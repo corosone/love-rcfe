@@ -281,7 +281,6 @@
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45) !important;
     }
     html.dark .modal-card,
-    html.dark #inbox-modal .modal-card,
     html.dark #call-modal .modal-card {
       background-color: #1a251f !important;
       border-color: #2d4034 !important;
@@ -543,8 +542,8 @@
         <span>Free 15-Minute Advisory Consultations Available this Week</span>
       </div>
       <div class="flex items-center gap-4 text-xs">
-        <a href="tel:+18005557233" data-call class="hover:underline flex items-center gap-1 opacity-90 hover:opacity-100">
-          <i data-lucide="phone" class="w-3.5 h-3.5"></i> (800) 555-RCFE
+        <a href="tel:+18182175755" data-call class="hover:underline flex items-center gap-1 opacity-90 hover:opacity-100">
+          <i data-lucide="phone" class="w-3.5 h-3.5"></i> (818) 217-5755
         </a>
         <span class="opacity-40">|</span>
         <button onclick="openBookingModal()" class="hover:underline flex items-center gap-1 font-semibold text-emerald-200 hover:text-white">
@@ -631,8 +630,8 @@
       </div>
       <div class="mt-3 pt-3 border-t border-brand-line/50 flex items-center justify-between text-xs text-brand-muted">
         <span>Need urgent placement?</span>
-        <a href="tel:+18005557233" data-call class="font-bold text-brand-green flex items-center gap-1">
-          <i data-lucide="phone" class="w-3.5 h-3.5"></i> (800) 555-RCFE
+        <a href="tel:+18182175755" data-call class="font-bold text-brand-green flex items-center gap-1">
+          <i data-lucide="phone" class="w-3.5 h-3.5"></i> (818) 217-5755
         </a>
       </div>
     </div>
@@ -847,7 +846,7 @@
                   MR
                 </div>
                 <div>
-                  <p class="font-bold text-sm text-brand-ink">Marcus R., RN</p>
+                  <p class="font-bold text-sm text-brand-ink">Marcus R</p>
                   <p class="text-xs text-brand-muted">Licensed RCFE Owner, Sacramento CA</p>
                 </div>
               </div>
@@ -1367,7 +1366,7 @@
                       <span>Urgent Placement / Hospital Discharge Notice</span>
                     </div>
                     <p class="leading-relaxed">
-                      With a 1–7 day transition window, immediate beds and physician assessments (LIC 602A) need expedited handling. Call our priority intake team directly at <a href="tel:+18005557233" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(800) 555-RCFE</a> for same-day openings.
+                      With a 1–7 day transition window, immediate beds and physician assessments (LIC 602A) need expedited handling. Call our priority intake team directly at <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> for same-day openings.
                     </p>
                   </div>
 
@@ -1642,11 +1641,29 @@
               <!-- FAQ 5 -->
               <div class="border border-brand-line rounded-xl overflow-hidden transition-colors">
                 <button onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-5" class="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
-                  <span>Is your placement service really free for families?</span>
+                  <span>How does Love RCFE make money? (Our Transparent Revenue Model)</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
-                <div id="faq-content-5" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight">
-                  Yes. Similar to a realtor representing a homebuyer, our advisory and placement services are compensated by licensed communities upon successful move-in, without adding any markup to the family's rent. Families never receive an invoice from us for placement guidance.
+                <div id="faq-content-5" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight space-y-3">
+                  <p>We believe in 100% transparency. Love RCFE has two distinct, ethical service tracks with clear revenue models:</p>
+                  <div class="grid sm:grid-cols-2 gap-3 pt-1">
+                    <div class="p-3.5 rounded-xl bg-white dark:bg-[#1a251f] border border-brand-line">
+                      <p class="font-bold text-brand-green flex items-center gap-1.5 mb-1 text-xs uppercase tracking-wide">
+                        <i data-lucide="heart-handshake" class="w-4 h-4"></i> For Seniors &amp; Families (100% Free)
+                      </p>
+                      <p class="text-xs text-brand-muted leading-relaxed">
+                        Our care evaluation, facility tours, and placement guidance are <strong>completely free to families</strong>. Similar to an insurance broker or tenant representative, the licensed care community pays us a standard placement referral fee from their operating budget only after your loved one safely moves in. Your monthly rent is never marked up, and you will never receive a bill from us.
+                      </p>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-white dark:bg-[#1a251f] border border-brand-line">
+                      <p class="font-bold text-brand-accent flex items-center gap-1.5 mb-1 text-xs uppercase tracking-wide">
+                        <i data-lucide="briefcase" class="w-4 h-4"></i> For RCFE Operators (Professional Consulting)
+                      </p>
+                      <p class="text-xs text-brand-muted leading-relaxed">
+                        Prospective residential care home owners, administrators, and investors pay <strong>transparent, flat-rate professional consulting fees</strong> for our California Title 22 licensing services (LIC 200 packet creation, Plan of Operation drafting, fire clearance coaching, and pre-licensing LPA inspection prep).
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1684,8 +1701,8 @@
                   <i data-lucide="phone-call" class="w-5 h-5"></i>
                 </div>
                 <div>
-                  <p class="text-xs uppercase tracking-wider text-brand-muted font-bold">Toll-Free Phone</p>
-                  <a href="tel:+18005557233" data-call class="text-base font-bold text-brand-ink hover:text-brand-green">(800) 555-RCFE (7233)</a>
+                  <p class="text-xs uppercase tracking-wider text-brand-muted font-bold">Direct Phone</p>
+                  <a href="tel:+18182175755" data-call class="text-base font-bold text-brand-ink hover:text-brand-green">(818) 217-5755</a>
                   <p class="text-xs text-brand-muted">Monday – Saturday: 8:00 AM – 7:00 PM PT</p>
                 </div>
               </div>
@@ -1696,7 +1713,7 @@
                 </div>
                 <div>
                   <p class="text-xs uppercase tracking-wider text-brand-muted font-bold">Email Inquiries</p>
-                  <a href="mailto:advisory@lovercfe.com" class="text-base font-bold text-brand-ink hover:text-brand-green">advisory@lovercfe.com</a>
+                  <a href="mailto:loveRCFE@gmail.com" class="text-base font-bold text-brand-ink hover:text-brand-green">loveRCFE@gmail.com</a>
                   <p class="text-xs text-brand-muted">General inquiries &amp; licensing packets</p>
                 </div>
               </div>
@@ -1758,7 +1775,7 @@
                 </div>
                 <div>
                   <label for="phone" class="block font-semibold text-sm text-brand-ink mb-1.5">Phone Number *</label>
-                  <input id="phone" name="phone" autocomplete="tel" required maxlength="40" placeholder="(555) 000-0000" class="field" type="tel">
+                  <input id="phone" name="phone" autocomplete="tel" required maxlength="40" placeholder="(818) 217-5755" class="field" type="tel">
                 </div>
               </div>
 
@@ -1887,7 +1904,7 @@
             <div>
               <h2 class="display text-2xl font-semibold text-brand-ink mb-3">4. Data Access &amp; Removal Requests</h2>
               <p class="text-brand-muted leading-relaxed">
-                You retain the right to inspect, correct, or request the deletion of any contact information we hold. Simply email us at <a href="mailto:advisory@lovercfe.com" class="text-brand-green underline font-semibold">advisory@lovercfe.com</a> with the subject "Data Removal Request."
+                You retain the right to inspect, correct, or request the deletion of any contact information we hold. Simply email us at <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> with the subject "Data Removal Request."
               </p>
             </div>
           </div>
@@ -1921,8 +1938,8 @@
       </div>
 
       <div class="rounded-2xl bg-brand-sageLight border border-brand-line p-5 text-center mb-4">
-        <p class="display text-3xl font-semibold text-brand-green tracking-tight select-all">(800) 555-RCFE</p>
-        <p class="text-xs text-brand-muted mt-1 select-all">(800) 555-7233</p>
+        <p class="display text-3xl font-semibold text-brand-green tracking-tight select-all">(818) 217-5755</p>
+        <p class="text-xs text-brand-muted mt-1 select-all">Direct Elder Care &amp; Licensing Line</p>
         <p id="call-modal-status" class="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-brand-ink" role="status"></p>
       </div>
 
@@ -1931,7 +1948,7 @@
           <i data-lucide="copy" class="w-3.5 h-3.5"></i>
           <span>Copy number</span>
         </button>
-        <a href="tel:+18005557233" data-native-tel class="inline-flex items-center justify-center gap-2 rounded-full border border-brand-green text-brand-green py-3 px-4 text-xs font-bold hover:bg-brand-sageLight transition">
+        <a href="tel:+18182175755" data-native-tel class="inline-flex items-center justify-center gap-2 rounded-full border border-brand-green text-brand-green py-3 px-4 text-xs font-bold hover:bg-brand-sageLight transition">
           <i data-lucide="phone" class="w-3.5 h-3.5"></i>
           <span>Open in calling app</span>
         </a>
@@ -1941,7 +1958,7 @@
         <p class="text-xs font-bold text-brand-ink mb-2">Prefer not to call right now?</p>
         <div class="flex flex-col sm:flex-row gap-2 text-xs font-semibold">
           <button onclick="closeCallModal(); openBookingModal();" class="flex-1 rounded-full border border-brand-line text-brand-ink py-2.5 px-4 hover:bg-brand-sageLight transition">Request a callback</button>
-          <a href="mailto:advisory@lovercfe.com" class="flex-1 text-center rounded-full border border-brand-line text-brand-ink py-2.5 px-4 hover:bg-brand-sageLight transition">Send an email</a>
+          <a href="mailto:loveRCFE@gmail.com" class="flex-1 text-center rounded-full border border-brand-line text-brand-ink py-2.5 px-4 hover:bg-brand-sageLight transition">Send an email</a>
         </div>
       </div>
     </div>
@@ -1971,7 +1988,7 @@
         </div>
         <div>
           <label for="book-phone" class="block text-xs font-bold text-brand-ink mb-1">Phone Number *</label>
-          <input id="book-phone" required type="tel" class="field text-sm" placeholder="(555) 000-0000">
+          <input id="book-phone" required type="tel" class="field text-sm" placeholder="(818) 217-5755">
         </div>
         <div>
           <label for="book-email" class="block text-xs font-bold text-brand-ink mb-1">Email Address *</label>
@@ -2028,38 +2045,6 @@
     </div>
   </div>
 
-  <!-- ==================== INBOX / LEADS DRAWER MODAL (ADMIN / DEMO) ==================== -->
-  <div id="inbox-modal" onclick="if(event.target === this) toggleInboxModal()" class="fixed inset-0 z-50 hidden flex items-center justify-end modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="inbox-title">
-    <div class="modal-card bg-white w-full max-w-md h-full p-6 shadow-2xl border-l border-brand-line flex flex-col justify-between">
-      <div>
-        <div class="flex items-center justify-between pb-4 border-b border-brand-line mb-4">
-          <div class="flex items-center gap-2">
-            <i data-lucide="inbox" class="w-5 h-5 text-brand-green"></i>
-            <h3 id="inbox-title" class="display text-xl font-bold text-brand-ink">Inquiries Inbox</h3>
-            <span id="lead-count-badge" class="text-xs font-bold px-2 py-0.5 rounded-full bg-brand-sage text-brand-green">0</span>
-          </div>
-          <button onclick="toggleInboxModal()" class="p-1.5 rounded-lg text-brand-muted hover:text-brand-ink hover:bg-brand-sageLight">
-            <i data-lucide="x" class="w-5 h-5"></i>
-          </button>
-        </div>
-        <p class="text-xs text-brand-muted mb-4">Submissions saved directly to client storage (LocalStorage). You can view, export, or clear submissions.</p>
-
-        <div id="leads-list" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
-          <!-- Populated by JavaScript -->
-        </div>
-      </div>
-
-      <div class="pt-4 border-t border-brand-line flex items-center justify-between gap-3">
-        <button onclick="exportLeadsCSV()" class="rounded-full border border-brand-green text-brand-green px-4 py-2 text-xs font-bold hover:bg-brand-sageLight flex items-center gap-1.5">
-          <i data-lucide="download" class="w-3.5 h-3.5"></i> Export CSV
-        </button>
-        <button onclick="clearAllLeads()" class="text-xs text-red-600 hover:underline">
-          Clear All
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- ==================== FOOTER ==================== -->
   <footer class="bg-brand-ink text-white py-12 border-t border-brand-greenDark">
     <div class="mx-auto max-w-7xl px-6 lg:px-10">
@@ -2102,22 +2087,16 @@
           <div class="text-sm text-[#dce7d9] space-y-2">
             <p class="flex items-center gap-2">
               <i data-lucide="phone" class="w-4 h-4 text-emerald-400"></i>
-              <a href="tel:+18005557233" data-call class="hover:text-white font-semibold">(800) 555-RCFE (7233)</a>
+              <a href="tel:+18182175755" data-call class="hover:text-white font-semibold">(818) 217-5755</a>
             </p>
             <p class="flex items-center gap-2">
               <i data-lucide="mail" class="w-4 h-4 text-emerald-400"></i>
-              <a href="mailto:advisory@lovercfe.com" class="hover:text-white">advisory@lovercfe.com</a>
+              <a href="mailto:loveRCFE@gmail.com" class="hover:text-white">loveRCFE@gmail.com</a>
             </p>
             <p class="flex items-center gap-2 text-xs text-brand-sage/80 pt-1">
               <i data-lucide="clock" class="w-4 h-4"></i>
               Mon–Sat 8:00 AM – 7:00 PM PT
             </p>
-          </div>
-          <div id="admin-link-wrap" class="pt-3 hidden">
-            <button onclick="toggleInboxModal()" class="text-xs text-brand-sage/80 hover:text-white flex items-center gap-1.5 underline underline-offset-4">
-              <i data-lucide="inbox" class="w-3.5 h-3.5"></i>
-              <span>View Submitted Leads (Admin / Demo)</span>
-            </button>
           </div>
         </div>
       </div>
@@ -2135,7 +2114,7 @@
   </footer>
 
   <!-- Floating Call Button (phones only) -->
-  <a href="tel:+18005557233" data-call class="fixed bottom-6 left-4 z-40 md:hidden inline-flex items-center gap-2 rounded-full bg-brand-green text-white pl-4 pr-5 py-3 text-sm font-semibold shadow-xl border border-white/20 active:scale-95 transition" aria-label="Call Love RCFE">
+  <a href="tel:+18182175755" data-call class="fixed bottom-6 left-4 z-40 md:hidden inline-flex items-center gap-2 rounded-full bg-brand-green text-white pl-4 pr-5 py-3 text-sm font-semibold shadow-xl border border-white/20 active:scale-95 transition" aria-label="Call Love RCFE">
     <i data-lucide="phone" class="w-4 h-4"></i>
     <span>Call us</span>
   </a>
@@ -2149,9 +2128,9 @@
   <script>
     // ==================== SITE SETTINGS ====================
     const CONTACT = {
-      email: 'advisory@lovercfe.com',
-      phoneDisplay: '(800) 555-RCFE',
-      phoneCopy: '(800) 555-7233'
+      email: 'loveRCFE@gmail.com',
+      phoneDisplay: '(818) 217-5755',
+      phoneCopy: '(818) 217-5755'
     };
     // Formspree endpoint URL (supports window.__FORM_ENDPOINT__ runtime override for testing/offline mode)
     const FORM_ENDPOINT = typeof window !== 'undefined' && window.__FORM_ENDPOINT__ !== undefined
@@ -2765,12 +2744,6 @@
           mainEl.focus();
         });
       }
-
-      // Reveal the demo leads inbox only when the URL contains ?admin
-      if (new URLSearchParams(location.search).has('admin')) {
-        const adminWrap = document.getElementById('admin-link-wrap');
-        if (adminWrap) adminWrap.classList.remove('hidden');
-      }
     });
 
     window.addEventListener('load', refreshIcons);
@@ -3289,7 +3262,7 @@
                     <span>Hospital Discharge / Urgent Placement Alert</span>
                   </div>
                   <p class="leading-relaxed">
-                    With an immediate 1–7 day timeframe, call our intake hotline at <a href="tel:+18005557233" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(800) 555-RCFE</a> for emergency openings and priority tour booking.
+                    With an immediate 1–7 day timeframe, call our intake hotline at <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> for emergency openings and priority tour booking.
                   </p>
                 </div>
               ` : ''}
@@ -3395,7 +3368,6 @@
         inquiry_type: 'Scheduled Call',
         submitted_at: new Date().toISOString()
       };
-      saveLead(record);
       const result = await sendLead(record);
       submitBtn.disabled = false;
 
@@ -3455,31 +3427,6 @@
         : 'text-sm font-semibold text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950/60 p-3.5 rounded-xl border border-red-200 dark:border-red-800 mt-2 flex items-center gap-2';
     }
 
-    function saveLead(record) {
-      try {
-        const stored = JSON.parse(localStorage.getItem('love_rcfe_leads') || '[]');
-        stored.unshift(record);
-        localStorage.setItem('love_rcfe_leads', JSON.stringify(stored));
-        updateLeadBadge();
-      } catch (err) {
-        console.warn('Could not store lead in localStorage:', err);
-      }
-    }
-
-    function getLeads() {
-      try {
-        return JSON.parse(localStorage.getItem('love_rcfe_leads') || '[]');
-      } catch {
-        return [];
-      }
-    }
-
-    function updateLeadBadge() {
-      const count = getLeads().length;
-      const badge = document.getElementById('lead-count-badge');
-      if (badge) badge.textContent = count;
-    }
-
     if (form) {
       form.addEventListener('submit', async event => {
         event.preventDefault();
@@ -3501,7 +3448,6 @@
           submitted_at: new Date().toISOString()
         };
 
-        saveLead(record); // local backup copy
         const result = await sendLead(record);
         submitButton.disabled = false;
 
@@ -3530,100 +3476,7 @@
       });
     }
 
-    // ==================== INBOX / LEADS DRAWER ====================
-    function toggleInboxModal() {
-      const modal = document.getElementById('inbox-modal');
-      if (!modal) return;
-      if (modal.classList.contains('hidden')) {
-        renderLeadsList();
-        openModal('inbox-modal');
-      } else {
-        closeModal('inbox-modal');
-      }
-    }
 
-    function renderLeadsList() {
-      const listContainer = document.getElementById('leads-list');
-      if (!listContainer) return;
-      const leads = getLeads();
-
-      if (leads.length === 0) {
-        listContainer.innerHTML = `
-          <div class="text-center py-10 text-brand-muted">
-            <i data-lucide="mail-open" class="w-8 h-8 mx-auto text-brand-line mb-2"></i>
-            <p class="text-sm font-semibold">No inquiries yet</p>
-            <p class="text-xs mt-1">Submit the contact form or schedule a call to see records appear here.</p>
-            <button onclick="seedDemoLead()" class="mt-4 px-3.5 py-1.5 rounded-full border border-brand-line text-xs font-semibold text-brand-green hover:bg-brand-sageLight">
-              Generate Sample Demo Inquiry
-            </button>
-          </div>
-        `;
-        refreshIcons();
-        return;
-      }
-
-      listContainer.innerHTML = leads.map((lead, idx) => `
-        <div class="p-3.5 rounded-xl border border-brand-line bg-brand-cream text-xs space-y-1 relative">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-sm text-brand-ink">${escapeHtml(lead.name)}</span>
-            <span class="text-[10px] text-brand-muted">${new Date(lead.submitted_at).toLocaleDateString()}</span>
-          </div>
-          <p class="text-brand-green font-semibold">${escapeHtml(lead.inquiry_type || 'General')}</p>
-          <p class="text-brand-muted"><span class="font-medium">Contact:</span> ${escapeHtml(lead.email)} • ${escapeHtml(lead.phone)}</p>
-          ${lead.city ? `<p class="text-brand-muted"><span class="font-medium">Location:</span> ${escapeHtml(lead.city)}</p>` : ''}
-          <p class="text-brand-ink/90 mt-1 italic border-t border-brand-line/50 pt-1">"${escapeHtml(lead.message)}"</p>
-        </div>
-      `).join('');
-      refreshIcons();
-    }
-
-    function seedDemoLead() {
-      const demoLead = {
-        name: 'Sarah Mitchell',
-        email: 'sarah.m@example.com',
-        phone: '(408) 555-0192',
-        city: 'San Jose, CA',
-        inquiry_type: 'Family Care Placement',
-        message: 'Looking for a warm 6-bed memory care residence in South Bay for my father with mild dementia. Ready to tour this month.',
-        submitted_at: new Date().toISOString()
-      };
-      saveLead(demoLead);
-      renderLeadsList();
-    }
-
-    function clearAllLeads() {
-      if (confirm('Clear all stored inquiries?')) {
-        localStorage.removeItem('love_rcfe_leads');
-        renderLeadsList();
-        updateLeadBadge();
-      }
-    }
-
-    function csvCell(value) {
-      let s = String(value == null ? '' : value);
-      // Stop spreadsheet apps from running pasted formulas
-      if (/^[=@]/.test(s) || /^[+\-][^\d\s(]/.test(s)) s = "'" + s;
-      return '"' + s.replace(/"/g, '""') + '"';
-    }
-
-    function exportLeadsCSV() {
-      const leads = getLeads();
-      if (leads.length === 0) {
-        alert('No inquiries to export.');
-        return;
-      }
-      const headers = ['Name', 'Email', 'Phone', 'City', 'Inquiry Type', 'Message', 'Submitted At'];
-      const rows = leads.map(l => [l.name, l.email, l.phone, l.city, l.inquiry_type, l.message, l.submitted_at].map(csvCell).join(','));
-      const csv = '\ufeff' + [headers.join(','), ...rows].join('\r\n');
-      const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `love_rcfe_leads_${new Date().toISOString().split('T')[0]}.csv`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
 
     function escapeHtml(str) {
       if (!str) return '';
