@@ -2017,6 +2017,9 @@
             <option value="Pricing & Benefits">VA Aid & Attendance / Medi-Cal ALW Questions</option>
           </select>
         </div>
+        <div class="hidden" aria-hidden="true">
+          <label>Leave this field empty <input type="text" name="hp_notes" tabindex="-1" autocomplete="off"></label>
+        </div>
         <button type="submit" class="w-full rounded-full bg-brand-green text-white py-3.5 font-bold text-sm hover:bg-brand-greenDark transition mt-2 shadow">
           Request My Call
         </button>
@@ -2132,10 +2135,11 @@
       phoneDisplay: '(818) 217-5755',
       phoneCopy: '(818) 217-5755'
     };
-    // Formspree endpoint URL (supports window.__FORM_ENDPOINT__ runtime override for testing/offline mode)
+    // Formspree email notification fallback & Vercel Postgres API endpoint
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaeoydak';
     const FORM_ENDPOINT = typeof window !== 'undefined' && window.__FORM_ENDPOINT__ !== undefined
       ? window.__FORM_ENDPOINT__
-      : 'https://formspree.io/f/xaeoydak';
+      : '/api/leads';
     const BUSINESS = { tz: 'America/Los_Angeles', openDays: [1, 2, 3, 4, 5, 6], openHour: 8, closeHour: 19 };
 
     let hasNavigated = false;
@@ -2283,18 +2287,56 @@
     }
 
     // ==================== SENDING LEADS ====================
+    async function postJson(url, record) {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(record)
+      });
+      const data = await res.json().catch(() => ({}));
+      return { res, data };
+    }
+
     async function sendLead(record) {
       if (!FORM_ENDPOINT) return { ok: false, reason: 'no-endpoint' };
+
       try {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(record)
-        });
-        return { ok: res.ok, reason: res.ok ? '' : 'http-' + res.status };
+        const { res, data } = await postJson(FORM_ENDPOINT, record);
+
+        if (res.status === 422 || res.status === 429) {
+          return {
+            ok: false,
+            validationError: data.error || 'Please check the highlighted fields.',
+            reason: 'validation'
+          };
+        }
+
+        if (res.ok) {
+          // Also notify Formspree non-blockingly so inquiries reach email immediately
+          if (FORM_ENDPOINT === '/api/leads' && FORMSPREE_ENDPOINT) {
+            fetch(FORMSPREE_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(record),
+              keepalive: true
+            }).catch(() => {});
+          }
+          return { ok: true, reason: '' };
+        }
       } catch (err) {
-        return { ok: false, reason: 'network' };
+        // Fall through to Formspree fallback
       }
+
+      if (FORM_ENDPOINT === '/api/leads' && FORMSPREE_ENDPOINT) {
+        try {
+          const { res } = await postJson(FORMSPREE_ENDPOINT, record);
+          return { ok: res.ok, reason: res.ok ? '' : 'http-' + res.status };
+        } catch (err) {
+          return { ok: false, reason: 'network' };
+        }
+      }
+
+      return { ok: false, reason: 'http-error' };
     }
 
     function openMailDraft(record) {
@@ -3351,6 +3393,7 @@
       };
 
       if (!name || !phone || !email || !date) return fail('Please fill out all required fields.');
+      if (bookingForm.elements.hp_notes && bookingForm.elements.hp_notes.value) return;
 
       const [y, m, d] = date.split('-').map(Number);
       const chosen = new Date(y, m - 1, d);
@@ -3363,9 +3406,12 @@
       status.className = 'text-xs text-center font-semibold min-h-4 text-brand-green dark:text-emerald-400';
 
       const record = {
+        kind: 'call_request',
         name, phone, email, city: '',
+        preferred_date: date,
+        preferred_time: timeLabel,
         message: `[Call request] ${prettyDate}, ${timeLabel}, Pacific Time. Topic: ${topic}`,
-        inquiry_type: 'Scheduled Call',
+        inquiry_type: topic,
         submitted_at: new Date().toISOString()
       };
       const result = await sendLead(record);
@@ -3379,6 +3425,8 @@
           closeBookingModal();
           bookingForm.reset();
         }, 2600);
+      } else if (result.validationError) {
+        fail(result.validationError);
       } else {
         const draftUrl = openMailDraft(record);
         status.style.color = '';
@@ -3439,6 +3487,7 @@
         showStatus('Sending your confidential enquiry…', true);
 
         const record = {
+          kind: 'enquiry',
           name: form.elements.name.value.trim(),
           email: form.elements.email.value.trim(),
           phone: form.elements.phone.value.trim(),
@@ -3454,6 +3503,8 @@
         if (result.ok) {
           form.reset();
           showStatus(`✓ Thank you, ${record.name}. Your message was sent. An elder care advisor will reply within 1 business day.`, true);
+        } else if (result.validationError) {
+          showStatus(result.validationError, false);
         } else {
           const draftUrl = openMailDraft(record);
           if (formStatus) {
