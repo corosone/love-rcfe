@@ -28,6 +28,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
   
+  <!-- Cloudflare Turnstile (spam protection) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=initTurnstile" async defer></script>
+
   <!-- Lucide Icons -->
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
   
@@ -1805,6 +1808,8 @@
                 <label>Leave this field empty <input type="text" name="hp_notes" tabindex="-1" autocomplete="off"></label>
               </div>
 
+              <div id="ts-contact" class="cf-ts min-h-[65px]"></div>
+
               <!-- Action & Status -->
               <div class="pt-2">
                 <button id="submit-button" class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-green text-white px-8 py-4 font-semibold text-base hover:bg-brand-greenDark shadow-md disabled:opacity-60 disabled:cursor-wait transition w-full sm:w-auto" type="submit">
@@ -2020,6 +2025,7 @@
         <div class="hidden" aria-hidden="true">
           <label>Leave this field empty <input type="text" name="hp_notes" tabindex="-1" autocomplete="off"></label>
         </div>
+        <div id="ts-booking" class="cf-ts flex justify-center min-h-[65px]"></div>
         <button type="submit" class="w-full rounded-full bg-brand-green text-white py-3.5 font-bold text-sm hover:bg-brand-greenDark transition mt-2 shadow">
           Request My Call
         </button>
@@ -2297,11 +2303,38 @@
       return { res, data };
     }
 
-    async function sendLead(record) {
+    // ==================== TURNSTILE (spam protection) ====================
+    const TURNSTILE_SITE_KEY = '0x4AAAAAAF_J9TXjVKsqM-AR';
+    const tsWidgets = {};
+    function initTurnstile() {
+      if (!window.turnstile) return;
+      document.querySelectorAll('.cf-ts').forEach(el => {
+        if (tsWidgets[el.id] !== undefined || el.offsetParent === null) return;
+        tsWidgets[el.id] = turnstile.render(el, { sitekey: TURNSTILE_SITE_KEY, theme: 'auto' });
+      });
+    }
+    window.addEventListener('load', initTurnstile);
+    function tsToken(id) {
+      try { return tsWidgets[id] !== undefined ? (turnstile.getResponse(tsWidgets[id]) || '') : ''; } catch (e) { return ''; }
+    }
+    function tsReset(id) {
+      try { if (tsWidgets[id] !== undefined) turnstile.reset(tsWidgets[id]); } catch (e) {}
+    }
+
+    async function sendLead(record, tsId) {
+      const token = tsToken(tsId);
+      try {
+        return await sendLeadInner(record, token);
+      } finally {
+        tsReset(tsId);
+      }
+    }
+
+    async function sendLeadInner(record, token) {
       if (!FORM_ENDPOINT) return { ok: false, reason: 'no-endpoint' };
 
       try {
-        const { res, data } = await postJson(FORM_ENDPOINT, record);
+        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, turnstile_token: token });
 
         if (res.status === 422 || res.status === 429) {
           return {
@@ -3350,6 +3383,7 @@
     function openBookingModal() {
       initBookingDatePicker();
       openModal('booking-modal');
+      initTurnstile();
     }
 
     function closeBookingModal() {
@@ -3414,7 +3448,7 @@
         inquiry_type: topic,
         submitted_at: new Date().toISOString()
       };
-      const result = await sendLead(record);
+      const result = await sendLead(record, 'ts-booking');
       submitBtn.disabled = false;
 
       if (result.ok) {
@@ -3497,7 +3531,7 @@
           submitted_at: new Date().toISOString()
         };
 
-        const result = await sendLead(record);
+        const result = await sendLead(record, 'ts-contact');
         submitButton.disabled = false;
 
         if (result.ok) {
