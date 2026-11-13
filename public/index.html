@@ -2309,11 +2309,22 @@
     function initTurnstile() {
       if (!window.turnstile) return;
       document.querySelectorAll('.cf-ts').forEach(el => {
-        if (tsWidgets[el.id] !== undefined || el.offsetParent === null) return;
-        tsWidgets[el.id] = turnstile.render(el, { sitekey: TURNSTILE_SITE_KEY, theme: 'auto' });
+        if (tsWidgets[el.id] !== undefined) return;
+        if (el.closest('.hidden')) return; // booking popup renders when it opens
+        try {
+          tsWidgets[el.id] = turnstile.render(el, { sitekey: TURNSTILE_SITE_KEY, theme: 'auto' });
+        } catch (e) { tsShowError(el); }
       });
     }
-    window.addEventListener('load', initTurnstile);
+    function tsShowError(el) {
+      el.innerHTML = '<p class="text-xs font-semibold text-red-600 dark:text-red-400">The security check could not load. Please turn off ad blockers for this site, or call (818) 217-5755 or email loveRCFE@gmail.com.</p>';
+    }
+    window.addEventListener('load', () => {
+      initTurnstile();
+      setTimeout(() => {
+        if (!window.turnstile) document.querySelectorAll('.cf-ts').forEach(tsShowError);
+      }, 4000);
+    });
     function tsToken(id) {
       try { return tsWidgets[id] !== undefined ? (turnstile.getResponse(tsWidgets[id]) || '') : ''; } catch (e) { return ''; }
     }
