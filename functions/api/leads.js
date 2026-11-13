@@ -63,6 +63,18 @@ export async function onRequestPost({ request, env, waitUntil }) {
 
   if (!record.message) record.message = '(no message)';
 
+  // Turnstile spam check (only enforced once TURNSTILE_SECRET is set in Cloudflare)
+  if (env?.TURNSTILE_SECRET) {
+    const token = clean(body.turnstile_token, 4096);
+    const ok = token ? await verifyTurnstile(env.TURNSTILE_SECRET, token, clientIp(request)) : false;
+    if (!ok) {
+      return jsonResponse(
+        { error: 'Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.' },
+        422
+      );
+    }
+  }
+
   if (!env?.DB) {
     return jsonResponse({ error: 'Database is not bound yet.' }, 503);
   }
@@ -97,6 +109,22 @@ export async function onRequestPost({ request, env, waitUntil }) {
   } catch (err) {
     console.error('Failed to save lead:', err);
     return jsonResponse({ error: 'Could not save your message right now.' }, 500);
+  }
+}
+
+// Returns true when Turnstile approves. If Cloudflare's check can't be reached, let the lead through.
+async function verifyTurnstile(secret, token, ip) {
+  try {
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret, response: token, remoteip: ip }),
+    });
+    const data = await res.json();
+    return data.success === true;
+  } catch (err) {
+    console.error('Turnstile verify unreachable:', err);
+    return true;
   }
 }
 
