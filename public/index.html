@@ -447,9 +447,9 @@
 
     /* ==================== CARE BUDGET CALCULATOR ==================== */
     .neon-calc-container {
-      background: #ffffff;
-      border: 1px solid #d9ded4;
-      box-shadow: 0 12px 32px -14px rgba(38, 56, 47, 0.28);
+      background: #dbe8d6;
+      border: 1px solid #a9c2a3;
+      box-shadow: 0 12px 32px -14px rgba(38, 56, 47, 0.35);
       border-radius: 24px;
       color: #26382f;
       animation: neonSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -458,18 +458,20 @@
       from { opacity: 0; transform: translateY(-12px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .neon-topbar { border-bottom: 1px solid #d9ded4; }
+    .neon-topbar { border-bottom: 1px solid #a9c2a3; }
     .neon-screen {
-      background: #edf2e9;
-      border: 1px solid #d9ded4;
+      background: #fcfbfa;
+      border: 1px solid #8fae88;
       border-radius: 16px;
-      color: #26382f;
+      color: #1d2c25;
+      box-shadow: inset 0 2px 4px rgba(38, 56, 47, 0.08);
       font-variant-numeric: tabular-nums;
     }
     .neon-btn {
-      background: #f8f5ee;
-      color: #26382f;
-      border: 1px solid #d9ded4;
+      background: #ffffff;
+      color: #1d2c25;
+      border: 1px solid #a9c2a3;
+      box-shadow: 0 2px 0 #a9c2a3;
       border-radius: 12px;
       font-weight: 700;
       font-size: 15px;
@@ -480,28 +482,28 @@
       justify-content: center;
       user-select: none;
     }
-    .neon-btn:hover { background: #dce7d9; border-color: #315d48; transform: translateY(-1px); }
-    .neon-btn:active { transform: translateY(1px); }
-    .neon-btn-op { background: #dce7d9; color: #315d48; border-color: #c4d4c0; }
-    .neon-btn-op:hover { background: #315d48; color: #ffffff; border-color: #315d48; }
-    .neon-btn-eq { background: #315d48; color: #ffffff; font-weight: 900; border-color: #315d48; }
-    .neon-btn-eq:hover { background: #203d30; border-color: #203d30; transform: translateY(-1px); }
-    .neon-btn-func { background: #edf2e9; color: #a96b46; }
-    .neon-btn-func:hover { background: #f5eee5; color: #a96b46; border-color: #a96b46; }
+    .neon-btn:hover { background: #eef5ea; border-color: #315d48; box-shadow: 0 2px 0 #315d48; transform: translateY(-1px); }
+    .neon-btn:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
+    .neon-btn-op { background: #bcd3b5; color: #203d30; border-color: #8fae88; box-shadow: 0 2px 0 #8fae88; }
+    .neon-btn-op:hover { background: #315d48; color: #ffffff; border-color: #203d30; box-shadow: 0 2px 0 #203d30; }
+    .neon-btn-eq { background: #315d48; color: #ffffff; font-weight: 900; border-color: #203d30; box-shadow: 0 2px 0 #203d30; }
+    .neon-btn-eq:hover { background: #203d30; border-color: #203d30; box-shadow: 0 2px 0 #14271e; transform: translateY(-1px); }
+    .neon-btn-func { background: #f5e6d8; color: #8a4f2c; border-color: #dcb89c; box-shadow: 0 2px 0 #dcb89c; }
+    .neon-btn-func:hover { background: #fbeee2; color: #8a4f2c; border-color: #a96b46; box-shadow: 0 2px 0 #a96b46; }
     .calc-chip {
       padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 700;
-      background: #f8f5ee; color: #26382f; border: 1px solid #d9ded4; transition: all 0.15s ease;
+      background: #ffffff; color: #1d2c25; border: 1px solid #8fae88; transition: all 0.15s ease;
     }
-    .calc-chip:hover { border-color: #315d48; background: #dce7d9; }
+    .calc-chip:hover { border-color: #315d48; background: #eef5ea; }
     .calc-chip-primary { background: #315d48; color: #ffffff; border-color: #315d48; }
     .calc-chip-primary:hover { background: #203d30; border-color: #203d30; }
-    .calc-close { padding: 4px; border-radius: 8px; color: #59685f; transition: all 0.15s ease; }
-    .calc-close:hover { background: #dce7d9; color: #315d48; }
+    .calc-close { padding: 4px; border-radius: 8px; color: #3f5247; transition: all 0.15s ease; }
+    .calc-close:hover { background: #bcd3b5; color: #203d30; }
     .calc-trigger {
-      background: #ecfdf5; color: #315d48; border: 1px solid transparent; cursor: pointer;
+      background: #dbe8d6; color: #315d48; border: 1px solid #a9c2a3; cursor: pointer;
       transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
     }
-    .calc-trigger:hover { background: #dce7d9; border-color: #315d48; }
+    .calc-trigger:hover { background: #c9ddc3; border-color: #315d48; }
     .calc-trigger:active { transform: scale(0.95); }
     .calc-trigger:focus-visible, .neon-btn:focus-visible, .calc-chip:focus-visible, .calc-close:focus-visible {
       outline: 2px solid #315d48; outline-offset: 2px;
@@ -511,6 +513,8 @@
     html.dark .neon-calc-container { background: #1a251f; border-color: #2d4034; box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.6); color: #e6ede8; }
     html.dark .neon-topbar { border-bottom-color: #2b3d33; }
     html.dark .neon-screen { background: #121915; border-color: #283a30; color: #e6ede8; }
+    html.dark .neon-btn, html.dark .neon-btn:hover, html.dark .neon-btn:active { box-shadow: none; }
+    html.dark .neon-screen { box-shadow: none; }
     html.dark .neon-btn { background: #23342a; color: #e6ede8; border-color: #2e4236; }
     html.dark .neon-btn:hover { background: #2d4034; border-color: #4ade80; }
     html.dark .neon-btn-op { background: #1b2720; color: #4ade80; border-color: #2e4236; }
