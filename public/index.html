@@ -547,6 +547,11 @@
     html:not(.dark) .bg-brand-accentLight { background-color: #f9e7d6; }
     html:not(.dark) [class*="border-brand-line"] { border-color: #d6dfc9; }
 
+    /* Light mode: darker terracotta so text meets the 4.5:1 contrast standard */
+    html:not(.dark) .text-brand-accent { color: #8a4f2c; }
+    html:not(.dark) .bg-brand-accent { background-color: #8a4f2c; }
+    html:not(.dark) .border-brand-accent { border-color: #8a4f2c; }
+
     @media (prefers-reduced-motion: reduce) {
       .lift { transition: none; }
       .scroll-smooth { scroll-behavior: auto; }
@@ -2365,7 +2370,7 @@
       if (!FORM_ENDPOINT) return { ok: false, reason: 'no-endpoint' };
 
       try {
-        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, turnstile_token: token });
+        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token });
 
         if (res.status === 422 || res.status === 429) {
           return {
