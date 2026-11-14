@@ -47,6 +47,10 @@
     html.dark .text-brand-green { color: #4ade80 !important; }
     html.dark .border-brand-line { border-color: #2d4034 !important; }
     html.dark input { background-color: #121915 !important; color: #e6ede8 !important; border-color: #2d4034 !important; }
+    .lead-field { width: 100%; border: 1px solid #d9ded4; border-radius: 10px; background: #ffffff; color: #26382f; font-size: 12px; font-weight: 500; padding: 6px 10px; }
+    .lead-field:focus { outline: 2px solid #315d48; outline-offset: 1px; }
+    html.dark .lead-field { background: #121915; border-color: #2e4236; color: #e6ede8; }
+    html.dark .lead-field:focus { outline-color: #4ade80; }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-ink min-h-screen flex flex-col antialiased">
@@ -177,6 +181,14 @@
         .replace(/'/g, '&#039;');
     }
 
+    const STAGE_LABELS = { new: 'New', called: 'Called', tour: 'Tour scheduled', waiting: 'Waiting on family' };
+    const SOURCE_LABELS = { home: 'Home page', services: 'Services page', tools: 'Tools page', approach: 'Approach page', support: 'FAQs & Support', contact: 'Contact page' };
+    const sourceLabel = (v) => SOURCE_LABELS[v] || v;
+    const stageOptions = (cur) => Object.entries(STAGE_LABELS)
+      .map(([v, label]) => `<option value="${v}" ${v === (cur || 'new') ? 'selected' : ''}>${label}</option>`).join('');
+    const findLead = (id) => allLeads.find(l => Number(l.id) === Number(id));
+    const hasUnsavedNotes = () => allLeads.some(l => l._savedNotes !== undefined && l.notes !== l._savedNotes);
+
     async function apiFetch(url, options = {}) {
       const pw = sessionStorage.getItem(TOKEN_KEY) || '';
       const res = await fetch(url, {
@@ -228,6 +240,9 @@
         if (err.status === 401) {
           sessionStorage.removeItem(TOKEN_KEY);
           showLogin(err.message);
+        } else if (err.status === 429) {
+          sessionStorage.removeItem(TOKEN_KEY);
+          showLogin(err.message);
         } else if (err.status === 503) {
           showLogin(err.message);
         } else {
@@ -247,6 +262,37 @@
         renderLeads();
       } catch (err) {
         alert(err.message);
+      }
+    }
+
+    async function setStage(id, stage) {
+      try {
+        await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, stage }) });
+        const target = findLead(id);
+        if (target) target.stage = stage;
+        renderLeads();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    function noteDraft(id, value) {
+      const target = findLead(id);
+      if (!target) return;
+      if (target._savedNotes === undefined) target._savedNotes = target.notes || '';
+      target.notes = value;
+    }
+
+    async function saveNote(id) {
+      const target = findLead(id);
+      if (!target || target._savedNotes === undefined || target.notes === target._savedNotes) return;
+      const statusEl = document.getElementById('note-status-' + id);
+      try {
+        await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, notes: target.notes }) });
+        target._savedNotes = target.notes;
+        if (statusEl) { statusEl.textContent = 'Saved'; setTimeout(() => { statusEl.textContent = ''; }, 2000); }
+      } catch (err) {
+        if (statusEl) statusEl.textContent = 'Not saved: ' + err.message;
       }
     }
 
@@ -285,7 +331,7 @@
         if (currentFilter === 'handled' && !l.handled) return false;
         if (currentFilter === 'calls' && l.kind !== 'call_request') return false;
         if (!q) return true;
-        return [l.name, l.email, l.phone, l.city, l.inquiryType, l.message]
+        return [l.name, l.email, l.phone, l.city, l.inquiryType, l.message, l.notes, STAGE_LABELS[l.stage], sourceLabel(l.source)]
           .some(v => String(v || '').toLowerCase().includes(q));
       });
 
@@ -321,6 +367,7 @@
                   <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-brand-line text-brand-muted">
                     ${escapeHtml(l.inquiryType)}
                   </span>
+                  ${l.stage && l.stage !== 'new' ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-accentLight text-brand-accent">${escapeHtml(STAGE_LABELS[l.stage] || l.stage)}</span>` : ''}
                   ${l.handled ? '<span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-brand-sageLight text-brand-green">Handled</span>' : ''}
                 </div>
                 <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-brand-muted mt-1.5">
@@ -334,10 +381,23 @@
                   ${l.preferredDate ? `<span class="flex items-center gap-1 font-semibold text-brand-ink"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> ${escapeHtml(l.preferredDate)} (${escapeHtml(l.preferredTime || '')})</span>` : ''}
                 </div>
               </div>
-              <span class="text-[11px] text-brand-muted">${escapeHtml(created)}</span>
+              <div class="text-right">
+                <span class="text-[11px] text-brand-muted">${escapeHtml(created)}</span>
+                ${l.source ? `<p class="text-[11px] text-brand-muted mt-0.5">From: ${escapeHtml(sourceLabel(l.source))}</p>` : ''}
+              </div>
             </div>
 
             <div class="surface-soft bg-brand-cream/70 rounded-xl border border-brand-line p-3.5 text-sm text-brand-ink whitespace-pre-line leading-relaxed">${escapeHtml(l.message)}</div>
+
+            <div class="grid gap-3 sm:grid-cols-[170px_1fr] items-start">
+              <label class="text-[11px] font-bold text-brand-muted">Stage
+                <select class="lead-field mt-1" onchange="setStage(${Number(l.id)}, this.value)">${stageOptions(l.stage)}</select>
+              </label>
+              <label class="text-[11px] font-bold text-brand-muted">Staff notes (private)
+                <textarea class="lead-field mt-1" rows="2" maxlength="2000" placeholder="Add a note, e.g. called, left voicemail, tour Friday 2pm" oninput="noteDraft(${Number(l.id)}, this.value)" onblur="saveNote(${Number(l.id)})">${escapeHtml(l.notes || '')}</textarea>
+                <span id="note-status-${Number(l.id)}" class="block text-[11px] font-semibold text-brand-green mt-0.5 min-h-[14px]"></span>
+              </label>
+            </div>
 
             <div class="flex items-center justify-end gap-3 pt-1">
               <button type="button" onclick="deleteLead(${Number(l.id)})" class="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline">
@@ -361,11 +421,11 @@
 
     function exportCsv() {
       if (!allLeads.length) return alert('No leads to export.');
-      const headers = ['ID', 'Kind', 'Inquiry Type', 'Name', 'Phone', 'Email', 'City', 'Preferred Date', 'Preferred Time', 'Handled', 'Message', 'Created At'];
+      const headers = ['ID', 'Kind', 'Inquiry Type', 'Name', 'Phone', 'Email', 'City', 'Preferred Date', 'Preferred Time', 'Handled', 'Message', 'Created At', 'Stage', 'Source', 'Notes'];
       const rows = allLeads.map(l => [
         l.id, l.kind, l.inquiryType, l.name, l.phone, l.email, l.city,
         l.preferredDate || '', l.preferredTime || '', l.handled ? 'Yes' : 'No',
-        l.message, l.createdAt
+        l.message, l.createdAt, STAGE_LABELS[l.stage] || '', l.source || '', l.notes || ''
       ].map(csvCell).join(','));
       const csv = '\ufeff' + [headers.join(','), ...rows].join('\r\n');
       const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
@@ -413,7 +473,8 @@
 
     // Auto-refresh every 60s while signed in and the tab is visible
     setInterval(() => {
-      if (!document.hidden && sessionStorage.getItem(TOKEN_KEY)) loadLeads();
+      const typing = document.activeElement && document.activeElement.matches('textarea, select');
+      if (!document.hidden && sessionStorage.getItem(TOKEN_KEY) && !typing && !hasUnsavedNotes()) loadLeads();
     }, 60000);
   </script>
 </body>
