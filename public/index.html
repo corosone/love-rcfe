@@ -445,31 +445,31 @@
       }
     }
 
-    /* ==================== NEON ORANGE CALCULATOR ==================== */
+    /* ==================== CARE BUDGET CALCULATOR ==================== */
     .neon-calc-container {
-      background: #0b0d10;
-      border: 2px solid #ff6600;
-      box-shadow: 0 0 30px rgba(255, 102, 0, 0.35), inset 0 0 20px rgba(255, 102, 0, 0.08);
+      background: #ffffff;
+      border: 1px solid #d9ded4;
+      box-shadow: 0 12px 32px -14px rgba(38, 56, 47, 0.28);
       border-radius: 24px;
-      color: #ff8533;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #26382f;
       animation: neonSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes neonSlideDown {
       from { opacity: 0; transform: translateY(-12px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+    .neon-topbar { border-bottom: 1px solid #d9ded4; }
     .neon-screen {
-      background: #040507;
-      border: 1px solid rgba(255, 102, 0, 0.4);
-      box-shadow: inset 0 0 15px rgba(255, 102, 0, 0.15);
+      background: #edf2e9;
+      border: 1px solid #d9ded4;
       border-radius: 16px;
-      text-shadow: 0 0 10px rgba(255, 102, 0, 0.85);
+      color: #26382f;
+      font-variant-numeric: tabular-nums;
     }
     .neon-btn {
-      background: #14171d;
-      color: #ff9944;
-      border: 1px solid rgba(255, 102, 0, 0.25);
+      background: #f8f5ee;
+      color: #26382f;
+      border: 1px solid #d9ded4;
       border-radius: 12px;
       font-weight: 700;
       font-size: 15px;
@@ -480,47 +480,55 @@
       justify-content: center;
       user-select: none;
     }
-    .neon-btn:hover {
-      background: #231b14;
-      border-color: #ff6600;
-      color: #ffffff;
-      box-shadow: 0 0 14px rgba(255, 102, 0, 0.6);
-      transform: translateY(-1px);
+    .neon-btn:hover { background: #dce7d9; border-color: #315d48; transform: translateY(-1px); }
+    .neon-btn:active { transform: translateY(1px); }
+    .neon-btn-op { background: #dce7d9; color: #315d48; border-color: #c4d4c0; }
+    .neon-btn-op:hover { background: #315d48; color: #ffffff; border-color: #315d48; }
+    .neon-btn-eq { background: #315d48; color: #ffffff; font-weight: 900; border-color: #315d48; }
+    .neon-btn-eq:hover { background: #203d30; border-color: #203d30; transform: translateY(-1px); }
+    .neon-btn-func { background: #edf2e9; color: #a96b46; }
+    .neon-btn-func:hover { background: #f5eee5; color: #a96b46; border-color: #a96b46; }
+    .calc-chip {
+      padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 700;
+      background: #f8f5ee; color: #26382f; border: 1px solid #d9ded4; transition: all 0.15s ease;
     }
-    .neon-btn:active {
-      transform: translateY(1px);
-      box-shadow: 0 0 6px rgba(255, 102, 0, 0.4);
+    .calc-chip:hover { border-color: #315d48; background: #dce7d9; }
+    .calc-chip-primary { background: #315d48; color: #ffffff; border-color: #315d48; }
+    .calc-chip-primary:hover { background: #203d30; border-color: #203d30; }
+    .calc-close { padding: 4px; border-radius: 8px; color: #59685f; transition: all 0.15s ease; }
+    .calc-close:hover { background: #dce7d9; color: #315d48; }
+    .calc-trigger {
+      background: #ecfdf5; color: #315d48; border: 1px solid transparent; cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
     }
-    .neon-btn-op {
-      background: #251508;
-      color: #ffaa55;
-      border-color: rgba(255, 102, 0, 0.5);
+    .calc-trigger:hover { background: #dce7d9; border-color: #315d48; }
+    .calc-trigger:active { transform: scale(0.95); }
+    .calc-trigger:focus-visible, .neon-btn:focus-visible, .calc-chip:focus-visible, .calc-close:focus-visible {
+      outline: 2px solid #315d48; outline-offset: 2px;
     }
-    .neon-btn-op:hover {
-      background: #ff6600;
-      color: #0b0d10;
-      box-shadow: 0 0 18px rgba(255, 102, 0, 0.85);
-    }
-    .neon-btn-eq {
-      background: #ff6600;
-      color: #0b0d10;
-      font-weight: 900;
-      border-color: #ff8533;
-      box-shadow: 0 0 18px rgba(255, 102, 0, 0.7);
-    }
-    .neon-btn-eq:hover {
-      background: #ff8533;
-      box-shadow: 0 0 25px rgba(255, 102, 0, 0.95);
-      transform: translateY(-1px) scale(1.02);
-    }
-    .neon-btn-func {
-      background: #1c1e24;
-      color: #ffa066;
-    }
-    .neon-btn-func:hover {
-      background: #332015;
-      color: #ffffff;
-    }
+
+    /* Calculator: dark mode */
+    html.dark .neon-calc-container { background: #1a251f; border-color: #2d4034; box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.6); color: #e6ede8; }
+    html.dark .neon-topbar { border-bottom-color: #2b3d33; }
+    html.dark .neon-screen { background: #121915; border-color: #283a30; color: #e6ede8; }
+    html.dark .neon-btn { background: #23342a; color: #e6ede8; border-color: #2e4236; }
+    html.dark .neon-btn:hover { background: #2d4034; border-color: #4ade80; }
+    html.dark .neon-btn-op { background: #1b2720; color: #4ade80; border-color: #2e4236; }
+    html.dark .neon-btn-op:hover { background: #4ade80; color: #0f1a14; border-color: #4ade80; }
+    html.dark .neon-btn-eq { background: #4ade80; color: #0f1a14; border-color: #4ade80; }
+    html.dark .neon-btn-eq:hover { background: #86efac; border-color: #86efac; }
+    html.dark .neon-btn-func { background: #1b2720; color: #f0a57d; }
+    html.dark .neon-btn-func:hover { background: #28201a; color: #f0a57d; border-color: #f0a57d; }
+    html.dark .calc-chip { background: #23342a; color: #e6ede8; border-color: #2e4236; }
+    html.dark .calc-chip:hover { background: #2d4034; border-color: #4ade80; }
+    html.dark .calc-chip-primary { background: #4ade80; color: #0f1a14; border-color: #4ade80; }
+    html.dark .calc-chip-primary:hover { background: #86efac; border-color: #86efac; }
+    html.dark .calc-close { color: #9bb0a3; }
+    html.dark .calc-close:hover { background: #2d4034; color: #4ade80; }
+    html.dark .calc-trigger { background: #1a2f24; color: #a7f3d0; }
+    html.dark .calc-trigger:hover { background: #23342a; border-color: #4ade80; }
+    html.dark .calc-trigger:focus-visible, html.dark .neon-btn:focus-visible,
+    html.dark .calc-chip:focus-visible, html.dark .calc-close:focus-visible { outline-color: #4ade80; }
 
     @media (prefers-reduced-motion: reduce) {
       .lift { transition: none; }
@@ -1073,34 +1081,28 @@
                 <p class="text-xs text-brand-muted mt-1">Based on prevailing 2025–2026 California regional market rates for RCFEs &amp; Assisted Living.</p>
               </div>
               <div class="flex items-center gap-2.5">
-                <button id="toggle-neon-calc-btn" onclick="toggleNeonCalculator()" type="button" aria-expanded="false" aria-controls="neon-calculator-widget" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold transition shadow-sm border border-orange-500/50 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/60 hover:bg-orange-100 dark:hover:bg-orange-900/60 hover:shadow-orange-500/30 active:scale-95">
-                  <span class="inline-block w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-                  <i data-lucide="calculator" class="w-3.5 h-3.5 text-orange-500"></i>
-                  <span id="neon-calc-btn-label">Open Neon Calculator</span>
-                </button>
-                <div class="p-2.5 bg-emerald-50 rounded-xl text-brand-green hidden sm:block">
+                <button id="toggle-neon-calc-btn" onclick="toggleNeonCalculator()" type="button" aria-expanded="false" aria-controls="neon-calculator-widget" aria-label="Open calculator" title="Open the budget calculator" class="calc-trigger p-2.5 rounded-xl">
                   <i data-lucide="calculator" class="w-6 h-6"></i>
-                </div>
+                </button>
               </div>
             </div>
 
-            <!-- Neon Orange Interactive Calculator Widget -->
-            <div id="neon-calculator-widget" class="hidden mb-8 neon-calc-container p-5 sm:p-7 shadow-2xl relative">
+            <!-- Care Budget Calculator Widget -->
+            <div id="neon-calculator-widget" class="hidden mb-8 neon-calc-container p-5 sm:p-7 relative">
               <!-- Top Bar -->
-              <div class="flex items-center justify-between pb-3 mb-4 border-b border-orange-500/30 text-xs">
+              <div class="neon-topbar flex items-center justify-between pb-3 mb-4 text-xs">
                 <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-orange-500 animate-ping"></span>
-                  <span class="w-2 h-2 rounded-full bg-orange-500 -ml-3.5"></span>
-                  <span class="font-bold tracking-widest uppercase text-orange-400 text-[11px]">NEON FX-9000 // CARE BUDGET CALC</span>
+                  <i data-lucide="calculator" class="w-4 h-4 text-brand-green"></i>
+                  <span class="font-bold tracking-wide uppercase text-brand-green text-[11px]">Care Budget Calculator</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <button onclick="copyNeonResult()" class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-[#14171d] border border-orange-500/40 text-orange-400 hover:text-white hover:border-orange-400 transition" title="Copy result to clipboard">
+                  <button type="button" onclick="copyNeonResult()" class="calc-chip" title="Copy result to clipboard">
                     <span id="neon-copy-label">Copy</span>
                   </button>
-                  <button onclick="applyNeonToBudget()" class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-[#ff6600]/20 border border-orange-500/60 text-orange-300 hover:bg-[#ff6600] hover:text-black transition" title="Apply to Care Inquiry">
+                  <button type="button" onclick="applyNeonToBudget()" class="calc-chip calc-chip-primary" title="Apply to Care Inquiry">
                     Use in Budget
                   </button>
-                  <button onclick="toggleNeonCalculator()" class="p-1 rounded-md text-orange-500 hover:text-white hover:bg-orange-500/20 transition" aria-label="Close calculator">
+                  <button type="button" onclick="toggleNeonCalculator()" class="calc-close" aria-label="Close calculator">
                     <i data-lucide="x" class="w-4 h-4"></i>
                   </button>
                 </div>
@@ -1108,8 +1110,8 @@
 
               <!-- Digital Screen -->
               <div class="neon-screen p-4 mb-5 text-right flex flex-col justify-between min-h-[76px]">
-                <div id="neon-history" class="text-xs text-orange-500/70 tracking-wider truncate mb-1 min-h-[16px]">&nbsp;</div>
-                <div id="neon-display" class="text-3xl sm:text-4xl font-extrabold text-[#ff7700] tracking-tight truncate select-all">0</div>
+                <div id="neon-history" class="text-xs text-brand-muted tracking-wider truncate mb-1 min-h-[16px]">&nbsp;</div>
+                <div id="neon-display" class="text-3xl sm:text-4xl font-extrabold text-brand-ink tracking-tight truncate select-all">0</div>
               </div>
 
               <!-- Keypad Grid -->
@@ -1141,7 +1143,7 @@
               </div>
 
               <!-- Bottom Helper Note -->
-              <p class="text-[11px] text-center text-orange-500/60 mt-4 tracking-wide">
+              <p class="text-[11px] text-center text-brand-muted mt-4 tracking-wide">
                 Keyboard shortcuts enabled • Click "Use in Budget" to transfer calculated cost to inquiry
               </p>
             </div>
@@ -2557,7 +2559,7 @@
       refreshIcons();
     }
 
-    // ==================== NEON ORANGE CALCULATOR ENGINE ====================
+    // ==================== CARE BUDGET CALCULATOR ENGINE ====================
     const neonState = {
       display: '0',
       prev: null,
@@ -2698,19 +2700,16 @@
 
     function toggleNeonCalculator() {
       const widget = document.getElementById('neon-calculator-widget');
-      const label = document.getElementById('neon-calc-btn-label');
       const btn = document.getElementById('toggle-neon-calc-btn');
       if (!widget) return;
       const isHidden = widget.classList.contains('hidden');
       if (isHidden) {
         widget.classList.remove('hidden');
-        if (label) label.textContent = 'Hide Neon Calculator';
-        if (btn) btn.setAttribute('aria-expanded', 'true');
+        if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Hide calculator'); btn.title = 'Hide the budget calculator'; }
         widget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
         widget.classList.add('hidden');
-        if (label) label.textContent = 'Open Neon Calculator';
-        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open calculator'); btn.title = 'Open the budget calculator'; }
       }
       refreshIcons();
     }
@@ -2763,7 +2762,7 @@
       }
     }
 
-    // Keyboard support for Neon Calculator
+    // Keyboard support for the calculator
     document.addEventListener('keydown', e => {
       const widget = document.getElementById('neon-calculator-widget');
       if (!widget || widget.classList.contains('hidden')) return;
