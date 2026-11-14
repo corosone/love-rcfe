@@ -37,6 +37,7 @@ export async function onRequestPost({ request, env, waitUntil }) {
     message: clean(body.message, LIMITS.message),
     preferredDate: clean(body.preferred_date, LIMITS.short) || null,
     preferredTime: clean(body.preferred_time, LIMITS.short) || null,
+    source: clean(body.source, 40),
   };
 
   const errors = {};
@@ -84,8 +85,8 @@ export async function onRequestPost({ request, env, waitUntil }) {
     const result = await env.DB
       .prepare(`
         INSERT INTO leads (
-          kind, inquiry_type, name, email, phone, city, message, preferred_date, preferred_time
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+          kind, inquiry_type, name, email, phone, city, message, preferred_date, preferred_time, source
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `)
       .bind(
         record.kind,
@@ -96,7 +97,8 @@ export async function onRequestPost({ request, env, waitUntil }) {
         record.city,
         record.message,
         record.preferredDate,
-        record.preferredTime
+        record.preferredTime,
+        record.source
       )
       .run();
 
