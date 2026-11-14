@@ -509,28 +509,27 @@
       outline: 2px solid #315d48; outline-offset: 2px;
     }
 
-    /* Calculator: dark mode */
-    html.dark .neon-calc-container { background: #1a251f; border-color: #2d4034; box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.6); color: #e6ede8; }
-    html.dark .neon-topbar { border-bottom-color: #2b3d33; }
-    html.dark .neon-screen { background: #121915; border-color: #283a30; color: #e6ede8; }
-    html.dark .neon-btn, html.dark .neon-btn:hover, html.dark .neon-btn:active { box-shadow: none; }
-    html.dark .neon-screen { box-shadow: none; }
-    html.dark .neon-btn { background: #23342a; color: #e6ede8; border-color: #2e4236; }
-    html.dark .neon-btn:hover { background: #2d4034; border-color: #4ade80; }
-    html.dark .neon-btn-op { background: #1b2720; color: #4ade80; border-color: #2e4236; }
-    html.dark .neon-btn-op:hover { background: #4ade80; color: #0f1a14; border-color: #4ade80; }
-    html.dark .neon-btn-eq { background: #4ade80; color: #0f1a14; border-color: #4ade80; }
-    html.dark .neon-btn-eq:hover { background: #86efac; border-color: #86efac; }
-    html.dark .neon-btn-func { background: #1b2720; color: #f0a57d; }
-    html.dark .neon-btn-func:hover { background: #28201a; color: #f0a57d; border-color: #f0a57d; }
-    html.dark .calc-chip { background: #23342a; color: #e6ede8; border-color: #2e4236; }
-    html.dark .calc-chip:hover { background: #2d4034; border-color: #4ade80; }
+    /* Calculator: dark mode (same layout and 3D buttons as light mode) */
+    html.dark .neon-calc-container { background: #243a2e; border-color: #3d5a49; box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.65); color: #e6ede8; }
+    html.dark .neon-topbar { border-bottom-color: #3d5a49; }
+    html.dark .neon-screen { background: #101713; border-color: #4f7a62; color: #e6ede8; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5); }
+    html.dark .neon-btn { background: #33503f; color: #e6ede8; border-color: #4a6b58; box-shadow: 0 2px 0 #12201a; }
+    html.dark .neon-btn:hover { background: #3c5b49; border-color: #4ade80; box-shadow: 0 2px 0 #2f9e5c; }
+    html.dark .neon-btn:active { box-shadow: 0 0 0 transparent; }
+    html.dark .neon-btn-op { background: #1b3a2a; color: #4ade80; border-color: #3f8a5f; box-shadow: 0 2px 0 #0e1f16; }
+    html.dark .neon-btn-op:hover { background: #4ade80; color: #0f1a14; border-color: #86efac; box-shadow: 0 2px 0 #2f9e5c; }
+    html.dark .neon-btn-eq { background: #4ade80; color: #0f1a14; border-color: #86efac; box-shadow: 0 2px 0 #2f9e5c; }
+    html.dark .neon-btn-eq:hover { background: #86efac; border-color: #bbf7d0; box-shadow: 0 2px 0 #4ade80; }
+    html.dark .neon-btn-func { background: #3a2d22; color: #f0a57d; border-color: #6b4a35; box-shadow: 0 2px 0 #1c140e; }
+    html.dark .neon-btn-func:hover { background: #4a3728; color: #f0a57d; border-color: #f0a57d; box-shadow: 0 2px 0 #a96b46; }
+    html.dark .calc-chip { background: #33503f; color: #e6ede8; border-color: #4a6b58; }
+    html.dark .calc-chip:hover { background: #3c5b49; border-color: #4ade80; }
     html.dark .calc-chip-primary { background: #4ade80; color: #0f1a14; border-color: #4ade80; }
     html.dark .calc-chip-primary:hover { background: #86efac; border-color: #86efac; }
-    html.dark .calc-close { color: #9bb0a3; }
-    html.dark .calc-close:hover { background: #2d4034; color: #4ade80; }
-    html.dark .calc-trigger { background: #1a2f24; color: #a7f3d0; }
-    html.dark .calc-trigger:hover { background: #23342a; border-color: #4ade80; }
+    html.dark .calc-close { color: #b6cbbd; }
+    html.dark .calc-close:hover { background: #33503f; color: #4ade80; }
+    html.dark .calc-trigger { background: #243a2e; color: #a7f3d0; border-color: #3d5a49; }
+    html.dark .calc-trigger:hover { background: #2f4a3b; border-color: #4ade80; }
     html.dark .calc-trigger:focus-visible, html.dark .neon-btn:focus-visible,
     html.dark .calc-chip:focus-visible, html.dark .calc-close:focus-visible { outline-color: #4ade80; }
 
