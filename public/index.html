@@ -533,6 +533,20 @@
     html.dark .calc-trigger:focus-visible, html.dark .neon-btn:focus-visible,
     html.dark .calc-chip:focus-visible, html.dark .calc-close:focus-visible { outline-color: #4ade80; }
 
+    /* ==================== LIGHT MODE: WARM PAGE + LIGHT SAGE PANELS ==================== */
+    html:not(.dark) body {
+      background-image: radial-gradient(1100px 460px at 50% -120px, #f7dfc9 0%, rgba(251, 241, 230, 0) 72%);
+      background-repeat: no-repeat;
+    }
+    html:not(.dark) .bg-brand-cream { background-color: #fbf1e6; }
+    html:not(.dark) .bg-brand-cream\/95 { background-color: rgba(251, 241, 230, 0.95); }
+    html:not(.dark) .hover\:bg-brand-cream\/60:hover { background-color: rgba(251, 241, 230, 0.6); }
+    html:not(.dark) .bg-brand-creamLight { background-color: #fdf7f0; }
+    html:not(.dark) .bg-brand-sageLight { background-color: #e8f1e4; }
+    html:not(.dark) .bg-brand-sage { background-color: #d9e8d3; }
+    html:not(.dark) .bg-brand-accentLight { background-color: #f9e7d6; }
+    html:not(.dark) [class*="border-brand-line"] { border-color: #d6dfc9; }
+
     @media (prefers-reduced-motion: reduce) {
       .lift { transition: none; }
       .scroll-smooth { scroll-behavior: auto; }
