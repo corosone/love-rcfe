@@ -27,7 +27,7 @@ function addDays(ymd, n) {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export async function onRequestPost({ request, env, waitUntil }) {
+export async function onRequestPost({ request, env }) {
   let body;
   try {
     body = await request.json();
@@ -136,11 +136,6 @@ export async function onRequestPost({ request, env, waitUntil }) {
       )
       .run();
 
-    // Backup email alert via Resend (only if RESEND_API_KEY is set). Never blocks the response.
-    if (env.RESEND_API_KEY && waitUntil) {
-      waitUntil(sendAlert(env, record));
-    }
-
     return jsonResponse({ ok: true, id: result?.meta?.last_row_id ?? null }, 201);
   } catch (err) {
     console.error('Failed to save lead:', err);
@@ -161,40 +156,6 @@ async function verifyTurnstile(secret, token, ip) {
   } catch (err) {
     console.error('Turnstile verify unreachable:', err);
     return true;
-  }
-}
-
-const esc = (v) =>
-  String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
-async function sendAlert(env, r) {
-  try {
-    const rows = [
-      ['Type', r.kind === 'call_request' ? 'Call request' : 'Enquiry'],
-      ['Topic', r.inquiryType],
-      ['Name', r.name],
-      ['Phone', r.phone],
-      ['Email', r.email],
-      ['City', r.city],
-      ['Preferred', [r.preferredDate, r.preferredTime].filter(Boolean).join(' ')],
-      ['Message', r.message],
-    ].filter(([, v]) => v);
-    const html = rows
-      .map(([k, v]) => `<p><b>${k}:</b> ${esc(v).replace(/\n/g, '<br>')}</p>`)
-      .join('');
-    await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: 'Love RCFE <onboarding@resend.dev>',
-        to: [env.NOTIFY_EMAIL || 'lovercfe@gmail.com'],
-        reply_to: r.email,
-        subject: `[Love RCFE] ${r.kind === 'call_request' ? 'Call request' : 'New enquiry'} from ${r.name}`,
-        html,
-      }),
-    });
-  } catch (err) {
-    console.error('Backup alert failed:', err);
   }
 }
 
