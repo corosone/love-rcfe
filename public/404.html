@@ -59,6 +59,14 @@
     html.dark .lang-option:hover { background-color: #24352b !important; }
     html.dark .lang-option[aria-checked="true"] { background-color: #1e3327 !important; color: #4ade80 !important; font-weight: 700; }
     html.dark footer { border-color: #283a30 !important; }
+    html[lang="ar"] :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote, input:not([type="tel"]):not([type="email"]), textarea, select) {
+      direction: rtl;
+      unicode-bidi: plaintext;
+    }
+    html[lang="ar"] :is(a[href^="tel:"], .lang-dropdown) {
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-ink min-h-screen flex flex-col">
@@ -113,6 +121,10 @@
             </button>
             <button type="button" role="menuitemradio" aria-checked="false" data-lang="ru" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
               <span><span>Русский</span> <span class="text-xs text-brand-muted ml-1">Russian</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="ar" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>العربية</span> <span class="text-xs text-brand-muted ml-1">Arabic</span></span>
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
             </button>
           </div>
