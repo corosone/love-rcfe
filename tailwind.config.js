@@ -1,4 +1,4 @@
-/** Same settings the pages used inline with the Tailwind CDN. */
+// Same settings the pages used inline with the Tailwind CDN.
 module.exports = {
   content: ['./public/**/*.{html,js}'],
   darkMode: 'class',
