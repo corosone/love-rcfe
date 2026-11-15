@@ -378,7 +378,7 @@
       tl: "Wika / Language",
       vi: "Ngôn ngữ / Language",
       ko: "언어 선택 / Language",
-      hy: "Լեզու / Язык",
+      hy: "Լեզու / Language",
       ru: "Язык / Language"
     },
     "Need urgent placement?": {
