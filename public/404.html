@@ -17,6 +17,7 @@
 
   <!-- Tailwind CSS: built at deploy time into /tailwind.css; falls back to the CDN via /404.js if missing -->
   <link id="tw-css" rel="stylesheet" href="/tailwind.css">
+  <script src="/i18n.js"></script>
   <script src="/404.js"></script>
   <style>
     body {
@@ -49,6 +50,14 @@
     html.dark .bg-brand-sageLight { background-color: #1e2e24 !important; }
     html.dark .bg-brand-accentLight { background-color: #28201a !important; }
     html.dark .hover\:bg-brand-sageLight\/60:hover { background-color: #24352b !important; }
+    html:not(.dark) .lang-dropdown { background-color: #fcfbfa; border-color: #d9ded4; }
+    html:not(.dark) .lang-option[aria-checked="true"] { background-color: #edf2e9; color: #203d30; font-weight: 700; }
+    html.dark .lang-toggle-btn { background-color: transparent !important; border-color: #2d4034 !important; color: #e6ede8 !important; }
+    html.dark .lang-toggle-btn:hover { background-color: #1e2c24 !important; border-color: #4ade80 !important; color: #4ade80 !important; }
+    html.dark .lang-dropdown { background-color: #1a251f !important; border-color: #2d4034 !important; }
+    html.dark .lang-option { color: #e6ede8 !important; }
+    html.dark .lang-option:hover { background-color: #24352b !important; }
+    html.dark .lang-option[aria-checked="true"] { background-color: #1e3327 !important; color: #4ade80 !important; font-weight: 700; }
     html.dark footer { border-color: #283a30 !important; }
   </style>
 </head>
@@ -66,6 +75,40 @@
       </a>
 
       <div class="flex items-center gap-2.5">
+        <div id="lang-menu-wrap" class="relative">
+          <button id="lang-toggle-btn" data-lang-toggle="desktop" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-dropdown" aria-label="Change language" title="Change language" class="lang-toggle-btn inline-flex items-center gap-1.5 px-2.5 py-2 rounded-full border border-brand-line text-brand-ink text-xs font-bold hover:bg-brand-sageLight/60 transition">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+            <span class="lang-current-code">EN</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
+          </button>
+          <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" class="lang-dropdown hidden absolute right-0 mt-2 w-56 rounded-2xl border shadow-xl py-1.5 z-50">
+            <div class="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
+            <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="es" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Español</span> <span class="text-xs text-brand-muted ml-1">Spanish</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>中文</span> <span class="text-xs text-brand-muted ml-1">Chinese</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="tl" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Tagalog</span> <span class="text-xs text-brand-muted ml-1">Filipino</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="vi" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Tiếng Việt</span> <span class="text-xs text-brand-muted ml-1">Vietnamese</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="ko" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>한국어</span> <span class="text-xs text-brand-muted ml-1">Korean</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+          </div>
+        </div>
         <button id="theme-btn" type="button" aria-label="Toggle dark mode" class="p-2.5 rounded-full border border-brand-line text-brand-ink hover:bg-brand-sageLight/60 transition flex items-center justify-center">
           <i data-lucide="moon" class="w-4 h-4"></i>
         </button>

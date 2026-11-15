@@ -10,7 +10,19 @@
       ? window.__FORM_ENDPOINT__
       : '/api/leads';
     const BUSINESS = { tz: 'America/Los_Angeles', openDays: [1, 2, 3, 4, 5, 6], openHour: 8, closeHour: 19 };
+    const BOOKING_TIME_CANONICAL = {
+      morning: 'Morning (9am - 12pm)',
+      afternoon: 'Afternoon (1pm - 4pm)',
+      evening: 'Late Afternoon (4pm - 6pm)'
+    };
 
+    const t = (text, vars) => (window.LoveI18n
+      ? window.LoveI18n.t(text, vars)
+      : String(text || '').replace(/\{(\w+)\}/g, (_, k) => (vars && vars[k] !== undefined ? vars[k] : `{${k}}`)));
+    const currentLocale = () => (window.LoveI18n ? window.LoveI18n.getIntlLocale() : 'en-US');
+
+    let currentView = 'home';
+    let quizCurrentStep = 1;
     let hasNavigated = false;
     let bookingCloseTimer = null;
 
@@ -86,19 +98,19 @@
       const openToday = BUSINESS.openDays.includes(day);
 
       if (openToday && minutes >= BUSINESS.openHour * 60 && minutes < BUSINESS.closeHour * 60) {
-        return { open: true, text: 'Open now, closes at 7:00 PM PT' };
+        return { open: true, text: t('Open now, closes at 7:00 PM PT') };
       }
       if (openToday && minutes < BUSINESS.openHour * 60) {
-        return { open: false, text: 'Closed right now, opens today at 8:00 AM PT' };
+        return { open: false, text: t('Closed right now, opens today at 8:00 AM PT') };
       }
       for (let i = 1; i <= 7; i++) {
         const next = (day + i) % 7;
         if (BUSINESS.openDays.includes(next)) {
-          const when = i === 1 ? 'tomorrow' : dayNames[next];
-          return { open: false, text: `Closed right now, opens ${when} at 8:00 AM PT` };
+          const when = i === 1 ? t('tomorrow') : t(dayNames[next]);
+          return { open: false, text: t('Closed right now, opens {when} at 8:00 AM PT', { when }) };
         }
       }
-      return { open: false, text: 'Closed right now' };
+      return { open: false, text: t('Closed right now') };
     }
 
     function updateCallStatus() {
@@ -139,8 +151,8 @@
         } catch (e) { copied = false; }
       }
       if (label) {
-        label.textContent = copied ? 'Copied' : 'Press Ctrl+C to copy';
-        setTimeout(() => { label.textContent = 'Copy number'; }, 2200);
+        label.textContent = copied ? t('Copied') : t('Press Ctrl+C to copy');
+        setTimeout(() => { label.textContent = t('Copy number'); }, 2200);
       }
     }
 
@@ -186,7 +198,11 @@
       });
     }
     function tsShowError(el) {
-      el.innerHTML = '<p class="text-xs font-semibold text-red-600 dark:text-red-400">The security check could not load. Please turn off ad blockers for this site, or call (818) 217-5755 or email loveRCFE@gmail.com.</p>';
+      el.innerHTML = '';
+      const p = document.createElement('p');
+      p.className = 'text-xs font-semibold text-red-600 dark:text-red-400';
+      p.textContent = t('The security check could not load. Please turn off ad blockers for this site, or call (818) 217-5755 or email loveRCFE@gmail.com.');
+      el.appendChild(p);
     }
     window.addEventListener('load', () => {
       initTurnstile();
@@ -216,7 +232,7 @@
       if (/\b\d{3}-\d{2}-\d{4}\b/.test(String(record.message || ''))) {
         return {
           ok: false,
-          validationError: 'For your privacy, please do not include Social Security numbers in web messages.',
+          validationError: t('For your privacy, please do not include Social Security numbers in web messages.'),
           reason: 'validation'
         };
       }
@@ -227,7 +243,7 @@
         if (res.status >= 400 && res.status < 500) {
           return {
             ok: false,
-            validationError: data.error || 'Please check the highlighted fields.',
+            validationError: data.error || t('Please check the highlighted fields.'),
             reason: 'validation'
           };
         }
@@ -302,10 +318,26 @@
       }
     }
 
+    const VIEW_TITLES = {
+      home: 'Love RCFE | Thoughtful Guidance for Elder Care & Residential Care Facilities',
+      services: 'Our Services | Love RCFE Elder Care & Operator Consulting',
+      tools: 'Care Tools & Cost Calculators | Love RCFE',
+      approach: 'Our Approach | Love RCFE Compassionate Care',
+      support: 'Support & FAQs | Love RCFE',
+      contact: 'Contact Us | Love RCFE Advisory Team',
+      terms: 'Terms of Use | Love RCFE',
+      privacy: 'Privacy Policy | Love RCFE'
+    };
+
+    function updateDocumentTitle(viewName) {
+      document.title = t(VIEW_TITLES[viewName] || 'Love RCFE');
+    }
+
     // View Routing
     function openView(name, updateHistory = true) {
       if (name === 'main-content') return;
       const chosen = viewNames.has(name) ? name : 'home';
+      currentView = chosen;
       
       // Toggle view visibility
       document.querySelectorAll('.view').forEach(view => {
@@ -330,17 +362,7 @@
       }
 
       // Update Document Title
-      const titles = {
-        home: 'Love RCFE | Thoughtful Guidance for Elder Care & Residential Care Facilities',
-        services: 'Our Services | Love RCFE Elder Care & Operator Consulting',
-        tools: 'Care Tools & Cost Calculators | Love RCFE',
-        approach: 'Our Approach | Love RCFE Compassionate Care',
-        support: 'Support & FAQs | Love RCFE',
-        contact: 'Contact Us | Love RCFE Advisory Team',
-        terms: 'Terms of Use | Love RCFE',
-        privacy: 'Privacy Policy | Love RCFE'
-      };
-      document.title = titles[chosen] || 'Love RCFE';
+      updateDocumentTitle(chosen);
 
       // Snappy view top reset without sluggish scroll animation
       document.documentElement.classList.remove('scroll-smooth');
@@ -415,18 +437,19 @@
         else el.classList.add('hidden');
       });
       document.querySelectorAll('.theme-label-mobile').forEach(el => {
-        el.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+        el.textContent = t(isDark ? 'Light Mode' : 'Dark Mode');
       });
 
       // Update accessibility labels & aria-pressed state
+      const themeLabel = t(isDark ? 'Switch to light mode' : 'Switch to dark mode');
       const themeBtn = document.getElementById('theme-toggle-btn');
       if (themeBtn) {
-        themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-        themeBtn.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        themeBtn.setAttribute('aria-label', themeLabel);
+        themeBtn.setAttribute('title', themeLabel);
         themeBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
       }
       document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        btn.setAttribute('aria-label', themeLabel);
       });
 
       // Sync mobile browser chrome / status bar theme color
@@ -582,11 +605,11 @@
       const isHidden = widget.classList.contains('hidden');
       if (isHidden) {
         widget.classList.remove('hidden');
-        if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Hide calculator'); btn.title = 'Hide the budget calculator'; }
+        if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', t('Hide calculator')); btn.title = t('Hide the budget calculator'); }
         widget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
         widget.classList.add('hidden');
-        if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open calculator'); btn.title = 'Open the budget calculator'; }
+        if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', t('Open calculator')); btn.title = t('Open the budget calculator'); }
       }
       refreshIcons();
     }
@@ -611,15 +634,15 @@
         } catch (e) { copied = false; }
       }
       if (label) {
-        label.textContent = copied ? 'Copied!' : 'Failed';
-        setTimeout(() => { label.textContent = 'Copy'; }, 1500);
+        label.textContent = copied ? t('Copied!') : t('Failed');
+        setTimeout(() => { label.textContent = t('Copy'); }, 1500);
       }
     }
 
     function applyNeonToBudget() {
       const num = parseFloat(neonState.display);
       if (isNaN(num) || num <= 0) {
-        alert('Please enter or calculate a valid budget amount on the calculator first.');
+        alert(t('Please enter or calculate a valid budget amount on the calculator first.'));
         return;
       }
       const formatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
@@ -841,10 +864,11 @@
       const facEl = document.getElementById('calc-facility-price');
       const homeEl = document.getElementById('calc-homecare-price');
 
+      const perMo = t('/mo');
       if (rangeEl) rangeEl.textContent = `${formatter.format(lowRange)} – ${formatter.format(highRange)}`;
-      if (rcfeEl) rcfeEl.textContent = `${formatter.format(totalRCFE)}/mo`;
-      if (facEl) facEl.textContent = `${formatter.format(facilityPrice)}/mo`;
-      if (homeEl) homeEl.textContent = `${formatter.format(homeCarePrice)}/mo`;
+      if (rcfeEl) rcfeEl.textContent = `${formatter.format(totalRCFE)}${perMo}`;
+      if (facEl) facEl.textContent = `${formatter.format(facilityPrice)}${perMo}`;
+      if (homeEl) homeEl.textContent = `${formatter.format(homeCarePrice)}${perMo}`;
     }
 
     // Pre-fill contact form from calculator estimate
@@ -870,6 +894,7 @@
     const quizState = { 1: null, 2: null, 3: null, 4: null };
 
     function updateQuizProgress(step) {
+      quizCurrentStep = step;
       const textEl = document.getElementById('quiz-progress-text');
       const percentEl = document.getElementById('quiz-progress-percent');
       const barEl = document.getElementById('quiz-progress-bar');
@@ -882,8 +907,8 @@
       if (wrapperEl) wrapperEl.classList.remove('hidden');
 
       const pct = Math.round((step / 4) * 100);
-      if (textEl) textEl.textContent = `Question ${step} of 4`;
-      if (percentEl) percentEl.textContent = `${pct}% Complete`;
+      if (textEl) textEl.textContent = t('Question {step} of 4', { step });
+      if (percentEl) percentEl.textContent = t('{pct}% Complete', { pct });
       if (barEl) barEl.style.width = `${pct}%`;
     }
 
@@ -957,7 +982,12 @@
         ];
       }
 
-      return { recTitle, recDesc, questions, isImmediate: answers[4] === 'immediate' };
+      return {
+        recTitle: t(recTitle),
+        recDesc: t(recDesc),
+        questions: questions.map(q => t(q)),
+        isImmediate: answers[4] === 'immediate'
+      };
     }
 
     function renderQuizResult() {
@@ -1057,37 +1087,38 @@
       if (!content) return;
       const step = modalQuizState.step;
       const ans = modalQuizState.answers;
+      const tx = s => escapeHtml(t(s));
 
       if (step === 1) {
         content.innerHTML = `
           <div>
             <div class="mb-5">
               <div class="flex items-center justify-between text-xs font-semibold text-brand-muted mb-1.5">
-                <span>Question 1 of 4: Profile</span>
-                <span class="text-brand-green font-bold">25% Complete</span>
+                <span>${tx('Question 1 of 4: Profile')}</span>
+                <span class="text-brand-green font-bold">${tx('25% Complete')}</span>
               </div>
               <div class="w-full bg-brand-sageLight rounded-full h-2 overflow-hidden border border-brand-line/60">
                 <div class="bg-brand-green h-full rounded-full transition-all duration-300" style="width: 25%"></div>
               </div>
             </div>
 
-            <p class="text-sm font-bold text-brand-ink mb-3">Who are you exploring care for?</p>
+            <p class="text-sm font-bold text-brand-ink mb-3">${tx('Who are you exploring care for?')}</p>
             <div class="grid sm:grid-cols-2 gap-3 mb-4">
               <button data-click="setModalQuizAnswer(1, 'elder-parent')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Elder Parent or Relative</span>
-                <span class="block text-xs text-brand-muted mt-1">Caring for Mom, Dad, or elder relative</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Elder Parent or Relative')}</span>
+                <span class="block text-xs text-brand-muted mt-1">${tx('Caring for Mom, Dad, or elder relative')}</span>
               </button>
               <button data-click="setModalQuizAnswer(1, 'spouse')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Spouse or Partner</span>
-                <span class="block text-xs text-brand-muted mt-1">Seeking support for partner's health progression</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Spouse or Partner')}</span>
+                <span class="block text-xs text-brand-muted mt-1">${tx("Seeking support for partner's health progression")}</span>
               </button>
               <button data-click="setModalQuizAnswer(1, 'self')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Myself</span>
-                <span class="block text-xs text-brand-muted mt-1">Planning forward for my own future residence</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Myself')}</span>
+                <span class="block text-xs text-brand-muted mt-1">${tx('Planning forward for my own future residence')}</span>
               </button>
               <button data-click="setModalQuizAnswer(1, 'client')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Social Worker / Discharge Planner</span>
-                <span class="block text-xs text-brand-muted mt-1">Hospital / rehab safe discharge placement</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Social Worker / Discharge Planner')}</span>
+                <span class="block text-xs text-brand-muted mt-1">${tx('Hospital / rehab safe discharge placement')}</span>
               </button>
             </div>
           </div>
@@ -1097,8 +1128,8 @@
           <div>
             <div class="mb-5">
               <div class="flex items-center justify-between text-xs font-semibold text-brand-muted mb-1.5">
-                <span>Question 2 of 4: Cognitive Health</span>
-                <span class="text-brand-green font-bold">50% Complete</span>
+                <span>${tx('Question 2 of 4: Cognitive Health')}</span>
+                <span class="text-brand-green font-bold">${tx('50% Complete')}</span>
               </div>
               <div class="w-full bg-brand-sageLight rounded-full h-2 overflow-hidden border border-brand-line/60">
                 <div class="bg-brand-green h-full rounded-full transition-all duration-300" style="width: 50%"></div>
@@ -1106,22 +1137,22 @@
             </div>
 
             <button data-click="prevModalQuizStep(1)" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-muted hover:text-brand-ink mb-3 transition">
-              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Question 1
+              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> ${tx('Back to Question 1')}
             </button>
 
-            <p class="text-sm font-bold text-brand-ink mb-3">What is their primary cognitive and memory status?</p>
+            <p class="text-sm font-bold text-brand-ink mb-3">${tx('What is their primary cognitive and memory status?')}</p>
             <div class="space-y-3 mb-4">
               <button data-click="setModalQuizAnswer(2, 'sharp')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Sharp &amp; Clear Cognitively</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Alert, manages conversations, no wandering or severe memory confusion</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Sharp & Clear Cognitively')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Alert, manages conversations, no wandering or severe memory confusion')}</span>
               </button>
               <button data-click="setModalQuizAnswer(2, 'mild')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Mild Forgetfulness / Age-Related Memory Lapses</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Occasionally forgets medications or dates, but oriented to surroundings</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Mild Forgetfulness / Age-Related Memory Lapses')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Occasionally forgets medications or dates, but oriented to surroundings')}</span>
               </button>
               <button data-click="setModalQuizAnswer(2, 'dementia')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Diagnosed Alzheimer's or Moderate/Severe Dementia</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Confusion, disorientation, risk of exit-seeking/wandering, requires secured care</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx("Diagnosed Alzheimer's or Moderate/Severe Dementia")}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Confusion, disorientation, risk of exit-seeking/wandering, requires secured care')}</span>
               </button>
             </div>
           </div>
@@ -1131,8 +1162,8 @@
           <div>
             <div class="mb-5">
               <div class="flex items-center justify-between text-xs font-semibold text-brand-muted mb-1.5">
-                <span>Question 3 of 4: Physical Assistance</span>
-                <span class="text-brand-green font-bold">75% Complete</span>
+                <span>${tx('Question 3 of 4: Physical Assistance')}</span>
+                <span class="text-brand-green font-bold">${tx('75% Complete')}</span>
               </div>
               <div class="w-full bg-brand-sageLight rounded-full h-2 overflow-hidden border border-brand-line/60">
                 <div class="bg-brand-green h-full rounded-full transition-all duration-300" style="width: 75%"></div>
@@ -1140,22 +1171,22 @@
             </div>
 
             <button data-click="prevModalQuizStep(2)" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-muted hover:text-brand-ink mb-3 transition">
-              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Question 2
+              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> ${tx('Back to Question 2')}
             </button>
 
-            <p class="text-sm font-bold text-brand-ink mb-3">What assistance is required with physical activities of daily living (ADLs)?</p>
+            <p class="text-sm font-bold text-brand-ink mb-3">${tx('What assistance is required with physical activities of daily living (ADLs)?')}</p>
             <div class="space-y-3 mb-4">
               <button data-click="setModalQuizAnswer(3, 'independent')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Independent / Minimal assistance</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Walks easily; just needs meal service, companionship, and medication reminders</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Independent / Minimal assistance')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Walks easily; just needs meal service, companionship, and medication reminders')}</span>
               </button>
               <button data-click="setModalQuizAnswer(3, 'assist')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Moderate Assistance (Bathing, Dressing, Transfers)</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Uses walker or wheelchair; needs 1 caregiver for showers or getting out of bed</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Moderate Assistance (Bathing, Dressing, Transfers)')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Uses walker or wheelchair; needs 1 caregiver for showers or getting out of bed')}</span>
               </button>
               <button data-click="setModalQuizAnswer(3, 'total')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">High Acuity / Bedridden / Total Dependence</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Non-ambulatory, frequent turning, hoyer lift or 2-person assist, hospice waiver</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('High Acuity / Bedridden / Total Dependence')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Non-ambulatory, frequent turning, hoyer lift or 2-person assist, hospice waiver')}</span>
               </button>
             </div>
           </div>
@@ -1165,8 +1196,8 @@
           <div>
             <div class="mb-5">
               <div class="flex items-center justify-between text-xs font-semibold text-brand-muted mb-1.5">
-                <span>Question 4 of 4: Timeline</span>
-                <span class="text-brand-green font-bold">100% Ready</span>
+                <span>${tx('Question 4 of 4: Timeline')}</span>
+                <span class="text-brand-green font-bold">${tx('100% Ready')}</span>
               </div>
               <div class="w-full bg-brand-sageLight rounded-full h-2 overflow-hidden border border-brand-line/60">
                 <div class="bg-brand-green h-full rounded-full transition-all duration-300" style="width: 100%"></div>
@@ -1174,22 +1205,22 @@
             </div>
 
             <button data-click="prevModalQuizStep(3)" class="inline-flex items-center gap-1 text-xs font-semibold text-brand-muted hover:text-brand-ink mb-3 transition">
-              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Question 3
+              <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> ${tx('Back to Question 3')}
             </button>
 
-            <p class="text-sm font-bold text-brand-ink mb-3">How soon is care needed?</p>
+            <p class="text-sm font-bold text-brand-ink mb-3">${tx('How soon is care needed?')}</p>
             <div class="space-y-3 mb-4">
               <button data-click="setModalQuizAnswer(4, 'immediate')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Immediate / Hospital Discharge (Within 1–7 Days)</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Urgent transition needing expedited bed placement and physician review</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Immediate / Hospital Discharge (Within 1–7 Days)')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Urgent transition needing expedited bed placement and physician review')}</span>
               </button>
               <button data-click="setModalQuizAnswer(4, 'soon')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Next 30–60 Days</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Proactively planning a comfortable, unhurried transition</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Next 30–60 Days')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Proactively planning a comfortable, unhurried transition')}</span>
               </button>
               <button data-click="setModalQuizAnswer(4, 'research')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
-                <span class="block font-bold text-sm text-brand-ink">Future Research &amp; Budget Planning</span>
-                <span class="block text-xs text-brand-muted mt-0.5">Gathering pricing, options, and understanding California licensing levels</span>
+                <span class="block font-bold text-sm text-brand-ink">${tx('Future Research & Budget Planning')}</span>
+                <span class="block text-xs text-brand-muted mt-0.5">${tx('Gathering pricing, options, and understanding California licensing levels')}</span>
               </button>
             </div>
           </div>
@@ -1198,12 +1229,15 @@
         // Result Step in Modal
         const rec = getCareRecommendation(ans);
         modalQuizState.lastRec = rec;
+        const lang = window.LoveI18n ? window.LoveI18n.getLang() : 'en';
+        const modalUrgentHtml = (window.LoveI18n && window.LoveI18n.BLOCKS && window.LoveI18n.BLOCKS.modal_urgent_p && (window.LoveI18n.BLOCKS.modal_urgent_p[lang] || window.LoveI18n.BLOCKS.modal_urgent_p.en))
+          || 'With an immediate 1–7 day timeframe, call our intake hotline at <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> for emergency openings and priority tour booking.';
 
         content.innerHTML = `
           <div class="space-y-4">
             <div class="p-6 rounded-2xl bg-brand-sageLight border border-brand-line">
               <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-green text-white text-xs font-bold uppercase tracking-wider mb-2.5">
-                <i data-lucide="check" class="w-3.5 h-3.5"></i> Custom Recommendation
+                <i data-lucide="check" class="w-3.5 h-3.5"></i> ${tx('Custom Recommendation')}
               </div>
               <h4 class="display text-xl sm:text-2xl font-bold text-brand-ink mb-2">${escapeHtml(rec.recTitle)}</h4>
               <p class="text-xs sm:text-sm text-brand-muted leading-relaxed mb-4">${escapeHtml(rec.recDesc)}</p>
@@ -1212,16 +1246,16 @@
                 <div class="mb-4 p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200 text-xs">
                   <div class="flex items-center gap-1.5 font-bold mb-1 text-sm text-amber-950 dark:text-amber-100">
                     <i data-lucide="alert-circle" class="w-4 h-4 text-amber-700 dark:text-amber-400"></i>
-                    <span>Hospital Discharge / Urgent Placement Alert</span>
+                    <span>${tx('Hospital Discharge / Urgent Placement Alert')}</span>
                   </div>
                   <p class="leading-relaxed">
-                    With an immediate 1–7 day timeframe, call our intake hotline at <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> for emergency openings and priority tour booking.
+                    ${modalUrgentHtml}
                   </p>
                 </div>
               ` : ''}
 
               <div class="border-t border-brand-line pt-3 text-xs">
-                <p class="font-bold text-brand-ink mb-1.5">Key Questions to Ask on Your First Tour:</p>
+                <p class="font-bold text-brand-ink mb-1.5">${tx('Key Questions to Ask on Your First Tour:')}</p>
                 <ul class="list-disc pl-5 space-y-1 text-brand-muted">
                   ${rec.questions.map(q => `<li>${escapeHtml(q)}</li>`).join('')}
                 </ul>
@@ -1230,16 +1264,16 @@
 
             <div class="flex flex-col sm:flex-row gap-3 pt-2">
               <button data-click="closeCareQuizModal(); openBookingModal();" class="flex-1 rounded-full bg-brand-green text-white py-3 px-4 text-xs font-bold hover:bg-brand-greenDark shadow-sm transition">
-                Book Free Advisory Call
+                ${tx('Book Free Advisory Call')}
               </button>
               <button data-click="closeCareQuizModal(); prefillContactFromModalQuiz();" class="flex-1 rounded-full border border-brand-green text-brand-green py-3 px-4 text-xs font-bold hover:bg-brand-sageLight transition">
-                Email Care Plan to Advisor
+                ${tx('Email Care Plan to Advisor')}
               </button>
             </div>
 
             <div class="text-center pt-1">
               <button data-click="openCareQuizModal()" class="text-xs text-brand-muted hover:text-brand-ink underline">
-                Retake Assessment
+                ${tx('Retake Assessment')}
               </button>
             </div>
           </div>
@@ -1299,7 +1333,8 @@
       const email = document.getElementById('book-email').value.trim();
       const date = document.getElementById('book-date').value;
       const timeSelect = document.getElementById('book-time');
-      const timeLabel = timeSelect.options[timeSelect.selectedIndex].text;
+      const displayTimeLabel = timeSelect.options[timeSelect.selectedIndex].text;
+      const canonicalTimeLabel = BOOKING_TIME_CANONICAL[timeSelect.value] || displayTimeLabel;
       const topic = document.getElementById('book-topic').value;
 
       const fail = message => {
@@ -1308,16 +1343,17 @@
         status.className = 'text-xs text-center font-semibold min-h-4 text-red-600 dark:text-red-400';
       };
 
-      if (!name || !phone || !email || !date) return fail('Please fill out all required fields.');
+      if (!name || !phone || !email || !date) return fail(t('Please fill out all required fields.'));
       if (bookingForm.elements.hp_notes && bookingForm.elements.hp_notes.value) return;
 
       const [y, m, d] = date.split('-').map(Number);
       const chosen = new Date(y, m - 1, d);
-      if (chosen.getDay() === 0) return fail('We make calls Monday through Saturday. Please pick another date.');
-      const prettyDate = chosen.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+      if (chosen.getDay() === 0) return fail(t('We make calls Monday through Saturday. Please pick another date.'));
+      const prettyDateEn = chosen.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+      const prettyDateLocal = chosen.toLocaleDateString(currentLocale(), { weekday: 'long', month: 'long', day: 'numeric' });
 
       submitBtn.disabled = true;
-      status.textContent = 'Sending your call request…';
+      status.textContent = t('Sending your call request…');
       status.style.color = '';
       status.className = 'text-xs text-center font-semibold min-h-4 text-brand-green dark:text-emerald-400';
 
@@ -1325,8 +1361,8 @@
         kind: 'call_request',
         name, phone, email, city: '',
         preferred_date: date,
-        preferred_time: timeLabel,
-        message: `[Call request] ${prettyDate}, ${timeLabel}, Pacific Time. Topic: ${topic}`,
+        preferred_time: canonicalTimeLabel,
+        message: `[Call request] ${prettyDateEn}, ${canonicalTimeLabel}, Pacific Time. Topic: ${topic}`,
         inquiry_type: topic,
         submitted_at: new Date().toISOString()
       };
@@ -1336,7 +1372,7 @@
       if (result.ok) {
         status.style.color = '';
         status.className = 'text-xs text-center font-semibold min-h-4 text-brand-green dark:text-emerald-400';
-        status.textContent = `✓ Request received. An advisor will call you on ${prettyDate} (${timeLabel}) to confirm.`;
+        status.textContent = t('✓ Request received. An advisor will call you on {date} ({time}) to confirm.', { date: prettyDateLocal, time: displayTimeLabel });
         if (bookingCloseTimer) clearTimeout(bookingCloseTimer);
         bookingCloseTimer = setTimeout(() => {
           bookingCloseTimer = null;
@@ -1349,13 +1385,13 @@
         const draftUrl = openMailDraft(record);
         status.style.color = '';
         status.className = 'text-xs text-center font-semibold min-h-4 text-amber-700 dark:text-amber-400';
-        status.textContent = "If your email app didn't open automatically, ";
+        status.textContent = t("If your email app didn't open automatically, ");
         const mailLink = document.createElement('a');
         mailLink.href = draftUrl;
         mailLink.className = 'underline font-bold hover:text-amber-900 dark:hover:text-amber-200';
-        mailLink.textContent = 'click here to send by email';
+        mailLink.textContent = t('click here to send by email');
         status.appendChild(mailLink);
-        status.appendChild(document.createTextNode(`, or call ${CONTACT.phoneDisplay}.`));
+        status.appendChild(document.createTextNode(t(', or call {phone}.', { phone: CONTACT.phoneDisplay })));
       }
     }
 
@@ -1402,7 +1438,7 @@
         if (form.elements.hp_notes && form.elements.hp_notes.value) return;
 
         submitButton.disabled = true;
-        showStatus('Sending your confidential enquiry…', true);
+        showStatus(t('Sending your confidential enquiry…'), true);
 
         const record = {
           kind: 'enquiry',
@@ -1420,26 +1456,26 @@
 
         if (result.ok) {
           form.reset();
-          showStatus(`✓ Thank you, ${record.name}. Your message was sent. An elder care advisor will reply within 1 business day.`, true);
+          showStatus(t('✓ Thank you, {name}. Your message was sent. An elder care advisor will reply within 1 business day.', { name: record.name }), true);
         } else if (result.validationError) {
           showStatus(result.validationError, false);
         } else {
           const draftUrl = openMailDraft(record);
           if (formStatus) {
             formStatus.className = 'text-sm font-semibold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 p-3.5 rounded-xl border border-amber-200 dark:border-amber-800 mt-2 leading-relaxed';
-            formStatus.textContent = "If your email app didn't open automatically, ";
+            formStatus.textContent = t("If your email app didn't open automatically, ");
             const mailLink = document.createElement('a');
             mailLink.href = draftUrl;
             mailLink.className = 'underline font-bold hover:text-amber-950 dark:hover:text-amber-100';
-            mailLink.textContent = 'click here to send by email';
+            mailLink.textContent = t('click here to send by email');
             formStatus.appendChild(mailLink);
-            formStatus.appendChild(document.createTextNode(', email '));
+            formStatus.appendChild(document.createTextNode(t(', email ')));
             const emailLink = document.createElement('a');
             emailLink.href = `mailto:${CONTACT.email}`;
             emailLink.className = 'underline';
             emailLink.textContent = CONTACT.email;
             formStatus.appendChild(emailLink);
-            formStatus.appendChild(document.createTextNode(`, or call ${CONTACT.phoneDisplay}.`));
+            formStatus.appendChild(document.createTextNode(t(', or call {phone}.', { phone: CONTACT.phoneDisplay })));
           }
         }
       });
@@ -1561,3 +1597,30 @@
         }
       }
     });
+
+    if (window.LoveI18n && typeof window.LoveI18n.onChange === 'function') {
+      window.LoveI18n.onChange(() => {
+        updateDocumentTitle(currentView);
+        applyTheme(document.documentElement.classList.contains('dark'));
+        calculateCosts();
+        updateQuizProgress(quizCurrentStep);
+        const resultEl = document.getElementById('quiz-result');
+        if (resultEl && !resultEl.classList.contains('hidden')) {
+          renderQuizResult();
+        }
+        const quizModal = document.getElementById('quiz-modal');
+        if (quizModal && !quizModal.classList.contains('hidden')) {
+          renderModalQuiz();
+          refreshIcons();
+        }
+        const callModal = document.getElementById('call-modal');
+        if (callModal && !callModal.classList.contains('hidden')) {
+          updateCallStatus();
+        }
+      });
+      // Sync localized title and dynamic JS widgets on initial load
+      updateDocumentTitle(currentView);
+      applyTheme(document.documentElement.classList.contains('dark'));
+      calculateCosts();
+      updateQuizProgress(quizCurrentStep);
+    }

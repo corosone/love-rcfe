@@ -54,7 +54,11 @@
   function syncThemeBtn(dark) {
     var btn = document.getElementById('theme-btn');
     if (btn) {
-      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      var label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+      if (window.LoveI18n && typeof window.LoveI18n.t === 'function') {
+        label = window.LoveI18n.t(label);
+      }
+      btn.setAttribute('aria-label', label);
       btn.innerHTML = dark ? '<i data-lucide="sun" class="w-4 h-4"></i>' : '<i data-lucide="moon" class="w-4 h-4"></i>';
     }
     var meta = document.querySelector('meta[name="theme-color"]');
@@ -74,6 +78,12 @@
     if (btn) btn.addEventListener('click', toggleTheme);
     var yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+    if (window.LoveI18n) {
+      window.LoveI18n.init();
+      window.LoveI18n.onChange(function () {
+        syncThemeBtn(document.documentElement.classList.contains('dark'));
+      });
+    }
     syncThemeBtn(document.documentElement.classList.contains('dark'));
   }
 

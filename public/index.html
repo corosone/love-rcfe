@@ -397,6 +397,52 @@
       stroke: #fde047 !important;
     }
 
+    /* Language Globe Toggle & Dropdown Styling */
+    html:not(.dark) .lang-toggle-btn:hover {
+      background-color: #d0ded0 !important;
+      border-color: #315d48 !important;
+      color: #203d30 !important;
+    }
+    html:not(.dark) .lang-dropdown {
+      background-color: #fcfbfa;
+      border-color: #d9ded4;
+    }
+    html:not(.dark) .lang-option[aria-checked="true"] {
+      background-color: #edf2e9;
+      color: #203d30;
+      font-weight: 700;
+    }
+    html.dark .lang-toggle-btn {
+      background-color: transparent !important;
+      border-color: #2b3d33 !important;
+      color: #e6ede8 !important;
+    }
+    html.dark .lang-toggle-btn:hover {
+      background-color: #1e2c24 !important;
+      border-color: #4ade80 !important;
+      color: #4ade80 !important;
+    }
+    html.dark .lang-toggle-btn:hover svg {
+      color: #4ade80 !important;
+      stroke: #4ade80 !important;
+    }
+    html.dark .lang-dropdown {
+      background-color: #1a251f !important;
+      border-color: #2b3d33 !important;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7) !important;
+    }
+    html.dark .lang-option {
+      color: #e6ede8 !important;
+    }
+    html.dark .lang-option:hover {
+      background-color: #24352b !important;
+    }
+    html.dark .lang-option[aria-checked="true"] {
+      background-color: #1e3327 !important;
+      color: #4ade80 !important;
+      font-weight: 700;
+    }
+
     html.dark ::-webkit-scrollbar-track { background: #151d18; }
     html.dark ::-webkit-scrollbar-thumb { background: #2f4438; }
     html.dark ::-webkit-scrollbar-thumb:hover { background: #446352; }
@@ -567,33 +613,104 @@
       </a>
 
       <!-- Desktop Nav -->
-      <nav aria-label="Main navigation" class="hidden md:flex items-center gap-x-8">
-        <a data-view-link="home" class="nav-link font-semibold text-brand-ink text-[15px]" href="#home">Home</a>
-        <a data-view-link="services" class="nav-link font-semibold text-brand-ink text-[15px]" href="#services">Services</a>
-        <a data-view-link="tools" class="nav-link font-semibold text-brand-ink text-[15px] flex items-center gap-1.5" href="#tools">
+      <nav aria-label="Main navigation" class="hidden md:flex items-center gap-x-5 lg:gap-x-7">
+        <a data-view-link="home" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#home">Home</a>
+        <a data-view-link="services" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#services">Services</a>
+        <a data-view-link="tools" class="nav-link font-semibold text-brand-ink text-[15px] flex items-center gap-1.5 whitespace-nowrap" href="#tools">
           <span>Care Tools</span>
           <span class="text-[10px] bg-brand-accent/15 text-brand-accent font-bold px-1.5 py-0.5 rounded-full">New</span>
         </a>
-        <a data-view-link="approach" class="nav-link font-semibold text-brand-ink text-[15px]" href="#approach">Our Approach</a>
-        <a data-view-link="support" class="nav-link font-semibold text-brand-ink text-[15px]" href="#support">FAQs & Support</a>
-        <a data-view-link="contact" class="inline-flex items-center gap-1.5 rounded-full bg-brand-green text-white px-5 py-2.5 text-sm font-semibold hover:bg-brand-greenDark shadow-sm transition" href="#contact">
+        <a data-view-link="approach" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#approach">Our Approach</a>
+        <a data-view-link="support" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#support">FAQs & Support</a>
+        <a data-view-link="contact" class="inline-flex items-center gap-1.5 rounded-full bg-brand-green text-white px-5 py-2.5 text-sm font-semibold hover:bg-brand-greenDark shadow-sm transition whitespace-nowrap" href="#contact">
           <span>Get in Touch</span>
           <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
         </a>
-        <!-- Theme Toggle Button (Desktop) -->
-        <button id="theme-toggle-btn" data-click="toggleTheme()" type="button" aria-label="Toggle dark mode" title="Toggle dark mode" class="theme-toggle-btn p-2.5 rounded-full border border-brand-line text-brand-ink transition flex items-center justify-center hover:scale-105 active:scale-95">
-          <i data-lucide="moon" id="theme-moon-icon" class="w-4 h-4"></i>
-          <i data-lucide="sun" id="theme-sun-icon" class="w-4 h-4 hidden"></i>
-        </button>
+        <div class="flex items-center gap-2">
+          <!-- Language Switcher (Desktop) -->
+          <div id="lang-menu-wrap" class="relative">
+            <button id="lang-toggle-btn" data-lang-toggle="desktop" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-dropdown" aria-label="Change language" title="Change language" class="lang-toggle-btn inline-flex items-center gap-1.5 px-2.5 py-2 rounded-full border border-brand-line text-brand-ink text-xs font-bold transition hover:scale-105 active:scale-95">
+              <i data-lucide="globe" class="w-4 h-4"></i>
+              <span class="lang-current-code">EN</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
+            </button>
+            <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" class="lang-dropdown hidden absolute right-0 mt-2 w-56 rounded-2xl border shadow-xl py-1.5 z-50">
+              <div class="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
+              <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="es" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>Español</span> <span class="text-xs text-brand-muted ml-1">Spanish</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>中文</span> <span class="text-xs text-brand-muted ml-1">Chinese</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="tl" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>Tagalog</span> <span class="text-xs text-brand-muted ml-1">Filipino</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="vi" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>Tiếng Việt</span> <span class="text-xs text-brand-muted ml-1">Vietnamese</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="ko" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>한국어</span> <span class="text-xs text-brand-muted ml-1">Korean</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Theme Toggle Button (Desktop) -->
+          <button id="theme-toggle-btn" data-click="toggleTheme()" type="button" aria-label="Toggle dark mode" title="Toggle dark mode" class="theme-toggle-btn p-2.5 rounded-full border border-brand-line text-brand-ink transition flex items-center justify-center hover:scale-105 active:scale-95">
+            <i data-lucide="moon" id="theme-moon-icon" class="w-4 h-4"></i>
+            <i data-lucide="sun" id="theme-sun-icon" class="w-4 h-4 hidden"></i>
+          </button>
+        </div>
       </nav>
 
-      <!-- Mobile Right Controls (Theme Toggle + Contact + Hamburger) -->
-      <div class="flex items-center gap-2 md:hidden">
+      <!-- Mobile Right Controls (Language + Theme Toggle + Contact + Hamburger) -->
+      <div class="flex items-center gap-1.5 sm:gap-2 md:hidden">
+        <div id="lang-menu-wrap-mobile" class="relative">
+          <button id="lang-toggle-btn-mobile" data-lang-toggle="mobile" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-dropdown-mobile" aria-label="Change language" class="lang-toggle-btn inline-flex items-center gap-1 px-2 py-2 rounded-lg border border-brand-line text-brand-ink text-xs font-bold transition">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+            <span class="lang-current-code">EN</span>
+          </button>
+          <div id="lang-dropdown-mobile" role="menu" aria-labelledby="lang-toggle-btn-mobile" class="lang-dropdown hidden absolute right-0 mt-2 w-52 rounded-2xl border shadow-xl py-1.5 z-50">
+            <div class="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
+            <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="es" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Español</span> <span class="text-xs text-brand-muted ml-1">Spanish</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>中文</span> <span class="text-xs text-brand-muted ml-1">Chinese</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="tl" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Tagalog</span> <span class="text-xs text-brand-muted ml-1">Filipino</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="vi" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Tiếng Việt</span> <span class="text-xs text-brand-muted ml-1">Vietnamese</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="ko" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>한국어</span> <span class="text-xs text-brand-muted ml-1">Korean</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+          </div>
+        </div>
         <button data-click="toggleTheme()" type="button" aria-label="Toggle dark mode" class="theme-toggle-btn p-2 rounded-lg border border-brand-line text-brand-ink transition flex items-center justify-center">
           <i data-lucide="moon" class="theme-moon-mobile w-4 h-4"></i>
           <i data-lucide="sun" class="theme-sun-mobile w-4 h-4 hidden"></i>
         </button>
-        <a data-view-link="contact" class="rounded-full bg-brand-green text-white px-3.5 py-1.5 text-xs font-semibold hover:bg-brand-greenDark transition" href="#contact">
+        <a data-view-link="contact" class="rounded-full bg-brand-green text-white px-3.5 py-1.5 text-xs font-semibold hover:bg-brand-greenDark transition whitespace-nowrap" href="#contact">
           Contact
         </a>
         <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation menu" class="p-2 rounded-lg border border-brand-line text-brand-ink hover:bg-brand-sageLight transition">
@@ -650,7 +767,7 @@
               <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
               Care begins with understanding
             </div>
-            <h1 id="hero-title" class="display text-brand-ink text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] mb-6">
+            <h1 id="hero-title" data-i18n-block="hero_title" class="display text-brand-ink text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] mb-6">
               A little more clarity.<br>
               <span class="italic text-brand-green font-normal">A lot more care.</span>
             </h1>
@@ -1214,7 +1331,7 @@
                     </div>
                   </div>
 
-                  <div class="mt-5 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-xs border border-emerald-200 dark:border-emerald-800">
+                  <div data-i18n-block="va_subsidy_note" class="mt-5 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-xs border border-emerald-200 dark:border-emerald-800">
                     <strong>Financial Subsidy Potential (2025–2026 VA Rates):</strong> Qualifying single Veterans can receive up to <strong>$2,431/mo</strong> (or up to <strong>$2,881/mo</strong> with a dependent spouse, and up to <strong>$1,563/mo</strong> for surviving spouses) through VA Aid &amp; Attendance pension benefits to offset monthly RCFE costs.
                   </div>
                 </div>
@@ -1358,7 +1475,7 @@
                       <i data-lucide="alert-circle" class="w-4 h-4 text-amber-700 dark:text-amber-400"></i>
                       <span>Urgent Placement / Hospital Discharge Notice</span>
                     </div>
-                    <p class="leading-relaxed">
+                    <p data-i18n-block="urgent_notice_p" class="leading-relaxed">
                       With a 1–7 day transition window, immediate beds and physician assessments (LIC 602A) need expedited handling. Call our priority intake team directly at <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> for same-day openings.
                     </p>
                   </div>
@@ -1591,7 +1708,7 @@
                   <span>What is the difference between an RCFE and a Skilled Nursing Facility (SNF)?</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
-                <div id="faq-content-1" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight">
+                <div id="faq-content-1" data-i18n-block="faq1_body" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight">
                   An <strong>RCFE (Residential Care Facility for the Elderly)</strong>—often referred to as an assisted living community or residential 6-bed board &amp; care—is designed for seniors who need help with daily activities (eating, bathing, dressing, medication management) in a warm, home-like environment. <br><br>
                   A <strong>Skilled Nursing Facility (SNF)</strong> is a medical hospital-like institution providing 24-hour licensed nursing care, IV therapy, and acute wound care. Many families choose RCFEs with hospice waivers so loved ones can age in place without ever moving to an institutional nursing home.
                 </div>
@@ -1603,7 +1720,7 @@
                   <span>Does Medicare or Medi-Cal pay for RCFE residential care?</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
-                <div id="faq-content-2" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight">
+                <div id="faq-content-2" data-i18n-block="faq2_body" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight">
                   Regular <strong>Medicare does not pay</strong> for room and board in an RCFE (it only covers medical doctor visits, hospitalizations, and short-term skilled rehab). <br><br>
                   In California, however, the <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> can pay for the care portion in certified facilities for qualifying low-income individuals. Additionally, Veterans Aid &amp; Attendance and Long-Term Care Insurance policies frequently offset costs. We help families evaluate these options.
                 </div>
@@ -1615,7 +1732,7 @@
                   <span>How long does it take to obtain an RCFE license in California?</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
-                <div id="faq-content-3" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight">
+                <div id="faq-content-3" data-i18n-block="faq3_body" class="faq-content hidden p-5 pt-0 text-sm text-brand-muted leading-relaxed border-t border-brand-line/40 bg-brand-creamLight">
                   The standard timeline is typically <strong>4 to 8 months</strong> depending on how quickly the local fire department conducts the STD 850 fire inspection, and the current backlog at the CDSS regional office. Having an error-free LIC 200 packet and compliant Plan of Operation cuts months off turnaround time.
                 </div>
               </div>
@@ -1644,7 +1761,7 @@
                       <p class="font-bold text-brand-green flex items-center gap-1.5 mb-1 text-xs uppercase tracking-wide">
                         <i data-lucide="heart-handshake" class="w-4 h-4"></i> For Seniors &amp; Families (100% Free)
                       </p>
-                      <p class="text-xs text-brand-muted leading-relaxed">
+                      <p data-i18n-block="faq5_family" class="text-xs text-brand-muted leading-relaxed">
                         Our care evaluation, facility tours, and placement guidance are <strong>completely free to families</strong>. Similar to an insurance broker or tenant representative, the licensed care community pays us a standard placement referral fee from their operating budget only after your loved one safely moves in. Your monthly rent is never marked up, and you will never receive a bill from us.
                       </p>
                     </div>
@@ -1652,7 +1769,7 @@
                       <p class="font-bold text-brand-accent flex items-center gap-1.5 mb-1 text-xs uppercase tracking-wide">
                         <i data-lucide="briefcase" class="w-4 h-4"></i> For RCFE Operators (Professional Consulting)
                       </p>
-                      <p class="text-xs text-brand-muted leading-relaxed">
+                      <p data-i18n-block="faq5_operator" class="text-xs text-brand-muted leading-relaxed">
                         Prospective residential care home owners, administrators, and investors pay <strong>transparent, flat-rate professional consulting fees</strong> for our California Title 22 licensing services (LIC 200 packet creation, Plan of Operation drafting, fire clearance coaching, and pre-licensing LPA inspection prep).
                       </p>
                     </div>
@@ -1898,7 +2015,7 @@
 
             <div>
               <h2 class="display text-2xl font-semibold text-brand-ink mb-3">4. Data Access &amp; Removal Requests</h2>
-              <p class="text-brand-muted leading-relaxed">
+              <p data-i18n-block="privacy4_p" class="text-brand-muted leading-relaxed">
                 You retain the right to inspect, correct, or request the deletion of any contact information we hold. Simply email us at <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> with the subject "Data Removal Request."
               </p>
             </div>
@@ -2132,6 +2249,7 @@
   </button>
 
   <!-- ==================== JAVASCRIPT ==================== -->
+  <script src="/i18n.js"></script>
   <script src="/app.js"></script>
 </body>
 </html>
