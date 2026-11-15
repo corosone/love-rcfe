@@ -9173,6 +9173,28 @@
     });
   }
 
+  function syncMenuScrollShadow(menu) {
+    if (!menu || menu.classList.contains('hidden')) return;
+    var overflow = menu.scrollHeight - menu.clientHeight;
+    var hasMoreBelow = overflow > 4 && (menu.scrollTop + menu.clientHeight < menu.scrollHeight - 4);
+    if (hasMoreBelow) {
+      menu.classList.add('has-scroll-bottom');
+    } else {
+      menu.classList.remove('has-scroll-bottom');
+    }
+  }
+
+  function bindMenuScrollListeners() {
+    var menus = document.querySelectorAll('.lang-dropdown');
+    menus.forEach(function (menu) {
+      if (menu.getAttribute('data-scroll-shadow-bound') === '1') return;
+      menu.setAttribute('data-scroll-shadow-bound', '1');
+      menu.addEventListener('scroll', function () {
+        syncMenuScrollShadow(menu);
+      }, { passive: true });
+    });
+  }
+
   function closeMenus() {
     var pairs = [
       ['lang-dropdown', 'lang-toggle-btn'],
@@ -9204,11 +9226,18 @@
 
     var willOpen = menu.classList.contains('hidden');
     if (willOpen) {
+      bindMenuScrollListeners();
       menu.classList.remove('hidden');
       btn.setAttribute('aria-expanded', 'true');
       var checked = menu.querySelector('.lang-option[aria-checked="true"]') || menu.querySelector('.lang-option');
       if (checked) {
         try { checked.focus(); } catch (e) {}
+      }
+      syncMenuScrollShadow(menu);
+      if (typeof window.requestAnimationFrame === 'function') {
+        window.requestAnimationFrame(function () {
+          syncMenuScrollShadow(menu);
+        });
       }
     } else {
       menu.classList.add('hidden');
@@ -9230,12 +9259,22 @@
 
   function init() {
     currentLang = getSavedLang();
+    bindMenuScrollListeners();
     updateHeaderControls();
     applyDom(document);
     initialized = true;
   }
 
   function bindGlobalMenuEvents() {
+    bindMenuScrollListeners();
+
+    window.addEventListener('resize', function () {
+      var menus = document.querySelectorAll('.lang-dropdown:not(.hidden)');
+      menus.forEach(function (menu) {
+        syncMenuScrollShadow(menu);
+      });
+    }, { passive: true });
+
     document.addEventListener('click', function (e) {
       var toggleBtn = e.target && e.target.closest ? e.target.closest('[data-lang-toggle]') : null;
       if (toggleBtn) {
