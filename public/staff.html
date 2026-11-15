@@ -45,7 +45,13 @@
     html.dark .text-brand-ink { color: #e6ede8 !important; }
     html.dark .text-brand-muted { color: #a7b8ad !important; }
     html.dark .text-brand-green { color: #4ade80 !important; }
+    html.dark .text-brand-accent { color: #f0a57d !important; }
     html.dark .border-brand-line { border-color: #2d4034 !important; }
+    html.dark .bg-brand-sageLight,
+    html.dark .bg-brand-sageLight\/60 { background-color: #1e2e24 !important; }
+    html.dark .bg-brand-accentLight { background-color: #2c221b !important; }
+    html.dark .bg-brand-cream\/70 { background-color: #151e19 !important; }
+    html.dark .hover\:bg-brand-sageLight\/40:hover { background-color: #24352b !important; }
     html.dark input { background-color: #121915 !important; color: #e6ede8 !important; border-color: #2d4034 !important; }
     .lead-field { width: 100%; border: 1px solid #d9ded4; border-radius: 10px; background: #ffffff; color: #26382f; font-size: 12px; font-weight: 500; padding: 6px 10px; }
     .lead-field:focus { outline: 2px solid #315d48; outline-offset: 1px; }
@@ -87,7 +93,7 @@
         <i data-lucide="lock" class="w-5 h-5"></i>
       </div>
       <h2 class="display text-2xl font-semibold text-brand-ink mb-1">Staff Sign In</h2>
-      <p class="text-sm text-brand-muted mb-6">Enter your <code class="text-xs px-1.5 py-0.5 rounded bg-brand-sageLight/60 text-brand-ink">INBOX_PASSWORD</code> to view enquiries and call requests stored in the database.</p>
+      <p class="text-sm text-brand-muted mb-6">Enter your staff password to view enquiries and call requests stored in the database.</p>
 
       <form id="login-form" class="space-y-4">
         <div>
@@ -147,12 +153,20 @@
 
       <!-- Leads List -->
       <div id="leads-list" class="space-y-3"></div>
+
+      <div id="load-more-wrap" class="hidden text-center pt-2">
+        <button id="load-more-btn" type="button" onclick="loadMoreLeads()" class="px-5 py-2 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition">
+          Load older leads
+        </button>
+      </div>
     </section>
   </main>
 
   <script>
-    const TOKEN_KEY = 'lovercfe_staff_pw';
     let allLeads = [];
+    let totalLeads = 0;
+    let hasMoreLeads = false;
+    let isSignedIn = false;
     let currentFilter = 'open';
     let searchQuery = '';
 
@@ -166,6 +180,7 @@
       try { localStorage.setItem('lovercfe_theme', dark ? 'dark' : 'light'); } catch (e) {}
       const btn = document.getElementById('theme-btn');
       if (btn) {
+        btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
         btn.innerHTML = dark ? '<i data-lucide="sun" class="w-4 h-4"></i>' : '<i data-lucide="moon" class="w-4 h-4"></i>';
         refreshIcons();
       }
@@ -182,20 +197,30 @@
     }
 
     const STAGE_LABELS = { new: 'New', called: 'Called', tour: 'Tour scheduled', waiting: 'Waiting on family' };
-    const SOURCE_LABELS = { home: 'Home page', services: 'Services page', tools: 'Tools page', approach: 'Approach page', support: 'FAQs & Support', contact: 'Contact page' };
+    const SOURCE_LABELS = {
+      home: 'Home page', services: 'Services page', tools: 'Tools page',
+      approach: 'Approach page', support: 'FAQs & Support', contact: 'Contact page',
+      terms: 'Terms page', privacy: 'Privacy page', other: 'Other page',
+    };
     const sourceLabel = (v) => SOURCE_LABELS[v] || v;
     const stageOptions = (cur) => Object.entries(STAGE_LABELS)
       .map(([v, label]) => `<option value="${v}" ${v === (cur || 'new') ? 'selected' : ''}>${label}</option>`).join('');
     const findLead = (id) => allLeads.find(l => Number(l.id) === Number(id));
     const hasUnsavedNotes = () => allLeads.some(l => l._savedNotes !== undefined && l.notes !== l._savedNotes);
 
+    function parseCreatedAt(raw) {
+      if (!raw) return new Date(NaN);
+      const s = String(raw).trim();
+      const iso = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/.test(s) ? s.replace(' ', 'T') + 'Z' : s;
+      return new Date(iso);
+    }
+
     async function apiFetch(url, options = {}) {
-      const pw = sessionStorage.getItem(TOKEN_KEY) || '';
       const res = await fetch(url, {
+        credentials: 'same-origin',
         ...options,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + pw,
           ...(options.headers || {})
         }
       });
@@ -207,6 +232,8 @@
     }
 
     function showLogin(errorMsg = '') {
+      isSignedIn = false;
+      document.title = 'Staff Inbox | Love RCFE';
       document.getElementById('login-view').classList.remove('hidden');
       document.getElementById('dashboard-view').classList.add('hidden');
       document.getElementById('signout-btn').classList.add('hidden');
@@ -214,43 +241,71 @@
     }
 
     function showDashboard() {
+      isSignedIn = true;
       document.getElementById('login-view').classList.add('hidden');
       document.getElementById('dashboard-view').classList.remove('hidden');
       document.getElementById('signout-btn').classList.remove('hidden');
       document.getElementById('login-error').textContent = '';
     }
 
-    function signOut() {
-      sessionStorage.removeItem(TOKEN_KEY);
+    async function signOut() {
+      try {
+        await apiFetch('/api/admin/session', { method: 'DELETE' });
+      } catch (e) {}
       allLeads = [];
+      totalLeads = 0;
+      hasMoreLeads = false;
       document.getElementById('inbox-password').value = '';
       showLogin('');
     }
 
-    async function loadLeads() {
+    function handleAuthFailure(err) {
+      if (err.status === 401 || err.status === 423) {
+        allLeads = [];
+        totalLeads = 0;
+        hasMoreLeads = false;
+        showLogin(err.message);
+        return true;
+      }
+      return false;
+    }
+
+    async function loadLeads({ silentAuth = false, append = false } = {}) {
       const statusEl = document.getElementById('dash-status');
-      if (statusEl) statusEl.textContent = 'Loading leads from database...';
+      if (statusEl && !silentAuth) statusEl.textContent = 'Loading leads from database...';
       try {
-        const data = await apiFetch('/api/admin/leads');
-        allLeads = Array.isArray(data.leads) ? data.leads : [];
+        const offset = append ? allLeads.length : 0;
+        const data = await apiFetch(`/api/admin/leads?limit=500&offset=${offset}`);
+        const incoming = Array.isArray(data.leads) ? data.leads : [];
+        allLeads = append ? [...allLeads, ...incoming] : incoming;
+        totalLeads = Number(data.total ?? allLeads.length);
+        hasMoreLeads = Boolean(data.hasMore);
         showDashboard();
-        if (statusEl) statusEl.textContent = `Showing latest records (${allLeads.length} loaded).`;
+        if (statusEl) {
+          statusEl.textContent = hasMoreLeads
+            ? `Showing ${allLeads.length} of ${totalLeads} records.`
+            : `Showing latest records (${allLeads.length} loaded).`;
+        }
+        const moreWrap = document.getElementById('load-more-wrap');
+        if (moreWrap) moreWrap.classList.toggle('hidden', !hasMoreLeads);
         renderLeads();
       } catch (err) {
         if (err.status === 401) {
-          sessionStorage.removeItem(TOKEN_KEY);
-          showLogin(err.message);
-        } else if (err.status === 423) {
-          sessionStorage.removeItem(TOKEN_KEY);
-          showLogin(err.message);
-        } else if (err.status === 429) {
-          showLogin(err.message);
-        } else if (err.status === 503) {
+          allLeads = [];
+          showLogin(silentAuth ? '' : err.message);
+        } else if (err.status === 423 || err.status === 429 || err.status === 503) {
           showLogin(err.message);
         } else {
           if (statusEl) statusEl.textContent = err.message;
         }
       }
+    }
+
+    async function loadMoreLeads() {
+      const btn = document.getElementById('load-more-btn');
+      if (btn) btn.disabled = true;
+      await loadLeads({ append: true });
+      if (btn) btn.disabled = false;
     }
 
     async function setHandled(id, handled) {
@@ -259,11 +314,11 @@
           method: 'PATCH',
           body: JSON.stringify({ id, handled })
         });
-        const target = allLeads.find(l => Number(l.id) === Number(id));
+        const target = findLead(id);
         if (target) target.handled = handled;
         renderLeads();
       } catch (err) {
-        alert(err.message);
+        if (!handleAuthFailure(err)) alert(err.message);
       }
     }
 
@@ -274,7 +329,7 @@
         if (target) target.stage = stage;
         renderLeads();
       } catch (err) {
-        alert(err.message);
+        if (!handleAuthFailure(err)) alert(err.message);
       }
     }
 
@@ -303,9 +358,10 @@
       try {
         await apiFetch(`/api/admin/leads?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
         allLeads = allLeads.filter(l => Number(l.id) !== Number(id));
+        if (totalLeads > 0) totalLeads -= 1;
         renderLeads();
       } catch (err) {
-        alert(err.message);
+        if (!handleAuthFailure(err)) alert(err.message);
       }
     }
 
@@ -318,7 +374,7 @@
       document.getElementById('stat-open').textContent = openCount;
       document.getElementById('stat-calls').textContent = callsCount;
       document.getElementById('stat-handled').textContent = handledCount;
-      document.getElementById('stat-total').textContent = allLeads.length;
+      document.getElementById('stat-total').textContent = totalLeads || allLeads.length;
 
       document.querySelectorAll('.filter-btn').forEach(btn => {
         const active = btn.dataset.filter === currentFilter;
@@ -352,10 +408,13 @@
 
       listEl.innerHTML = filtered.map(l => {
         const isCall = l.kind === 'call_request';
-        const created = new Date(l.createdAt).toLocaleString('en-US', {
-          month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'
-        });
-        const telHref = 'tel:' + encodeURI(String(l.phone || '').replace(/[^+\d]/g, ''));
+        const parsedDate = parseCreatedAt(l.createdAt);
+        const created = Number.isNaN(parsedDate.getTime())
+          ? String(l.createdAt || '')
+          : parsedDate.toLocaleString('en-US', {
+              month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'
+            });
+        const telHref = 'tel:' + encodeURIComponent(String(l.phone || '').replace(/[^+\d]/g, ''));
         const mailHref = 'mailto:' + encodeURI(String(l.email || ''));
         return `
           <article class="surface bg-white rounded-2xl border border-brand-line p-5 shadow-sm space-y-3 ${l.handled ? 'opacity-75' : ''}">
@@ -417,12 +476,15 @@
 
     function csvCell(value) {
       let s = String(value == null ? '' : value);
-      if (/^[=@]/.test(s) || /^[+\-][^\d\s(]/.test(s)) s = "'" + s;
+      if (/^[\t\r]/.test(s) || /^[ \t\r\n]*[=+\-@]/.test(s)) s = "'" + s;
       return '"' + s.replace(/"/g, '""') + '"';
     }
 
     function exportCsv() {
       if (!allLeads.length) return alert('No leads to export.');
+      if (hasMoreLeads && !confirm(`Only the latest ${allLeads.length} of ${totalLeads} leads are loaded. Export these ${allLeads.length} leads anyway?`)) {
+        return;
+      }
       const headers = ['ID', 'Kind', 'Inquiry Type', 'Name', 'Phone', 'Email', 'City', 'Preferred Date', 'Preferred Time', 'Handled', 'Message', 'Created At', 'Stage', 'Source', 'Notes'];
       const rows = allLeads.map(l => [
         l.id, l.kind, l.inquiryType, l.name, l.phone, l.email, l.city,
@@ -444,10 +506,21 @@
       e.preventDefault();
       const pw = document.getElementById('inbox-password').value;
       const btn = document.getElementById('login-submit');
+      const errorEl = document.getElementById('login-error');
       btn.disabled = true;
-      sessionStorage.setItem(TOKEN_KEY, pw);
-      await loadLeads();
-      btn.disabled = false;
+      errorEl.textContent = '';
+      try {
+        await apiFetch('/api/admin/session', {
+          method: 'POST',
+          body: JSON.stringify({ password: pw })
+        });
+        document.getElementById('inbox-password').value = '';
+        await loadLeads();
+      } catch (err) {
+        errorEl.textContent = err.message;
+      } finally {
+        btn.disabled = false;
+      }
     });
 
     document.addEventListener('click', (e) => {
@@ -465,18 +538,21 @@
 
     if (document.documentElement.classList.contains('dark')) {
       const btn = document.getElementById('theme-btn');
-      if (btn) btn.innerHTML = '<i data-lucide="sun" class="w-4 h-4"></i>';
+      if (btn) {
+        btn.setAttribute('aria-label', 'Switch to light mode');
+        btn.innerHTML = '<i data-lucide="sun" class="w-4 h-4"></i>';
+      }
     }
     refreshIcons();
 
-    if (sessionStorage.getItem(TOKEN_KEY)) {
-      loadLeads();
-    }
+    loadLeads({ silentAuth: true });
 
     // Auto-refresh every 60s while signed in and the tab is visible
     setInterval(() => {
-      const typing = document.activeElement && document.activeElement.matches('textarea, select');
-      if (!document.hidden && sessionStorage.getItem(TOKEN_KEY) && !typing && !hasUnsavedNotes()) loadLeads();
+      const typing = document.activeElement && document.activeElement.matches('input, textarea, select');
+      if (!document.hidden && isSignedIn && !typing && !hasUnsavedNotes()) {
+        loadLeads({ silentAuth: true });
+      }
     }, 60000);
   </script>
 </body>

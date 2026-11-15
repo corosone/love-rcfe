@@ -1,9 +1,7 @@
-import {
-  ensureSchema, jsonResponse, clean, clientIp, tooManyRequests, isAdmin,
-  adminAttemptKey, getAdminAttempts, lockWaitSeconds, recordAdminFail, clearAdminAttempts,
-} from '../../../lib/db.js';
+import { jsonResponse, clean, authorizeAdmin } from '../../../lib/db.js';
 
 const STAGES = ['new', 'called', 'tour', 'waiting'];
+const DEFAULT_LIMIT = 500;
 
 const LEAD_COLUMNS = `
   id,
@@ -44,99 +42,55 @@ function mapLead(row) {
   };
 }
 
-async function authorize(request, env) {
-  if (!env?.INBOX_PASSWORD) {
-    return jsonResponse(
-      { error: 'INBOX_PASSWORD is not configured yet. Add it in Cloudflare Pages → Settings → Variables and Secrets.' },
-      503
-    );
-  }
-
-  if (tooManyRequests(`admin:${clientIp(request)}`, 60, 60 * 1000)) {
-    return jsonResponse({ error: 'Too many attempts. Please wait a minute and try again.' }, 429);
-  }
-
-  if (!env?.DB) {
-    return jsonResponse(
-      { error: 'D1 database is not bound yet. Bind your D1 database as "DB" in Cloudflare Pages → Settings → Bindings.' },
-      503
-    );
-  }
-
-  try {
-    await ensureSchema(env.DB);
-  } catch (err) {
-    console.error('Database initialization failed:', err);
-    return jsonResponse({ error: 'Database connection error.' }, 500);
-  }
-
-  // No password sent at all (e.g. the login screen loading): nothing to count.
-  if (!request.headers.get('authorization')) {
-    return jsonResponse({ error: 'Incorrect password.' }, 401);
-  }
-
-  let key, attempts;
-  try {
-    key = await adminAttemptKey(request);
-    attempts = await getAdminAttempts(env.DB, key);
-  } catch (err) {
-    console.error('Lockout check failed:', err);
-    return jsonResponse({ error: 'Database connection error.' }, 500);
-  }
-
-  const wait = lockWaitSeconds(attempts);
-  if (wait > 0) {
-    return jsonResponse(
-      { error: `Too many wrong passwords. Please try again in ${Math.ceil(wait / 60)} minute(s).` },
-      423,
-      { 'Retry-After': String(wait) }
-    );
-  }
-
-  if (!(await isAdmin(request, env))) {
-    try {
-      await recordAdminFail(env.DB, key, attempts);
-    } catch (err) {
-      console.error('Could not record failed login:', err);
-    }
-    return jsonResponse({ error: 'Incorrect password.' }, 401);
-  }
-
-  if (attempts) {
-    try {
-      await clearAdminAttempts(env.DB, key);
-    } catch (err) {
-      console.error('Could not clear failed logins:', err);
-    }
-  }
-
-  return null;
-}
-
 export async function onRequestGet({ request, env }) {
-  const denied = await authorize(request, env);
+  const denied = await authorizeAdmin(request, env);
   if (denied) return denied;
 
-  const { results } = await env.DB
-    .prepare(`SELECT ${LEAD_COLUMNS} FROM leads ORDER BY created_at DESC LIMIT 500`)
-    .all();
+  const params = new URL(request.url).searchParams;
+  const rawLimit = Number(params.get('limit') || DEFAULT_LIMIT);
+  const rawOffset = Number(params.get('offset') || 0);
+  const limit = Number.isInteger(rawLimit) && rawLimit > 0 ? Math.min(rawLimit, DEFAULT_LIMIT) : DEFAULT_LIMIT;
+  const offset = Number.isInteger(rawOffset) && rawOffset >= 0 ? rawOffset : 0;
 
-  return jsonResponse({ leads: (results || []).map(mapLead) });
+  try {
+    const [countRow, listRes] = await Promise.all([
+      env.DB.prepare('SELECT COUNT(*) AS total FROM leads').first(),
+      env.DB
+        .prepare(`SELECT ${LEAD_COLUMNS} FROM leads ORDER BY created_at DESC LIMIT ? OFFSET ?`)
+        .bind(limit, offset)
+        .all(),
+    ]);
+
+    const rows = listRes?.results || [];
+    const total = Number(countRow?.total ?? rows.length);
+    return jsonResponse({
+      leads: rows.map(mapLead),
+      total,
+      hasMore: offset + rows.length < total,
+    });
+  } catch (err) {
+    console.error('Failed to load leads:', err);
+    return jsonResponse({ error: 'Database read error.' }, 500);
+  }
 }
 
 export async function onRequestPatch({ request, env }) {
-  const denied = await authorize(request, env);
+  const denied = await authorizeAdmin(request, env);
   if (denied) return denied;
 
-  let body = {};
+  let body;
   try {
     body = await request.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return jsonResponse({ error: 'Invalid JSON body.' }, 400);
+    }
   } catch {
     return jsonResponse({ error: 'Invalid JSON body.' }, 400);
   }
 
   const urlId = new URL(request.url).searchParams.get('id');
-  const id = Number(body?.id ?? urlId);
+  const rawId = body.id !== undefined && body.id !== null ? body.id : urlId;
+  const id = Number(rawId);
   if (!Number.isInteger(id) || id <= 0) {
     return jsonResponse({ error: 'Invalid lead id.' }, 400);
   }
@@ -163,50 +117,64 @@ export async function onRequestPatch({ request, env }) {
     return jsonResponse({ error: 'Nothing to update.' }, 400);
   }
 
-  await env.DB
-    .prepare(`UPDATE leads SET ${sets.join(', ')} WHERE id = ?`)
-    .bind(...values, id)
-    .run();
+  try {
+    await env.DB
+      .prepare(`UPDATE leads SET ${sets.join(', ')} WHERE id = ?`)
+      .bind(...values, id)
+      .run();
 
-  const updated = await env.DB
-    .prepare(`SELECT ${LEAD_COLUMNS} FROM leads WHERE id = ?`)
-    .bind(id)
-    .first();
+    const updated = await env.DB
+      .prepare(`SELECT ${LEAD_COLUMNS} FROM leads WHERE id = ?`)
+      .bind(id)
+      .first();
 
-  if (!updated) {
-    return jsonResponse({ error: 'Lead not found.' }, 404);
+    if (!updated) {
+      return jsonResponse({ error: 'Lead not found.' }, 404);
+    }
+
+    return jsonResponse({ lead: mapLead(updated) });
+  } catch (err) {
+    console.error('Failed to update lead:', err);
+    return jsonResponse({ error: 'Database update error.' }, 500);
   }
-
-  return jsonResponse({ lead: mapLead(updated) });
 }
 
 export async function onRequestDelete({ request, env }) {
-  const denied = await authorize(request, env);
+  const denied = await authorizeAdmin(request, env);
   if (denied) return denied;
 
   let body = {};
   try {
     body = await request.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      body = {};
+    }
   } catch {
     body = {};
   }
 
   const urlId = new URL(request.url).searchParams.get('id');
-  const id = Number(urlId ?? body?.id);
+  const rawId = urlId && urlId.trim() ? urlId : body?.id;
+  const id = Number(rawId);
   if (!Number.isInteger(id) || id <= 0) {
     return jsonResponse({ error: 'Invalid lead id.' }, 400);
   }
 
-  const result = await env.DB
-    .prepare('DELETE FROM leads WHERE id = ?')
-    .bind(id)
-    .run();
+  try {
+    const result = await env.DB
+      .prepare('DELETE FROM leads WHERE id = ?')
+      .bind(id)
+      .run();
 
-  if (!result?.meta?.changes) {
-    return jsonResponse({ error: 'Lead not found.' }, 404);
+    if (!result?.meta?.changes) {
+      return jsonResponse({ error: 'Lead not found.' }, 404);
+    }
+
+    return jsonResponse({ ok: true, id });
+  } catch (err) {
+    console.error('Failed to delete lead:', err);
+    return jsonResponse({ error: 'Database delete error.' }, 500);
   }
-
-  return jsonResponse({ ok: true, id });
 }
 
 export function onRequest() {

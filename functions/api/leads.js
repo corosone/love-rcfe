@@ -25,7 +25,7 @@ function addDays(ymd, n) {
   return new Date(Date.UTC(y, m - 1, d + n)).toISOString().slice(0, 10);
 }
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMAIL_RE = /^[^\s@<>'"\u0000-\u001f]+@[^\s@<>'"\u0000-\u001f]+\.[^\s@<>'"\u0000-\u001f]{2,}$/;
 
 export async function onRequestPost({ request, env }) {
   let body;
@@ -50,6 +50,9 @@ export async function onRequestPost({ request, env }) {
     );
   }
 
+  if (body.kind !== undefined && body.kind !== 'enquiry' && body.kind !== 'call_request') {
+    return jsonResponse({ error: 'Invalid request type.' }, 422);
+  }
   const kind = body.kind === 'call_request' ? 'call_request' : 'enquiry';
   const record = {
     kind,
@@ -108,6 +111,8 @@ export async function onRequestPost({ request, env }) {
         422
       );
     }
+  } else {
+    console.warn('TURNSTILE_SECRET is not set; skipping Turnstile verification.');
   }
 
   if (!env?.DB) {
@@ -143,7 +148,7 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-// Returns true when Turnstile approves. If Cloudflare's check can't be reached, let the lead through.
+// Returns true only when Turnstile verifies the token (fail-closed on network/API errors).
 async function verifyTurnstile(secret, token, ip) {
   try {
     const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -151,11 +156,15 @@ async function verifyTurnstile(secret, token, ip) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ secret, response: token, remoteip: ip }),
     });
+    if (!res.ok) {
+      console.error('Turnstile verify HTTP error:', res.status);
+      return false;
+    }
     const data = await res.json();
     return data.success === true;
   } catch (err) {
     console.error('Turnstile verify unreachable:', err);
-    return true;
+    return false;
   }
 }
 

@@ -444,6 +444,10 @@
       .animate-pulse, .animate-ping {
         animation: none !important;
       }
+      .lift { transition: none; }
+      .scroll-smooth { scroll-behavior: auto; }
+      .view:not([hidden]) { animation: none; }
+      .modal-card { animation: none; }
     }
 
     /* ==================== CARE BUDGET CALCULATOR ==================== */
@@ -552,13 +556,6 @@
     html:not(.dark) .text-brand-accent { color: #8a4f2c; }
     html:not(.dark) .bg-brand-accent { background-color: #8a4f2c; }
     html:not(.dark) .border-brand-accent { border-color: #8a4f2c; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .lift { transition: none; }
-      .scroll-smooth { scroll-behavior: auto; }
-      .view:not([hidden]) { animation: none; }
-      .modal-card { animation: none; }
-    }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-ink min-h-screen flex flex-col selection:bg-brand-sage selection:text-brand-ink">
@@ -1197,8 +1194,8 @@
                 </div>
 
                 <!-- Room Preference -->
-                <div>
-                  <label class="block text-sm font-bold text-brand-ink mb-2">Room Type</label>
+                <fieldset>
+                  <legend class="block text-sm font-bold text-brand-ink mb-2">Room Type</legend>
                   <div class="grid grid-cols-2 gap-3">
                     <label class="flex items-center gap-2 p-3 border border-brand-line rounded-xl cursor-pointer hover:bg-brand-sageLight/40 has-[:checked]:border-brand-green has-[:checked]:bg-brand-sageLight/30">
                       <input type="radio" name="calc-room" value="private" checked onchange="calculateCosts()" class="text-brand-green focus:ring-brand-green">
@@ -1209,7 +1206,7 @@
                       <span class="text-sm font-medium text-brand-ink">Shared / Semi-Private</span>
                     </label>
                   </div>
-                </div>
+                </fieldset>
 
                 <!-- Info Box -->
                 <div class="p-4 bg-brand-cream rounded-xl text-xs text-brand-muted leading-relaxed border border-brand-line">
@@ -1781,8 +1778,8 @@
               </div>
 
               <!-- Inquiry Type Selector -->
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-ink mb-2">I am reaching out regarding *</label>
+              <fieldset>
+                <legend class="block text-xs font-bold uppercase tracking-wider text-brand-ink mb-2">I am reaching out regarding *</legend>
                 <div class="grid sm:grid-cols-2 gap-3">
                   <label class="flex items-center gap-2 p-3 border border-brand-line rounded-xl cursor-pointer hover:bg-brand-sageLight/40 has-[:checked]:border-brand-green has-[:checked]:bg-brand-sageLight/30">
                     <input type="radio" name="inquiry_type" value="Family Care Placement" checked class="text-brand-green focus:ring-brand-green">
@@ -1793,7 +1790,7 @@
                     <span class="text-sm font-semibold text-brand-ink">RCFE Licensing &amp; Consulting</span>
                   </label>
                 </div>
-              </div>
+              </fieldset>
 
               <!-- Name & Phone -->
               <div class="grid sm:grid-cols-2 gap-5">
@@ -2182,6 +2179,7 @@
     const BUSINESS = { tz: 'America/Los_Angeles', openDays: [1, 2, 3, 4, 5, 6], openHour: 8, closeHour: 19 };
 
     let hasNavigated = false;
+    let bookingCloseTimer = null;
 
     // ==================== MODAL MANAGER (focus, scroll lock, Esc, Tab trap) ====================
     const modalStack = [];
@@ -2213,6 +2211,10 @@
       const idx = modalStack.indexOf(id);
       if (idx > -1) modalStack.splice(idx, 1);
       if (id === 'booking-modal') {
+        if (bookingCloseTimer) {
+          clearTimeout(bookingCloseTimer);
+          bookingCloseTimer = null;
+        }
         const status = document.getElementById('booking-status');
         if (status) status.textContent = '';
       }
@@ -2341,11 +2343,12 @@
     const tsWidgets = {};
     function initTurnstile() {
       if (!window.turnstile) return;
+      const tsTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
       document.querySelectorAll('.cf-ts').forEach(el => {
         if (tsWidgets[el.id] !== undefined) return;
         if (el.closest('[hidden], .hidden')) return; // renders when its page or popup is shown
         try {
-          tsWidgets[el.id] = turnstile.render(el, { sitekey: TURNSTILE_SITE_KEY, theme: 'auto' });
+          tsWidgets[el.id] = turnstile.render(el, { sitekey: TURNSTILE_SITE_KEY, theme: tsTheme });
         } catch (e) { tsShowError(el); }
       });
     }
@@ -3018,11 +3021,7 @@
         messageField.value = `Hello Love RCFE Team,\n\nI used your cost calculator and would like personalized recommendations for care:\n• Region: ${regionText}\n• Care Level: ${careText}\n• Room Preference: ${roomType === 'private' ? 'Private Room' : 'Shared / Semi-Private'}\n• Estimated Monthly Budget: ${range}\n\nPlease reach out to me with vetted licensed care facilities that match this criteria.`;
       }
 
-      const inquiryRadios = document.querySelectorAll('input[name="inquiry_type"]');
-      inquiryRadios.forEach(radio => {
-        if (radio.value.includes('Family Care')) radio.checked = true;
-      });
-
+      selectInquiryType('Family Care');
       openView('contact');
     }
 
@@ -3419,6 +3418,10 @@
 
     // Modal Helpers
     function openBookingModal() {
+      if (bookingCloseTimer) {
+        clearTimeout(bookingCloseTimer);
+        bookingCloseTimer = null;
+      }
       initBookingDatePicker();
       openModal('booking-modal');
       initTurnstile();
@@ -3493,7 +3496,9 @@
         status.style.color = '';
         status.className = 'text-xs text-center font-semibold min-h-4 text-brand-green dark:text-emerald-400';
         status.textContent = `✓ Request received. An advisor will call you on ${prettyDate} (${timeLabel}) to confirm.`;
-        setTimeout(() => {
+        if (bookingCloseTimer) clearTimeout(bookingCloseTimer);
+        bookingCloseTimer = setTimeout(() => {
+          bookingCloseTimer = null;
           closeBookingModal();
           bookingForm.reset();
         }, 2600);

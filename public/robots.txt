@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /staff
+Disallow: /staff.html
 Disallow: /api/
 
 Sitemap: https://love-rcfe.pages.dev/sitemap.xml
