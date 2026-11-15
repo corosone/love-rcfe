@@ -59,9 +59,15 @@
     html.dark .lang-option:hover { background-color: #24352b !important; }
     html.dark .lang-option[aria-checked="true"] { background-color: #1e3327 !important; color: #4ade80 !important; font-weight: 700; }
     html.dark footer { border-color: #283a30 !important; }
-    html[lang="ar"] :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote, input:not([type="tel"]):not([type="email"]), textarea, select) {
-      direction: rtl;
+    html[lang="ar"] body {
+      text-align: left;
+    }
+    html[lang="ar"] :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote) {
       unicode-bidi: plaintext;
+    }
+    html[lang="ar"] :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
+      unicode-bidi: plaintext;
+      text-align: left;
     }
     html[lang="ar"] :is(a[href^="tel:"], .lang-dropdown) {
       direction: ltr;

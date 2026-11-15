@@ -570,9 +570,15 @@
     html:not(.dark) .text-brand-accent { color: #8a4f2c; }
     html:not(.dark) .bg-brand-accent { background-color: #8a4f2c; }
     html:not(.dark) .border-brand-accent { border-color: #8a4f2c; }
-    html[lang="ar"] :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote, input:not([type="tel"]):not([type="email"]), textarea, select) {
-      direction: rtl;
+    html[lang="ar"] body {
+      text-align: left;
+    }
+    html[lang="ar"] :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote) {
       unicode-bidi: plaintext;
+    }
+    html[lang="ar"] :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
+      unicode-bidi: plaintext;
+      text-align: left;
     }
     html[lang="ar"] :is(a[href^="tel:"], input[type="tel"], input[type="email"], #neon-calculator-widget, .lang-dropdown) {
       direction: ltr;
