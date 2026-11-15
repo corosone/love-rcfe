@@ -1,8 +1,12 @@
-import { ensureSchema, jsonResponse, clean, clientIp, tooManyRequests } from '../../lib/db.js';
+import {
+  ensureSchema, jsonResponse, clean, clientIp,
+  verifySameOrigin, readJsonBody, tooManyRequests, tooManyRequestsD1,
+} from '../../lib/db.js';
 
 const LIMITS = { name: 120, email: 254, phone: 40, city: 100, message: 3000, inquiryType: 80, short: 80 };
 const MAX_DAYS_AHEAD = 100; // the booking form offers 90 days; small slack for time zones
 const TIME_RE = /^(morning|afternoon|late afternoon|evening)\b/i;
+const SSN_RE = /\b\d{3}-\d{2}-\d{4}\b/;
 const ALLOWED_SOURCES = new Set(['home', 'services', 'tools', 'approach', 'support', 'contact', 'terms', 'privacy']);
 
 // "YYYY-MM-DD" -> Date (UTC midnight) if it is a real calendar date, else null
@@ -28,22 +32,20 @@ function addDays(ymd, n) {
 const EMAIL_RE = /^[^\s@<>'"\u0000-\u001f]+@[^\s@<>'"\u0000-\u001f]+\.[^\s@<>'"\u0000-\u001f]{2,}$/;
 
 export async function onRequestPost({ request, env }) {
-  let body;
-  try {
-    body = await request.json();
-    if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      return jsonResponse({ error: 'Invalid request body.' }, 400);
-    }
-  } catch {
-    return jsonResponse({ error: 'Invalid request body.' }, 400);
-  }
+  const originErr = verifySameOrigin(request);
+  if (originErr) return originErr;
 
-  // Honeypot: real visitors never fill this hidden field. Pretend success so bots move on.
-  if (clean(body.hp_notes, 200)) {
+  const parsed = await readJsonBody(request, 16384);
+  if (!parsed.ok) return parsed.response;
+  const body = parsed.data;
+
+  // Honeypot: real visitors never fill these hidden fields. Pretend success so bots move on.
+  if (clean(body.hp_notes, 200) || clean(body._gotcha, 200)) {
     return jsonResponse({ ok: true }, 201);
   }
 
-  if (tooManyRequests(`lead:${clientIp(request)}`, 8, 10 * 60 * 1000)) {
+  const ip = clientIp(request);
+  if (tooManyRequests(`lead:${ip}`, 8, 10 * 60 * 1000)) {
     return jsonResponse(
       { error: 'Too many submissions. Please call (818) 217-5755 or email loveRCFE@gmail.com.' },
       429
@@ -54,6 +56,7 @@ export async function onRequestPost({ request, env }) {
     return jsonResponse({ error: 'Invalid request type.' }, 422);
   }
   const kind = body.kind === 'call_request' ? 'call_request' : 'enquiry';
+  const rawSource = clean(body.source, 40);
   const record = {
     kind,
     inquiryType: clean(body.inquiry_type, LIMITS.inquiryType) || 'General Inquiry',
@@ -64,7 +67,7 @@ export async function onRequestPost({ request, env }) {
     message: clean(body.message, LIMITS.message),
     preferredDate: clean(body.preferred_date, LIMITS.short) || null,
     preferredTime: clean(body.preferred_time, LIMITS.short) || null,
-    source: ALLOWED_SOURCES.has(clean(body.source, 40)) ? clean(body.source, 40) : (clean(body.source, 40) ? 'other' : ''),
+    source: ALLOWED_SOURCES.has(rawSource) ? rawSource : (rawSource ? 'other' : ''),
   };
 
   const errors = {};
@@ -73,6 +76,9 @@ export async function onRequestPost({ request, env }) {
   if (record.phone.replace(/\D/g, '').length < 7) errors.phone = 'Please enter a valid phone number.';
   if (kind === 'enquiry' && record.message.length < 5) {
     errors.message = 'Please tell us a little about how we can help.';
+  }
+  if (SSN_RE.test(record.message)) {
+    errors.message = 'For your privacy, please do not include Social Security numbers in web messages.';
   }
   if (kind === 'call_request') {
     const dateOk = parseYmd(record.preferredDate);
@@ -101,18 +107,24 @@ export async function onRequestPost({ request, env }) {
 
   if (!record.message) record.message = '(no message)';
 
-  // Turnstile spam check (only enforced once TURNSTILE_SECRET is set in Cloudflare)
+  // Turnstile spam check (enforced when TURNSTILE_SECRET is set; fails closed if REQUIRE_TURNSTILE=true)
   if (env?.TURNSTILE_SECRET) {
     const token = clean(body.turnstile_token, 4096);
-    const ok = token ? await verifyTurnstile(env.TURNSTILE_SECRET, token, clientIp(request)) : false;
+    const expectedHost = new URL(request.url).hostname;
+    const ok = token ? await verifyTurnstile(env.TURNSTILE_SECRET, token, ip, expectedHost) : false;
     if (!ok) {
       return jsonResponse(
         { error: 'Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.' },
         422
       );
     }
+  } else if (env?.REQUIRE_TURNSTILE === 'true') {
+    return jsonResponse(
+      { error: 'Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.' },
+      503
+    );
   } else {
-    console.warn('TURNSTILE_SECRET is not set; skipping Turnstile verification.');
+    console.warn('TURNSTILE_SECRET is not set; relying on origin, payload, and D1 rate-limit protections.');
   }
 
   if (!env?.DB) {
@@ -121,6 +133,19 @@ export async function onRequestPost({ request, env }) {
 
   try {
     await ensureSchema(env.DB);
+
+    // Cross-isolate D1 rate limits (per-IP and global flood cap)
+    const [ipLimited, globalLimited] = await Promise.all([
+      tooManyRequestsD1(env.DB, `lead:${ip}`, 8, 10 * 60),
+      tooManyRequestsD1(env.DB, 'lead:__global__', 40, 10 * 60),
+    ]);
+    if (ipLimited || globalLimited) {
+      return jsonResponse(
+        { error: 'Too many submissions. Please call (818) 217-5755 or email loveRCFE@gmail.com.' },
+        429
+      );
+    }
+
     const result = await env.DB
       .prepare(`
         INSERT INTO leads (
@@ -141,6 +166,25 @@ export async function onRequestPost({ request, env }) {
       )
       .run();
 
+    // Optional server-side Formspree forwarding if FORMSPREE_ENDPOINT is set in Cloudflare env
+    if (env?.FORMSPREE_ENDPOINT && /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/.test(env.FORMSPREE_ENDPOINT)) {
+      fetch(env.FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          kind: record.kind,
+          inquiry_type: record.inquiryType,
+          name: record.name,
+          email: record.email,
+          phone: record.phone,
+          city: record.city,
+          message: record.message,
+          preferred_date: record.preferredDate,
+          preferred_time: record.preferredTime,
+        }),
+      }).catch(() => {});
+    }
+
     return jsonResponse({ ok: true, id: result?.meta?.last_row_id ?? null }, 201);
   } catch (err) {
     console.error('Failed to save lead:', err);
@@ -148,8 +192,8 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-// Returns true only when Turnstile verifies the token (fail-closed on network/API errors).
-async function verifyTurnstile(secret, token, ip) {
+// Returns true only when Turnstile verifies the token and hostname (fail-closed on network/API errors).
+async function verifyTurnstile(secret, token, ip, expectedHost) {
   try {
     const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
@@ -161,7 +205,18 @@ async function verifyTurnstile(secret, token, ip) {
       return false;
     }
     const data = await res.json();
-    return data.success === true;
+    if (data.success !== true) return false;
+    if (
+      data.hostname &&
+      expectedHost &&
+      expectedHost !== 'localhost' &&
+      expectedHost !== '127.0.0.1' &&
+      data.hostname !== expectedHost
+    ) {
+      console.warn('Turnstile hostname mismatch:', data.hostname, 'vs', expectedHost);
+      return false;
+    }
+    return true;
   } catch (err) {
     console.error('Turnstile verify unreachable:', err);
     return false;

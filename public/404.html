@@ -13,36 +13,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-- Tailwind CSS: built at deploy time into /tailwind.css; falls back to the CDN if that file is missing -->
-  <script>
-    function loadTwFallback() {
-      var s = document.createElement('script');
-      s.src = 'https://cdn.tailwindcss.com/3.4.17';
-      s.onload = function () {
-        tailwind.config = {
-          darkMode: 'class',
-          theme: { extend: {
-            colors: { brand: { ink: '#26382f', muted: '#59685f', cream: '#f8f5ee', creamLight: '#fcfbfa', sage: '#dce7d9', sageLight: '#edf2e9', green: '#315d48', greenDark: '#203d30', accent: '#a96b46', accentLight: '#f5eee5', line: '#d9ded4' } },
-            fontFamily: { sans: ['"DM Sans"', 'sans-serif'], display: ['"Fraunces"', 'serif'] }
-          } }
-        };
-      };
-      document.head.appendChild(s);
-    }
-  </script>
-  <link rel="stylesheet" href="/tailwind.css" onerror="loadTwFallback()">
-  <script>
-    (function () {
-      try {
-        var isDark = localStorage.getItem('lovercfe_theme') === 'dark';
-        if (isDark) document.documentElement.classList.add('dark');
-        var m = document.querySelector('meta[name="theme-color"]');
-        if (m) m.setAttribute('content', isDark ? '#121915' : '#315d48');
-      } catch (e) {}
-    })();
-  </script>
+  <!-- Tailwind CSS: built at deploy time into /tailwind.css; falls back to the CDN via /404.js if missing -->
+  <link id="tw-css" rel="stylesheet" href="/tailwind.css">
+  <script src="/404.js"></script>
   <style>
     body {
       font-family: 'DM Sans', sans-serif;
@@ -91,7 +66,7 @@
       </a>
 
       <div class="flex items-center gap-2.5">
-        <button id="theme-btn" type="button" onclick="toggleTheme()" aria-label="Toggle dark mode" class="p-2.5 rounded-full border border-brand-line text-brand-ink hover:bg-brand-sageLight/60 transition flex items-center justify-center">
+        <button id="theme-btn" type="button" aria-label="Toggle dark mode" class="p-2.5 rounded-full border border-brand-line text-brand-ink hover:bg-brand-sageLight/60 transition flex items-center justify-center">
           <i data-lucide="moon" class="w-4 h-4"></i>
         </button>
         <a href="/#contact" class="inline-flex items-center gap-1.5 rounded-full bg-brand-green text-white px-4 py-2 text-xs sm:text-sm font-semibold hover:bg-brand-greenDark shadow-sm transition">
@@ -169,33 +144,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    function refreshIcons() {
-      if (window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
-    }
-
-    function syncThemeBtn(isDark) {
-      var btn = document.getElementById('theme-btn');
-      if (btn) {
-        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-        btn.innerHTML = isDark ? '<i data-lucide="sun" class="w-4 h-4"></i>' : '<i data-lucide="moon" class="w-4 h-4"></i>';
-      }
-      var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', isDark ? '#121915' : '#315d48');
-      refreshIcons();
-    }
-
-    function toggleTheme() {
-      var isDark = !document.documentElement.classList.contains('dark');
-      document.documentElement.classList.toggle('dark', isDark);
-      try { localStorage.setItem('lovercfe_theme', isDark ? 'dark' : 'light'); } catch (e) {}
-      syncThemeBtn(isDark);
-    }
-
-    var yearEl = document.getElementById('current-year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-    syncThemeBtn(document.documentElement.classList.contains('dark'));
-  </script>
 </body>
 </html>

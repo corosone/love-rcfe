@@ -1,7 +1,8 @@
-import { jsonResponse, clean, authorizeAdmin } from '../../../lib/db.js';
+import { jsonResponse, clean, readJsonBody, authorizeAdmin } from '../../../lib/db.js';
 
 const STAGES = ['new', 'called', 'tour', 'waiting'];
 const DEFAULT_LIMIT = 500;
+const MAX_OFFSET = 50000;
 
 const LEAD_COLUMNS = `
   id,
@@ -50,7 +51,7 @@ export async function onRequestGet({ request, env }) {
   const rawLimit = Number(params.get('limit') || DEFAULT_LIMIT);
   const rawOffset = Number(params.get('offset') || 0);
   const limit = Number.isInteger(rawLimit) && rawLimit > 0 ? Math.min(rawLimit, DEFAULT_LIMIT) : DEFAULT_LIMIT;
-  const offset = Number.isInteger(rawOffset) && rawOffset >= 0 ? rawOffset : 0;
+  const offset = Number.isInteger(rawOffset) && rawOffset >= 0 ? Math.min(rawOffset, MAX_OFFSET) : 0;
 
   try {
     const [countRow, listRes] = await Promise.all([
@@ -78,15 +79,9 @@ export async function onRequestPatch({ request, env }) {
   const denied = await authorizeAdmin(request, env);
   if (denied) return denied;
 
-  let body;
-  try {
-    body = await request.json();
-    if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      return jsonResponse({ error: 'Invalid JSON body.' }, 400);
-    }
-  } catch {
-    return jsonResponse({ error: 'Invalid JSON body.' }, 400);
-  }
+  const parsed = await readJsonBody(request, 8192);
+  if (!parsed.ok) return parsed.response;
+  const body = parsed.data;
 
   const urlId = new URL(request.url).searchParams.get('id');
   const rawId = body.id !== undefined && body.id !== null ? body.id : urlId;
@@ -95,21 +90,21 @@ export async function onRequestPatch({ request, env }) {
     return jsonResponse({ error: 'Invalid lead id.' }, 400);
   }
 
-  // Only update the fields that were actually sent.
+  // Only update the fields that were actually sent as own properties.
   const sets = [];
   const values = [];
-  if ('handled' in body) {
+  if (Object.hasOwn(body, 'handled')) {
     sets.push('handled = ?');
     values.push(body.handled === true || body.handled === 1 ? 1 : 0);
   }
-  if ('stage' in body) {
+  if (Object.hasOwn(body, 'stage')) {
     if (!STAGES.includes(body.stage)) {
       return jsonResponse({ error: 'Invalid stage.' }, 400);
     }
     sets.push('stage = ?');
     values.push(body.stage);
   }
-  if ('notes' in body) {
+  if (Object.hasOwn(body, 'notes')) {
     sets.push('notes = ?');
     values.push(clean(body.notes, 2000));
   }
@@ -143,15 +138,9 @@ export async function onRequestDelete({ request, env }) {
   const denied = await authorizeAdmin(request, env);
   if (denied) return denied;
 
-  let body = {};
-  try {
-    body = await request.json();
-    if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      body = {};
-    }
-  } catch {
-    body = {};
-  }
+  const parsed = await readJsonBody(request, 2048, { allowEmpty: true });
+  if (!parsed.ok) return parsed.response;
+  const body = parsed.data;
 
   const urlId = new URL(request.url).searchParams.get('id');
   const rawId = urlId && urlId.trim() ? urlId : body?.id;
