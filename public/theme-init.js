@@ -18,6 +18,16 @@
     if (m) m.setAttribute('content', isDark ? '#121915' : '#315d48');
   } catch (e) {}
 
+  try {
+    var qLang = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
+    var sLang = qLang || localStorage.getItem('lovercfe_lang') || 'en';
+    if (/^(en|es|zh|tl|vi|ko|hy|ru)$/.test(sLang) && sLang !== 'en') {
+      document.documentElement.lang = sLang;
+      document.documentElement.setAttribute('translate', 'no');
+      document.documentElement.classList.add('notranslate');
+    }
+  } catch (e) {}
+
   function loadTwFallback() {
     if (document.getElementById('tw-cdn-fallback')) return;
     var script = document.createElement('script');

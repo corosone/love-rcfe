@@ -357,7 +357,7 @@
     "Dark Mode": {
       es: "Modo Oscuro",
       zh: "深色模式",
-      tl: "Dark Mode",
+      tl: "Madilim na Mode",
       vi: "Chế độ tối",
       ko: "다크 모드",
       hy: "Մուգ ռեժիմ",
@@ -366,7 +366,7 @@
     "Light Mode": {
       es: "Modo Claro",
       zh: "浅色模式",
-      tl: "Light Mode",
+      tl: "Maliwanag na Mode",
       vi: "Chế độ sáng",
       ko: "라이트 모드",
       hy: "Բաց ռեժիմ",
@@ -3826,7 +3826,7 @@
     "Assisted Living Community / Independent Living": {
       es: "Comunidad de Vivienda Asistida / Vida Independiente",
       zh: "协助生活社区 / 独立康养社区",
-      tl: "Assisted Living Community / Independent Living",
+      tl: "Komunidad ng Assisted Living / Independent Living",
       vi: "Cộng Đồng Sinh Hoạt Có Hỗ Trợ / Tự Lập",
       ko: "어시스티드 리빙 커뮤니티 / 시니어 독립 주거",
       hy: "Assisted Living համայնք / Անկախ բնակություն",
@@ -3993,6 +3993,296 @@
       ko: " 번호로 전화해 주세요.",
       hy: ", կամ զանգահարեք {phone}։",
       ru: ", или позвоните по номеру {phone}."
+    },
+
+    // Alt attributes, prefill templates & API error messages
+    "Older adult and caregiver sharing a warm, reassuring moment together at home": {
+      es: "Adulto mayor y cuidadora compartiendo un momento cálido y tranquilo juntos en casa",
+      zh: "长者与照护人员在家中共度温暖安心的时光",
+      tl: "Nakatatanda at tagapag-alaga na magkasamang masaya at panatag sa tahanan",
+      vi: "Người cao tuổi và người chăm sóc cùng chia sẻ khoảnh khắc ấm áp, an tâm tại nhà",
+      ko: "집에서 따뜻하고 편안한 시간을 함께 보내고 있는 어르신과 돌봄 요양보호사",
+      hy: "Տարեցը և խնամակալը տանը կիսում են ջերմ ու հանգիստ պահ",
+      ru: "Пожилой человек и сиделка проводят теплый, спокойный момент вместе дома"
+    },
+    "Elder parent or relative": {
+      es: "Padre, madre o familiar mayor",
+      zh: "年迈父母或长辈亲属",
+      tl: "Nakatatandang magulang o kamag-anak",
+      vi: "Cha mẹ hoặc người thân cao tuổi",
+      ko: "연로하신 부모님 또는 가족",
+      hy: "Տարեց ծնող կամ հարազատ",
+      ru: "Пожилой родитель или родственник"
+    },
+    "Spouse or partner": {
+      es: "Cónyuge o pareja",
+      zh: "配偶或伴侣",
+      tl: "Asawa o katuwang",
+      vi: "Vợ/chồng hoặc bạn đời",
+      ko: "배우자 또는 파트너",
+      hy: "Ամուսին կամ կողակից",
+      ru: "Супруг или партнер"
+    },
+    "A client or patient (social worker / discharge planner)": {
+      es: "Un cliente o paciente (trabajador social / planificador de alta)",
+      zh: "服务对象或患者（社工 / 出院协调员）",
+      tl: "Kliyente o pasyente (social worker / discharge planner)",
+      vi: "Khách hàng hoặc bệnh nhân (nhân viên công tác xã hội / điều phối xuất viện)",
+      ko: "고객 또는 환자(사회복지사 / 퇴원 코디네이터)",
+      hy: "Հաճախորդ կամ բուժառու (սոցիալական աշխատող / դուրսգրման համակարգող)",
+      ru: "Клиент или пациент (соцработник / координатор выписки)"
+    },
+    "Sharp and clear": {
+      es: "Lúcido y con claridad mental",
+      zh: "思维清晰清醒",
+      tl: "Malinaw at matalas ang isip",
+      vi: "Minh mẫn và tỉnh táo",
+      ko: "인지가 또렷하고 명료함",
+      hy: "Սթափ և պարզ միտք",
+      ru: "Ясный и четкий ум"
+    },
+    "Mild forgetfulness": {
+      es: "Olvidos leves",
+      zh: "轻度健忘",
+      tl: "Bahagyang pagiging malilimutin",
+      vi: "Hay quên nhẹ",
+      ko: "가벼운 건망증",
+      hy: "Թեթև մոռացկոտություն",
+      ru: "Легкая забывчивость"
+    },
+    "Alzheimer's or moderate dementia": {
+      es: "Alzheimer o demencia moderada",
+      zh: "阿尔茨海默病或中度失智",
+      tl: "Alzheimer's o katamtamang dementia",
+      vi: "Alzheimer hoặc sa sút trí tuệ mức vừa",
+      ko: "알츠하이머 또는 중등도 치매",
+      hy: "Ալցհայմեր կամ չափավոր դեմենցիա",
+      ru: "Болезнь Альцгеймера или умеренная деменция"
+    },
+    "Independent or minimal help": {
+      es: "Independiente o ayuda mínima",
+      zh: "生活自理或仅需少量协助",
+      tl: "Nagsasarili o kaunting tulong lang",
+      vi: "Tự lập hoặc cần hỗ trợ tối thiểu",
+      ko: "자립 가능 또는 최소 보조",
+      hy: "Անկախ կամ նվազագույն օգնություն",
+      ru: "Самостоятельный или с минимальной помощью"
+    },
+    "Help with bathing, dressing, or transfers": {
+      es: "Ayuda para bañarse, vestirse o trasladarse",
+      zh: "需要协助洗浴、穿衣或起身移位",
+      tl: "Tulong sa paliligo, pagbibihis, o paglipat",
+      vi: "Cần hỗ trợ tắm rửa, mặc đồ hoặc di chuyển",
+      ko: "목욕, 착탈의 또는 이동 보조 필요",
+      hy: "Օգնություն լողանալիս, հագնվելիս կամ տեղաշարժվելիս",
+      ru: "Помощь при купании, одевании или пересаживании"
+    },
+    "Bedridden or total care": {
+      es: "En cama o cuidado total",
+      zh: "长期卧床或全护理",
+      tl: "Nakaratay o ganap na pag-aalaga",
+      vi: "Nằm liệt giường hoặc chăm sóc toàn phần",
+      ko: "와상 상태 또는 전적인 돌봄 필요",
+      hy: "Անկողնային կամ ամբողջական խնամք",
+      ru: "Лежачий больной или полный уход"
+    },
+    "Immediate (1-7 days)": {
+      es: "Inmediato (1 a 7 días)",
+      zh: "紧急入住（1–7 天内）",
+      tl: "Agaran (1–7 araw)",
+      vi: "Khẩn cấp (1–7 ngày)",
+      ko: "긴급(1~7일 이내)",
+      hy: "Անհապաղ (1–7 օր)",
+      ru: "Срочно (1–7 дней)"
+    },
+    "Next 30-60 days": {
+      es: "Próximos 30 a 60 días",
+      zh: "未来 30–60 天内",
+      tl: "Susunod na 30–60 araw",
+      vi: "Trong 30–60 ngày tới",
+      ko: "30~60일 이내",
+      hy: "Առաջիկա 30–60 օրը",
+      ru: "Ближайшие 30–60 дней"
+    },
+    "Future research": {
+      es: "Investigación futura",
+      zh: "先了解与规划",
+      tl: "Pag-aaral para sa hinaharap",
+      vi: "Tìm hiểu cho tương lai",
+      ko: "향후 계획 및 정보 수집",
+      hy: "Ապագայի ուսումնասիրություն",
+      ru: "Изучение на будущее"
+    },
+    "Not answered": {
+      es: "Sin respuesta",
+      zh: "未填写",
+      tl: "Hindi sinagot",
+      vi: "Chưa trả lời",
+      ko: "응답 없음",
+      hy: "Պատասխան չկա",
+      ru: "Нет ответа"
+    },
+    "Personalized Residential Care": {
+      es: "Cuidado Residencial Personalizado",
+      zh: "定制家庭式照护之家",
+      tl: "Personal na Pangangalagang Residensyal",
+      vi: "Chăm Sóc Nội Trú Cá Nhân Hóa",
+      ko: "맞춤형 주거 돌봄(RCFE)",
+      hy: "Անհատականացված բնակելի խնամք",
+      ru: "Персональный домашний уход"
+    },
+    "Residential Care": {
+      es: "Cuidado Residencial",
+      zh: "家庭式照护",
+      tl: "Pangangalagang Residensyal",
+      vi: "Chăm Sóc Nội Trú",
+      ko: "주거형 돌봄",
+      hy: "Բնակելի խնամք",
+      ru: "Проживание с уходом"
+    },
+    "Hello Love RCFE Team,\n\nI calculated my family's monthly elder care budget using your calculator at approximately {amount}/month.\n\nPlease provide vetted licensed residential care facility (RCFE) recommendations and cost breakdown options that fit within this budget.": {
+      es: "Hola equipo de Love RCFE,\n\nCalculé el presupuesto mensual de cuidado para mi familia usando su calculadora en aproximadamente {amount}/mes.\n\nPor favor envíenme recomendaciones de centros RCFE verificados con licencia y opciones que se ajusten a este presupuesto.",
+      zh: "Love RCFE 团队您好，\n\n我使用贵网站计算器测算的家庭每月长者照护预算约为 {amount}/月。\n\n请提供符合该预算、经过核查的持牌 RCFE 照护之家推荐方案与费用明细。",
+      tl: "Kumusta Love RCFE Team,\n\nKinalkula ko ang buwanang badyet ng aming pamilya para sa pag-aalaga gamit ang inyong calculator sa humigit-kumulang {amount}/buwan.\n\nMangyaring magpadala ng mga rekomendasyon ng sinuring lisensyadong RCFE na akma sa badyet na ito.",
+      vi: "Chào đội ngũ Love RCFE,\n\nTôi đã tính ngân sách chăm sóc người cao tuổi hàng tháng cho gia đình bằng công cụ của quý vị vào khoảng {amount}/tháng.\n\nVui lòng gợi ý giúp tôi các cơ sở RCFE được cấp phép phù hợp với ngân sách này.",
+      ko: "안녕하세요 Love RCFE 팀,\n\n웹사이트 계산기로 산출한 저희 가족의 월 어르신 돌봄 예산은 약 {amount}/월입니다.\n\n이 예산에 맞는 검증된 인가 RCFE 요양홈 추천과 비용 구성을 안내해 주세요.",
+      hy: "Բարև Love RCFE թիմ,\n\nՁեր հաշվիչով ես հաշվարկել եմ մեր ընտանիքի տարեցների խնամքի ամսական բյուջեն՝ մոտավորապես {amount}/ամիս։\n\nԽնդրում եմ առաջարկել ստուգված լիցենզավորված RCFE տներ և արժեքի տարբերակներ այս բյուջեի շրջանակում։",
+      ru: "Здравствуйте, команда Love RCFE!\n\nЯ рассчитал(а) ежемесячный бюджет нашей семьи на уход с помощью вашего калькулятора — около {amount}/мес.\n\nПожалуйста, подберите проверенные лицензированные пансионаты RCFE и варианты стоимости в рамках этого бюджета."
+    },
+    "Hello Love RCFE Team,\n\nI used your cost calculator and would like personalized recommendations for care:\n• Region: {region}\n• Care Level: {care}\n• Room Preference: {room}\n• Estimated Monthly Budget: {range}\n\nPlease reach out to me with vetted licensed care facilities that match this criteria.": {
+      es: "Hola equipo de Love RCFE,\n\nUsé su calculadora de costos y deseo recomendaciones personalizadas:\n• Región: {region}\n• Nivel de cuidado: {care}\n• Tipo de habitación: {room}\n• Presupuesto mensual estimado: {range}\n\nPor favor contáctenme con centros con licencia verificados que coincidan con estos criterios.",
+      zh: "Love RCFE 团队您好，\n\n我使用了费用计算器，希望能获取定制照护推荐：\n• 区域：{region}\n• 照护等级：{care}\n• 房间偏好：{room}\n• 预估月预算：{range}\n\n请联系我并提供符合以上条件的持牌照护机构。",
+      tl: "Kumusta Love RCFE Team,\n\nGinamit ko ang inyong cost calculator at nais ng rekomendasyon para sa pag-aalaga:\n• Rehiyon: {region}\n• Antas ng pag-aalaga: {care}\n• Uri ng silid: {room}\n• Tinatayang buwanang badyet: {range}\n\nMangyaring makipag-ugnayan sa akin para sa mga lisensyadong pasilidad na akma rito.",
+      vi: "Chào đội ngũ Love RCFE,\n\nTôi đã dùng công cụ ước tính chi phí và muốn nhận gợi ý phù hợp:\n• Khu vực: {region}\n• Mức độ chăm sóc: {care}\n• Loại phòng: {room}\n• Ngân sách dự kiến hàng tháng: {range}\n\nVui lòng liên hệ với tôi kèm danh sách các cơ sở được cấp phép phù hợp.",
+      ko: "안녕하세요 Love RCFE 팀,\n\n비용 계산기를 이용해 아래 조건에 맞는 맞춤 추천을 요청드립니다:\n• 지역: {region}\n• 돌봄 수준: {care}\n• 객실 유형: {room}\n• 예상 월 예산: {range}\n\n조건에 부합하는 검증된 인가 요양 시설 정보를 안내해 주세요.",
+      hy: "Բարև Love RCFE թիմ,\n\nՕգտագործեցի արժեքի հաշվիչը և ցանկանում եմ ստանալ անհատական առաջարկներ․\n• Տարածաշրջան՝ {region}\n• Խնամքի մակարդակ՝ {care}\n• Սենյակի տեսակ՝ {room}\n• Գնահատված ամսական բյուջե՝ {range}\n\nԽնդրում եմ կապվել ինձ հետ այս չափանիշներին համապատասխանող լիցենզավորված տների համար։",
+      ru: "Здравствуйте, команда Love RCFE!\n\nЯ воспользовался(лась) калькулятором и хотел(а) бы получить подбор вариантов:\n• Регион: {region}\n• Уровень ухода: {care}\n• Тип комнаты: {room}\n• Ориентировочный бюджет в месяц: {range}\n\nПожалуйста, свяжитесь со мной и предложите проверенные лицензированные пансионаты по этим критериям."
+    },
+    "Hello Love RCFE Advisory Team,\n\nI completed your Care Level Assessment and received the following recommendation:\n• Target Care Setting: {title}\n• Exploring care for: {recipient}\n• Cognitive status: {memory}\n• Physical ADL needs: {adl}\n• Placement Timeframe: {timeline}\n\nPlease contact me with licensed facility openings and touring support.": {
+      es: "Hola equipo asesor de Love RCFE,\n\nCompleté la Evaluación de Nivel de Cuidado y recibí esta recomendación:\n• Entorno recomendado: {title}\n• Cuidado para: {recipient}\n• Estado cognitivo: {memory}\n• Necesidades físicas (ADL): {adl}\n• Plazo estimado: {timeline}\n\nPor favor contáctenme con vacantes disponibles y apoyo para visitas.",
+      zh: "Love RCFE 顾问团队您好，\n\n我完成了照护等级评估，获得了以下推荐结果：\n• 建议照护类型：{title}\n• 照护对象：{recipient}\n• 认知状况：{memory}\n• 日常活动需求：{adl}\n• 入住时间规划：{timeline}\n\n请联系我并提供可预约的持牌机构与参观协助。",
+      tl: "Kumusta Love RCFE Advisory Team,\n\nNatapos ko ang Care Level Assessment at nakita ang rekomendasyong ito:\n• Inirerekomendang lugar: {title}\n• Para kanino: {recipient}\n• Kondisyon ng isip: {memory}\n• Pisikal na pangangailangan: {adl}\n• Inaasahang panahon: {timeline}\n\nMangyaring makipag-ugnayan para sa mga bakanteng pasilidad at pagbisita.",
+      vi: "Chào đội ngũ tư vấn Love RCFE,\n\nTôi vừa hoàn thành bài đánh giá mức độ chăm sóc và nhận được gợi ý sau:\n• Mô hình phù hợp: {title}\n• Đối tượng chăm sóc: {recipient}\n• Tình trạng nhận thức: {memory}\n• Nhu cầu hỗ trợ sinh hoạt (ADL): {adl}\n• Thời gian dự kiến: {timeline}\n\nVui lòng liên hệ với tôi về các cơ sở còn chỗ và lịch tham quan.",
+      ko: "안녕하세요 Love RCFE 상담팀,\n\n돌봄 수준 자가진단을 완료하여 다음과 같은 추천 결과를 받았습니다:\n• 추천 돌봄 형태: {title}\n• 대상자: {recipient}\n• 인지 상태: {memory}\n• 신체 활동 보조 필요: {adl}\n• 희망 입소 시기: {timeline}\n\n입소 가능한 인가 시설 및 투어 일정을 안내해 주세요.",
+      hy: "Բարև Love RCFE խորհրդատվական թիմ,\n\nԱնցա խնամքի մակարդակի գնահատումը և ստացա հետևյալ առաջարկը․\n• Առաջարկվող խնամքի տեսակ՝ {title}\n• Ում համար՝ {recipient}\n• Ճանաչողական վիճակ՝ {memory}\n• Ֆիզիկական օգնություն (ADL)՝ {adl}\n• Ժամկետ՝ {timeline}\n\nԽնդրում եմ կապվել ինձ հետ ազատ տեղերի և շրջայցերի համար։",
+      ru: "Здравствуйте, команда Love RCFE!\n\nЯ прошел(а) оценку уровня ухода и получил(а) следующую рекомендацию:\n• Подходящий формат: {title}\n• Для кого: {recipient}\n• Когнитивное состояние: {memory}\n• Физическая помощь (ADL): {adl}\n• Сроки переезда: {timeline}\n\nПожалуйста, свяжитесь со мной для подбора свободных мест и организации просмотров."
+    },
+    "Hello Love RCFE Advisory Team,\n\nI completed your Care Assessment Wizard and received the following custom match:\n• Recommended Setting: {title}\n• Care recipient: {recipient}\n• Memory status: {memory}\n• Physical ADL needs: {adl}\n• Timeframe: {timeline}\n\nPlease reach out with verified California licensed facilities in my area.": {
+      es: "Hola equipo asesor de Love RCFE,\n\nCompleté el Asistente de Evaluación de Cuidado y obtuve esta recomendación personalizada:\n• Entorno recomendado: {title}\n• Persona a cuidar: {recipient}\n• Estado de memoria: {memory}\n• Necesidades físicas (ADL): {adl}\n• Plazo estimado: {timeline}\n\nPor favor contáctenme con centros verificados con licencia en California en mi zona.",
+      zh: "Love RCFE 顾问团队您好，\n\n我完成了智能照护评估向导，获得了以下定制匹配：\n• 推荐类型：{title}\n• 照护对象：{recipient}\n• 记忆状态：{memory}\n• 身体活动需求：{adl}\n• 时间计划：{timeline}\n\n请为我们推荐我所在地区经过核查的加州持牌照护之家。",
+      tl: "Kumusta Love RCFE Advisory Team,\n\nNatapos ko ang Care Assessment Wizard at nakakuha ng personal na tugma:\n• Inirerekomendang pasilidad: {title}\n• Tatanggap ng alaga: {recipient}\n• Estado ng memorya: {memory}\n• Pisikal na tulong: {adl}\n• Takdang panahon: {timeline}\n\nMangyaring makipag-ugnayan para sa mga lisensyadong pasilidad sa California sa aming lugar.",
+      vi: "Chào đội ngũ tư vấn Love RCFE,\n\nTôi đã hoàn thành trình hướng dẫn đánh giá chăm sóc và nhận được kết quả phù hợp:\n• Loại hình đề xuất: {title}\n• Người cần chăm sóc: {recipient}\n• Tình trạng trí nhớ: {memory}\n• Nhu cầu sinh hoạt (ADL): {adl}\n• Thời gian dự kiến: {timeline}\n\nVui lòng liên hệ để giới thiệu các cơ sở được cấp phép tại California gần khu vực của tôi.",
+      ko: "안녕하세요 Love RCFE 상담팀,\n\n맞춤 돌봄 평가 마법사를 완료하여 다음 결과를 받았습니다:\n• 추천 형태: {title}\n• 돌봄 대상자: {recipient}\n• 기억력 상태: {memory}\n• 신체 보조 필요도: {adl}\n• 희망 시기: {timeline}\n\n거주 지역 인근의 검증된 캘리포니아 인가 시설 정보를 부탁드립니다.",
+      hy: "Բարև Love RCFE խորհրդատվական թիմ,\n\nԱվարտեցի խնամքի գնահատման ուղեցույցը և ստացա անհատական առաջարկ․\n• Առաջարկվող միջավայր՝ {title}\n• Խնամք ստացող՝ {recipient}\n• Հիշողության վիճակ՝ {memory}\n• Ֆիզիկական օգնություն (ADL)՝ {adl}\n• Ժամկետ՝ {timeline}\n\nԽնդրում եմ կապվել ինձ հետ իմ տարածքում ստուգված կալիֆոռնիական լիցենզավորված տների համար։",
+      ru: "Здравствуйте, команда Love RCFE!\n\nЯ прошел(а) мастер оценки ухода и получил(а) персональный результат:\n• Рекомендованный формат: {title}\n• Для кого: {recipient}\n• Состояние памяти: {memory}\n• Физическая помощь (ADL): {adl}\n• Сроки: {timeline}\n\nПожалуйста, подскажите проверенные лицензированные пансионаты Калифорнии в нашем районе."
+    },
+    "Too many submissions. Please call (818) 217-5755 or email loveRCFE@gmail.com.": {
+      es: "Demasiados envíos seguidos. Por favor llame al (818) 217-5755 o escriba a loveRCFE@gmail.com.",
+      zh: "提交过于频繁。请致电 (818) 217-5755 或发邮件至 loveRCFE@gmail.com。",
+      tl: "Masyadong maraming pagsubok. Tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com.",
+      vi: "Gửi quá nhiều lần. Vui lòng gọi (818) 217-5755 hoặc email loveRCFE@gmail.com.",
+      ko: "요청이 너무 많습니다. (818) 217-5755 로 전화하시거나 loveRCFE@gmail.com 으로 이메일을 보내주세요.",
+      hy: "Չափազանց շատ հարցումներ։ Խնդրում ենք զանգահարել (818) 217-5755 կամ գրել loveRCFE@gmail.com հասցեով։",
+      ru: "Слишком много отправок. Пожалуйста, позвоните по номеру (818) 217-5755 или напишите на loveRCFE@gmail.com."
+    },
+    "Please enter your name.": {
+      es: "Por favor ingrese su nombre.",
+      zh: "请输入您的姓名。",
+      tl: "Pakilagay ang inyong pangalan.",
+      vi: "Vui lòng nhập tên của bạn.",
+      ko: "성함을 입력해 주세요.",
+      hy: "Խնդրում ենք մուտքագրել ձեր անունը։",
+      ru: "Пожалуйста, введите ваше имя."
+    },
+    "Please enter a valid email address.": {
+      es: "Por favor ingrese un correo electrónico válido.",
+      zh: "请输入有效的电子邮箱地址。",
+      tl: "Pakilagay ang wastong email address.",
+      vi: "Vui lòng nhập địa chỉ email hợp lệ.",
+      ko: "올바른 이메일 주소를 입력해 주세요.",
+      hy: "Խնդրում ենք մուտքագրել վավեր էլ․ փոստի հասցե։",
+      ru: "Пожалуйста, введите корректный адрес эл. почты."
+    },
+    "Please enter a valid phone number.": {
+      es: "Por favor ingrese un número de teléfono válido.",
+      zh: "请输入有效的电话号码。",
+      tl: "Pakilagay ang wastong numero ng telepono.",
+      vi: "Vui lòng nhập số điện thoại hợp lệ.",
+      ko: "올바른 전화번호를 입력해 주세요.",
+      hy: "Խնդրում ենք մուտքագրել վավեր հեռախոսահամար։",
+      ru: "Пожалуйста, введите корректный номер телефона."
+    },
+    "Please tell us a little about how we can help.": {
+      es: "Por favor cuéntenos brevemente cómo podemos ayudarle.",
+      zh: "请简要说明我们可以如何协助您。",
+      tl: "Pakilarawan nang maikli kung paano kami makakatulong.",
+      vi: "Vui lòng cho biết ngắn gọn chúng tôi có thể hỗ trợ gì.",
+      ko: "어떤 도움이 필요하신지 간단히 적어 주세요.",
+      hy: "Խնդրում ենք հակիրճ նկարագրել, թե ինչպես կարող ենք օգնել։",
+      ru: "Пожалуйста, кратко опишите, чем мы можем вам помочь."
+    },
+    "Please choose a preferred date.": {
+      es: "Por favor elija una fecha preferida.",
+      zh: "请选择期望日期。",
+      tl: "Pumili ng gustong petsa.",
+      vi: "Vui lòng chọn ngày mong muốn.",
+      ko: "희망 날짜를 선택해 주세요.",
+      hy: "Խնդրում ենք ընտրել նախընտրելի ամսաթիվ։",
+      ru: "Пожалуйста, выберите удобную дату."
+    },
+    "Please choose a valid date.": {
+      es: "Por favor elija una fecha válida.",
+      zh: "请选择有效日期。",
+      tl: "Pumili ng wastong petsa.",
+      vi: "Vui lòng chọn ngày hợp lệ.",
+      ko: "올바른 날짜를 선택해 주세요.",
+      hy: "Խնդրում ենք ընտրել վավեր ամսաթիվ։",
+      ru: "Пожалуйста, выберите корректную дату."
+    },
+    "Please choose a future date.": {
+      es: "Por favor elija una fecha futura.",
+      zh: "请选择未来的日期。",
+      tl: "Pumili ng petsa sa hinaharap.",
+      vi: "Vui lòng chọn một ngày sắp tới.",
+      ko: "오늘 이후의 날짜를 선택해 주세요.",
+      hy: "Խնդրում ենք ընտրել գալիք ամսաթիվ։",
+      ru: "Пожалуйста, выберите дату в будущем."
+    },
+    "Please choose a date within the next 3 months.": {
+      es: "Por favor elija una fecha dentro de los próximos 3 meses.",
+      zh: "请选择未来 3 个月内的日期。",
+      tl: "Pumili ng petsa sa loob ng susunod na 3 buwan.",
+      vi: "Vui lòng chọn ngày trong vòng 3 tháng tới.",
+      ko: "향후 3개월 이내의 날짜를 선택해 주세요.",
+      hy: "Խնդրում ենք ընտրել առաջիկա 3 ամսվա ընթացքում գտնվող ամսաթիվ։",
+      ru: "Пожалуйста, выберите дату в пределах ближайших 3 месяцев."
+    },
+    "Please choose a time from the list.": {
+      es: "Por favor elija un horario de la lista.",
+      zh: "请从列表中选择一个时段。",
+      tl: "Pumili ng oras mula sa listahan.",
+      vi: "Vui lòng chọn khung giờ từ danh sách.",
+      ko: "목록에서 시간대를 선택해 주세요.",
+      hy: "Խնդրում ենք ցանկից ընտրել ժամանակահատված։",
+      ru: "Пожалуйста, выберите время из списка."
+    },
+    "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": {
+      es: "Por favor complete la verificación de seguridad. Si no aparece, llame al (818) 217-5755 o escriba a loveRCFE@gmail.com.",
+      zh: "请先完成安全验证。若未显示，请致电 (818) 217-5755 或发送邮件至 loveRCFE@gmail.com。",
+      tl: "Pakikumpleto ang security check. Kung hindi ito lumalabas, tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com.",
+      vi: "Vui lòng hoàn tất bước kiểm tra bảo mật. Nếu không hiển thị, hãy gọi (818) 217-5755 hoặc email loveRCFE@gmail.com.",
+      ko: "보안 확인을 완료해 주세요. 화면에 나타나지 않으면 (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 연락해 주세요.",
+      hy: "Խնդրում ենք անցնել անվտանգության ստուգումը։ Եթե այն չի երևում, զանգահարեք (818) 217-5755 կամ գրեք loveRCFE@gmail.com։",
+      ru: "Пожалуйста, пройдите проверку безопасности. Если она не отображается, позвоните (818) 217-5755 или напишите на loveRCFE@gmail.com."
+    },
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": {
+      es: "La verificación de seguridad no está disponible temporalmente. Llame al (818) 217-5755 o escriba a loveRCFE@gmail.com.",
+      zh: "安全验证暂不可用。请致电 (818) 217-5755 或发邮件至 loveRCFE@gmail.com。",
+      tl: "Pansamantalang hindi magamit ang security verification. Tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com.",
+      vi: "Xác minh bảo mật tạm thời không khả dụng. Vui lòng gọi (818) 217-5755 hoặc email loveRCFE@gmail.com.",
+      ko: "보안 인증을 일시적으로 이용할 수 없습니다. (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 문의해 주세요.",
+      hy: "Անվտանգության ստուգումը ժամանակավորապես անհասանելի է։ Զանգահարեք (818) 217-5755 կամ գրեք loveRCFE@gmail.com։",
+      ru: "Проверка безопасности временно недоступна. Позвоните (818) 217-5755 или напишите на loveRCFE@gmail.com."
     }
   };
 
@@ -4002,8 +4292,23 @@
   var changeListeners = [];
   var initialized = false;
 
+  function syncDocumentLangAttrs(code) {
+    try {
+      var html = document.documentElement;
+      if (!html) return;
+      html.lang = code;
+      if (code && code !== 'en') {
+        html.setAttribute('translate', 'no');
+        html.classList.add('notranslate');
+      } else {
+        html.setAttribute('translate', 'yes');
+        html.classList.remove('notranslate');
+      }
+    } catch (e) {}
+  }
+
   var currentLang = getSavedLang();
-  try { document.documentElement.lang = currentLang; } catch (e) {}
+  syncDocumentLangAttrs(currentLang);
 
   function getSavedLang() {
     try {
@@ -4063,8 +4368,8 @@
     });
 
     // 2. Attributes: placeholder, title, aria-label
-    var attrNames = ['placeholder', 'title', 'aria-label'];
-    var withAttrs = container.querySelectorAll ? container.querySelectorAll('[placeholder],[title],[aria-label]') : [];
+    var attrNames = ['placeholder', 'title', 'aria-label', 'alt'];
+    var withAttrs = container.querySelectorAll ? container.querySelectorAll('[placeholder],[title],[aria-label],[alt]') : [];
     withAttrs.forEach(function (el) {
       if (el.closest && el.closest('.lang-option')) return;
       var saved = origAttrMap.get(el);
@@ -4121,7 +4426,7 @@
 
   function updateHeaderControls() {
     var meta = LANGUAGES[currentLang] || LANGUAGES.en;
-    document.documentElement.lang = currentLang;
+    syncDocumentLangAttrs(currentLang);
 
     document.querySelectorAll('.lang-current-code').forEach(function (el) {
       el.textContent = meta.code;

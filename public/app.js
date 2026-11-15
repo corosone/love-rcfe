@@ -164,7 +164,7 @@
       independent: 'Independent or minimal help', assist: 'Help with bathing, dressing, or transfers', total: 'Bedridden or total care',
       immediate: 'Immediate (1-7 days)', soon: 'Next 30-60 days', research: 'Future research'
     };
-    const answerLabel = key => ANSWER_LABELS[key] || 'Not answered';
+    const answerLabel = key => t(ANSWER_LABELS[key] || 'Not answered');
 
     function selectInquiryType(text) {
       document.querySelectorAll('input[name="inquiry_type"]').forEach(radio => {
@@ -243,7 +243,7 @@
         if (res.status >= 400 && res.status < 500) {
           return {
             ok: false,
-            validationError: data.error || t('Please check the highlighted fields.'),
+            validationError: data.error ? t(data.error) : t('Please check the highlighted fields.'),
             reason: 'validation'
           };
         }
@@ -649,7 +649,10 @@
       
       const messageField = document.getElementById('message');
       if (messageField) {
-        messageField.value = `Hello Love RCFE Team,\n\nI calculated my family's monthly elder care budget using your calculator at approximately ${formatted}/month.\n\nPlease provide vetted licensed residential care facility (RCFE) recommendations and cost breakdown options that fit within this budget.`;
+        messageField.value = t(
+          "Hello Love RCFE Team,\n\nI calculated my family's monthly elder care budget using your calculator at approximately {amount}/month.\n\nPlease provide vetted licensed residential care facility (RCFE) recommendations and cost breakdown options that fit within this budget.",
+          { amount: formatted }
+        );
       }
       selectInquiryType('Family Care');
       openView('contact');
@@ -883,7 +886,15 @@
 
       const messageField = document.getElementById('message');
       if (messageField) {
-        messageField.value = `Hello Love RCFE Team,\n\nI used your cost calculator and would like personalized recommendations for care:\n• Region: ${regionText}\n• Care Level: ${careText}\n• Room Preference: ${roomType === 'private' ? 'Private Room' : 'Shared / Semi-Private'}\n• Estimated Monthly Budget: ${range}\n\nPlease reach out to me with vetted licensed care facilities that match this criteria.`;
+        messageField.value = t(
+          "Hello Love RCFE Team,\n\nI used your cost calculator and would like personalized recommendations for care:\n• Region: {region}\n• Care Level: {care}\n• Room Preference: {room}\n• Estimated Monthly Budget: {range}\n\nPlease reach out to me with vetted licensed care facilities that match this criteria.",
+          {
+            region: regionText,
+            care: careText,
+            room: t(roomType === 'private' ? 'Private Room' : 'Shared / Semi-Private'),
+            range
+          }
+        );
       }
 
       selectInquiryType('Family Care');
@@ -1039,10 +1050,19 @@
     }
 
     function prefillContactFromQuiz() {
-      const title = document.getElementById('result-title')?.textContent || 'Residential Care';
+      const title = document.getElementById('result-title')?.textContent || t('Residential Care');
       const messageField = document.getElementById('message');
       if (messageField) {
-        messageField.value = `Hello Love RCFE Advisory Team,\n\nI completed your Care Level Assessment and received the following recommendation:\n• Target Care Setting: ${title}\n• Exploring care for: ${answerLabel(quizState[1])}\n• Cognitive status: ${answerLabel(quizState[2])}\n• Physical ADL needs: ${answerLabel(quizState[3])}\n• Placement Timeframe: ${answerLabel(quizState[4])}\n\nPlease contact me with licensed facility openings and touring support.`;
+        messageField.value = t(
+          "Hello Love RCFE Advisory Team,\n\nI completed your Care Level Assessment and received the following recommendation:\n• Target Care Setting: {title}\n• Exploring care for: {recipient}\n• Cognitive status: {memory}\n• Physical ADL needs: {adl}\n• Placement Timeframe: {timeline}\n\nPlease contact me with licensed facility openings and touring support.",
+          {
+            title,
+            recipient: answerLabel(quizState[1]),
+            memory: answerLabel(quizState[2]),
+            adl: answerLabel(quizState[3]),
+            timeline: answerLabel(quizState[4])
+          }
+        );
       }
       selectInquiryType('Family Care');
       openView('contact');
@@ -1282,10 +1302,19 @@
     }
 
     function prefillContactFromModalQuiz() {
-      const recTitle = (modalQuizState.lastRec && modalQuizState.lastRec.recTitle) || 'Personalized Residential Care';
+      const recTitle = (modalQuizState.lastRec && modalQuizState.lastRec.recTitle) || t('Personalized Residential Care');
       const messageField = document.getElementById('message');
       if (messageField) {
-        messageField.value = `Hello Love RCFE Advisory Team,\n\nI completed your Care Assessment Wizard and received the following custom match:\n• Recommended Setting: ${recTitle}\n• Care recipient: ${answerLabel(modalQuizState.answers[1])}\n• Memory status: ${answerLabel(modalQuizState.answers[2])}\n• Physical ADL needs: ${answerLabel(modalQuizState.answers[3])}\n• Timeframe: ${answerLabel(modalQuizState.answers[4])}\n\nPlease reach out with verified California licensed facilities in my area.`;
+        messageField.value = t(
+          "Hello Love RCFE Advisory Team,\n\nI completed your Care Assessment Wizard and received the following custom match:\n• Recommended Setting: {title}\n• Care recipient: {recipient}\n• Memory status: {memory}\n• Physical ADL needs: {adl}\n• Timeframe: {timeline}\n\nPlease reach out with verified California licensed facilities in my area.",
+          {
+            title: recTitle,
+            recipient: answerLabel(modalQuizState.answers[1]),
+            memory: answerLabel(modalQuizState.answers[2]),
+            adl: answerLabel(modalQuizState.answers[3]),
+            timeline: answerLabel(modalQuizState.answers[4])
+          }
+        );
       }
       selectInquiryType('Family Care');
       openView('contact');
@@ -1616,6 +1645,18 @@
         const callModal = document.getElementById('call-modal');
         if (callModal && !callModal.classList.contains('hidden')) {
           updateCallStatus();
+        }
+        const calcWidget = document.getElementById('neon-calculator-widget');
+        const calcBtn = document.getElementById('toggle-neon-calc-btn');
+        if (calcWidget && calcBtn) {
+          const isCalcOpen = !calcWidget.classList.contains('hidden');
+          calcBtn.setAttribute('aria-label', t(isCalcOpen ? 'Hide calculator' : 'Open calculator'));
+          calcBtn.title = t(isCalcOpen ? 'Hide the budget calculator' : 'Open the budget calculator');
+        }
+        if (!window.turnstile) {
+          document.querySelectorAll('.cf-ts p').forEach(p => {
+            p.textContent = t('The security check could not load. Please turn off ad blockers for this site, or call (818) 217-5755 or email loveRCFE@gmail.com.');
+          });
         }
       });
       // Sync localized title and dynamic JS widgets on initial load
