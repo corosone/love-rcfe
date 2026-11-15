@@ -21,7 +21,7 @@
   try {
     var qLang = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
     var sLang = qLang || localStorage.getItem('lovercfe_lang') || 'en';
-    if (/^(en|es|zh|tl|vi|ko|hy|ru|ar)$/.test(sLang) && sLang !== 'en') {
+    if (/^(en|es|zh|tl|vi|ko|hy|ru|ar|fa|hi|pa|ja|uk|he|km|fr|pt)$/.test(sLang) && sLang !== 'en') {
       document.documentElement.lang = sLang;
       document.documentElement.setAttribute('translate', 'no');
       document.documentElement.classList.add('notranslate');

@@ -12,7 +12,16 @@
     ko: { code: 'KO', name: '한국어', intl: 'ko-KR' },
     hy: { code: 'ARM', name: 'Հայերեն', intl: 'hy-AM' },
     ru: { code: 'RU', name: 'Русский', intl: 'ru-RU' },
-    ar: { code: 'AR', name: 'العربية', intl: 'ar-US' }
+    ar: { code: 'AR', name: 'العربية', intl: 'ar-US' },
+    fa: { code: 'FA', name: 'فارسی', intl: 'fa-IR' },
+    hi: { code: 'HI', name: 'हिन्दी', intl: 'hi-IN' },
+    pa: { code: 'PA', name: 'ਪੰਜਾਬੀ', intl: 'pa-IN' },
+    ja: { code: 'JA', name: '日本語', intl: 'ja-JP' },
+    uk: { code: 'UK', name: 'Українська', intl: 'uk-UA' },
+    he: { code: 'HE', name: 'עברית', intl: 'he-IL' },
+    km: { code: 'KM', name: 'ខ្មែរ', intl: 'km-KH' },
+    fr: { code: 'FR', name: 'Français', intl: 'fr-FR' },
+    pt: { code: 'PT', name: 'Português', intl: 'pt-BR' }
   };
 
   // Multi-tag HTML blocks (keyed by data-i18n-block) so inline markup & word order translate naturally.
@@ -25,7 +34,16 @@
       ko: '조금 더 선명한 안내.<br><span class="italic text-brand-green font-normal">훨씬 더 깊은 돌봄.</span>',
       hy: 'Ավելի շատ հստակություն։<br><span class="italic text-brand-green font-normal">Ավելի շատ հոգատարություն։</span>',
       ru: 'Больше ясности.<br><span class="italic text-brand-green font-normal">Больше заботы.</span>',
-      ar: 'وضوح أكثر قليلاً.<br><span class="italic text-brand-green font-normal">ورعاية أكبر بكثير.</span>'
+      ar: 'وضوح أكثر قليلاً.<br><span class="italic text-brand-green font-normal">ورعاية أكبر بكثير.</span>',
+      fa: 'کمی شفافیت بیشتر.<br> <span class="italic text-brand-green font-normal">مراقبتی بسیار صمیمانه‌تر.</span>',
+      hi: 'थोड़ी अधिक स्पष्टता।<br> <span class="italic text-brand-green font-normal">कहीं अधिक देखभाल।</span>',
+      pa: 'ਥੋੜ੍ਹੀ ਹੋਰ ਸਪੱਸ਼ਟਤਾ।<br> <span class="italic text-brand-green font-normal">ਬਹੁਤ ਜ਼ਿਆਦਾ ਦੇਖਭਾਲ।</span>',
+      ja: 'もう少しの明快さを。<br><span class="italic text-brand-green font-normal">もっと深い思いやりを。</span>',
+      uk: 'Трохи більше ясності.<br> <span class="italic text-brand-green font-normal">Набагато більше турботи.</span>',
+      he: 'קצת יותר בהירות.<br> <span class="italic text-brand-green font-normal">הרבה יותר דאגה ומסירות.</span>',
+      km: 'ភាពច្បាស់លាស់កាន់តែច្រើន។<br> <span class="italic text-brand-green font-normal">ការយកចិត្តទុកដាក់កាន់តែខ្លាំង។</span>',
+      fr: 'Un peu plus de clarté.<br> <span class="italic text-brand-green font-normal">Beaucoup plus de bienveillance.</span>',
+      pt: 'Um pouco mais de clareza.<br> <span class="italic text-brand-green font-normal">Muito mais cuidado.</span>'
     },
     va_subsidy_note: {
       es: '<strong>Posible subsidio financiero (tarifas VA 2025–2026):</strong> Los veteranos solteros que califiquen pueden recibir hasta <strong>$2,431/mes</strong> (o hasta <strong>$2,881/mes</strong> con cónyuge dependiente, y hasta <strong>$1,563/mes</strong> para cónyuges sobrevivientes) mediante los beneficios de pensión VA Aid &amp; Attendance para cubrir costos mensuales de un RCFE.',
@@ -35,7 +53,16 @@
       ko: '<strong>재정 지원 가능액 (2025–2026년 VA 기준):</strong> 자격을 갖춘 독신 퇴역군인은 월 최대 <strong>$2,431</strong>(부양 배우자가 있는 경우 최대 <strong>$2,881</strong>, 생존 배우자는 최대 <strong>$1,563</strong>)까지 VA Aid &amp; Attendance 연금 혜택을 받아 RCFE 월 비용 부담을 줄일 수 있습니다.',
       hy: '<strong>Հնարավոր ֆինանսական աջակցություն (2025–2026 թթ. VA դրույքաչափեր)․</strong> Որակավորված միայնակ վետերանները կարող են ստանալ ամսական մինչև <strong>$2,431/ամիս</strong> (կամ մինչև <strong>$2,881/ամիս</strong>՝ կախյալ ամուսնու առկայության դեպքում, և մինչև <strong>$1,563/ամիս</strong>՝ վերապրած ամուսինների համար) VA Aid &amp; Attendance կենսաթոշակային ծրագրով՝ RCFE ամսական ծախսերը փոխհատուցելու համար։',
       ru: '<strong>Возможная финансовая субсидия (ставки VA 2025–2026 гг.):</strong> Соответствующие требованиям одинокие ветераны могут получать до <strong>$2,431/мес</strong> (или до <strong>$2,881/мес</strong> при наличии иждивенца-супруга, и до <strong>$1,563/мес</strong> для вдов/вдовцов) по программе VA Aid &amp; Attendance для оплаты ежемесячного проживания в RCFE.',
-      ar: '<strong>إمكانية الدعم المالي (معدلات VA لعام 2025–2026):</strong> يمكن للمحاربين القدامى العزاب المؤهلين الحصول على ما يصل إلى <strong>$2,431/شهر</strong> (أو حتى <strong>$2,881/شهر</strong> مع زوج معال، وحتى <strong>$1,563/شهر</strong> للأزواج الباقين على قيد الحياة) عبر معاش VA Aid &amp; Attendance لتغطية التكاليف الشهرية لدار الرعاية (RCFE).'
+      ar: '<strong>إمكانية الدعم المالي (معدلات VA لعام 2025–2026):</strong> يمكن للمحاربين القدامى العزاب المؤهلين الحصول على ما يصل إلى <strong>$2,431/شهر</strong> (أو حتى <strong>$2,881/شهر</strong> مع زوج معال، وحتى <strong>$1,563/شهر</strong> للأزواج الباقين على قيد الحياة) عبر معاش VA Aid &amp; Attendance لتغطية التكاليف الشهرية لدار الرعاية (RCFE).',
+      fa: '<strong>امکان دریافت کمک‌هزینه مالی (نرخ‌های ۲۰۲۵–۲۰۲۶ اداره امور کهنه‌سربازان VA):</strong> کهنه‌سربازان مجرد واجد شرایط می‌توانند تا <strong>۲٬۴۳۱ دلار در ماه</strong> (یا تا <strong>۲٬۸۸۱ دلار در ماه</strong> با همسر تحت تکفل، و تا <strong>۱٬۵۶۳ دلار در ماه</strong> برای همسران بازمانده) از طریق مزایای مستمری VA Aid &amp; Attendance برای جبران هزینه‌های ماهانه RCFE دریافت کنند.',
+      hi: '<strong>वित्तीय सहायता की संभावना (2025–2026 VA दरें):</strong> पात्र एकल पूर्व सैनिक (Veterans) मासिक RCFE खर्चों की भरपाई के लिए VA Aid &amp; Attendance पेंशन लाभों के माध्यम से <strong>$2,431/माह</strong> तक (या आश्रित जीवनसाथी के साथ <strong>$2,881/माह</strong> तक, और जीवित जीवनसाथी के लिए <strong>$1,563/माह</strong> तक) प्राप्त कर सकते हैं।',
+      pa: '<strong>ਵਿੱਤੀ ਸਹਾਇਤਾ ਦੀ ਸੰਭਾਵਨਾ (2025–2026 VA ਦਰਾਂ):</strong> ਯੋਗ ਇਕੱਲੇ ਸਾਬਕਾ ਫ਼ੌਜੀ (Veterans) ਆਪਣੇ ਮਹੀਨਾਵਾਰ RCFE ਖਰਚਿਆਂ ਨੂੰ ਘਟਾਉਣ ਲਈ VA Aid &amp; Attendance ਪੈਨਸ਼ਨ ਲਾਭਾਂ ਰਾਹੀਂ <strong>$2,431/ਮਹੀਨਾ</strong> ਤੱਕ (ਜਾਂ ਨਿਰਭਰ ਜੀਵਨ-ਸਾਥੀ ਸਮੇਤ <strong>$2,881/ਮਹੀਨਾ</strong> ਤੱਕ, ਅਤੇ ਜੀਵਤ ਬਚੇ ਜੀਵਨ-ਸਾਥੀ ਲਈ <strong>$1,563/ਮਹੀਨਾ</strong> ਤੱਕ) ਪ੍ਰਾਪਤ ਕਰ ਸਕਦੇ ਹਨ।',
+      ja: '<strong>経済的支援の可能性（2025〜2026年 VA 支給基準）：</strong> 条件を満たす単身の退役軍人の方は、月額最大 <strong>$2,431/月</strong>（扶養配偶者がいる場合は最大 <strong>$2,881/月</strong>、遺族配偶者の場合は最大 <strong>$1,563/月</strong>）を VA Aid &amp; Attendance 年金給付として受給し、RCFE の月額費用に充てることができます。',
+      uk: '<strong>Можлива фінансова субсидія (тарифи VA 2025–2026):</strong> Самотні ветерани, які відповідають вимогам, можуть отримувати до <strong>$2,431/міс</strong> (або до <strong>$2,881/міс</strong> із чоловіком/дружиною на утриманні та до <strong>$1,563/міс</strong> для вдів/удівців) за програмою пенсійних виплат VA Aid &amp; Attendance для компенсації щомісячних витрат на RCFE.',
+      he: '<strong>פוטנציאל לסבסוד כספי (תעריפי VA לשנים 2025–2026):</strong> יוצאי צבא ארה"ב (Veterans) יחידים העומדים בתנאי הזכאות יכולים לקבל עד <strong>$2,431 לחודש</strong> (או עד <strong>$2,881 לחודש</strong> עם בן/בת זוג תלוי/ה, ועד <strong>$1,563 לחודש</strong> לבני זוג אלמנים/ות) באמצעות קצבת VA Aid &amp; Attendance לקיזוז העלויות החודשיות של RCFE.',
+      km: '<strong>សក្តានុពលប្រាក់ឧបត្ថម្ភហិរញ្ញវត្ថុ (អត្រា VA ឆ្នាំ 2025–2026)៖</strong> អតីតយុទ្ធជននៅលីវដែលមានសិទ្ធិអាចទទួលបានរហូតដល់ <strong>$2,431/ខែ</strong> (ឬរហូតដល់ <strong>$2,881/ខែ</strong> ជាមួយសហព័ទ្ធក្នុងបន្ទុក និងរហូតដល់ <strong>$1,563/ខែ</strong> សម្រាប់សហព័ទ្ធដែលនៅរស់) តាមរយៈអត្ថប្រយោជន៍សោធននិវត្តន៍ VA Aid &amp; Attendance ដើម្បីជួយបន្ថយថ្លៃចំណាយប្រចាំខែរបស់ RCFE។',
+      fr: '<strong>Potentiel d\'aide financière (barèmes VA 2025–2026) :</strong> Les anciens combattants célibataires éligibles peuvent recevoir jusqu\'à <strong>2 431 $/mois</strong> (ou jusqu\'à <strong>2 881 $/mois</strong> avec un conjoint à charge, et jusqu\'à <strong>1 563 $/mois</strong> pour les conjoints survivants) grâce à l\'allocation de retraite VA Aid &amp; Attendance afin d\'alléger le coût mensuel d\'un RCFE.',
+      pt: '<strong>Potencial de Subsídio Financeiro (Valores VA 2025–2026):</strong> Veteranos solteiros elegíveis podem receber até <strong>$2,431/mês</strong> (ou até <strong>$2,881/mês</strong> com cônjuge dependente, e até <strong>$1,563/mês</strong> para cônjuges sobreviventes) por meio dos benefícios de pensão VA Aid &amp; Attendance para ajudar a cobrir os custos mensais de um RCFE.'
     },
     urgent_notice_p: {
       es: 'Con un plazo de transición de 1 a 7 días, las camas inmediatas y evaluaciones médicas (LIC 602A) requieren trámite urgente. Llame directamente a nuestro equipo de admisión prioritaria al <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> para vacantes hoy mismo.',
@@ -45,7 +72,16 @@
       ko: '1~7일 이내의 긴급 전환 일정인 경우 즉시 입소 가능한 병상과 의사 평가서(LIC 602A)를 신속히 진행해야 합니다. 당일 공실 확인을 위해 우선 접수 팀 <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> 으로 바로 전화해 주세요.',
       hy: '1–7 օրվա անհետաձգելի ժամկետի դեպքում անհապաղ տեղավորումը և բժշկական գնահատումները (LIC 602A) պահանջում են շտապ ձևակերպում։ Անմիջապես զանգահարեք մեր առաջնահերթ ընդունման թիմին՝ <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a>, նույն օրվա ազատ տեղերի համար։',
       ru: 'При срочном переезде в течение 1–7 дней требуется оперативный подбор места и медицинского заключения (LIC 602A). Позвоните напрямую в нашу службу приоритетного приема по номеру <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a>, чтобы узнать о свободных местах на сегодня.',
-      ar: 'مع نافذة انتقال عاجلة من 1 إلى 7 أيام، تتطلب الأسرّة الفورية والتقييمات الطبية (LIC 602A) إجراءات سريعة. اتصل مباشرة بفريق القبول ذي الأولوية لدينا على <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> لمعرفة الأماكن الشاغرة اليوم.'
+      ar: 'مع نافذة انتقال عاجلة من 1 إلى 7 أيام، تتطلب الأسرّة الفورية والتقييمات الطبية (LIC 602A) إجراءات سريعة. اتصل مباشرة بفريق القبول ذي الأولوية لدينا على <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> لمعرفة الأماكن الشاغرة اليوم.',
+      fa: 'در بازه انتقال ۱ تا ۷ روزه، یافتن تخت فوری و ارزیابی پزشک (LIC 602A) نیازمند پیگیری سریع است. برای اطلاع از ظرفیت‌های خالی در همان روز، مستقیماً با تیم پذیرش فوری ما به شماره <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> تماس بگیرید.',
+      hi: '1–7 दिनों की त्वरित समय-सीमा में, तत्काल उपलब्ध बेड और चिकित्सक मूल्यांकन (LIC 602A) की प्रक्रिया को तेज़ी से पूरा करना आवश्यक होता है। उसी दिन उपलब्ध स्थान जानने के लिए सीधे हमारी प्राथमिकता प्रवेश टीम को <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> पर कॉल करें।',
+      pa: '1–7 ਦਿਨਾਂ ਦੇ ਤੁਰੰਤ ਬਦਲਾਅ ਦੇ ਸਮੇਂ ਵਿੱਚ, ਤਤਕਾਲ ਬੈੱਡਾਂ ਅਤੇ ਡਾਕਟਰੀ ਮੁਲਾਂਕਣ (LIC 602A) ਲਈ ਫ਼ੌਰੀ ਕਾਰਵਾਈ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। ਅੱਜ ਹੀ ਉਪਲਬਧ ਥਾਵਾਂ ਲਈ ਸਾਡੀ ਤਰਜੀਹੀ ਦਾਖ਼ਲਾ ਟੀਮ ਨੂੰ ਸਿੱਧਾ <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> ਉੱਤੇ ਕਾਲ ਕਰੋ।',
+      ja: '1〜7日以内の緊急転居・退院の場合、即時入居可能な空きベッドの手配および医師評価書（LIC 602A）の迅速な対応が必要です。当日の空き状況については、優先受付窓口 <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> まで直接お電話ください。',
+      uk: 'При терміні переходу 1–7 днів вільні місця та медичні оцінки (LIC 602A) потребують прискореного оформлення. Зателефонуйте безпосередньо нашій команді пріоритетного прийому за номером <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a>, щоб дізнатися про наявність місць уже сьогодні.',
+      he: 'בחלון מעבר של 1–7 ימים, מיטות פנויות מיידית והערכות רופא (LIC 602A) דורשות טיפול מזורז. התקשרו ישירות לצוות הקליטה הדחופה שלנו במספר <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> לקבלת מקומות פנויים עוד היום.',
+      km: 'ជាមួយនឹងរយៈពេលផ្លាស់ប្តូរពី 1 ទៅ 7 ថ្ងៃ គ្រែសម្រាកបន្ទាន់ និងការវាយតម្លៃរបស់វេជ្ជបណ្ឌិត (LIC 602A) ត្រូវការដំណើរការឆាប់រហ័ស។ សូមទូរស័ព្ទទៅក្រុមទទួលពាក្យអាទិភាពរបស់យើងដោយផ្ទាល់តាមរយៈលេខ <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> ដើម្បីស្វែងរកកន្លែងទំនេរក្នុងថ្ងៃតែមួយ។',
+      fr: 'Avec un délai de transition de 1 à 7 jours, les places immédiates et les évaluations médicales (LIC 602A) nécessitent un traitement accéléré. Appelez directement notre équipe d\'admission prioritaire au <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> pour connaître les disponibilités le jour même.',
+      pt: 'Com um prazo de transição de 1 a 7 dias, vagas imediatas e avaliações médicas (LIC 602A) exigem encaminhamento ágil. Ligue diretamente para nossa equipe de admissão prioritária no <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> para disponibilidade no mesmo dia.'
     },
     modal_urgent_p: {
       en: 'With an immediate 1–7 day timeframe, call our intake hotline at <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> for emergency openings and priority tour booking.',
@@ -56,7 +92,16 @@
       ko: '1~7일 이내의 긴급 입소 일정인 경우 긴급 접수 직통 <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> 으로 연락하시면 당일 공실과 우선 방문 일정을 안내해 드립니다.',
       hy: '1–7 օրվա անհետաձգելի ժամկետի համար զանգահարեք մեր ընդունման թեժ գիծ՝ <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a>, արտակարգ ազատ տեղերի և առաջնահերթ այցելության ամրագրման համար։',
       ru: 'При срочном размещении в течение 1–7 дней позвоните на нашу горячую линию <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> для экстренного подбора мест и приоритетного просмотра.',
-      ar: 'للحالات العاجلة خلال 1–7 أيام، اتصل بالخط الساخن للقبول على <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> للاستفسار عن الأماكن الطارئة وحجز جولة ذات أولوية.'
+      ar: 'للحالات العاجلة خلال 1–7 أيام، اتصل بالخط الساخن للقبول على <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> للاستفسار عن الأماكن الطارئة وحجز جولة ذات أولوية.',
+      fa: 'در بازه فوری ۱ تا ۷ روزه، برای ظرفیت‌های اضطراری و رزرو اولویت‌دار بازدید، با خط پذیرش ما به شماره <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> تماس بگیرید.',
+      hi: '1–7 दिनों की तत्काल समय-सीमा के लिए, आपातकालीन उपलब्धता और प्राथमिकता विज़िट बुकिंग हेतु हमारी हेल्पलाइन <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> पर कॉल करें।',
+      pa: '1–7 ਦਿਨਾਂ ਦੀ ਤੁਰੰਤ ਸਮਾਂ-ਸੀਮਾ ਦੇ ਨਾਲ, ਹੰਗਾਮੀ ਉਪਲਬਧ ਥਾਵਾਂ ਅਤੇ ਤਰਜੀਹੀ ਦੌਰੇ ਦੀ ਬੁਕਿੰਗ ਲਈ ਸਾਡੀ ਦਾਖ਼ਲਾ ਹੈਲਪਲਾਈਨ <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> ਉੱਤੇ ਕਾਲ ਕਰੋ।',
+      ja: '1〜7日以内の緊急のご入居には、受付直通ダイヤル <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> までお電話ください。緊急の空き状況のご案内と優先見学のご予約を承ります。',
+      uk: 'При невідкладному терміні 1–7 днів зателефонуйте на нашу гарячу лінію за номером <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> для термінового підбору місць і пріоритетного запису на огляд.',
+      he: 'בלוח זמנים מיידי של 1–7 ימים, התקשרו לקו החם לקליטה דחופה במספר <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> לקבלת מקומות חירום ותיאום סיור בעדיפות עליונה.',
+      km: 'ជាមួយនឹងរយៈពេលបន្ទាន់ពី 1 ទៅ 7 ថ្ងៃ សូមទូរស័ព្ទទៅខ្សែទូរស័ព្ទទទួលពាក្យបន្ទាន់របស់យើងតាមរយៈលេខ <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> សម្រាប់កន្លែងទំនេរបន្ទាន់ និងការកក់ទស្សនកិច្ចអាទិភាព។',
+      fr: 'Avec un délai immédiat de 1 à 7 jours, appelez notre ligne d\'admission au <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> pour les places d\'urgence et la réservation prioritaire de visites.',
+      pt: 'Com um prazo imediato de 1 a 7 dias, ligue para nossa linha de admissão no <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> para vagas de emergência e agendamento prioritário de visitas.'
     },
     faq1_body: {
       es: 'Un <strong>RCFE (Centro Residencial para Adultos Mayores)</strong>—a menudo llamado comunidad de vivienda asistida o casa de cuidado residencial (Board &amp; Care) de 6 camas—está diseñado para personas mayores que necesitan ayuda con sus actividades diarias (alimentación, baño, vestirse, control de medicamentos) en un entorno cálido y hogareño. <br><br>Un <strong>Centro de Enfermería Especializada (SNF)</strong> es una institución médica similar a un hospital que brinda atención de enfermería con licencia las 24 horas, terapia intravenosa y cuidado de heridas agudas. Muchas familias eligen un RCFE con exención de hospicio para que sus seres queridos envejezcan en un hogar sin tener que mudarse a un asilo institucional.',
@@ -66,7 +111,16 @@
       ko: '<strong>RCFE(노인 주거 돌봄 시설)</strong>는 흔히 어시스티드 리빙 커뮤니티 또는 6인실 주거형 요양홈(Board &amp; Care)으로 불리며, 식사·목욕·옷 입기·복약 관리 등 일상생활 지원이 필요한 어르신들이 따뜻하고 가정적인 환경에서 지내실 수 있도록 마련된 곳입니다.<br><br>반면 <strong>전문간호요양시설(SNF)</strong>은 24시간 면허 간호사의 의료 돌봄, 수액 치료, 급성 상처 치료를 제공하는 병원형 의료 기관입니다. 많은 가족들이 호스피스 면제(Hospice Waiver) 승인을 받은 RCFE를 선택해 어르신이 대형 요양병원으로 옮기지 않고도 편안히 노후를 보내실 수 있도록 돕습니다.',
       hy: '<strong>RCFE-ն (Տարեցների բնակելի խնամքի հաստատություն)</strong>՝ որը հաճախ անվանում են օժանդակ բնակության համայնք կամ 6 տեղանոց տնային խնամքի տուն (Board &amp; Care), նախատեսված է այն տարեցների համար, ովքեր առօրյա գործողություններում (սնվելու, լողանալու, հագնվելու, դեղերի ընդունման) օգնության կարիք ունեն՝ ջերմ, տնային միջավայրում։ <br><br><strong>Մասնագիտացված բուժքույրական հաստատությունը (SNF)</strong> հիվանդանոցի տիպի բժշկական հաստատություն է, որն ապահովում է 24-ժամյա լիցենզավորված բուժքույրական խնամք, ներերակային թերապիա և սուր վերքերի բուժում։ Շատ ընտանիքներ ընտրում են հոսպիսային բացառում (hospice waiver) ունեցող RCFE, որպեսզի իրենց հարազատը մնա հարմարավետ տանը՝ առանց խոշոր խնամքի կենտրոն տեղափոխվելու։',
       ru: '<strong>RCFE (Учреждение проживания и ухода за пожилыми людьми)</strong> — часто называемое домом с сопровождаемым проживанием или небольшим пансионатом на 6 мест (Board &amp; Care) — предназначено для пожилых людей, которым нужна помощь в повседневной жизни (питание, купание, одевание, контроль приема лекарств) в теплой домашней обстановке. <br><br><strong>Учреждение квалифицированного сестринского ухода (SNF)</strong> — это медицинское учреждение больничного типа с круглосуточным уходом лицензированных медсестер, капельницами и лечением острых состояний. Многие семьи выбирают RCFE с разрешением на хосписный уход (hospice waiver), чтобы близкий человек мог достойно встретить старость в домашней обстановке без переезда в крупный интернат.',
-      ar: '<strong>مرفق RCFE (دار رعاية سكنية لكبار السن)</strong>—ويُعرف غالباً بمجمع المعيشة المساعدة أو دار الرعاية السكنية المنزلية المكونة من 6 أسرّة (Board &amp; Care)—مصمم لكبار السن الذين يحتاجون مساعدة في أنشطة الحياة اليومية (الوجبات، الاستحمام، ارتداء الملابس، إدارة الأدوية) ضمن بيئة دافئة تشبه المنزل. <br><br>أما <strong>مرفق التمريض الماهر (SNF)</strong> فهو منشأة طبية شبيهة بالمستشفى تقدم رعاية تمريضية مرخصة على مدار 24 ساعة وعلاجاً وريدياً ورعاية للجروح الحادة. تختار كثير من العائلات مرفق RCFE حاصلاً على إعفاء رعاية المحتضرين (Hospice Waiver) ليبقى أحباؤهم في أجواء منزلية مريحة دون الانتقال إلى دار رعاية مؤسسية.'
+      ar: '<strong>مرفق RCFE (دار رعاية سكنية لكبار السن)</strong>—ويُعرف غالباً بمجمع المعيشة المساعدة أو دار الرعاية السكنية المنزلية المكونة من 6 أسرّة (Board &amp; Care)—مصمم لكبار السن الذين يحتاجون مساعدة في أنشطة الحياة اليومية (الوجبات، الاستحمام، ارتداء الملابس، إدارة الأدوية) ضمن بيئة دافئة تشبه المنزل. <br><br>أما <strong>مرفق التمريض الماهر (SNF)</strong> فهو منشأة طبية شبيهة بالمستشفى تقدم رعاية تمريضية مرخصة على مدار 24 ساعة وعلاجاً وريدياً ورعاية للجروح الحادة. تختار كثير من العائلات مرفق RCFE حاصلاً على إعفاء رعاية المحتضرين (Hospice Waiver) ليبقى أحباؤهم في أجواء منزلية مريحة دون الانتقال إلى دار رعاية مؤسسية.',
+      fa: 'یک <strong>RCFE (مرکز مراقبت مسکونی برای سالمندان)</strong> — که اغلب به عنوان مجتمع زندگی همراه با مراقبت یا خانه مراقبت مسکونی ۶ تختخوابی (Board &amp; Care) شناخته می‌شود — برای سالمندانی طراحی شده است که در محیطی گرم و خانگی به کمک در فعالیت‌های روزمره (غذا خوردن، استحمام، لباس پوشیدن، مدیریت داروها) نیاز دارند. <br><br> یک <strong>مرکز پرستاری تخصصی (SNF)</strong> مؤسسه‌ای درمانی شبیه بیمارستان است که مراقبت‌های پرستاری مجاز ۲۴ ساعته، سرم‌تراپی (IV) و مراقبت از زخم‌های حاد را ارائه می‌دهد. بسیاری از خانواده‌ها مراکز RCFE دارای مجوز مراقبت تسکینی (Hospice Waiver) را انتخاب می‌کنند تا عزیزانشان بتوانند بدون نیاز به جابه‌جایی به آسایشگاه‌های بزرگ و رسمی، در فضایی خانگی دوران سالمندی خود را سپری کنند.',
+      hi: 'एक <strong>RCFE (Residential Care Facility for the Elderly — वरिष्ठजनों के लिए आवासीय देखभाल केंद्र)</strong>—जिसे अक्सर असिस्टेड लिविंग समुदाय या 6-बेड आवासीय Board &amp; Care कहा जाता है—उन वरिष्ठजनों के लिए बनाया गया है जिन्हें घर जैसे आत्मीय माहौल में दैनिक गतिविधियों (भोजन, स्नान, कपड़े पहनना, दवा प्रबंधन) में सहायता की आवश्यकता होती है। <br><br> एक <strong>Skilled Nursing Facility (SNF — कुशल नर्सिंग केंद्र)</strong> अस्पताल जैसा चिकित्सा संस्थान होता है जहाँ 24 घंटे लाइसेंस प्राप्त नर्सिंग देखभाल, IV थेरेपी और गंभीर घावों का उपचार प्रदान किया जाता है। कई परिवार हॉस्पिस वेवर वाले RCFE को चुनते हैं ताकि उनके प्रियजन किसी बड़े संस्थागत नर्सिंग होम में जाए बिना अपने परिचित माहौल में ही सम्मानपूर्वक उम्र बिता सकें।',
+      pa: 'ਇੱਕ <strong>RCFE (ਬਜ਼ੁਰਗਾਂ ਲਈ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਕੇਂਦਰ)</strong>—ਜਿਸ ਨੂੰ ਅਕਸਰ ਅਸਿਸਟਡ ਲਿਵਿੰਗ ਕਮਿਊਨਿਟੀ ਜਾਂ 6-ਬੈੱਡ ਵਾਲਾ ਰਿਹਾਇਸ਼ੀ ਬੋਰਡ ਐਂਡ ਕੇਅਰ (Board &amp; Care) ਘਰ ਕਿਹਾ ਜਾਂਦਾ ਹੈ—ਉਨ੍ਹਾਂ ਬਜ਼ੁਰਗਾਂ ਲਈ ਬਣਾਇਆ ਗਿਆ ਹੈ ਜਿਨ੍ਹਾਂ ਨੂੰ ਘਰ ਵਰਗੇ ਨਿੱਘੇ ਮਾਹੌਲ ਵਿੱਚ ਰੋਜ਼ਾਨਾ ਦੇ ਕੰਮਾਂ (ਖਾਣਾ ਖਾਣ, ਨਹਾਉਣ, ਕੱਪੜੇ ਪਾਉਣ, ਦਵਾਈਆਂ ਦੀ ਸੰਭਾਲ) ਵਿੱਚ ਮਦਦ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। <br><br> ਇੱਕ <strong>ਸਕਿਲਡ ਨਰਸਿੰਗ ਫੈਸਿਲਿਟੀ (SNF)</strong> ਹਸਪਤਾਲ ਵਰਗੀ ਇੱਕ ਡਾਕਟਰੀ ਸੰਸਥਾ ਹੁੰਦੀ ਹੈ ਜੋ 24 ਘੰਟੇ ਲਾਇਸੰਸਸ਼ੁਦਾ ਨਰਸਿੰਗ ਦੇਖਭਾਲ, IV ਥੈਰੇਪੀ ਅਤੇ ਗੰਭੀਰ ਜ਼ਖ਼ਮਾਂ ਦੀ ਦੇਖਭਾਲ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ। ਬਹੁਤ ਸਾਰੇ ਪਰਿਵਾਰ ਹੌਸਪਿਸ ਛੋਟ (Hospice Waiver) ਵਾਲੇ RCFE ਦੀ ਚੋਣ ਕਰਦੇ ਹਨ ਤਾਂ ਜੋ ਉਨ੍ਹਾਂ ਦੇ ਪਿਆਰੇ ਕਿਸੇ ਵੱਡੇ ਨਰਸਿੰਗ ਹੋਮ ਵਿੱਚ ਜਾਣ ਤੋਂ ਬਿਨਾਂ ਘਰੇਲੂ ਮਾਹੌਲ ਵਿੱਚ ਹੀ ਆਪਣਾ ਬੁਢਾਪਾ ਆਰਾਮ ਨਾਲ ਬਿਤਾ ਸਕਣ।',
+      ja: '<strong>RCFE（高齢者居住型ケア施設）</strong>は、アシステッド・リビングや6床の少人数制ホーム（Board &amp; Care）とも呼ばれ、食事・入浴・着替え・服薬管理といった日常生活のサポートを必要とするご高齢者が、温かく家庭的な環境で暮らせるように設計された施設です。<br><br>一方、<strong>SNF（高度看護介護施設）</strong>は病院に近い医療機関であり、資格を持つ看護師による24時間体制の医療ケア、点滴治療、急性期の創傷ケアなどを提供します。多くのご家族は、大切な方が大規模な療養施設へ転居することなく住み慣れた温かい環境で穏やかに歳を重ねられるよう、ホスピス特例承認（Hospice Waiver）を持つ RCFE を選ばれています。',
+      uk: '<strong>RCFE (Residential Care Facility for the Elderly — Житловий заклад догляду за людьми похилого віку)</strong>, який часто називають спільнотою супроводжуваного проживання або сімейним будинком догляду на 6 ліжок (Board &amp; Care), призначений для людей похилого віку, які потребують допомоги в щоденних справах (харчування, купання, одягання, контроль прийому ліків) у теплій домашній атмосфері. <br><br> <strong>Заклад кваліфікованого медсестринського догляду (SNF)</strong> — це медична установа лікарняного типу, що забезпечує цілодобовий ліцензований медсестринський догляд, внутрішньовенну терапію та лікування складних ран. Багато родин обирають RCFE із дозволом на хоспісний супровід (hospice waiver), щоб їхні близькі могли гідно жити в затишку без переїзду до лікарняного інтернату.',
+      he: '<strong>RCFE (Residential Care Facility for the Elderly — מעון טיפולי למבוגרים)</strong>, המכונה לעיתים קהילת דיור מוגן או בית טיפולי אינטימי של 6 מיטות (Board &amp; Care), מיועד לאזרחים ותיקים הזקוקים לעזרה בפעולות היומיום (אכילה, רחצה, לבוש וניהול תרופות) בסביבה חמה וביתית. <br><br> <strong>מוסד סיעודי מיומן (SNF)</strong> הוא מוסד רפואי דמוי בית חולים המספק טיפול סיעודי מוסמך 24 שעות ביממה, עירויים תוך-ורידיים וטיפול בפצעים מורכבים. משפחות רבות בוחרות ב-RCFE עם אישור הוספיס (Hospice Waiver), כדי שיקיריהן יוכלו להזדקן בכבוד בבית חם מבלי לעבור למוסד סיעודי גדול.',
+      km: '<strong>RCFE (មណ្ឌលថែទាំស្នាក់នៅសម្រាប់មនុស្សចាស់)</strong>—ដែលជារឿយៗត្រូវបានគេហៅថាសហគមន៍រស់នៅដោយមានជំនួយ ឬផ្ទះថែទាំស្នាក់នៅខ្នាត 6 គ្រែ (Board &amp; Care)—ត្រូវបានរៀបចំឡើងសម្រាប់មនុស្សចាស់ដែលត្រូវការជំនួយក្នុងសកម្មភាពប្រចាំថ្ងៃ (ការញ៉ាំអាហារ ការងូតទឹក ការស្លៀកពាក់ ការគ្រប់គ្រងថ្នាំពេទ្យ) ក្នុងបរិយាកាសកក់ក្តៅដូចនៅផ្ទះ។ <br><br> ចំណែកឯ <strong>មណ្ឌលគិលានុបដ្ឋាយិកាជំនាញ (SNF)</strong> គឺជាស្ថាប័នវេជ្ជសាស្ត្រដូចមន្ទីរពេទ្យ ដែលផ្តល់សេវាថែទាំគិលានុបដ្ឋាយិកាមានអាជ្ញាប័ណ្ណ 24 ម៉ោង ការព្យាបាលដោយចាក់សរសៃ IV និងការថែទាំរបួសធ្ងន់ធ្ងរ។ គ្រួសារជាច្រើនជ្រើសរើស RCFE ដែលមានការលើកលែងសម្រាប់ការថែទាំដំណាក់កាលចុងក្រោយ (Hospice Waiver) ដើម្បីឱ្យមនុស្សជាទីស្រឡាញ់អាចរស់នៅប្រកបដោយភាពសុខសាន្តដោយមិនចាំបាច់ផ្លាស់ប្តូរទៅមណ្ឌលថែទាំបែបស្ថាប័នធំឡើយ។',
+      fr: 'Un <strong>RCFE (Residential Care Facility for the Elderly — établissement résidentiel de soins pour personnes âgées)</strong>, souvent appelé résidence avec services ou foyer résidentiel de 6 lits (Board &amp; Care), est conçu pour les aînés ayant besoin d\'aide pour les gestes du quotidien (repas, toilette, habillage, gestion des médicaments) dans un cadre chaleureux et familial. <br><br> Un <strong>Skilled Nursing Facility (SNF — établissement de soins infirmiers spécialisés)</strong> est une structure médicalisée de type hospitalier offrant des soins infirmiers diplômés 24 h/24, des perfusions intraveineuses et des soins de plaies complexes. De nombreuses familles choisissent un RCFE doté d\'une dérogation pour soins palliatifs (Hospice Waiver) afin que leur proche puisse vieillir sur place sans jamais intégrer un établissement médicalisé institutionnel.',
+      pt: 'Um <strong>RCFE (Residential Care Facility for the Elderly — Residencial de Cuidados para Idosos)</strong>—frequentemente chamado de comunidade de vida assistida ou casa residencial de cuidados para 6 residentes (Board &amp; Care)—foi projetado para idosos que precisam de apoio nas atividades diárias (alimentação, banho, vestir-se, controle de medicamentos) em um ambiente acolhedor e familiar. <br><br> Uma <strong>Skilled Nursing Facility (SNF — Instituição de Enfermagem Especializada)</strong> é uma instituição médica semelhante a um hospital que oferece cuidados de enfermagem licenciados 24 horas por dia, terapia intravenosa e tratamento de feridas agudas. Muitas famílias optam por RCFEs com isenção para cuidados paliativos (hospice waiver) para que seus entes queridos possam envelhecer com tranquilidade em um lar, sem precisar se mudar para um asilo institucional.'
     },
     faq2_body: {
       es: '<strong>Medicare regular no cubre</strong> el alojamiento y comida en un RCFE (solo cubre consultas médicas, hospitalizaciones y rehabilitación especializada a corto plazo). <br><br>Sin embargo, en California, el programa <strong>Exención de Vivienda Asistida de Medi-Cal (ALW)</strong> puede cubrir la parte del cuidado en centros certificados para personas de bajos ingresos que califiquen. Además, la pensión de Veterans Aid &amp; Attendance y las pólizas de Seguro de Cuidado a Largo Plazo ayudan con frecuencia a compensar los costos. Ayudamos a las familias a evaluar estas opciones.',
@@ -76,7 +130,16 @@
       ko: '일반 <strong>메디케어(Medicare)는 RCFE의 숙식 비용을 지원하지 않습니다</strong>(의사 진료, 입원, 단기 전문 재활 치료만 보장). <br><br>하지만 캘리포니아에서는 자격을 갖춘 저소득층의 경우 <strong>Medi-Cal 보조생활 면제 프로그램(ALW)</strong>을 통해 인증 시설의 돌봄 비용 일부를 지원받을 수 있습니다. 또한 보훈처 Aid &amp; Attendance 연금과 장기요양보험(LTC)도 비용 부담을 크게 덜어줍니다. 저희가 가족분들께 적합한 옵션을 함께 검토해 드립니다.',
       hy: '<strong>Սովորական Medicare-ը չի վճարում</strong> RCFE-ում կեցության և սննդի համար (այն ծածկում է միայն բժշկական այցերը, հիվանդանոցային բուժումը և կարճաժամկետ վերականգնումը)։ <br><br>Սակայն Կալիֆոռնիայում <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> ծրագիրը կարող է փոխհատուցել խնամքի մասը հավաստագրված հաստատություններում՝ որակավորված ցածր եկամուտ ունեցող անձանց համար։ Բացի այդ, Veterans Aid &amp; Attendance ծրագիրը և Երկարաժամկետ խնամքի ապահովագրությունը (LTC) հաճախ օգնում են նվազեցնել ծախսերը։ Մենք օգնում ենք ընտանիքներին ուսումնասիրել այս հնարավորությունները։',
       ru: '<strong>Обычная страховка Medicare не оплачивает</strong> проживание и питание в RCFE (она покрывает только визиты к врачу, госпитализацию и краткосрочную реабилитацию). <br><br>Однако в Калифорнии программа <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> может оплачивать часть стоимости ухода в сертифицированных учреждениях для малоимущих граждан, соответствующих критериям. Кроме того, пенсия Veterans Aid &amp; Attendance и полисы страхования долгосрочного ухода (LTC) часто помогают компенсировать расходы. Мы помогаем семьям разобраться в этих вариантах.',
-      ar: '<strong>لا يغطي برنامج Medicare العادي</strong> تكاليف السكن والطعام في مرافق RCFE (فهو يغطي فقط زيارات الأطباء والإقامة في المستشفى والتأهيل المتخصص قصير الأمد). <br><br>ومع ذلك، في كاليفورنيا، يمكن لبرنامج <strong>إعفاء المعيشة المساعدة Medi-Cal ALW</strong> تغطية جزء من تكلفة الرعاية في المرافق المعتمدة للمؤهلين من ذوي الدخل المحدود. كما تساعد معاشات Veterans Aid &amp; Attendance وبوالص تأمين الرعاية طويلة الأمد (LTC) في تخفيف التكاليف. نحن نساعد العائلات في تقييم هذه الخيارات.'
+      ar: '<strong>لا يغطي برنامج Medicare العادي</strong> تكاليف السكن والطعام في مرافق RCFE (فهو يغطي فقط زيارات الأطباء والإقامة في المستشفى والتأهيل المتخصص قصير الأمد). <br><br>ومع ذلك، في كاليفورنيا، يمكن لبرنامج <strong>إعفاء المعيشة المساعدة Medi-Cal ALW</strong> تغطية جزء من تكلفة الرعاية في المرافق المعتمدة للمؤهلين من ذوي الدخل المحدود. كما تساعد معاشات Veterans Aid &amp; Attendance وبوالص تأمين الرعاية طويلة الأمد (LTC) في تخفيف التكاليف. نحن نساعد العائلات في تقييم هذه الخيارات.',
+      fa: '<strong>برنامه عادی Medicare هزینه اقامت و غذا</strong> در یک RCFE را پوشش نمی‌دهد (و فقط ویزیت‌های پزشک، بستری در بیمارستان و توانبخشی تخصصی کوتاه‌مدت را پرداخت می‌کند). <br><br> با این حال، در کالیفرنیا برنامه <strong>Medi-Cal ALW (معافیت زندگی همراه با مراقبت)</strong> می‌تواند بخش هزینه‌های مراقبت را در مراکز دارای گواهی برای افراد کم‌درآمد واجد شرایط پوشش دهد. علاوه بر این، مستمری VA Aid &amp; Attendance و بیمه‌نامه‌های مراقبت طولانی‌مدت اغلب به کاهش هزینه‌ها کمک می‌کنند. ما به خانواده‌ها در بررسی این گزینه‌ها یاری می‌رسانیم.',
+      hi: 'सामान्य <strong>Medicare किसी RCFE में रहने और भोजन का भुगतान नहीं करता</strong> है (यह केवल डॉक्टर की विज़िट, अस्पताल में भर्ती और अल्पकालिक कुशल पुनर्वास को कवर करता है)। <br><br> हालांकि, कैलिफ़ोर्निया में <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> कार्यक्रम पात्र कम-आय वाले व्यक्तियों के लिए प्रमाणित केंद्रों में देखभाल के हिस्से का भुगतान कर सकता है। इसके अतिरिक्त, Veterans Aid &amp; Attendance और दीर्घकालिक देखभाल बीमा (Long-Term Care Insurance) पॉलिसियाँ भी अक्सर लागत कम करने में मदद करती हैं। हम परिवारों को इन विकल्पों का मूल्यांकन करने में सहायता करते हैं।',
+      pa: 'ਕਿਸੇ RCFE ਵਿੱਚ ਰਹਿਣ ਅਤੇ ਖਾਣੇ-ਪੀਣੇ ਦੇ ਖਰਚੇ ਲਈ <strong>ਆਮ Medicare ਭੁਗਤਾਨ ਨਹੀਂ ਕਰਦਾ</strong> (ਇਹ ਸਿਰਫ਼ ਡਾਕਟਰ ਦੀਆਂ ਮੁਲਾਕਾਤਾਂ, ਹਸਪਤਾਲ ਵਿੱਚ ਦਾਖ਼ਲੇ ਅਤੇ ਥੋੜ੍ਹੇ ਸਮੇਂ ਦੇ ਮਾਹਿਰ ਪੁਨਰਵਾਸ ਨੂੰ ਹੀ ਕਵਰ ਕਰਦਾ ਹੈ)। <br><br> ਹਾਲਾਂਕਿ, ਕੈਲੀਫੋਰਨੀਆ ਵਿੱਚ <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> ਪ੍ਰੋਗਰਾਮ ਯੋਗ ਘੱਟ-ਆਮਦਨ ਵਾਲੇ ਵਿਅਕਤੀਆਂ ਲਈ ਪ੍ਰਮਾਣਿਤ ਕੇਂਦਰਾਂ ਵਿੱਚ ਦੇਖਭਾਲ ਵਾਲੇ ਹਿੱਸੇ ਦਾ ਭੁਗਤਾਨ ਕਰ ਸਕਦਾ ਹੈ। ਇਸ ਤੋਂ ਇਲਾਵਾ, Veterans Aid &amp; Attendance ਪੈਨਸ਼ਨ ਅਤੇ ਲੰਬੇ ਸਮੇਂ ਦੀ ਦੇਖਭਾਲ ਵਾਲਾ ਬੀਮਾ (Long-Term Care Insurance) ਅਕਸਰ ਖਰਚਿਆਂ ਨੂੰ ਘਟਾਉਣ ਵਿੱਚ ਮਦਦ ਕਰਦੇ ਹਨ। ਅਸੀਂ ਪਰਿਵਾਰਾਂ ਨੂੰ ਇਨ੍ਹਾਂ ਵਿਕਲਪਾਂ ਦਾ ਮੁਲਾਂਕਣ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦੇ ਹਾਂ।',
+      ja: '通常の<strong>メディケア（Medicare）では、RCFE の居住費や食費は補償されません</strong>（医師の診察、入院、短期の専門リハビリのみが対象となります）。<br><br>ただしカリフォルニア州では、所定の低所得基準を満たす方を対象に、<strong>Medi-Cal Assisted Living Waiver（ALW）</strong>が認定施設における介護費用の部分を負担できる場合があります。また、Veterans Aid &amp; Attendance や民間の長期介護保険（Long-Term Care Insurance）も費用負担の軽減に多く活用されています。私たちがご家族と一緒にこれらの選択肢を確認・評価するお手伝いをいたします。',
+      uk: 'Звичайний <strong>Medicare не оплачує</strong> проживання та харчування в RCFE (він покриває лише візити до лікарів, госпіталізації та короткострокову спеціалізовану реабілітацію). <br><br> Проте в Каліфорнії програма <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> може оплачувати послуги догляду в сертифікованих закладах для осіб із низьким рівнем доходу, які відповідають вимогам. Крім того, витрати часто допомагають покрити виплати Veterans Aid &amp; Attendance та поліси страхування довгострокового догляду. Ми допомагаємо родинам оцінити всі ці можливості.',
+      he: '<strong>ביטוח Medicare רגיל אינו מכסה</strong> מגורים וכלכלה ב-RCFE (הוא מכסה רק ביקורי רופא, אשפוזים ושיקום מיומן לטווח קצר). <br><br> עם זאת, בקליפורניה תוכנית <strong>Medi-Cal ALW (Assisted Living Waiver)</strong> יכולה לממן את מרכיב הטיפול במתקנים מאושרים עבור זכאים בעלי הכנסה נמוכה. בנוסף, קצבאות VA Aid &amp; Attendance ופוליסות ביטוח סיעודי ארוך טווח (Long-Term Care Insurance) מסייעות לעיתים קרובות בכיסוי העלויות. אנו מסייעים למשפחות לבחון אפשרויות אלו.',
+      km: 'កម្មវិធី <strong>Medicare ធម្មតាមិនបង់ថ្លៃ</strong> សម្រាប់ការស្នាក់នៅ និងអាហារក្នុង RCFE ទេ (វាគ្របដណ្តប់តែការពិគ្រោះជាមួយវេជ្ជបណ្ឌិត ការសម្រាកមន្ទីរពេទ្យ និងការស្តារនីតិសម្បទាជំនាញរយៈពេលខ្លីប៉ុណ្ណោះ)។ <br><br> ទោះជាយ៉ាងណាក៏ដោយ នៅរដ្ឋ California កម្មវិធី <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> អាចបង់ថ្លៃផ្នែកថែទាំនៅក្នុងមណ្ឌលដែលមានវិញ្ញាបនបត្រសម្រាប់បុគ្គលដែលមានប្រាក់ចំណូលទាប និងមានសិទ្ធិគ្រប់គ្រាន់។ លើសពីនេះ ប្រាក់សោធន Veterans Aid &amp; Attendance និងគោលនយោបាយធានារ៉ាប់រងការថែទាំរយៈពេលវែង (Long-Term Care Insurance) ក៏ជួយបន្ថយថ្លៃចំណាយជាញឹកញាប់ផងដែរ។ យើងជួយគ្រួសារវាយតម្លៃជម្រើសទាំងនេះ។',
+      fr: 'L\'assurance <strong>Medicare classique ne couvre pas</strong> l\'hébergement et les repas dans un RCFE (elle prend uniquement en charge les consultations médicales, les hospitalisations et la rééducation spécialisée de courte durée). <br><br> En Californie, toutefois, le programme <strong>Medi-Cal Assisted Living Waiver (ALW)</strong> peut financer la part liée aux soins dans les établissements agréés pour les personnes à faibles revenus éligibles. De plus, la pension VA Aid &amp; Attendance et les assurances dépendance à long terme permettent souvent de réduire la facture. Nous aidons les familles à évaluer ces solutions.',
+      pt: 'O <strong>Medicare regular não cobre</strong> moradia e alimentação em um RCFE (cobre apenas consultas médicas, internações hospitalares e reabilitação especializada de curto prazo). <br><br> Na Califórnia, porém, o programa <strong>Medi-Cal ALW (Assisted Living Waiver)</strong> pode cobrir a parte assistencial em residenciais certificados para pessoas de baixa renda elegíveis. Além disso, os benefícios Veterans Aid &amp; Attendance e apólices de Seguro de Cuidados de Longo Prazo frequentemente ajudam a reduzir os custos. Nós ajudamos as famílias a avaliar essas opções.'
     },
     faq3_body: {
       es: 'El plazo estándar suele ser de <strong>4 a 8 meses</strong>, según la rapidez con la que el departamento de bomberos local realice la inspección STD 850 y el volumen de trámites en la oficina regional del CDSS. Contar con un paquete LIC 200 sin errores y un Plan de Operación conforme a las normas ahorra meses de espera.',
@@ -86,7 +149,16 @@
       ko: '표준 소요 기간은 지역 소방서의 STD 850 소방 점검 일정과 CDSS 지역 사무소의 심사 대기 물량에 따라 보통 <strong>4~8개월</strong> 정도 걸립니다. 오류 없는 LIC 200 신청 패키지와 규정에 맞는 운영 계획서(Plan of Operation)를 준비하면 심사 기간을 몇 달씩 단축할 수 있습니다.',
       hy: 'Ստանդարտ ժամկետը սովորաբար կազմում է <strong>4-ից 8 ամիս</strong>՝ կախված նրանից, թե որքան արագ տեղական հրշեջ ծառայությունը կկատարի STD 850 ստուգումը և որքան ծանրաբեռնված է CDSS-ի տարածաշրջանային գրասենյակը։ Անսխալ LIC 200 փաթեթը և կանոնադրական Գործողությունների ծրագիրը (Plan of Operation) խնայում են ամիսներ։',
       ru: 'Стандартный срок обычно составляет от <strong>4 до 8 месяцев</strong> в зависимости от того, как быстро местная пожарная служба проведет инспекцию STD 850 и какова текущая загрузка регионального офиса CDSS. Безупречный пакет документов LIC 200 и грамотный План деятельности (Plan of Operation) экономят месяцы ожидания.',
-      ar: 'المدة القياسية تتراوح عادةً بين <strong>4 إلى 8 أشهر</strong>، وذلك حسب سرعة إدارة الإطفاء المحلية في إجراء فحص STD 850 وحجم المعاملات المتراكمة لدى مكتب CDSS الإقليمي. إعداد حزمة LIC 200 خالية من الأخطاء وخطة تشغيل مطابقة للأنظمة يوفر عدة أشهر من الانتظار.'
+      ar: 'المدة القياسية تتراوح عادةً بين <strong>4 إلى 8 أشهر</strong>، وذلك حسب سرعة إدارة الإطفاء المحلية في إجراء فحص STD 850 وحجم المعاملات المتراكمة لدى مكتب CDSS الإقليمي. إعداد حزمة LIC 200 خالية من الأخطاء وخطة تشغيل مطابقة للأنظمة يوفر عدة أشهر من الانتظار.',
+      fa: 'مدت زمان استاندارد معمولاً <strong>۴ تا ۸ ماه</strong> است؛ بسته به اینکه اداره آتش‌نشانی محلی با چه سرعتی بازرسی حریق STD 850 را انجام دهد و صف پرونده‌ها در دفتر منطقه‌ای CDSS چقدر باشد. داشتن یک پرونده بی‌نقص LIC 200 و طرح عملیاتی منطبق با مقررات، ماه‌ها از زمان انتظار می‌کاهد.',
+      hi: 'सामान्य समय-सीमा आमतौर पर <strong>4 से 8 महीने</strong> होती है, जो इस बात पर निर्भर करती है कि स्थानीय अग्निशमन विभाग कितनी जल्दी STD 850 अग्नि सुरक्षा निरीक्षण करता है और CDSS क्षेत्रीय कार्यालय में आवेदनों का कितना बैकलॉग है। त्रुटि-रहित LIC 200 पैकेट और नियमों के अनुरूप संचालन योजना (Plan of Operation) होने से प्रक्रिया के कई महीने बच सकते हैं।',
+      pa: 'ਆਮ ਸਮਾਂ-ਸੀਮਾ ਲਗਭਗ <strong>4 ਤੋਂ 8 ਮਹੀਨੇ</strong> ਹੁੰਦੀ ਹੈ, ਜੋ ਇਸ ਗੱਲ ਉੱਤੇ ਨਿਰਭਰ ਕਰਦੀ ਹੈ ਕਿ ਸਥਾਨਕ ਫਾਇਰ ਵਿਭਾਗ STD 850 ਅੱਗ ਸੁਰੱਖਿਆ ਜਾਂਚ ਕਿੰਨੀ ਜਲਦੀ ਕਰਦਾ ਹੈ ਅਤੇ CDSS ਦੇ ਖੇਤਰੀ ਦਫ਼ਤਰ ਵਿੱਚ ਮੌਜੂਦਾ ਅਰਜ਼ੀਆਂ ਦਾ ਕਿੰਨਾ ਬਕਾਇਆ ਹੈ। ਗਲਤੀਆਂ ਤੋਂ ਰਹਿਤ LIC 200 ਪੈਕੇਟ ਅਤੇ ਨਿਯਮਾਂ ਅਨੁਸਾਰ ਸੰਚਾਲਨ ਯੋਜਨਾ (Plan of Operation) ਹੋਣ ਨਾਲ ਪ੍ਰਕਿਰਿਆ ਦੇ ਸਮੇਂ ਵਿੱਚ ਕਈ ਮਹੀਨਿਆਂ ਦੀ ਬੱਚਤ ਹੁੰਦੀ ਹੈ।',
+      ja: '標準的な取得期間は、地元消防署による STD 850 防火検査の実施スピードおよび管轄 CDSS 地域事務所の現在の審査状況にもよりますが、通常 <strong>4〜8か月</strong>程度です。不備のない LIC 200 申請書類一式と法令に適合した運営計画書（Plan of Operation）を最初から用意することで、承認までの待機期間を数か月単位で短縮できます。',
+      uk: 'Стандартний термін зазвичай становить <strong>від 4 до 8 місяців</strong> залежно від того, як швидко місцева пожежна служба проведе перевірку пожежної безпеки за формою STD 850, а також від поточного завантаження регіонального офісу CDSS. Бездоганно підготовлений пакет LIC 200 і відповідний вимогам План діяльності (Plan of Operation) скорочують час очікування на місяці.',
+      he: 'לוח הזמנים הסטנדרטי הוא לרוב <strong>4 עד 8 חודשים</strong>, בהתאם למהירות שבה מחלקת הכבאות המקומית מבצעת את בדיקת הבטיחות מאש STD 850 ולעומס הבקשות במשרד האזורי של CDSS. תיק בקשה LIC 200 נקי משגיאות ותוכנית הפעלה (Plan of Operation) תקנית חוסכים חודשים של המתנה.',
+      km: 'រយៈពេលស្តង់ដារជាធម្មតាគឺ <strong>4 ទៅ 8 ខែ</strong> អាស្រ័យលើល្បឿនដែលនាយកដ្ឋានពន្លត់អគ្គិភ័យក្នុងតំបន់ធ្វើការត្រួតពិនិត្យអគ្គិភ័យ STD 850 និងបរិមាណឯកសារកកស្ទះបច្ចុប្បន្ននៅការិយាល័យតំបន់ CDSS។ ការមានកញ្ចប់ឯកសារ LIC 200 ដែលគ្មានកំហុស និងផែនការប្រតិបត្តិការ (Plan of Operation) ដែលស្របតាមបទប្បញ្ញត្តិ ជួយកាត់បន្ថយពេលវេលារង់ចាំបានរាប់ខែ។',
+      fr: 'Le délai habituel est généralement de <strong>4 à 8 mois</strong>, selon la rapidité avec laquelle les pompiers locaux réalisent l\'inspection incendie STD 850 et la charge de dossiers au bureau régional du CDSS. Disposer d\'un dossier LIC 200 sans erreur et d\'un Plan d\'exploitation conforme permet de gagner plusieurs mois.',
+      pt: 'O prazo padrão costuma ser de <strong>4 a 8 meses</strong>, dependendo da rapidez com que o corpo de bombeiros local realiza a inspeção de incêndio STD 850 e do volume atual de demandas no escritório regional do CDSS. Contar com um pacote LIC 200 sem erros e um Plano de Operação em conformidade economiza meses no processo de aprovação.'
     },
     faq5_family: {
       es: 'Nuestra evaluación de cuidados, recorridos por centros y asesoría de ubicación son <strong>completamente gratuitos para las familias</strong>. De forma similar a un corredor de seguros o representante de inquilinos, la comunidad de cuidado con licencia nos paga una tarifa estándar de referencia de su presupuesto operativo solo después de que su ser querido se mude de forma segura. Su renta mensual nunca se incrementa y usted jamás recibirá una factura nuestra.',
@@ -96,7 +168,16 @@
       ko: '저희의 돌봄 평가, 시설 투어 동행 및 입소 상담은 <strong>가족분들께 100% 무료</strong>입니다. 보험 브로커나 임차인 대리인과 마찬가지로, 어르신이 안전하게 입소하신 후에만 인가된 시설 측 운영 예산에서 표준 소개 수수료를 지급받습니다. 월 이용료에 수수료가 가산되지 않으며 가족분께 청구서를 보내는 일은 절대 없습니다.',
       hy: 'Մեր խնամքի գնահատումը, հաստատությունների շրջայցերը և տեղավորման խորհրդատվությունը <strong>ամբողջությամբ անվճար են ընտանիքների համար</strong>։ Ապահովագրական բրոքերի կամ վարձակալի ներկայացուցչի նման՝ լիցենզավորված խնամքի համայնքն է մեզ վճարում ստանդարտ ուղեգրման վճար իր գործառնական բյուջեից՝ միայն ձեր հարազատի ապահով տեղափոխումից հետո։ Ձեր ամսավարձը երբեք չի ավելանում, և դուք մեզանից երբեք հաշիվ չեք ստանա։',
       ru: 'Наша оценка потребностей в уходе, сопровождение на просмотрах и консультации по размещению <strong>полностью бесплатны для семей</strong>. Подобно страховому брокеру или агенту арендатора, стандартную комиссию из своего операционного бюджета нам выплачивает лицензированный пансионат — и только после безопасного заселения вашего близкого. Ваша ежемесячная плата никогда не увеличивается, и мы никогда не выставляем вам счетов.',
-      ar: 'تقييم احتياجات الرعاية وجولات المرافق واستشارات التسكين لدينا <strong>مجانية تماماً للعائلات</strong>. وكما هو الحال مع وسيط التأمين أو ممثل المستأجرين، تدفع لنا دار الرعاية المرخصة رسوم إحالة قياسية من ميزانيتها التشغيلية فقط بعد انتقال قريبك بأمان. لا يرتفع إيجارك الشهري أبداً ولن تتلقى أي فاتورة منا على الإطلاق.'
+      ar: 'تقييم احتياجات الرعاية وجولات المرافق واستشارات التسكين لدينا <strong>مجانية تماماً للعائلات</strong>. وكما هو الحال مع وسيط التأمين أو ممثل المستأجرين، تدفع لنا دار الرعاية المرخصة رسوم إحالة قياسية من ميزانيتها التشغيلية فقط بعد انتقال قريبك بأمان. لا يرتفع إيجارك الشهري أبداً ولن تتلقى أي فاتورة منا على الإطلاق.',
+      fa: 'ارزیابی نیازهای مراقبتی، بازدید از مراکز و راهنمایی برای اسکان مناسب <strong>برای خانواده‌ها کاملاً رایگان</strong> است. مشابه کارگزار بیمه یا نماینده مستأجر، مرکز مراقبت دارای مجوز تنها پس از اسکان ایمن عزیز شما، یک حق‌الزحمه استاندارد معرفی را از بودجه عملیاتی خود به ما پرداخت می‌کند. اجاره ماهانه شما هرگز افزایش نمی‌یابد و هیچ‌گاه صورت‌حسابی از ما دریافت نخواهید کرد.',
+      hi: 'हमारा देखभाल मूल्यांकन, केंद्रों का दौरा और प्लेसमेंट मार्गदर्शन <strong>परिवारों के लिए पूरी तरह निःशुल्क है</strong>। किसी बीमा ब्रोकर या किरायेदार प्रतिनिधि की तरह, जब आपके प्रियजन सुरक्षित रूप से देखभाल केंद्र में रहने आ जाते हैं, केवल उसके बाद लाइसेंस प्राप्त देखभाल समुदाय अपने परिचालन बजट से हमें एक मानक प्लेसमेंट रेफ़रल शुल्क देता है। आपके मासिक किराए में कभी कोई अतिरिक्त बढ़ोतरी नहीं की जाती और आपको हमारी ओर से कभी कोई बिल नहीं मिलेगा।',
+      pa: 'ਸਾਡਾ ਦੇਖਭਾਲ ਮੁਲਾਂਕਣ, ਕੇਂਦਰਾਂ ਦੇ ਦੌਰੇ ਅਤੇ ਰਿਹਾਇਸ਼ ਮਾਰਗਦਰਸ਼ਨ <strong>ਪਰਿਵਾਰਾਂ ਲਈ ਪੂਰੀ ਤਰ੍ਹਾਂ ਮੁਫ਼ਤ ਹਨ</strong>। ਕਿਸੇ ਬੀਮਾ ਬ੍ਰੋਕਰ ਜਾਂ ਕਿਰਾਏਦਾਰ ਪ੍ਰਤੀਨਿਧੀ ਵਾਂਗ, ਲਾਇਸੰਸਸ਼ੁਦਾ ਦੇਖਭਾਲ ਕੇਂਦਰ ਤੁਹਾਡੇ ਪਿਆਰੇ ਦੇ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਉੱਥੇ ਸ਼ਿਫਟ ਹੋਣ ਤੋਂ ਬਾਅਦ ਹੀ ਆਪਣੇ ਸੰਚਾਲਨ ਬਜਟ ਵਿੱਚੋਂ ਸਾਨੂੰ ਇੱਕ ਮਿਆਰੀ ਰੈਫਰਲ ਫੀਸ ਅਦਾ ਕਰਦਾ ਹੈ। ਤੁਹਾਡਾ ਮਹੀਨਾਵਾਰ ਕਿਰਾਇਆ ਕਦੇ ਵੀ ਵਧਾਇਆ ਨਹੀਂ ਜਾਂਦਾ ਅਤੇ ਤੁਹਾਨੂੰ ਸਾਡੇ ਵੱਲੋਂ ਕਦੇ ਕੋਈ ਬਿੱਲ ਨਹੀਂ ਮਿਲੇਗਾ।',
+      ja: '私たちのケア評価、施設見学の同行、および入居先のご案内は、<strong>ご家族にとって完全無料</strong>です。保険ブローカーやテナント代理人と同様の仕組みで、大切なご家族が安全にご入居された後にのみ、認可ケア施設側の運営予算から標準的な紹介手数料が支払われます。月額利用料が上乗せされることは一切なく、ご家族へご請求書をお送りすることも決してございません。',
+      uk: 'Наша оцінка потреб догляду, організація переглядів закладів і консультації з підбору є <strong>повністю безкоштовними для родин</strong>. Подібно до страхового брокера чи представника орендаря, ліцензований будинок догляду сплачує нам стандартну комісію за направлення зі свого операційного бюджету лише після того, як ваша близька людина безпечно переїде. Ваша щомісячна оплата ніколи не збільшується, і ви ніколи не отримаєте від нас рахунку.',
+      he: 'הערכת הצרכים, הסיורים במתקנים והייעוץ לבחירת המעון <strong>ניתנים למשפחות בחינם לחלוטין</strong>. בדומה למתווך ביטוח או נציג שוכרים, המעון המורשה משלם לנו דמי הפניה מקובלים מתוך תקציב התפעול שלו רק לאחר שיקירכם נכנס בבטחה למקום. התעריף החודשי שלכם לעולם אינו מיוקר, ולעולם לא תקבלו מאיתנו חשבונית.',
+      km: 'ការវាយតម្លៃការថែទាំ ការជូនទស្សនាមណ្ឌល និងការណែនាំអំពីការរៀបចំកន្លែងស្នាក់នៅរបស់យើង គឺ<strong>ឥតគិតថ្លៃទាំងស្រុងសម្រាប់គ្រួសារ</strong>។ ស្រដៀងគ្នានឹងភ្នាក់ងារធានារ៉ាប់រង ឬអ្នកតំណាងអ្នកជួលដែរ មណ្ឌលថែទាំដែលមានអាជ្ញាប័ណ្ណជាអ្នកបង់ថ្លៃណែនាំស្តង់ដារឱ្យយើងចេញពីថវិកាប្រតិបត្តិការរបស់ពួកគេ លុះត្រាតែមនុស្សជាទីស្រឡាញ់របស់លោកអ្នកបានផ្លាស់ចូលរស់នៅដោយសុវត្ថិភាពរួចរាល់។ ថ្លៃជួលប្រចាំខែរបស់លោកអ្នកមិនត្រូវបានដំឡើងថ្លៃឡើយ ហើយលោកអ្នកនឹងមិនដែលទទួលបានវិក្កយបត្រពីយើងទេ។',
+      fr: 'Notre évaluation des besoins, l\'organisation des visites et notre accompagnement pour le placement sont <strong>entièrement gratuits pour les familles</strong>. À l\'instar d\'un courtier en assurance ou d\'un représentant de locataires, l\'établissement agréé nous verse une commission de référencement standard issue de son budget de fonctionnement uniquement une fois que votre proche s\'est installé en toute sécurité. Votre loyer mensuel n\'est jamais majoré et vous ne recevrez jamais aucune facture de notre part.',
+      pt: 'Nossa avaliação de cuidados, visitas acompanhadas às casas e orientação para acolhimento são <strong>totalmente gratuitas para as famílias</strong>. Assim como um corretor de seguros ou representante de locatários, a comunidade de cuidados licenciada nos paga uma taxa padrão de encaminhamento a partir de seu orçamento operacional somente após a mudança segura do seu ente querido. Sua mensalidade nunca sofre acréscimo e você jamais receberá uma cobrança nossa.'
     },
     faq5_operator: {
       es: 'Los futuros propietarios, administradores e inversionistas de casas de cuidado residencial pagan <strong>tarifas profesionales transparentes y fijas</strong> por nuestros servicios de licenciamiento bajo el Título 22 de California (elaboración del paquete LIC 200, redacción del Plan de Operación, asesoría de aprobación contra incendios y preparación para la inspección previa del LPA).',
@@ -106,7 +187,16 @@
       ko: '예비 주거형 요양홈(RCFE) 소유주, 관리자 및 투자자분들께는 캘리포니아 Title 22 인허가 컨설팅 서비스(LIC 200 신청서 작성, 운영 계획서 초안 작성, 소방 승인 코칭, LPA 사전 실사 대비)에 대해 <strong>투명한 정액제 전문 컨설팅 수수료</strong>를 안내해 드립니다.',
       hy: 'Ապագա բնակելի խնամքի տների սեփականատերերը, ադմինիստրատորները և ներդրողները վճարում են <strong>թափանցիկ, ֆիքսված մասնագիտական խորհրդատվական վճար</strong> Կալիֆոռնիայի Title 22 լիցենզավորման մեր ծառայությունների համար (LIC 200 փաթեթի պատրաստում, Գործողությունների ծրագրի կազմում, հրշեջ թույլտվության ուղեկցում և LPA նախալիցենզավորման ստուգման նախապատրաստում)։',
       ru: 'Будущие владельцы пансионатов, администраторы и инвесторы оплачивают <strong>прозрачные фиксированные профессиональные гонорары</strong> за наши услуги по лицензированию в соответствии с Title 22 Калифорнии (подготовка пакета LIC 200, составление Плана деятельности, сопровождение пожарной проверки и подготовка к предлицензионной инспекции LPA).',
-      ar: 'يدفع الملاك والمديرون والمستثمرون المرتقبون لدور الرعاية السكنية <strong>أتعاباً استشارية مهنية ثابتة وشفافة</strong> مقابل خدمات الترخيص بموجب لوائح Title 22 في كاليفورنيا (إعداد حزمة LIC 200، صياغة خطة التشغيل، إرشادات موافقة السلامة من الحرائق، والتحضير لفحص ما قبل الترخيص من LPA).'
+      ar: 'يدفع الملاك والمديرون والمستثمرون المرتقبون لدور الرعاية السكنية <strong>أتعاباً استشارية مهنية ثابتة وشفافة</strong> مقابل خدمات الترخيص بموجب لوائح Title 22 في كاليفورنيا (إعداد حزمة LIC 200، صياغة خطة التشغيل، إرشادات موافقة السلامة من الحرائق، والتحضير لفحص ما قبل الترخيص من LPA).',
+      fa: 'مالکان آینده خانه‌های مراقبت مسکونی، مدیران و سرمایه‌گذاران، <strong>هزینه‌های مشاوره تخصصی شفاف و با نرخ ثابت</strong> را برای خدمات اخذ مجوز تحت مقررات Title 22 کالیفرنیا (تهیه پرونده LIC 200، تدوین طرح عملیاتی، راهنمایی تأییدیه آتش‌نشانی و آماده‌سازی برای بازرسی پیش از صدور مجوز توسط LPA) پرداخت می‌کنند.',
+      hi: 'आवासीय देखभाल गृहों के भावी मालिक, प्रशासक और निवेशक हमारी कैलिफ़ोर्निया Title 22 लाइसेंसिंग सेवाओं (LIC 200 पैकेट तैयार करना, संचालन योजना का मसौदा बनाना, अग्नि सुरक्षा स्वीकृति मार्गदर्शन और पूर्व-लाइसेंसिंग LPA निरीक्षण की तैयारी) के लिए <strong>पारदर्शी, निश्चित-दर व्यावसायिक परामर्श शुल्क</strong> का भुगतान करते हैं।',
+      pa: 'ਭਾਵੀ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਘਰਾਂ ਦੇ ਮਾਲਕ, ਪ੍ਰਸ਼ਾਸਕ ਅਤੇ ਨਿਵੇਸ਼ਕ ਸਾਡੀਆਂ ਕੈਲੀਫੋਰਨੀਆ Title 22 ਲਾਇਸੰਸਿੰਗ ਸੇਵਾਵਾਂ (LIC 200 ਪੈਕੇਟ ਤਿਆਰ ਕਰਨਾ, ਸੰਚਾਲਨ ਯੋਜਨਾ ਲਿਖਣਾ, ਅੱਗ ਸੁਰੱਖਿਆ ਮਨਜ਼ੂਰੀ ਦੀ ਤਿਆਰੀ ਅਤੇ ਲਾਇਸੰਸ ਤੋਂ ਪਹਿਲਾਂ LPA ਜਾਂਚ ਦੀ ਤਿਆਰੀ) ਲਈ <strong>ਪਾਰਦਰਸ਼ੀ, ਨਿਰਧਾਰਤ-ਦਰ ਪੇਸ਼ੇਵਰ ਸਲਾਹ ਫੀਸ</strong> ਅਦਾ ਕਰਦੇ ਹਨ।',
+      ja: 'これから居住型ケアホームの開業を目指すオーナー様、管理者様、および投資家の方々には、カリフォルニア州 Title 22 ライセンス取得支援サービス（LIC 200 申請書類一式の作成、運営計画書の起案、防火承認取得のコーチング、認可前 LPA 実地検査の事前対策）に対して、<strong>明朗な定額制の専門コンサルティング料金</strong>をご提示しております。',
+      uk: 'Майбутні власники житлових будинків догляду, адміністратори та інвестори сплачують <strong>прозорі фіксовані гонорари за професійне консультування</strong> щодо ліцензування за Title 22 у Каліфорнії (підготовка пакета LIC 200, складання Плану діяльності, супровід пожежної перевірки та підготовка до передліцензійної інспекції LPA).',
+      he: 'יזמים, בעלים עתידיים, מנהלים ומשקיעים של מעונות טיפוליים משלמים <strong>שכר טרחה שקוף וקבוע מראש</strong> עבור שירותי הייעוץ והרישוי שלנו לפי California Title 22 (עריכת תיק LIC 200, כתיבת תוכנית הפעלה, ליווי לקבלת אישור כיבוי אש והכנה לביקורת טרום-רישוי של LPA).',
+      km: 'ម្ចាស់ផ្ទះថែទាំស្នាក់នៅអនាគត អ្នកគ្រប់គ្រង និងអ្នកវិនិយោគបង់ <strong>ថ្លៃសេវាប្រឹក្សាយោបល់វិជ្ជាជីវៈថេរ និងមានតម្លាភាព</strong> សម្រាប់សេវាកម្មសុំអាជ្ញាប័ណ្ណ Title 22 នៅរដ្ឋ California របស់យើង (ការរៀបចំកញ្ចប់ឯកសារ LIC 200 ការព្រាងផែនការប្រតិបត្តិការ ការបង្វឹកអំពីការអនុញ្ញាតអគ្គិភ័យ និងការត្រៀមខ្លួនសម្រាប់ការត្រួតពិនិត្យ LPA មុនទទួលអាជ្ញាប័ណ្ណ)។',
+      fr: 'Les futurs propriétaires, administrateurs et investisseurs de foyers résidentiels de soins paient des <strong>honoraires de conseil professionnels forfaitaires et transparents</strong> pour nos services d\'agrément Title 22 en Californie (constitution du dossier LIC 200, rédaction du Plan d\'exploitation, accompagnement à l\'approbation incendie et préparation à l\'inspection pré-licence du LPA).',
+      pt: 'Futuros proprietários de casas residenciais de cuidados, administradores e investidores pagam <strong>honorários profissionais transparentes e com valor fixo</strong> pelos nossos serviços de licenciamento pelo Title 22 da Califórnia (elaboração do pacote LIC 200, redação do Plano de Operação, orientação para aprovação contra incêndios e preparação para a inspeção pré-licenciamento do LPA).'
     },
     privacy4_p: {
       es: 'Usted conserva el derecho de inspeccionar, corregir o solicitar la eliminación de cualquier información de contacto que guardemos. Simplemente escríbanos a <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> con el asunto "Data Removal Request."',
@@ -116,7 +206,16 @@
       ko: '귀하는 당사가 보유한 연락처 정보를 열람, 수정하거나 삭제를 요청할 권리가 있습니다. 제목을 "Data Removal Request"로 하여 <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> 으로 이메일을 보내주시면 됩니다.',
       hy: 'Դուք իրավունք ունեք դիտել, ուղղել կամ պահանջել հեռացնել մեր կողմից պահվող ցանկացած կոնտակտային տեղեկություն։ Պարզապես գրեք մեզ <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> հասցեով՝ նշելով "Data Removal Request." թեման։',
       ru: 'Вы имеете право просматривать, исправлять или запрашивать удаление любых хранимых нами контактных данных. Просто напишите нам на <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> с темой письма "Data Removal Request."',
-      ar: 'تحتفظ بالحق في مراجعة أو تصحيح أو طلب حذف أي معلومات اتصال نحتفظ بها. ما عليك سوى مراسلتنا على <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> بعنوان رسالة "Data Removal Request."'
+      ar: 'تحتفظ بالحق في مراجعة أو تصحيح أو طلب حذف أي معلومات اتصال نحتفظ بها. ما عليك سوى مراسلتنا على <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> بعنوان رسالة "Data Removal Request."',
+      fa: 'شما حق دارید هرگونه اطلاعات تماسی را که نزد ما نگهداری می‌شود مشاهده، اصلاح یا درخواست حذف آن را ثبت کنید. کافی است با موضوع "Data Removal Request" به نشانی <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> ایمیل بفرستید.',
+      hi: 'हमारे पास मौजूद आपकी किसी भी संपर्क जानकारी को देखने, सुधारने या हटाने का अनुरोध करने का अधिकार आपके पास सुरक्षित है। इसके लिए बस हमें <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> पर "Data Removal Request" विषय के साथ ईमेल भेजें।',
+      pa: 'ਸਾਡੇ ਕੋਲ ਮੌਜੂਦ ਤੁਹਾਡੀ ਕਿਸੇ ਵੀ ਸੰਪਰਕ ਜਾਣਕਾਰੀ ਨੂੰ ਦੇਖਣ, ਠੀਕ ਕਰਨ ਜਾਂ ਮਿਟਾਉਣ ਦੀ ਬੇਨਤੀ ਕਰਨ ਦਾ ਅਧਿਕਾਰ ਤੁਹਾਡੇ ਕੋਲ ਸੁਰੱਖਿਅਤ ਹੈ। ਬਸ ਸਾਨੂੰ <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> ਉੱਤੇ "Data Removal Request" ਵਿਸ਼ੇ ਨਾਲ ਈਮੇਲ ਭੇਜੋ।',
+      ja: 'お客様には、当社が保有する連絡先情報を閲覧、訂正、または削除請求する権利がございます。件名に「Data Removal Request」とご記入のうえ、<a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> までメールをお送りください。',
+      uk: 'Ви зберігаєте право переглядати, виправляти або вимагати видалення будь-якої контактної інформації, яку ми зберігаємо. Просто напишіть нам на електронну пошту <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> із темою листа "Data Removal Request."',
+      he: 'שמורה לכם הזכות לעיין, לתקן או לבקש מחיקה של כל מידע ליצירת קשר שאנו מחזיקים. פשוט שלחו לנו אימייל לכתובת <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> עם שורת הנושא "Data Removal Request".',
+      km: 'លោកអ្នករក្សាសិទ្ធិក្នុងការពិនិត្យ កែតម្រូវ ឬស្នើសុំលុបព័ត៌មានទំនាក់ទំនងណាមួយដែលយើងរក្សាទុក។ សូមផ្ញើអ៊ីមែលមកយើងតាមរយៈ <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> ដោយដាក់ប្រធានបទថា "Data Removal Request."។',
+      fr: 'Vous conservez le droit de consulter, de rectifier ou de demander la suppression de toute information de contact que nous détenons. Il vous suffit de nous écrire à <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> avec l\'objet « Data Removal Request ».',
+      pt: 'Você mantém o direito de consultar, corrigir ou solicitar a exclusão de qualquer informação de contato que armazenamos. Basta enviar um e-mail para <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> com o assunto "Data Removal Request."'
     }
   };
 
@@ -130,7 +229,16 @@
       ko: "Love RCFE | 어르신 돌봄 입소 및 캘리포니아 RCFE 인허가 전문 상담",
       hy: "Love RCFE | Խորիմաստ ուղեկցում տարեցների խնամքի և RCFE հաստատությունների համար",
       ru: "Love RCFE | Вдумчивая помощь по уходу за пожилыми и открытию RCFE",
-      ar: "Love RCFE | إرشاد مدروس لرعاية المسنين ومرافق الرعاية السكنية"
+      ar: "Love RCFE | إرشاد مدروس لرعاية المسنين ومرافق الرعاية السكنية",
+      fa: "Love RCFE | راهنمای دلسوزانه برای مراقبت از سالمندان و خانه‌های مراقبت مسکونی",
+      hi: "Love RCFE | वरिष्ठजन देखभाल और आवासीय देखभाल केंद्रों के लिए संवेदनशील मार्गदर्शन",
+      pa: "Love RCFE | ਬਜ਼ੁਰਗਾਂ ਦੀ ਦੇਖਭਾਲ ਅਤੇ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਕੇਂਦਰਾਂ ਲਈ ਸੁਚੱਜਾ ਮਾਰਗਦਰਸ਼ਨ",
+      ja: "Love RCFE | 高齢者ケア・RCFE施設選びと開業の丁寧なご案内",
+      uk: "Love RCFE | Дбайливі консультації щодо догляду за людьми похилого віку та будинків догляду RCFE",
+      he: "Love RCFE | ליווי קשוב לטיפול באזרחים ותיקים וייעוץ למעונות RCFE",
+      km: "Love RCFE | ការណែនាំប្រកបដោយការយកចិត្តទុកដាក់សម្រាប់ការថែទាំមនុស្សចាស់ និងមណ្ឌលថែទាំស្នាក់នៅ",
+      fr: "Love RCFE | Accompagnement attentif pour les soins aux aînés et les établissements résidentiels",
+      pt: "Love RCFE | Orientação Acolhedora para Cuidados de Idosos e Residenciais RCFE"
     },
     "Our Services | Love RCFE Elder Care & Operator Consulting": {
       es: "Nuestros Servicios | Love RCFE Cuidado de Adultos Mayores y Consultoría",
@@ -140,7 +248,16 @@
       ko: "서비스 안내 | Love RCFE 어르신 돌봄 및 RCFE 운영 컨설팅",
       hy: "Մեր ծառայությունները | Love RCFE տարեցների խնամք և խորհրդատվություն",
       ru: "Наши услуги | Love RCFE: уход за пожилыми и консалтинг операторов",
-      ar: "خدماتنا | Love RCFE لرعاية المسنين واستشارات المشغلين"
+      ar: "خدماتنا | Love RCFE لرعاية المسنين واستشارات المشغلين",
+      fa: "خدمات ما | Love RCFE مشاوره مراقبت از سالمندان و راه‌اندازی مراکز",
+      hi: "हमारी सेवाएँ | Love RCFE वरिष्ठजन देखभाल और संचालक परामर्श",
+      pa: "ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ | Love RCFE ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਅਤੇ ਸੰਚਾਲਕ ਸਲਾਹ",
+      ja: "サービス一覧 | Love RCFE 高齢者ケア相談・事業者コンサルティング",
+      uk: "Наші послуги | Love RCFE — підбір догляду та консалтинг для операторів",
+      he: "השירותים שלנו | Love RCFE לטיפול במבוגרים וייעוץ למפעילים",
+      km: "សេវាកម្មរបស់យើង | Love RCFE ការថែទាំមនុស្សចាស់ និងការប្រឹក្សាសម្រាប់អ្នកបើកមណ្ឌល",
+      fr: "Nos services | Love RCFE — Accompagnement des aînés et conseil aux exploitants",
+      pt: "Nossos Serviços | Love RCFE Cuidados para Idosos e Consultoria para Operadores"
     },
     "Care Tools & Cost Calculators | Love RCFE": {
       es: "Herramientas de Cuidado y Calculadoras de Costos | Love RCFE",
@@ -150,7 +267,16 @@
       ko: "케어 도구 및 비용 계산기 | Love RCFE",
       hy: "Խնամքի գործիքներ և արժեքի հաշվիչներ | Love RCFE",
       ru: "Инструменты ухода и калькуляторы стоимости | Love RCFE",
-      ar: "أدوات الرعاية وحاسبات التكلفة | Love RCFE"
+      ar: "أدوات الرعاية وحاسبات التكلفة | Love RCFE",
+      fa: "ابزارهای مراقبت و ماشین‌حساب هزینه | Love RCFE",
+      hi: "देखभाल उपकरण और लागत कैलकुलेटर | Love RCFE",
+      pa: "ਦੇਖਭਾਲ ਸਾਧਨ ਅਤੇ ਖਰਚ ਕੈਲਕੂਲੇਟਰ | Love RCFE",
+      ja: "ケアツール・費用シミュレーター | Love RCFE",
+      uk: "Інструменти підбору догляду та калькулятори вартості | Love RCFE",
+      he: "כלים לבחירת טיפול ומחשבוני עלויות | Love RCFE",
+      km: "ឧបករណ៍ថែទាំ និងម៉ាស៊ីនគណនាថ្លៃចំណាយ | Love RCFE",
+      fr: "Outils d'aide et calculateurs de coûts | Love RCFE",
+      pt: "Ferramentas de Cuidado e Calculadoras de Custo | Love RCFE"
     },
     "Our Approach | Love RCFE Compassionate Care": {
       es: "Nuestro Enfoque | Love RCFE Cuidado Compasivo",
@@ -160,7 +286,16 @@
       ko: "상담 철학 | Love RCFE 진심 어린 돌봄",
       hy: "Մեր մոտեցումը | Love RCFE սրտացավ խնամք",
       ru: "Наш подход | Love RCFE: заботливый уход",
-      ar: "منهجنا | Love RCFE للرعاية الرحيمة"
+      ar: "منهجنا | Love RCFE للرعاية الرحيمة",
+      fa: "رویکرد ما | Love RCFE مراقبت دلسوزانه",
+      hi: "हमारा दृष्टिकोण | Love RCFE करुणामय देखभाल",
+      pa: "ਸਾਡਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ | Love RCFE ਹਮਦਰਦੀ ਭਰੀ ਦੇਖਭਾਲ",
+      ja: "私たちの理念 | Love RCFE 思いやりのあるケア",
+      uk: "Наш підхід | Love RCFE — чуйна підтримка та прозорість",
+      he: "הגישה שלנו | Love RCFE טיפול במסירות ורגישות",
+      km: "វិធីសាស្ត្ររបស់យើង | Love RCFE ការថែទាំប្រកបដោយក្តីមេត្តា",
+      fr: "Notre approche | Love RCFE — Des soins empreints de bienveillance",
+      pt: "Nossa Abordagem | Love RCFE Cuidado Humanizado"
     },
     "Support & FAQs | Love RCFE": {
       es: "Soporte y Preguntas Frecuentes | Love RCFE",
@@ -170,7 +305,16 @@
       ko: "고객 지원 및 자주 묻는 질문 | Love RCFE",
       hy: "Աջակցություն և ՀՏՀ | Love RCFE",
       ru: "Поддержка и частые вопросы | Love RCFE",
-      ar: "الدعم والأسئلة الشائعة | Love RCFE"
+      ar: "الدعم والأسئلة الشائعة | Love RCFE",
+      fa: "پشتیبانی و پرسش‌های متداول | Love RCFE",
+      hi: "सहायता और अक्सर पूछे जाने वाले प्रश्न | Love RCFE",
+      pa: "ਸਹਾਇਤਾ ਅਤੇ ਆਮ ਸਵਾਲ | Love RCFE",
+      ja: "サポート・よくある質問 | Love RCFE",
+      uk: "Підтримка та часті запитання | Love RCFE",
+      he: "תמיכה ושאלות נפוצות | Love RCFE",
+      km: "ជំនួយ និងសំណួរញឹកញាប់ | Love RCFE",
+      fr: "Aide et FAQ | Love RCFE",
+      pt: "Suporte e Perguntas Frequentes | Love RCFE"
     },
     "Contact Us | Love RCFE Advisory Team": {
       es: "Contáctenos | Equipo Asesor de Love RCFE",
@@ -180,7 +324,16 @@
       ko: "문의하기 | Love RCFE 전문 상담팀",
       hy: "Կապ մեզ հետ | Love RCFE խորհրդատվական թիմ",
       ru: "Связаться с нами | Команда консультантов Love RCFE",
-      ar: "تواصل معنا | فريق استشارات Love RCFE"
+      ar: "تواصل معنا | فريق استشارات Love RCFE",
+      fa: "تماس با ما | تیم مشاوره Love RCFE",
+      hi: "संपर्क करें | Love RCFE सलाहकार टीम",
+      pa: "ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ | Love RCFE ਸਲਾਹਕਾਰ ਟੀਮ",
+      ja: "お問い合わせ | Love RCFE アドバイザリーチーム",
+      uk: "Зв’яжіться з нами | Команда консультантів Love RCFE",
+      he: "צרו קשר | צוות הייעוץ של Love RCFE",
+      km: "ទាក់ទងមកយើង | ក្រុមទីប្រឹក្សា Love RCFE",
+      fr: "Nous contacter | Équipe de conseil Love RCFE",
+      pt: "Fale Conosco | Equipe de Assessoria Love RCFE"
     },
     "Terms of Use | Love RCFE": {
       es: "Términos de Uso | Love RCFE",
@@ -190,7 +343,16 @@
       ko: "이용약관 | Love RCFE",
       hy: "Օգտագործման պայմաններ | Love RCFE",
       ru: "Условия использования | Love RCFE",
-      ar: "شروط الاستخدام | Love RCFE"
+      ar: "شروط الاستخدام | Love RCFE",
+      fa: "شرایط استفاده | Love RCFE",
+      hi: "उपयोग की शर्तें | Love RCFE",
+      pa: "ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ | Love RCFE",
+      ja: "利用規約 | Love RCFE",
+      uk: "Умови використання | Love RCFE",
+      he: "תנאי שימוש | Love RCFE",
+      km: "លក្ខខណ្ឌនៃការប្រើប្រាស់ | Love RCFE",
+      fr: "Conditions d'utilisation | Love RCFE",
+      pt: "Termos de Uso | Love RCFE"
     },
     "Privacy Policy | Love RCFE": {
       es: "Política de Privacidad | Love RCFE",
@@ -200,7 +362,16 @@
       ko: "개인정보 처리방침 | Love RCFE",
       hy: "Գաղտնիության քաղաքականություն | Love RCFE",
       ru: "Политика конфиденциальности | Love RCFE",
-      ar: "سياسة الخصوصية | Love RCFE"
+      ar: "سياسة الخصوصية | Love RCFE",
+      fa: "سیاست حفظ حریم خصوصی | Love RCFE",
+      hi: "गोपनीयता नीति | Love RCFE",
+      pa: "ਗੋਪਨੀਯਤਾ ਨੀਤੀ | Love RCFE",
+      ja: "プライバシーポリシー | Love RCFE",
+      uk: "Політика конфіденційності | Love RCFE",
+      he: "מדיניות פרטיות | Love RCFE",
+      km: "គោលការណ៍ឯកជនភាព | Love RCFE",
+      fr: "Politique de confidentialité | Love RCFE",
+      pt: "Política de Privacidade | Love RCFE"
     },
     "Page Not Found | Love RCFE": {
       es: "Página No Encontrada | Love RCFE",
@@ -210,7 +381,16 @@
       ko: "페이지를 찾을 수 없습니다 | Love RCFE",
       hy: "Էջը չի գտնվել | Love RCFE",
       ru: "Страница не найдена | Love RCFE",
-      ar: "الصفحة غير موجودة | Love RCFE"
+      ar: "الصفحة غير موجودة | Love RCFE",
+      fa: "صفحه پیدا نشد | Love RCFE",
+      hi: "पृष्ठ नहीं मिला | Love RCFE",
+      pa: "ਪੰਨਾ ਨਹੀਂ ਮਿਲਿਆ | Love RCFE",
+      ja: "ページが見つかりません | Love RCFE",
+      uk: "Сторінку не знайдено | Love RCFE",
+      he: "הדף לא נמצא | Love RCFE",
+      km: "រកមិនឃើញទំព័រនេះទេ | Love RCFE",
+      fr: "Page introuvable | Love RCFE",
+      pt: "Página Não Encontrada | Love RCFE"
     },
     "Skip to main content": {
       es: "Ir al contenido principal",
@@ -220,7 +400,16 @@
       ko: "본문 바로가기",
       hy: "Անցնել հիմնական բովանդակությանը",
       ru: "Перейти к основному содержанию",
-      ar: "تخطي إلى المحتوى الرئيسي"
+      ar: "تخطي إلى المحتوى الرئيسي",
+      fa: "رفتن به محتوای اصلی",
+      hi: "मुख्य सामग्री पर जाएँ",
+      pa: "ਮੁੱਖ ਸਮੱਗਰੀ 'ਤੇ ਜਾਓ",
+      ja: "メインコンテンツへスキップ",
+      uk: "Перейти до основного вмісту",
+      he: "דלג לתוכן הראשי",
+      km: "រំលងទៅខ្លឹមសារសំខាន់",
+      fr: "Aller au contenu principal",
+      pt: "Pular para o conteúdo principal"
     },
     "Free 15-Minute Advisory Consultations Available this Week": {
       es: "Consultas gratuitas de asesoría de 15 minutos disponibles esta semana",
@@ -230,7 +419,16 @@
       ko: "이번 주 15분 무료 전문 상담 예약 가능",
       hy: "Այս շաբաթ հասանելի են անվճար 15-րոպեանոց խորհրդատվություններ",
       ru: "Бесплатные 15-минутные консультации доступны на этой неделе",
-      ar: "استشارات إرشادية مجانية لمدة 15 دقيقة متاحة هذا الأسبوع"
+      ar: "استشارات إرشادية مجانية لمدة 15 دقيقة متاحة هذا الأسبوع",
+      fa: "مشاوره رایگان ۱۵ دقیقه‌ای در این هفته در دسترس است",
+      hi: "इस सप्ताह 15-मिनट का निःशुल्क सलाहकार परामर्श उपलब्ध है",
+      pa: "ਇਸ ਹਫ਼ਤੇ 15-ਮਿੰਟ ਦਾ ਮੁਫ਼ਤ ਸਲਾਹ-ਮਸ਼ਵਰਾ ਉਪਲਬਧ ਹੈ",
+      ja: "今週の15分間・無料個別相談を受付中です",
+      uk: "Цього тижня доступні безкоштовні 15-хвилинні консультації",
+      he: "שיחות ייעוץ חינם של 15 דקות זמינות השבוע",
+      km: "មានការប្រឹក្សាយោបល់ឥតគិតថ្លៃរយៈពេល 15 នាទីក្នុងសប្តាហ៍នេះ",
+      fr: "Consultations de conseil gratuites de 15 minutes disponibles cette semaine",
+      pt: "Consultas Gratuitas de Assessoria de 15 Minutos Disponíveis Esta Semana"
     },
     "Schedule a Call": {
       es: "Programar llamada",
@@ -240,7 +438,16 @@
       ko: "전화 예약하기",
       hy: "Ամրագրել զանգ",
       ru: "Заказать звонок",
-      ar: "حجز مكالمة"
+      ar: "حجز مكالمة",
+      fa: "رزرو تماس تلفنی",
+      hi: "कॉल शेड्यूल करें",
+      pa: "ਕਾਲ ਤੈਅ ਕਰੋ",
+      ja: "通話相談を予約",
+      uk: "Запланувати дзвінок",
+      he: "תיאום שיחה",
+      km: "កំណត់ពេលហៅទូរស័ព្ទ",
+      fr: "Planifier un appel",
+      pt: "Agendar Ligação"
     },
     "Care & Consulting": {
       es: "Cuidado y Consultoría",
@@ -250,7 +457,16 @@
       ko: "케어 & 컨설팅",
       hy: "Խնամք և խորհրդատվություն",
       ru: "Уход и консалтинг",
-      ar: "الرعاية والاستشارات"
+      ar: "الرعاية والاستشارات",
+      fa: "مراقبت و مشاوره",
+      hi: "देखभाल और परामर्श",
+      pa: "ਦੇਖਭਾਲ ਅਤੇ ਸਲਾਹ",
+      ja: "ケア紹介＆開業コンサルティング",
+      uk: "Догляд і консалтинг",
+      he: "טיפול וייעוץ",
+      km: "ការថែទាំ និងការប្រឹក្សា",
+      fr: "Soins et conseil",
+      pt: "Cuidados e Consultoria"
     },
     "Home": {
       es: "Inicio",
@@ -260,7 +476,16 @@
       ko: "홈",
       hy: "Գլխավոր",
       ru: "Главная",
-      ar: "الرئيسية"
+      ar: "الرئيسية",
+      fa: "خانه",
+      hi: "होम",
+      pa: "ਮੁੱਖ ਪੰਨਾ",
+      ja: "ホーム",
+      uk: "Головна",
+      he: "דף הבית",
+      km: "ទំព័រដើម",
+      fr: "Accueil",
+      pt: "Início"
     },
     "Services": {
       es: "Servicios",
@@ -270,7 +495,16 @@
       ko: "서비스",
       hy: "Ծառայություններ",
       ru: "Услуги",
-      ar: "الخدمات"
+      ar: "الخدمات",
+      fa: "خدمات",
+      hi: "सेवाएँ",
+      pa: "ਸੇਵਾਵਾਂ",
+      ja: "サービス",
+      uk: "Послуги",
+      he: "שירותים",
+      km: "សេវាកម្ម",
+      fr: "Nos services",
+      pt: "Serviços"
     },
     "Care Tools": {
       es: "Herramientas",
@@ -280,7 +514,16 @@
       ko: "케어 도구",
       hy: "Խնամքի գործիքներ",
       ru: "Инструменты",
-      ar: "أدوات الرعاية"
+      ar: "أدوات الرعاية",
+      fa: "ابزارهای مراقبت",
+      hi: "देखभाल उपकरण",
+      pa: "ਦੇਖਭਾਲ ਸਾਧਨ",
+      ja: "ケアツール",
+      uk: "Інструменти",
+      he: "כלי טיפול",
+      km: "ឧបករណ៍ថែទាំ",
+      fr: "Outils de soins",
+      pt: "Ferramentas"
     },
     "New": {
       es: "Nuevo",
@@ -290,7 +533,16 @@
       ko: "신규",
       hy: "Նոր",
       ru: "Новое",
-      ar: "جديد"
+      ar: "جديد",
+      fa: "جدید",
+      hi: "नया",
+      pa: "ਨਵਾਂ",
+      ja: "新着",
+      uk: "Нове",
+      he: "חדש",
+      km: "ថ្មី",
+      fr: "Nouveau",
+      pt: "Novo"
     },
     "Our Approach": {
       es: "Nuestro Enfoque",
@@ -300,7 +552,16 @@
       ko: "상담 철학",
       hy: "Մեր մոտեցումը",
       ru: "Наш подход",
-      ar: "منهجنا"
+      ar: "منهجنا",
+      fa: "رویکرد ما",
+      hi: "हमारा दृष्टिकोण",
+      pa: "ਸਾਡਾ ਤਰੀਕਾ",
+      ja: "私たちの理念",
+      uk: "Наш підхід",
+      he: "הגישה שלנו",
+      km: "វិធីសាស្ត្ររបស់យើង",
+      fr: "Notre approche",
+      pt: "Nossa Abordagem"
     },
     "FAQs & Support": {
       es: "Preguntas y Ayuda",
@@ -310,7 +571,16 @@
       ko: "자주 묻는 질문",
       hy: "ՀՏՀ և աջակցություն",
       ru: "Вопросы и помощь",
-      ar: "الأسئلة والدعم"
+      ar: "الأسئلة والدعم",
+      fa: "پرسش‌های متداول و پشتیبانی",
+      hi: "प्रश्नोत्तर और सहायता",
+      pa: "ਆਮ ਸਵਾਲ ਅਤੇ ਸਹਾਇਤਾ",
+      ja: "よくある質問・サポート",
+      uk: "Запитання та підтримка",
+      he: "שאלות ותמיכה",
+      km: "សំណួរញឹកញាប់ និងជំនួយ",
+      fr: "FAQ et assistance",
+      pt: "Dúvidas e Suporte"
     },
     "Get in Touch": {
       es: "Contáctenos",
@@ -320,7 +590,16 @@
       ko: "상담 문의",
       hy: "Կապ հաստատել",
       ru: "Связаться",
-      ar: "تواصل معنا"
+      ar: "تواصل معنا",
+      fa: "ارتباط با ما",
+      hi: "संपर्क करें",
+      pa: "ਸੰਪਰਕ ਕਰੋ",
+      ja: "ご相談・お問い合わせ",
+      uk: "Зв’язатися",
+      he: "דברו איתנו",
+      km: "ទាក់ទងមកយើង",
+      fr: "Prendre contact",
+      pt: "Entre em Contato"
     },
     "Contact": {
       es: "Contacto",
@@ -330,7 +609,16 @@
       ko: "문의",
       hy: "Կապ",
       ru: "Контакты",
-      ar: "اتصل بنا"
+      ar: "اتصل بنا",
+      fa: "تماس",
+      hi: "संपर्क",
+      pa: "ਸੰਪਰਕ",
+      ja: "お問い合わせ",
+      uk: "Контакти",
+      he: "צור קשר",
+      km: "ទំនាក់ទំនង",
+      fr: "Nous contacter",
+      pt: "Contato"
     },
     "Our Services": {
       es: "Nuestros Servicios",
@@ -340,7 +628,16 @@
       ko: "서비스 안내",
       hy: "Մեր ծառայությունները",
       ru: "Наши услуги",
-      ar: "خدماتنا"
+      ar: "خدماتنا",
+      fa: "خدمات ما",
+      hi: "हमारी सेवाएँ",
+      pa: "ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ",
+      ja: "サービス案内",
+      uk: "Наші послуги",
+      he: "השירותים שלנו",
+      km: "សេវាកម្មរបស់យើង",
+      fr: "Nos services",
+      pt: "Nossos Serviços"
     },
     "Care Tools & Calculators": {
       es: "Herramientas y Calculadoras",
@@ -350,7 +647,16 @@
       ko: "케어 도구 및 계산기",
       hy: "Խնամքի գործիքներ և հաշվիչներ",
       ru: "Инструменты и калькуляторы",
-      ar: "أدوات الرعاية والحاسبات"
+      ar: "أدوات الرعاية والحاسبات",
+      fa: "ابزارهای مراقبت و ماشین‌حساب‌ها",
+      hi: "देखभाल उपकरण और कैलकुलेटर",
+      pa: "ਦੇਖਭਾਲ ਸਾਧਨ ਅਤੇ ਕੈਲਕੂਲੇਟਰ",
+      ja: "ケアツール・費用計算",
+      uk: "Калькулятори та інструменти догляду",
+      he: "כלים ומחשבוני עלויות",
+      km: "ឧបករណ៍ថែទាំ និងម៉ាស៊ីនគណនា",
+      fr: "Outils et calculateurs de coûts",
+      pt: "Ferramentas e Calculadoras de Cuidado"
     },
     "Assessment & Cost": {
       es: "Evaluación y Costo",
@@ -360,7 +666,16 @@
       ko: "평가 및 비용",
       hy: "Գնահատում և արժեք",
       ru: "Оценка и стоимость",
-      ar: "التقييم والتكلفة"
+      ar: "التقييم والتكلفة",
+      fa: "ارزیابی و برآورد هزینه",
+      hi: "मूल्यांकन और लागत",
+      pa: "ਮੁਲਾਂਕਣ ਅਤੇ ਖਰਚ",
+      ja: "ケア診断・費用目安",
+      uk: "Оцінка та вартість",
+      he: "הערכה ועלויות",
+      km: "ការវាយតម្លៃ និងថ្លៃចំណាយ",
+      fr: "Évaluation et coûts",
+      pt: "Avaliação e Custos"
     },
     "Support & FAQs": {
       es: "Soporte y Preguntas",
@@ -370,7 +685,16 @@
       ko: "지원 및 FAQ",
       hy: "Աջակցություն և ՀՏՀ",
       ru: "Поддержка и вопросы",
-      ar: "الدعم والأسئلة الشائعة"
+      ar: "الدعم والأسئلة الشائعة",
+      fa: "پشتیبانی و پرسش‌های متداول",
+      hi: "सहायता और प्रश्नोत्तर",
+      pa: "ਸਹਾਇਤਾ ਅਤੇ ਆਮ ਸਵਾਲ",
+      ja: "サポート・FAQ",
+      uk: "Підтримка та запитання",
+      he: "תמיכה ושאלות נפוצות",
+      km: "ជំនួយ និងសំណួរញឹកញាប់",
+      fr: "Aide et FAQ",
+      pt: "Suporte e Perguntas Frequentes"
     },
     "Start Consultation": {
       es: "Iniciar Consulta",
@@ -380,7 +704,16 @@
       ko: "상담 시작하기",
       hy: "Սկսել խորհրդատվությունը",
       ru: "Начать консультацию",
-      ar: "ابدأ الاستشارة"
+      ar: "ابدأ الاستشارة",
+      fa: "شروع مشاوره",
+      hi: "परामर्श शुरू करें",
+      pa: "ਸਲਾਹ-ਮਸ਼ਵਰਾ ਸ਼ੁਰੂ ਕਰੋ",
+      ja: "無料相談をはじめる",
+      uk: "Розпочати консультацію",
+      he: "התחילו ייעוץ",
+      km: "ចាប់ផ្តើមការប្រឹក្សា",
+      fr: "Demander une consultation",
+      pt: "Iniciar Consultoria"
     },
     "Display Mode:": {
       es: "Modo de pantalla:",
@@ -390,7 +723,16 @@
       ko: "화면 모드:",
       hy: "Ցուցադրման ռեժիմ՝",
       ru: "Режим экрана:",
-      ar: "وضع العرض:"
+      ar: "وضع العرض:",
+      fa: "حالت نمایش:",
+      hi: "प्रदर्शन मोड:",
+      pa: "ਡਿਸਪਲੇ ਮੋਡ:",
+      ja: "表示モード：",
+      uk: "Режим відображення:",
+      he: "מצב תצוגה:",
+      km: "ទម្រង់បង្ហាញ៖",
+      fr: "Mode d'affichage :",
+      pt: "Modo de Exibição:"
     },
     "Dark Mode": {
       es: "Modo Oscuro",
@@ -400,7 +742,16 @@
       ko: "다크 모드",
       hy: "Մուգ ռեժիմ",
       ru: "Темная тема",
-      ar: "الوضع الداكن"
+      ar: "الوضع الداكن",
+      fa: "حالت تاریک",
+      hi: "डार्क मोड",
+      pa: "ਡਾਰਕ ਮੋਡ",
+      ja: "ダークモード",
+      uk: "Темна тема",
+      he: "מצב כהה",
+      km: "ទម្រង់ងងឹត",
+      fr: "Mode sombre",
+      pt: "Modo Escuro"
     },
     "Light Mode": {
       es: "Modo Claro",
@@ -410,7 +761,16 @@
       ko: "라이트 모드",
       hy: "Բաց ռեժիմ",
       ru: "Светлая тема",
-      ar: "الوضع الفاتح"
+      ar: "الوضع الفاتح",
+      fa: "حالت روشن",
+      hi: "लाइट मोड",
+      pa: "ਲਾਈਟ ਮੋਡ",
+      ja: "ライトモード",
+      uk: "Світла тема",
+      he: "מצב בהיר",
+      km: "ទម្រង់ភ្លឺ",
+      fr: "Mode clair",
+      pt: "Modo Claro"
     },
     "Language / Idioma": {
       es: "Idioma / Language",
@@ -420,7 +780,16 @@
       ko: "언어 선택 / Language",
       hy: "Լեզու / Language",
       ru: "Язык / Language",
-      ar: "اللغة / Language"
+      ar: "اللغة / Language",
+      fa: "زبان / Language",
+      hi: "भाषा / Language",
+      pa: "ਭਾਸ਼ਾ / Language",
+      ja: "言語 / Language",
+      uk: "Мова / Language",
+      he: "שפה / Language",
+      km: "ភាសា / Language",
+      fr: "Langue / Language",
+      pt: "Idioma / Language"
     },
     "Need urgent placement?": {
       es: "¿Necesita ubicación urgente?",
@@ -430,7 +799,16 @@
       ko: "긴급 입소가 필요하신가요?",
       hy: "Շտապ տեղավորո՞ւմ է անհրաժեշտ",
       ru: "Нужно срочное размещение?",
-      ar: "هل تحتاج لتسكين عاجل؟"
+      ar: "هل تحتاج لتسكين عاجل؟",
+      fa: "نیاز به اسکان فوری دارید؟",
+      hi: "क्या तत्काल प्लेसमेंट चाहिए?",
+      pa: "ਕੀ ਤੁਰੰਤ ਰਿਹਾਇਸ਼ ਦੀ ਲੋੜ ਹੈ?",
+      ja: "お急ぎの入居先をお探しですか？",
+      uk: "Потрібне термінове влаштування?",
+      he: "זקוקים לשיבוץ דחוף?",
+      km: "ត្រូវការកន្លែងស្នាក់នៅបន្ទាន់មែនទេ?",
+      fr: "Besoin d'un placement urgent ?",
+      pt: "Precisa de acolhimento urgente?"
     },
     "Care begins with understanding": {
       es: "El cuidado comienza con la comprensión",
@@ -440,7 +818,16 @@
       ko: "진정한 돌봄은 이해에서 시작됩니다",
       hy: "Խնամքը սկսվում է ըմբռնումից",
       ru: "Забота начинается с понимания",
-      ar: "الرعاية تبدأ بالفهم"
+      ar: "الرعاية تبدأ بالفهم",
+      fa: "مراقبت از درک درست آغاز می‌شود",
+      hi: "सच्ची देखभाल समझ से शुरू होती है",
+      pa: "ਦੇਖਭਾਲ ਦੀ ਸ਼ੁਰੂਆਤ ਸਹੀ ਸਮਝ ਨਾਲ ਹੁੰਦੀ ਹੈ",
+      ja: "安心のケアは、丁寧な理解から始まります",
+      uk: "Турбота починається з розуміння",
+      he: "טיפול מסור מתחיל בהבנה",
+      km: "ការថែទាំចាប់ផ្តើមពីការយល់ដឹង",
+      fr: "Prendre soin commence par comprendre",
+      pt: "O cuidado começa com a compreensão"
     },
     "Whether you are looking for the right residential care home for a parent, or navigating California Title 22 licensing to open your own RCFE, we guide you every step of the way.": {
       es: "Ya sea que busque el hogar de cuidado residencial adecuado para su padre o madre, o necesite tramitar la licencia bajo el Título 22 de California para abrir su propio RCFE, lo guiamos en cada paso.",
@@ -450,7 +837,16 @@
       ko: "부모님을 위한 따뜻한 주거형 요양홈(Board & Care)을 찾고 계시든, 캘리포니아 Title 22 인허가를 준비해 직접 RCFE를 설립하시든 모든 과정을 한 걸음씩 함께합니다.",
       hy: "Անկախ նրանից՝ փնտրում եք ճիշտ բնակելի խնամքի տուն ձեր ծնողի համար, թե անցնում եք Կալիֆոռնիայի Title 22 լիցենզավորման գործընթացով՝ ձեր սեփական RCFE-ն բացելու համար, մենք ուղեկցում ենք ձեզ ամեն քայլափոխի։",
       ru: "Ищете ли вы подходящий дом заботы для родителя или проходите лицензирование по стандарту California Title 22 для открытия собственного RCFE — мы поддержим вас на каждом этапе.",
-      ar: "سواء كنت تبحث عن دار الرعاية السكنية المناسبة لوالدك أو والدتك، أو تسعى لاستخراج ترخيص Title 22 في كاليفورنيا لفتح دار RCFE خاصة بك، فنحن نرشدك في كل خطوة."
+      ar: "سواء كنت تبحث عن دار الرعاية السكنية المناسبة لوالدك أو والدتك، أو تسعى لاستخراج ترخيص Title 22 في كاليفورنيا لفتح دار RCFE خاصة بك، فنحن نرشدك في كل خطوة.",
+      fa: "چه به دنبال یافتن خانه مراقبت مناسب برای والدین خود باشید و چه در مسیر دریافت مجوز Title 22 کالیفرنیا برای راه‌اندازی RCFE خودتان گام بردارید، ما در تمام مراحل همراه شما هستیم.",
+      hi: "चाहे आप अपने माता-पिता के लिए सही आवासीय देखभाल गृह खोज रहे हों, या अपना स्वयं का RCFE शुरू करने के लिए कैलिफ़ोर्निया Title 22 लाइसेंसिंग की प्रक्रिया समझ रहे हों, हम हर कदम पर आपका मार्गदर्शन करते हैं।",
+      pa: "ਭਾਵੇਂ ਤੁਸੀਂ ਆਪਣੇ ਮਾਤਾ-ਪਿਤਾ ਲਈ ਢੁੱਕਵਾਂ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਘਰ ਲੱਭ ਰਹੇ ਹੋ, ਜਾਂ ਆਪਣਾ RCFE ਖੋਲ੍ਹਣ ਲਈ ਕੈਲੀਫੋਰਨੀਆ Title 22 ਲਾਇਸੰਸਿੰਗ ਦੀ ਪ੍ਰਕਿਰਿਆ ਨੂੰ ਸਮਝ ਰਹੇ ਹੋ, ਅਸੀਂ ਹਰ ਕਦਮ 'ਤੇ ਤੁਹਾਡਾ ਮਾਰਗਦਰਸ਼ਨ ਕਰਦੇ ਹਾਂ।",
+      ja: "親御様にとって最適な居住型ケアホームをお探しの場合も、カリフォルニア州 Title 22 の認可手続きを経てご自身の RCFE を開業される場合も、一歩ずつ丁寧に伴走いたします。",
+      uk: "Незалежно від того, чи шукаєте ви надійний будинок догляду для когось із батьків, чи проходите ліцензування за Title 22 у Каліфорнії для відкриття власного RCFE, ми супроводжуємо вас на кожному кроці.",
+      he: "בין אם אתם מחפשים בית טיפולי מתאים להורה ובין אם אתם נערכים לרישוי California Title 22 להקמת RCFE משלכם, אנחנו מלווים אתכם בכל שלב בדרך.",
+      km: "មិនថាលោកអ្នកកំពុងស្វែងរកផ្ទះថែទាំស្នាក់នៅដែលសមរម្យសម្រាប់ឪពុកម្តាយ ឬកំពុងរៀបចំឯកសារសុំអាជ្ញាប័ណ្ណ Title 22 នៅរដ្ឋ California ដើម្បីបើក RCFE ផ្ទាល់ខ្លួននោះទេ យើងជួយណែនាំលោកអ្នកគ្រប់ជំហាន។",
+      fr: "Que vous recherchiez la maison de soins idéale pour un parent ou que vous prépariez l'agrément Title 22 de Californie pour ouvrir votre propre RCFE, nous vous guidons à chaque étape.",
+      pt: "Seja na busca pela casa residencial de cuidados ideal para seus pais ou na condução do licenciamento Title 22 da Califórnia para abrir seu próprio RCFE, guiamos você em cada etapa."
     },
     "Talk with an advisor": {
       es: "Hable con un asesor",
@@ -460,7 +856,16 @@
       ko: "전문 상담사와 이야기하기",
       hy: "Խոսել խորհրդատուի հետ",
       ru: "Поговорить с консультантом",
-      ar: "تحدث مع مستشار"
+      ar: "تحدث مع مستشار",
+      fa: "گفتگو با مشاور",
+      hi: "सलाहकार से बात करें",
+      pa: "ਸਲਾਹਕਾਰ ਨਾਲ ਗੱਲ ਕਰੋ",
+      ja: "アドバイザーに相談する",
+      uk: "Поспілкуватися з консультантом",
+      he: "שיחה עם יועץ",
+      km: "ពិភាក្សាជាមួយទីប្រឹក្សា",
+      fr: "Parler à un conseiller",
+      pt: "Falar com um consultor"
     },
     "Take 2-Min Care Assessment": {
       es: "Evaluación rápida de 2 min",
@@ -470,7 +875,16 @@
       ko: "2분 케어 자가 진단",
       hy: "Անցնել 2-րոպեանոց խնամքի գնահատում",
       ru: "Пройти 2-мин оценку ухода",
-      ar: "أجرِ تقييم الرعاية في دقيقتين"
+      ar: "أجرِ تقييم الرعاية في دقيقتين",
+      fa: "ارزیابی ۲ دقیقه‌ای نیازهای مراقبتی",
+      hi: "2-मिनट का देखभाल मूल्यांकन करें",
+      pa: "2-ਮਿੰਟ ਦਾ ਦੇਖਭਾਲ ਮੁਲਾਂਕਣ ਲਓ",
+      ja: "2分でできるケア診断を始める",
+      uk: "Пройти 2-хвилинну оцінку догляду",
+      he: "מילוי הערכת טיפול (2 דקות)",
+      km: "ធ្វើការវាយតម្លៃការថែទាំរយៈពេល 2 នាទី",
+      fr: "Faire l'évaluation de 2 min",
+      pt: "Fazer Avaliação de Cuidados de 2 Min"
     },
     "Families Guided": {
       es: "Familias asesoradas",
@@ -480,7 +894,16 @@
       ko: "상담 완료 가족",
       hy: "Ուղեկցված ընտանիքներ",
       ru: "Семей получили помощь",
-      ar: "عائلة تم إرشادها"
+      ar: "عائلة تم إرشادها",
+      fa: "خانواده‌های راهنمایی‌شده",
+      hi: "परिवारों का मार्गदर्शन",
+      pa: "ਪਰਿਵਾਰਾਂ ਦਾ ਮਾਰਗਦਰਸ਼ਨ",
+      ja: "ご相談実績のあるご家族",
+      uk: "Родин отримали допомогу",
+      he: "משפחות שליווינו",
+      km: "គ្រួសារដែលបានណែនាំ",
+      fr: "Familles accompagnées",
+      pt: "Famílias Orientadas"
     },
     "Title 22 Focus": {
       es: "Enfoque Título 22",
@@ -490,7 +913,16 @@
       ko: "Title 22 전문성",
       hy: "Title 22 մասնագիտացում",
       ru: "Фокус на Title 22",
-      ar: "تخصص Title 22"
+      ar: "تخصص Title 22",
+      fa: "تمرکز بر Title 22",
+      hi: "Title 22 विशेषज्ञता",
+      pa: "Title 22 'ਤੇ ਕੇਂਦਰਿਤ",
+      ja: "Title 22 専門特化",
+      uk: "Фокус на Title 22",
+      he: "מיקוד ב-Title 22",
+      km: "ផ្តោតលើ Title 22",
+      fr: "Expertise Title 22",
+      pt: "Foco no Title 22"
     },
     "Family Referral Fee": {
       es: "Costo para familias",
@@ -500,7 +932,16 @@
       ko: "가족 상담 수수료",
       hy: "Ընտանիքների համար վճար",
       ru: "Комиссия для семей",
-      ar: "رسوم الإحالة للعائلات"
+      ar: "رسوم الإحالة للعائلات",
+      fa: "هزینه معرفی برای خانواده‌ها",
+      hi: "परिवार रेफ़रल शुल्क",
+      pa: "ਪਰਿਵਾਰਕ ਰੈਫਰਲ ਫੀਸ",
+      ja: "ご家族の紹介手数料",
+      uk: "Комісія для родин",
+      he: "עמלת הפניה למשפחות",
+      km: "ថ្លៃណែនាំសម្រាប់គ្រួសារ",
+      fr: "Frais de placement pour les familles",
+      pt: "Taxa para Famílias"
     },
     "Compassionate Advocacy": {
       es: "Defensa Compasiva",
@@ -510,7 +951,16 @@
       ko: "진심 어린 옹호와 동행",
       hy: "Սրտացավ պաշտպանություն",
       ru: "Чуткая поддержка",
-      ar: "مناصرة رحيمة"
+      ar: "مناصرة رحيمة",
+      fa: "حمایت دلسوزانه",
+      hi: "संवेदनशील पैरवी और सहयोग",
+      pa: "ਹਮਦਰਦੀ ਭਰੀ ਵਕਾਲਤ",
+      ja: "心に寄り添うサポート",
+      uk: "Щира підтримка інтересів",
+      he: "ליווי אמפתי ומסור",
+      km: "ការគាំទ្រប្រកបដោយក្តីមេត្តា",
+      fr: "Défense bienveillante de vos intérêts",
+      pt: "Acompanhamento Humanizado"
     },
     "Every family deserves a thoughtful, dignified path forward.": {
       es: "Cada familia merece un camino respetuoso y bien pensado.",
@@ -520,7 +970,16 @@
       ko: "모든 가정은 사려 깊고 존엄한 돌봄의 길을 누릴 자격이 있습니다.",
       hy: "Յուրաքանչյուր ընտանիք արժանի է մտածված և արժանապատիվ ուղու։",
       ru: "Каждая семья заслуживает вдумчивого и достойного пути вперед.",
-      ar: "كل عائلة تستحق مساراً مدروساً يحفظ الكرامة."
+      ar: "كل عائلة تستحق مساراً مدروساً يحفظ الكرامة.",
+      fa: "هر خانواده‌ای سزاوار مسیری سنجیده و محترمانه است.",
+      hi: "हर परिवार आगे बढ़ने के लिए एक संवेदनशील और सम्मानजनक मार्ग का हकदार है।",
+      pa: "ਹਰ ਪਰਿਵਾਰ ਅੱਗੇ ਵਧਣ ਲਈ ਇੱਕ ਸੁਚੱਜੇ ਅਤੇ ਸਨਮਾਨਜਨਕ ਰਸਤੇ ਦਾ ਹੱਕਦਾਰ ਹੈ।",
+      ja: "すべてのご家族に、思いやりと尊厳のある確かな選択肢を。",
+      uk: "Кожна родина заслуговує на продуманий і гідний шлях уперед.",
+      he: "כל משפחה ראויה לדרך שקולה, רגישה ומכבדת קדימה.",
+      km: "គ្រប់គ្រួសារទាំងអស់សមនឹងទទួលបានផ្លូវទៅមុខដ៏សមរម្យ និងប្រកបដោយសេចក្តីថ្លៃថ្នូរ។",
+      fr: "Chaque famille mérite un cheminement réfléchi et digne.",
+      pt: "Cada família merece seguir em frente com serenidade e dignidade."
     },
     "100% Free for Families": {
       es: "100% Gratis para Familias",
@@ -530,7 +989,16 @@
       ko: "가족 상담 100% 무료",
       hy: "100% անվճար ընտանիքների համար",
       ru: "100% бесплатно для семей",
-      ar: "مجاني 100% للعائلات"
+      ar: "مجاني 100% للعائلات",
+      fa: "۱۰۰٪ رایگان برای خانواده‌ها",
+      hi: "परिवारों के लिए 100% निःशुल्क",
+      pa: "ਪਰਿਵਾਰਾਂ ਲਈ 100% ਮੁਫ਼ਤ",
+      ja: "ご家族のご利用は完全無料",
+      uk: "100% безкоштовно для родин",
+      he: "100% חינם למשפחות",
+      km: "ឥតគិតថ្លៃ 100% សម្រាប់គ្រួសារ",
+      fr: "100 % gratuit pour les familles",
+      pt: "100% Gratuito para Famílias"
     },
     "Licensed CA Care": {
       es: "Cuidado con Licencia CA",
@@ -540,7 +1008,16 @@
       ko: "캘리포니아 공식 인가 시설",
       hy: "Լիցենզավորված CA խնամք",
       ru: "Лицензированный уход CA",
-      ar: "رعاية مرخصة في كاليفورنيا"
+      ar: "رعاية مرخصة في كاليفورنيا",
+      fa: "مراقبت دارای مجوز کالیفرنیا",
+      hi: "लाइसेंस प्राप्त CA देखभाल",
+      pa: "ਲਾਇਸੰਸਸ਼ੁਦਾ CA ਦੇਖਭਾਲ",
+      ja: "カリフォルニア州認可施設",
+      uk: "Ліцензований догляд у Каліфорнії",
+      he: "טיפול מורשה בקליפורניה",
+      km: "ការថែទាំមានអាជ្ញាប័ណ្ណនៅ CA",
+      fr: "Soins agréés en Californie",
+      pt: "Cuidado Licenciado na CA"
     },
     "Two Dedicated Paths": {
       es: "Dos Rutas Especializadas",
@@ -550,7 +1027,16 @@
       ko: "두 가지 전문 지원 분야",
       hy: "Երկու մասնագիտացված ուղղություն",
       ru: "Два профильных направления",
-      ar: "مساران مخصصان"
+      ar: "مساران مخصصان",
+      fa: "دو مسیر تخصصی",
+      hi: "दो समर्पित सेवा मार्ग",
+      pa: "ਦੋ ਸਮਰਪਿਤ ਰਸਤੇ",
+      ja: "2つの専門サポート領域",
+      uk: "Два спеціалізовані напрямки",
+      he: "שני מסלולים ייעודיים",
+      km: "ផ្លូវជំនួយពីរផ្សេងគ្នា",
+      fr: "Deux parcours dédiés",
+      pt: "Dois Caminhos Dedicados"
     },
     "How can we assist you today?": {
       es: "¿Cómo podemos ayudarle hoy?",
@@ -560,7 +1046,16 @@
       ko: "오늘 어떤 도움이 필요하신가요?",
       hy: "Ինչպե՞ս կարող ենք օգնել ձեզ այսօր",
       ru: "Чем мы можем помочь вам сегодня?",
-      ar: "كيف يمكننا مساعدتك اليوم؟"
+      ar: "كيف يمكننا مساعدتك اليوم؟",
+      fa: "امروز چگونه می‌توانیم به شما کمک کنیم؟",
+      hi: "आज हम आपकी किस प्रकार सहायता कर सकते हैं?",
+      pa: "ਅੱਜ ਅਸੀਂ ਤੁਹਾਡੀ ਕਿਸ ਤਰ੍ਹਾਂ ਮਦਦ ਕਰ ਸਕਦੇ ਹਾਂ?",
+      ja: "本日はどのようなご相談でしょうか？",
+      uk: "Чим ми можемо допомогти вам сьогодні?",
+      he: "כיצד נוכל לסייע לכם היום?",
+      km: "តើយើងអាចជួយលោកអ្នកដោយរបៀបណានៅថ្ងៃនេះ?",
+      fr: "Comment pouvons-nous vous aider aujourd'hui ?",
+      pt: "Como podemos ajudar você hoje?"
     },
     "Choose the track that fits your current priority to see tailored guidance and tools.": {
       es: "Elija la opción que mejor se adapte a su prioridad actual para ver orientación y herramientas personalizadas.",
@@ -570,7 +1065,16 @@
       ko: "현재 가장 시급한 목적에 맞는 경로를 선택해 맞춤형 안내와 도구를 확인하세요.",
       hy: "Ընտրեք ձեր ընթացիկ առաջնահերթությանը համապատասխանող ուղղությունը՝ հարմարեցված ուղեցույցներ և գործիքներ տեսնելու համար։",
       ru: "Выберите направление, соответствующее вашей текущей задаче, чтобы получить персональные рекомендации и инструменты.",
-      ar: "اختر المسار الذي يناسب أولويتك الحالية لعرض الإرشادات والأدوات المصممة لك."
+      ar: "اختر المسار الذي يناسب أولويتك الحالية لعرض الإرشادات والأدوات المصممة لك.",
+      fa: "مسیر متناسب با اولویت فعلی خود را انتخاب کنید تا راهنمایی‌ها و ابزارهای اختصاصی را ببینید.",
+      hi: "अपनी वर्तमान प्राथमिकता के अनुसार सही विकल्प चुनें और उपयुक्त मार्गदर्शन व उपकरण देखें।",
+      pa: "ਆਪਣੀ ਮੌਜੂਦਾ ਲੋੜ ਅਨੁਸਾਰ ਢੁੱਕਵਾਂ ਵਿਕਲਪ ਚੁਣੋ ਤਾਂ ਜੋ ਤੁਹਾਨੂੰ ਖ਼ਾਸ ਮਾਰਗਦਰਸ਼ਨ ਅਤੇ ਸਾਧਨ ਮਿਲ ਸਕਣ।",
+      ja: "現在のご状況に合うサポート領域をお選びいただくと、目的に合わせたご案内やツールをご確認いただけます。",
+      uk: "Оберіть напрямок, який відповідає вашому поточному запиту, щоб отримати персоналізовані поради та інструменти.",
+      he: "בחרו את המסלול המתאים לצורך הנוכחי שלכם כדי לקבל הכוונה וכלים מותאמים אישית.",
+      km: "ជ្រើសរើសផ្នែកដែលសមស្របនឹងអាទិភាពបច្ចុប្បន្នរបស់លោកអ្នក ដើម្បីមើលការណែនាំ និងឧបករណ៍ដែលរៀបចំឡើងជាពិសេស។",
+      fr: "Choisissez le parcours correspondant à votre priorité actuelle pour découvrir des conseils et outils adaptés.",
+      pt: "Escolha a trilha que melhor reflete sua prioridade atual para acessar orientações e ferramentas sob medida."
     },
     "For Seniors & Families": {
       es: "Para Adultos Mayores y Familias",
@@ -580,7 +1084,16 @@
       ko: "어르신 및 가족을 위한 안내",
       hy: "Տարեցների և ընտանիքների համար",
       ru: "Для пожилых людей и семей",
-      ar: "لكبار السن والعائلات"
+      ar: "لكبار السن والعائلات",
+      fa: "برای سالمندان و خانواده‌ها",
+      hi: "वरिष्ठजनों और परिवारों के लिए",
+      pa: "ਬਜ਼ੁਰਗਾਂ ਅਤੇ ਪਰਿਵਾਰਾਂ ਲਈ",
+      ja: "ご高齢者とご家族の方へ",
+      uk: "Для людей похилого віку та родин",
+      he: "לאזרחים ותיקים ומשפחות",
+      km: "សម្រាប់មនុស្សចាស់ និងគ្រួសារ",
+      fr: "Pour les aînés et les familles",
+      pt: "Para Idosos e Famílias"
     },
     "Looking for Quality Elder Care?": {
       es: "¿Busca cuidado de calidad para un adulto mayor?",
@@ -590,7 +1103,16 @@
       ko: "믿을 수 있는 어르신 요양홈을 찾고 계신가요?",
       hy: "Փնտրո՞ւմ եք որակյալ խնամք տարեցների համար",
       ru: "Ищете качественный уход за пожилым человеком?",
-      ar: "هل تبحث عن رعاية عالية الجودة لكبار السن؟"
+      ar: "هل تبحث عن رعاية عالية الجودة لكبار السن؟",
+      fa: "به دنبال مراقبت باکیفیت برای سالمندان هستید؟",
+      hi: "क्या आप गुणवत्तापूर्ण वरिष्ठजन देखभाल खोज रहे हैं?",
+      pa: "ਕੀ ਤੁਸੀਂ ਮਿਆਰੀ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਲੱਭ ਰਹੇ ਹੋ?",
+      ja: "質の高い高齢者ケアホームをお探しですか？",
+      uk: "Шукаєте якісний догляд для близької людини?",
+      he: "מחפשים טיפול איכותי לבן משפחה מבוגר?",
+      km: "កំពុងស្វែងរកការថែទាំមនុស្សចាស់ប្រកបដោយគុណភាពមែនទេ?",
+      fr: "Vous recherchez des soins de qualité pour un proche âgé ?",
+      pt: "Procurando Cuidados de Qualidade para Idosos?"
     },
     "Confused by Assisted Living vs 6-bed Residential Care (Board & Care) vs Memory Care? We evaluate medical needs, budget, and location to shortlist trusted California licensed facilities.": {
       es: "¿Le confunde elegir entre Vivienda Asistida, Casa de Cuidado de 6 camas (Board & Care) o Cuidado de la Memoria? Evaluamos sus necesidades médicas, presupuesto y ubicación para preseleccionar centros confiables con licencia en California.",
@@ -600,7 +1122,16 @@
       ko: "대형 어시스티드 리빙, 6인실 소규모 주거형 요양홈(Board & Care), 치매 전문 케어 중 무엇이 맞는지 막막하신가요? 의료 상태, 예산, 희망 지역을 분석해 캘리포니아 정식 인가 시설을 엄선해 드립니다.",
       hy: "Շփոթվա՞ծ եք Assisted Living-ի, 6 տեղանոց բնակելի խնամքի տան (Board & Care) և Հիշողության խնամքի միջև։ Մենք գնահատում ենք բժշկական կարիքները, բյուջեն և գտնվելու վայրը՝ Կալիֆոռնիայի վստահելի լիցենզավորված հաստատություններ առաջարկելու համար։",
       ru: "Запутались в различиях между Assisted Living, 6-местным домашним пансионатом (Board & Care) и отделением ухода за памятью? Мы оцениваем медицинские потребности, бюджет и расположение, чтобы подобрать надежные лицензированные учреждения в Калифорнии.",
-      ar: "هل تحتار بين المعيشة المساعدة ودار الرعاية المنزلية من 6 أسرّة (Board & Care) ورعاية الذاكرة؟ نقيّم الاحتياجات الطبية والميزانية والموقع لترشيح مرافق موثوقة ومرخصة في كاليفورنيا."
+      ar: "هل تحتار بين المعيشة المساعدة ودار الرعاية المنزلية من 6 أسرّة (Board & Care) ورعاية الذاكرة؟ نقيّم الاحتياجات الطبية والميزانية والموقع لترشيح مرافق موثوقة ومرخصة في كاليفورنيا.",
+      fa: "بین زندگی همراه با مراقبت (Assisted Living)، خانه مراقبت مسکونی ۶ تختخوابی (Board & Care) و مراقبت تخصصی حافظه (Memory Care) سردرگم هستید؟ ما نیازهای پزشکی، بودجه و موقعیت مکانی را بررسی می‌کنیم تا مراکز معتبر دارای مجوز کالیفرنیا را به شما معرفی کنیم.",
+      hi: "असिस्टेड लिविंग, 6-बेड आवासीय देखभाल (Board & Care) और मेमोरी केयर के बीच चयन को लेकर असमंजस में हैं? हम चिकित्सा आवश्यकताओं, बजट और स्थान का मूल्यांकन करके कैलिफ़ोर्निया के भरोसेमंद लाइसेंस प्राप्त केंद्रों की सूची तैयार करते हैं।",
+      pa: "ਕੀ ਤੁਸੀਂ ਅਸਿਸਟਡ ਲਿਵਿੰਗ, 6-ਬੈੱਡ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ (ਬੋਰਡ ਐਂਡ ਕੇਅਰ) ਅਤੇ ਮੈਮੋਰੀ ਕੇਅਰ ਦੇ ਫ਼ਰਕ ਨੂੰ ਲੈ ਕੇ ਉਲਝਣ ਵਿੱਚ ਹੋ? ਅਸੀਂ ਕੈਲੀਫੋਰਨੀਆ ਦੇ ਭਰੋਸੇਮੰਦ ਲਾਇਸੰਸਸ਼ੁਦਾ ਕੇਂਦਰਾਂ ਦੀ ਚੋਣ ਕਰਨ ਲਈ ਡਾਕਟਰੀ ਲੋੜਾਂ, ਬਜਟ ਅਤੇ ਸਥਾਨ ਦਾ ਮੁਲਾਂਕਣ ਕਰਦੇ ਹਾਂ।",
+      ja: "アシステッド・リビング、6床の少人数制居住型ケア（Board & Care）、メモリーケアの違いにお悩みではありませんか？医療的ニーズ・ご予算・ご希望地域を丁寧にお伺いし、信頼できるカリフォルニア州認可施設を厳選してご提案します。",
+      uk: "Важко розібратися між великим комплексом супроводжуваного проживання, 6-місним сімейним будинком догляду (Board & Care) та відділенням догляду при деменції? Ми оцінюємо медичні потреби, бюджет і розташування, щоб відібрати перевірені ліцензовані заклади Каліфорнії.",
+      he: "מתלבטים בין דיור מוגן (Assisted Living), בית טיפולי של 6 מיטות (Board & Care) או מחלקת תשושי נפש (Memory Care)? אנו מעריכים צרכים רפואיים, תקציב ומיקום כדי לסנן עבורכם מתקנים מורשים ואמינים בקליפורניה.",
+      km: "ពិបាកបែងចែករវាង Assisted Living, ផ្ទះថែទាំស្នាក់នៅខ្នាត 6 គ្រែ (Board & Care) ឬការថែទាំអ្នកជំងឺចងចាំ (Memory Care) មែនទេ? យើងវាយតម្លៃតម្រូវការវេជ្ជសាស្ត្រ ថវិកា និងទីតាំង ដើម្បីជ្រើសរើសមណ្ឌលមានអាជ្ញាប័ណ្ណដែលគួរឱ្យទុកចិត្តនៅរដ្ឋ California។",
+      fr: "Vous hésitez entre une résidence avec services (Assisted Living), un foyer résidentiel de 6 lits (Board & Care) ou une unité spécialisée pour la mémoire ? Nous évaluons les besoins médicaux, le budget et le secteur pour présélectionner des établissements californiens agréés et fiables.",
+      pt: "Em dúvida entre Assisted Living, Residencial de 6 vagas (Board & Care) ou Cuidados de Memória? Avaliamos necessidades médicas, orçamento e localização para selecionar residenciais licenciados de confiança na Califórnia."
     },
     "Unbiased facility vetting & state citation checks": {
       es: "Verificación imparcial de centros e historial de inspecciones estatales",
@@ -610,7 +1141,16 @@
       ko: "객관적인 시설 검증 및 주정부 시정 기록 확인",
       hy: "Հաստատությունների անկողմնակալ ստուգում և նահանգային խախտումների ուսումնասիրություն",
       ru: "Независимая проверка учреждений и отчетов о нарушениях",
-      ar: "فحص محايد للمرافق ومراجعة سجلات المخالفات الحكومية"
+      ar: "فحص محايد للمرافق ومراجعة سجلات المخالفات الحكومية",
+      fa: "ارزیابی بی‌طرفانه مراکز و بررسی سوابق نظارتی ایالتی",
+      hi: "निष्पक्ष केंद्र जांच और राज्य निरीक्षण रिकॉर्ड समीक्षा",
+      pa: "ਕੇਂਦਰਾਂ ਦੀ ਨਿਰਪੱਖ ਜਾਂਚ ਅਤੇ ਸਰਕਾਰੀ ਰਿਕਾਰਡ (citations) ਦੀ ਪੜਤਾਲ",
+      ja: "中立的な施設調査および州の指導・違反履歴チェック",
+      uk: "Незалежна перевірка закладів та історії державних порушень",
+      he: "בדיקה אובייקטיבית של מתקנים ודוחות ליקויים של המדינה",
+      km: "ការពិនិត្យមណ្ឌលដោយមិនលំអៀង និងការឆែកប្រវត្តិល្មើសបទប្បញ្ញត្តិរដ្ឋ",
+      fr: "Vérification impartiale des établissements et contrôle des infractions auprès de l'État",
+      pt: "Seleção imparcial de casas e verificação de autuações estaduais"
     },
     "Negotiation and tour accompaniment": {
       es: "Negociación de tarifas y acompañamiento en visitas",
@@ -620,7 +1160,16 @@
       ko: "입소 조건 협상 및 시설 투어 동행",
       hy: "Բանակցություններ և ուղեկցում շրջայցերի ընթացքում",
       ru: "Переговоры и сопровождение на просмотрах",
-      ar: "التفاوض والمرافقة في جولات المعاينة"
+      ar: "التفاوض والمرافقة في جولات المعاينة",
+      fa: "همراهی در مذاکره و بازدید حضوری از مراکز",
+      hi: "शुल्क वार्ता और केंद्र दौरे में साथ",
+      pa: "ਫੀਸ ਬਾਰੇ ਗੱਲਬਾਤ ਅਤੇ ਕੇਂਦਰ ਦੇ ਦੌਰੇ ਵਿੱਚ ਸਾਥ",
+      ja: "条件交渉および施設見学への同行サポート",
+      uk: "Переговори щодо умов і супровід під час оглядів",
+      he: "משא ומתן וליווי אישי בסיורים",
+      km: "ការចរចាតម្លៃ និងការជូនទៅទស្សនាមណ្ឌល",
+      fr: "Négociation et accompagnement lors des visites",
+      pt: "Negociação e acompanhamento nas visitas"
     },
     "Medi-Cal ALW & VA Aid and Attendance advice": {
       es: "Orientación sobre Medi-Cal ALW y VA Aid & Attendance",
@@ -630,7 +1179,16 @@
       ko: "Medi-Cal ALW 및 VA 보훈 연금 지원 안내",
       hy: "Խորհրդատվություն Medi-Cal ALW և VA Aid & Attendance ծրագրերի վերաբերյալ",
       ru: "Консультации по Medi-Cal ALW и VA Aid and Attendance",
-      ar: "إرشاد حول Medi-Cal ALW ومعاش VA Aid & Attendance"
+      ar: "إرشاد حول Medi-Cal ALW ومعاش VA Aid & Attendance",
+      fa: "مشاوره درباره Medi-Cal ALW و مستمری VA Aid and Attendance",
+      hi: "Medi-Cal ALW और VA Aid and Attendance सलाह",
+      pa: "Medi-Cal ALW ਅਤੇ VA Aid and Attendance ਬਾਰੇ ਸਲਾਹ",
+      ja: "Medi-Cal ALW および VA Aid & Attendance の活用アドバイス",
+      uk: "Консультації щодо Medi-Cal ALW і VA Aid & Attendance",
+      he: "הכוונה לזכויות Medi-Cal ALW ו-VA Aid & Attendance",
+      km: "ការប្រឹក្សាអំពី Medi-Cal ALW និង VA Aid and Attendance",
+      fr: "Conseils sur Medi-Cal ALW et la pension VA Aid and Attendance",
+      pt: "Orientação sobre Medi-Cal ALW e VA Aid & Attendance"
     },
     "View Family Services": {
       es: "Ver servicios familiares",
@@ -640,7 +1198,16 @@
       ko: "가족 지원 서비스 보기",
       hy: "Դիտել ընտանեկան ծառայությունները",
       ru: "Услуги для семей",
-      ar: "عرض خدمات العائلات"
+      ar: "عرض خدمات العائلات",
+      fa: "مشاهده خدمات خانواده‌ها",
+      hi: "पारिवारिक सेवाएँ देखें",
+      pa: "ਪਰਿਵਾਰਕ ਸੇਵਾਵਾਂ ਦੇਖੋ",
+      ja: "ご家族向けサービスを見る",
+      uk: "Послуги для родин",
+      he: "צפייה בשירותים למשפחות",
+      km: "មើលសេវាកម្មសម្រាប់គ្រួសារ",
+      fr: "Découvrir les services aux familles",
+      pt: "Ver Serviços para Famílias"
     },
     "Start Quiz": {
       es: "Iniciar evaluación",
@@ -650,7 +1217,16 @@
       ko: "자가진단 시작",
       hy: "Սկսել հարցումը",
       ru: "Пройти тест",
-      ar: "ابدأ التقييم"
+      ar: "ابدأ التقييم",
+      fa: "شروع ارزیابی",
+      hi: "मूल्यांकन शुरू करें",
+      pa: "ਮੁਲਾਂਕਣ ਸ਼ੁਰੂ ਕਰੋ",
+      ja: "診断をスタート",
+      uk: "Пройти тест",
+      he: "התחילו שאלון",
+      km: "ចាប់ផ្តើមសំណួរវាយតម្លៃ",
+      fr: "Commencer le questionnaire",
+      pt: "Iniciar Questionário"
     },
     "For Prospective Operators": {
       es: "Para Futuros Operadores",
@@ -660,7 +1236,16 @@
       ko: "예비 RCFE 운영자 안내",
       hy: "Ապագա օպերատորների համար",
       ru: "Для будущих операторов",
-      ar: "للمشغلين المرتقبين"
+      ar: "للمشغلين المرتقبين",
+      fa: "برای متقاضیان راه‌اندازی مرکز",
+      hi: "भावी संचालकों के लिए",
+      pa: "ਭਾਵੀ ਸੰਚਾਲਕਾਂ ਲਈ",
+      ja: "RCFE 開業をご検討の事業者様へ",
+      uk: "Для майбутніх операторів",
+      he: "ליזמים ומפעילים עתידיים",
+      km: "សម្រាប់អ្នកត្រៀមបើកមណ្ឌល",
+      fr: "Pour les futurs exploitants",
+      pt: "Para Futuros Operadores"
     },
     "Opening an RCFE Care Home?": {
       es: "¿Desea abrir una casa de cuidado RCFE?",
@@ -670,7 +1255,16 @@
       ko: "RCFE 요양홈 개원을 준비 중이신가요?",
       hy: "Բացո՞ւմ եք RCFE խնամքի տուն",
       ru: "Открываете пансионат RCFE?",
-      ar: "هل تفتتح دار رعاية RCFE؟"
+      ar: "هل تفتتح دار رعاية RCFE؟",
+      fa: "در حال راه‌اندازی خانه مراقبت RCFE هستید؟",
+      hi: "क्या आप RCFE देखभाल गृह खोल रहे हैं?",
+      pa: "ਕੀ ਤੁਸੀਂ RCFE ਦੇਖਭਾਲ ਘਰ ਖੋਲ੍ਹ ਰਹੇ ਹੋ?",
+      ja: "RCFE ケアホームの開業をお考えですか？",
+      uk: "Відкриваєте будинок догляду RCFE?",
+      he: "פותחים מעון טיפולי מסוג RCFE?",
+      km: "កំពុងបើកផ្ទះថែទាំ RCFE មែនទេ?",
+      fr: "Vous ouvrez une maison de soins RCFE ?",
+      pt: "Abrindo uma Casa de Cuidados RCFE?"
     },
     "California Title 22 compliance and CDSS licensing can feel daunting. We handle your LIC 200 packet, Plan of Operation, fire clearance prep, and pre-licensing walk-through.": {
       es: "Cumplir con el Título 22 de California y obtener la licencia del CDSS puede parecer abrumador. Preparamos su paquete LIC 200, Plan de Operación, aprobación contra incendios y recorrido previo a la licencia.",
@@ -680,7 +1274,16 @@
       ko: "캘리포니아 Title 22 규정 준수와 CDSS 인허가 절차는 복잡하게 느껴질 수 있습니다. LIC 200 신청 서류, 운영 계획서, 소방 승인 준비, 사전 실사 대비까지 전담 지원해 드립니다.",
       hy: "Կալիֆոռնիայի Title 22 պահանջները և CDSS լիցենզավորումը կարող են բարդ թվալ։ Մենք ստանձնում ենք LIC 200 փաթեթը, Գործողությունների ծրագիրը, հրշեջ թույլտվության նախապատրաստումը և նախալիցենզավորման շրջայցը։",
       ru: "Требования California Title 22 и лицензирование CDSS могут казаться сложными. Мы берем на себя подготовку пакета LIC 200, Плана деятельности, пожарного допуска и предлицензионной проверки.",
-      ar: "قد يبدو الامتثال للوائح Title 22 وترخيص CDSS في كاليفورنيا معقداً. نتولى عنك حزمة LIC 200 وخطة التشغيل والتحضير لموافقة الإطفاء ومعاينة ما قبل الترخيص."
+      ar: "قد يبدو الامتثال للوائح Title 22 وترخيص CDSS في كاليفورنيا معقداً. نتولى عنك حزمة LIC 200 وخطة التشغيل والتحضير لموافقة الإطفاء ومعاينة ما قبل الترخيص.",
+      fa: "رعایت مقررات Title 22 کالیفرنیا و دریافت مجوز از CDSS می‌تواند پیچیده به نظر برسد. ما تهیه پرونده LIC 200، طرح عملیاتی، آماده‌سازی تأییدیه آتش‌نشانی و بازرسی آزمایشی پیش از مجوز را برای شما انجام می‌دهیم.",
+      hi: "कैलिफ़ोर्निया Title 22 अनुपालन और CDSS लाइसेंसिंग प्रक्रिया जटिल लग सकती है। हम आपका LIC 200 पैकेट, संचालन योजना, अग्नि सुरक्षा स्वीकृति की तैयारी और पूर्व-लाइसेंसिंग निरीक्षण की पूरी तैयारी संभालते हैं।",
+      pa: "ਕੈਲੀਫੋਰਨੀਆ Title 22 ਦੀ ਪਾਲਣਾ ਅਤੇ CDSS ਲਾਇਸੰਸਿੰਗ ਮੁਸ਼ਕਲ ਲੱਗ ਸਕਦੀ ਹੈ। ਅਸੀਂ ਤੁਹਾਡਾ LIC 200 ਪੈਕੇਟ, ਸੰਚਾਲਨ ਯੋਜਨਾ (Plan of Operation), ਅੱਗ ਸੁਰੱਖਿਆ ਮਨਜ਼ੂਰੀ ਦੀ ਤਿਆਰੀ ਅਤੇ ਲਾਇਸੰਸ ਤੋਂ ਪਹਿਲਾਂ ਦੇ ਨਿਰੀਖਣ ਦੀ ਤਿਆਰੀ ਸੰਭਾਲਦੇ ਹਾਂ।",
+      ja: "カリフォルニア州 Title 22 の法令遵守や CDSS 認可手続きは複雑に感じられるものです。LIC 200 申請書類一式、運営計画書、消防検査対策、認可前実地検査の準備まで一貫してサポートいたします。",
+      uk: "Дотримання норм Title 22 у Каліфорнії та ліцензування CDSS можуть здаватися складними. Ми підготуємо пакет LIC 200, План діяльності, матеріали для пожежної перевірки та проведемо підготовчий аудит перед інспекцією.",
+      he: "עמידה בתקנות Title 22 של קליפורניה ורישוי CDSS עשויים להיראות מורכבים. אנו מטפלים בתיק LIC 200, בתוכנית ההפעלה (Plan of Operation), בהכנה לאישור כיבוי אש ובביקורת טרום-הרישוי.",
+      km: "ការអនុលោមតាម Title 22 នៅរដ្ឋ California និងការសុំអាជ្ញាប័ណ្ណ CDSS អាចមើលទៅស្មុគស្មាញ។ យើងជួយរៀបចំកញ្ចប់ LIC 200 ផែនការប្រតិបត្តិការ ការត្រៀមអនុញ្ញាតអគ្គិភ័យ និងការត្រួតពិនិត្យមុនទទួលអាជ្ញាប័ណ្ណ។",
+      fr: "La conformité au Title 22 de Californie et l'agrément auprès du CDSS peuvent sembler complexes. Nous prenons en charge votre dossier LIC 200, le Plan d'exploitation, la préparation à l'inspection incendie et la visite blanche pré-licence.",
+      pt: "A conformidade com o Title 22 da Califórnia e o licenciamento pelo CDSS podem parecer complexos. Cuidamos do pacote LIC 200, Plano de Operação, preparo contra incêndios e vistoria pré-licenciamento."
     },
     "Complete LIC 200 packet & policy manual authoring": {
       es: "Paquete completo LIC 200 y redacción de manuales de políticas",
@@ -690,7 +1293,16 @@
       ko: "LIC 200 전체 신청 서류 및 운영 규정 매뉴얼 작성",
       hy: "LIC 200 ամբողջական փաթեթի և կանոնակարգերի կազմում",
       ru: "Полный пакет LIC 200 и разработка внутренних регламентов",
-      ar: "إعداد حزمة LIC 200 الكاملة ودليل السياسات"
+      ar: "إعداد حزمة LIC 200 الكاملة ودليل السياسات",
+      fa: "تهیه کامل پرونده LIC 200 و تدوین دفترچه خط‌مشی‌ها",
+      hi: "संपूर्ण LIC 200 पैकेट और नीति पुस्तिका लेखन",
+      pa: "ਪੂਰਾ LIC 200 ਪੈਕੇਟ ਅਤੇ ਨੀਤੀ ਨਿਯਮਾਵਲੀ ਤਿਆਰ ਕਰਨਾ",
+      ja: "LIC 200 申請書類一式および規定マニュアルの完全作成",
+      uk: "Повний пакет LIC 200 і розробка регламентів та політик",
+      he: "עריכת תיק LIC 200 מלא וכתיבת מדריך נהלים",
+      km: "ការរៀបចំកញ្ចប់ LIC 200 ពេញលេញ និងការសរសេរសៀវភៅគោលនយោបាយ",
+      fr: "Constitution complète du dossier LIC 200 et rédaction du manuel de procédures",
+      pt: "Pacote LIC 200 completo e elaboração de manuais de políticas"
     },
     "STD 850 Fire Marshal clearance guidance": {
       es: "Asesoría para aprobación de bomberos STD 850",
@@ -700,7 +1312,16 @@
       ko: "STD 850 소방국 승인 절차 코칭",
       hy: "STD 850 հրշեջ տեսչության թույլտվության ուղեկցում",
       ru: "Сопровождение пожарного разрешения STD 850",
-      ar: "إرشادات موافقة السلامة من الحرائق STD 850"
+      ar: "إرشادات موافقة السلامة من الحرائق STD 850",
+      fa: "راهنمایی برای اخذ تأییدیه آتش‌نشانی STD 850",
+      hi: "STD 850 फ़ायर मार्शल स्वीकृति मार्गदर्शन",
+      pa: "STD 850 ਫਾਇਰ ਮਾਰਸ਼ਲ ਮਨਜ਼ੂਰੀ ਲਈ ਮਾਰਗਦਰਸ਼ਨ",
+      ja: "STD 850 消防当局（Fire Marshal）検査のクリア指導",
+      uk: "Супровід пожежної перевірки для форми STD 850",
+      he: "הכוונה לקבלת אישור כבאות STD 850",
+      km: "ការណែនាំអំពីការអនុញ្ញាតពីមន្ត្រីអគ្គិភ័យ STD 850",
+      fr: "Accompagnement pour l'approbation incendie STD 850 du Fire Marshal",
+      pt: "Orientação para aprovação STD 850 do Corpo de Bombeiros"
     },
     "Administrator certification guidance & mock inspections": {
       es: "Guía para certificación de administrador e inspecciones simuladas",
@@ -710,7 +1331,16 @@
       ko: "관리자 자격 취득 안내 및 모의 현장 실사",
       hy: "Ադմինիստրատորի սերտիֆիկացման խորհրդատվություն և փորձնական ստուգումներ",
       ru: "Помощь в сертификации администратора и пробные инспекции",
-      ar: "إرشادات شهادة المدير وتفتيشات تجريبية"
+      ar: "إرشادات شهادة المدير وتفتيشات تجريبية",
+      fa: "راهنمایی گواهینامه مدیریت و برگزاری بازرسی آزمایشی",
+      hi: "प्रशासक प्रमाणन मार्गदर्शन और मॉक निरीक्षण",
+      pa: "ਪ੍ਰਸ਼ਾਸਕ ਪ੍ਰਮਾਣੀਕਰਨ ਮਾਰਗਦਰਸ਼ਨ ਅਤੇ ਅਭਿਆਸ ਨਿਰੀਖਣ",
+      ja: "管理者資格取得のご案内および模擬実地検査の実施",
+      uk: "Допомога з сертифікацією адміністратора та пробні інспекції",
+      he: "ליווי להסמכת מנהל מעון וביקורות הדמיה",
+      km: "ការណែនាំអំពីវិញ្ញាបនបត្រអ្នកគ្រប់គ្រង និងការធ្វើតេស្តត្រួតពិនិត្យសាកល្បង",
+      fr: "Préparation à la certification d'administrateur et inspections blanches",
+      pt: "Orientação para certificação de administrador e inspeções simuladas"
     },
     "View Operator Consulting": {
       es: "Ver consultoría de operadores",
@@ -720,7 +1350,16 @@
       ko: "운영자 컨설팅 보기",
       hy: "Օպերատորների խորհրդատվություն",
       ru: "Консалтинг для операторов",
-      ar: "استشارات المشغلين"
+      ar: "استشارات المشغلين",
+      fa: "مشاهده خدمات مشاوره بهره‌برداران",
+      hi: "संचालक परामर्श देखें",
+      pa: "ਸੰਚਾਲਕ ਸਲਾਹ ਸੇਵਾਵਾਂ ਦੇਖੋ",
+      ja: "事業者向けコンサルティングを見る",
+      uk: "Консалтинг для операторів",
+      he: "צפייה בייעוץ למפעילים",
+      km: "មើលការប្រឹក្សាសម្រាប់អ្នកបើកមណ្ឌល",
+      fr: "Découvrir le conseil aux exploitants",
+      pt: "Ver Consultoria para Operadores"
     },
     "Book Strategy Session": {
       es: "Reservar sesión estratégica",
@@ -730,7 +1369,16 @@
       ko: "전략 상담 예약",
       hy: "Ամրագրել ռազմավարական հանդիպում",
       ru: "Записаться на стратегическую сессию",
-      ar: "احجز جلسة استراتيجية"
+      ar: "احجز جلسة استراتيجية",
+      fa: "رزرو جلسه برنامه‌ریزی",
+      hi: "रणनीति सत्र बुक करें",
+      pa: "ਰਣਨੀਤੀ ਸੈਸ਼ਨ ਬੁੱਕ ਕਰੋ",
+      ja: "開業戦略相談を予約",
+      uk: "Замовити стратегічну сесію",
+      he: "תיאום פגישת אסטרטגיה",
+      km: "កក់ការពិភាក្សាយុទ្ធសាស្ត្រ",
+      fr: "Réserver une séance stratégique",
+      pt: "Agendar Sessão Estratégica"
     },
     "Voices of Trust": {
       es: "Voces de Confianza",
@@ -740,7 +1388,16 @@
       ko: "신뢰의 목소리",
       hy: "Վստահության ձայներ",
       ru: "Отзывы доверия",
-      ar: "أصوات الثقة"
+      ar: "أصوات الثقة",
+      fa: "صدای اعتماد",
+      hi: "भरोसे की आवाज़ें",
+      pa: "ਭਰੋਸੇ ਦੀਆਂ ਆਵਾਜ਼ਾਂ",
+      ja: "信頼のお声",
+      uk: "Відгуки та довіра",
+      he: "קולות של אמון",
+      km: "សំឡេងនៃទំនុកចិត្ត",
+      fr: "Témoignages de confiance",
+      pt: "Vozes de Confiança"
     },
     "Stories of Peace of Mind": {
       es: "Historias de Tranquilidad",
@@ -750,7 +1407,16 @@
       ko: "평안을 찾은 가족들의 이야기",
       hy: "Հոգեկան հանգստության պատմություններ",
       ru: "Истории спокойствия и уверенности",
-      ar: "قصص من راحة البال"
+      ar: "قصص من راحة البال",
+      fa: "روایت‌هایی از آرامش خاطر",
+      hi: "मन की शांति की कहानियाँ",
+      pa: "ਮਨ ਦੀ ਸ਼ਾਂਤੀ ਦੀਆਂ ਕਹਾਣੀਆਂ",
+      ja: "安心をお届けできたエピソード",
+      uk: "Історії душевного спокою",
+      he: "סיפורים של שקט נפשי",
+      km: "រឿងរ៉ាវនៃភាពស្ងប់ចិត្ត",
+      fr: "Histoires de sérénité retrouvée",
+      pt: "Histórias de Tranquilidade"
     },
     "Hear directly from adult children finding safe homes for parents, and healthcare entrepreneurs launching successful care communities.": {
       es: "Conozca las experiencias de hijos que encontraron hogares seguros para sus padres y emprendedores de la salud que lanzaron sus comunidades con éxito.",
@@ -760,7 +1426,16 @@
       ko: "부모님을 위한 안전한 보금자리를 찾은 자녀들과 성공적으로 요양 홈을 개원한 의료 창업자들의 생생한 후기입니다.",
       hy: "Լսեք անմիջապես չափահաս զավակներից, ովքեր ապահով տուն են գտել ծնողների համար, և առողջապահության ձեռներեցներից, ովքեր հաջող խնամքի հաստատություններ են հիմնել։",
       ru: "Узнайте напрямую от взрослых детей, нашедших надежный дом для родителей, и предпринимателей, запустивших успешные центры ухода.",
-      ar: "استمع مباشرة من الأبناء الذين وجدوا منازل آمنة لوالديهم، ومن رواد الأعمال الذين أطلقوا مرافق رعاية ناجحة."
+      ar: "استمع مباشرة من الأبناء الذين وجدوا منازل آمنة لوالديهم، ومن رواد الأعمال الذين أطلقوا مرافق رعاية ناجحة.",
+      fa: "مستقیماً از فرزندان بالغی بشنوید که خانه‌ای امن برای والدین خود یافتند، و از کارآفرینان حوزه سلامت که مراکز مراقبت موفقی را راه‌اندازی کردند.",
+      hi: "सीधे उन बच्चों से सुनें जिन्होंने अपने माता-पिता के लिए सुरक्षित घर खोजे, और उन स्वास्थ्य सेवा उद्यमियों से जिन्होंने सफल देखभाल समुदाय शुरू किए।",
+      pa: "ਉਨ੍ਹਾਂ ਬੱਚਿਆਂ ਤੋਂ ਸਿੱਧਾ ਸੁਣੋ ਜਿਨ੍ਹਾਂ ਨੇ ਆਪਣੇ ਮਾਤਾ-ਪਿਤਾ ਲਈ ਸੁਰੱਖਿਅਤ ਘਰ ਲੱਭੇ, ਅਤੇ ਉਨ੍ਹਾਂ ਸਿਹਤ-ਸੰਭਾਲ ਉੱਦਮੀਆਂ ਤੋਂ ਜੋ ਸਫਲ ਦੇਖਭਾਲ ਕੇਂਦਰ ਚਲਾ ਰਹੇ ਹਨ।",
+      ja: "親御様のために安心できる住まいを見つけられたご家族や、ケアコミュニティの立ち上げに成功された医療・介護起業家の皆様のリアルなお声をご紹介します。",
+      uk: "Дізнайтеся з перших уст досвід дорослих дітей, які знайшли безпечний дім для батьків, та підприємців у сфері догляду, які успішно запустили власні заклади.",
+      he: "שמעו ישירות מילדים בוגרים שמצאו בתים בטוחים להוריהם, ומזמי בריאות שהקימו קהילות טיפול מצליחות.",
+      km: "ស្តាប់ដោយផ្ទាល់ពីកូនៗដែលបានរកឃើញផ្ទះសុវត្ថិភាពសម្រាប់ឪពុកម្តាយ និងសហគ្រិនវិស័យសុខាភិបាលដែលបានបើកសហគមន៍ថែទាំដោយជោគជ័យ។",
+      fr: "Découvrez les retours directs d'enfants adultes ayant trouvé un foyer sûr pour leurs parents, et d'entrepreneurs de santé lançant des structures d'accueil florissantes.",
+      pt: "Ouça diretamente filhos que encontraram lares seguros para seus pais e empreendedores da saúde que inauguraram comunidades de cuidado bem-sucedidas."
     },
     "\"When Mom was diagnosed with progressive dementia, hospital discharge gave us 48 hours to find a place. Love RCFE took my panic, calmed me down, and placed her in an intimate 6-bed home 10 minutes away. Mom is smiling again.\"": {
       es: "\"Cuando diagnosticaron a mi mamá con demencia progresiva, el hospital nos dio 48 horas tras el alta para encontrar un lugar. Love RCFE calmó mi pánico y la ubicó en una acogedora casa de 6 camas a 10 minutos. Mi mamá volvió a sonreír.\"",
@@ -770,7 +1445,16 @@
       ko: "\"어머니께서 진행성 치매 진단을 받으셨을 때 병원에서 퇴원까지 48시간밖에 시간이 없었습니다. 패닉에 빠진 저를 진정시켜 주시고 집에서 10분 거리의 아늑한 6인실 홈에 입소시켜 주셨어요. 어머니가 다시 웃고 계십니다.\"",
       hy: "«Երբ մայրիկիս ախտորոշեցին պրոգրեսիվ դեմենցիա, հիվանդանոցից դուրս գրվելու համար մեզ 48 ժամ տվեցին՝ տեղ գտնելու համար։ Love RCFE-ն հանգստացրեց իմ խուճապը և տեղավորեց նրան հարմարավետ 6 տեղանոց տանը՝ 10 րոպե հեռավորության վրա։ Մայրիկս նորից ժպտում է»։",
       ru: "«Когда маме диагностировали прогрессирующую деменцию, при выписке из больницы нам дали 48 часов на поиск места. Love RCFE сняли мою панику, успокоили и устроили ее в уютный дом на 6 мест в 10 минутах езды. Мама снова улыбается».",
-      ar: "\"عندما شُخّصت والدتي بالخرف المتقدم، أعطتنا المستشفى عند الخروج 48 ساعة فقط لإيجاد مكان. هدّأت Love RCFE من قلقي وأسكنتها في دار دافئة من 6 أسرّة على بُعد 10 دقائق. والدتي تبتسم مجدداً.\""
+      ar: "\"عندما شُخّصت والدتي بالخرف المتقدم، أعطتنا المستشفى عند الخروج 48 ساعة فقط لإيجاد مكان. هدّأت Love RCFE من قلقي وأسكنتها في دار دافئة من 6 أسرّة على بُعد 10 دقائق. والدتي تبتسم مجدداً.\"",
+      fa: "«وقتی پزشکان تشخیص زوال عقل پیش‌رونده برای مادرم دادند، بخش ترخیص بیمارستان فقط ۴۸ ساعت به ما فرصت داد تا جایی پیدا کنیم. Love RCFE اضطراب مرا به آرامش تبدیل کرد و مادرم را در یک خانه دنج ۶ تختخوابی در ۱۰ دقیقه‌ای ما اسکان داد. مادرم دوباره لبخند می‌زند.»",
+      hi: "\"जब माँ को बढ़ते डिमेंशिया का पता चला, तो अस्पताल से छुट्टी के समय हमें जगह खोजने के लिए केवल 48 घंटे मिले। Love RCFE ने मेरी घबराहट दूर की, मुझे संभाला और 10 मिनट की दूरी पर एक आत्मीय 6-बेड गृह में उनकी व्यवस्था की। माँ अब फिर से मुस्कुरा रही हैं।\"",
+      pa: "\"ਜਦੋਂ ਮਾਤਾ ਜੀ ਨੂੰ ਵਧਦੇ ਡਿਮੇਨਸ਼ੀਆ ਦਾ ਪਤਾ ਲੱਗਿਆ, ਤਾਂ ਹਸਪਤਾਲ ਤੋਂ ਛੁੱਟੀ ਵੇਲੇ ਸਾਨੂੰ ਜਗ੍ਹਾ ਲੱਭਣ ਲਈ ਸਿਰਫ਼ 48 ਘੰਟੇ ਮਿਲੇ। Love RCFE ਨੇ ਮੇਰੀ ਘਬਰਾਹਟ ਦੂਰ ਕੀਤੀ, ਮੈਨੂੰ ਦਿਲਾਸਾ ਦਿੱਤਾ ਅਤੇ ਸਿਰਫ਼ 10 ਮਿੰਟ ਦੀ ਦੂਰੀ 'ਤੇ ਇੱਕ ਨਿੱਘੇ 6-ਬੈੱਡ ਘਰ ਵਿੱਚ ਉਨ੍ਹਾਂ ਦੀ ਰਿਹਾਇਸ਼ ਦਾ ਪ੍ਰਬੰਧ ਕੀਤਾ। ਮਾਤਾ ਜੀ ਫਿਰ ਤੋਂ ਮੁਸਕਰਾ ਰਹੇ ਹਨ।\"",
+      ja: "「母が進行性の認知症と診断され、病院から退院まで48時間以内に入居先を見つけるよう言われました。パニックになっていた私を Love RCFE が落ち着かせてくれ、自宅から10分の場所にあるアットホームな6床のケアホームを見つけてくれました。今では母に笑顔が戻っています。」",
+      uk: "«Коли мамі діагностували прогресуючу деменцію, під час виписки з лікарні нам дали лише 48 годин на пошук закладу. Команда Love RCFE зняла всю мою паніку, заспокоїла та влаштувала її до затишного 6-місного будинку за 10 хвилин від нас. Мама знову усміхається».",
+      he: "\"כשאמא אובחנה עם דמנציה מתקדמת, השחרור מבית החולים נתן לנו 48 שעות למצוא מקום. צוות Love RCFE הרגיע את הלחץ שלי ושיבץ אותה בבית אינטימי של 6 מיטות במרחק 10 דקות מאיתנו. אמא מחייכת שוב.\"",
+      km: "\"ពេលម្តាយខ្ញុំត្រូវបានរកឃើញថាមានជំងឺភ្លេចភ្លាំងវិវត្តន៍កាន់តែធ្ងន់ធ្ងរ មន្ទីរពេទ្យឱ្យពេលយើងត្រឹម 48 ម៉ោងដើម្បីរកកន្លែងស្នាក់នៅ។ Love RCFE បានជួយរំងាប់អារម្មណ៍ភ័យស្លន់ស្លោរបស់ខ្ញុំ និងបានរៀបចំឱ្យគាត់ចូលស្នាក់នៅក្នុងផ្ទះថែទាំខ្នាត 6 គ្រែដ៏កក់ក្តៅចម្ងាយត្រឹម 10 នាទី។ ឥឡូវម្តាយខ្ញុំញញឹមឡើងវិញហើយ។\"",
+      fr: "« Lorsque maman a reçu un diagnostic de démence évolutive, l'hôpital nous a donné 48 heures à sa sortie pour trouver une place. Love RCFE a su apaiser mon angoisse et lui a trouvé un foyer intime de 6 lits à 10 minutes de chez nous. Maman sourit à nouveau. »",
+      pt: "\"Quando minha mãe foi diagnosticada com demência progressiva, a alta hospitalar nos deu 48 horas para encontrar um lugar. A Love RCFE acolheu meu desespero, me acalmou e a instalou em uma casa aconchegante de 6 vagas a 10 minutos de distância. Minha mãe voltou a sorrir.\""
     },
     "Daughter & Family Caregiver, San Jose CA": {
       es: "Hija y cuidadora familiar, San Jose, CA",
@@ -780,7 +1464,16 @@
       ko: "보호자 자녀 · 캘리포니아 새너제이",
       hy: "Դուստր և ընտանեկան խնամակալ, Սան Խոսե, Կալիֆոռնիա",
       ru: "Дочь и семейный опекун, Сан-Хосе, Калифорния",
-      ar: "ابنة ومقدمة رعاية عائلية، سان خوسيه، كاليفورنيا"
+      ar: "ابنة ومقدمة رعاية عائلية، سان خوسيه، كاليفورنيا",
+      fa: "دختر و مراقب خانواده، سن‌خوزه، کالیفرنیا",
+      hi: "पुत्री और पारिवारिक देखभालकर्ता, San Jose CA",
+      pa: "ਧੀ ਅਤੇ ਪਰਿਵਾਰਕ ਦੇਖਭਾਲ ਕਰਨ ਵਾਲੀ, San Jose, CA",
+      ja: "ご家族介護者（娘）・カリフォルニア州 San Jose",
+      uk: "Донька та доглядальниця в родині, San Jose, Каліфорнія",
+      he: "בת ומטפלת משפחתית, San Jose, קליפורניה",
+      km: "កូនស្រី និងអ្នកមើលថែគ្រួសារ, San Jose CA",
+      fr: "Fille et aidante familiale, San Jose CA",
+      pt: "Filha e Cuidadora Familiar, San Jose CA"
     },
     "\"As a registered nurse, I knew patient care, but California Title 22 bureaucracy almost made me quit. Love RCFE wrote our Plan of Operation, coached our Component III interview, and we passed our pre-licensing inspection on the first visit.\"": {
       es: "\"Como enfermero titulado conocía el cuidado clínico, pero la burocracia del Título 22 casi me hace rendirme. Love RCFE redactó nuestro Plan de Operación, nos preparó para la entrevista del Componente III y aprobamos la inspección inicial en la primera visita.\"",
@@ -790,7 +1483,16 @@
       ko: "\"정규 간호사로서 환자 돌봄은 자신 있었지만 캘리포니아 Title 22 행정 절차 때문에 포기할 뻔했습니다. Love RCFE가 운영 계획서 작성과 Component III 인터뷰를 코칭해 준 덕분에 첫 방문 실사에서 단번에 합격했습니다.\"",
       hy: "«Որպես գրանցված բուժքույր՝ ես գիտեի հիվանդների խնամքը, բայց Կալիֆոռնիայի Title 22 բյուրոկրատիան գրեթե ստիպեց ինձ հանձնվել։ Love RCFE-ն գրեց մեր Գործողությունների ծրագիրը, պատրաստեց Component III հարցազրույցին, և մենք առաջին իսկ այցից անցանք նախալիցենզավորման ստուգումը»։",
       ru: "«Как дипломированная медсестра я отлично разбиралась в уходе, но бюрократия California Title 22 чуть не заставила меня бросить затею. В Love RCFE составили наш План деятельности, подготовили к собеседованию Component III, и мы прошли предлицензионную проверку с первого раза».",
-      ar: "\"كممرضة مسجلة، كنت أتقن رعاية المرضى، لكن بيروقراطية Title 22 كادت تدفعني للاستسلام. كتبت Love RCFE خطة التشغيل ودربتنا لمقابلة Component III، واجتزنا تفتيش ما قبل الترخيص من أول زيارة.\""
+      ar: "\"كممرضة مسجلة، كنت أتقن رعاية المرضى، لكن بيروقراطية Title 22 كادت تدفعني للاستسلام. كتبت Love RCFE خطة التشغيل ودربتنا لمقابلة Component III، واجتزنا تفتيش ما قبل الترخيص من أول زيارة.\"",
+      fa: "«به عنوان یک پرستار رسمی، مراقبت از بیمار را بلد بودم، اما کاغذبازی‌های Title 22 کالیفرنیا نزدیک بود مرا منصرف کند. Love RCFE طرح عملیاتی ما را نوشت، برای مصاحبه Component III به ما مشاوره داد و در همان اولین بازدید، بازرسی پیش از صدور مجوز را با موفقیت پشت سر گذاشتیم.»",
+      hi: "\"एक पंजीकृत नर्स के रूप में मुझे रोगी देखभाल का पूरा अनुभव था, लेकिन कैलिफ़ोर्निया Title 22 की कागज़ी प्रक्रिया ने मुझे लगभग हार मानने पर मजबूर कर दिया था। Love RCFE ने हमारी संचालन योजना लिखी, Component III साक्षात्कार की तैयारी करवाई, और हमने पहली ही बार में पूर्व-लाइसेंसिंग निरीक्षण पास कर लिया।\"",
+      pa: "\"ਇੱਕ ਰਜਿਸਟਰਡ ਨਰਸ ਵਜੋਂ ਮੈਨੂੰ ਮਰੀਜ਼ਾਂ ਦੀ ਦੇਖਭਾਲ ਆਉਂਦੀ ਸੀ, ਪਰ ਕੈਲੀਫੋਰਨੀਆ Title 22 ਦੀ ਕਾਗਜ਼ੀ ਕਾਰਵਾਈ ਨੇ ਲਗਭਗ ਮੈਨੂੰ ਹਾਰ ਮੰਨਣ 'ਤੇ ਮਜਬੂਰ ਕਰ ਦਿੱਤਾ ਸੀ। Love RCFE ਨੇ ਸਾਡੀ ਸੰਚਾਲਨ ਯੋਜਨਾ ਲਿਖੀ, Component III ਇੰਟਰਵਿਊ ਦੀ ਤਿਆਰੀ ਕਰਵਾਈ, ਅਤੇ ਅਸੀਂ ਪਹਿਲੀ ਹੀ ਮੁਲਾਕਾਤ ਵਿੱਚ ਲਾਇਸੰਸ ਤੋਂ ਪਹਿਲਾਂ ਦੀ ਜਾਂਚ ਪਾਸ ਕਰ ਲਈ।\"",
+      ja: "「正看護師として患者ケアの経験はありましたが、カリフォルニア州 Title 22 の煩雑な書類手続きには心が折れそうでした。Love RCFE に運営計画書を作成してもらい、Component III の面談指導を受けたおかげで、認可前検査を初回で合格できました。」",
+      uk: "«Як дипломована медсестра, я добре знала догляд за пацієнтами, але бюрократія Title 22 у Каліфорнії ледь не змусила мене здатися. Love RCFE склали наш План діяльності, підготували нас до співбесіди Component III, і ми пройшли передліцензійну інспекцію з першого візиту».",
+      he: "\"כאחות מוסמכת הכרתי היטב טיפול בחולים, אבל הביורוקרטיה של California Title 22 כמעט גרמה לי לוותר. Love RCFE כתבו את תוכנית ההפעלה שלנו, הכינו אותנו לראיון Component III ועברנו את ביקורת טרום-הרישוי בביקור הראשון.\"",
+      km: "\"ក្នុងនាមជាគិលានុបដ្ឋាយិកាមានអាជ្ញាប័ណ្ណ ខ្ញុំចេះថែទាំអ្នកជំងឺ ប៉ុន្តែនីតិវិធី Title 22 នៅរដ្ឋ California ស្ទើរតែធ្វើឱ្យខ្ញុំបោះបង់ចោល។ Love RCFE បានសរសេរផែនការប្រតិបត្តិការឱ្យយើង បង្វឹកសម្រាប់ការសម្ភាសន៍ Component III ហើយយើងបានជាប់ការត្រួតពិនិត្យមុនទទួលអាជ្ញាប័ណ្ណតាំងពីលើកដំបូង។\"",
+      fr: "« En tant qu'infirmière diplômée, je maîtrisais les soins aux patients, mais la bureaucratie du Title 22 californien a failli me faire abandonner. Love RCFE a rédigé notre Plan d'exploitation, nous a préparés à l'entretien de la composante III et nous avons réussi l'inspection pré-licence dès la première visite. »",
+      pt: "\"Como enfermeira registrada, eu dominava o cuidado ao paciente, mas a burocracia do Title 22 da Califórnia quase me fez desistir. A Love RCFE redigiu nosso Plano de Operação, treinou nossa entrevista do Componente III e passamos na inspeção pré-licenciamento logo na primeira visita.\""
     },
     "Licensed RCFE Owner, Sacramento CA": {
       es: "Propietario de RCFE con licencia, Sacramento, CA",
@@ -800,7 +1502,16 @@
       ko: "인가 RCFE 시설 대표 · 캘리포니아 새크라멘토",
       hy: "Լիցենզավորված RCFE սեփականատեր, Սակրամենտո, Կալիֆոռնիա",
       ru: "Лицензированный владелец RCFE, Сакраменто, Калифорния",
-      ar: "مالكة دار RCFE مرخصة، ساكرامنتو، كاليفورنيا"
+      ar: "مالكة دار RCFE مرخصة، ساكرامنتو، كاليفورنيا",
+      fa: "مالک دارای مجوز RCFE، ساکرامنتو، کالیفرنیا",
+      hi: "लाइसेंस प्राप्त RCFE मालिक, Sacramento CA",
+      pa: "ਲਾਇਸੰਸਸ਼ੁਦਾ RCFE ਮਾਲਕ, Sacramento, CA",
+      ja: "認可 RCFE オーナー・カリフォルニア州 Sacramento",
+      uk: "Ліцензований власник RCFE, Sacramento, Каліфорнія",
+      he: "בעלת RCFE מורשה, Sacramento, קליפורניה",
+      km: "ម្ចាស់ RCFE មានអាជ្ញាប័ណ្ណ, Sacramento CA",
+      fr: "Propriétaire agréée d'un RCFE, Sacramento CA",
+      pt: "Proprietária de RCFE Licenciado, Sacramento CA"
     },
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": {
       es: "\"Nos explicaron la diferencia entre grandes residencias de 100 personas y casas pequeñas de cuidado residencial. Eso nos ahorró casi $2,400 al mes y le dio a mi padre atención personalizada de 1 cuidador por cada 3 residentes.\"",
@@ -810,7 +1521,16 @@
       ko: "\"100인 규모 대형 시설과 소규모 주거형 보드앤케어의 차이를 명확히 설명해 주셨습니다. 덕분에 매달 약 2,400달러를 아끼면서 아버지께 1대3 밀착 돌봄을 해드릴 수 있었어요.\"",
       hy: "«Նրանք բացատրեցին տարբերությունը 100 բնակիչ ունեցող առևտրային կենտրոնների և փոքր բնակելի խնամքի տների միջև։ Դա մեզ խնայեց ամսական գրեթե $2,400 և հորս ապահովեց 1-ը-3-ին անհատական ուշադրություն»։",
       ru: "«Нам подробно объяснили разницу между крупными коммерческими комплексами на 100 человек и небольшими семейными пансионатами. Это сэкономило почти $2,400 в месяц и дало отцу персональный уход в соотношении 1 к 3».",
-      ar: "\"شرحوا لنا الفرق بين المجمعات التجارية الكبيرة التي تضم 100 مقيم وبيوت الرعاية السكنية الصغيرة. وفر ذلك علينا قرابة $2,400 شهرياً ومنح والدي رعاية شخصية بنسبة 1 إلى 3.\""
+      ar: "\"شرحوا لنا الفرق بين المجمعات التجارية الكبيرة التي تضم 100 مقيم وبيوت الرعاية السكنية الصغيرة. وفر ذلك علينا قرابة $2,400 شهرياً ومنح والدي رعاية شخصية بنسبة 1 إلى 3.\"",
+      fa: "«آن‌ها تفاوت میان مجتمع‌های تجاری ۱۰۰ نفره زندگی با مراقبت و خانه‌های کوچک مسکونی را برایمان توضیح دادند. همین موضوع نزدیک به ۲٬۴۰۰ دلار در ماه در هزینه‌هایمان صرفه‌جویی کرد و توجه فردی ۱ به ۳ را برای پدرم فراهم آورد.»",
+      hi: "\"उन्होंने 100 निवासियों वाले व्यावसायिक असिस्टेड लिविंग केंद्रों और छोटे आवासीय बोर्ड-एंड-केयर घरों के बीच का अंतर समझाया। इससे हमारे लगभग $2,400 प्रति माह बचे और मेरे पिताजी को 1-पर-3 व्यक्तिगत देखभाल मिली।\"",
+      pa: "\"ਉਨ੍ਹਾਂ ਨੇ 100-ਨਿਵਾਸੀਆਂ ਵਾਲੇ ਵਪਾਰਕ ਅਸਿਸਟਡ ਲਿਵਿੰਗ ਕੇਂਦਰਾਂ ਅਤੇ ਛੋਟੇ ਰਿਹਾਇਸ਼ੀ ਬੋਰਡ-ਐਂਡ-ਕੇਅਰ ਘਰਾਂ ਵਿੱਚ ਫ਼ਰਕ ਸਮਝਾਇਆ। ਇਸ ਨਾਲ ਸਾਡੇ ਮਹੀਨੇ ਦੇ ਲਗਭਗ $2,400 ਬਚੇ ਅਤੇ ਮੇਰੇ ਪਿਤਾ ਜੀ ਨੂੰ ਹਰ 3 ਨਿਵਾਸੀਆਂ ਪਿੱਛੇ 1 ਦੇਖਭਾਲ ਕਰਤਾ ਦਾ ਨਿੱਜੀ ਧਿਆਨ ਮਿਲਿਆ।\"",
+      ja: "「100人規模の商業的なアシステッド・リビングと、小規模な居住型 Board & Care ホームの違いをわかりやすく説明してくれました。おかげで毎月約 $2,400 を節約できたうえ、父は介護スタッフ1名につき入居者3名という手厚いケアを受けられています。」",
+      uk: "«Вони пояснили різницю між комерційними комплексами на 100 мешканців і невеликими домашніми будинками догляду. Це заощадило нам майже $2,400 на місяць і забезпечило батькові персональну увагу у співвідношенні 1 доглядальник на 3 мешканців».",
+      he: "\"הם הסבירו לנו את ההבדל בין מתקני דיור מוגן מסחריים של 100 דיירים לבין בתי board-and-care קטנים. זה חסך לנו כמעט $2,400 בחודש והעניק לאבי יחס אישי של מטפל אחד לכל 3 דיירים.\"",
+      km: "\"ពួកគេបានពន្យល់ពីភាពខុសគ្នារវាងមណ្ឌលរស់នៅដោយមានជំនួយខ្នាតធំ 100 នាក់ និងផ្ទះថែទាំស្នាក់នៅខ្នាតតូច។ ការណ៍នេះបានជួយសន្សំប្រាក់យើងជិត $2,400 ក្នុងមួយខែ ហើយផ្តល់ឱ្យឪពុកខ្ញុំនូវការយកចិត្តទុកដាក់ផ្ទាល់ខ្លួនក្នុងសមាមាត្រ 1 ទល់ 3។\"",
+      fr: "« Ils nous ont expliqué la différence entre les grands établissements commerciaux de 100 résidents et les petits foyers résidentiels de soins. Cela nous a fait économiser près de 2 400 $ par mois tout en offrant à mon père un accompagnement personnalisé à raison d'un soignant pour trois résidents. »",
+      pt: "\"Eles explicaram a diferença entre grandes empreendimentos comerciais para 100 residentes e pequenas casas residenciais de cuidados. Isso nos economizou quase $2,400 por mês e deu ao meu pai atenção pessoal na proporção de 1 para 3.\""
     },
     "Family Caregivers, Irvine CA": {
       es: "Cuidadores familiares, Irvine, CA",
@@ -820,7 +1540,16 @@
       ko: "가족 보호자 · 캘리포니아 어바인",
       hy: "Ընտանեկան խնամակալներ, Իրվայն, Կալիֆոռնիա",
       ru: "Родственники, Ирвайн, Калифорния",
-      ar: "مقدمو رعاية عائليون، إرفاين، كاليفورنيا"
+      ar: "مقدمو رعاية عائليون، إرفاين، كاليفورنيا",
+      fa: "مراقبان خانواده، ارواین، کالیفرنیا",
+      hi: "पारिवारिक देखभालकर्ता, Irvine CA",
+      pa: "ਪਰਿਵਾਰਕ ਦੇਖਭਾਲ ਕਰਨ ਵਾਲੇ, Irvine, CA",
+      ja: "ご家族介護者・カリフォルニア州 Irvine",
+      uk: "Родина опікунів, Irvine, Каліфорнія",
+      he: "מטפלים משפחתיים, Irvine, קליפורניה",
+      km: "អ្នកមើលថែគ្រួសារ, Irvine CA",
+      fr: "Aidants familiaux, Irvine CA",
+      pt: "Cuidadores Familiares, Irvine CA"
     },
     "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": {
       es: "* Experiencias representativas compuestas de clientes. Los registros reales de familias y centros se mantienen bajo estricta confidencialidad.",
@@ -830,7 +1559,16 @@
       ko: "* 고객 사례를 바탕으로 구성한 대표 후기이며, 실제 가족 및 시설 기록은 엄격히 비밀이 유지됩니다.",
       hy: "* Ներկայացուցչական ամփոփված պատմություններ հաճախորդների փորձից։ Ընտանիքների և հաստատությունների իրական տվյալները խիստ գաղտնի են։",
       ru: "* Обобщенные примеры опыта клиентов. Реальные данные семей и учреждений хранятся в строгой конфиденциальности.",
-      ar: "* تجارب تمثيلية مجمعة لعملائنا. تبقى السجلات الفعلية للعائلات والمرافق سرية تماماً."
+      ar: "* تجارب تمثيلية مجمعة لعملائنا. تبقى السجلات الفعلية للعائلات والمرافق سرية تماماً.",
+      fa: "* تجربیات نمونه و ترکیبی از مراجعین. سوابق واقعی خانواده‌ها و مراکز کاملاً محرمانه حفظ می‌شود.",
+      hi: "* ये प्रतिनिधि और समेकित ग्राहक अनुभव हैं। वास्तविक परिवारों और केंद्रों के रिकॉर्ड पूरी तरह गोपनीय रखे जाते हैं।",
+      pa: "* ਪ੍ਰਤੀਨਿਧੀ ਗਾਹਕ ਅਨੁਭਵਾਂ ਦਾ ਸੰਗ੍ਰਹਿ। ਅਸਲ ਪਰਿਵਾਰਾਂ ਅਤੇ ਕੇਂਦਰਾਂ ਦੇ ਰਿਕਾਰਡ ਪੂਰੀ ਤਰ੍ਹਾਂ ਗੁਪਤ ਰੱਖੇ ਜਾਂਦੇ ਹਨ।",
+      ja: "※ ご相談事例をもとに再構成した代表的な体験談です。実際のご家族および施設に関する記録は厳重に守秘管理しております。",
+      uk: "* Типові узагальнені історії клієнтів. Реальні дані родин і закладів зберігаються в суворій конфіденційності.",
+      he: "* חוויות לקוחות מייצגות ומשולבות. רשומות אמיתיות של משפחות ומעונות נשמרות בסודיות מוחלטת.",
+      km: "* ឧទាហរណ៍បទពិសោធន៍តំណាងរបស់អតិថិជន។ កំណត់ត្រាពិតរបស់គ្រួសារ និងមណ្ឌលត្រូវបានរក្សាជាការសម្ងាត់យ៉ាងតឹងរ៉ឹង។",
+      fr: "* Expériences clients composites représentatives. Les dossiers réels des familles et des établissements restent strictement confidentiels.",
+      pt: "* Relatos compostos representativos de experiências reais. Registros reais de famílias e residenciais são mantidos sob sigilo absoluto."
     },
     "Our Core Practice": {
       es: "Nuestra Práctica Principal",
@@ -840,7 +1578,16 @@
       ko: "핵심 전문 분야",
       hy: "Մեր հիմնական գործունեությունը",
       ru: "Наша основная практика",
-      ar: "ممارستنا الأساسية"
+      ar: "ممارستنا الأساسية",
+      fa: "حوزه تخصصی اصلی ما",
+      hi: "हमारी मुख्य विशेषज्ञता",
+      pa: "ਸਾਡਾ ਮੁੱਖ ਕਾਰਜ",
+      ja: "中核となる専門サービス",
+      uk: "Наша основна спеціалізація",
+      he: "תחומי ההתמחות שלנו",
+      km: "ជំនាញស្នូលរបស់យើង",
+      fr: "Notre cœur de métier",
+      pt: "Nossa Atuação Principal"
     },
     "Expert Guidance for Families & Care Providers": {
       es: "Asesoría Experta para Familias y Proveedores de Cuidado",
@@ -850,7 +1597,16 @@
       ko: "가족과 시설 운영자를 위한 전문 컨설팅",
       hy: "Մասնագիտական ուղեկցում ընտանիքների և խնամքի տրամադրողների համար",
       ru: "Экспертная помощь семьям и владельцам пансионатов",
-      ar: "إرشاد خبير للعائلات ومقدمي الرعاية"
+      ar: "إرشاد خبير للعائلات ومقدمي الرعاية",
+      fa: "راهنمایی تخصصی برای خانواده‌ها و ارائه‌دهندگان مراقبت",
+      hi: "परिवारों और देखभाल प्रदाताओं के लिए विशेषज्ञ मार्गदर्शन",
+      pa: "ਪਰਿਵਾਰਾਂ ਅਤੇ ਦੇਖਭਾਲ ਪ੍ਰਦਾਤਾਵਾਂ ਲਈ ਮਾਹਿਰ ਮਾਰਗਦਰਸ਼ਨ",
+      ja: "ご家族と介護事業者の双方に寄り添う専門支援",
+      uk: "Експертний супровід для родин і надавачів догляду",
+      he: "ליווי מקצועי למשפחות ולמפעילים טיפוליים",
+      km: "ការណែនាំប្រកបដោយវិជ្ជាជីវៈសម្រាប់គ្រួសារ និងអ្នកផ្តល់សេវាថែទាំ",
+      fr: "Une expertise claire pour les familles et les professionnels du soin",
+      pt: "Orientação Especializada para Famílias e Operadores de Cuidados"
     },
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": {
       es: "Las decisiones de cuidado impactan la salud, la dignidad y el patrimonio familiar. Brindamos asesoría clara y objetiva tanto si busca un hogar para un ser querido como si inicia su propio centro de cuidado.",
@@ -860,7 +1616,16 @@
       ko: "돌봄에 관한 결정은 건강과 존엄성, 그리고 평생 모은 자산에 직결됩니다. 어르신 입소 안내든 RCFE 창업 준비든 명쾌하고 객관적인 전문 지식을 제공합니다.",
       hy: "Խնամքի վերաբերյալ որոշումները ազդում են առողջության, արժանապատվության և խնայողությունների վրա։ Մենք տրամադրում ենք հստակ, անաչառ փորձագիտություն՝ թե՛ հարազատին տեղավորելիս, թե՛ խնամքի բիզնես սկսելիս։",
       ru: "Решения об уходе влияют на здоровье, достоинство и сбережения всей жизни. Мы даем ясную, объективную экспертизу как при размещении близкого человека, так и при открытии бизнеса.",
-      ar: "تؤثر قرارات الرعاية على الصحة والكرامة ومدخرات العمر. نقدم خبرة واضحة وموضوعية سواء كنت تبحث عن رعاية لقريب أو تطلق مشروع رعاية مسنين."
+      ar: "تؤثر قرارات الرعاية على الصحة والكرامة ومدخرات العمر. نقدم خبرة واضحة وموضوعية سواء كنت تبحث عن رعاية لقريب أو تطلق مشروع رعاية مسنين.",
+      fa: "تصمیم‌گیری درباره مراقبت بر سلامت، کرامت و پس‌انداز یک عمر زندگی اثر می‌گذارد. چه در حال یافتن محل مناسب برای یکی از عزیزان باشید و چه در حال راه‌اندازی کسب‌وکار مراقبت از سالمندان، ما دانش روشن و بی‌طرفانه ارائه می‌دهیم.",
+      hi: "देखभाल से जुड़े निर्णय स्वास्थ्य, सम्मान और जीवन भर की जमा-पूंजी को प्रभावित करते हैं। चाहे आप किसी प्रियजन के लिए देखभाल गृह चुन रहे हों या वरिष्ठजन देखभाल व्यवसाय शुरू कर रहे हों, हम स्पष्ट और निष्पक्ष विशेषज्ञ सलाह देते हैं।",
+      pa: "ਦੇਖਭਾਲ ਦੇ ਫੈਸਲੇ ਸਿਹਤ, ਸਨਮਾਨ ਅਤੇ ਜੀਵਨ ਭਰ ਦੀ ਕਮਾਈ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰਦੇ ਹਨ। ਭਾਵੇਂ ਤੁਸੀਂ ਆਪਣੇ ਪਿਆਰੇ ਲਈ ਢੁੱਕਵਾਂ ਘਰ ਲੱਭ ਰਹੇ ਹੋ ਜਾਂ ਬਜ਼ੁਰਗਾਂ ਦੀ ਦੇਖਭਾਲ ਦਾ ਕਾਰੋਬਾਰ ਸ਼ੁਰੂ ਕਰ ਰਹੇ ਹੋ, ਅਸੀਂ ਸਪੱਸ਼ਟ ਅਤੇ ਨਿਰਪੱਖ ਮਾਹਿਰ ਸਲਾਹ ਦਿੰਦੇ ਹਾਂ।",
+      ja: "ケアに関する決断は、健康・尊厳・大切な資産のすべてに関わる重要な選択です。ご家族の入居先探しにおいても、高齢者ケア事業の立ち上げにおいても、客観的で明快な専門知見をご提供いたします。",
+      uk: "Рішення щодо догляду впливають на здоров’я, гідність і багаторічні заощадження. Ми надаємо чітку та об’єктивну експертну підтримку як при виборі закладу для близької людини, так і при відкритті бізнесу у сфері догляду.",
+      he: "החלטות טיפוליות משפיעות על הבריאות, הכבוד וחסכונות החיים. אנו מעניקים מומחיות ברורה ואובייקטיבית בין אם אתם משבצים אדם יקר ובין אם מקימים מעון לטיפול במבוגרים.",
+      km: "ការសម្រេចចិត្តផ្នែកថែទាំប៉ះពាល់ដល់សុខភាព សេចក្តីថ្លៃថ្នូរ និងប្រាក់សន្សំពេញមួយជីវិត។ យើងផ្តល់ជូននូវជំនាញច្បាស់លាស់ និងមិនលំអៀង មិនថាលោកអ្នកកំពុងស្វែងរកកន្លែងស្នាក់នៅសម្រាប់មនុស្សជាទីស្រឡាញ់ ឬកំពុងចាប់ផ្តើមអាជីវកម្មថែទាំមនុស្សចាស់នោះទេ។",
+      fr: "Les décisions de placement touchent à la santé, à la dignité et à l'épargne d'une vie. Nous apportons une expertise objective et limpide, que vous placiez un proche ou lanciez votre activité d'accueil pour aînés.",
+      pt: "Decisões sobre cuidados impactam a saúde, a dignidade e as economias de uma vida. Oferecemos consultoria clara e objetiva, seja para acolher um ente querido ou lançar um negócio de cuidados para idosos."
     },
     "Services for Seniors & Families": {
       es: "Servicios para Adultos Mayores y Familias",
@@ -870,7 +1635,16 @@
       ko: "어르신 및 가족을 위한 서비스",
       hy: "Ծառայություններ տարեցների և ընտանիքների համար",
       ru: "Услуги для пожилых людей и семей",
-      ar: "خدمات كبار السن والعائلات"
+      ar: "خدمات كبار السن والعائلات",
+      fa: "خدمات برای سالمندان و خانواده‌ها",
+      hi: "वरिष्ठजनों और परिवारों के लिए सेवाएँ",
+      pa: "ਬਜ਼ੁਰਗਾਂ ਅਤੇ ਪਰਿਵਾਰਾਂ ਲਈ ਸੇਵਾਵਾਂ",
+      ja: "ご高齢者・ご家族向けサービス",
+      uk: "Послуги для людей похилого віку та родин",
+      he: "שירותים לאזרחים ותיקים ומשפחות",
+      km: "សេវាកម្មសម្រាប់មនុស្សចាស់ និងគ្រួសារ",
+      fr: "Services pour les aînés et les familles",
+      pt: "Serviços para Idosos e Famílias"
     },
     "Comprehensive Level-of-Care Audit": {
       es: "Evaluación Integral del Nivel de Cuidado",
@@ -880,7 +1654,16 @@
       ko: "종합 돌봄 수준 정밀 평가",
       hy: "Խնամքի մակարդակի համապարփակ գնահատում",
       ru: "Комплексная оценка уровня ухода",
-      ar: "تقييم شامل لمستوى الرعاية"
+      ar: "تقييم شامل لمستوى الرعاية",
+      fa: "ارزیابی جامع سطح مراقبت",
+      hi: "देखभाल स्तर का व्यापक मूल्यांकन",
+      pa: "ਦੇਖਭਾਲ ਦੇ ਪੱਧਰ ਦੀ ਵਿਆਪਕ ਜਾਂਚ",
+      ja: "総合的な必要ケア度（Level of Care）診断",
+      uk: "Комплексна оцінка необхідного рівня догляду",
+      he: "אבחון מקיף של רמת הטיפול הנדרשת",
+      km: "ការវាយតម្លៃកម្រិតថែទាំគ្រប់ជ្រុងជ្រោយ",
+      fr: "Audit complet du niveau de soins",
+      pt: "Avaliação Completa do Nível de Cuidados"
     },
     "We review current ADL scores, physician reports (LIC 602A), and behavioral symptoms to determine whether an independent board-and-care, specialized memory care, or skilled nursing is medically necessary.": {
       es: "Revisamos actividades de la vida diaria (ADL), informes médicos (LIC 602A) y síntomas conductuales para definir si es médicamente necesario un hogar residencial, cuidado de la memoria o enfermería especializada.",
@@ -890,7 +1673,16 @@
       ko: "일상생활수행능력(ADL) 점수, 의사 소견서(LIC 602A), 행동 증상을 검토해 일반 보드앤케어, 치매 전문 케어, 또는 전문 간호시설 중 의학적으로 필요한 단계를 판단합니다.",
       hy: "Մենք ուսումնասիրում ենք առօրյա գործունեության (ADL) ցուցանիշները, բժշկի տեղեկանքը (LIC 602A) և վարքային առանձնահատկությունները՝ որոշելու, թե արդյոք անհրաժեշտ է սովորական բնակելի խնամք, մասնագիտացված հիշողության խնամք, թե բուժքույրական հաստատություն։",
       ru: "Мы анализируем показатели повседневной активности (ADL), врачебные заключения (LIC 602A) и поведенческие симптомы, чтобы точно определить необходимость пансионата, отделения деменции или медицинского ухода.",
-      ar: "نراجع مؤشرات الأنشطة اليومية (ADL) وتقارير الطبيب (LIC 602A) والأعراض السلوكية لتحديد مدى الحاجة الطبية لدار سكنية عادية أو رعاية الذاكرة أو تمريض ماهر."
+      ar: "نراجع مؤشرات الأنشطة اليومية (ADL) وتقارير الطبيب (LIC 602A) والأعراض السلوكية لتحديد مدى الحاجة الطبية لدار سكنية عادية أو رعاية الذاكرة أو تمريض ماهر.",
+      fa: "ما امتیازهای فعلی فعالیت‌های روزمره (ADL)، گزارش‌های پزشک (LIC 602A) و نشانه‌های رفتاری را بررسی می‌کنیم تا مشخص شود آیا خانه مراقبت مسکونی، مراقبت تخصصی حافظه یا پرستاری تخصصی از نظر پزشکی ضروری است.",
+      hi: "हम वर्तमान ADL स्कोर, चिकित्सक रिपोर्ट (LIC 602A) और व्यवहार संबंधी लक्षणों की समीक्षा करके यह निर्धारित करते हैं कि स्वतंत्र बोर्ड-एंड-केयर, विशेष मेमोरी केयर या कुशल नर्सिंग में से चिकित्सकीय रूप से क्या आवश्यक है।",
+      pa: "ਅਸੀਂ ਮੌਜੂਦਾ ADL ਅੰਕਾਂ, ਡਾਕਟਰ ਦੀਆਂ ਰਿਪੋਰਟਾਂ (LIC 602A) ਅਤੇ ਵਿਵਹਾਰਕ ਲੱਛਣਾਂ ਦੀ ਸਮੀਖਿਆ ਕਰਦੇ ਹਾਂ ਤਾਂ ਜੋ ਇਹ ਤੈਅ ਕੀਤਾ ਜਾ ਸਕੇ ਕਿ ਸੁਤੰਤਰ ਬੋਰਡ-ਐਂਡ-ਕੇਅਰ, ਵਿਸ਼ੇਸ਼ ਮੈਮੋਰੀ ਕੇਅਰ ਜਾਂ ਸਕਿਲਡ ਨਰਸਿੰਗ ਵਿੱਚੋਂ ਡਾਕਟਰੀ ਤੌਰ 'ਤੇ ਕੀ ਜ਼ਰੂਰੀ ਹੈ।",
+      ja: "現在の ADL（日常生活動作）状況、医師評価書（LIC 602A）、行動面の症状を総合的に確認し、少人数制 Board & Care、認知症専門メモリーケア、あるいは高度看護施設のいずれが医学的に適切かを判断します。",
+      uk: "Ми аналізуємо показники щоденної активності (ADL), медичні висновки лікаря (LIC 602A) та поведінкові прояви, щоб визначити, чи потрібен самостійний будинок догляду, спеціалізований догляд при деменції або кваліфікований медсестринський догляд.",
+      he: "אנו בוחנים תפקוד יומיומי (ADL), דוחות רופא (LIC 602A) ותסמינים התנהגותיים כדי לקבוע אם דרוש בית טיפולי רגיל, מחלקת תשושי נפש ייעודית או מוסד סיעודי מיומן.",
+      km: "យើងពិនិត្យពិន្ទុសកម្មភាពប្រចាំថ្ងៃ (ADL) បច្ចុប្បន្ន របាយការណ៍វេជ្ជបណ្ឌិត (LIC 602A) និងរោគសញ្ញាអាកប្បកិរិយា ដើម្បីកំណត់ថាតើផ្ទះថែទាំស្នាក់នៅឯករាជ្យ ការថែទាំអ្នកជំងឺចងចាំឯកទេស ឬការថែទាំគិលានុបដ្ឋាយិកាជំនាញ គឺចាំបាច់ផ្នែកវេជ្ជសាស្ត្រឬអត់។",
+      fr: "Nous analysons les scores actuels d'autonomie (AVQ), les rapports médicaux (LIC 602A) et les symptômes comportementaux afin de déterminer si un foyer résidentiel indépendant, une unité spécialisée pour troubles cognitifs ou un établissement de soins infirmiers spécialisés est médicalement indiqué.",
+      pt: "Analisamos as avaliações atuais de atividades diárias (ADLs), laudos médicos (LIC 602A) e sintomas comportamentais para definir se é indicado um lar residencial independente, cuidados especializados de memória ou enfermagem especializada."
     },
     "Includes Physician Form LIC 602A Review": {
       es: "Incluye revisión del Formulario Médico LIC 602A",
@@ -900,7 +1692,16 @@
       ko: "의사 평가서 LIC 602A 검토 포함",
       hy: "Ներառում է LIC 602A բժշկական ձևաթղթի վերլուծություն",
       ru: "Включает проверку медицинской формы LIC 602A",
-      ar: "يشمل مراجعة نموذج الطبيب LIC 602A"
+      ar: "يشمل مراجعة نموذج الطبيب LIC 602A",
+      fa: "شامل بررسی فرم پزشک LIC 602A",
+      hi: "इसमें चिकित्सक फ़ॉर्म LIC 602A की समीक्षा शामिल है",
+      pa: "ਡਾਕਟਰੀ ਫਾਰਮ LIC 602A ਦੀ ਸਮੀਖਿਆ ਸ਼ਾਮਲ ਹੈ",
+      ja: "医師評価書（様式 LIC 602A）の確認を含みます",
+      uk: "Включає перевірку медичної форми лікаря LIC 602A",
+      he: "כולל בדיקת טופס רופא LIC 602A",
+      km: "រួមបញ្ចូលការពិនិត្យទម្រង់វេជ្ជបណ្ឌិត LIC 602A",
+      fr: "Inclut l'examen du formulaire médical LIC 602A",
+      pt: "Inclui Revisão do Formulário Médico LIC 602A"
     },
     "Curated Placement & Tour Support": {
       es: "Selección Personalizada y Apoyo en Visitas",
@@ -910,7 +1711,16 @@
       ko: "맞춤형 시설 추천 및 투어 동행",
       hy: "Անհատական ընտրություն և շրջայցերի աջակցություն",
       ru: "Подбор пансионата и сопровождение на просмотрах",
-      ar: "اختيار مخصص ودعم في الجولات"
+      ar: "اختيار مخصص ودعم في الجولات",
+      fa: "معرفی گزینشی مراکز و همراهی در بازدید",
+      hi: "चयनित प्लेसमेंट और विज़िट सहयोग",
+      pa: "ਚੋਣਵੀਂ ਰਿਹਾਇਸ਼ ਅਤੇ ਦੌਰੇ ਵਿੱਚ ਸਹਾਇਤਾ",
+      ja: "厳選施設のご案内＆見学同行サポート",
+      uk: "Персональний підбір закладів і супровід на переглядах",
+      he: "התאמה אישית וליווי בסיורים",
+      km: "ការជ្រើសរើសកន្លែងស្នាក់នៅ និងការជួយជូនទស្សនា",
+      fr: "Sélection ciblée et accompagnement aux visites",
+      pt: "Seleção Criteriosa e Apoio em Visitas"
     },
     "We inspect state CDSS licensing files for past citations, staff turnover rates, and food ratings before scheduling private family tours. We accompany you or provide a touring checklist.": {
       es: "Revisamos los expedientes estatales del CDSS para verificar citaciones previas, rotación de personal y calidad alimentaria antes de programar visitas privadas. Le acompañamos o le entregamos una lista de verificación.",
@@ -920,7 +1730,16 @@
       ko: "개별 방문 일정을 잡기 전 주정부 CDSS 파일에서 과거 시정 명령 이력, 직원 이직률, 식단 수준을 먼저 확인하고 직접 동행하거나 점검 체크리스트를 제공합니다.",
       hy: "Մինչ ընտանեկան շրջայցեր նշանակելը՝ մենք ստուգում ենք CDSS-ի լիցենզավորման արխիվները՝ անցյալ խախտումների, անձնակազմի հոսունության և սննդի գնահատականների համար։ Մենք ուղեկցում ենք ձեզ կամ տրամադրում ստուգաթերթ։",
       ru: "Перед организацией частных просмотров мы проверяем архивы лицензирования CDSS на наличие нарушений, текучесть кадров и качество питания. Мы сопровождаем вас лично или выдаем чек-лист.",
-      ar: "نفحص ملفات ترخيص CDSS الحكومية بحثاً عن المخالفات السابقة ومعدل دوران الموظفين وتقييم الطعام قبل ترتيب جولات عائلية خاصة، مع مرافقتك أو تزويدك بقائمة تحقق."
+      ar: "نفحص ملفات ترخيص CDSS الحكومية بحثاً عن المخالفات السابقة ومعدل دوران الموظفين وتقييم الطعام قبل ترتيب جولات عائلية خاصة، مع مرافقتك أو تزويدك بقائمة تحقق.",
+      fa: "پیش از هماهنگی بازدیدهای خصوصی خانواده، پرونده‌های صدور مجوز CDSS را از نظر تخلفات قبلی، نرخ جابه‌جایی کارکنان و کیفیت تغذیه بررسی می‌کنیم. در بازدید همراه شما می‌آییم یا چک‌لیست بازدید ارائه می‌دهیم.",
+      hi: "निजी पारिवारिक विज़िट तय करने से पहले हम राज्य की CDSS लाइसेंसिंग फ़ाइलों में पिछले उल्लंघनों, स्टाफ़ बदलाव दर और भोजन गुणवत्ता की जांच करते हैं। हम आपके साथ जाते हैं या निरीक्षण चेकलिस्ट प्रदान करते हैं।",
+      pa: "ਨਿੱਜੀ ਪਰਿਵਾਰਕ ਦੌਰੇ ਤੈਅ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਅਸੀਂ ਪਿਛਲੀਆਂ ਉਲੰਘਣਾਵਾਂ (citations), ਸਟਾਫ ਬਦਲਾਅ ਦੀ ਦਰ ਅਤੇ ਭੋਜਨ ਦੀ ਗੁਣਵੱਤਾ ਲਈ ਰਾਜ ਦੀਆਂ CDSS ਲਾਇਸੰਸਿੰਗ ਫਾਈਲਾਂ ਦੀ ਜਾਂਚ ਕਰਦੇ ਹਾਂ। ਅਸੀਂ ਤੁਹਾਡੇ ਨਾਲ ਜਾਂਦੇ ਹਾਂ ਜਾਂ ਦੌਰੇ ਦੀ ਜਾਂਚ-ਸੂਚੀ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਾਂ।",
+      ja: "個別見学を設定する前に、州 CDSS の認可記録から過去の指導・違反履歴、職員の定着率、食事の評価まで事前に調査します。見学への同行、またはチェックリストのご提供にも対応しております。",
+      uk: "Перш ніж організувати приватні перегляди для родини, ми перевіряємо державні реєстри CDSS на наявність попередніх зауважень, плинність персоналу та якість харчування. Ми супроводжуємо вас особисто або надаємо детальний чекліст для візиту.",
+      he: "אנו בודקים את תיקי הרישוי של CDSS לליקויי עבר, תחלופת צוות ואיכות המזון לפני תיאום סיורים משפחתיים פרטיים. אנו מצטרפים אליכם או מציידים אתכם ברשימת בדיקה לסיור.",
+      km: "យើងពិនិត្យឯកសារអាជ្ញាប័ណ្ណ CDSS របស់រដ្ឋសម្រាប់ប្រវត្តិល្មើសបទប្បញ្ញត្តិកន្លងមក អត្រាផ្លាស់ប្តូរបុគ្គលិក និងការវាយតម្លៃអាហារ មុនពេលកំណត់ពេលទស្សនកិច្ចផ្ទាល់ខ្លួនសម្រាប់គ្រួសារ។ យើងអាចជូនលោកអ្នកទៅទស្សនា ឬផ្តល់បញ្ជីត្រួតពិនិត្យពេលទស្សនា។",
+      fr: "Nous consultons les dossiers publics d'agrément du CDSS pour vérifier l'historique des citations, le renouvellement du personnel et la qualité des repas avant de planifier des visites familiales privées. Nous vous accompagnons ou vous fournissons une grille d'évaluation.",
+      pt: "Verificamos os arquivos estaduais do CDSS em busca de autuações anteriores, rotatividade de equipe e qualidade da alimentação antes de agendar visitas privadas. Acompanhamos você ou fornecemos um roteiro completo de vistoria."
     },
     "100% Free Placement Service for Families": {
       es: "Servicio de ubicación 100% gratuito para familias",
@@ -930,7 +1749,16 @@
       ko: "가족을 위한 100% 무료 입소 연계",
       hy: "100% անվճար տեղավորման ծառայություն ընտանիքների համար",
       ru: "100% бесплатный подбор для семей",
-      ar: "خدمة تسكين مجانية 100% للعائلات"
+      ar: "خدمة تسكين مجانية 100% للعائلات",
+      fa: "خدمات اسکان ۱۰۰٪ رایگان برای خانواده‌ها",
+      hi: "परिवारों के लिए 100% निःशुल्क प्लेसमेंट सेवा",
+      pa: "ਪਰਿਵਾਰਾਂ ਲਈ 100% ਮੁਫ਼ਤ ਰਿਹਾਇਸ਼ ਸਹਾਇਤਾ ਸੇਵਾ",
+      ja: "ご家族への入居紹介サービスは100%無料",
+      uk: "100% безкоштовний підбір житла для родин",
+      he: "שירות שיבוץ 100% חינם למשפחות",
+      km: "សេវាស្វែងរកកន្លែងស្នាក់នៅឥតគិតថ្លៃ 100% សម្រាប់គ្រួសារ",
+      fr: "Service de placement 100 % gratuit pour les familles",
+      pt: "Serviço de Encaminhamento 100% Gratuito para Famílias"
     },
     "Benefit & Financial Navigation": {
       es: "Orientación Financiera y de Beneficios",
@@ -940,7 +1768,16 @@
       ko: "정부 지원금 및 재정 혜택 안내",
       hy: "Նպաստների և ֆինանսական ուղղորդում",
       ru: "Навигация по льготам и финансированию",
-      ar: "توجيه المزايا والتمويل"
+      ar: "توجيه المزايا والتمويل",
+      fa: "راهنمایی مزایا و امور مالی",
+      hi: "सरकारी लाभ और वित्तीय मार्गदर्शन",
+      pa: "ਲਾਭ ਅਤੇ ਵਿੱਤੀ ਮਾਰਗਦਰਸ਼ਨ",
+      ja: "給付制度・資金計画ナビゲーション",
+      uk: "Навігація пільг і фінансових програм",
+      he: "ניווט זכויות והיבטים פיננסיים",
+      km: "ការណែនាំអំពីអត្ថប្រយោជន៍ និងហិរញ្ញវត្ថុ",
+      fr: "Orientation financière et aides publiques",
+      pt: "Orientação sobre Benefícios e Finanças"
     },
     "Assistance understanding Veterans Aid & Attendance pensions (up to $2,431+/mo for single veterans and $2,881+/mo for married veterans), Long-Term Care Insurance policies, and Medi-Cal ALW eligibility.": {
       es: "Ayuda para comprender pensiones de Veterans Aid & Attendance (hasta $2,431+/mes para veteranos solteros y $2,881+/mes para casados), seguros de cuidado a largo plazo y elegibilidad para Medi-Cal ALW.",
@@ -950,7 +1787,16 @@
       ko: "퇴역군인 Aid & Attendance 연금(독신 월 최대 $2,431+, 기혼 월 최대 $2,881+), 장기요양보험(LTC) 및 Medi-Cal ALW 수급 자격을 알기 쉽게 안내합니다.",
       hy: "Աջակցություն Veterans Aid & Attendance կենսաթոշակների (ամսական մինչև $2,431+ միայնակ վետերանների և $2,881+ ամուսնացած վետերանների համար), Երկարաժամկետ խնամքի ապահովագրության և Medi-Cal ALW իրավասության հարցերում։",
       ru: "Помощь в оформлении пенсий Veterans Aid & Attendance (до $2,431+/мес для одиноких ветеранов и $2,881+/мес для семейных), полисов страхования долгосрочного ухода и программы Medi-Cal ALW.",
-      ar: "مساعدة في فهم معاشات Veterans Aid & Attendance (حتى $2,431+/شهر للعازب و$2,881+/شهر للمتزوج) وبوالص تأمين الرعاية طويلة الأمد وأهلية Medi-Cal ALW."
+      ar: "مساعدة في فهم معاشات Veterans Aid & Attendance (حتى $2,431+/شهر للعازب و$2,881+/شهر للمتزوج) وبوالص تأمين الرعاية طويلة الأمد وأهلية Medi-Cal ALW.",
+      fa: "کمک به درک مستمری VA Aid & Attendance (تا بیش از ۲٬۴۳۱ دلار در ماه برای کهنه‌سربازان مجرد و ۲٬۸۸۱ دلار در ماه برای متأهلان)، بیمه‌نامه‌های مراقبت طولانی‌مدت و شرایط دریافت Medi-Cal ALW.",
+      hi: "Veterans Aid & Attendance पेंशन (एकल पूर्व सैनिकों के लिए $2,431+/माह तक और विवाहित पूर्व सैनिकों के लिए $2,881+/माह तक), दीर्घकालिक देखभाल बीमा पॉलिसियों और Medi-Cal ALW पात्रता को समझने में सहायता।",
+      pa: "Veterans Aid & Attendance ਪੈਨਸ਼ਨ (ਇਕੱਲੇ ਸਾਬਕਾ ਫ਼ੌਜੀਆਂ ਲਈ $2,431+/ਮਹੀਨਾ ਤੱਕ ਅਤੇ ਵਿਆਹੁਤਾ ਸਾਬਕਾ ਫ਼ੌਜੀਆਂ ਲਈ $2,881+/ਮਹੀਨਾ ਤੱਕ), ਲੰਬੇ ਸਮੇਂ ਦੀ ਦੇਖਭਾਲ ਬੀਮਾ ਪਾਲਿਸੀਆਂ ਅਤੇ Medi-Cal ALW ਯੋਗਤਾ ਨੂੰ ਸਮਝਣ ਵਿੱਚ ਸਹਾਇਤਾ।",
+      ja: "退役軍人介護手当年金 VA Aid & Attendance（単身退役軍人で月額最大 $2,431 以上、既婚退役軍人で月額最大 $2,881 以上）、長期介護保険（LTC保険）、および Medi-Cal ALW の受給資格について分かりやすくご案内します。",
+      uk: "Допомога в роз’ясненні пенсійних виплат Veterans Aid & Attendance (до $2,431+/міс для самотніх ветеранів і до $2,881+/міс для одружених ветеранів), умов полісів страхування довгострокового догляду та права на програму Medi-Cal ALW.",
+      he: "סיוע בהבנת קצבאות VA Aid & Attendance (עד $2,431+ לחודש ליחידים ועד $2,881+ לחודש לנשואים), פוליסות ביטוח סיעודי ארוך טווח וזכאות לתוכנית Medi-Cal ALW.",
+      km: "ជំនួយក្នុងការស្វែងយល់ពីប្រាក់សោធន Veterans Aid & Attendance (រហូតដល់ $2,431+/ខែ សម្រាប់អតីតយុទ្ធជននៅលីវ និង $2,881+/ខែ សម្រាប់អតីតយុទ្ធជនមានគ្រួសារ) គោលនយោបាយធានារ៉ាប់រងការថែទាំរយៈពេលវែង និងសិទ្ធិទទួលបាន Medi-Cal ALW។",
+      fr: "Aide pour comprendre les pensions Veterans Aid & Attendance (jusqu'à 2 431 $+/mois pour un ancien combattant célibataire et 2 881 $+/mois pour un ancien combattant marié), les polices d'assurance dépendance à long terme et l'éligibilité à Medi-Cal ALW.",
+      pt: "Apoio para compreender pensões Veterans Aid & Attendance (até $2,431+/mês para veteranos solteiros e $2,881+/mês para veteranos casados), apólices de Seguro de Cuidados de Longo Prazo e elegibilidade ao Medi-Cal ALW."
     },
     "Advocacy for Long-Term Care Claims": {
       es: "Apoyo en reclamos de Seguro a Largo Plazo",
@@ -960,7 +1806,16 @@
       ko: "장기요양보험(LTC) 청구 지원",
       hy: "Երկարաժամկետ խնամքի ապահովագրական հայցերի աջակցություն",
       ru: "Поддержка по выплатам страхования долгосрочного ухода",
-      ar: "دعم مطالبات تأمين الرعاية طويلة الأمد"
+      ar: "دعم مطالبات تأمين الرعاية طويلة الأمد",
+      fa: "پیگیری و حمایت برای درخواست‌های بیمه مراقبت طولانی‌مدت",
+      hi: "दीर्घकालिक देखभाल दावों में सहयोग",
+      pa: "ਲੰਬੇ ਸਮੇਂ ਦੀ ਦੇਖਭਾਲ ਦੇ ਦਾਅਵਿਆਂ ਲਈ ਸਹਿਯੋਗ",
+      ja: "長期介護保険の給付請求サポート",
+      uk: "Підтримка при оформленні страхових виплат",
+      he: "ליווי ותמיכה בתביעות ביטוח סיעודי",
+      km: "ការគាំទ្រសម្រាប់ការទាមទារធានារ៉ាប់រងការថែទាំរយៈពេលវែង",
+      fr: "Accompagnement pour les demandes d'indemnisation dépendance",
+      pt: "Apoio em Solicitações de Seguro de Longo Prazo"
     },
     "Consulting for RCFE Operators & Investors": {
       es: "Consultoría para Operadores e Inversionistas de RCFE",
@@ -970,7 +1825,16 @@
       ko: "RCFE 운영자 및 투자자 컨설팅",
       hy: "Խորհրդատվություն RCFE օպերատորների և ներդրողների համար",
       ru: "Консалтинг для операторов и инвесторов RCFE",
-      ar: "استشارات لمشغلي ومستثمري RCFE"
+      ar: "استشارات لمشغلي ومستثمري RCFE",
+      fa: "مشاوره برای بهره‌برداران و سرمایه‌گذاران RCFE",
+      hi: "RCFE संचालकों और निवेशकों के लिए परामर्श",
+      pa: "RCFE ਸੰਚਾਲਕਾਂ ਅਤੇ ਨਿਵੇਸ਼ਕਾਂ ਲਈ ਸਲਾਹ",
+      ja: "RCFE 事業者・投資家向けコンサルティング",
+      uk: "Консалтинг для операторів та інвесторів RCFE",
+      he: "ייעוץ למפעילי RCFE ומשקיעים",
+      km: "ការប្រឹក្សាសម្រាប់អ្នកបើកមណ្ឌល RCFE និងអ្នកវិនិយោគ",
+      fr: "Conseil pour les exploitants et investisseurs RCFE",
+      pt: "Consultoria para Operadores e Investidores de RCFE"
     },
     "Turnkey LIC 200 Licensing Packet": {
       es: "Paquete Llave en Mano de Licencia LIC 200",
@@ -980,7 +1844,16 @@
       ko: "맞춤형 LIC 200 인허가 신청 패키지",
       hy: "Պատրաստի LIC 200 լիցենզավորման փաթեթ",
       ru: "Пакет лицензирования LIC 200 «под ключ»",
-      ar: "حزمة ترخيص LIC 200 جاهزة"
+      ar: "حزمة ترخيص LIC 200 جاهزة",
+      fa: "پکیج آماده اخذ مجوز LIC 200",
+      hi: "पूर्ण LIC 200 लाइसेंसिंग पैकेट",
+      pa: "ਤਿਆਰ-ਬਰ-ਤਿਆਰ LIC 200 ਲਾਇਸੰਸਿੰਗ ਪੈਕੇਟ",
+      ja: "そのまま申請できる LIC 200 認可申請書類一式",
+      uk: "Готовий пакет ліцензування LIC 200 «під ключ»",
+      he: "חבילת רישוי LIC 200 מוכנה להגשה",
+      km: "កញ្ចប់សុំអាជ្ញាប័ណ្ណ LIC 200 ពេញលេញរួចរាល់",
+      fr: "Dossier d'agrément LIC 200 clé en main",
+      pt: "Pacote de Licenciamento LIC 200 Pronto para Protocolo"
     },
     "We draft your entire 30+ item application: Plan of Operation, Admission Agreement, House Rules, Emergency Disaster Plan (LIC 610E), Theft & Loss Policy, and Job Descriptions tailored to Title 22.": {
       es: "Redactamos toda su solicitud de más de 30 documentos: Plan de Operación, Contrato de Admisión, Reglas de la Casa, Plan de Desastres (LIC 610E), Política de Pérdidas y Descripciones de Puestos según el Título 22.",
@@ -990,7 +1863,16 @@
       ko: "운영 계획서, 입소 계약서, 생활 수칙, 비상 재난 계획(LIC 610E), 도난·분실 규정, Title 22 기준 직무 기술서 등 30여 종의 전체 신청 서류를 직접 작성합니다.",
       hy: "Մենք կազմում ենք ձեր ամբողջ 30+ կետից բաղկացած հայտը՝ Գործողությունների ծրագիր, Ընդունման պայմանագիր, Ներքին կանոնակարգ, Արտակարգ իրավիճակների պլան (LIC 610E), Գողության և կորստի քաղաքականություն և պաշտոնական պարտականություններ՝ Title 22-ին համապատասխան։",
       ru: "Мы разрабатываем всю заявку из 30+ пунктов: План деятельности, Договор приема, Правила дома, План действий при ЧС (LIC 610E), Политику учета краж и утрат и должностные инструкции по стандарту Title 22.",
-      ar: "نعد طلبك الكامل بأكثر من 30 بنداً: خطة التشغيل، اتفاقية القبول، قواعد الدار، خطة الطوارئ (LIC 610E)، سياسة السرقة والفقدان، والوصف الوظيفي وفق Title 22."
+      ar: "نعد طلبك الكامل بأكثر من 30 بنداً: خطة التشغيل، اتفاقية القبول، قواعد الدار، خطة الطوارئ (LIC 610E)، سياسة السرقة والفقدان، والوصف الوظيفي وفق Title 22.",
+      fa: "ما کل پرونده بیش از ۳۰ بخشی درخواست شما را آماده می‌کنیم: طرح عملیاتی، قرارداد پذیرش، قوانین خانه، برنامه واکنش به بلایا (LIC 610E)، خط‌مشی سرقت و مفقودی و شرح وظایف شغلی منطبق با Title 22.",
+      hi: "हम आपका 30+ दस्तावेज़ों वाला पूरा आवेदन तैयार करते हैं: Title 22 के अनुरूप संचालन योजना, प्रवेश अनुबंध, आवास नियम, आपातकालीन आपदा योजना (LIC 610E), चोरी एवं हानि नीति और कार्य विवरण।",
+      pa: "ਅਸੀਂ ਤੁਹਾਡੀ ਪੂਰੀ 30+ ਦਸਤਾਵੇਜ਼ਾਂ ਵਾਲੀ ਅਰਜ਼ੀ ਤਿਆਰ ਕਰਦੇ ਹਾਂ: Title 22 ਅਨੁਸਾਰ ਸੰਚਾਲਨ ਯੋਜਨਾ (Plan of Operation), ਦਾਖ਼ਲਾ ਸਮਝੌਤਾ, ਘਰ ਦੇ ਨਿਯਮ, ਐਮਰਜੈਂਸੀ ਆਫ਼ਤ ਯੋਜਨਾ (LIC 610E), ਚੋਰੀ ਅਤੇ ਨੁਕਸਾਨ ਨੀਤੀ, ਅਤੇ ਨੌਕਰੀ ਦੇ ਵੇਰਵੇ।",
+      ja: "Title 22 に準拠した30項目以上の申請書類（運営計画書、入居契約書、施設利用規定、緊急災害対策計画［LIC 610E］、盗難・紛失防止規定、職務記述書など）を一括してオーダーメイドで作成します。",
+      uk: "Ми готуємо всю заявку з понад 30 документів: План діяльності, Договір про прийом, Правила проживання, План дій у надзвичайних ситуаціях (LIC 610E), Політику щодо крадіжок і втрат та посадові інструкції відповідно до Title 22.",
+      he: "אנו עורכים את כל תיק הבקשה הכולל 30+ מסמכים: תוכנית הפעלה, הסכם קליטה, כללי הבית, תוכנית חירום (LIC 610E), מדיניות גניבה ואובדן והגדרות תפקיד בהתאם ל-Title 22.",
+      km: "យើងព្រាងពាក្យសុំទាំងមូលដែលមានជាង 30 មុខ៖ ផែនការប្រតិបត្តិការ កិច្ចព្រមព្រៀងចូលស្នាក់នៅ វិន័យផ្ទះ ផែនការគ្រោះមហន្តរាយបន្ទាន់ (LIC 610E) គោលនយោបាយការពារអំពើលួច និងការបាត់បង់ និងការពិពណ៌នាការងារដែលរៀបចំស្របតាម Title 22។",
+      fr: "Nous rédigeons l'intégralité de votre demande de plus de 30 pièces : Plan d'exploitation, contrat d'admission, règlement intérieur, plan d'urgence en cas de catastrophe (LIC 610E), politique contre le vol et les pertes, et fiches de poste conformes au Title 22.",
+      pt: "Elaboramos todo o seu processo com mais de 30 itens: Plano de Operação, Contrato de Admissão, Regras da Casa, Plano de Emergência e Desastres (LIC 610E), Política de Furto e Perda e Descrições de Cargos alinhadas ao Title 22."
     },
     "Guaranteed Resubmission Support": {
       es: "Soporte garantizado de reenvío ante observaciones",
@@ -1000,7 +1882,16 @@
       ko: "보완 요청 시 재접수 책임 지원",
       hy: "Կրկնակի ներկայացման երաշխավորված աջակցություն",
       ru: "Гарантированная поддержка при доработке",
-      ar: "دعم مضمون لإعادة التقديم"
+      ar: "دعم مضمون لإعادة التقديم",
+      fa: "پشتیبانی تضمینی برای ارسال اصلاحیه",
+      hi: "सुधार और पुनः प्रस्तुति की गारंटीड सहायता",
+      pa: "ਮੁੜ-ਅਰਜ਼ੀ (Resubmission) ਸਹਾਇਤਾ ਦੀ ਗਰੰਟੀ",
+      ja: "再提出・補正対応も安心の保証サポート",
+      uk: "Гарантована підтримка при доопрацюванні",
+      he: "תמיכה מובטחת בהגשה חוזרת",
+      km: "ធានាគាំទ្រការដាក់ស្នើឡើងវិញ",
+      fr: "Assistance garantie en cas de demande de complément",
+      pt: "Suporte Garantido para Reenvio e Ajustes"
     },
     "Physical Plant & Fire Clearance (STD 850)": {
       es: "Planta Física y Aprobación de Bomberos (STD 850)",
@@ -1010,7 +1901,16 @@
       ko: "시설 구조 검토 및 소방 승인 (STD 850)",
       hy: "Շինության և հրշեջ թույլտվության նախապատրաստում (STD 850)",
       ru: "Помещение и пожарное разрешение (STD 850)",
-      ar: "تجهيز المبنى وموافقة الإطفاء (STD 850)"
+      ar: "تجهيز المبنى وموافقة الإطفاء (STD 850)",
+      fa: "بررسی ساختمان و تأییدیه آتش‌نشانی (STD 850)",
+      hi: "भवन संरचना और अग्नि सुरक्षा स्वीकृति (STD 850)",
+      pa: "ਇਮਾਰਤ ਦੀ ਜਾਂਚ ਅਤੇ ਅੱਗ ਸੁਰੱਖਿਆ ਮਨਜ਼ੂਰੀ (STD 850)",
+      ja: "施設建物要件・防火承認（STD 850）対策",
+      uk: "Підготовка приміщення та пожежний дозвіл (STD 850)",
+      he: "התאמת המבנה ואישור כיבוי אש (STD 850)",
+      km: "អគារទីតាំង និងការអនុញ្ញាតអគ្គិភ័យ (STD 850)",
+      fr: "Conformité des locaux et approbation incendie (STD 850)",
+      pt: "Estrutura Física e Aprovação contra Incêndios (STD 850)"
     },
     "Site feasibility review before you lease or buy. Guidance on sprinkler requirements, egress routes, door hardware, wheelchair ramps, and local fire marshal coordination for non-ambulatory/bedridden clearance.": {
       es: "Evaluación previa antes de alquilar o comprar. Guía sobre rociadores, rutas de evacuación, herrajes de puertas, rampas y coordinación con bomberos para residentes no ambulatorios o postrados en cama.",
@@ -1020,7 +1920,16 @@
       ko: "임대·매입 전 입지 타당성 검토부터 스프링클러, 비상 대피로, 문 손잡이 규격, 휠체어 경사로, 비보행·와상 입소자 승인을 위한 소방국 협의까지 안내합니다.",
       hy: "Տարածքի համապատասխանության ստուգում վարձակալելուց կամ գնելուց առաջ։ Խորհրդատվություն ցնցուղային համակարգերի, տարհանման ուղիների, դռների փականների, թեքահարթակների և տեղական հրշեջ տեսչության հետ համակարգման վերաբերյալ՝ չքայլող և անկողնային բնակիչների թույլտվության համար։",
       ru: "Проверка объекта до аренды или покупки. Рекомендации по спринклерам, путям эвакуации, дверной фурнитуре, пандусам и согласованию с пожарным инспектором для допуска лежачих/маломобильных жильцов.",
-      ar: "دراسة جدوى الموقع قبل الاستئجار أو الشراء، مع إرشادات الرشاشات ومخارج الطوارئ وأقفال الأبواب ومنحدرات الكراسي المتحركة والتنسيق مع الإطفاء لتصريح غير القادرين على المشي/طريحي الفراش."
+      ar: "دراسة جدوى الموقع قبل الاستئجار أو الشراء، مع إرشادات الرشاشات ومخارج الطوارئ وأقفال الأبواب ومنحدرات الكراسي المتحركة والتنسيق مع الإطفاء لتصريح غير القادرين على المشي/طريحي الفراش.",
+      fa: "بررسی امکان‌سنجی ملک پیش از اجاره یا خرید. راهنمایی درباره الزامات آب‌پاش حریق، مسیرهای خروج اضطراری، دستگیره‌های در، رمپ ویلچر و هماهنگی با بازرس آتش‌نشانی محلی برای مجوز افراد غیرمتحرک یا بستری.",
+      hi: "लीज़ या खरीद से पहले स्थल की उपयुक्तता जांच। नॉन-एम्बुलेटरी/शैयाग्रस्त स्वीकृति के लिए स्प्रिंकलर आवश्यकताओं, निकास मार्गों, दरवाज़ों के हार्डवेयर, व्हीलचेयर रैंप और स्थानीय फ़ायर मार्शल समन्वय पर मार्गदर्शन।",
+      pa: "ਲੀਜ਼ 'ਤੇ ਲੈਣ ਜਾਂ ਖਰੀਦਣ ਤੋਂ ਪਹਿਲਾਂ ਜਗ੍ਹਾ ਦੀ ਅਨੁਕੂਲਤਾ ਦੀ ਸਮੀਖਿਆ। ਸਪ੍ਰਿੰਕਲਰ ਲੋੜਾਂ, ਨਿਕਾਸ ਰਸਤਿਆਂ, ਦਰਵਾਜ਼ਿਆਂ ਦੇ ਹਾਰਡਵੇਅਰ, ਵ੍ਹੀਲਚੇਅਰ ਰੈਂਪਾਂ ਅਤੇ ਚੱਲਣ-ਫਿਰਨ ਤੋਂ ਅਸਮਰੱਥ/ਬਿਸਤਰੇ 'ਤੇ ਸੀਮਤ ਮਰੀਜ਼ਾਂ ਦੀ ਮਨਜ਼ੂਰੀ ਲਈ ਸਥਾਨਕ ਫਾਇਰ ਮਾਰਸ਼ਲ ਨਾਲ ਤਾਲਮੇਲ ਬਾਰੇ ਮਾਰਗਦਰਸ਼ਨ।",
+      ja: "物件の賃貸・購入前の現地適性調査を実施します。スプリンクラー要件、避難経路、ドア金具、車椅子用スロープ、ならびに歩行困難者・寝たきり入居者受入承認に向けた地元消防署との調整を指導します。",
+      uk: "Оцінка придатності об’єкта ще до оренди чи купівлі. Рекомендації щодо спринклерних систем, шляхів евакуації, дверної фурнітури, пандусів для крісел колісних і взаємодії з місцевим пожежним інспектором для допуску немобільних і лежачих мешканців.",
+      he: "בדיקת היתכנות של הנכס לפני שכירות או רכישה. הכוונה בנושא מתזים, דרכי מילוט, פרזול דלתות, רמפות לכיסאות גלגלים ותיאום מול רשות הכבאות לקבלת אישור לדיירים סיעודיים/מרותקי מיטה.",
+      km: "ការពិនិត្យលទ្ធភាពទីតាំងមុនពេលលោកអ្នកជួល ឬទិញ។ ការណែនាំអំពីតម្រូវការប្រព័ន្ធបាញ់ទឹកពន្លត់អគ្គិភ័យ ផ្លូវចេញសង្គ្រោះបន្ទាន់ ដៃទ្វារ ផ្លូវជម្រាលសម្រាប់រទេះរុញ និងការសម្របសម្រួលជាមួយមន្ត្រីអគ្គិភ័យក្នុងតំបន់សម្រាប់ការអនុញ្ញាតអ្នកមិនអាចដើរបាន ឬសម្រាកលើគ្រែ។",
+      fr: "Étude de faisabilité du bien avant la location ou l'achat. Conseils sur les gicleurs automatiques, les issues de secours, la quincaillerie des portes, les rampes d'accès et la coordination avec le Fire Marshal local pour l'autorisation des résidents non ambulatoires ou alités.",
+      pt: "Estudo de viabilidade do imóvel antes de alugar ou comprar. Orientação sobre exigências de sprinklers, rotas de fuga, ferragens de portas, rampas de acesso e alinhamento com o corpo de bombeiros local para liberação de residentes não deambulantes ou acamados."
     },
     "Avoid Costly Remodeling Delays": {
       es: "Evite costosos retrasos de remodelación",
@@ -1030,7 +1939,16 @@
       ko: "불필요한 공사비와 일정 지연 예방",
       hy: "Խուսափեք վերանորոգման թանկարժեք ուշացումներից",
       ru: "Избегайте дорогостоящих задержек ремонта",
-      ar: "تجنب تأخيرات الترميم المكلفة"
+      ar: "تجنب تأخيرات الترميم المكلفة",
+      fa: "جلوگیری از تأخیرهای پرهزینه بازسازی",
+      hi: "महंगे पुनर्निर्माण और देरी से बचें",
+      pa: "ਮਹਿੰਗੀ ਮੁਰੰਮਤ ਕਾਰਨ ਹੋਣ ਵਾਲੀ ਦੇਰੀ ਤੋਂ ਬਚੋ",
+      ja: "高額な改修工事や工期遅延を未然に防止",
+      uk: "Уникнення дорогих затримок із ремонтом",
+      he: "מנעו עיכובי שיפוץ יקרים",
+      km: "ជៀសវាងការពន្យារពេលជួសជុលដែលអស់ថ្លៃចំណាយខ្ពស់",
+      fr: "Évitez des retards de travaux coûteux",
+      pt: "Evite Atrasos e Reformas Onerosas"
     },
     "Component III & Pre-Licensing Prep": {
       es: "Preparación para Componente III y Pre-Licencia",
@@ -1040,7 +1958,16 @@
       ko: "Component III 인터뷰 및 사전 실사 대비",
       hy: "Component III և նախալիցենզավորման պատրաստում",
       ru: "Подготовка к Component III и инспекции",
-      ar: "التحضير لمقابلة Component III ومعاينة ما قبل الترخيص"
+      ar: "التحضير لمقابلة Component III ومعاينة ما قبل الترخيص",
+      fa: "آماده‌سازی Component III و بازرسی پیش از مجوز",
+      hi: "Component III और पूर्व-लाइसेंसिंग तैयारी",
+      pa: "Component III ਅਤੇ ਲਾਇਸੰਸ ਤੋਂ ਪਹਿਲਾਂ ਦੀ ਤਿਆਰੀ",
+      ja: "Component III 面談・認可前実地検査対策",
+      uk: "Співбесіда Component III і передліцензійна підготовка",
+      he: "הכנה ל-Component III ולביקורת טרום-רישוי",
+      km: "ការត្រៀមខ្លួនសម្រាប់ Component III និងមុនទទួលអាជ្ញាប័ណ្ណ",
+      fr: "Préparation à la composante III et pré-licence",
+      pt: "Componente III e Preparação Pré-Licenciamento"
     },
     "One-on-one coaching for your CDSS LPA interview, mock licensing walk-through, medication room staging, resident chart setup, and staff onboarding protocols so you open on schedule.": {
       es: "Entrenamiento individual para su entrevista con el analista LPA del CDSS, recorrido simulado, sala de medicamentos, expedientes de residentes y protocolos de contratación para abrir a tiempo.",
@@ -1050,7 +1977,16 @@
       ko: "CDSS 심사관(LPA) 인터뷰 1:1 코칭, 모의 현장 실사, 투약실 세팅, 입소자 차트 구성, 직원 채용 절차까지 일정에 맞춰 개원할 수 있도록 돕습니다.",
       hy: "Անհատական պատրաստում CDSS LPA հարցազրույցին, փորձնական ստուգում, դեղորայքային սենյակի կահավորում, բնակիչների քարտերի ձևավորում և անձնակազմի ներգրավման կարգեր՝ ժամանակին բացվելու համար։",
       ru: "Персональная подготовка к интервью с инспектором CDSS LPA, пробный аудит, организация комнаты хранения лекарств, оформление карт жильцов и адаптация персонала для открытия точно в срок.",
-      ar: "تدريب فردي لمقابلة محلل CDSS LPA، وجولة تفتيش تجريبية، وتجهيز غرفة الأدوية وملفات المقيمين وبروتوكولات تدريب الموظفين لتفتتح في الموعد المحدد."
+      ar: "تدريب فردي لمقابلة محلل CDSS LPA، وجولة تفتيش تجريبية، وتجهيز غرفة الأدوية وملفات المقيمين وبروتوكولات تدريب الموظفين لتفتتح في الموعد المحدد.",
+      fa: "آماده‌سازی فردی برای مصاحبه با کارشناس LPA در CDSS، بازرسی آزمایشی صدور مجوز، چیدمان اتاق دارو، تنظیم پرونده‌های مقیمان و دستورالعمل‌های جذب نیرو تا به موقع افتتاح کنید.",
+      hi: "आपके CDSS LPA साक्षात्कार के लिए व्यक्तिगत कोचिंग, मॉक लाइसेंसिंग निरीक्षण, दवा कक्ष की व्यवस्था, निवासी चार्ट सेटअप और स्टाफ़ ऑनबोर्डिंग प्रोटोकॉल ताकि आप समय पर केंद्र शुरू कर सकें।",
+      pa: "ਤੁਹਾਡੀ CDSS LPA ਇੰਟਰਵਿਊ ਲਈ ਨਿੱਜੀ ਤਿਆਰੀ, ਅਭਿਆਸ ਲਾਇਸੰਸਿੰਗ ਨਿਰੀਖਣ, ਦਵਾਈਆਂ ਵਾਲੇ ਕਮਰੇ ਦੀ ਸੈਟਿੰਗ, ਨਿਵਾਸੀ ਚਾਰਟ ਤਿਆਰ ਕਰਨਾ ਅਤੇ ਸਟਾਫ ਦੀ ਭਰਤੀ ਪ੍ਰਕਿਰਿਆ ਤਾਂ ਜੋ ਤੁਸੀਂ ਸਮੇਂ ਸਿਰ ਸ਼ੁਰੂਆਤ ਕਰ ਸਕੋ।",
+      ja: "予定通り開業できるよう、CDSS の担当 LPA による面談に向けたマンツーマン指導、模擬実地検査、服薬管理室の整備、入居者カルテ構築、スタッフ導入研修手順の整備まで徹底サポートします。",
+      uk: "Індивідуальна підготовка до інтерв’ю з інспектором LPA від CDSS, пробний інспекційний обхід, облаштування кімнати зберігання ліків, формування карток мешканців і протоколів адаптації персоналу для вчасного відкриття.",
+      he: "אימון אישי לראיון עם מפקח CDSS (LPA), סיור הדמיה של ביקורת רישוי, ארגון חדר תרופות, הקמת תיקי דיירים ונהלי קליטת עובדים כדי שתפתחו בזמן.",
+      km: "ការបង្វឹកមួយទល់មួយសម្រាប់ការសម្ភាសន៍ CDSS LPA ការដើរពិនិត្យសាកល្បងសុំអាជ្ញាប័ណ្ណ ការរៀបចំបន្ទប់រក្សាទុកថ្នាំ ការរៀបចំសំណុំឯកសារអ្នកស្នាក់នៅ និងនីតិវិធីទទួលបុគ្គលិកថ្មី ដើម្បីឱ្យលោកអ្នកបើកដំណើរការទាន់ពេលវេលា។",
+      fr: "Coaching individuel pour votre entretien avec le LPA du CDSS, visite blanche de conformité, organisation de la salle des médicaments, mise en place des dossiers des résidents et protocoles d'intégration du personnel pour ouvrir dans les délais.",
+      pt: "Treinamento individual para sua entrevista com o LPA do CDSS, vistoria simulada de licenciamento, organização da sala de medicação, montagem de prontuários de residentes e protocolos de integração da equipe para inaugurar no prazo."
     },
     "Mock LPA Audit Included": {
       es: "Auditoría simulada LPA incluida",
@@ -1060,7 +1996,16 @@
       ko: "모의 LPA 실사 점검 포함",
       hy: "Ներառում է LPA փորձնական ստուգում",
       ru: "Включен пробный аудит LPA",
-      ar: "يشمل تدقيق LPA تجريبي"
+      ar: "يشمل تدقيق LPA تجريبي",
+      fa: "شامل بازرسی آزمایشی شبیه‌سازی‌شده LPA",
+      hi: "मॉक LPA ऑडिट शामिल",
+      pa: "ਅਭਿਆਸ LPA ਨਿਰੀਖਣ (Mock Audit) ਸ਼ਾਮਲ ਹੈ",
+      ja: "LPA 模擬実地検査を標準パッケージに含む",
+      uk: "Пробний аудит LPA включено",
+      he: "כולל ביקורת הדמיה בסגנון LPA",
+      km: "រួមបញ្ចូលការធ្វើសវនកម្ម LPA សាកល្បង",
+      fr: "Audit blanc de type LPA inclus",
+      pt: "Auditoria Simulada de LPA Inclusa"
     },
     "Ready to discuss your specific goals?": {
       es: "¿Listo para hablar sobre sus metas específicas?",
@@ -1070,7 +2015,16 @@
       ko: "구체적인 목표에 대해 상담해 볼까요?",
       hy: "Պատրա՞ստ եք քննարկել ձեր կոնկրետ նպատակները",
       ru: "Готовы обсудить ваши конкретные цели?",
-      ar: "هل أنت مستعد لمناقشة أهدافك المحددة؟"
+      ar: "هل أنت مستعد لمناقشة أهدافك المحددة؟",
+      fa: "آماده‌اید درباره اهداف خاص خود گفتگو کنید؟",
+      hi: "क्या आप अपने विशेष लक्ष्यों पर चर्चा करने के लिए तैयार हैं?",
+      pa: "ਕੀ ਤੁਸੀਂ ਆਪਣੇ ਖ਼ਾਸ ਟੀਚਿਆਂ ਬਾਰੇ ਗੱਲ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ?",
+      ja: "具体的なご希望についてお聞かせいただけますか？",
+      uk: "Готові обговорити ваші конкретні завдання?",
+      he: "מוכנים לשוחח על המטרות הייחודיות שלכם?",
+      km: "ត្រៀមខ្លួនពិភាក្សាអំពីគោលដៅជាក់លាក់របស់លោកអ្នកហើយឬនៅ?",
+      fr: "Prêt à échanger sur vos objectifs précis ?",
+      pt: "Pronto para conversar sobre seus objetivos específicos?"
     },
     "Every family and every care facility is distinct. We provide honest answers in plain English without sales pressure.": {
       es: "Cada familia y cada centro es único. Brindamos respuestas claras y honestas, sin presiones de venta.",
@@ -1080,7 +2034,16 @@
       ko: "모든 가정과 시설의 상황은 저마다 다릅니다. 영업 부담 없이 솔직하고 명쾌한 해답을 드립니다.",
       hy: "Յուրաքանչյուր ընտանիք և խնամքի հաստատություն եզակի է։ Մենք տալիս ենք անկեղծ, հստակ պատասխաններ՝ առանց վաճառքի ճնշման։",
       ru: "Каждая семья и каждый пансионат уникальны. Мы даем честные и понятные ответы без навязывания услуг.",
-      ar: "كل عائلة وكل دار رعاية لها ظروفها الخاصة. نقدم إجابات صادقة وواضحة دون أي ضغط بيعي."
+      ar: "كل عائلة وكل دار رعاية لها ظروفها الخاصة. نقدم إجابات صادقة وواضحة دون أي ضغط بيعي.",
+      fa: "هر خانواده و هر مرکز مراقبت منحصربه‌فرد است. ما بدون هیچ‌گونه فشار فروش، پاسخ‌های صادقانه و روشن به شما می‌دهیم.",
+      hi: "हर परिवार और हर देखभाल केंद्र अद्वितीय होता है। हम बिना किसी व्यावसायिक दबाव के सरल, स्पष्ट भाषा में ईमानदार उत्तर देते हैं।",
+      pa: "ਹਰ ਪਰਿਵਾਰ ਅਤੇ ਹਰ ਦੇਖਭਾਲ ਕੇਂਦਰ ਵਿਲੱਖਣ ਹੁੰਦਾ ਹੈ। ਅਸੀਂ ਬਿਨਾਂ ਕਿਸੇ ਵਿਕਰੀ ਦਬਾਅ ਦੇ ਸਾਫ਼ ਅਤੇ ਸਰਲ ਭਾਸ਼ਾ ਵਿੱਚ ਇਮਾਨਦਾਰ ਜਵਾਬ ਦਿੰਦੇ ਹਾਂ।",
+      ja: "ご家族の状況も、目指すケア施設の姿も一つとして同じものはありません。強引な勧誘は一切行わず、分かりやすい言葉で率直かつ誠実にお答えいたします。",
+      uk: "Кожна родина й кожен будинок догляду унікальні. Ми надаємо чесні відповіді зрозумілою мовою без нав’язливих продажів.",
+      he: "כל משפחה וכל מעון טיפולי הם עולם ומלואו. אנו מעניקים תשובות כנות בשפה ברורה וללא לחץ מכירתי.",
+      km: "គ្រប់គ្រួសារ និងគ្រប់មណ្ឌលថែទាំសុទ្ធតែមានលក្ខណៈខុសៗគ្នា។ យើងផ្តល់ចម្លើយស្មោះត្រង់ដោយភាសាសាមញ្ញងាយយល់ ដោយគ្មានការបង្ខិតបង្ខំលក់ឡើយ។",
+      fr: "Chaque famille et chaque maison de soins sont uniques. Nous vous offrons des réponses franches, dans un langage clair et sans aucune pression commerciale.",
+      pt: "Cada família e cada casa de cuidados é única. Oferecemos respostas francas, em linguagem clara e sem pressão comercial."
     },
     "Contact Our Team": {
       es: "Contactar al equipo",
@@ -1090,7 +2053,16 @@
       ko: "상담팀에 문의하기",
       hy: "Կապվել մեր թիմի հետ",
       ru: "Связаться с нашей командой",
-      ar: "تواصل مع فريقنا"
+      ar: "تواصل مع فريقنا",
+      fa: "تماس با تیم ما",
+      hi: "हमारी टीम से संपर्क करें",
+      pa: "ਸਾਡੀ ਟੀਮ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      ja: "専門チームへのお問い合わせ",
+      uk: "Зв’язатися з командою",
+      he: "צרו קשר עם הצוות שלנו",
+      km: "ទាក់ទងក្រុមការងាររបស់យើង",
+      fr: "Contacter notre équipe",
+      pt: "Falar com Nossa Equipe"
     },
     "Book a 15-Min Advisory Call": {
       es: "Reservar llamada de 15 min",
@@ -1100,7 +2072,16 @@
       ko: "15분 전화 상담 예약",
       hy: "Ամրագրել 15-րոպեանոց զանգ",
       ru: "Заказать 15-мин консультацию",
-      ar: "احجز مكالمة إرشادية لمدة 15 دقيقة"
+      ar: "احجز مكالمة إرشادية لمدة 15 دقيقة",
+      fa: "رزرو تماس مشاوره ۱۵ دقیقه‌ای",
+      hi: "15-मिनट की सलाहकार कॉल बुक करें",
+      pa: "15-ਮਿੰਟ ਦੀ ਸਲਾਹ ਕਾਲ ਬੁੱਕ ਕਰੋ",
+      ja: "15分間・無料電話相談を予約",
+      uk: "Записатися на 15-хвилинну консультацію",
+      he: "קבעו שיחת ייעוץ של 15 דקות",
+      km: "កក់ការហៅពិគ្រោះយោបល់រយៈពេល 15 នាទី",
+      fr: "Réserver un appel conseil de 15 min",
+      pt: "Agendar Ligação de Assessoria de 15 Min"
     },
     "Interactive Resources": {
       es: "Recursos Interactivos",
@@ -1110,7 +2091,16 @@
       ko: "맞춤형 인터랙티브 도구",
       hy: "Ինտերակտիվ ռեսուրսներ",
       ru: "Интерактивные ресурсы",
-      ar: "موارد تفاعلية"
+      ar: "موارد تفاعلية",
+      fa: "منابع تعاملی",
+      hi: "इंटरैक्टिव संसाधन",
+      pa: "ਇੰਟਰਐਕਟਿਵ ਸਾਧਨ",
+      ja: "対話型プランニングツール",
+      uk: "Інтерактивні ресурси",
+      he: "כלים אינטראקטיביים",
+      km: "ធនធានអន្តរកម្ម",
+      fr: "Ressources interactives",
+      pt: "Recursos Interativos"
     },
     "Estimate senior living costs, find the appropriate level of care, and explore the California RCFE licensing timeline.": {
       es: "Estime los costos de cuidado, determine el nivel adecuado de atención y explore el cronograma de licencia RCFE en California.",
@@ -1120,7 +2110,16 @@
       ko: "어르신 돌봄 예상 비용을 계산하고, 알맞은 돌봄 수준과 캘리포니아 RCFE 인허가 일정을 확인하세요.",
       hy: "Հաշվարկեք տարեցների խնամքի ծախսերը, ընտրեք խնամքի ճիշտ մակարդակը և ծանոթացեք Կալիֆոռնիայի RCFE լիցենզավորման ժամանակացույցին։",
       ru: "Рассчитайте стоимость ухода за пожилыми, определите подходящий уровень помощи и изучите этапы лицензирования RCFE в Калифорнии.",
-      ar: "قدّر تكاليف المعيشة لكبار السن، وحدد مستوى الرعاية المناسب، واستكشف الجدول الزمني لترخيص RCFE في كاليفورنيا."
+      ar: "قدّر تكاليف المعيشة لكبار السن، وحدد مستوى الرعاية المناسب، واستكشف الجدول الزمني لترخيص RCFE في كاليفورنيا.",
+      fa: "هزینه‌های زندگی سالمندان را برآورد کنید، سطح مراقبت مناسب را بیابید و زمان‌بندی اخذ مجوز RCFE در کالیفرنیا را بررسی کنید.",
+      hi: "वरिष्ठजन आवास की लागत का अनुमान लगाएँ, उपयुक्त देखभाल स्तर पहचानें और कैलिफ़ोर्निया RCFE लाइसेंसिंग समय-सीमा जानें।",
+      pa: "ਬਜ਼ੁਰਗਾਂ ਦੀ ਰਿਹਾਇਸ਼ ਦੇ ਖਰਚੇ ਦਾ ਅੰਦਾਜ਼ਾ ਲਗਾਓ, ਦੇਖਭਾਲ ਦਾ ਸਹੀ ਪੱਧਰ ਲੱਭੋ, ਅਤੇ ਕੈਲੀਫੋਰਨੀਆ RCFE ਲਾਇਸੰਸਿੰਗ ਦੀ ਸਮਾਂ-ਸੀਮਾ ਜਾਣੋ।",
+      ja: "シニアホームの月額費用目安の試算、適切なケアレベルの診断、およびカリフォルニア州 RCFE 認可取得までのスケジュールをご確認いただけます。",
+      uk: "Оцініть витрати на проживання з доглядом, визначте потрібний рівень допомоги та ознайомтеся з етапами ліцензування RCFE у Каліфорнії.",
+      he: "חשבו עלויות מגורים לטיפול במבוגרים, מצאו את רמת הטיפול המתאימה ובחנו את לוח הזמנים לרישוי RCFE בקליפורניה.",
+      km: "ប៉ាន់ស្មានថ្លៃចំណាយការរស់នៅសម្រាប់មនុស្សចាស់ ស្វែងរកកម្រិតថែទាំសមរម្យ និងស្វែងយល់ពីកាលវិភាគសុំអាជ្ញាប័ណ្ណ RCFE នៅរដ្ឋ California។",
+      fr: "Estimez le coût de l'hébergement pour seniors, identifiez le niveau de soins adapté et explorez le calendrier d'obtention de la licence RCFE en Californie.",
+      pt: "Estime custos de moradia sênior, descubra o nível de cuidado adequado e explore o cronograma de licenciamento RCFE na Califórnia."
     },
     "Cost Estimator": {
       es: "Calculadora de Costos",
@@ -1130,7 +2129,16 @@
       ko: "비용 계산기",
       hy: "Արժեքի հաշվիչ",
       ru: "Калькулятор стоимости",
-      ar: "مقدّر التكلفة"
+      ar: "مقدّر التكلفة",
+      fa: "برآوردگر هزینه",
+      hi: "लागत अनुमानक",
+      pa: "ਖਰਚ ਅਨੁਮਾਨਕ",
+      ja: "費用シミュレーター",
+      uk: "Калькулятор вартості",
+      he: "מחשבון עלויות",
+      km: "ឧបករណ៍ប៉ាន់ស្មានថ្លៃចំណាយ",
+      fr: "Estimateur de coûts",
+      pt: "Estimador de Custos"
     },
     "Care Level Assessment": {
       es: "Evaluación de Cuidado",
@@ -1140,7 +2148,16 @@
       ko: "돌봄 단계 자가진단",
       hy: "Խնամքի մակարդակի գնահատում",
       ru: "Оценка уровня ухода",
-      ar: "تقييم مستوى الرعاية"
+      ar: "تقييم مستوى الرعاية",
+      fa: "ارزیابی سطح مراقبت",
+      hi: "देखभाल स्तर मूल्यांकन",
+      pa: "ਦੇਖਭਾਲ ਪੱਧਰ ਮੁਲਾਂਕਣ",
+      ja: "必要ケアレベル診断",
+      uk: "Оцінка рівня догляду",
+      he: "הערכת רמת טיפול",
+      km: "ការវាយតម្លៃកម្រិតថែទាំ",
+      fr: "Évaluation du niveau de soins",
+      pt: "Avaliação do Nível de Cuidados"
     },
     "Operator Licensing Roadmap": {
       es: "Ruta de Licenciamiento",
@@ -1150,7 +2167,16 @@
       ko: "운영자 인허가 로드맵",
       hy: "Օպերատորի լիցենզավորման ճանապարհային քարտեզ",
       ru: "Дорожная карта лицензирования",
-      ar: "خارطة طريق ترخيص المشغل"
+      ar: "خارطة طريق ترخيص المشغل",
+      fa: "نقشه راه مجوز بهره‌برداران",
+      hi: "संचालक लाइसेंसिंग रोडमैप",
+      pa: "ਸੰਚਾਲਕ ਲਾਇਸੰਸਿੰਗ ਰੋਡਮੈਪ",
+      ja: "事業者向け認可ロードマップ",
+      uk: "Дорожня карта ліцензування",
+      he: "מפת דרכים לרישוי מפעילים",
+      km: "ផែនទីបង្ហាញផ្លូវសុំអាជ្ញាប័ណ្ណសម្រាប់អ្នកបើកមណ្ឌល",
+      fr: "Feuille de route de licence pour exploitants",
+      pt: "Roteiro de Licenciamento para Operadores"
     },
     "California Elder Care Monthly Cost Calculator": {
       es: "Calculadora Mensual de Costos de Cuidado en California",
@@ -1160,7 +2186,16 @@
       ko: "캘리포니아 어르신 돌봄 월 비용 계산기",
       hy: "Կալիֆոռնիայում տարեցների խնամքի ամսական արժեքի հաշվիչ",
       ru: "Калькулятор ежемесячной стоимости ухода в Калифорнии",
-      ar: "حاسبة التكلفة الشهرية لرعاية المسنين في كاليفورنيا"
+      ar: "حاسبة التكلفة الشهرية لرعاية المسنين في كاليفورنيا",
+      fa: "ماشین‌حساب هزینه ماهانه مراقبت از سالمندان در کالیفرنیا",
+      hi: "कैलिफ़ोर्निया वरिष्ठजन देखभाल मासिक लागत कैलकुलेटर",
+      pa: "ਕੈਲੀਫੋਰਨੀਆ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਮਹੀਨਾਵਾਰ ਖਰਚ ਕੈਲਕੂਲੇਟਰ",
+      ja: "カリフォルニア州 高齢者ケア月額費用シミュレーター",
+      uk: "Калькулятор щомісячної вартості догляду в Каліфорнії",
+      he: "מחשבון עלות חודשית לטיפול במבוגרים בקליפורניה",
+      km: "ម៉ាស៊ីនគណនាថ្លៃថែទាំមនុស្សចាស់ប្រចាំខែនៅរដ្ឋ California",
+      fr: "Calculateur de coût mensuel des soins aux aînés en Californie",
+      pt: "Calculadora de Custo Mensal de Cuidados para Idosos na Califórnia"
     },
     "Based on prevailing 2025–2026 California regional market rates for RCFEs & Assisted Living.": {
       es: "Basado en tarifas regionales vigentes del mercado 2025–2026 en California para RCFE y Vivienda Asistida.",
@@ -1170,7 +2205,16 @@
       ko: "2025–2026년 캘리포니아 지역별 RCFE 및 어시스티드 리빙 시장 평균 요금 기준입니다.",
       hy: "Հիմնված է Կալիֆոռնիայի RCFE և Assisted Living 2025–2026 թթ. տարածաշրջանային շուկայական դրույքաչափերի վրա։",
       ru: "На основе рыночных тарифов Калифорнии для RCFE и Assisted Living на 2025–2026 годы.",
-      ar: "استناداً إلى أسعار السوق الإقليمية السائدة في كاليفورنيا لعامي 2025–2026 لمرافق RCFE والمعيشة المساعدة."
+      ar: "استناداً إلى أسعار السوق الإقليمية السائدة في كاليفورنيا لعامي 2025–2026 لمرافق RCFE والمعيشة المساعدة.",
+      fa: "بر اساس نرخ‌های رایج بازار منطقه‌ای کالیفرنیا در سال‌های ۲۰۲۵–۲۰۲۶ برای مراکز RCFE و زندگی همراه با مراقبت.",
+      hi: "RCFE और असिस्टेड लिविंग के लिए 2025–2026 की प्रचलित कैलिफ़ोर्निया क्षेत्रीय बाज़ार दरों पर आधारित।",
+      pa: "RCFE ਅਤੇ ਅਸਿਸਟਡ ਲਿਵਿੰਗ ਲਈ 2025–2026 ਦੀਆਂ ਮੌਜੂਦਾ ਕੈਲੀਫੋਰਨੀਆ ਖੇਤਰੀ ਬਾਜ਼ਾਰ ਦਰਾਂ 'ਤੇ ਆਧਾਰਿਤ।",
+      ja: "2025〜2026年のカリフォルニア州各地域における RCFE・アシステッドリビングの実勢相場に基づいています。",
+      uk: "На основі актуальних регіональних ринкових тарифів Каліфорнії 2025–2026 років для RCFE та закладів супроводжуваного проживання.",
+      he: "מבוסס על תעריפי השוק האזוריים המקובלים בקליפורניה לשנים 2025–2026 עבור RCFE ודיור מוגן.",
+      km: "ផ្អែកលើអត្រាទីផ្សារប្រចាំតំបន់នៅរដ្ឋ California ឆ្នាំ 2025–2026 សម្រាប់ RCFE និង Assisted Living។",
+      fr: "Basé sur les tarifs régionaux du marché californien 2025–2026 pour les RCFE et résidences avec services.",
+      pt: "Com base nos valores regionais de mercado de 2025–2026 na Califórnia para RCFEs e Assisted Living."
     },
     "Care Budget Calculator": {
       es: "Calculadora de Presupuesto",
@@ -1180,7 +2224,16 @@
       ko: "예산 계산기",
       hy: "Խնամքի բյուջեի հաշվիչ",
       ru: "Калькулятор бюджета ухода",
-      ar: "حاسبة ميزانية الرعاية"
+      ar: "حاسبة ميزانية الرعاية",
+      fa: "ماشین‌حساب بودجه مراقبت",
+      hi: "देखभाल बजट कैलकुलेटर",
+      pa: "ਦੇਖਭਾਲ ਬਜਟ ਕੈਲਕੂਲੇਟਰ",
+      ja: "ケア予算・電卓ツール",
+      uk: "Калькулятор бюджету догляду",
+      he: "מחשבון תקציב טיפול",
+      km: "ម៉ាស៊ីនគណនាថវិកាថែទាំ",
+      fr: "Calculateur de budget de soins",
+      pt: "Calculadora de Orçamento"
     },
     "Copy": {
       es: "Copiar",
@@ -1190,7 +2243,16 @@
       ko: "복사",
       hy: "Պատճենել",
       ru: "Копировать",
-      ar: "نسخ"
+      ar: "نسخ",
+      fa: "کپی",
+      hi: "कॉपी करें",
+      pa: "ਕਾਪੀ ਕਰੋ",
+      ja: "コピー",
+      uk: "Копіювати",
+      he: "העתקה",
+      km: "ចម្លង",
+      fr: "Copier",
+      pt: "Copiar"
     },
     "Copied!": {
       es: "¡Copiado!",
@@ -1200,7 +2262,16 @@
       ko: "복사됨!",
       hy: "Պատճենվեց",
       ru: "Скопировано!",
-      ar: "تم النسخ!"
+      ar: "تم النسخ!",
+      fa: "کپی شد!",
+      hi: "कॉपी हो गया!",
+      pa: "ਕਾਪੀ ਹੋ ਗਿਆ!",
+      ja: "コピーしました！",
+      uk: "Скопійовано!",
+      he: "הועתק!",
+      km: "បានចម្លង!",
+      fr: "Copié !",
+      pt: "Copiado!"
     },
     "Failed": {
       es: "Error",
@@ -1210,7 +2281,16 @@
       ko: "실패",
       hy: "Ձախողվեց",
       ru: "Ошибка",
-      ar: "فشل النسخ"
+      ar: "فشل النسخ",
+      fa: "ناموفق",
+      hi: "विफल",
+      pa: "ਅਸਫਲ",
+      ja: "コピー失敗",
+      uk: "Помилка",
+      he: "נכשל",
+      km: "បរាជ័យ",
+      fr: "Échec",
+      pt: "Falhou"
     },
     "Use in Budget": {
       es: "Usar en presupuesto",
@@ -1220,7 +2300,16 @@
       ko: "예산에 반영",
       hy: "Կիրառել բյուջեում",
       ru: "Добавить в бюджет",
-      ar: "استخدم في الميزانية"
+      ar: "استخدم في الميزانية",
+      fa: "استفاده در بودجه",
+      hi: "बजट में उपयोग करें",
+      pa: "ਬਜਟ ਵਿੱਚ ਵਰਤੋ",
+      ja: "予算として入力",
+      uk: "Додати в бюджет",
+      he: "השתמש בתקציב",
+      km: "ប្រើក្នុងថវិកា",
+      fr: "Utiliser dans le budget",
+      pt: "Usar no Orçamento"
     },
     "Keyboard shortcuts enabled • Click \"Use in Budget\" to transfer calculated cost to inquiry": {
       es: "Atajos de teclado activos • Haga clic en \"Usar en presupuesto\" para enviar este monto a su consulta",
@@ -1230,7 +2319,16 @@
       ko: "키보드 입력 지원 • \"예산에 반영\"을 누르면 계산된 금액이 문의 양식에 자동 입력됩니다",
       hy: "Ստեղնաշարի կարճ կոճակները միացված են • Սեղմեք «Կիրառել բյուջեում»՝ հաշվարկված գումարը հայտին փոխանցելու համար",
       ru: "Горячие клавиши активны • Нажмите «Добавить в бюджет», чтобы перенести расчет в заявку",
-      ar: "اختصارات لوحة المفاتيح مفعلة • انقر \"استخدم في الميزانية\" لنقل التكلفة المحسوبة إلى الاستفسار"
+      ar: "اختصارات لوحة المفاتيح مفعلة • انقر \"استخدم في الميزانية\" لنقل التكلفة المحسوبة إلى الاستفسار",
+      fa: "میانبرهای صفحه‌کلید فعال است • برای انتقال هزینه محاسبه‌شده به فرم درخواست، روی «استفاده در بودجه» کلیک کنید",
+      hi: "कीबोर्ड शॉर्टकट सक्रिय • गणना की गई लागत को पूछताछ फ़ॉर्म में भेजने के लिए \"बजट में उपयोग करें\" पर क्लिक करें",
+      pa: "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਚਾਲੂ ਹਨ • ਗਿਣਿਆ ਗਿਆ ਖਰਚ ਪੁੱਛਗਿੱਛ ਵਿੱਚ ਭੇਜਣ ਲਈ \"ਬਜਟ ਵਿੱਚ ਵਰਤੋ\" 'ਤੇ ਕਲਿੱਕ ਕਰੋ",
+      ja: "キーボード操作対応 • 「予算として入力」をクリックすると試算額をお問い合わせ欄へ反映できます",
+      uk: "Підтримуються клавіатурні скорочення • Натисніть «Додати в бюджет», щоб перенести розраховану суму до запиту",
+      he: "קיצורי מקלדת פעילים • לחצו על \"השתמש בתקציב\" להעברת העלות המחושבת לפנייה",
+      km: "បានបើកផ្លូវកាត់ក្តារចុច • ចុច \"ប្រើក្នុងថវិកា\" ដើម្បីផ្ទេរថ្លៃចំណាយដែលបានគណនាទៅក្នុងទម្រង់សាកសួរ",
+      fr: "Raccourcis clavier activés • Cliquez sur « Utiliser dans le budget » pour transférer le coût calculé vers votre demande",
+      pt: "Atalhos de teclado ativados • Clique em \"Usar no Orçamento\" para transferir o valor calculado para sua consulta"
     },
     "Region in California": {
       es: "Región de California",
@@ -1240,7 +2338,16 @@
       ko: "캘리포니아 내 희망 지역",
       hy: "Տարածաշրջանը Կալիֆոռնիայում",
       ru: "Регион в Калифорнии",
-      ar: "المنطقة في كاليفورنيا"
+      ar: "المنطقة في كاليفورنيا",
+      fa: "منطقه در کالیفرنیا",
+      hi: "कैलिफ़ोर्निया में क्षेत्र",
+      pa: "ਕੈਲੀਫੋਰਨੀਆ ਵਿੱਚ ਖੇਤਰ",
+      ja: "カリフォルニア州内のご希望地域",
+      uk: "Регіон Каліфорнії",
+      he: "אזור בקליפורניה",
+      km: "តំបន់នៅរដ្ឋ California",
+      fr: "Région en Californie",
+      pt: "Região na Califórnia"
     },
     "San Francisco Bay Area / Silicon Valley (Tier 1 High)": {
       es: "Área de la Bahía de SF / Silicon Valley (Nivel 1 Alto)",
@@ -1250,7 +2357,16 @@
       ko: "샌프란시스코 베이 지역 / 실리콘밸리 (1급 고비용 지역)",
       hy: "Սան Ֆրանցիսկոյի ծոց / Սիլիկոնյան հովիտ (Մակարդակ 1՝ Բարձր)",
       ru: "Район залива Сан-Франциско / Кремниевая долина (Уровень 1 — высокий)",
-      ar: "منطقة خليج سان فرانسيسكو / وادي السيليكون (المستوى 1 المرتفع)"
+      ar: "منطقة خليج سان فرانسيسكو / وادي السيليكون (المستوى 1 المرتفع)",
+      fa: "منطقه خلیج سانفرانسیسکو / سیلیکون ولی (سطح ۱ – بالا)",
+      hi: "San Francisco Bay Area / Silicon Valley (टियर 1 उच्च)",
+      pa: "San Francisco Bay Area / Silicon Valley (ਟੀਅਰ 1 ਉੱਚ ਦਰ)",
+      ja: "サンフランシスコ Bay Area / シリコンバレー（Tier 1・高価格帯）",
+      uk: "Затока Сан-Франциско / Кремнієва долина (Рівень 1 — високі тарифи)",
+      he: "Bay Area / עמק הסיליקון (דרגה 1 גבוהה)",
+      km: "San Francisco Bay Area / Silicon Valley (កម្រិត 1 ខ្ពស់)",
+      fr: "San Francisco Bay Area / Silicon Valley (Niveau 1 élevé)",
+      pt: "San Francisco Bay Area / Vale do Silício (Faixa 1 Alta)"
     },
     "Los Angeles / Orange County / San Diego (Tier 2)": {
       es: "Los Ángeles / Condado de Orange / San Diego (Nivel 2)",
@@ -1260,7 +2376,16 @@
       ko: "로스앤젤레스 / 오렌지 카운티 / 샌디에이고 (2급 지역)",
       hy: "Լոս Անջելես / Օրինջ շրջան / Սան Դիեգո (Մակարդակ 2)",
       ru: "Лос-Анджелес / округ Ориндж / Сан-Диего (Уровень 2)",
-      ar: "لوس أنجلوس / مقاطعة أورانج / سان دييغو (المستوى 2)"
+      ar: "لوس أنجلوس / مقاطعة أورانج / سان دييغو (المستوى 2)",
+      fa: "لس‌آنجلس / اورنج کانتی / سن‌دیگو (سطح ۲)",
+      hi: "Los Angeles / Orange County / San Diego (टियर 2)",
+      pa: "Los Angeles / Orange County / San Diego (ਟੀਅਰ 2)",
+      ja: "Los Angeles / Orange County / サンディエゴ（Tier 2）",
+      uk: "Los Angeles / Orange County / Сан-Дієго (Рівень 2)",
+      he: "Los Angeles / Orange County / San Diego (דרגה 2)",
+      km: "Los Angeles / Orange County / San Diego (កម្រិត 2)",
+      fr: "Los Angeles / Orange County / San Diego (Niveau 2)",
+      pt: "Los Angeles / Orange County / San Diego (Faixa 2)"
     },
     "Sacramento / Central Valley / Inland Empire (Tier 3)": {
       es: "Sacramento / Valle Central / Inland Empire (Nivel 3)",
@@ -1270,7 +2395,16 @@
       ko: "새크라멘토 / 센트럴 밸리 / 인랜드 엠파이어 (3급 지역)",
       hy: "Սակրամենտո / Կենտրոնական հովիտ / Ինլենդ Էմփայր (Մակարդակ 3)",
       ru: "Сакраменто / Центральная долина / Инленд-Эмпайр (Уровень 3)",
-      ar: "ساكرامنتو / الوادي الأوسط / إنلاند إمباير (المستوى 3)"
+      ar: "ساكرامنتو / الوادي الأوسط / إنلاند إمباير (المستوى 3)",
+      fa: "ساکرامنتو / سنترال ولی / اینلند امپایر (سطح ۳)",
+      hi: "Sacramento / Central Valley / Inland Empire (टियर 3)",
+      pa: "Sacramento / Central Valley / Inland Empire (ਟੀਅਰ 3)",
+      ja: "Sacramento / Central Valley / インランドエンパイア（Tier 3）",
+      uk: "Sacramento / Central Valley / Inland Empire (Рівень 3)",
+      he: "Sacramento / Central Valley / Inland Empire (דרגה 3)",
+      km: "Sacramento / Central Valley / Inland Empire (កម្រិត 3)",
+      fr: "Sacramento / Central Valley / Inland Empire (Niveau 3)",
+      pt: "Sacramento / Central Valley / Inland Empire (Faixa 3)"
     },
     "Northern / Rural California (Tier 4)": {
       es: "Norte / Zonas Rurales de California (Nivel 4)",
@@ -1280,7 +2414,16 @@
       ko: "북부 캘리포니아 / 외곽 지역 (4급 지역)",
       hy: "Հյուսիսային / գյուղական Կալիֆոռնիա (Մակարդակ 4)",
       ru: "Северная / сельская Калифорния (Уровень 4)",
-      ar: "شمال / ريف كاليفورنيا (المستوى 4)"
+      ar: "شمال / ريف كاليفورنيا (المستوى 4)",
+      fa: "کالیفرنیای شمالی / مناطق روستایی (سطح ۴)",
+      hi: "उत्तरी / ग्रामीण कैलिफ़ोर्निया (टियर 4)",
+      pa: "ਉੱਤਰੀ / ਪੇਂਡੂ ਕੈਲੀਫੋਰਨੀਆ (ਟੀਅਰ 4)",
+      ja: "北カリフォルニア / 地方エリア（Tier 4）",
+      uk: "Північна / сільська частина Каліфорнії (Рівень 4)",
+      he: "צפון קליפורניה / אזורים כפריים (דרגה 4)",
+      km: "ភាគខាងជើង / តំបន់ជនបទរដ្ឋ California (កម្រិត 4)",
+      fr: "Nord de la Californie / Zones rurales (Niveau 4)",
+      pt: "Norte da Califórnia / Áreas Rurais (Faixa 4)"
     },
     "Assistance / Care Needed": {
       es: "Asistencia / Nivel de Cuidado Requerido",
@@ -1290,7 +2433,16 @@
       ko: "필요한 일상 지원 및 돌봄 단계",
       hy: "Անհրաժեշտ օգնություն / խնամք",
       ru: "Необходимая помощь / уровень ухода",
-      ar: "المساعدة / الرعاية المطلوبة"
+      ar: "المساعدة / الرعاية المطلوبة",
+      fa: "میزان کمک و مراقبت مورد نیاز",
+      hi: "आवश्यक सहायता / देखभाल",
+      pa: "ਲੋੜੀਂਦੀ ਸਹਾਇਤਾ / ਦੇਖਭਾਲ",
+      ja: "必要な介護・生活支援の程度",
+      uk: "Необхідний обсяг допомоги / догляду",
+      he: "רמת הסיוע / הטיפול הנדרש",
+      km: "ជំនួយ / ការថែទាំដែលត្រូវការ",
+      fr: "Assistance / Niveau de soins requis",
+      pt: "Assistência / Cuidado Necessário"
     },
     "Minimal (Meal preparation, housekeeping, medication reminders)": {
       es: "Mínimo (Comidas, limpieza, recordatorios de medicación)",
@@ -1300,7 +2452,16 @@
       ko: "최소 지원 (식사 준비, 가사 지원, 복약 알림)",
       hy: "Նվազագույն (Սննդի պատրաստում, մաքրություն, դեղերի հիշեցում)",
       ru: "Минимальный (приготовление еды, уборка, напоминание о лекарствах)",
-      ar: "بسيطة (إعداد الوجبات، التدبير المنزلي، التذكير بالأدوية)"
+      ar: "بسيطة (إعداد الوجبات، التدبير المنزلي، التذكير بالأدوية)",
+      fa: "حداقلی (تهیه غذا، نظافت منزل، یادآوری دارو)",
+      hi: "न्यूनतम (भोजन तैयारी, घर की सफ़ाई, दवा की याद दिलाना)",
+      pa: "ਘੱਟੋ-ਘੱਟ (ਭੋਜਨ ਤਿਆਰ ਕਰਨਾ, ਘਰ ਦੀ ਸਫ਼ਾਈ, ਦਵਾਈ ਦੀ ਯਾਦ-ਦਹਾਨੀ)",
+      ja: "軽度（食事の準備、居室清掃、服薬の声かけ）",
+      uk: "Мінімальний (приготування їжі, прибирання, нагадування про ліки)",
+      he: "מינימלית (הכנת ארוחות, משק בית, תזכורת תרופות)",
+      km: "តិចតួច (ការរៀបចំអាហារ ការសម្អាតផ្ទះ ការរំលឹកលេបថ្នាំ)",
+      fr: "Minimal (Préparation des repas, ménage, rappels de médicaments)",
+      pt: "Mínimo (Preparo de refeições, limpeza, lembretes de medicação)"
     },
     "Moderate (Bathing, dressing, transfer assistance, 1-person assist)": {
       es: "Moderado (Baño, vestirse, ayuda para trasladarse de 1 persona)",
@@ -1310,7 +2471,16 @@
       ko: "중등도 지원 (목욕, 옷 입기, 1인 부축 이동 지원)",
       hy: "Միջին (Լողանալու, հագնվելու, տեղաշարժվելու օգնություն՝ 1 անձ)",
       ru: "Умеренный (купание, одевание, помощь при перемещении с 1 сиделкой)",
-      ar: "متوسطة (الاستحمام، اللبس، المساعدة في الانتقال بمقدم رعاية واحد)"
+      ar: "متوسطة (الاستحمام، اللبس، المساعدة في الانتقال بمقدم رعاية واحد)",
+      fa: "متوسط (کمک در استحمام، لباس پوشیدن، جابه‌جایی، کمک ۱ نفره)",
+      hi: "मध्यम (स्नान, कपड़े पहनना, उठने-बैठने में 1 व्यक्ति की सहायता)",
+      pa: "ਦਰਮਿਆਨੀ (ਨਹਾਉਣਾ, ਕੱਪੜੇ ਪਾਉਣਾ, ਉੱਠਣ-ਬੈਠਣ ਵਿੱਚ 1 ਵਿਅਕਤੀ ਦੀ ਮਦਦ)",
+      ja: "中度（入浴・着替え・移乗の介助、スタッフ1名での介助）",
+      uk: "Помірний (купання, одягання, переміщення, допомога 1 доглядальника)",
+      he: "בינונית (רחצה, לבוש, סיוע במעברים, עזרת מטפל אחד)",
+      km: "មធ្យម (ការងូតទឹក ការស្លៀកពាក់ ជំនួយផ្លាស់ទី ជំនួយដោយមនុស្ស 1 នាក់)",
+      fr: "Modéré (Toilette, habillage, aide aux transferts, assistance par 1 personne)",
+      pt: "Moderado (Banho, vestir-se, auxílio em transferências, apoio de 1 cuidador)"
     },
     "Memory Care (Dementia/Alzheimer's, wandering risk, cueing)": {
       es: "Cuidado de la Memoria (Demencia/Alzheimer, riesgo de deambulación)",
@@ -1320,7 +2490,16 @@
       ko: "치매 전문 케어 (알츠하이머, 배회 위험, 인지 안내)",
       hy: "Հիշողության խնամք (Դեմենցիա/Ալցհայմեր, մոլորվելու ռիսկ, ուղղորդում)",
       ru: "Уход при деменции (Альцгеймер, риск ухода из дома, постоянный присмотр)",
-      ar: "رعاية الذاكرة (الخرف/ألزهايمر، خطر التجوال والضياع، التوجيه)"
+      ar: "رعاية الذاكرة (الخرف/ألزهايمر، خطر التجوال والضياع، التوجيه)",
+      fa: "مراقبت حافظه (زوال عقل/آلزایمر، خطر سرگردانی، راهنمایی مستمر)",
+      hi: "मेमोरी केयर (डिमेंशिया/अल्ज़ाइमर, भटकने का जोखिम, निरंतर मार्गदर्शन)",
+      pa: "ਮੈਮੋਰੀ ਕੇਅਰ (ਡਿਮੇਨਸ਼ੀਆ/ਅਲਜ਼ਾਈਮਰ, ਭਟਕਣ ਦਾ ਖ਼ਤਰਾ, ਲਗਾਤਾਰ ਮਾਰਗਦਰਸ਼ਨ)",
+      ja: "メモリーケア（認知症・アルツハイマー病、徘徊リスク対応、行動サポート）",
+      uk: "Догляд при порушеннях пам’яті (деменція / хвороба Альцгеймера, ризик блукання, підказки)",
+      he: "טיפול בדמנציה (אלצהיימר/דמנציה, סיכון לשוטטות, הכוונה)",
+      km: "ការថែទាំអ្នកជំងឺចងចាំ (Dementia/Alzheimer's ហានិភ័យដើរវង្វេង ការណែនាំរំលឹក)",
+      fr: "Soins de la mémoire (Démence/Alzheimer, risque d'errance, guidage)",
+      pt: "Cuidados de Memória (Demência/Alzheimer, risco de perambulação, orientação contínua)"
     },
     "High Acuity / Bedridden (Total care, 2-person assist, hospice waiver)": {
       es: "Alta Complejidad / Postrado (Cuidado total, asistencia de 2 personas, hospicio)",
@@ -1330,7 +2509,16 @@
       ko: "고중증 / 와상 돌봄 (전면적 케어, 2인 보조 이동, 호스피스)",
       hy: "Բարձր խնամք / Անկողնային (Լիարժեք խնամք, 2 անձի օգնություն, հոսպիս)",
       ru: "Интенсивный / лежачие больные (полный уход, 2 помощника, хосписный допуск)",
-      ar: "عالية الشدة / طريح الفراش (رعاية كاملة، مساعدة شخصين، إعفاء رعاية المحتضرين)"
+      ar: "عالية الشدة / طريح الفراش (رعاية كاملة، مساعدة شخصين، إعفاء رعاية المحتضرين)",
+      fa: "نیاز مراقبتی بالا / بستری (مراقبت کامل، کمک ۲ نفره، مجوز مراقبت تسکینی)",
+      hi: "उच्च आवश्यकता / शैयाग्रस्त (पूर्ण देखभाल, 2 व्यक्तियों की सहायता, हॉस्पिस वेवर)",
+      pa: "ਉੱਚ ਦੇਖਭਾਲ / ਬਿਸਤਰੇ 'ਤੇ ਸੀਮਤ (ਪੂਰੀ ਦੇਖਭਾਲ, 2 ਵਿਅਕਤੀਆਂ ਦੀ ਮਦਦ, ਹੌਸਪਿਸ ਛੋਟ)",
+      ja: "重度・寝たきり（全面介助、2名介助、ホスピス特例対応）",
+      uk: "Висока складність / лежачий режим (повний догляд, допомога 2 осіб, hospice waiver)",
+      he: "מורכבות גבוהה / מרותק למיטה (טיפול מלא, 2 מטפלים, אישור הוספיס)",
+      km: "កម្រិតធ្ងន់ / សម្រាកលើគ្រែ (ការថែទាំពេញលេញ ជំនួយដោយមនុស្ស 2 នាក់ ការលើកលែង hospice waiver)",
+      fr: "Soins lourds / Personne alitée (Prise en charge totale, aide à 2 personnes, dérogation soins palliatifs)",
+      pt: "Alta Complexidade / Acamado (Cuidado integral, apoio de 2 cuidadores, hospice waiver)"
     },
     "Room Type": {
       es: "Tipo de Habitación",
@@ -1340,7 +2528,16 @@
       ko: "객실 유형",
       hy: "Սենյակի տեսակը",
       ru: "Тип комнаты",
-      ar: "نوع الغرفة"
+      ar: "نوع الغرفة",
+      fa: "نوع اتاق",
+      hi: "कमरे का प्रकार",
+      pa: "ਕਮਰੇ ਦੀ ਕਿਸਮ",
+      ja: "お部屋のタイプ",
+      uk: "Тип кімнати",
+      he: "סוג חדר",
+      km: "ប្រភេទបន្ទប់",
+      fr: "Type de chambre",
+      pt: "Tipo de Quarto"
     },
     "Private Room": {
       es: "Habitación Privada",
@@ -1350,7 +2547,16 @@
       ko: "1인실 (개인실)",
       hy: "Առանձին սենյակ",
       ru: "Отдельная комната",
-      ar: "غرفة خاصة"
+      ar: "غرفة خاصة",
+      fa: "اتاق خصوصی",
+      hi: "निजी कमरा",
+      pa: "ਨਿੱਜੀ ਕਮਰਾ",
+      ja: "個室（プライベートルーム）",
+      uk: "Окрема кімната",
+      he: "חדר פרטי",
+      km: "បន្ទប់ឯកជន",
+      fr: "Chambre individuelle",
+      pt: "Quarto Privativo"
     },
     "Shared / Semi-Private": {
       es: "Compartida / Semiprivada",
@@ -1360,7 +2566,16 @@
       ko: "2인실 (공동실)",
       hy: "Համատեղ սենյակ",
       ru: "Общая / на двоих",
-      ar: "غرفة مشتركة"
+      ar: "غرفة مشتركة",
+      fa: "اتاق مشترک / نیمه‌خصوصی",
+      hi: "साझा / अर्ध-निजी कमरा",
+      pa: "ਸਾਂਝਾ / ਅਰਧ-ਨਿੱਜੀ ਕਮਰਾ",
+      ja: "相部屋（セミプライベート）",
+      uk: "Спільна / напівприватна кімната",
+      he: "חדר משותף / חצי-פרטי",
+      km: "បន្ទប់រួម / ពាក់កណ្តាលឯកជន",
+      fr: "Chambre partagée / semi-individuelle",
+      pt: "Compartilhado / Semiprivativo"
     },
     "What is covered in monthly RCFE rent?": {
       es: "¿Qué incluye la renta mensual en un RCFE?",
@@ -1370,7 +2585,16 @@
       ko: "RCFE 월 이용료에는 무엇이 포함되나요?",
       hy: "Ի՞նչ է ներառված RCFE ամսավճարի մեջ",
       ru: "Что входит в ежемесячную плату RCFE?",
-      ar: "ماذا يشمل الإيجار الشهري في RCFE؟"
+      ar: "ماذا يشمل الإيجار الشهري في RCFE؟",
+      fa: "اجاره ماهانه RCFE چه مواردی را شامل می‌شود؟",
+      hi: "मासिक RCFE किराए में क्या-क्या शामिल होता है?",
+      pa: "ਮਹੀਨਾਵਾਰ RCFE ਕਿਰਾਏ ਵਿੱਚ ਕੀ ਸ਼ਾਮਲ ਹੁੰਦਾ ਹੈ?",
+      ja: "RCFE の月額費用には何が含まれますか？",
+      uk: "Що входить у щомісячну плату в RCFE?",
+      he: "מה כלול בתשלום החודשי של RCFE?",
+      km: "តើថ្លៃជួល RCFE ប្រចាំខែគ្របដណ្តប់អ្វីខ្លះ?",
+      fr: "Que comprend le loyer mensuel d'un RCFE ?",
+      pt: "O que está incluso na mensalidade de um RCFE?"
     },
     "Typical RCFE monthly fees include 3 daily home-cooked meals, 24-hour awake staffing, medication management, laundry, utilities, and daily activity programs.": {
       es: "Las tarifas mensuales típicas incluyen 3 comidas caseras diarias, personal despierto las 24 horas, manejo de medicamentos, lavandería, servicios públicos y actividades diarias.",
@@ -1380,7 +2604,16 @@
       ko: "일반적인 RCFE 월 비용에는 하루 3끼 가정식 식사, 24시간 상주 돌봄 인력, 복약 관리, 세탁, 공과금, 일일 활동 프로그램이 포함됩니다.",
       hy: "RCFE ստանդարտ ամսավճարը ներառում է օրական 3 անգամ տնային սնունդ, 24-ժամյա արթուն անձնակազմ, դեղորայքի կառավարում, լվացք, կոմունալ ծախսեր և ամենօրյա զբաղմունքներ։",
       ru: "Типичная ежемесячная плата в RCFE включает 3-разовое домашнее питание, круглосуточное бодрствующее дежурство персонала, контроль лекарств, стирку, коммунальные услуги и ежедневный досуг.",
-      ar: "تشمل الرسوم الشهرية المعتادة في RCFE 3 وجبات منزلية يومياً، وطاقماً مستيقظاً على مدار 24 ساعة، وإدارة الأدوية، والغسيل، والمرافق، والأنشطة اليومية."
+      ar: "تشمل الرسوم الشهرية المعتادة في RCFE 3 وجبات منزلية يومياً، وطاقماً مستيقظاً على مدار 24 ساعة، وإدارة الأدوية، والغسيل، والمرافق، والأنشطة اليومية.",
+      fa: "هزینه ماهانه معمول RCFE شامل ۳ وعده غذای خانگی روزانه، حضور نیروی مراقب بیدار به‌صورت ۲۴ ساعته، مدیریت داروها، شست‌وشوی لباس، هزینه‌های آب و برق و برنامه‌های فعالیت روزانه است.",
+      hi: "सामान्य RCFE मासिक शुल्क में प्रतिदिन घर का बना 3 समय का भोजन, 24 घंटे जागरूक स्टाफ़, दवा प्रबंधन, कपड़े धोना, बिजली-पानी की सुविधाएँ और दैनिक गतिविधि कार्यक्रम शामिल होते हैं।",
+      pa: "ਆਮ RCFE ਮਹੀਨਾਵਾਰ ਫੀਸ ਵਿੱਚ ਰੋਜ਼ਾਨਾ ਘਰ ਦੇ ਬਣੇ 3 ਭੋਜਨ, 24 ਘੰਟੇ ਜਾਗਦਾ ਸਟਾਫ, ਦਵਾਈਆਂ ਦੀ ਸੰਭਾਲ, ਕੱਪੜੇ ਧੋਣਾ, ਬਿਜਲੀ-ਪਾਣੀ ਅਤੇ ਰੋਜ਼ਾਨਾ ਗਤੀਵਿਧੀਆਂ ਦੇ ਪ੍ਰੋਗਰਾਮ ਸ਼ਾਮਲ ਹੁੰਦੇ ਹਨ।",
+      ja: "一般的な RCFE の月額利用料には、1日3食の手作り食事、24時間常駐の見守りスタッフ、服薬管理、洗濯、光熱費、日々のレクリエーション活動が含まれます。",
+      uk: "Типова щомісячна вартість RCFE включає триразове домашнє харчування, цілодобову зміну несплячого персоналу, контроль прийому ліків, прання, комунальні послуги та щоденні заняття.",
+      he: "תשלום חודשי טיפוסי ב-RCFE כולל 3 ארוחות ביתיות ביום, צוות ערני 24 שעות ביממה, ניהול תרופות, כביסה, תשלומי חשבונות ותוכניות פעילות יומיות.",
+      km: "ថ្លៃសេវា RCFE ប្រចាំខែធម្មតារួមមាន អាហារចម្អិននៅផ្ទះ 3 ពេលក្នុងមួយថ្ងៃ បុគ្គលិកប្រចាំការភ្ញាក់ 24 ម៉ោង ការគ្រប់គ្រងថ្នាំពេទ្យ ការបោកគក់ ទឹកភ្លើង និងកម្មវិធីសកម្មភាពប្រចាំថ្ងៃ។",
+      fr: "Les frais mensuels habituels d'un RCFE incluent 3 repas faits maison par jour, un personnel éveillé 24 h/24, la gestion des médicaments, la blanchisserie, les charges et des programmes d'activités quotidiens.",
+      pt: "As mensalidades típicas de um RCFE incluem 3 refeições caseiras diárias, equipe acordada 24 horas, controle de medicamentos, lavanderia, contas de consumo e programação diária de atividades."
     },
     "Estimated Monthly Investment": {
       es: "Inversión Mensual Estimada",
@@ -1390,7 +2623,16 @@
       ko: "예상 월 돌봄 비용",
       hy: "Գնահատված ամսական ծախս",
       ru: "Ориентировочный ежемесячный бюджет",
-      ar: "التكلفة الشهرية التقديرية"
+      ar: "التكلفة الشهرية التقديرية",
+      fa: "برآورد هزینه ماهانه",
+      hi: "अनुमानित मासिक खर्च",
+      pa: "ਅਨੁਮਾਨਿਤ ਮਹੀਨਾਵਾਰ ਖਰਚ",
+      ja: "月額費用の概算目安",
+      uk: "Орієнтовні щомісячні витрати",
+      he: "השקעה חודשית משוערת",
+      km: "ការចំណាយវិនិយោគប្រចាំខែប៉ាន់ស្មាន",
+      fr: "Investissement mensuel estimé",
+      pt: "Investimento Mensal Estimado"
     },
     "/ month": {
       es: "/ mes",
@@ -1400,7 +2642,16 @@
       ko: "/ 월",
       hy: "/ ամիս",
       ru: "/ мес",
-      ar: "/ شهرياً"
+      ar: "/ شهرياً",
+      fa: "/ ماه",
+      hi: "/ माह",
+      pa: "/ ਮਹੀਨਾ",
+      ja: "/ 月",
+      uk: "/ місяць",
+      he: "/ חודש",
+      km: "/ ខែ",
+      fr: "/ mois",
+      pt: "/ mês"
     },
     "/mo": {
       es: "/mes",
@@ -1410,7 +2661,16 @@
       ko: "/월",
       hy: "/ամիս",
       ru: "/мес",
-      ar: "/شهر"
+      ar: "/شهر",
+      fa: "/ماه",
+      hi: "/माह",
+      pa: "/ਮਹੀਨਾ",
+      ja: "/月",
+      uk: "/міс",
+      he: "לחודש",
+      km: "/ខែ",
+      fr: "/mois",
+      pt: "/mês"
     },
     "Estimates include base room and tiered care level add-ons. Illustrative only: actual rates vary by home and this is not a quote.": {
       es: "Las estimaciones incluyen habitación base y niveles adicionales de cuidado. Solo referencial: las tarifas reales varían según el centro y no constituyen una cotización.",
@@ -1420,7 +2680,16 @@
       ko: "기본 방값과 돌봄 등급별 추가 비용을 합산한 참고용 추정치이며, 실제 요금은 시설마다 다르므로 공식 견적이 아닙니다.",
       hy: "Հաշվարկները ներառում են հիմնական սենյակը և խնամքի մակարդակի հավելավճարները։ Կրում են միայն տեղեկատվական բնույթ և վերջնական գնառաջարկ չեն։",
       ru: "Расчет включает базовое проживание и надбавку за уровень ухода. Носит справочный характер и не является коммерческим предложением.",
-      ar: "تشمل التقديرات الغرفة الأساسية وإضافات مستوى الرعاية. للتوضيح فقط: تختلف الأسعار الفعلية من دار لأخرى وهذا ليس عرض سعر."
+      ar: "تشمل التقديرات الغرفة الأساسية وإضافات مستوى الرعاية. للتوضيح فقط: تختلف الأسعار الفعلية من دار لأخرى وهذا ليس عرض سعر.",
+      fa: "برآوردها شامل هزینه پایه اتاق و سطوح پلکانی مراقبت است. این ارقام صرفاً راهنما هستند: نرخ‌های واقعی بر اساس هر خانه متفاوت است و به‌منزله پیش‌فاکتور قطعی نیست.",
+      hi: "अनुमान में बुनियादी कमरा और देखभाल स्तर के अनुसार अतिरिक्त शुल्क शामिल हैं। यह केवल उदाहरण के लिए है: वास्तविक दरें हर देखभाल गृह के अनुसार अलग होती हैं और यह कोई औपचारिक कोटेशन नहीं है।",
+      pa: "ਅਨੁਮਾਨ ਵਿੱਚ ਮੁੱਢਲਾ ਕਮਰਾ ਅਤੇ ਦੇਖਭਾਲ ਦੇ ਪੱਧਰ ਅਨੁਸਾਰ ਵਾਧੂ ਖਰਚ ਸ਼ਾਮਲ ਹਨ। ਇਹ ਸਿਰਫ਼ ਅੰਦਾਜ਼ੇ ਲਈ ਹੈ: ਅਸਲ ਦਰਾਂ ਹਰ ਘਰ ਅਨੁਸਾਰ ਵੱਖ-ਵੱਖ ਹੁੰਦੀਆਂ ਹਨ ਅਤੇ ਇਹ ਕੋਈ ਪੱਕਾ ਕੋਟ ਨਹੀਂ ਹੈ।",
+      ja: "概算には基本居室料およびケア段階に応じた加算が含まれます。あくまで目安であり、実際の料金は各施設により異なるため正式なお見積りではございません。",
+      uk: "Оцінка включає базове проживання та доплату за рівень догляду. Розрахунок є орієнтовним: фактичні тарифи залежать від конкретного закладу і не є офіційною офертою.",
+      he: "האומדנים כוללים חדר בסיסי ותוספות לפי דרגת הטיפול. להמחשה בלבד: התעריפים בפועל משתנים ממעון למעון ואינם מהווים הצעת מחיר.",
+      km: "ការប៉ាន់ស្មានរួមមានបន្ទប់មូលដ្ឋាន និងថ្លៃបន្ថែមតាមកម្រិតថែទាំ។ សម្រាប់ជាឧទាហរណ៍ប៉ុណ្ណោះ៖ អត្រាពិតប្រាកដប្រែប្រួលតាមផ្ទះថែទាំនីមួយៗ ហើយនេះមិនមែនជាសម្រង់តម្លៃផ្លូវការទេ។",
+      fr: "Les estimations incluent le tarif de base de la chambre et les suppléments selon le niveau de soins. À titre indicatif uniquement : les tarifs réels varient selon chaque établissement et ceci ne constitue pas un devis.",
+      pt: "As estimativas incluem acomodação básica e adicionais conforme o nível de cuidado. Valor apenas ilustrativo: as tarifas reais variam por casa e não constituem orçamento formal."
     },
     "Residential 6-Bed Board & Care:": {
       es: "Casa Residencial de 6 Camas (Board & Care):",
@@ -1430,7 +2699,16 @@
       ko: "6인실 주거형 요양홈 (Board & Care):",
       hy: "Բնակելի 6 տեղանոց խնամքի տուն (Board & Care)՝",
       ru: "Домашний пансионат на 6 мест (Board & Care):",
-      ar: "دار رعاية سكنية من 6 أسرّة (Board & Care):"
+      ar: "دار رعاية سكنية من 6 أسرّة (Board & Care):",
+      fa: "خانه مراقبت مسکونی ۶ تختخوابی (Board & Care):",
+      hi: "आवासीय 6-बेड बोर्ड एंड केयर:",
+      pa: "ਰਿਹਾਇਸ਼ੀ 6-ਬੈੱਡ ਬੋਰਡ ਐਂਡ ਕੇਅਰ (Board & Care):",
+      ja: "少人数制6床ホーム（Board & Care）：",
+      uk: "Сімейний будинок догляду на 6 ліжок (Board & Care):",
+      he: "בית טיפולי של 6 מיטות (Board & Care):",
+      km: "ផ្ទះថែទាំស្នាក់នៅខ្នាត 6 គ្រែ (Board & Care)៖",
+      fr: "Foyer résidentiel de 6 lits (Board & Care) :",
+      pt: "Casa Residencial de Cuidados (6 Vagas / Board & Care):"
     },
     "Large Assisted Living Community:": {
       es: "Comunidad Grande de Vivienda Asistida:",
@@ -1440,7 +2718,16 @@
       ko: "대형 어시스티드 리빙 커뮤니티:",
       hy: "Մեծ Assisted Living համալիր՝",
       ru: "Крупный центр Assisted Living:",
-      ar: "مجمع معيشة مساعدة كبير:"
+      ar: "مجمع معيشة مساعدة كبير:",
+      fa: "مجتمع بزرگ زندگی همراه با مراقبت (Assisted Living):",
+      hi: "बड़ा असिस्टेड लिविंग समुदाय:",
+      pa: "ਵੱਡੀ ਅਸਿਸਟਡ ਲਿਵਿੰਗ ਕਮਿਊਨਿਟੀ:",
+      ja: "大型アシステッド・リビング施設：",
+      uk: "Великий комплекс супроводжуваного проживання:",
+      he: "קהילת דיור מוגן גדולה:",
+      km: "សហគមន៍រស់នៅដោយមានជំនួយខ្នាតធំ (Assisted Living)៖",
+      fr: "Grande résidence avec services (Assisted Living) :",
+      pt: "Grande Comunidade de Assisted Living:"
     },
     "Equivalent 24/7 In-Home Agency Care:": {
       es: "Cuidado en Casa 24/7 por Agencia (Equivalente):",
@@ -1450,7 +2737,16 @@
       ko: "동일 조건 24시간 방문요양 파견 비용:",
       hy: "Համարժեք 24/7 տնային գործակալական խնամք՝",
       ru: "Эквивалентный уход на дому 24/7 через агентство:",
-      ar: "رعاية منزلية مكافئة 24/7 عبر وكالة:"
+      ar: "رعاية منزلية مكافئة 24/7 عبر وكالة:",
+      fa: "مراقبت معادل ۲۴/۷ در منزل از طریق مؤسسات اعزام مراقب:",
+      hi: "समतुल्य 24/7 घरेलू एजेंसी देखभाल:",
+      pa: "ਇਸ ਦੇ ਬਰਾਬਰ 24/7 ਘਰੇਲੂ ਏਜੰਸੀ ਦੇਖਭਾਲ:",
+      ja: "同等の24時間訪問介護サービス利用時：",
+      uk: "Еквівалентний цілодобовий догляд удома через агентство:",
+      he: "טיפול ביתי מקביל 24/7 דרך חברת סיעוד:",
+      km: "ការថែទាំតាមផ្ទះ 24/7 ដោយភ្នាក់ងារដែលមានតម្លៃស្មើគ្នា៖",
+      fr: "Équivalent en soins à domicile par agence 24 h/24 et 7 j/7 :",
+      pt: "Cuidado Domiciliar Equivalente 24/7 via Agência:"
     },
     "720 hrs/mo at prevailing California agency rates": {
       es: "720 horas/mes a tarifas vigentes de agencias en California",
@@ -1460,7 +2756,16 @@
       ko: "캘리포니아 방문요양 평균 시급 기준 월 720시간",
       hy: "ամսական 720 ժամ՝ Կալիֆոռնիայի գործակալական սակագներով",
       ru: "720 часов/мес по действующим тарифам агентств Калифорнии",
-      ar: "720 ساعة/شهر وفق أسعار الوكالات السائدة في كاليفورنيا"
+      ar: "720 ساعة/شهر وفق أسعار الوكالات السائدة في كاليفورنيا",
+      fa: "۷۲۰ ساعت در ماه با نرخ‌های متداول مؤسسات در کالیفرنیا",
+      hi: "प्रचलित कैलिफ़ोर्निया एजेंसी दरों पर 720 घंटे/माह",
+      pa: "ਕੈਲੀਫੋਰਨੀਆ ਦੀਆਂ ਮੌਜੂਦਾ ਏਜੰਸੀ ਦਰਾਂ 'ਤੇ 720 ਘੰਟੇ/ਮਹੀਨਾ",
+      ja: "カリフォルニア州の派遣介護事業者の実勢単価（月720時間換算）",
+      uk: "720 год/міс за середніми тарифами агентств у Каліфорнії",
+      he: "720 שעות בחודש בתעריפי סוכנויות הסיעוד בקליפורניה",
+      km: "720 ម៉ោង/ខែ តាមអត្រាភ្នាក់ងារទូទៅនៅរដ្ឋ California",
+      fr: "720 h/mois aux tarifs moyens des agences en Californie",
+      pt: "720 h/mês nas tarifas médias de agências da Califórnia"
     },
     "Inquire About This Budget": {
       es: "Consultar sobre este presupuesto",
@@ -1470,7 +2775,16 @@
       ko: "이 예산으로 상담 요청",
       hy: "Հարցում ուղարկել այս բյուջեով",
       ru: "Подобрать варианты по бюджету",
-      ar: "استفسر بهذه الميزانية"
+      ar: "استفسر بهذه الميزانية",
+      fa: "استعلام درباره این بودجه",
+      hi: "इस बजट के बारे में पूछें",
+      pa: "ਇਸ ਬਜਟ ਬਾਰੇ ਪੁੱਛਗਿੱਛ ਕਰੋ",
+      ja: "このご予算で相談する",
+      uk: "Надіслати запит щодо цього бюджету",
+      he: "פנייה לגבי תקציב זה",
+      km: "សាកសួរអំពីថវិកានេះ",
+      fr: "Se renseigner sur ce budget",
+      pt: "Consultar Opções Neste Orçamento"
     },
     "Free Placement Help": {
       es: "Ayuda Gratuita",
@@ -1480,7 +2794,16 @@
       ko: "무료 입소 지원",
       hy: "Անվճար տեղավորման օգնություն",
       ru: "Бесплатный подбор места",
-      ar: "مساعدة مجانية في التسكين"
+      ar: "مساعدة مجانية في التسكين",
+      fa: "راهنمایی رایگان اسکان",
+      hi: "निःशुल्क प्लेसमेंट सहायता",
+      pa: "ਮੁਫ਼ਤ ਰਿਹਾਇਸ਼ ਸਹਾਇਤਾ",
+      ja: "無料の施設紹介サポート",
+      uk: "Безкоштовна допомога з підбором",
+      he: "עזרה חינם בשיבוץ",
+      km: "ជំនួយស្វែងរកកន្លែងស្នាក់នៅឥតគិតថ្លៃ",
+      fr: "Aide gratuite au placement",
+      pt: "Ajuda Gratuita de Encaminhamento"
     },
     "Self-Assessment Tool": {
       es: "Herramienta de Autoevaluación",
@@ -1490,7 +2813,16 @@
       ko: "자가진단 도구",
       hy: "Ինքնագնահատման գործիք",
       ru: "Инструмент самооценки",
-      ar: "أداة التقييم الذاتي"
+      ar: "أداة التقييم الذاتي",
+      fa: "ابزار خودارزیابی",
+      hi: "स्व-मूल्यांकन उपकरण",
+      pa: "ਸਵੈ-ਮੁਲਾਂਕਣ ਸਾਧਨ",
+      ja: "セルフチェック診断ツール",
+      uk: "Інструмент самооцінки",
+      he: "כלי להערכה עצמית",
+      km: "ឧបករណ៍វាយតម្លៃដោយខ្លួនឯង",
+      fr: "Outil d'auto-évaluation",
+      pt: "Ferramenta de Autoavaliação"
     },
     "Find the Right Care Setting": {
       es: "Encuentre el Entorno de Cuidado Ideal",
@@ -1500,7 +2832,16 @@
       ko: "알맞은 돌봄 환경 찾기",
       hy: "Գտեք խնամքի ճիշտ միջավայրը",
       ru: "Подберите подходящий формат ухода",
-      ar: "اعثر على بيئة الرعاية المناسبة"
+      ar: "اعثر على بيئة الرعاية المناسبة",
+      fa: "یافتن محیط مراقبت مناسب",
+      hi: "सही देखभाल व्यवस्था चुनें",
+      pa: "ਸਹੀ ਦੇਖਭਾਲ ਮਾਹੌਲ ਲੱਭੋ",
+      ja: "最適なケア環境を見つける",
+      uk: "Визначте оптимальний формат догляду",
+      he: "מצאו את המסגרת הטיפולית המתאימה",
+      km: "ស្វែងរកកន្លែងថែទាំដែលសមរម្យ",
+      fr: "Trouver le cadre de soins adapté",
+      pt: "Encontre o Ambiente de Cuidado Ideal"
     },
     "Answer 4 quick questions to receive tailored recommendations on care type, staff ratio, and touring advice.": {
       es: "Responda 4 breves preguntas para recibir recomendaciones sobre el tipo de cuidado, proporción de personal y consejos para sus visitas.",
@@ -1510,7 +2851,16 @@
       ko: "4가지 간단한 질문에 답하시면 적합한 시설 유형, 인력 비율, 방문 점검 포인트를 맞춤 추천해 드립니다.",
       hy: "Պատասխանեք 4 արագ հարցի՝ խնամքի տեսակի, անձնակազմի հարաբերակցության և շրջայցի վերաբերյալ անհատական խորհուրդներ ստանալու համար։",
       ru: "Ответьте на 4 коротких вопроса, чтобы получить персональные рекомендации по формату ухода, штату сиделок и вопросам для просмотра.",
-      ar: "أجب عن 4 أسئلة سريعة للحصول على توصيات مخصصة لنوع الرعاية ونسبة الموظفين ونصائح المعاينة."
+      ar: "أجب عن 4 أسئلة سريعة للحصول على توصيات مخصصة لنوع الرعاية ونسبة الموظفين ونصائح المعاينة.",
+      fa: "به ۴ پرسش کوتاه پاسخ دهید تا پیشنهادهای اختصاصی درباره نوع مراقبت، نسبت مراقب به سالمند و نکات بازدید را دریافت کنید.",
+      hi: "देखभाल के प्रकार, स्टाफ़ अनुपात और केंद्र दौरे से जुड़ी उपयुक्त सिफारिशें पाने के लिए 4 संक्षिप्त प्रश्नों के उत्तर दें।",
+      pa: "ਦੇਖਭਾਲ ਦੀ ਕਿਸਮ, ਸਟਾਫ ਅਨੁਪਾਤ ਅਤੇ ਦੌਰੇ ਬਾਰੇ ਖ਼ਾਸ ਸੁਝਾਅ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ 4 ਤੁਰੰਤ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦਿਓ।",
+      ja: "4つの簡単な質問にお答えいただくだけで、最適な施設形態・スタッフ配置比率・見学時の確認ポイントをご案内します。",
+      uk: "Дайте відповідь на 4 короткі запитання, щоб отримати індивідуальні рекомендації щодо типу догляду, співвідношення персоналу та порад для перегляду закладів.",
+      he: "ענו על 4 שאלות קצרות כדי לקבל המלצות מותאמות על סוג הטיפול, יחס הצוות וטיפים לסיורים.",
+      km: "ឆ្លើយសំណួររហ័សចំនួន 4 ដើម្បីទទួលបានការណែនាំសមស្របលើប្រភេទការថែទាំ សមាមាត្របុគ្គលិក និងដំបូន្មានពេលទៅទស្សនា។",
+      fr: "Répondez à 4 questions rapides pour recevoir des recommandations personnalisées sur le type de soins, le ratio d'encadrement et les conseils de visite.",
+      pt: "Responda a 4 perguntas rápidas para receber recomendações personalizadas sobre tipo de cuidado, proporção de equipe e dicas para visitas."
     },
     "Question {step} of 4": {
       es: "Pregunta {step} de 4",
@@ -1520,7 +2870,16 @@
       ko: "4문항 중 {step}번",
       hy: "Հարց {step}՝ 4-ից",
       ru: "Вопрос {step} из 4",
-      ar: "السؤال {step} من 4"
+      ar: "السؤال {step} من 4",
+      fa: "پرسش {step} از ۴",
+      hi: "4 में से प्रश्न {step}",
+      pa: "ਸਵਾਲ {step} (4 ਵਿੱਚੋਂ)",
+      ja: "質問 {step} / 4",
+      uk: "Запитання {step} з 4",
+      he: "שאלה {step} מתוך 4",
+      km: "សំណួរទី {step} ក្នុងចំណោម 4",
+      fr: "Question {step} sur 4",
+      pt: "Pergunta {step} de 4"
     },
     "{pct}% Complete": {
       es: "{pct}% Completado",
@@ -1530,7 +2889,16 @@
       ko: "{pct}% 완료",
       hy: "{pct}% ավարտված",
       ru: "Выполнено {pct}%",
-      ar: "مكتمل {pct}%"
+      ar: "مكتمل {pct}%",
+      fa: "{pct}٪ تکمیل شده",
+      hi: "{pct}% पूर्ण",
+      pa: "{pct}% ਪੂਰਾ ਹੋਇਆ",
+      ja: "{pct}% 完了",
+      uk: "Завершено на {pct}%",
+      he: "{pct}% הושלמו",
+      km: "បានបញ្ចប់ {pct}%",
+      fr: "{pct} % complété",
+      pt: "{pct}% concluído"
     },
     "Question 1 of 4": {
       es: "Pregunta 1 de 4",
@@ -1540,7 +2908,16 @@
       ko: "4문항 중 1번",
       hy: "Հարց 1՝ 4-ից",
       ru: "Вопрос 1 из 4",
-      ar: "السؤال 1 من 4"
+      ar: "السؤال 1 من 4",
+      fa: "پرسش ۱ از ۴",
+      hi: "4 में से प्रश्न 1",
+      pa: "ਸਵਾਲ 1 (4 ਵਿੱਚੋਂ)",
+      ja: "質問 1 / 4",
+      uk: "Запитання 1 з 4",
+      he: "שאלה 1 מתוך 4",
+      km: "សំណួរទី 1 ក្នុងចំណោម 4",
+      fr: "Question 1 sur 4",
+      pt: "Pergunta 1 de 4"
     },
     "25% Complete": {
       es: "25% Completado",
@@ -1550,7 +2927,16 @@
       ko: "25% 완료",
       hy: "25% ավարտված",
       ru: "Выполнено 25%",
-      ar: "مكتمل 25%"
+      ar: "مكتمل 25%",
+      fa: "۲۵٪ تکمیل شده",
+      hi: "25% पूर्ण",
+      pa: "25% ਪੂਰਾ ਹੋਇਆ",
+      ja: "25% 完了",
+      uk: "Завершено на 25%",
+      he: "25% הושלמו",
+      km: "បានបញ្ចប់ 25%",
+      fr: "25 % complété",
+      pt: "25% concluído"
     },
     "50% Complete": {
       es: "50% Completado",
@@ -1560,7 +2946,16 @@
       ko: "50% 완료",
       hy: "50% ավարտված",
       ru: "Выполнено 50%",
-      ar: "مكتمل 50%"
+      ar: "مكتمل 50%",
+      fa: "۵۰٪ تکمیل شده",
+      hi: "50% पूर्ण",
+      pa: "50% ਪੂਰਾ ਹੋਇਆ",
+      ja: "50% 完了",
+      uk: "Завершено на 50%",
+      he: "50% הושלמו",
+      km: "បានបញ្ចប់ 50%",
+      fr: "50 % complété",
+      pt: "50% concluído"
     },
     "75% Complete": {
       es: "75% Completado",
@@ -1570,7 +2965,16 @@
       ko: "75% 완료",
       hy: "75% ավարտված",
       ru: "Выполнено 75%",
-      ar: "مكتمل 75%"
+      ar: "مكتمل 75%",
+      fa: "۷۵٪ تکمیل شده",
+      hi: "75% पूर्ण",
+      pa: "75% ਪੂਰਾ ਹੋਇਆ",
+      ja: "75% 完了",
+      uk: "Завершено на 75%",
+      he: "75% הושלמו",
+      km: "បានបញ្ចប់ 75%",
+      fr: "75 % complété",
+      pt: "75% concluído"
     },
     "100% Ready": {
       es: "100% Listo",
@@ -1580,7 +2984,16 @@
       ko: "100% 준비 완료",
       hy: "100% պատրաստ է",
       ru: "Готово на 100%",
-      ar: "جاهز 100%"
+      ar: "جاهز 100%",
+      fa: "۱۰۰٪ آماده",
+      hi: "100% तैयार",
+      pa: "100% ਤਿਆਰ",
+      ja: "100% 準備完了",
+      uk: "Готово на 100%",
+      he: "100% מוכן",
+      km: "រួចរាល់ 100%",
+      fr: "Prêt à 100 %",
+      pt: "100% pronto"
     },
     "Question 1 of 4: Profile": {
       es: "Pregunta 1 de 4: Perfil",
@@ -1590,7 +3003,16 @@
       ko: "1단계 / 4단계: 대상자",
       hy: "Հարց 1՝ 4-ից․ Պրոֆիլ",
       ru: "Вопрос 1 из 4: Профиль",
-      ar: "السؤال 1 من 4: الملف الشخصي"
+      ar: "السؤال 1 من 4: الملف الشخصي",
+      fa: "پرسش ۱ از ۴: مشخصات",
+      hi: "4 में से प्रश्न 1: परिचय",
+      pa: "ਸਵਾਲ 1 (4 ਵਿੱਚੋਂ): ਵੇਰਵਾ",
+      ja: "質問 1 / 4：ご対象者様について",
+      uk: "Запитання 1 з 4: Профіль",
+      he: "שאלה 1 מתוך 4: פרופיל",
+      km: "សំណួរទី 1 ក្នុងចំណោម 4៖ ព័ត៌មានទូទៅ",
+      fr: "Question 1 sur 4 : Profil",
+      pt: "Pergunta 1 de 4: Perfil"
     },
     "Question 2 of 4: Cognitive Health": {
       es: "Pregunta 2 de 4: Salud Cognitiva",
@@ -1600,7 +3022,16 @@
       ko: "2단계 / 4단계: 인지 및 기억 상태",
       hy: "Հարց 2՝ 4-ից․ Ճանաչողական առողջություն",
       ru: "Вопрос 2 из 4: Когнитивное состояние",
-      ar: "السؤال 2 من 4: الصحة الإدراكية"
+      ar: "السؤال 2 من 4: الصحة الإدراكية",
+      fa: "پرسش ۲ از ۴: وضعیت شناختی",
+      hi: "4 में से प्रश्न 2: संज्ञानात्मक स्वास्थ्य",
+      pa: "ਸਵਾਲ 2 (4 ਵਿੱਚੋਂ): ਮਾਨਸਿਕ ਤੇ ਯਾਦਾਸ਼ਤ ਸਿਹਤ",
+      ja: "質問 2 / 4：認知・記憶の状態",
+      uk: "Запитання 2 з 4: Когнітивний стан",
+      he: "שאלה 2 מתוך 4: מצב קוגניטיבי",
+      km: "សំណួរទី 2 ក្នុងចំណោម 4៖ សុខភាពការយល់ដឹង និងចងចាំ",
+      fr: "Question 2 sur 4 : Santé cognitive",
+      pt: "Pergunta 2 de 4: Saúde Cognitiva"
     },
     "Question 3 of 4: Physical Assistance": {
       es: "Pregunta 3 de 4: Asistencia Física",
@@ -1610,7 +3041,16 @@
       ko: "3단계 / 4단계: 신체 활동 지원",
       hy: "Հարց 3՝ 4-ից․ Ֆիզիկական օգնություն",
       ru: "Вопрос 3 из 4: Физическая помощь",
-      ar: "السؤال 3 من 4: المساعدة الجسدية"
+      ar: "السؤال 3 من 4: المساعدة الجسدية",
+      fa: "پرسش ۳ از ۴: کمک فیزیکی",
+      hi: "4 में से प्रश्न 3: शारीरिक सहायता",
+      pa: "ਸਵਾਲ 3 (4 ਵਿੱਚੋਂ): ਸਰੀਰਕ ਸਹਾਇਤਾ",
+      ja: "質問 3 / 4：身体的な介護の必要性",
+      uk: "Запитання 3 з 4: Фізична допомога",
+      he: "שאלה 3 מתוך 4: סיוע פיזי",
+      km: "សំណួរទី 3 ក្នុងចំណោម 4៖ ជំនួយផ្នែករាងកាយ",
+      fr: "Question 3 sur 4 : Assistance physique",
+      pt: "Pergunta 3 de 4: Assistência Física"
     },
     "Question 4 of 4: Timeline": {
       es: "Pregunta 4 de 4: Plazo",
@@ -1620,7 +3060,16 @@
       ko: "4단계 / 4단계: 입소 희망 시기",
       hy: "Հարց 4՝ 4-ից․ Ժամկետ",
       ru: "Вопрос 4 из 4: Сроки",
-      ar: "السؤال 4 من 4: الإطار الزمني"
+      ar: "السؤال 4 من 4: الإطار الزمني",
+      fa: "پرسش ۴ از ۴: زمان‌بندی",
+      hi: "4 में से प्रश्न 4: समय-सीमा",
+      pa: "ਸਵਾਲ 4 (4 ਵਿੱਚੋਂ): ਸਮਾਂ-ਸੀਮਾ",
+      ja: "質問 4 / 4：ご希望の時期",
+      uk: "Запитання 4 з 4: Терміни",
+      he: "שאלה 4 מתוך 4: לוח זמנים",
+      km: "សំណួរទី 4 ក្នុងចំណោម 4៖ រយៈពេល",
+      fr: "Question 4 sur 4 : Délai",
+      pt: "Pergunta 4 de 4: Prazo"
     },
     "Question 1 of 4: Who are you exploring care for?": {
       es: "Pregunta 1 de 4: ¿Para quién busca cuidado?",
@@ -1630,7 +3079,16 @@
       ko: "1단계: 누구를 위한 돌봄을 찾고 계신가요?",
       hy: "Հարց 1՝ 4-ից․ Ո՞ւմ համար եք խնամք փնտրում",
       ru: "Вопрос 1 из 4: Для кого вы ищете уход?",
-      ar: "السؤال 1 من 4: لمن تبحث عن الرعاية؟"
+      ar: "السؤال 1 من 4: لمن تبحث عن الرعاية؟",
+      fa: "پرسش ۱ از ۴: برای چه کسی به دنبال مراقبت هستید؟",
+      hi: "4 में से प्रश्न 1: आप किसके लिए देखभाल विकल्प देख रहे हैं?",
+      pa: "ਸਵਾਲ 1 (4 ਵਿੱਚੋਂ): ਤੁਸੀਂ ਕਿਸ ਲਈ ਦੇਖਭਾਲ ਲੱਭ ਰਹੇ ਹੋ?",
+      ja: "質問 1 / 4：どなたのケアをお探しですか？",
+      uk: "Запитання 1 з 4: Для кого ви підбираєте догляд?",
+      he: "שאלה 1 מתוך 4: עבור מי אתם בודקים מסגרת טיפולית?",
+      km: "សំណួរទី 1 ក្នុងចំណោម 4៖ តើលោកអ្នកកំពុងស្វែងរកការថែទាំសម្រាប់នរណា?",
+      fr: "Question 1 sur 4 : Pour qui recherchez-vous des soins ?",
+      pt: "Pergunta 1 de 4: Para quem você está buscando cuidados?"
     },
     "Who are you exploring care for?": {
       es: "¿Para quién busca cuidado?",
@@ -1640,7 +3098,16 @@
       ko: "누구를 위한 돌봄을 찾고 계신가요?",
       hy: "Ո՞ւմ համար եք խնամք փնտրում",
       ru: "Для кого вы ищете уход?",
-      ar: "لمن تبحث عن الرعاية؟"
+      ar: "لمن تبحث عن الرعاية؟",
+      fa: "برای چه کسی به دنبال مراقبت هستید؟",
+      hi: "आप किसके लिए देखभाल विकल्प देख रहे हैं?",
+      pa: "ਤੁਸੀਂ ਕਿਸ ਲਈ ਦੇਖਭਾਲ ਲੱਭ ਰਹੇ ਹੋ?",
+      ja: "どなたのケアをお探しですか？",
+      uk: "Для кого ви підбираєте догляд?",
+      he: "עבור מי אתם בודקים מסגרת טיפולית?",
+      km: "តើលោកអ្នកកំពុងស្វែងរកការថែទាំសម្រាប់នរណា?",
+      fr: "Pour qui recherchez-vous des soins ?",
+      pt: "Para quem você está buscando cuidados?"
     },
     "Elder Parent or Relative": {
       es: "Padre, madre o familiar mayor",
@@ -1650,7 +3117,16 @@
       ko: "연로하신 부모님 또는 친척",
       hy: "Տարեց ծնող կամ հարազատ",
       ru: "Пожилой родитель или родственник",
-      ar: "والد مسن أو قريب"
+      ar: "والد مسن أو قريب",
+      fa: "والدین سالمند یا یکی از بستگان",
+      hi: "बुज़ुर्ग माता-पिता या रिश्तेदार",
+      pa: "ਬਜ਼ੁਰਗ ਮਾਤਾ-ਪਿਤਾ ਜਾਂ ਰਿਸ਼ਤੇਦਾਰ",
+      ja: "ご高齢の親御様またはご親族",
+      uk: "Літній родич або хтось із батьків",
+      he: "הורה מבוגר או קרוב משפחה",
+      km: "ឪពុកម្តាយ ឬសាច់ញាតិវ័យចំណាស់",
+      fr: "Un parent âgé ou un proche",
+      pt: "Mãe, Pai ou Familiar Idoso"
     },
     "Looking after Mom, Dad, or elderly family member.": {
       es: "Cuidando a mamá, papá o a un familiar mayor.",
@@ -1660,7 +3136,16 @@
       ko: "어머니, 아버지 또는 연로하신 가족분을 위한 탐색",
       hy: "Մայրիկի, հայրիկի կամ ընտանիքի տարեց անդամի համար։",
       ru: "Забота о маме, папе или пожилом члене семьи.",
-      ar: "رعاية الأم أو الأب أو أحد أفراد الأسرة المسنين."
+      ar: "رعاية الأم أو الأب أو أحد أفراد الأسرة المسنين.",
+      fa: "مراقبت از مادر، پدر یا عضو سالمند خانواده.",
+      hi: "माँ, पिताजी या परिवार के किसी बुज़ुर्ग सदस्य की देखभाल करना।",
+      pa: "ਮਾਤਾ ਜੀ, ਪਿਤਾ ਜੀ ਜਾਂ ਪਰਿਵਾਰ ਦੇ ਬਜ਼ੁਰਗ ਮੈਂਬਰ ਦੀ ਦੇਖਭਾਲ ਲਈ।",
+      ja: "お母様、お父様、またはご高齢のご家族のために探している。",
+      uk: "Піклування про маму, тата чи старшого члена родини.",
+      he: "דואגים לאמא, לאבא או לבן משפחה מבוגר.",
+      km: "កំពុងមើលថែម្តាយ ឪពុក ឬសមាជិកគ្រួសារវ័យចំណាស់។",
+      fr: "Je veille sur ma mère, mon père ou un membre âgé de ma famille.",
+      pt: "Cuidando da mãe, do pai ou de um familiar idoso."
     },
     "Caring for Mom, Dad, or elder relative": {
       es: "Cuidando a mamá, papá o familiar mayor",
@@ -1670,7 +3155,16 @@
       ko: "부모님 또는 연로하신 친척을 위한 돌봄",
       hy: "Հոգ տանելով մայրիկի, հայրիկի կամ տարեց հարազատի մասին",
       ru: "Забота о маме, папе или пожилом родственнике",
-      ar: "رعاية الأم أو الأب أو قريب مسن"
+      ar: "رعاية الأم أو الأب أو قريب مسن",
+      fa: "مراقبت از مادر، پدر یا یکی از بستگان سالمند",
+      hi: "माँ, पिताजी या किसी बुज़ुर्ग रिश्तेदार की देखभाल",
+      pa: "ਮਾਤਾ ਜੀ, ਪਿਤਾ ਜੀ ਜਾਂ ਬਜ਼ੁਰਗ ਰਿਸ਼ਤੇਦਾਰ ਦੀ ਸੰਭਾਲ",
+      ja: "お母様・お父様・ご高齢のご親族のケアを検討中",
+      uk: "Піклування про маму, тата або старшого родича",
+      he: "דאגה לאמא, אבא או קרוב משפחה מבוגר",
+      km: "កំពុងមើលថែម្តាយ ឪពុក ឬសាច់ញាតិវ័យចំណាស់",
+      fr: "Accompagnement de ma mère, mon père ou d'un proche âgé",
+      pt: "Cuidando da mãe, do pai ou de um familiar idoso"
     },
     "Spouse or Partner": {
       es: "Cónyuge o pareja",
@@ -1680,7 +3174,16 @@
       ko: "배우자 또는 파트너",
       hy: "Ամուսին կամ կողակից",
       ru: "Супруг или партнер",
-      ar: "الزوج أو الشريك"
+      ar: "الزوج أو الشريك",
+      fa: "همسر یا شریک زندگی",
+      hi: "जीवनसाथी या साथी",
+      pa: "ਜੀਵਨ-ਸਾਥੀ ਜਾਂ ਪਾਰਟਨਰ",
+      ja: "配偶者またはパートナー",
+      uk: "Чоловік, дружина або партнер",
+      he: "בן או בת זוג",
+      km: "សហព័ទ្ធ ឬដៃគូជីវិត",
+      fr: "Mon conjoint ou partenaire",
+      pt: "Cônjuge ou Companheiro(a)"
     },
     "Seeking support for partner's health progression.": {
       es: "Buscando apoyo ante el avance de salud de su pareja.",
@@ -1690,7 +3193,16 @@
       ko: "배우자의 건강 상태 변화에 맞춘 지원 모색",
       hy: "Կողակցի առողջական վիճակի համար աջակցություն փնտրելով։",
       ru: "Поиск поддержки в связи с изменением здоровья партнера.",
-      ar: "البحث عن دعم لتطورات الحالة الصحية للشريك."
+      ar: "البحث عن دعم لتطورات الحالة الصحية للشريك.",
+      fa: "در جستجوی حمایت متناسب با روند وضعیت سلامت شریک زندگی.",
+      hi: "जीवनसाथी की बदलती स्वास्थ्य आवश्यकताओं के लिए सहयोग खोजना।",
+      pa: "ਜੀਵਨ-ਸਾਥੀ ਦੀ ਵਧਦੀ ਸਿਹਤ ਲੋੜ ਲਈ ਸਹਾਇਤਾ ਲੱਭ ਰਹੇ ਹੋ।",
+      ja: "配偶者・パートナーの健康状態の変化に応じた支援を探している。",
+      uk: "Пошук підтримки через зміни у стані здоров’я партнера.",
+      he: "חיפוש תמיכה בעקבות שינוי במצבו הבריאותי של בן/בת הזוג.",
+      km: "កំពុងស្វែងរកការគាំទ្រសម្រាប់ស្ថានភាពសុខភាពរបស់ដៃគូដែលកំពុងវិវត្តន៍។",
+      fr: "Je recherche du soutien face à l'évolution de l'état de santé de mon conjoint.",
+      pt: "Buscando apoio diante da evolução de saúde do(a) parceiro(a)."
     },
     "Seeking support for partner's health progression": {
       es: "Buscando apoyo para la salud de su pareja",
@@ -1700,7 +3212,16 @@
       ko: "배우자의 건강 변화에 따른 돌봄 지원",
       hy: "Աջակցություն կողակցի առողջական փոփոխությունների համար",
       ru: "Поддержка для партнера при ухудшении здоровья",
-      ar: "دعم لتطورات الحالة الصحية للشريك"
+      ar: "دعم لتطورات الحالة الصحية للشريك",
+      fa: "در جستجوی حمایت متناسب با وضعیت سلامت شریک زندگی",
+      hi: "जीवनसाथी के स्वास्थ्य परिवर्तन के लिए सहयोग खोजना",
+      pa: "ਜੀਵਨ-ਸਾਥੀ ਦੀ ਸਿਹਤ ਸਹਾਇਤਾ ਲਈ",
+      ja: "配偶者・パートナーの体調変化に伴うケアを検討中",
+      uk: "Пошук підтримки у зв’язку зі змінами здоров’я партнера",
+      he: "חיפוש תמיכה בהתמודדות הבריאותית של בן/בת הזוג",
+      km: "កំពុងស្វែងរកការគាំទ្រសម្រាប់ស្ថានភាពសុខភាពរបស់ដៃគូ",
+      fr: "Recherche de soutien pour l'évolution de la santé du conjoint",
+      pt: "Buscando apoio diante da evolução de saúde do(a) parceiro(a)"
     },
     "Myself": {
       es: "Para mí mismo(a)",
@@ -1710,7 +3231,16 @@
       ko: "본인",
       hy: "Ինձ համար",
       ru: "Для себя",
-      ar: "لنفسي"
+      ar: "لنفسي",
+      fa: "خودم",
+      hi: "स्वयं अपने लिए",
+      pa: "ਆਪਣੇ ਲਈ",
+      ja: "ご本人（私自身）",
+      uk: "Для себе",
+      he: "עבורי",
+      km: "ខ្លួនឯងផ្ទាល់",
+      fr: "Moi-même",
+      pt: "Para Mim Mesmo(a)"
     },
     "Planning forward for my own future community.": {
       es: "Planificando con anticipación mi futura comunidad.",
@@ -1720,7 +3250,16 @@
       ko: "미래의 주거 환경을 위한 사전 계획",
       hy: "Իմ ապագա բնակավայրի նախօրոք պլանավորում։",
       ru: "Заблаговременное планирование будущего проживания.",
-      ar: "التخطيط المسبق لمجتمع إقامتي المستقبلي."
+      ar: "التخطيط المسبق لمجتمع إقامتي المستقبلي.",
+      fa: "برنامه‌ریزی پیش‌دستانه برای سکونت آینده خودم.",
+      hi: "अपने स्वयं के भविष्य के देखभाल समुदाय की योजना बनाना।",
+      pa: "ਆਪਣੇ ਭਵਿੱਖ ਦੀ ਰਿਹਾਇਸ਼ੀ ਕਮਿਊਨਿਟੀ ਲਈ ਪਹਿਲਾਂ ਤੋਂ ਯੋਜਨਾ ਬਣਾਉਣਾ।",
+      ja: "自分自身の将来の暮らしに向けて前向きに検討している。",
+      uk: "Завчасне планування власного комфортного проживання в майбутньому.",
+      he: "תכנון קדימה למסגרת המגורים העתידית שלי.",
+      km: "កំពុងរៀបចំផែនការទុកជាមុនសម្រាប់សហគមន៍អនាគតរបស់ខ្លួនឯង។",
+      fr: "J'anticipe l'organisation de mon propre lieu de vie futur.",
+      pt: "Planejando com antecedência minha própria moradia futura."
     },
     "Planning forward for my own future residence": {
       es: "Planificando mi futura residencia",
@@ -1730,7 +3269,16 @@
       ko: "본인의 향후 거주 환경 사전 계획",
       hy: "Ապագա բնակության վայրի նախօրոք պլանավորում",
       ru: "Планирование будущего места проживания",
-      ar: "التخطيط المسبق لمكان إقامتي المستقبلي"
+      ar: "التخطيط المسبق لمكان إقامتي المستقبلي",
+      fa: "برنامه‌ریزی پیش‌دستانه برای محل اقامت آینده خودم",
+      hi: "अपने भविष्य के आवास की पूर्व योजना बनाना",
+      pa: "ਆਪਣੇ ਭਵਿੱਖ ਦੇ ਨਿਵਾਸ ਲਈ ਯੋਜਨਾ ਬਣਾਉਣਾ",
+      ja: "ご自身の将来の住まいを前もって検討中",
+      uk: "Завчасне планування власного майбутнього житла",
+      he: "תכנון מראש של המגורים העתידיים שלי",
+      km: "កំពុងរៀបចំផែនការទុកជាមុនសម្រាប់ទីលំនៅអនាគតរបស់ខ្លួនឯង",
+      fr: "Planification anticipée pour ma propre résidence future",
+      pt: "Planejando com antecedência minha própria residência futura"
     },
     "Social Worker / Discharge Planner": {
       es: "Trabajador Social / Alta Hospitalaria",
@@ -1740,7 +3288,16 @@
       ko: "사회복지사 / 병원 퇴원 담당자",
       hy: "Սոցիալական աշխատող / Դուրսգրման համակարգող",
       ru: "Социальный работник / координатор выписки",
-      ar: "أخصائي اجتماعي / منسق خروج من المستشفى"
+      ar: "أخصائي اجتماعي / منسق خروج من المستشفى",
+      fa: "مددکار اجتماعی / برنامه‌ریز ترخیص بیمارستان",
+      hi: "सोशल वर्कर / डिस्चार्ज प्लानर",
+      pa: "ਸੋਸ਼ਲ ਵਰਕਰ / ਡਿਸਚਾਰਜ ਪਲੈਨਰ",
+      ja: "ソーシャルワーカー / 退院調整担当者",
+      uk: "Соціальний працівник / координатор виписки",
+      he: "עובד/ת סוציאלי/ת / מתאם/ת שחרור",
+      km: "បុគ្គលិកសង្គមកិច្ច / អ្នករៀបចំផែនការចេញពីមន្ទីរពេទ្យ",
+      fr: "Travailleur social / Coordinateur de sortie d'hôpital",
+      pt: "Assistente Social / Planejamento de Alta"
     },
     "Helping a patient transition safely from hospital.": {
       es: "Ayudando a un paciente en una transición segura desde el hospital.",
@@ -1750,7 +3307,16 @@
       ko: "환자의 안전한 병원 퇴원 및 연계 지원",
       hy: "Օգնելով բուժառուին անվտանգ տեղափոխվել հիվանդանոցից։",
       ru: "Помощь пациенту с безопасным переходом из больницы.",
-      ar: "مساعدة مريض على الانتقال الآمن من المستشفى."
+      ar: "مساعدة مريض على الانتقال الآمن من المستشفى.",
+      fa: "کمک به انتقال ایمن بیمار از بیمارستان.",
+      hi: "किसी रोगी को अस्पताल से सुरक्षित रूप से स्थानांतरित करने में मदद करना।",
+      pa: "ਮਰੀਜ਼ ਨੂੰ ਹਸਪਤਾਲ ਤੋਂ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਸ਼ਿਫਟ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਨਾ।",
+      ja: "患者様の病院からの安全な退院・転居をサポートしている。",
+      uk: "Допомога пацієнту в безпечному переведенні з лікарні.",
+      he: "סיוע למטופל במעבר בטוח מבית החולים.",
+      km: "កំពុងជួយអ្នកជំងឺផ្លាស់ប្តូរចេញពីមន្ទីរពេទ្យដោយសុវត្ថិភាព។",
+      fr: "J'aide un patient à quitter l'hôpital vers un cadre sécurisé.",
+      pt: "Ajudando um paciente na transição segura após alta hospitalar."
     },
     "Hospital / rehab safe discharge placement": {
       es: "Ubicación segura tras alta hospitalaria o rehabilitación",
@@ -1760,7 +3326,16 @@
       ko: "병원·재활시설 퇴원 후 안전 연계",
       hy: "Անվտանգ տեղավորում հիվանդանոցից / վերականգնողական կենտրոնից",
       ru: "Безопасное размещение после выписки из больницы / реабилитации",
-      ar: "تسكين آمن بعد الخروج من المستشفى أو التأهيل"
+      ar: "تسكين آمن بعد الخروج من المستشفى أو التأهيل",
+      fa: "انتقال ایمن پس از ترخیص از بیمارستان / توانبخشی",
+      hi: "अस्पताल / पुनर्वास से सुरक्षित डिस्चार्ज प्लेसमेंट",
+      pa: "ਹਸਪਤਾਲ / ਰੀਹੈਬ ਤੋਂ ਸੁਰੱਖਿਅਤ ਛੁੱਟੀ ਤੋਂ ਬਾਅਦ ਰਿਹਾਇਸ਼",
+      ja: "病院・リハビリ施設からの安全な退院先手配",
+      uk: "Безпечне влаштування після виписки з лікарні чи реабілітації",
+      he: "שיבוץ בטוח בשחרור מבית חולים / שיקום",
+      km: "ការរៀបចំកន្លែងស្នាក់នៅប្រកបដោយសុវត្ថិភាពក្រោយចេញពីមន្ទីរពេទ្យ / មណ្ឌលស្តារនីតិសម្បទា",
+      fr: "Placement sécurisé après sortie d'hôpital ou de rééducation",
+      pt: "Encaminhamento seguro pós-alta hospitalar / reabilitação"
     },
     "Back to Question 1": {
       es: "Volver a la Pregunta 1",
@@ -1770,7 +3345,16 @@
       ko: "1번 문항으로 돌아가기",
       hy: "Վերադառնալ հարց 1-ին",
       ru: "Назад к вопросу 1",
-      ar: "العودة للسؤال 1"
+      ar: "العودة للسؤال 1",
+      fa: "بازگشت به پرسش ۱",
+      hi: "प्रश्न 1 पर वापस जाएँ",
+      pa: "ਸਵਾਲ 1 'ਤੇ ਵਾਪਸ ਜਾਓ",
+      ja: "質問 1 に戻る",
+      uk: "Назад до запитання 1",
+      he: "חזרה לשאלה 1",
+      km: "ត្រឡប់ទៅសំណួរទី 1",
+      fr: "Retour à la question 1",
+      pt: "Voltar para a Pergunta 1"
     },
     "Back to Question 2": {
       es: "Volver a la Pregunta 2",
@@ -1780,7 +3364,16 @@
       ko: "2번 문항으로 돌아가기",
       hy: "Վերադառնալ հարց 2-ին",
       ru: "Назад к вопросу 2",
-      ar: "العودة للسؤال 2"
+      ar: "العودة للسؤال 2",
+      fa: "بازگشت به پرسش ۲",
+      hi: "प्रश्न 2 पर वापस जाएँ",
+      pa: "ਸਵਾਲ 2 'ਤੇ ਵਾਪਸ ਜਾਓ",
+      ja: "質問 2 に戻る",
+      uk: "Назад до запитання 2",
+      he: "חזרה לשאלה 2",
+      km: "ត្រឡប់ទៅសំណួរទី 2",
+      fr: "Retour à la question 2",
+      pt: "Voltar para a Pergunta 2"
     },
     "Back to Question 3": {
       es: "Volver a la Pregunta 3",
@@ -1790,7 +3383,16 @@
       ko: "3번 문항으로 돌아가기",
       hy: "Վերադառնալ հարց 3-ին",
       ru: "Назад к вопросу 3",
-      ar: "العودة للسؤال 3"
+      ar: "العودة للسؤال 3",
+      fa: "بازگشت به پرسش ۳",
+      hi: "प्रश्न 3 पर वापस जाएँ",
+      pa: "ਸਵਾਲ 3 'ਤੇ ਵਾਪਸ ਜਾਓ",
+      ja: "質問 3 に戻る",
+      uk: "Назад до запитання 3",
+      he: "חזרה לשאלה 3",
+      km: "ត្រឡប់ទៅសំណួរទី 3",
+      fr: "Retour à la question 3",
+      pt: "Voltar para a Pergunta 3"
     },
     "Question 2 of 4: What is their primary cognitive and memory status?": {
       es: "Pregunta 2 de 4: ¿Cuál es su estado cognitivo y de memoria principal?",
@@ -1800,7 +3402,16 @@
       ko: "2단계: 현재 인지 및 기억 상태는 어떠한가요?",
       hy: "Հարց 2՝ 4-ից․ Ինչպիսի՞ն է նրա հիշողության և մտավոր վիճակը",
       ru: "Вопрос 2 из 4: Каково состояние памяти и когнитивных функций?",
-      ar: "السؤال 2 من 4: ما هي حالة الذاكرة والإدراك الأساسية؟"
+      ar: "السؤال 2 من 4: ما هي حالة الذاكرة والإدراك الأساسية؟",
+      fa: "پرسش ۲ از ۴: وضعیت اصلی شناختی و حافظه ایشان چگونه است؟",
+      hi: "4 में से प्रश्न 2: उनकी मुख्य संज्ञानात्मक और स्मृति स्थिति कैसी है?",
+      pa: "ਸਵਾਲ 2 (4 ਵਿੱਚੋਂ): ਉਨ੍ਹਾਂ ਦੀ ਮਾਨਸਿਕ ਸੂਝ ਅਤੇ ਯਾਦਾਸ਼ਤ ਦੀ ਮੁੱਖ ਸਥਿਤੀ ਕੀ ਹੈ?",
+      ja: "質問 2 / 4：現在の認知機能や記憶の主な状態はいかがですか？",
+      uk: "Запитання 2 з 4: Який поточний стан пам’яті та когнітивних функцій?",
+      he: "שאלה 2 מתוך 4: מהו מצבם הקוגניטיבי ומצב הזיכרון העיקרי?",
+      km: "សំណួរទី 2 ក្នុងចំណោម 4៖ តើស្ថានភាពការយល់ដឹង និងការចងចាំចម្បងរបស់គាត់យ៉ាងដូចម្តេចដែរ?",
+      fr: "Question 2 sur 4 : Quel est son état cognitif et mémoriel principal ?",
+      pt: "Pergunta 2 de 4: Qual é o estado cognitivo e de memória atual?"
     },
     "What is their primary cognitive and memory status?": {
       es: "¿Cuál es su estado cognitivo y de memoria principal?",
@@ -1810,7 +3421,16 @@
       ko: "현재 인지 및 기억 상태는 어떠한가요?",
       hy: "Ինչպիսի՞ն է նրա հիշողության և մտավոր վիճակը",
       ru: "Каково состояние памяти и когнитивных функций?",
-      ar: "ما هي حالة الذاكرة والإدراك الأساسية؟"
+      ar: "ما هي حالة الذاكرة والإدراك الأساسية؟",
+      fa: "وضعیت اصلی شناختی و حافظه ایشان چگونه است؟",
+      hi: "उनकी मुख्य संज्ञानात्मक और स्मृति स्थिति कैसी है?",
+      pa: "ਉਨ੍ਹਾਂ ਦੀ ਮਾਨਸਿਕ ਸੂਝ ਅਤੇ ਯਾਦਾਸ਼ਤ ਦੀ ਮੁੱਖ ਸਥਿਤੀ ਕੀ ਹੈ?",
+      ja: "現在の認知機能や記憶の主な状態はいかがですか？",
+      uk: "Який поточний стан пам’яті та когнітивних функцій?",
+      he: "מהו מצבם הקוגניטיבי ומצב הזיכרון העיקרי?",
+      km: "តើស្ថានភាពការយល់ដឹង និងការចងចាំចម្បងរបស់គាត់យ៉ាងដូចម្តេចដែរ?",
+      fr: "Quel est son état cognitif et mémoriel principal ?",
+      pt: "Qual é o estado cognitivo e de memória atual?"
     },
     "Sharp & Clear Cognitively": {
       es: "Mente lúcida y clara",
@@ -1820,7 +3440,16 @@
       ko: "인지 및 판단력 양호",
       hy: "Պարզ և սթափ միտք",
       ru: "Ясный и четкий ум",
-      ar: "ذهن صافٍ وواعٍ تماماً"
+      ar: "ذهن صافٍ وواعٍ تماماً",
+      fa: "هوشیار و دارای ذهن شفاف",
+      hi: "मानसिक रूप से सजग और स्पष्ट",
+      pa: "ਮਾਨਸਿਕ ਤੌਰ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਚੁਸਤ ਅਤੇ ਸਪੱਸ਼ਟ",
+      ja: "認知機能ははっきりしている",
+      uk: "Ясний розум і чітке мислення",
+      he: "צלול וחד קוגניטיבית",
+      km: "ស្មារតីវាងវៃ និងច្បាស់លាស់",
+      fr: "Esprit vif et lucide",
+      pt: "Lucidez e Clareza Cognitiva"
     },
     "Alert, manages conversations, no wandering or severe memory lapses.": {
       es: "Alerta, mantiene conversaciones, sin deambulación ni fallos graves de memoria.",
@@ -1830,7 +3459,16 @@
       ko: "대화 소통이 원활하고 배회나 심한 기억력 저하가 없음",
       hy: "Ուշադիր է, զրուցում է, չկա թափառում կամ հիշողության լուրջ խանգարում։",
       ru: "В ясном сознании, поддерживает беседу, без уходов из дома и тяжелой забывчивости.",
-      ar: "منتبه، يدير المحادثات، دون تجوال أو هفوات ذاكرة حادة."
+      ar: "منتبه، يدير المحادثات، دون تجوال أو هفوات ذاكرة حادة.",
+      fa: "هوشیار، قادر به گفتگو، بدون سرگردانی یا فراموشی شدید.",
+      hi: "सतर्क रहते हैं, बातचीत कर लेते हैं, भटकने या गंभीर स्मृति हानि की समस्या नहीं है।",
+      pa: "ਚੌਕਸ ਹਨ, ਗੱਲਬਾਤ ਸੰਭਾਲਦੇ ਹਨ, ਭਟਕਣ ਜਾਂ ਗੰਭੀਰ ਭੁੱਲਣ ਦੀ ਸਮੱਸਿਆ ਨਹੀਂ ਹੈ।",
+      ja: "意識が明瞭で会話も問題なくでき、徘徊や深刻な物忘れはありません。",
+      uk: "Уважний/а, підтримує розмову, без блукання чи серйозних провалів у пам’яті.",
+      he: "ערני, מנהל שיחה, ללא שוטטות או אובדן זיכרון חמור.",
+      km: "ដឹងខ្លួនល្អ និយាយឆ្លើយឆ្លងបាន មិនដើរវង្វេង ឬភ្លេចភ្លាំងធ្ងន់ធ្ងរទេ។",
+      fr: "Alerte, suit les conversations, sans errance ni pertes de mémoire sévères.",
+      pt: "Alerta, conversa bem, sem episódios de perambulação ou lapsos graves de memória."
     },
     "Alert, manages conversations, no wandering or severe memory confusion": {
       es: "Alerta, conversa con claridad, sin deambulación ni confusión severa",
@@ -1840,7 +3478,16 @@
       ko: "대화 가능하며 배회나 심각한 혼란 증상이 없음",
       hy: "Ուշադիր է, զրուցում է, չկա թափառում կամ հիշողության շփոթմունք",
       ru: "В ясном сознании, поддерживает беседу, без уходов из дома и спутанности",
-      ar: "منتبه، يتحدث بوضوح دون تجوال أو تشوش ذاكرة حاد"
+      ar: "منتبه، يتحدث بوضوح دون تجوال أو تشوش ذاكرة حاد",
+      fa: "هوشیار، قادر به گفتگو، بدون سرگردانی یا سردرگمی شدید حافظه",
+      hi: "सतर्क, बातचीत करने में सक्षम, भटकने या गंभीर स्मृति भ्रम की समस्या नहीं",
+      pa: "ਚੌਕਸ, ਗੱਲਬਾਤ ਕਰਦੇ ਹਨ, ਭਟਕਣ ਜਾਂ ਯਾਦਾਸ਼ਤ ਦੀ ਗੰਭੀਰ ਉਲਝਣ ਨਹੀਂ",
+      ja: "意識明瞭で会話可能、徘徊や強い混乱はありません",
+      uk: "Уважний/а, підтримує бесіду, без блукання чи вираженої сплутаності пам’яті",
+      he: "ערני, מנהל שיחה, ללא שוטטות או בלבול זיכרון חמור",
+      km: "ដឹងខ្លួនល្អ និយាយឆ្លើយឆ្លងបាន មិនដើរវង្វេង ឬវង្វេងស្មារតីធ្ងន់ធ្ងរ",
+      fr: "Alerte, participe aux conversations, sans errance ni confusion sévère",
+      pt: "Alerta, conversa bem, sem perambulação ou confusão grave de memória"
     },
     "Mild Forgetfulness / Age-Related Memory Loss": {
       es: "Olvidos leves / pérdida de memoria por edad",
@@ -1850,7 +3497,16 @@
       ko: "경미한 건망증 / 노화성 기억력 저하",
       hy: "Թեթև մոռացկոտություն / Տարիքային հիշողության թուլացում",
       ru: "Легкая забывчивость / возрастное снижение памяти",
-      ar: "نسيان خفيف / ضعف ذاكرة مرتبط بالعمر"
+      ar: "نسيان خفيف / ضعف ذاكرة مرتبط بالعمر",
+      fa: "فراموشی خفیف / افت حافظه ناشی از سن",
+      hi: "हल्की भूलने की समस्या / उम्र से जुड़ी स्मृति कमी",
+      pa: "ਹਲਕੀ ਭੁੱਲਣ ਦੀ ਆਦਤ / ਉਮਰ ਨਾਲ ਸਬੰਧਤ ਯਾਦਾਸ਼ਤ ਦੀ ਕਮੀ",
+      ja: "軽い物忘れ・加齢に伴う記憶の低下",
+      uk: "Легка забудькуватість / вікові зміни пам’яті",
+      he: "שכחה קלה / ירידת זיכרון תלוית גיל",
+      km: "ភ្លេចភ្លាំងតិចតួច / បាត់បង់ការចងចាំតាមអាយុ",
+      fr: "Oublis légers / Troubles de mémoire liés à l'âge",
+      pt: "Esquecimento Leve / Perda de Memória Associada à Idade"
     },
     "Mild Forgetfulness / Age-Related Memory Lapses": {
       es: "Olvidos leves / lapsos de memoria por edad",
@@ -1860,7 +3516,16 @@
       ko: "경미한 건망증 / 가벼운 기억 착오",
       hy: "Թեթև մոռացկոտություն / Տարիքային հիշողության բացեր",
       ru: "Легкая забывчивость / возрастные провалы в памяти",
-      ar: "نسيان خفيف / هفوات ذاكرة مرتبطة بالعمر"
+      ar: "نسيان خفيف / هفوات ذاكرة مرتبطة بالعمر",
+      fa: "فراموشی خفیف / لغزش‌های حافظه مرتبط با سن",
+      hi: "हल्की भूलने की आदत / उम्र के साथ स्मृति में कमी",
+      pa: "ਹਲਕਾ ਭੁੱਲਣਾ / ਉਮਰ ਕਾਰਨ ਯਾਦਾਸ਼ਤ ਵਿੱਚ ਕਮੀ",
+      ja: "軽い物忘れ・加齢による記憶の抜け",
+      uk: "Легка забудькуватість / вікові провали пам’яті",
+      he: "שכחה קלה / איבוד זיכרון קל תלוי גיל",
+      km: "ភ្លេចភ្លាំងតិចតួច / ការភ្លេចភ្លាំងតាមអាយុ",
+      fr: "Oublis légers / Pertes de mémoire liées à l'âge",
+      pt: "Esquecimento Leve / Lapsos de Memória Associados à Idade"
     },
     "Occasionally forgets medications or dates, but remains oriented to surroundings.": {
       es: "Olvida ocasionalmente medicamentos o fechas, pero se mantiene orientado.",
@@ -1870,7 +3535,16 @@
       ko: "가끔 약이나 날짜를 잊지만 주변 환경과 장소는 잘 인지함",
       hy: "Երբեմն մոռանում է դեղերը կամ ամսաթվերը, բայց կողմնորոշվում է միջավայրում։",
       ru: "Иногда забывает принять лекарства или даты, но хорошо ориентируется в обстановке.",
-      ar: "ينسى أحياناً مواعيد الأدوية أو التواريخ، لكنه واعٍ لمحيطه."
+      ar: "ينسى أحياناً مواعيد الأدوية أو التواريخ، لكنه واعٍ لمحيطه.",
+      fa: "گاهی داروها یا تاریخ‌ها را فراموش می‌کند، اما نسبت به محیط اطراف آگاه است.",
+      hi: "कभी-कभी दवाइयाँ या तारीखें भूल जाते हैं, लेकिन अपने आसपास के माहौल से परिचित रहते हैं।",
+      pa: "ਕਦੇ-ਕਦਾਈਂ ਦਵਾਈਆਂ ਜਾਂ ਤਾਰੀਖ਼ਾਂ ਭੁੱਲ ਜਾਂਦੇ ਹਨ, ਪਰ ਆਲੇ-ਦੁਆਲੇ ਤੋਂ ਜਾਣੂ ਰਹਿੰਦੇ ਹਨ।",
+      ja: "服薬や日付を時々忘れることがありますが、周囲の状況は正しく認識しています。",
+      uk: "Іноді забуває про ліки чи дати, але добре орієнтується в просторі.",
+      he: "שוכח לעיתים תרופות או תאריכים, אך מתמצא היטב בסביבה.",
+      km: "ភ្លេចថ្នាំ ឬកាលបរិច្ឆេទម្តងម្កាល ប៉ុន្តែនៅដឹងទិសដៅជុំវិញខ្លួន។",
+      fr: "Oublie parfois ses médicaments ou les dates, mais reste bien orienté dans son environnement.",
+      pt: "Esquece ocasionalmente remédios ou datas, mas mantém-se orientado(a) no ambiente."
     },
     "Occasionally forgets medications or dates, but oriented to surroundings": {
       es: "Olvida a veces medicamentos o fechas, pero sigue orientado",
@@ -1880,7 +3554,16 @@
       ko: "약·날짜를 가끔 잊지만 주변 상황 인지는 유지됨",
       hy: "Երբեմն մոռանում է դեղերը կամ ամսաթվերը, բայց կողմնորոշվում է շրջապատում",
       ru: "Иногда забывает о лекарствах или датах, но ориентируется в пространстве",
-      ar: "ينسى الأدوية أو التواريخ أحياناً لكنه مدرك لمحيطه"
+      ar: "ينسى الأدوية أو التواريخ أحياناً لكنه مدرك لمحيطه",
+      fa: "گاهی داروها یا تاریخ‌ها را فراموش می‌کند، اما به محیط اطراف آگاه است",
+      hi: "कभी-कभी दवाइयाँ या तारीखें भूलते हैं, पर आसपास के वातावरण की समझ बनी हुई है",
+      pa: "ਕਦੇ-ਕਦਾਈਂ ਦਵਾਈਆਂ ਜਾਂ ਤਾਰੀਖ਼ਾਂ ਭੁੱਲਦੇ ਹਨ, ਪਰ ਆਲੇ-ਦੁਆਲੇ ਦੀ ਸਮਝ ਹੈ",
+      ja: "薬や日付を忘れることがあるが、見当識は保たれています",
+      uk: "Часом забуває про прийом ліків чи дати, але орієнтується в обстановці",
+      he: "שוכח לעיתים תרופות או תאריכים, אך מתמצא בסביבתו",
+      km: "ភ្លេចថ្នាំ ឬកាលបរិច្ឆេទម្តងម្កាល ប៉ុន្តែនៅដឹងទិសដៅជុំវិញខ្លួន",
+      fr: "Oublie parfois les médicaments ou les dates, mais reste orienté dans l'espace",
+      pt: "Esquece ocasionalmente remédios ou datas, mas mantém orientação no ambiente"
     },
     "Diagnosed Alzheimer's or Moderate Dementia": {
       es: "Alzheimer diagnosticado o demencia moderada",
@@ -1890,7 +3573,16 @@
       ko: "알츠하이머 진단 또는 중등도 치매",
       hy: "Ախտորոշված Ալցհայմեր կամ չափավոր դեմենցիա",
       ru: "Болезнь Альцгеймера или умеренная деменция",
-      ar: "تشخيص بألزهايمر أو خرف متوسط"
+      ar: "تشخيص بألزهايمر أو خرف متوسط",
+      fa: "تشخیص آلزایمر یا زوال عقل متوسط",
+      hi: "निदान किया गया अल्ज़ाइमर या मध्यम डिमेंशिया",
+      pa: "ਪ੍ਰਮਾਣਿਤ ਅਲਜ਼ਾਈਮਰ ਜਾਂ ਦਰਮਿਆਨਾ ਡਿਮੇਨਸ਼ੀਆ",
+      ja: "アルツハイマー病の診断または中等度の認知症",
+      uk: "Діагностована хвороба Альцгеймера або помірна деменція",
+      he: "אבחון אלצהיימר או דמנציה בינונית",
+      km: "មានជំងឺ Alzheimer's ឬជំងឺភ្លេចភ្លាំងកម្រិតមធ្យម",
+      fr: "Maladie d'Alzheimer diagnostiquée ou démence modérée",
+      pt: "Alzheimer Diagnosticado ou Demência Moderada"
     },
     "Diagnosed Alzheimer's or Moderate/Severe Dementia": {
       es: "Alzheimer diagnosticado o demencia moderada/severa",
@@ -1900,7 +3592,16 @@
       ko: "알츠하이머 또는 중등도·중증 치매",
       hy: "Ախտորոշված Ալցհայմեր կամ չափավոր/ծանր դեմենցիա",
       ru: "Болезнь Альцгеймера или умеренная/тяжелая деменция",
-      ar: "تشخيص بألزهايمر أو خرف متوسط إلى شديد"
+      ar: "تشخيص بألزهايمر أو خرف متوسط إلى شديد",
+      fa: "تشخیص آلزایمر یا زوال عقل متوسط تا شدید",
+      hi: "निदान किया गया अल्ज़ाइमर या मध्यम/गंभीर डिमेंशिया",
+      pa: "ਪ੍ਰਮਾਣਿਤ ਅਲਜ਼ਾਈਮਰ ਜਾਂ ਦਰਮਿਆਨਾ/ਗੰਭੀਰ ਡਿਮੇਨਸ਼ੀਆ",
+      ja: "アルツハイマー病の診断または中等度〜重度の認知症",
+      uk: "Діагностована хвороба Альцгеймера або помірна/тяжка деменція",
+      he: "אבחון אלצהיימר או דמנציה בינונית/מתקדמת",
+      km: "មានជំងឺ Alzheimer's ឬជំងឺភ្លេចភ្លាំងកម្រិតមធ្យម/ធ្ងន់ធ្ងរ",
+      fr: "Maladie d'Alzheimer diagnostiquée ou démence modérée à sévère",
+      pt: "Alzheimer Diagnosticado ou Demência Moderada/Avançada"
     },
     "Confusion, disorientation, risk of exit-seeking or getting lost, requires delayed egress.": {
       es: "Confusión, desorientación, riesgo de salir y perderse; requiere puertas con retardo de salida.",
@@ -1910,7 +3611,16 @@
       ko: "혼란, 지남력 저하, 배회·외출 위험이 있어 안전 출입 통제가 필요함",
       hy: "Շփոթմունք, ապակողմնորոշում, դուրս գալու կամ կորելու ռիսկ, պահանջում է ուշացված ելքի համակարգ։",
       ru: "Спутанность сознания, дезориентация, риск ухода или потери, требуется защищенный выход.",
-      ar: "ارتباك، تشتت، خطر محاولة الخروج أو الضياع، يتطلب مخارج مؤمّنة بتأخير زمني."
+      ar: "ارتباك، تشتت، خطر محاولة الخروج أو الضياع، يتطلب مخارج مؤمّنة بتأخير زمني.",
+      fa: "سردرگمی، عدم درک مکان، خطر تلاش برای خروج یا گم‌شدن؛ نیازمند درهای ایمن با تأخیر خروج.",
+      hi: "भ्रम, दिशा-भूल, बाहर निकलने या खो जाने का जोखिम, सुरक्षित विलंबित निकास (Delayed Egress) आवश्यक।",
+      pa: "ਉਲਝਣ, ਦਿਸ਼ਾ-ਭਰਮ, ਬਾਹਰ ਨਿਕਲਣ ਜਾਂ ਗੁੰਮ ਹੋਣ ਦਾ ਖ਼ਤਰਾ, ਸੁਰੱਖਿਅਤ ਨਿਕਾਸ ਨਿਯੰਤਰਣ (delayed egress) ਦੀ ਲੋੜ।",
+      ja: "混乱や見当識障害があり、外出企図や迷子のリスクがあるため、遅延解錠設備（Delayed Egress）が必要です。",
+      uk: "Сплутаність свідомості, дезорієнтація, ризик виходу з дому та блукання, потрібні двері з затримкою відкриття.",
+      he: "בלבול, חוסר התמצאות, סיכון ליציאה מהמקום או אובדן דרך, נדרשת מערכת עיכוב יציאה.",
+      km: "វង្វេងវង្វាន់ បាត់បង់ទិសដៅ ប្រឈមការដើររកច្រកចេញ ឬវង្វេងផ្លូវ ត្រូវការទ្វារពន្យារពេលចេញ (delayed egress)។",
+      fr: "Confusion, désorientation, risque de fugue ou de se perdre, nécessite des sorties à ouverture temporisée.",
+      pt: "Confusão, desorientação, risco de tentar sair ou se perder, exigindo portas com controle de saída temporizada."
     },
     "Confusion, disorientation, risk of exit-seeking/wandering, requires secured care": {
       es: "Confusión, desorientación, riesgo de deambulación; requiere entorno seguro",
@@ -1920,7 +3630,16 @@
       ko: "혼란·배회 위험이 있어 안전한 치매 전문 케어 환경이 필요함",
       hy: "Շփոթմունք, ապակողմնորոշում, մոլորվելու ռիսկ, պահանջում է անվտանգ վերահսկվող խնամք",
       ru: "Спутанность, дезориентация, склонность к уходам, требуется закрытая безопасная среда",
-      ar: "ارتباك وتشتت مع خطر الخروج والضياع، ويتطلب رعاية مؤمّنة"
+      ar: "ارتباك وتشتت مع خطر الخروج والضياع، ويتطلب رعاية مؤمّنة",
+      fa: "سردرگمی، عدم درک جهت و مکان، خطر خروج یا سرگردانی؛ نیازمند مراقبت ایمن‌شده",
+      hi: "भ्रम, दिशा-भूल, बाहर निकलने/भटकने का जोखिम, सुरक्षित देखभाल आवश्यक",
+      pa: "ਉਲਝਣ, ਦਿਸ਼ਾ-ਭਰਮ, ਬਾਹਰ ਨਿਕਲਣ/ਭਟਕਣ ਦਾ ਖ਼ਤਰਾ, ਸੁਰੱਖਿਅਤ ਦੇਖਭਾਲ ਦੀ ਲੋੜ",
+      ja: "混乱・見当識障害や徘徊リスクがあり、安全管理された環境が必要です",
+      uk: "Дезорієнтація, ризик самовільного виходу чи блукання, потрібен захищений простір",
+      he: "בלבול, חוסר התמצאות, סיכון לשוטטות/יציאה, נדרשת השגחה מאובטחת",
+      km: "វង្វេងវង្វាន់ បាត់បង់ទិសដៅ ប្រឈមការដើររកច្រកចេញ/វង្វេង ត្រូវការការថែទាំមានសុវត្ថិភាពខ្ពស់",
+      fr: "Confusion, désorientation, risque de fugue ou d'errance, nécessite un cadre sécurisé",
+      pt: "Confusão, desorientação, risco de saída/perambulação, exigindo cuidado com segurança monitorada"
     },
     "Question 3 of 4: What assistance is required with physical activities of daily living (ADLs)?": {
       es: "Pregunta 3 de 4: ¿Qué asistencia requiere en actividades físicas diarias (ADL)?",
@@ -1930,7 +3649,16 @@
       ko: "3단계: 일상생활 신체 활동(ADL)에 어느 정도 도움이 필요한가요?",
       hy: "Հարց 3՝ 4-ից․ Ինչպիսի՞ ֆիզիկական օգնություն է անհրաժեշտ առօրյա գործողություններում (ADL)",
       ru: "Вопрос 3 из 4: Какая физическая помощь нужна в повседневной жизни (ADL)?",
-      ar: "السؤال 3 من 4: ما المساعدة المطلوبة في الأنشطة البدنية اليومية (ADLs)؟"
+      ar: "السؤال 3 من 4: ما المساعدة المطلوبة في الأنشطة البدنية اليومية (ADLs)؟",
+      fa: "پرسش ۳ از ۴: در فعالیت‌های فیزیکی روزمره (ADLs) چه کمکی نیاز است؟",
+      hi: "4 में से प्रश्न 3: दैनिक शारीरिक गतिविधियों (ADLs) में कितनी सहायता की आवश्यकता है?",
+      pa: "ਸਵਾਲ 3 (4 ਵਿੱਚੋਂ): ਰੋਜ਼ਾਨਾ ਜੀਵਨ ਦੀਆਂ ਸਰੀਰਕ ਗਤੀਵਿਧੀਆਂ (ADLs) ਵਿੱਚ ਕਿੰਨੀ ਮਦਦ ਦੀ ਲੋੜ ਹੈ?",
+      ja: "質問 3 / 4：日常生活動作（ADL）においてどのような身体介助が必要ですか？",
+      uk: "Запитання 3 з 4: Яка допомога потрібна у щоденній фізичній активності (ADL)?",
+      he: "שאלה 3 מתוך 4: איזה סיוע נדרש בפעולות היומיום הפיזיות (ADLs)?",
+      km: "សំណួរទី 3 ក្នុងចំណោម 4៖ តើត្រូវការជំនួយអ្វីខ្លះជាមួយសកម្មភាពប្រចាំថ្ងៃផ្នែករាងកាយ (ADLs)?",
+      fr: "Question 3 sur 4 : Quelle aide est nécessaire pour les activités physiques de la vie quotidienne (AVQ) ?",
+      pt: "Pergunta 3 de 4: Qual nível de assistência física é necessário nas atividades diárias (ADLs)?"
     },
     "What assistance is required with physical activities of daily living (ADLs)?": {
       es: "¿Qué asistencia física necesita diariamente (ADL)?",
@@ -1940,7 +3668,16 @@
       ko: "일상 신체 활동(ADL)에 어떤 지원이 필요한가요?",
       hy: "Ինչպիսի՞ ֆիզիկական օգնություն է անհրաժեշտ առօրյա գործողություններում (ADL)",
       ru: "Какая физическая помощь нужна в повседневной жизни (ADL)?",
-      ar: "ما المساعدة المطلوبة في الأنشطة البدنية اليومية (ADLs)؟"
+      ar: "ما المساعدة المطلوبة في الأنشطة البدنية اليومية (ADLs)؟",
+      fa: "در فعالیت‌های فیزیکی روزمره (ADLs) چه کمکی نیاز است؟",
+      hi: "दैनिक शारीरिक गतिविधियों (ADLs) में कितनी सहायता की आवश्यकता है?",
+      pa: "ਰੋਜ਼ਾਨਾ ਜੀਵਨ ਦੀਆਂ ਸਰੀਰਕ ਗਤੀਵਿਧੀਆਂ (ADLs) ਵਿੱਚ ਕਿੰਨੀ ਮਦਦ ਦੀ ਲੋੜ ਹੈ?",
+      ja: "日常生活動作（ADL）においてどのような身体介助が必要ですか？",
+      uk: "Яка допомога потрібна у щоденній фізичній активності (ADL)?",
+      he: "איזה סיוע נדרש בפעולות היומיום הפיזיות (ADLs)?",
+      km: "តើត្រូវការជំនួយអ្វីខ្លះជាមួយសកម្មភាពប្រចាំថ្ងៃផ្នែករាងកាយ (ADLs)?",
+      fr: "Quelle aide est nécessaire pour les activités physiques de la vie quotidienne (AVQ) ?",
+      pt: "Qual nível de assistência física é necessário nas atividades diárias (ADLs)?"
     },
     "Independent / Minimal assistance": {
       es: "Independiente / asistencia mínima",
@@ -1950,7 +3687,16 @@
       ko: "독립 생활 / 최소한의 도움",
       hy: "Անկախ / Նվազագույն օգնություն",
       ru: "Самостоятельный / минимальная помощь",
-      ar: "مستقل / مساعدة بسيطة"
+      ar: "مستقل / مساعدة بسيطة",
+      fa: "مستقل / کمک حداقلی",
+      hi: "स्वतंत्र / न्यूनतम सहायता",
+      pa: "ਆਤਮ-ਨਿਰਭਰ / ਘੱਟੋ-ਘੱਟ ਸਹਾਇਤਾ",
+      ja: "自立 / 最小限のサポート",
+      uk: "Самостійність / мінімальна допомога",
+      he: "עצמאי / סיוע מינימלי",
+      km: "ឯករាជ្យ / ត្រូវការជំនួយតិចតួច",
+      fr: "Autonome / Aide minimale",
+      pt: "Independente / Assistência mínima"
     },
     "Walks without difficulty; just needs meal service, social outings, and medication distribution.": {
       es: "Camina sin dificultad; solo necesita comidas, salidas sociales y administración de medicinas.",
@@ -1960,7 +3706,16 @@
       ko: "보행이 자유로우며 식사, 여가 활동, 복약 관리 정도만 필요함",
       hy: "Քայլում է առանց դժվարության. միայն սնունդ, շփում և դեղերի բաշխում է պետք։",
       ru: "Ходит самостоятельно; требуется только питание, общение и выдача лекарств.",
-      ar: "يمشي دون صعوبة؛ يحتاج فقط لخدمة الوجبات والأنشطة وتوزيع الأدوية."
+      ar: "يمشي دون صعوبة؛ يحتاج فقط لخدمة الوجبات والأنشطة وتوزيع الأدوية.",
+      fa: "به‌راحتی راه می‌رود؛ فقط به تهیه غذا، برنامه‌های اجتماعی و تحویل دارو نیاز دارد.",
+      hi: "बिना कठिनाई के चलते हैं; केवल भोजन सेवा, सामाजिक गतिविधियों और दवा वितरण की आवश्यकता है।",
+      pa: "ਬਿਨਾਂ ਮੁਸ਼ਕਲ ਦੇ ਤੁਰਦੇ ਹਨ; ਸਿਰਫ਼ ਭੋਜਨ ਸੇਵਾ, ਸਮਾਜਿਕ ਸੈਰ-ਸਪਾਟੇ ਅਤੇ ਦਵਾਈਆਂ ਦੇਣ ਦੀ ਲੋੜ ਹੈ।",
+      ja: "歩行に支障はなく、食事の提供、外出の機会、服薬管理のみのサポートで十分です。",
+      uk: "Вільно пересувається; потрібні лише харчування, спілкування та видача ліків.",
+      he: "הולך ללא קושי; זקוק רק לארוחות, פעילות חברתית וחלוקת תרופות.",
+      km: "ដើរបានដោយគ្មានការលំបាក; គ្រាន់តែត្រូវការសេវាអាហារ សកម្មភាពសង្គម និងការចែកថ្នាំ។",
+      fr: "Marche sans difficulté ; a simplement besoin de la préparation des repas, de sorties sociales et de la distribution des médicaments.",
+      pt: "Caminha sem dificuldade; precisa apenas de refeições, convívio social e administração de medicamentos."
     },
     "Walks easily; just needs meal service, companionship, and medication reminders": {
       es: "Camina con facilidad; solo necesita comidas, compañía y recordatorios de medicinas",
@@ -1970,7 +3725,16 @@
       ko: "거동이 편하며 식사, 말벗, 복약 알림 정도가 필요함",
       hy: "Քայլում է ազատ. պետք է միայն սնունդ, ընկերակցություն և դեղերի հիշեցում",
       ru: "Ходит свободно; нужно только питание, общение и напоминания о лекарствах",
-      ar: "يمشي بسهولة؛ يحتاج فقط للوجبات والرفقة والتذكير بالأدوية"
+      ar: "يمشي بسهولة؛ يحتاج فقط للوجبات والرفقة والتذكير بالأدوية",
+      fa: "به‌راحتی راه می‌رود؛ فقط به سرویس غذا، هم‌صحبتی و یادآوری دارو نیاز دارد",
+      hi: "आसानी से चलते हैं; केवल भोजन सेवा, साथ और दवा की याद दिलाने की आवश्यकता है",
+      pa: "ਆਸਾਨੀ ਨਾਲ ਤੁਰਦੇ ਹਨ; ਸਿਰਫ਼ ਭੋਜਨ, ਸੰਗਤ ਅਤੇ ਦਵਾਈ ਦੀ ਯਾਦ-ਦਹਾਨੀ ਦੀ ਲੋੜ",
+      ja: "歩行は安定しており、食事提供・見守り・服薬の声かけが中心です",
+      uk: "Легко ходить; потрібні харчування, компанія та нагадування про ліки",
+      he: "מתנייד בקלות; זקוק רק לארוחות, חברה ותזכורת תרופות",
+      km: "ដើរបានស្រួល; គ្រាន់តែត្រូវការសេវាអាហារ មិត្តភាព និងការរំលឹកលេបថ្នាំ",
+      fr: "Marche facilement ; besoin uniquement de repas, de présence et de rappels de médicaments",
+      pt: "Caminha com facilidade; precisa apenas de refeições, companhia e lembretes de medicação"
     },
     "Assistance with Bathing, Dressing, or Transfers": {
       es: "Ayuda para bañarse, vestirse o trasladarse",
@@ -1980,7 +3744,16 @@
       ko: "목욕, 옷 입기 또는 거동·이동 도움",
       hy: "Օգնություն լողանալիս, հագնվելիս կամ տեղաշարժվելիս",
       ru: "Помощь при купании, одевании или перемещении",
-      ar: "مساعدة في الاستحمام أو اللبس أو الانتقال"
+      ar: "مساعدة في الاستحمام أو اللبس أو الانتقال",
+      fa: "کمک برای استحمام، لباس پوشیدن یا جابه‌جایی",
+      hi: "स्नान, कपड़े पहनने या उठने-बैठने में सहायता",
+      pa: "ਨਹਾਉਣ, ਕੱਪੜੇ ਪਾਉਣ ਜਾਂ ਉੱਠਣ-ਬੈਠਣ ਵਿੱਚ ਸਹਾਇਤਾ",
+      ja: "入浴・着替え・移乗の介助が必要",
+      uk: "Допомога з купанням, одяганням або переміщенням",
+      he: "עזרה ברחצה, לבוש או מעברים",
+      km: "ជំនួយក្នុងការងូតទឹក ការស្លៀកពាក់ ឬការផ្លាស់ប្តូរទីតាំង",
+      fr: "Aide pour la toilette, l'habillage ou les transferts",
+      pt: "Apoio para Banho, Vestir-se ou Transferências"
     },
     "Moderate Assistance (Bathing, Dressing, Transfers)": {
       es: "Asistencia moderada (baño, vestirse, traslados)",
@@ -1990,7 +3763,16 @@
       ko: "중등도 지원 (목욕, 착의, 이동 보조)",
       hy: "Միջին օգնություն (Լողանալ, հագնվել, տեղաշարժվել)",
       ru: "Умеренная помощь (купание, одевание, перемещение)",
-      ar: "مساعدة متوسطة (الاستحمام، اللبس، الانتقال)"
+      ar: "مساعدة متوسطة (الاستحمام، اللبس، الانتقال)",
+      fa: "کمک متوسط (استحمام، لباس پوشیدن، جابه‌جایی)",
+      hi: "मध्यम सहायता (स्नान, कपड़े पहनना, उठना-बैठना)",
+      pa: "ਦਰਮਿਆਨੀ ਸਹਾਇਤਾ (ਨਹਾਉਣਾ, ਕੱਪੜੇ ਪਾਉਣਾ, ਉੱਠਣਾ-ਬੈਠਣਾ)",
+      ja: "中等度の介助（入浴・更衣・移乗）",
+      uk: "Помірна допомога (купання, одягання, переміщення)",
+      he: "סיוע בינוני (רחצה, לבוש, מעברים)",
+      km: "ជំនួយកម្រិតមធ្យម (ការងូតទឹក ការស្លៀកពាក់ ការផ្លាស់ប្តូរទីតាំង)",
+      fr: "Aide modérée (toilette, habillage, transferts)",
+      pt: "Assistência Moderada (Banho, Vestir-se, Transferências)"
     },
     "Uses walker or wheelchair, needs 1-person physical help getting in/out of bed or shower.": {
       es: "Usa andador o silla de ruedas; necesita apoyo físico de 1 persona para cama o ducha.",
@@ -2000,7 +3782,16 @@
       ko: "보행기·휠체어를 사용하며 침대나 샤워 시 1명의 신체 보조가 필요함",
       hy: "Օգտագործում է քայլակ կամ սայլակ, 1 անձի օգնության կարիք ունի անկողնուց կամ ցնցուղից օգտվելիս։",
       ru: "Использует ходунки или коляску, нужна помощь 1 человека при подъеме с кровати или в душе.",
-      ar: "يستخدم مشاية أو كرسياً متحركاً، ويحتاج مساعدة شخص واحد للنهوض من السرير أو الاستحمام."
+      ar: "يستخدم مشاية أو كرسياً متحركاً، ويحتاج مساعدة شخص واحد للنهوض من السرير أو الاستحمام.",
+      fa: "از واکر یا ویلچر استفاده می‌کند و برای بلند شدن از تخت یا دوش گرفتن به کمک ۱ نفر نیاز دارد.",
+      hi: "वॉकर या व्हीलचेयर का उपयोग करते हैं, बिस्तर या शॉवर में आने-जाने के लिए 1 व्यक्ति की शारीरिक सहायता चाहिए।",
+      pa: "ਵਾਕਰ ਜਾਂ ਵ੍ਹੀਲਚੇਅਰ ਵਰਤਦੇ ਹਨ, ਬਿਸਤਰੇ ਜਾਂ ਸ਼ਾਵਰ ਵਿੱਚ ਜਾਣ-ਆਉਣ ਲਈ 1 ਵਿਅਕਤੀ ਦੀ ਸਰੀਰਕ ਮਦਦ ਦੀ ਲੋੜ ਹੈ।",
+      ja: "歩行器や車椅子を使用し、ベッドの乗り降りやシャワー時に介助者1名の身体的サポートが必要です。",
+      uk: "Користується ходунками чи кріслом колісним, потребує фізичної допомоги 1 доглядальника при вставанні з ліжка чи у душі.",
+      he: "משתמש בהליכון או כיסא גלגלים, זקוק לעזרה פיזית של אדם אחד בכניסה ויציאה מהמיטה או המקלחת.",
+      km: "ប្រើឧបករណ៍ជួយដើរ ឬរទេះរុញ ត្រូវការជំនួយមនុស្ស 1 នាក់ក្នុងការឡើង/ចុះពីគ្រែ ឬងូតទឹក។",
+      fr: "Utilise un déambulateur ou un fauteuil roulant, a besoin de l'aide physique d'une personne pour entrer/sortir du lit ou de la douche.",
+      pt: "Usa andador ou cadeira de rodas e precisa do apoio físico de 1 cuidador para sair da cama ou tomar banho."
     },
     "Uses walker or wheelchair; needs 1 caregiver for showers or getting out of bed": {
       es: "Usa andador o silla de ruedas; necesita 1 cuidador para ducharse o levantarse",
@@ -2010,7 +3801,16 @@
       ko: "보행기·휠체어 사용, 샤워 및 기상 시 요양보호사 1명 지원 필요",
       hy: "Օգտագործում է քայլակ կամ սայլակ. ցնցուղի կամ անկողնուց վեր կենալու համար 1 խնամակալ է պետք",
       ru: "Пользуется ходунками/коляской; нужна помощь 1 сиделки в душе и при подъеме с кровати",
-      ar: "يستخدم مشاية أو كرسياً متحركاً ويحتاج مقدم رعاية واحداً للاستحمام أو السرير"
+      ar: "يستخدم مشاية أو كرسياً متحركاً ويحتاج مقدم رعاية واحداً للاستحمام أو السرير",
+      fa: "از واکر یا ویلچر استفاده می‌کند؛ برای حمام یا بلند شدن از تخت به ۱ مراقب نیاز دارد",
+      hi: "वॉकर या व्हीलचेयर का उपयोग; स्नान या बिस्तर से उठने के लिए 1 देखभालकर्ता की सहायता",
+      pa: "ਵਾਕਰ ਜਾਂ ਵ੍ਹੀਲਚੇਅਰ ਵਰਤਦੇ ਹਨ; ਨਹਾਉਣ ਜਾਂ ਬਿਸਤਰੇ ਤੋਂ ਉੱਠਣ ਲਈ 1 ਦੇਖਭਾਲ ਕਰਤਾ ਦੀ ਲੋੜ",
+      ja: "歩行器・車椅子を使用し、入浴やベッドからの移乗に1名介助が必要です",
+      uk: "Користується ходунками або кріслом колісним; потрібен 1 доглядальник для душу чи підйому з ліжка",
+      he: "נעזר בהליכון או כיסא גלגלים; זקוק למטפל אחד למקלחת או לקימה מהמיטה",
+      km: "ប្រើឧបករណ៍ជួយដើរ ឬរទេះរុញ; ត្រូវការអ្នកថែទាំ 1 នាក់សម្រាប់ងូតទឹក ឬងើបពីគ្រែ",
+      fr: "Utilise un déambulateur ou un fauteuil roulant ; besoin d'un soignant pour la douche ou le lever du lit",
+      pt: "Usa andador ou cadeira de rodas; precisa de 1 cuidador para banho ou sair da cama"
     },
     "Bedridden / Total Dependence / Incontinence": {
       es: "Postrado / Dependencia total / Incontinencia",
@@ -2020,7 +3820,16 @@
       ko: "와상 상태 / 전적 의존 / 실금 케어",
       hy: "Անկողնային / Ամբողջական կախվածություն / Անմիզապահություն",
       ru: "Лежачий больной / полная зависимость / недержание",
-      ar: "طريح الفراش / اعتماد كلي / سلس"
+      ar: "طريح الفراش / اعتماد كلي / سلس",
+      fa: "بستری / وابستگی کامل / بی‌اختیاری",
+      hi: "शैयाग्रस्त / पूर्ण निर्भरता / असंयमितता",
+      pa: "ਬਿਸਤਰੇ 'ਤੇ ਸੀਮਤ / ਪੂਰੀ ਨਿਰਭਰਤਾ / ਮਲ-ਮੂਤਰ ਨਿਯੰਤਰਣ ਦੀ ਸਮੱਸਿਆ",
+      ja: "寝たきり・全介助・失禁ケアが必要",
+      uk: "Лежачий стан / повна залежність / нетримання",
+      he: "מרותק למיטה / תלות מלאה / אי-שליטה בסוגרים",
+      km: "សម្រាកលើគ្រែ / ពឹងផ្អែកទាំងស្រុង / មិនអាចទប់បត់ជើងបាន",
+      fr: "Alité / Dépendance totale / Incontinence",
+      pt: "Acamado / Dependência Total / Incontinência"
     },
     "High Acuity / Bedridden / Total Dependence": {
       es: "Alta complejidad / Postrado / Dependencia total",
@@ -2030,7 +3839,16 @@
       ko: "고중증 / 와상 / 전면적 돌봄 필요",
       hy: "Ծանր վիճակ / Անկողնային / Ամբողջական կախվածություն",
       ru: "Тяжелое состояние / лежачий уход / полная зависимость",
-      ar: "رعاية فائقة / طريح الفراش / اعتماد كلي"
+      ar: "رعاية فائقة / طريح الفراش / اعتماد كلي",
+      fa: "نیاز مراقبتی بالا / بستری / وابستگی کامل",
+      hi: "उच्च देखभाल आवश्यकता / शैयाग्रस्त / पूर्ण निर्भरता",
+      pa: "ਉੱਚ ਦੇਖਭਾਲ / ਬਿਸਤਰੇ 'ਤੇ ਸੀਮਤ / ਪੂਰੀ ਨਿਰਭਰਤਾ",
+      ja: "重度ケア・寝たきり・全面介助",
+      uk: "Висока складність / лежачий пацієнт / повний догляд",
+      he: "מורכבות גבוהה / מרותק למיטה / תלות מלאה",
+      km: "កម្រិតធ្ងន់ / សម្រាកលើគ្រែ / ពឹងផ្អែកទាំងស្រុង",
+      fr: "Soins lourds / Alité / Dépendance totale",
+      pt: "Alta Complexidade / Acamado / Dependência Total"
     },
     "Non-ambulatory, frequent turning, hoyer lift or 2-person transfer, or hospice waiver care.": {
       es: "No ambulatorio, cambios de posición frecuentes, grúa Hoyer o traslado de 2 personas o exención de hospicio.",
@@ -2040,7 +3858,16 @@
       ko: "거동 불가로 잦은 체위 변경, 호이어 리프트·2인 이동 또는 호스피스 돌봄이 필요함",
       hy: "Չքայլող, հաճախակի շրջելու, վերամբարձի կամ 2 անձի տեղափոխման կարիք, կամ հոսպիսային խնամք։",
       ru: "Маломобильный/лежачий, требуются повороты, подъемник Хойера или помощь 2 человек, либо хосписный уход.",
-      ar: "غير قادر على المشي، تقليب متكرر، رافعة هوير أو نقل بشخصين، أو رعاية محتضرين."
+      ar: "غير قادر على المشي، تقليب متكرر، رافعة هوير أو نقل بشخصين، أو رعاية محتضرين.",
+      fa: "عدم توانایی راه‌رفتن، نیاز به تغییر وضعیت مکرر، بالابر Hoyer یا کمک ۲ نفره، یا مراقبت تسکینی.",
+      hi: "चलने-फिरने में असमर्थ, बार-बार करवट दिलाना, होयर लिफ़्ट या 2 व्यक्तियों द्वारा सहारा, या हॉस्पिस वेवर देखभाल।",
+      pa: "ਚੱਲਣ-ਫਿਰਨ ਤੋਂ ਅਸਮਰੱਥ, ਵਾਰ-ਵਾਰ ਪਾਸਾ ਬਦਲਣਾ, ਹੋਇਰ ਲਿਫਟ (Hoyer lift) ਜਾਂ 2-ਵਿਅਕਤੀਆਂ ਵੱਲੋਂ ਚੁੱਕਣ, ਜਾਂ ਹੌਸਪਿਸ ਛੋਟ ਦੇਖਭਾਲ ਦੀ ਲੋੜ।",
+      ja: "自力歩行が困難で、定期的な体位変換、介護用リフト（Hoyerリフト）や2名体制での移乗、またはホスピス特例ケアが必要です。",
+      uk: "Немобільний стан, часте перевертання, підйомник Hoyer або перекладання двома особами, чи догляд із hospice waiver.",
+      he: "אינו מתנייד עצמאית, שינוי תנוחה תכוף, מנוף הרמה או העברה על ידי 2 מטפלים, או צורך באישור הוספיס.",
+      km: "មិនអាចដើរបាន ត្រូវប្រែខ្លួនញឹកញាប់ ត្រូវការឧបករណ៍លើក hoyer lift ឬជំនួយ 2 នាក់ ឬការថែទាំ hospice waiver។",
+      fr: "Non ambulatoire, retournements fréquents, lève-personne ou transfert à 2 personnes, ou soins sous dérogation de soins palliatifs.",
+      pt: "Não deambulante, mudança frequente de decúbito, guincho de transferência ou apoio de 2 cuidadores, ou cuidado com hospice waiver."
     },
     "Non-ambulatory, frequent turning, hoyer lift or 2-person assist, hospice waiver": {
       es: "No ambulatorio, cambios de posición, grúa o 2 personas, exención de hospicio",
@@ -2050,7 +3877,16 @@
       ko: "보행 불가, 체위 변경, 리프트 또는 2인 보조, 호스피스 지원 필요",
       hy: "Չքայլող, հաճախակի շրջելու, վերամբարձի կամ 2 անձի օգնություն, հոսպիս",
       ru: "Не передвигается, требуются повороты, подъемник или помощь 2 сиделок, хоспис",
-      ar: "غير قادر على المشي، تقليب متكرر، رافعة أو شخصان، رعاية محتضرين"
+      ar: "غير قادر على المشي، تقليب متكرر، رافعة أو شخصان، رعاية محتضرين",
+      fa: "عدم توانایی راه‌رفتن، تغییر وضعیت مکرر، بالابر Hoyer یا کمک ۲ نفره، مجوز مراقبت تسکینی",
+      hi: "चलने में असमर्थ, नियमित करवट, होयर लिफ़्ट या 2 व्यक्तियों की सहायता, हॉस्पिस वेवर",
+      pa: "ਚੱਲਣ-ਫਿਰਨ ਤੋਂ ਅਸਮਰੱਥ, ਵਾਰ-ਵਾਰ ਪਾਸਾ ਬਦਲਣਾ, ਹੋਇਰ ਲਿਫਟ (Hoyer lift) ਜਾਂ 2-ਵਿਅਕਤੀਆਂ ਦੀ ਮਦਦ, ਹੌਸਪਿਸ ਛੋਟ",
+      ja: "自力歩行不可、体位変換・介護リフトや2名介助・ホスピス特例が必要です",
+      uk: "Немобільність, регулярне перевертання, підйомник Hoyer або допомога 2 осіб, hospice waiver",
+      he: "לא מתנייד, שינוי תנוחה תכוף, מנוף הרמה או 2 מטפלים, אישור הוספיס",
+      km: "មិនអាចដើរបាន ត្រូវប្រែខ្លួនញឹកញាប់ ត្រូវការឧបករណ៍លើក hoyer lift ឬជំនួយ 2 នាក់ ការថែទាំ hospice waiver",
+      fr: "Non ambulatoire, retournements réguliers, lève-personne ou aide à 2 personnes, dérogation soins palliatifs",
+      pt: "Não deambulante, mudança frequente de posição, guincho ou apoio de 2 pessoas, hospice waiver"
     },
     "Question 4 of 4: How soon is care needed?": {
       es: "Pregunta 4 de 4: ¿En cuánto tiempo necesitan el cuidado?",
@@ -2060,7 +3896,16 @@
       ko: "4단계: 언제쯤 입소가 필요하신가요?",
       hy: "Հարց 4՝ 4-ից․ Որքա՞ն շուտ է խնամք անհրաժեշտ",
       ru: "Вопрос 4 из 4: Насколько срочно требуется уход?",
-      ar: "السؤال 4 من 4: متى يُطلب توفير الرعاية؟"
+      ar: "السؤال 4 من 4: متى يُطلب توفير الرعاية؟",
+      fa: "پرسش ۴ از ۴: چقدر زود به مراقبت نیاز دارید؟",
+      hi: "4 में से प्रश्न 4: देखभाल की आवश्यकता कितनी जल्दी है?",
+      pa: "ਸਵਾਲ 4 (4 ਵਿੱਚੋਂ): ਦੇਖਭਾਲ ਦੀ ਕਿੰਨੀ ਜਲਦੀ ਲੋੜ ਹੈ?",
+      ja: "質問 4 / 4：いつ頃からのケア開始をお考えですか？",
+      uk: "Запитання 4 з 4: Як швидко потрібен догляд?",
+      he: "שאלה 4 מתוך 4: תוך כמה זמן נדרש הטיפול?",
+      km: "សំណួរទី 4 ក្នុងចំណោម 4៖ តើត្រូវការការថែទាំឆាប់ប៉ុណ្ណា?",
+      fr: "Question 4 sur 4 : Dans quel délai les soins sont-ils nécessaires ?",
+      pt: "Pergunta 4 de 4: Em quanto tempo o cuidado é necessário?"
     },
     "How soon is care needed?": {
       es: "¿En cuánto tiempo necesitan el cuidado?",
@@ -2070,7 +3915,16 @@
       ko: "언제쯤 입소가 필요하신가요?",
       hy: "Որքա՞ն շուտ է խնամք անհրաժեշտ",
       ru: "Насколько срочно требуется уход?",
-      ar: "متى يُطلب توفير الرعاية؟"
+      ar: "متى يُطلب توفير الرعاية؟",
+      fa: "چقدر زود به مراقبت نیاز دارید؟",
+      hi: "देखभाल की आवश्यकता कितनी जल्दी है?",
+      pa: "ਦੇਖਭਾਲ ਦੀ ਕਿੰਨੀ ਜਲਦੀ ਲੋੜ ਹੈ?",
+      ja: "いつ頃からのケア開始をお考えですか？",
+      uk: "Як швидко потрібен догляд?",
+      he: "תוך כמה זמן נדרש הטיפול?",
+      km: "តើត្រូវការការថែទាំឆាប់ប៉ុណ្ណា?",
+      fr: "Dans quel délai les soins sont-ils nécessaires ?",
+      pt: "Em quanto tempo o cuidado é necessário?"
     },
     "Immediate / Hospital Discharge": {
       es: "Inmediato / Alta Hospitalaria",
@@ -2080,7 +3934,16 @@
       ko: "즉시 / 병원 퇴원 예정",
       hy: "Անհապաղ / Հիվանդանոցից դուրսգրում",
       ru: "Срочно / выписка из больницы",
-      ar: "فوري / خروج من المستشفى"
+      ar: "فوري / خروج من المستشفى",
+      fa: "فوری / ترخیص از بیمارستان",
+      hi: "तत्काल / अस्पताल से छुट्टी",
+      pa: "ਤੁਰੰਤ / ਹਸਪਤਾਲ ਤੋਂ ਛੁੱਟੀ",
+      ja: "至急・退院に伴う即日対応",
+      uk: "Негайно / виписка з лікарні",
+      he: "מיידי / שחרור מבית חולים",
+      km: "បន្ទាន់ / ចេញពីមន្ទីរពេទ្យ",
+      fr: "Immédiat / Sortie d'hôpital",
+      pt: "Imediato / Alta Hospitalar"
     },
     "Immediate / Hospital Discharge (Within 1–7 Days)": {
       es: "Inmediato / Alta Hospitalaria (En 1–7 días)",
@@ -2090,7 +3953,16 @@
       ko: "즉시 / 병원 퇴원 (1~7일 이내)",
       hy: "Անհապաղ / Հիվանդանոցից դուրսգրում (1–7 օրվա ընթացքում)",
       ru: "Срочно / выписка из больницы (в течение 1–7 дней)",
-      ar: "فوري / خروج من المستشفى (خلال 1–7 أيام)"
+      ar: "فوري / خروج من المستشفى (خلال 1–7 أيام)",
+      fa: "فوری / ترخیص از بیمارستان (ظرف ۱ تا ۷ روز)",
+      hi: "तत्काल / अस्पताल से छुट्टी (1–7 दिनों के भीतर)",
+      pa: "ਤੁਰੰਤ / ਹਸਪਤਾਲ ਤੋਂ ਛੁੱਟੀ (1–7 ਦਿਨਾਂ ਦੇ ਅੰਦਰ)",
+      ja: "至急・病院退院に伴う転居（1〜7日以内）",
+      uk: "Негайно / виписка з лікарні (протягом 1–7 днів)",
+      he: "מיידי / שחרור מבית חולים (בתוך 1–7 ימים)",
+      km: "បន្ទាន់ / ចេញពីមន្ទីរពេទ្យ (ក្នុងរយៈពេល 1–7 ថ្ងៃ)",
+      fr: "Immédiat / Sortie d'hôpital (Sous 1 à 7 jours)",
+      pt: "Imediato / Alta Hospitalar (Entre 1 e 7 Dias)"
     },
     "Within 1–7 days.": {
       es: "En un plazo de 1 a 7 días.",
@@ -2100,7 +3972,16 @@
       ko: "1~7일 이내.",
       hy: "1–7 օրվա ընթացքում։",
       ru: "В течение 1–7 дней.",
-      ar: "خلال 1–7 أيام."
+      ar: "خلال 1–7 أيام.",
+      fa: "ظرف ۱ تا ۷ روز.",
+      hi: "1–7 दिनों के भीतर।",
+      pa: "1–7 ਦਿਨਾਂ ਦੇ ਅੰਦਰ।",
+      ja: "1〜7日以内を希望。",
+      uk: "Протягом 1–7 днів.",
+      he: "בתוך 1–7 ימים.",
+      km: "ក្នុងរយៈពេល 1–7 ថ្ងៃ។",
+      fr: "Sous 1 à 7 jours.",
+      pt: "Dentro de 1 a 7 dias."
     },
     "Urgent transition needing expedited bed placement and physician review": {
       es: "Transición urgente que requiere cama inmediata y evaluación médica",
@@ -2110,7 +3991,16 @@
       ko: "긴급 병상 확보 및 의사 평가서 신속 처리가 필요한 상황",
       hy: "Շտապ տեղափոխում՝ արագացված տեղավորմամբ և բժշկական եզրակացությամբ",
       ru: "Срочный переезд с ускоренным поиском места и проверкой врачебной формы",
-      ar: "انتقال عاجل يتطلب سرعة توفير سرير ومراجعة طبية"
+      ar: "انتقال عاجل يتطلب سرعة توفير سرير ومراجعة طبية",
+      fa: "انتقال فوری نیازمند تخصیص سریع تخت و بررسی پزشک",
+      hi: "तत्काल बदलाव जिसके लिए शीघ्र बेड व्यवस्था और चिकित्सक समीक्षा आवश्यक है",
+      pa: "ਤੁਰੰਤ ਬਦਲਾਅ, ਜਿਸ ਲਈ ਫ਼ੌਰੀ ਬੈੱਡ ਅਤੇ ਡਾਕਟਰੀ ਸਮੀਖਿਆ ਦੀ ਲੋੜ ਹੈ",
+      ja: "空きベッドの迅速な手配と医師評価の確認が急務なご状況",
+      uk: "Терміновий перехід, що потребує швидкого пошуку місця та медичного огляду",
+      he: "מעבר דחוף המצריך מציאת מיטה מזורזת ובדיקת רופא",
+      km: "ការផ្លាស់ប្តូរបន្ទាន់ដែលត្រូវការការរៀបចំគ្រែឆាប់រហ័ស និងការពិនិត្យពីវេជ្ជបណ្ឌិត",
+      fr: "Transition urgente nécessitant un placement rapide et un avis médical accéléré",
+      pt: "Transição urgente que exige vaga imediata e revisão médica ágil"
     },
     "Next 30–60 Days": {
       es: "Próximos 30–60 días",
@@ -2120,7 +4010,16 @@
       ko: "향후 30~60일 이내",
       hy: "Առաջիկա 30–60 օրվա ընթացքում",
       ru: "В ближайшие 30–60 дней",
-      ar: "خلال 30–60 يوماً القادمة"
+      ar: "خلال 30–60 يوماً القادمة",
+      fa: "۳۰ تا ۶۰ روز آینده",
+      hi: "अगले 30–60 दिनों में",
+      pa: "ਅਗਲੇ 30–60 ਦਿਨ",
+      ja: "今後30〜60日以内",
+      uk: "Найближчі 30–60 днів",
+      he: "ב-30–60 הימים הקרובים",
+      km: "ក្នុងរយៈពេល 30–60 ថ្ងៃខាងមុខ",
+      fr: "Dans les 30 à 60 prochains jours",
+      pt: "Próximos 30 a 60 Dias"
     },
     "Planning a smooth transition.": {
       es: "Planificando una transición tranquila.",
@@ -2130,7 +4029,16 @@
       ko: "여유 있고 순조로운 입소 준비 중",
       hy: "Հանգիստ տեղափոխության պլանավորում։",
       ru: "Планирование спокойного переезда.",
-      ar: "التخطيط لانتقال سلس وهادئ."
+      ar: "التخطيط لانتقال سلس وهادئ.",
+      fa: "برنامه‌ریزی برای انتقالی آرام و بی‌دغدغه.",
+      hi: "सुगम और आरामदायक बदलाव की योजना बना रहे हैं।",
+      pa: "ਸੁਖਾਲੇ ਬਦਲਾਅ ਦੀ ਯੋਜਨਾ ਬਣਾਉਣਾ।",
+      ja: "無理のないスムーズな移行を計画中。",
+      uk: "Планування спокійного та комфортного переходу.",
+      he: "תכנון מעבר חלק ונינוח.",
+      km: "រៀបចំផែនការផ្លាស់ប្តូរដោយរលូន។",
+      fr: "Préparation d'une transition en douceur.",
+      pt: "Planejando uma transição tranquila."
     },
     "Proactively planning a comfortable, unhurried transition": {
       es: "Planificando con tiempo una mudanza cómoda y sin prisas",
@@ -2140,7 +4048,16 @@
       ko: "무리 없이 편안한 입소 전환을 미리 계획 중",
       hy: "Հարմարավետ և չշտապող տեղափոխության նախապատրաստում",
       ru: "Заблаговременное планирование комфортного переезда без спешки",
-      ar: "تخطيط استباقي لانتقال مريح دون استعجال"
+      ar: "تخطيط استباقي لانتقال مريح دون استعجال",
+      fa: "برنامه‌ریزی پیش‌دستانه برای یک انتقال راحت و بدون عجله",
+      hi: "बिना जल्दबाज़ी के आरामदायक बदलाव की पूर्व योजना बना रहे हैं",
+      pa: "ਬਿਨਾਂ ਕਾਹਲੀ ਦੇ ਆਰਾਮਦਾਇਕ ਬਦਲਾਅ ਦੀ ਅਗਾਊਂ ਯੋਜਨਾ ਬਣਾਉਣਾ",
+      ja: "余裕をもって安心して移れる環境を計画的に検討中",
+      uk: "Завчасне планування спокійного переїзду без поспіху",
+      he: "תכנון יזום של מעבר נוח וללא לחץ",
+      km: "រៀបចំផែនការទុកជាមុនសម្រាប់ការផ្លាស់ប្តូរប្រកបដោយផាសុកភាព និងមិនប្រញាប់ប្រញាល់",
+      fr: "Planification proactive d'une transition confortable et sans précipitation",
+      pt: "Planejando com antecedência uma transição confortável e sem pressa"
     },
     "Future Research": {
       es: "Investigación a futuro",
@@ -2150,7 +4067,16 @@
       ko: "향후 대비 사전 조사",
       hy: "Ապագայի ուսումնասիրություն",
       ru: "Изучение на будущее",
-      ar: "بحث مستقبلي"
+      ar: "بحث مستقبلي",
+      fa: "بررسی و تحقیق برای آینده",
+      hi: "भविष्य के लिए जानकारी",
+      pa: "ਭਵਿੱਖ ਲਈ ਖੋਜ-ਪੜਤਾਲ",
+      ja: "将来に向けた情報収集",
+      uk: "Ознайомлення на майбутнє",
+      he: "בדיקה לעתיד",
+      km: "ស្រាវជ្រាវសម្រាប់អនាគត",
+      fr: "Recherche pour l'avenir",
+      pt: "Pesquisa Futura"
     },
     "Future Research & Budget Planning": {
       es: "Investigación futura y presupuesto",
@@ -2160,7 +4086,16 @@
       ko: "사전 정보 탐색 및 예산 계획",
       hy: "Ապագայի ուսումնասիրություն և բյուջեի պլանավորում",
       ru: "Исследование вариантов и планирование бюджета",
-      ar: "بحث مستقبلي وتخطيط الميزانية"
+      ar: "بحث مستقبلي وتخطيط الميزانية",
+      fa: "بررسی گزینه‌ها و برنامه‌ریزی بودجه برای آینده",
+      hi: "भविष्य की खोज और बजट योजना",
+      pa: "ਭਵਿੱਖ ਲਈ ਖੋਜ-ਪੜਤਾਲ ਅਤੇ ਬਜਟ ਯੋਜਨਾਬੰਦੀ",
+      ja: "将来に向けた情報収集・資金計画",
+      uk: "Вивчення варіантів і планування бюджету на майбутнє",
+      he: "מחקר לעתיד ותכנון תקציב",
+      km: "ស្រាវជ្រាវសម្រាប់អនាគត និងរៀបចំផែនការថវិកា",
+      fr: "Recherche future et planification budgétaire",
+      pt: "Pesquisa Futura e Planejamento Financeiro"
     },
     "Just learning options.": {
       es: "Solo conociendo opciones.",
@@ -2170,7 +4105,16 @@
       ko: "가능한 옵션들을 미리 살펴보는 단계",
       hy: "Պարզապես ծանոթանում եմ տարբերակներին։",
       ru: "Просто изучаю возможные варианты.",
-      ar: "استطلاع الخيارات المتاحة فقط."
+      ar: "استطلاع الخيارات المتاحة فقط.",
+      fa: "صرفاً در حال آشنایی با گزینه‌ها.",
+      hi: "अभी केवल विकल्प समझ रहे हैं।",
+      pa: "ਬਸ ਵਿਕਲਪਾਂ ਬਾਰੇ ਜਾਣਕਾਰੀ ਲੈ ਰਹੇ ਹਾਂ।",
+      ja: "まずは選択肢を知りたい。",
+      uk: "Поки вивчаємо можливі варіанти.",
+      he: "רק בודקים אפשרויות.",
+      km: "គ្រាន់តែស្វែងយល់ពីជម្រើសនានា។",
+      fr: "Simple prise de renseignements sur les options.",
+      pt: "Apenas conhecendo as opções."
     },
     "Gathering pricing, options, and understanding California licensing levels": {
       es: "Reuniendo precios, opciones y niveles de licencia en California",
@@ -2180,7 +4124,16 @@
       ko: "비용 비교 및 캘리포니아 인허가 시설 등급 사전 파악",
       hy: "Գների, տարբերակների և Կալիֆոռնիայի լիցենզավորման մակարդակների ուսումնասիրություն",
       ru: "Сбор цен, вариантов и изучение уровней лицензирования в Калифорнии",
-      ar: "جمع الأسعار والخيارات وفهم مستويات الترخيص في كاليفورنيا"
+      ar: "جمع الأسعار والخيارات وفهم مستويات الترخيص في كاليفورنيا",
+      fa: "جمع‌آوری اطلاعات قیمت، گزینه‌ها و شناخت سطوح مجوز در کالیفرنیا",
+      hi: "दरों, विकल्पों और कैलिफ़ोर्निया लाइसेंसिंग स्तरों की जानकारी जुटा रहे हैं",
+      pa: "ਕੀਮਤਾਂ, ਵਿਕਲਪਾਂ ਅਤੇ ਕੈਲੀਫੋਰਨੀਆ ਲਾਇਸੰਸਿੰਗ ਪੱਧਰਾਂ ਬਾਰੇ ਜਾਣਕਾਰੀ ਇਕੱਠੀ ਕਰਨਾ",
+      ja: "費用感や施設の選択肢、カリフォルニア州の認可区分について情報収集中",
+      uk: "Збір цін, варіантів і ознайомлення з рівнями ліцензування в Каліфорнії",
+      he: "איסוף מחירים, אפשרויות והבנת רמות הרישוי בקליפורניה",
+      km: "ប្រមូលព័ត៌មានតម្លៃ ជម្រើស និងស្វែងយល់ពីកម្រិតអាជ្ញាប័ណ្ណនៅរដ្ឋ California",
+      fr: "Collecte des tarifs, des options et compréhension des niveaux d'agrément en Californie",
+      pt: "Levantando valores, opções e entendendo os níveis de licenciamento da Califórnia"
     },
     "Custom Recommendation": {
       es: "Recomendación Personalizada",
@@ -2190,7 +4143,16 @@
       ko: "맞춤 추천 결과",
       hy: "Անհատական առաջարկ",
       ru: "Персональная рекомендация",
-      ar: "توصية مخصصة"
+      ar: "توصية مخصصة",
+      fa: "پیشنهاد اختصاصی",
+      hi: "व्यक्तिगत सिफारिश",
+      pa: "ਤੁਹਾਡੇ ਲਈ ਖ਼ਾਸ ਸਿਫ਼ਾਰਸ਼",
+      ja: "お客様への個別ご提案",
+      uk: "Індивідуальна рекомендація",
+      he: "המלצה מותאמת אישית",
+      km: "ការណែនាំផ្ទាល់ខ្លួន",
+      fr: "Recommandation personnalisée",
+      pt: "Recomendação Personalizada"
     },
     "Residential 6-Bed Care Home (RCFE / Board & Care)": {
       es: "Casa de Cuidado Residencial de 6 Camas (RCFE / Board & Care)",
@@ -2200,7 +4162,16 @@
       ko: "6인실 소규모 주거형 요양홈 (RCFE / Board & Care)",
       hy: "Բնակելի 6 տեղանոց խնամքի տուն (RCFE / Board & Care)",
       ru: "Домашний пансионат на 6 мест (RCFE / Board & Care)",
-      ar: "دار رعاية سكنية من 6 أسرّة (RCFE / Board & Care)"
+      ar: "دار رعاية سكنية من 6 أسرّة (RCFE / Board & Care)",
+      fa: "خانه مراقبت مسکونی ۶ تختخوابی (RCFE / Board & Care)",
+      hi: "आवासीय 6-बेड देखभाल गृह (RCFE / Board & Care)",
+      pa: "ਰਿਹਾਇਸ਼ੀ 6-ਬੈੱਡ ਦੇਖਭਾਲ ਘਰ (RCFE / Board & Care)",
+      ja: "少人数制6床ケアホーム（RCFE / Board & Care）",
+      uk: "Сімейний будинок догляду на 6 ліжок (RCFE / Board & Care)",
+      he: "בית טיפולי של 6 מיטות (RCFE / Board & Care)",
+      km: "ផ្ទះថែទាំស្នាក់នៅខ្នាត 6 គ្រែ (RCFE / Board & Care)",
+      fr: "Maison de soins résidentielle de 6 lits (RCFE / Board & Care)",
+      pt: "Casa Residencial de Cuidados de 6 Vagas (RCFE / Board & Care)"
     },
     "Based on your answers, an intimate residential care home provides the ideal 1-to-3 caregiver ratio, continuous eyes-on supervision, and lower sensory stimulation compared to large institutional facilities.": {
       es: "Según sus respuestas, un hogar residencial íntimo ofrece la proporción ideal de 1 cuidador por cada 3 residentes, supervisión continua y menos sobreestimulación sensorial frente a grandes instituciones.",
@@ -2210,7 +4181,16 @@
       ko: "응답하신 내용을 바탕으로 볼 때, 1대3의 밀착 케어 비율과 상시 보호 관찰, 대형 시설보다 차분하고 아늑한 환경이 어우러진 6인실 주거형 요양홈이 가장 적합합니다.",
       hy: "Ձեր պատասխանների հիման վրա՝ փոքր բնակելի խնամքի տունը ապահովում է խնամակալների իդեալական 1-ը-3 հարաբերակցություն, մշտական հսկողություն և հանգիստ միջավայր՝ համեմատած մեծ հաստատությունների հետ։",
       ru: "Судя по вашим ответам, небольшой домашний пансионат обеспечивает оптимальное соотношение сиделок 1 к 3, постоянный присмотр и спокойную атмосферу без перегрузки, как в крупных центрах.",
-      ar: "بناءً على إجاباتك، توفر دار الرعاية السكنية الصغيرة نسبة مثالية من 1 مقدم رعاية لكل 3 مقيمين، وإشرافاً مباشراً مستمراً، وهدوءاً أكبر مقارنة بالمرافق المؤسسية الكبيرة."
+      ar: "بناءً على إجاباتك، توفر دار الرعاية السكنية الصغيرة نسبة مثالية من 1 مقدم رعاية لكل 3 مقيمين، وإشرافاً مباشراً مستمراً، وهدوءاً أكبر مقارنة بالمرافق المؤسسية الكبيرة.",
+      fa: "بر اساس پاسخ‌های شما، یک خانه مراقبت مسکونی صمیمی نسبت ایده‌آل ۱ مراقب به ۳ مقیم، نظارت مستقیم و مداوم و تحریک حسی کمتر را در مقایسه با مراکز بزرگ و شلوغ فراهم می‌کند.",
+      hi: "आपके उत्तरों के आधार पर, एक आत्मीय आवासीय देखभाल गृह बड़े संस्थागत केंद्रों की तुलना में आदर्श 1-से-3 देखभालकर्ता अनुपात, निरंतर प्रत्यक्ष निगरानी और शांत वातावरण प्रदान करता है।",
+      pa: "ਤੁਹਾਡੇ ਜਵਾਬਾਂ ਦੇ ਆਧਾਰ 'ਤੇ, ਇੱਕ ਨਿੱਘਾ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਘਰ ਵੱਡੇ ਸੰਸਥਾਗਤ ਕੇਂਦਰਾਂ ਦੇ ਮੁਕਾਬਲੇ 1-ਤੋਂ-3 ਦਾ ਆਦਰਸ਼ ਦੇਖਭਾਲ ਅਨੁਪਾਤ, ਲਗਾਤਾਰ ਨਜ਼ਰਸਾਨੀ ਅਤੇ ਸ਼ਾਂਤ ਘਰੇਲੂ ਮਾਹੌਲ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।",
+      ja: "ご回答内容から判断いたしますと、大規模施設に比べて刺激が少なく、介護スタッフ1名につき入居者3名という理想的な人員配置で絶えず目が届く少人数制の居住型ケアホームが最適です。",
+      uk: "З огляду на ваші відповіді, камерний житловий будинок догляду забезпечує оптимальне співвідношення 1 доглядальник на 3 мешканців, постійний нагляд і спокійнішу обстановку порівняно з великими установами.",
+      he: "על פי תשובותיכם, בית טיפולי אינטימי מספק יחס מיטבי של מטפל אחד לכל 3 דיירים, השגחה צמודה ומתמשכת וגירוי חושי מופחת בהשוואה למוסדות גדולים.",
+      km: "ផ្អែកលើចម្លើយរបស់លោកអ្នក ផ្ទះថែទាំស្នាក់នៅដ៏កក់ក្តៅផ្តល់សមាមាត្រអ្នកថែទាំដ៏ល្អប្រសើរគឺ 1 ទល់នឹង 3 ការតាមដានមើលថែជាប់លាប់ និងការរំញោចអារម្មណ៍តិចជាងមណ្ឌលស្ថាប័នខ្នាតធំ។",
+      fr: "D'après vos réponses, un foyer résidentiel intime offre le ratio idéal d'un soignant pour 3 résidents, une vigilance visuelle continue et une stimulation sensorielle réduite par rapport aux grands établissements institutionnels.",
+      pt: "Com base nas suas respostas, uma casa residencial acolhedora oferece a proporção ideal de 1 cuidador para 3 residentes, supervisão contínua e menos estímulos sensoriais em comparação a grandes instituições."
     },
     "Your loved one is best served by an intimate residential board-and-care home offering 24-hour awake assistance for dressing, bathing, medication management, and warm home-cooked meals in a cozy family neighborhood.": {
       es: "Su ser querido estará mejor atendido en un hogar residencial íntimo (board-and-care) que ofrece asistencia despierta las 24 horas para vestirse, bañarse, control de medicamentos y comidas caseras en un tranquilo vecindario familiar.",
@@ -2220,7 +4200,16 @@
       ko: "어르신께는 조용한 일반 주택가에서 옷 입기, 목욕, 복약 관리 및 따뜻한 가정식 식사를 24시간 상주 인력이 세심히 돌봐드리는 소규모 주거형 요양홈(Board & Care)이 가장 잘 맞습니다.",
       hy: "Ձեր հարազատի համար լավագույնը փոքր բնակելի խնամքի տունն է՝ 24-ժամյա արթուն անձնակազմով, լողանալու և հագնվելու օգնությամբ, դեղերի վերահսկմամբ և տնական սննդով՝ հանգիստ թաղամասում։",
       ru: "Для вашего близкого лучше всего подойдет уютный домашний пансионат в тихом районе с круглосуточным бодрствующим уходом, помощью с гигиеной, контролем лекарств и домашним питанием.",
-      ar: "الأنسب لقريبك هو دار رعاية سكنية دافئة توفر مساعدة مستيقظة على مدار 24 ساعة للبس والاستحمام وإدارة الأدوية مع وجبات منزلية طازجة في حي سكني هادئ."
+      ar: "الأنسب لقريبك هو دار رعاية سكنية دافئة توفر مساعدة مستيقظة على مدار 24 ساعة للبس والاستحمام وإدارة الأدوية مع وجبات منزلية طازجة في حي سكني هادئ.",
+      fa: "عزیز شما در یک خانه مراقبت مسکونی صمیمی بهترین خدمات را دریافت خواهد کرد؛ جایی که کمک ۲۴ ساعته بیدار برای لباس پوشیدن، استحمام، مدیریت دارو و غذاهای گرم خانگی در محله‌ای آرام و خانوادگی ارائه می‌شود.",
+      hi: "आपके प्रियजन के लिए एक आत्मीय आवासीय बोर्ड-एंड-केयर गृह सबसे उपयुक्त रहेगा, जहाँ शांत पारिवारिक मोहल्ले में कपड़े पहनने, स्नान, दवा प्रबंधन के लिए 24 घंटे जागरूक सहायता और घर का बना ताज़ा भोजन मिलता है।",
+      pa: "ਤੁਹਾਡੇ ਪਿਆਰੇ ਲਈ ਇੱਕ ਨਿੱਘਾ ਰਿਹਾਇਸ਼ੀ ਬੋਰਡ-ਐਂਡ-ਕੇਅਰ ਘਰ ਸਭ ਤੋਂ ਢੁੱਕਵਾਂ ਹੈ, ਜੋ ਸ਼ਾਂਤ ਪਰਿਵਾਰਕ ਮੁਹੱਲੇ ਵਿੱਚ ਕੱਪੜੇ ਪਾਉਣ, ਨਹਾਉਣ, ਦਵਾਈਆਂ ਦੀ ਸੰਭਾਲ ਲਈ 24-ਘੰਟੇ ਜਾਗਦੀ ਸਹਾਇਤਾ ਅਤੇ ਘਰ ਦਾ ਬਣਿਆ ਤਾਜ਼ਾ ਭੋਜਨ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।",
+      ja: "落ち着いた住宅街にある家庭的な少人数制 Board & Care ホームが最も適しています。着替えや入浴、服薬管理を24時間体制の常駐スタッフが見守り、温かな手料理をご提供できる環境です。",
+      uk: "Вашій близькій людині найкраще підійде камерний будинок догляду формату Board & Care, де забезпечено цілодобову підтримку несплячого персоналу при одяганні, купанні, прийомі ліків і домашнє харчування в затишному житловому районі.",
+      he: "ליקירכם יתאים ביותר בית טיפולי אינטימי (Board & Care) המציע סיוע ערני 24 שעות ביממה בלבוש, רחצה, ניהול תרופות וארוחות חמות תוצרת בית בשכונה משפחתית ונעימה.",
+      km: "មនុស្សជាទីស្រឡាញ់របស់លោកអ្នកសមស្របបំផុតជាមួយផ្ទះថែទាំស្នាក់នៅខ្នាតតូច ដែលផ្តល់ជំនួយភ្ញាក់ 24 ម៉ោងសម្រាប់ការស្លៀកពាក់ ការងូតទឹក ការគ្រប់គ្រងថ្នាំពេទ្យ និងអាហារចម្អិននៅផ្ទះដ៏កក់ក្តៅក្នុងសង្កាត់គ្រួសារដ៏សុខសាន្ត។",
+      fr: "Votre proche sera au mieux dans une maison de soins résidentielle chaleureuse offrant une présence éveillée 24 h/24 pour l'habillage, la toilette, la gestion des médicaments et de bons repas faits maison dans un quartier calme et familial.",
+      pt: "Seu ente querido será mais bem assistido em uma casa residencial de cuidados com equipe acordada 24 horas para apoio ao vestir-se, banho, administração de medicamentos e refeições caseiras quentinhas em um bairro residencial tranquilo."
     },
     "Urgent Placement / Hospital Discharge Notice": {
       es: "Aviso de Ubicación Urgente / Alta Hospitalaria",
@@ -2230,7 +4219,16 @@
       ko: "긴급 입소 / 병원 퇴원 안내",
       hy: "Շտապ տեղավորում / Հիվանդանոցից դուրսգրման ծանուցում",
       ru: "Срочное размещение / выписка из больницы",
-      ar: "تنبيه تسكين عاجل / خروج من المستشفى"
+      ar: "تنبيه تسكين عاجل / خروج من المستشفى",
+      fa: "اعلان اسکان فوری / ترخیص از بیمارستان",
+      hi: "तत्काल प्लेसमेंट / अस्पताल डिस्चार्ज सूचना",
+      pa: "ਤੁਰੰਤ ਰਿਹਾਇਸ਼ / ਹਸਪਤਾਲ ਤੋਂ ਛੁੱਟੀ ਸੂਚਨਾ",
+      ja: "緊急入居・病院退院に関するご案内",
+      uk: "Термінове влаштування / повідомлення про виписку з лікарні",
+      he: "התראת שיבוץ דחוף / שחרור מבית חולים",
+      km: "សេចក្តីជូនដំណឹងអំពីការចូលស្នាក់នៅបន្ទាន់ / ការចេញពីមន្ទីរពេទ្យ",
+      fr: "Avis de placement urgent / Sortie d'hôpital",
+      pt: "Aviso de Acolhimento Urgente / Alta Hospitalar"
     },
     "Hospital Discharge / Urgent Placement Alert": {
       es: "Alerta de Alta Hospitalaria / Ubicación Urgente",
@@ -2240,7 +4238,16 @@
       ko: "병원 퇴원 / 긴급 입소 알림",
       hy: "Հիվանդանոցից դուրսգրման / Շտապ տեղավորման ազդանշան",
       ru: "Внимание: срочное размещение после выписки из больницы",
-      ar: "تنبيه عاجل: تسكين فوري بعد الخروج من المستشفى"
+      ar: "تنبيه عاجل: تسكين فوري بعد الخروج من المستشفى",
+      fa: "هشدار ترخیص از بیمارستان / اسکان فوری",
+      hi: "अस्पताल डिस्चार्ज / तत्काल प्लेसमेंट अलर्ट",
+      pa: "ਹਸਪਤਾਲ ਤੋਂ ਛੁੱਟੀ / ਤੁਰੰਤ ਰਿਹਾਇਸ਼ ਚੇਤਾਵਨੀ",
+      ja: "病院退院・緊急入居のご案内",
+      uk: "Попередження про виписку з лікарні / термінове влаштування",
+      he: "התרעה על שחרור מבית חולים / שיבוץ דחוף",
+      km: "ការជូនដំណឹងបន្ទាន់អំពីការចេញពីមន្ទីរពេទ្យ / ការចូលស្នាក់នៅបន្ទាន់",
+      fr: "Alerte sortie d'hôpital / Placement urgent",
+      pt: "Alerta de Alta Hospitalar / Acolhimento Urgente"
     },
     "Key Questions to Ask on Your First Tour:": {
       es: "Preguntas clave para hacer en su primera visita:",
@@ -2250,7 +4257,16 @@
       ko: "첫 시설 방문 시 꼭 확인해야 할 질문:",
       hy: "Առաջին շրջայցի ընթացքում տալու հիմնական հարցերը՝",
       ru: "Ключевые вопросы для первого визита:",
-      ar: "أسئلة مهمة تطرحها في جولتك الأولى:"
+      ar: "أسئلة مهمة تطرحها في جولتك الأولى:",
+      fa: "پرسش‌های کلیدی که در اولین بازدید باید بپرسید:",
+      hi: "अपने पहले दौरे पर पूछने योग्य मुख्य प्रश्न:",
+      pa: "ਤੁਹਾਡੇ ਪਹਿਲੇ ਦੌਰੇ ਦੌਰਾਨ ਪੁੱਛਣ ਵਾਲੇ ਮੁੱਖ ਸਵਾਲ:",
+      ja: "初回見学時に確認すべき重要な質問：",
+      uk: "Головні запитання під час першого огляду закладу:",
+      he: "שאלות מפתח שכדאי לשאול בסיור הראשון:",
+      km: "សំណួរសំខាន់ៗដែលគួរសួរនៅពេលទស្សនកិច្ចលើកដំបូងរបស់លោកអ្នក៖",
+      fr: "Questions essentielles à poser lors de votre première visite :",
+      pt: "Perguntas Essenciais para Fazer na Primeira Visita:"
     },
     "Does the home have a currently active CDSS Hospice Waiver and Bedridden Clearance?": {
       es: "¿Cuenta el hogar con Exención de Hospicio y Autorización para Postrados vigentes ante el CDSS?",
@@ -2260,7 +4276,16 @@
       ko: "해당 시설이 현재 유효한 CDSS 호스피스 면제(Hospice Waiver)와 와상 입소 승인을 보유하고 있나요?",
       hy: "Արդյո՞ք տունն ունի գործող CDSS Հոսպիսային բացառում և անկողնային բնակչի թույլտվություն",
       ru: "Есть ли у пансионата действующие разрешения CDSS Hospice Waiver и Bedridden Clearance?",
-      ar: "هل لدى الدار حالياً إعفاء رعاية محتضرين (Hospice Waiver) وتصريح طريحي الفراش ساريان من CDSS؟"
+      ar: "هل لدى الدار حالياً إعفاء رعاية محتضرين (Hospice Waiver) وتصريح طريحي الفراش ساريان من CDSS؟",
+      fa: "آیا خانه دارای مجوز فعال مراقبت تسکینی (Hospice Waiver) و تأییدیه پذیرش افراد بستری (Bedridden Clearance) از CDSS است؟",
+      hi: "क्या इस देखभाल गृह के पास वर्तमान में सक्रिय CDSS हॉस्पिस वेवर और शैयाग्रस्त देखभाल स्वीकृति (Bedridden Clearance) है?",
+      pa: "ਕੀ ਇਸ ਘਰ ਕੋਲ ਮੌਜੂਦਾ ਸਮੇਂ ਵਿੱਚ ਸਰਗਰਮ CDSS ਹੌਸਪਿਸ ਛੋਟ (Hospice Waiver) ਅਤੇ ਬਿਸਤਰੇ 'ਤੇ ਸੀਮਤ ਮਰੀਜ਼ਾਂ ਲਈ ਮਨਜ਼ੂਰੀ ਹੈ?",
+      ja: "現在有効な CDSS ホスピス特例承認（Hospice Waiver）および寝たきり入居者受入承認（Bedridden Clearance）を取得していますか？",
+      uk: "Чи має заклад чинний дозвіл CDSS Hospice Waiver та дозвіл на прийом лежачих мешканців (Bedridden Clearance)?",
+      he: "האם לבית יש אישור הוספיס (Hospice Waiver) ואישור למרותקי מיטה בתוקף מטעם CDSS?",
+      km: "តើផ្ទះថែទាំនេះមានការលើកលែង CDSS Hospice Waiver និងការអនុញ្ញាតសម្រាប់អ្នកសម្រាកលើគ្រែ (Bedridden Clearance) ដែលកំពុងមានសុពលភាពដែរឬទេ?",
+      fr: "La maison dispose-t-elle actuellement d'une dérogation pour soins palliatifs (Hospice Waiver) et d'une autorisation pour résidents alités délivrées par le CDSS ?",
+      pt: "A casa possui atualmente Hospice Waiver e liberação para acamados ativos junto ao CDSS?"
     },
     "Is there an awake caregiver on shift throughout the entire night?": {
       es: "¿Hay un cuidador despierto de turno durante toda la noche?",
@@ -2270,7 +4295,16 @@
       ko: "야간 시간대 내내 깨어 근무하는 전담 직원이 상주하나요?",
       hy: "Արդյո՞ք ամբողջ գիշերվա ընթացքում հերթապահում է արթուն խնամակալ",
       ru: "Находится ли на смене бодрствующий сотрудник в течение всей ночи?",
-      ar: "هل يوجد مقدم رعاية مستيقظ في النوبة طوال ساعات الليل؟"
+      ar: "هل يوجد مقدم رعاية مستيقظ في النوبة طوال ساعات الليل؟",
+      fa: "آیا در تمام طول شب یک مراقب بیدار در شیفت حضور دارد؟",
+      hi: "क्या पूरी रात शिफ्ट में एक जागरूक देखभालकर्ता ड्यूटी पर रहता है?",
+      pa: "ਕੀ ਪੂਰੀ ਰਾਤ ਡਿਊਟੀ 'ਤੇ ਕੋਈ ਜਾਗਦਾ ਦੇਖਭਾਲ ਕਰਤਾ ਮੌਜੂਦ ਰਹਿੰਦਾ ਹੈ?",
+      ja: "夜間を通して仮眠ではなく覚醒して勤務する介護スタッフが常駐していますか？",
+      uk: "Чи чергує несплячий доглядальник протягом усієї ночі?",
+      he: "האם יש מטפל ערני במשמרת לאורך כל הלילה?",
+      km: "តើមានអ្នកថែទាំភ្ញាក់ប្រចាំការពេញមួយយប់ដែរឬទេ?",
+      fr: "Y a-t-il un soignant éveillé en poste durant toute la nuit ?",
+      pt: "Há um cuidador acordado de plantão durante toda a madrugada?"
     },
     "Are medications stored in double-locked cabinets and administered strictly per doctor orders?": {
       es: "¿Los medicamentos se guardan bajo doble llave y se administran estrictamente según receta médica?",
@@ -2280,7 +4314,16 @@
       ko: "약품이 이중 잠금 캐비닛에 보관되며 의사 처방대로 엄격하게 투약되나요?",
       hy: "Արդյո՞ք դեղերը պահվում են կրկնակի փակվող պահարաններում և տրվում խիստ բժշկի նշանակմամբ",
       ru: "Хранятся ли лекарства под двойным замком и выдаются ли строго по назначению врача?",
-      ar: "هل تُحفظ الأدوية في خزائن مقفلة بقفل مزدوج وتُعطى بدقة وفق أوامر الطبيب؟"
+      ar: "هل تُحفظ الأدوية في خزائن مقفلة بقفل مزدوج وتُعطى بدقة وفق أوامر الطبيب؟",
+      fa: "آیا داروها در کمدهای دو قفله نگهداری می‌شوند و دقیقاً مطابق دستور پزشک داده می‌شوند؟",
+      hi: "क्या दवाइयाँ दोहरे ताले वाली अलमारियों में रखी जाती हैं और सख्ती से डॉक्टर के निर्देशानुसार दी जाती हैं?",
+      pa: "ਕੀ ਦਵਾਈਆਂ ਨੂੰ ਡਬਲ-ਲਾਕ ਅਲਮਾਰੀਆਂ ਵਿੱਚ ਰੱਖਿਆ ਜਾਂਦਾ ਹੈ ਅਤੇ ਸਖ਼ਤੀ ਨਾਲ ਡਾਕਟਰ ਦੇ ਹੁਕਮਾਂ ਅਨੁਸਾਰ ਦਿੱਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ?",
+      ja: "お薬は二重施錠のキャビネットに保管され、医師の指示通りに厳格に管理・投薬されていますか？",
+      uk: "Чи зберігаються ліки у шафах із подвійним замком та чи видаються суворо за призначенням лікаря?",
+      he: "האם התרופות מאוחסנות בארונות בעלי נעילה כפולה וניתנות אך ורק בהתאם להוראות הרופא?",
+      km: "តើថ្នាំពេទ្យត្រូវបានរក្សាទុកក្នុងទូចាក់សោពីរជាន់ និងផ្តល់ឱ្យយ៉ាងតឹងរ៉ឹងតាមវេជ្ជបញ្ជារបស់វេជ្ជបណ្ឌិតដែរឬទេ?",
+      fr: "Les médicaments sont-ils conservés dans des armoires à double verrouillage et administrés strictement sur ordonnance médicale ?",
+      pt: "Os medicamentos ficam guardados em armários com trava dupla e são administrados estritamente conforme prescrição médica?"
     },
     "Retake Assessment": {
       es: "Repetir evaluación",
@@ -2290,7 +4333,16 @@
       ko: "진단 다시 하기",
       hy: "Կրկին անցնել գնահատումը",
       ru: "Пройти тест заново",
-      ar: "إعادة التقييم"
+      ar: "إعادة التقييم",
+      fa: "انجام مجدد ارزیابی",
+      hi: "मूल्यांकन दोबारा करें",
+      pa: "ਮੁਲਾਂਕਣ ਦੁਬਾਰਾ ਦਿਓ",
+      ja: "診断をやり直す",
+      uk: "Пройти оцінку ще раз",
+      he: "מילוי הערכה מחדש",
+      km: "ធ្វើការវាយតម្លៃម្តងទៀត",
+      fr: "Refaire l'évaluation",
+      pt: "Refazer Avaliação"
     },
     "Schedule Placement Call": {
       es: "Programar llamada de ubicación",
@@ -2300,7 +4352,16 @@
       ko: "입소 상담 전화 예약",
       hy: "Ամրագրել տեղավորման զանգ",
       ru: "Заказать звонок по подбору",
-      ar: "احجز مكالمة التسكين"
+      ar: "احجز مكالمة التسكين",
+      fa: "هماهنگی تماس برای اسکان",
+      hi: "प्लेसमेंट कॉल शेड्यूल करें",
+      pa: "ਰਿਹਾਇਸ਼ ਲਈ ਕਾਲ ਤੈਅ ਕਰੋ",
+      ja: "入居相談の通話を予約",
+      uk: "Записатися на дзвінок щодо підбору",
+      he: "תיאום שיחה לשיבוץ",
+      km: "កំណត់ពេលហៅទូរស័ព្ទរៀបចំកន្លែងស្នាក់នៅ",
+      fr: "Planifier un appel de placement",
+      pt: "Agendar Ligação de Acolhimento"
     },
     "Email My Care Plan": {
       es: "Enviar plan por correo",
@@ -2310,7 +4371,16 @@
       ko: "케어 플랜 이메일 전송",
       hy: "Ուղարկել խնամքի պլանը էլ․ փոստով",
       ru: "Отправить план ухода на почту",
-      ar: "أرسل خطة الرعاية لبريدي"
+      ar: "أرسل خطة الرعاية لبريدي",
+      fa: "ارسال برنامه مراقبت به ایمیل من",
+      hi: "मेरा देखभाल प्लान ईमेल करें",
+      pa: "ਮੇਰੀ ਦੇਖਭਾਲ ਯੋਜਨਾ ਈਮੇਲ ਕਰੋ",
+      ja: "ケアプランをメールで送る",
+      uk: "Надіслати мій план догляду",
+      he: "שלחו לי את תוכנית הטיפול",
+      km: "ផ្ញើផែនការថែទាំរបស់ខ្ញុំតាមអ៊ីមែល",
+      fr: "Envoyer mon plan de soins par e-mail",
+      pt: "Enviar Plano por E-mail"
     },
     "Book Free Advisory Call": {
       es: "Reservar llamada gratuita",
@@ -2320,7 +4390,16 @@
       ko: "무료 상담 전화 예약",
       hy: "Ամրագրել անվճար խորհրդատվական զանգ",
       ru: "Заказать бесплатную консультацию",
-      ar: "احجز مكالمة إرشادية مجانية"
+      ar: "احجز مكالمة إرشادية مجانية",
+      fa: "رزرو تماس مشاوره رایگان",
+      hi: "निःशुल्क सलाहकार कॉल बुक करें",
+      pa: "ਮੁਫ਼ਤ ਸਲਾਹ ਕਾਲ ਬੁੱਕ ਕਰੋ",
+      ja: "無料電話相談を予約する",
+      uk: "Замовити безкоштовний дзвінок",
+      he: "קבעו שיחת ייעוץ חינם",
+      km: "កក់ការហៅពិគ្រោះយោបល់ឥតគិតថ្លៃ",
+      fr: "Réserver un appel conseil gratuit",
+      pt: "Agendar Assessoria Gratuita"
     },
     "Email Care Plan to Advisor": {
       es: "Enviar plan al asesor",
@@ -2330,7 +4409,16 @@
       ko: "상담사에게 케어 플랜 보내기",
       hy: "Ուղարկել խնամքի պլանը խորհրդատուին",
       ru: "Отправить план ухода консультанту",
-      ar: "أرسل خطة الرعاية للمستشار"
+      ar: "أرسل خطة الرعاية للمستشار",
+      fa: "ارسال برنامه مراقبت به مشاور",
+      hi: "सलाहकार को देखभाल प्लान ईमेल करें",
+      pa: "ਸਲਾਹਕਾਰ ਨੂੰ ਦੇਖਭਾਲ ਯੋਜਨਾ ਈਮੇਲ ਕਰੋ",
+      ja: "アドバイザーへ診断結果を送信",
+      uk: "Надіслати план консультанту",
+      he: "שליחת תוכנית הטיפול ליועץ",
+      km: "ផ្ញើផែនការថែទាំតាមអ៊ីមែលទៅទីប្រឹក្សា",
+      fr: "Envoyer le plan de soins à un conseiller",
+      pt: "Enviar Plano de Cuidados ao Consultor"
     },
     "California Title 22 Licensing Guide": {
       es: "Guía de Licenciamiento Título 22 de California",
@@ -2340,7 +4428,16 @@
       ko: "캘리포니아 Title 22 인허가 가이드",
       hy: "Կալիֆոռնիայի Title 22 լիցենզավորման ուղեցույց",
       ru: "Руководство по лицензированию California Title 22",
-      ar: "دليل ترخيص Title 22 في كاليفورنيا"
+      ar: "دليل ترخيص Title 22 في كاليفورنيا",
+      fa: "راهنمای اخذ مجوز تحت مقررات Title 22 کالیفرنیا",
+      hi: "कैलिफ़ोर्निया Title 22 लाइसेंसिंग गाइड",
+      pa: "ਕੈਲੀਫੋਰਨੀਆ Title 22 ਲਾਇਸੰਸਿੰਗ ਗਾਈਡ",
+      ja: "カリフォルニア州 Title 22 認可取得ガイド",
+      uk: "Гід із ліцензування за Title 22 у Каліфорнії",
+      he: "מדריך רישוי California Title 22",
+      km: "មគ្គុទ្ទេសក៍សុំអាជ្ញាប័ណ្ណ Title 22 នៅរដ្ឋ California",
+      fr: "Guide de l'agrément Title 22 en Californie",
+      pt: "Guia de Licenciamento Title 22 da Califórnia"
     },
     "4-Stage RCFE Licensure Roadmap": {
       es: "Ruta de Licenciamiento RCFE en 4 Etapas",
@@ -2350,7 +4447,16 @@
       ko: "RCFE 인허가 4단계 로드맵",
       hy: "RCFE լիցենզավորման 4-փուլային ճանապարհային քարտեզ",
       ru: "4 этапа получения лицензии RCFE",
-      ar: "خارطة طريق ترخيص RCFE من 4 مراحل"
+      ar: "خارطة طريق ترخيص RCFE من 4 مراحل",
+      fa: "نقشه راه ۴ مرحله‌ای اخذ مجوز RCFE",
+      hi: "4-चरणीय RCFE लाइसेंसिंग रोडमैप",
+      pa: "4-ਪੜਾਵੀ RCFE ਲਾਇਸੰਸ ਪ੍ਰਾਪਤੀ ਰੋਡਮੈਪ",
+      ja: "RCFE ライセンス取得 4段階ロードマップ",
+      uk: "4-етапна дорожня карта отримання ліцензії RCFE",
+      he: "מפת דרכים ב-4 שלבים לרישוי RCFE",
+      km: "ផែនទីបង្ហាញផ្លូវសុំអាជ្ញាប័ណ្ណ RCFE 4 ដំណាក់កាល",
+      fr: "Feuille de route de licence RCFE en 4 étapes",
+      pt: "Roteiro em 4 Etapas para Licenciamento RCFE"
     },
     "A step-by-step timeline from business inception to accepting your first resident.": {
       es: "Un cronograma paso a paso desde el inicio del proyecto hasta recibir a su primer residente.",
@@ -2360,7 +4466,16 @@
       ko: "사업 준비 시작부터 첫 입소 어르신을 맞이할 때까지의 단계별 일정입니다.",
       hy: "Քայլ առ քայլ ժամանակացույց՝ բիզնեսի մեկնարկից մինչև առաջին բնակչի ընդունումը։",
       ru: "Пошаговый план от запуска бизнеса до приема первого жильца.",
-      ar: "جدول زمني خطوة بخطوة من تأسيس المشروع حتى استقبال أول مقيم."
+      ar: "جدول زمني خطوة بخطوة من تأسيس المشروع حتى استقبال أول مقيم.",
+      fa: "جدول زمانی گام‌به‌گام از شروع ایده کسب‌وکار تا پذیرش اولین مقیم.",
+      hi: "व्यवसाय की शुरुआत से लेकर पहले निवासी के प्रवेश तक की चरण-दर-चरण समय-सीमा।",
+      pa: "ਕਾਰੋਬਾਰ ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਲੈ ਕੇ ਆਪਣੇ ਪਹਿਲੇ ਨਿਵਾਸੀ ਨੂੰ ਸਵੀਕਾਰ ਕਰਨ ਤੱਕ ਦੀ ਕਦਮ-ਦਰ-ਕਦਮ ਸਮਾਂ-ਸੀਮਾ।",
+      ja: "事業構想の段階から最初の入居者様をお迎えするまでのステップ別スケジュールです。",
+      uk: "Покроковий графік від ідеї бізнесу до прийому першого мешканця.",
+      he: "לוח זמנים שלב אחר שלב מהקמת העסק ועד קליטת הדייר הראשון.",
+      km: "កាលវិភាគជាជំហានៗ ចាប់ពីការចាប់ផ្តើមអាជីវកម្មរហូតដល់ការទទួលអ្នកស្នាក់នៅដំបូងរបស់លោកអ្នក។",
+      fr: "Un calendrier étape par étape, de la création du projet à l'accueil de votre premier résident.",
+      pt: "Um cronograma passo a passo desde a concepção do negócio até a admissão do primeiro residente."
     },
     "Stage 1: Administrator Certification & Prerequisites": {
       es: "Etapa 1: Certificación de Administrador y Requisitos",
@@ -2370,7 +4485,16 @@
       ko: "1단계: 관리자 자격 취득 및 사전 요건",
       hy: "Փուլ 1․ Ադմինիստրատորի սերտիֆիկացում և նախապայմաններ",
       ru: "Этап 1: Сертификация администратора и базовые требования",
-      ar: "المرحلة 1: شهادة المدير والمتطلبات الأولية"
+      ar: "المرحلة 1: شهادة المدير والمتطلبات الأولية",
+      fa: "مرحله ۱: گواهینامه مدیریت و پیش‌نیازها",
+      hi: "चरण 1: प्रशासक प्रमाणन और प्रारंभिक आवश्यकताएँ",
+      pa: "ਪੜਾਅ 1: ਪ੍ਰਸ਼ਾਸਕ ਪ੍ਰਮਾਣੀਕਰਨ ਅਤੇ ਮੁੱਢਲੀਆਂ ਸ਼ਰਤਾਂ",
+      ja: "第1段階：管理者資格の取得と事前要件の確認",
+      uk: "Етап 1: Сертифікація адміністратора та базові вимоги",
+      he: "שלב 1: הסמכת מנהל ודרישות קדם",
+      km: "ដំណាក់កាលទី 1៖ វិញ្ញាបនបត្រអ្នកគ្រប់គ្រង និងលក្ខខណ្ឌតម្រូវជាមុន",
+      fr: "Étape 1 : Certification d'administrateur et prérequis",
+      pt: "Etapa 1: Certificação de Administrador e Pré-Requisitos"
     },
     "Weeks 1–6": {
       es: "Semanas 1–6",
@@ -2380,7 +4504,16 @@
       ko: "1~6주차",
       hy: "Շաբաթներ 1–6",
       ru: "Недели 1–6",
-      ar: "الأسابيع 1–6"
+      ar: "الأسابيع 1–6",
+      fa: "هفته ۱ تا ۶",
+      hi: "सप्ताह 1–6",
+      pa: "ਹਫ਼ਤੇ 1–6",
+      ja: "第1〜6週",
+      uk: "Тижні 1–6",
+      he: "שבועות 1–6",
+      km: "សប្តាហ៍ទី 1–6",
+      fr: "Semaines 1 à 6",
+      pt: "Semanas 1–6"
     },
     "Complete mandatory 80-hour state-approved RCFE Administrator training, pass the California Department of Social Services (CDSS) state examination with 70%+, and obtain DOJ/FBI LiveScan fingerprint clearances.": {
       es: "Complete la capacitación estatal obligatoria de 80 horas para Administrador RCFE, apruebe el examen del CDSS con 70%+ y obtenga las verificaciones de huellas LiveScan ante DOJ/FBI.",
@@ -2390,7 +4523,16 @@
       ko: "주정부 승인 80시간 RCFE 관리자 필수 교육을 이수하고 CDSS 주정부 시험을 70% 이상으로 통과한 뒤 DOJ/FBI LiveScan 지문 신원조회를 완료합니다.",
       hy: "Անցեք պարտադիր 80-ժամյա պետական RCFE Ադմինիստրատորի դասընթացը, հանձնեք Կալիֆոռնիայի Սոցիալական ծառայությունների դեպարտամենտի (CDSS) քննությունը 70%+ արդյունքով և ստացեք DOJ/FBI LiveScan մատնահետքերի թույլտվություն։",
       ru: "Пройдите обязательное 80-часовое обучение администратора RCFE, сдайте экзамен CDSS с результатом 70%+ и получите проверку отпечатков пальцев DOJ/FBI LiveScan.",
-      ar: "أكمل تدريب مدير RCFE الإلزامي المعتمد من الولاية (80 ساعة)، واجتز اختبار CDSS بنسبة 70%+، واحصل على تصاريح البصمات DOJ/FBI LiveScan."
+      ar: "أكمل تدريب مدير RCFE الإلزامي المعتمد من الولاية (80 ساعة)، واجتز اختبار CDSS بنسبة 70%+، واحصل على تصاريح البصمات DOJ/FBI LiveScan.",
+      fa: "تکمیل دوره اجباری ۸۰ ساعته آموزش مدیریت RCFE مورد تأیید ایالت، قبولی در آزمون ایالتی CDSS با نمره ۷۰٪ به بالا و اخذ تأییدیه اثر انگشت LiveScan از DOJ/FBI.",
+      hi: "राज्य-स्वीकृत अनिवार्य 80-घंटे का RCFE प्रशासक प्रशिक्षण पूरा करें, 70%+ अंकों के साथ कैलिफ़ोर्निया सामाजिक सेवा विभाग (CDSS) की राज्य परीक्षा उत्तीर्ण करें और DOJ/FBI LiveScan फ़िंगरप्रिंट स्वीकृति प्राप्त करें।",
+      pa: "ਲਾਜ਼ਮੀ 80-ਘੰਟੇ ਦੀ ਰਾਜ-ਪ੍ਰਵਾਨਿਤ RCFE ਪ੍ਰਸ਼ਾਸਕ ਸਿਖਲਾਈ ਪੂਰੀ ਕਰੋ, California Department of Social Services (CDSS) ਦੀ ਰਾਜ ਪ੍ਰੀਖਿਆ 70%+ ਅੰਕਾਂ ਨਾਲ ਪਾਸ ਕਰੋ, ਅਤੇ DOJ/FBI LiveScan ਫਿੰਗਰਪ੍ਰਿੰਟ ਮਨਜ਼ੂਰੀ ਪ੍ਰਾਪਤ ਕਰੋ।",
+      ja: "州認定の必須80時間 RCFE 管理者研修を修了し、カリフォルニア州社会福祉局（CDSS）の州試験に70%以上のスコアで合格したうえで、DOJ および FBI の LiveScan（指紋照合による身元確認）を完了します。",
+      uk: "Пройдіть обов’язковий 80-годинний курс адміністратора RCFE, затверджений штатом, складіть державний іспит California Department of Social Services (CDSS) із результатом від 70% і отримайте допуски за відбитками пальців DOJ/FBI LiveScan.",
+      he: "השלמת קורס חובה של 80 שעות למנהלי RCFE המאושר על ידי המדינה, מעבר מבחן הרישוי של CDSS בציון 70%+ וקבלת אישורי טביעת אצבע LiveScan מ-DOJ/FBI.",
+      km: "បញ្ចប់វគ្គបណ្តុះបណ្តាលអ្នកគ្រប់គ្រង RCFE រយៈពេល 80 ម៉ោងដែលទទួលស្គាល់ដោយរដ្ឋ ប្រឡងជាប់ការប្រឡងរដ្ឋរបស់នាយកដ្ឋានសេវាសង្គមរដ្ឋ California (CDSS) ដោយទទួលបានពិន្ទុ 70%+ និងទទួលបានការបញ្ជាក់ស្នាមម្រាមដៃ DOJ/FBI LiveScan។",
+      fr: "Suivre la formation obligatoire de 80 heures d'administrateur RCFE agréée par l'État, réussir l'examen du Département des services sociaux de Californie (CDSS) avec au moins 70 %, et obtenir les vérifications d'empreintes DOJ/FBI LiveScan.",
+      pt: "Conclua o treinamento obrigatório de 80 horas aprovado pelo estado para Administrador de RCFE, obtenha aprovação mínima de 70% no exame estadual do California Department of Social Services (CDSS) e conclua a verificação biométrica DOJ/FBI LiveScan."
     },
     "Stage 2: Real Estate & STD 850 Fire Clearance": {
       es: "Etapa 2: Inmueble y Aprobación de Bomberos STD 850",
@@ -2400,7 +4542,16 @@
       ko: "2단계: 부동산 확보 및 STD 850 소방 승인",
       hy: "Փուլ 2․ Անշարժ գույք և STD 850 հրշեջ թույլտվություն",
       ru: "Этап 2: Недвижимость и пожарный допуск STD 850",
-      ar: "المرحلة 2: العقار وموافقة السلامة من الحرائق STD 850"
+      ar: "المرحلة 2: العقار وموافقة السلامة من الحرائق STD 850",
+      fa: "مرحله ۲: ملک و تأییدیه آتش‌نشانی STD 850",
+      hi: "चरण 2: संपत्ति चयन और STD 850 अग्नि सुरक्षा स्वीकृति",
+      pa: "ਪੜਾਅ 2: ਜਾਇਦਾਦ ਅਤੇ STD 850 ਅੱਗ ਸੁਰੱਖਿਆ ਮਨਜ਼ੂਰੀ",
+      ja: "第2段階：物件確保および STD 850 防火承認",
+      uk: "Етап 2: Нерухомість і пожежний дозвіл STD 850",
+      he: "שלב 2: נכס ואישור כבאות STD 850",
+      km: "ដំណាក់កាលទី 2៖ អចលនទ្រព្យ និងការអនុញ្ញាតអគ្គិភ័យ STD 850",
+      fr: "Étape 2 : Bien immobilier et approbation incendie STD 850",
+      pt: "Etapa 2: Imóvel e Aprovação contra Incêndios STD 850"
     },
     "Weeks 6–14": {
       es: "Semanas 6–14",
@@ -2410,7 +4561,16 @@
       ko: "6~14주차",
       hy: "Շաբաթներ 6–14",
       ru: "Недели 6–14",
-      ar: "الأسابيع 6–14"
+      ar: "الأسابيع 6–14",
+      fa: "هفته ۶ تا ۱۴",
+      hi: "सप्ताह 6–14",
+      pa: "ਹਫ਼ਤੇ 6–14",
+      ja: "第6〜14週",
+      uk: "Тижні 6–14",
+      he: "שבועות 6–14",
+      km: "សប្តាហ៍ទី 6–14",
+      fr: "Semaines 6 à 14",
+      pt: "Semanas 6–14"
     },
     "Secure a residential single-family home. Coordinate local zoning compliance, smoke detector interconnectivity, fire extinguishers, emergency exit pathways, and schedule city/county fire marshal inspection for Form STD 850 approval.": {
       es: "Asegure una vivienda unifamiliar residencial. Gestione la zonificación local, detectores de humo interconectados, extintores, salidas de emergencia y programe la inspección del jefe de bomberos para aprobar el Formulario STD 850.",
@@ -2420,7 +4580,16 @@
       ko: "단독주택 부지를 확보하고 지역 용도 규정을 확인한 뒤, 연동형 화재 감지기, 소화기, 비상 탈출 동선을 갖추어 관할 소방관의 STD 850 점검을 받습니다.",
       hy: "Ձեռք բերեք կամ վարձակալեք մեկընտանեկան բնակելի տուն։ Ապահովեք գոտիավորման համապատասխանությունը, ծխի դետեկտորների ցանցը, կրակմարիչները, վթարային ելքերը և նշանակեք քաղաքային/շրջանային հրշեջ տեսչության ստուգումը՝ STD 850 ձևի հաստատման համար։",
       ru: "Арендуйте или приобретите индивидуальный жилой дом. Приведите в соответствие зонирование, объединенные датчики дыма, огнетушители, эвакуационные выходы и организуйте проверку пожарного инспектора для формы STD 850.",
-      ar: "احصل على منزل عائلي سكني، واستوفِ شروط التنظيم المحلي، وربط كواشف الدخان، وطفايات الحريق، ومخارج الطوارئ، وجدولة معاينة الإطفاء لاعتماد نموذج STD 850."
+      ar: "احصل على منزل عائلي سكني، واستوفِ شروط التنظيم المحلي، وربط كواشف الدخان، وطفايات الحريق، ومخارج الطوارئ، وجدولة معاينة الإطفاء لاعتماد نموذج STD 850.",
+      fa: "تأمین یک خانه مسکونی تک‌خانواری. هماهنگی انطباق کاربری محلی، اتصال یکپارچه دتکتورهای دود، کپسول‌های آتش‌نشانی، مسیرهای خروج اضطراری و زمان‌بندی بازرسی رئیس آتش‌نشانی شهر/شهرستان برای تأیید فرم STD 850.",
+      hi: "एक आवासीय एकल-परिवार घर सुरक्षित करें। स्थानीय ज़ोनिंग अनुपालन, आपस में जुड़े स्मोक डिटेक्टर, अग्निशमन यंत्र, आपातकालीन निकास मार्ग सुनिश्चित करें और फ़ॉर्म STD 850 की स्वीकृति के लिए शहर/काउंटी फ़ायर मार्शल निरीक्षण तय करें।",
+      pa: "ਇੱਕ ਸਿੰਗਲ-ਫੈਮਿਲੀ ਰਿਹਾਇਸ਼ੀ ਘਰ ਦਾ ਪ੍ਰਬੰਧ ਕਰੋ। ਸਥਾਨਕ ਜ਼ੋਨਿੰਗ ਨਿਯਮਾਂ, ਆਪਸ ਵਿੱਚ ਜੁੜੇ ਸਮੋਕ ਡਿਟੈਕਟਰਾਂ, ਅੱਗ ਬੁਝਾਊ ਯੰਤਰਾਂ, ਐਮਰਜੈਂਸੀ ਨਿਕਾਸ ਰਸਤਿਆਂ ਦਾ ਪ੍ਰਬੰਧ ਕਰੋ, ਅਤੇ ਫਾਰਮ STD 850 ਦੀ ਮਨਜ਼ੂਰੀ ਲਈ ਸਿਟੀ/ਕਾਉਂਟੀ ਫਾਇਰ ਮਾਰਸ਼ਲ ਦੀ ਜਾਂਚ ਤੈਅ ਕਰੋ।",
+      ja: "一戸建て住宅物件を確保します。地域の用途地域規制の確認、連動型煙感知器や消火器の設置、非常避難経路の整備を行い、市または郡の消防担当官（Fire Marshal）による Form STD 850 承認検査を手配します。",
+      uk: "Оберіть та закріпіть за собою житловий будинок для однієї родини. Узгодьте відповідність місцевому зонуванню, взаємопов’язані датчики диму, вогнегасники, евакуаційні виходи та призначте інспекцію міського чи окружного пожежного маршала для затвердження форми STD 850.",
+      he: "איתור והסדרת בית מגורים צמוד-קרקע. התאמה לייעוד הקרקע המקומי, גלאי עשן מקושרים, מטפים, דרכי מילוט ותיאום ביקורת מפקח הכבאות העירוני/מחוזי לאישור טופס STD 850.",
+      km: "រៀបចំផ្ទះលំនៅដ្ឋានឯកជនមួយខ្នង។ សម្របសម្រួលការអនុលោមតាមប្លង់មេតំបន់ ការតភ្ជាប់ឧបករណ៍ចាប់ផ្សែងភ្លើង បំពង់ពន្លត់អគ្គិភ័យ ផ្លូវចេញសង្គ្រោះបន្ទាន់ និងកំណត់ពេលត្រួតពិនិត្យពីមន្ត្រីអគ្គិភ័យក្រុង/ខោនធី ដើម្បីទទួលបានការអនុម័តទម្រង់ STD 850។",
+      fr: "Sécuriser une maison individuelle résidentielle. Coordonner la conformité au zonage local, l'interconnexion des détecteurs de fumée, les extincteurs, les voies d'évacuation d'urgence et planifier l'inspection du Fire Marshal municipal ou du comté pour le formulaire STD 850.",
+      pt: "Garanta uma residência unifamiliar adequada. Alinhe a conformidade de zoneamento local, interconexão de detectores de fumaça, extintores, rotas de saída de emergência e agende a inspeção do corpo de bombeiros municipal ou do condado para aprovação do formulário STD 850."
     },
     "Stage 3: Application Submission (LIC 200 & Policies)": {
       es: "Etapa 3: Envío de Solicitud (LIC 200 y Políticas)",
@@ -2430,7 +4599,16 @@
       ko: "3단계: 인허가 신청서 접수 (LIC 200 및 규정집)",
       hy: "Փուլ 3․ Հայտի ներկայացում (LIC 200 և կանոնակարգեր)",
       ru: "Этап 3: Подача заявки (LIC 200 и регламенты)",
-      ar: "المرحلة 3: تقديم الطلب (LIC 200 والسياسات)"
+      ar: "المرحلة 3: تقديم الطلب (LIC 200 والسياسات)",
+      fa: "مرحله ۳: ارسال درخواست (LIC 200 و خط‌مشی‌ها)",
+      hi: "चरण 3: आवेदन जमा करना (LIC 200 और नीतियाँ)",
+      pa: "ਪੜਾਅ 3: ਅਰਜ਼ੀ ਜਮ੍ਹਾਂ ਕਰਨਾ (LIC 200 ਅਤੇ ਨੀਤੀਆਂ)",
+      ja: "第3段階：申請書類の提出（LIC 200 および各種規定）",
+      uk: "Етап 3: Подання заявки (LIC 200 та політики)",
+      he: "שלב 3: הגשת הבקשה (LIC 200 ונהלים)",
+      km: "ដំណាក់កាលទី 3៖ ការដាក់ពាក្យសុំ (LIC 200 និងគោលនយោបាយ)",
+      fr: "Étape 3 : Dépôt de la demande (LIC 200 et procédures)",
+      pt: "Etapa 3: Protocolo do Processo (LIC 200 e Políticas)"
     },
     "Weeks 14–22": {
       es: "Semanas 14–22",
@@ -2440,7 +4618,16 @@
       ko: "14~22주차",
       hy: "Շաբաթներ 14–22",
       ru: "Недели 14–22",
-      ar: "الأسابيع 14–22"
+      ar: "الأسابيع 14–22",
+      fa: "هفته ۱۴ تا ۲۲",
+      hi: "सप्ताह 14–22",
+      pa: "ਹਫ਼ਤੇ 14–22",
+      ja: "第14〜22週",
+      uk: "Тижні 14–22",
+      he: "שבועות 14–22",
+      km: "សប្តាហ៍ទី 14–22",
+      fr: "Semaines 14 à 22",
+      pt: "Semanas 14–22"
     },
     "Assemble the complete LIC 200 packet with all attachments: Financial Solvency (LIC 401), Disaster Plan (LIC 610E), Admission Agreements, Program of Activities, Theft & Loss policies, and submit non-refundable state fees.": {
       es: "Integre el paquete LIC 200 completo con todos sus anexos: Solvencia Financiera (LIC 401), Plan de Desastres (LIC 610E), Contratos de Admisión, Programa de Actividades, Políticas de Pérdidas y pague las tarifas estatales.",
@@ -2450,7 +4637,16 @@
       ko: "재정 건전성 서류(LIC 401), 재난 대응 계획(LIC 610E), 입소 계약서, 활동 프로그램, 도난·분실 규정 등을 포함한 LIC 200 전체 서류와 주정부 접수비를 제출합니다.",
       hy: "Հավաքեք LIC 200 ամբողջական փաթեթը՝ բոլոր հավելվածներով՝ Ֆինանսական վճարունակություն (LIC 401), Աղետների պլան (LIC 610E), Ընդունման պայմանագրեր, Զբաղմունքների ծրագիր, Գողության և կորստի քաղաքականություն և վճարեք պետական տուրքերը։",
       ru: "Соберите полный пакет LIC 200 со всеми приложениями: финансовая состоятельность (LIC 401), план действий при ЧС (LIC 610E), договоры приема, программа досуга, политика учета краж и утрат, и оплатите невозвратные госпошлины.",
-      ar: "تجميع حزمة LIC 200 الكاملة مع المرفقات: الملاءة المالية (LIC 401)، خطة الكوارث (LIC 610E)، اتفاقيات القبول، برنامج الأنشطة، وسياسات السرقة والفقدان مع سداد رسوم الولاية."
+      ar: "تجميع حزمة LIC 200 الكاملة مع المرفقات: الملاءة المالية (LIC 401)، خطة الكوارث (LIC 610E)، اتفاقيات القبول، برنامج الأنشطة، وسياسات السرقة والفقدان مع سداد رسوم الولاية.",
+      fa: "تکمیل بسته کامل LIC 200 به همراه تمامی پیوست‌ها: توان مالی (LIC 401)، برنامه بحران (LIC 610E)، قراردادهای پذیرش، برنامه فعالیت‌ها، خط‌مشی‌های سرقت و مفقودی و پرداخت هزینه‌های غیرقابل استرداد ایالتی.",
+      hi: "सभी संलग्नकों के साथ संपूर्ण LIC 200 पैकेट तैयार करें: वित्तीय क्षमता (LIC 401), आपदा योजना (LIC 610E), प्रवेश अनुबंध, गतिविधि कार्यक्रम, चोरी और हानि नीतियाँ, और राज्य का शुल्क जमा करें।",
+      pa: "ਸਾਰੇ ਨੱਥੀ ਦਸਤਾਵੇਜ਼ਾਂ ਸਮੇਤ ਪੂਰਾ LIC 200 ਪੈਕੇਟ ਤਿਆਰ ਕਰੋ: ਵਿੱਤੀ ਸਮਰੱਥਾ (LIC 401), ਆਫ਼ਤ ਯੋਜਨਾ (LIC 610E), ਦਾਖ਼ਲਾ ਸਮਝੌਤੇ, ਗਤੀਵਿਧੀਆਂ ਦਾ ਪ੍ਰੋਗਰਾਮ, ਚੋਰੀ ਅਤੇ ਨੁਕਸਾਨ ਨੀਤੀਆਂ, ਅਤੇ ਨਾ-ਵਾਪਸੀਯੋਗ ਰਾਜ ਫੀਸ ਜਮ੍ਹਾਂ ਕਰੋ।",
+      ja: "財務健全性証明書（LIC 401）、緊急災害対策計画（LIC 610E）、入居契約書、活動プログラム、盗難・紛失防止規定などすべての添付書類を含む LIC 200 申請一式を取りまとめ、州の申請手数料（返金不可）とともに提出します。",
+      uk: "Сформуйте повний пакет LIC 200 з усіма додатками: фінансова спроможність (LIC 401), план дій у надзвичайних ситуаціях (LIC 610E), договори про прийом, програма дозвілля, політика щодо крадіжок і втрат, а також сплатіть державні збори, що не повертаються.",
+      he: "גיבוש תיק LIC 200 המלא על כל נספחיו: איתנות פיננסית (LIC 401), תוכנית חירום (LIC 610E), הסכמי קליטה, תוכנית פעילויות, מדיניות גניבה ואובדן ותשלום אגרות המדינה.",
+      km: "ប្រមូលផ្តុំកញ្ចប់ឯកសារ LIC 200 ពេញលេញជាមួយឯកសារភ្ជាប់ទាំងអស់៖ ស្ថិរភាពហិរញ្ញវត្ថុ (LIC 401) ផែនការគ្រោះមហន្តរាយ (LIC 610E) កិច្ចព្រមព្រៀងចូលស្នាក់នៅ កម្មវិធីសកម្មភាព គោលនយោបាយអំពើលួច និងការបាត់បង់ ហើយបង់ថ្លៃសេវារដ្ឋដែលមិនអាចដកវិញបាន។",
+      fr: "Constituer le dossier LIC 200 complet avec toutes ses annexes : solvabilité financière (LIC 401), plan d'urgence (LIC 610E), contrats d'admission, programme d'activités, politiques contre le vol et les pertes, et régler les frais d'État non remboursables.",
+      pt: "Monte o pacote completo do formulário LIC 200 com todos os anexos: Solvência Financeira (LIC 401), Plano de Desastres (LIC 610E), Contratos de Admissão, Programa de Atividades, políticas de Furto e Perda e recolha as taxas estaduais."
     },
     "Stage 4: Component III & Pre-Licensing Inspection": {
       es: "Etapa 4: Componente III e Inspección Previa",
@@ -2460,7 +4656,16 @@
       ko: "4단계: Component III 인터뷰 및 최종 사전 실사",
       hy: "Փուլ 4․ Component III և նախալիցենզավորման ստուգում",
       ru: "Этап 4: Component III и предлицензионная инспекция",
-      ar: "المرحلة 4: مقابلة Component III وتفتيش ما قبل الترخيص"
+      ar: "المرحلة 4: مقابلة Component III وتفتيش ما قبل الترخيص",
+      fa: "مرحله ۴: مرحله سوم (Component III) و بازرسی پیش از مجوز",
+      hi: "चरण 4: Component III और पूर्व-लाइसेंसिंग निरीक्षण",
+      pa: "ਪੜਾਅ 4: Component III ਅਤੇ ਲਾਇਸੰਸ ਤੋਂ ਪਹਿਲਾਂ ਦਾ ਨਿਰੀਖਣ",
+      ja: "第4段階：Component III 面談および認可前実地検査",
+      uk: "Етап 4: Component III та передліцензійна інспекція",
+      he: "שלב 4: ראיון Component III וביקורת טרום-רישוי",
+      km: "ដំណាក់កាលទី 4៖ Component III និងការត្រួតពិនិត្យមុនទទួលអាជ្ញាប័ណ្ណ",
+      fr: "Étape 4 : Composante III et inspection pré-licence",
+      pt: "Etapa 4: Componente III e Inspeção Pré-Licenciamento"
     },
     "Weeks 22–28": {
       es: "Semanas 22–28",
@@ -2470,7 +4675,16 @@
       ko: "22~28주차",
       hy: "Շաբաթներ 22–28",
       ru: "Недели 22–28",
-      ar: "الأسابيع 22–28"
+      ar: "الأسابيع 22–28",
+      fa: "هفته ۲۲ تا ۲۸",
+      hi: "सप्ताह 22–28",
+      pa: "ਹਫ਼ਤੇ 22–28",
+      ja: "第22〜28週",
+      uk: "Тижні 22–28",
+      he: "שבועות 22–28",
+      km: "សប្តាហ៍ទី 22–28",
+      fr: "Semaines 22 à 28",
+      pt: "Semanas 22–28"
     },
     "Attend the in-person Component III interview with your assigned Licensing Program Analyst (LPA). Pass the on-site physical plant inspection (hot water testing 105°–120°F, locked medications, first-aid, food reserves) and receive your license.": {
       es: "Asista a la entrevista presencial del Componente III con su analista LPA asignado. Apruebe la inspección física (temperatura de agua caliente 105°–120°F, medicamentos bajo llave, botiquín, reservas de alimentos) y reciba su licencia.",
@@ -2480,7 +4694,16 @@
       ko: "담당 인허가 심사관(LPA)과의 Component III 대면 인터뷰에 참석하고 현장 물리적 실사(온수 온도 105°–120°F, 잠금 약품함, 구급함, 비상 식량 등)를 통과해 최종 라이선스를 발급받습니다.",
       hy: "Մասնակցեք նշանակված LPA վերլուծաբանի հետ անձնական Component III հարցազրույցին։ Անցեք տեղում շինության ստուգումը (տաք ջուրը 105°–120°F, փակված դեղեր, առաջին օգնություն, սննդի պաշարներ) և ստացեք ձեր լիցենզիան։",
       ru: "Пройдите личное интервью Component III с назначенным инспектором LPA. Успешно пройдите выездной осмотр помещения (температура воды 105°–120°F, сейф для лекарств, аптечка, запас продуктов) и получите лицензию.",
-      ar: "احضر مقابلة Component III الشخصية مع محلل الترخيص (LPA)، واجتز التفتيش الميداني للمبنى (اختبار حرارة الماء 105°–120°F، قفل الأدوية، الإسعافات الأولية، ومخزون الغذاء) واستلم ترخيصك."
+      ar: "احضر مقابلة Component III الشخصية مع محلل الترخيص (LPA)، واجتز التفتيش الميداني للمبنى (اختبار حرارة الماء 105°–120°F، قفل الأدوية، الإسعافات الأولية، ومخزون الغذاء) واستلم ترخيصك.",
+      fa: "شرکت در مصاحبه حضوری Component III با کارشناس برنامه صدور مجوز (LPA) اختصاص‌یافته. قبولی در بازرسی فیزیکی محل (آزمایش دمای آب گرم ۱۰۵ تا ۱۲۰ درجه فارنهایت، داروهای قفل‌شده، کمک‌های اولیه، ذخیره غذایی) و دریافت مجوز.",
+      hi: "अपने नियुक्त लाइसेंसिंग प्रोग्राम एनालिस्ट (LPA) के साथ व्यक्तिगत Component III साक्षात्कार में शामिल हों। स्थल पर भौतिक निरीक्षण (105°–120°F गर्म पानी परीक्षण, ताले में सुरक्षित दवाइयाँ, प्राथमिक चिकित्सा, भोजन भंडार) पास करें और अपना लाइसेंस प्राप्त करें।",
+      pa: "ਆਪਣੇ ਨਿਰਧਾਰਤ Licensing Program Analyst (LPA) ਨਾਲ ਵਿਅਕਤੀਗਤ Component III ਇੰਟਰਵਿਊ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ। ਮੌਕੇ 'ਤੇ ਇਮਾਰਤ ਦੀ ਜਾਂਚ (ਗਰਮ ਪਾਣੀ ਦੀ ਜਾਂਚ 105°–120°F, ਤਾਲਾਬੰਦ ਦਵਾਈਆਂ, ਫਸਟ-ਏਡ, ਭੋਜਨ ਭੰਡਾਰ) ਪਾਸ ਕਰੋ ਅਤੇ ਆਪਣਾ ਲਾਇਸੰਸ ਪ੍ਰਾਪਤ ਕਰੋ।",
+      ja: "担当の認可プログラム審査官（LPA）との対面式 Component III 面談に出席します。現地施設検査（給湯温度 105°〜120°F の確認、施錠された薬品保管、救急用品、非常食備蓄など）に合格し、正式なライセンスが交付されます。",
+      uk: "Пройдіть особисту співбесіду Component III із призначеним вам аналітиком програми ліцензування (LPA). Успішно складіть виїзну інспекцію приміщення (перевірка гарячої води 105°–120°F, замкнені медикаменти, аптечка, запаси продуктів) і отримайте ліцензію.",
+      he: "השתתפות בראיון פרונטלי Component III מול מפקח הרישוי (LPA). מעבר ביקורת המבנה באתר (בדיקת טמפרטורת מים חמים 105°–120°F, תרופות נעולות, עזרה ראשונה, מלאי מזון) וקבלת הרישיון.",
+      km: "ចូលរួមការសម្ភាសន៍ផ្ទាល់ Component III ជាមួយអ្នកវិភាគកម្មវិធីអាជ្ញាប័ណ្ណ (LPA) ដែលបានចាត់តាំង។ ឆ្លងកាត់ការត្រួតពិនិត្យអគារផ្ទាល់ (ការធ្វើតេស្តទឹកក្តៅ 105°–120°F ថ្នាំចាក់សោ សម្ភារៈសង្គ្រោះបឋម អាហារបម្រុង) ហើយទទួលបានអាជ្ញាប័ណ្ណរបស់លោកអ្នក។",
+      fr: "Participer à l'entretien en personne de la Composante III avec votre analyste de programme de licence (LPA). Réussir l'inspection sur place des locaux (contrôle de l'eau chaude entre 105° et 120°F, médicaments sous clé, trousse de premiers secours, réserves alimentaires) et recevoir votre licence.",
+      pt: "Compareça à entrevista presencial do Componente III com o Licensing Program Analyst (LPA) designado. Passe na inspeção física presencial (teste de água quente entre 105°–120°F, medicamentos trancados, primeiros socorros, estoque de alimentos) e receba sua licença."
     },
     "Want Love RCFE to draft your policies and guide your inspection?": {
       es: "¿Desea que Love RCFE redacte sus políticas y lo prepare para su inspección?",
@@ -2490,7 +4713,16 @@
       ko: "운영 규정집 작성부터 현장 실사까지 Love RCFE의 전담 가이드를 받고 싶으신가요?",
       hy: "Ցանկանո՞ւմ եք, որ Love RCFE-ն կազմի ձեր կանոնակարգերը և ուղեկցի ստուգման ժամանակ",
       ru: "Хотите, чтобы Love RCFE подготовила документы и сопроводила проверку?",
-      ar: "هل تريد أن تتولى Love RCFE صياغة سياساتك وتوجيهك في التفتيش؟"
+      ar: "هل تريد أن تتولى Love RCFE صياغة سياساتك وتوجيهك في التفتيش؟",
+      fa: "می‌خواهید Love RCFE خط‌مشی‌های شما را تدوین کند و در بازرسی همراهتان باشد؟",
+      hi: "क्या आप चाहते हैं कि Love RCFE आपकी नीतियाँ तैयार करे और निरीक्षण में मार्गदर्शन दे?",
+      pa: "ਕੀ ਤੁਸੀਂ ਚਾਹੁੰਦੇ ਹੋ ਕਿ Love RCFE ਤੁਹਾਡੀਆਂ ਨੀਤੀਆਂ ਤਿਆਰ ਕਰੇ ਅਤੇ ਨਿਰੀਖਣ ਵਿੱਚ ਮਾਰਗਦਰਸ਼ਨ ਕਰੇ?",
+      ja: "Love RCFE に規定書類の作成や実地検査の対策をお任せになりませんか？",
+      uk: "Хочете, щоб Love RCFE підготували ваші регламенти та супроводили інспекцію?",
+      he: "רוצים שצוות Love RCFE ינסח את הנהלים וילווה אתכם בביקורת?",
+      km: "តើលោកអ្នកចង់ឱ្យ Love RCFE ជួយព្រាងគោលនយោបាយ និងណែនាំការត្រួតពិនិត្យរបស់លោកអ្នកដែរឬទេ?",
+      fr: "Vous souhaitez que Love RCFE rédige vos procédures et vous prépare à l'inspection ?",
+      pt: "Quer que a Love RCFE elabore suas políticas e oriente sua inspeção?"
     },
     "Discuss Operator Consulting": {
       es: "Hablar sobre consultoría",
@@ -2500,7 +4732,16 @@
       ko: "운영자 컨설팅 문의하기",
       hy: "Քննարկել օպերատորների խորհրդատվությունը",
       ru: "Обсудить консалтинг для операторов",
-      ar: "ناقش استشارات المشغلين"
+      ar: "ناقش استشارات المشغلين",
+      fa: "گفتگو درباره مشاوره بهره‌برداران",
+      hi: "संचालक परामर्श पर चर्चा करें",
+      pa: "ਸੰਚਾਲਕ ਸਲਾਹ ਬਾਰੇ ਗੱਲ ਕਰੋ",
+      ja: "事業者コンサルティングを相談する",
+      uk: "Обговорити консалтинг для операторів",
+      he: "דברו איתנו על ייעוץ למפעילים",
+      km: "ពិភាក្សាអំពីការប្រឹក្សាសម្រាប់អ្នកបើកមណ្ឌល",
+      fr: "Échanger sur le conseil aux exploitants",
+      pt: "Conversar sobre Consultoria para Operadores"
     },
     "Our Core Philosophy": {
       es: "Nuestra Filosofía Central",
@@ -2510,7 +4751,16 @@
       ko: "우리의 핵심 철학",
       hy: "Մեր հիմնական փիլիսոփայությունը",
       ru: "Наша философия",
-      ar: "فلسفتنا الأساسية"
+      ar: "فلسفتنا الأساسية",
+      fa: "فلسفه اصلی ما",
+      hi: "हमारा मूल दर्शन",
+      pa: "ਸਾਡਾ ਮੂਲ ਸਿਧਾਂਤ",
+      ja: "私たちの基本理念",
+      uk: "Наша головна філософія",
+      he: "תפיסת העולם שלנו",
+      km: "ទស្សនវិជ្ជាស្នូលរបស់យើង",
+      fr: "Notre philosophie fondamentale",
+      pt: "Nossa Filosofia Central"
     },
     "Personal guidance, one deliberate step at a time.": {
       es: "Asesoría personal, un paso firme a la vez.",
@@ -2520,7 +4770,16 @@
       ko: "신중하고 세심하게, 한 걸음씩 함께하는 맞춤 상담.",
       hy: "Անհատական ուղեկցում՝ մեկ մտածված քայլ առաջ գնալով։",
       ru: "Индивидуальное сопровождение — один продуманный шаг за раз.",
-      ar: "إرشاد شخصي، خطوة مدروسة تلو الأخرى."
+      ar: "إرشاد شخصي، خطوة مدروسة تلو الأخرى.",
+      fa: "راهنمایی شخصی، با گام‌هایی سنجیده و دقیق.",
+      hi: "व्यक्तिगत मार्गदर्शन, एक सुविचारित कदम एक बार में।",
+      pa: "ਨਿੱਜੀ ਮਾਰਗਦਰਸ਼ਨ, ਹਰ ਕਦਮ ਪੂਰੀ ਸੋਚ-ਸਮਝ ਨਾਲ।",
+      ja: "一人ひとりに寄り添い、一歩ずつ誠実にご案内します。",
+      uk: "Персональний супровід — крок за кроком, виважено й дбайливо.",
+      he: "ליווי אישי, צעד מדויק ושקול בכל פעם.",
+      km: "ការណែនាំផ្ទាល់ខ្លួន មួយជំហានម្តងៗដោយការគិតគូរដិតដល់។",
+      fr: "Un accompagnement humain, étape après étape, avec discernement.",
+      pt: "Orientação pessoal, um passo seguro de cada vez."
     },
     "We reject high-pressure referral factories. Every senior is someone's mother, father, or partner. Every care home operator is building a sanctuary for vulnerable elders. We ground our work in calm clarity and regulatory rigor.": {
       es: "Rechazamos las agencias impersonales de referencia masiva. Cada adulto mayor es la madre, padre o pareja de alguien. Cada operador construye un refugio para personas mayores vulnerables. Trabajamos con serenidad y rigor normativo.",
@@ -2530,7 +4789,16 @@
       ko: "저희는 기계적인 대량 알선 방식을 거부합니다. 모든 어르신은 누군가의 소중한 어머니이자 아버지, 배우자이며 모든 시설 운영자는 어르신의 안식처를 만드는 분들입니다. 차분한 명확성과 엄격한 규정 준수를 최우선으로 삼습니다.",
       hy: "Մենք մերժում ենք ագրեսիվ ուղեգրման գործակալությունների մոտեցումը։ Յուրաքանչյուր տարեց ինչ-որ մեկի մայրն է, հայրը կամ կողակիցը։ Յուրաքանչյուր խնամքի տան սեփականատեր կառուցում է ապահով ապաստան։ Մենք մեր աշխատանքը կառուցում ենք հանգիստ հստակության և իրավական ճշգրտության վրա։",
       ru: "Мы отвергаем конвейерные агентства с навязчивыми продажами. Каждый пожилой человек — чья-то мать, отец или супруг. Каждый владелец пансионата создает безопасный дом для уязвимых людей. В основе нашей работы — спокойная ясность и точность в правилах.",
-      ar: "نرفض مكاتب الإحالة التجارية القائمة على الضغط. كل مسنّ هو أم أو أب أو شريك حياة لشخص ما، وكل مشغّل يبني ملاذاً آمناً لكبار السن. نرتكز في عملنا على الوضوح الهادئ والدقة التنظيمية."
+      ar: "نرفض مكاتب الإحالة التجارية القائمة على الضغط. كل مسنّ هو أم أو أب أو شريك حياة لشخص ما، وكل مشغّل يبني ملاذاً آمناً لكبار السن. نرتكز في عملنا على الوضوح الهادئ والدقة التنظيمية.",
+      fa: "ما با کارخانه‌های پرفشار معرفی مرکز مخالفیم. هر سالمند مادر، پدر یا همسر کسی است. هر بهره‌بردار خانه مراقبت در حال ساختن پناهگاهی امن برای سالمندان آسیب‌پذیر است. ما کار خود را بر پایه شفافیت آرام و دقت مقرراتی بنا نهاده‌ایم.",
+      hi: "हम दबाव डालने वाली रेफ़रल एजेंसियों की कार्यशैली को अस्वीकार करते हैं। हर वरिष्ठ व्यक्ति किसी की माँ, पिता या जीवनसाथी होता है। हर देखभाल गृह संचालक संवेदनशील बुज़ुर्गों के लिए एक सुरक्षित आश्रय बना रहा होता है। हम अपने काम की नींव शांत स्पष्टता और नियामक सटीकता पर रखते हैं।",
+      pa: "ਅਸੀਂ ਦਬਾਅ ਪਾ ਕੇ ਰੈਫਰਲ ਕਰਨ ਵਾਲੇ ਢੰਗਾਂ ਨੂੰ ਨਕਾਰਦੇ ਹਾਂ। ਹਰ ਬਜ਼ੁਰਗ ਕਿਸੇ ਦੀ ਮਾਂ, ਪਿਤਾ ਜਾਂ ਜੀਵਨ-ਸਾਥੀ ਹੁੰਦਾ ਹੈ। ਹਰ ਦੇਖਭਾਲ ਘਰ ਦਾ ਸੰਚਾਲਕ ਕਮਜ਼ੋਰ ਬਜ਼ੁਰਗਾਂ ਲਈ ਇੱਕ ਸੁਰੱਖਿਅਤ ਆਸਰਾ ਬਣਾ ਰਿਹਾ ਹੁੰਦਾ ਹੈ। ਅਸੀਂ ਆਪਣਾ ਕੰਮ ਸ਼ਾਂਤ ਸਪੱਸ਼ਟਤਾ ਅਤੇ ਨਿਯਮਾਂ ਦੀ ਸਖ਼ਤ ਪਾਲਣਾ ਨਾਲ ਕਰਦੇ ਹਾਂ।",
+      ja: "私たちはノルマ重視の強引な紹介業者とは一線を画します。すべてのご高齢者は、誰かにとってかけがえのないお母様、お父様、またはパートナーです。そしてケアホームの運営者は、支援を必要とするご高齢者のための安らぎの拠り所を築いています。私たちは穏やかな明快さと厳格な法令遵守を活動の土台としています。",
+      uk: "Ми не працюємо як конвеєрні агентства тиску. Кожна літня людина — чиясь мама, тато або коханий партнер. Кожен оператор будинку догляду створює безпечний прихисток для вразливих людей. Ми будуємо свою роботу на спокійній ясності та суворому дотриманні норм.",
+      he: "אנו דוחים מוקדי הפניות לוחצים. כל אדם מבוגר הוא אמא, אבא או בן/בת זוג של מישהו. כל מפעיל של בית טיפולי בונה מקלט בטוח לקשישים פגיעים. עבודתנו מבוססת על בהירות רגועה והקפדה רגולטורית.",
+      km: "យើងបដិសេធប្រព័ន្ធណែនាំដែលដាក់សម្ពាធខ្ពស់។ មនុស្សចាស់គ្រប់រូបគឺជាម្តាយ ឪពុក ឬដៃគូរបស់នរណាម្នាក់។ អ្នកបើកផ្ទះថែទាំគ្រប់រូបកំពុងកសាងទីជម្រកសុវត្ថិភាពសម្រាប់មនុស្សចាស់ដែលងាយរងគ្រោះ។ យើងផ្អែកការងាររបស់យើងលើភាពច្បាស់លាស់ដ៏ស្ងប់ស្ងាត់ និងភាពម៉ត់ចត់ផ្នែកបទប្បញ្ញត្តិ។",
+      fr: "Nous rejetons les usines à recommandations sous pression. Chaque personne âgée est la mère, le père ou le conjoint de quelqu'un. Chaque exploitant de foyer bâtit un sanctuaire pour des aînés vulnérables. Nous fondons notre travail sur une clarté sereine et une rigueur réglementaire absolue.",
+      pt: "Rejeitamos centrais de encaminhamento apressadas e impessoais. Cada idoso é a mãe, o pai ou o companheiro de alguém. Cada operador está construindo um refúgio seguro para pessoas vulneráveis. Baseamos nosso trabalho em clareza tranquila e rigor regulatório."
     },
     "Our Independence Promise": {
       es: "Nuestro Compromiso de Independencia",
@@ -2540,7 +4808,16 @@
       ko: "독립성과 객관성에 대한 약속",
       hy: "Մեր անկախության խոստումը",
       ru: "Наше обещание независимости",
-      ar: "وعدنا بالاستقلالية"
+      ar: "وعدنا بالاستقلالية",
+      fa: "تعهد ما به استقلال و بی‌طرفی",
+      hi: "हमारी निष्पक्षता का वचन",
+      pa: "ਸਾਡਾ ਨਿਰਪੱਖਤਾ ਦਾ ਵਾਅਦਾ",
+      ja: "中立性と独立性のお約束",
+      uk: "Наше зобов’язання незалежності",
+      he: "המחויבות שלנו לעצמאות ויושרה",
+      km: "ការសន្យាឯករាជ្យភាពរបស់យើង",
+      fr: "Notre promesse d'indépendance",
+      pt: "Nosso Compromisso de Independência"
     },
     "We do not push facilities based on referral kickbacks. We inspect state citations, review physical cleanliness, and match care capabilities directly with resident health needs.": {
       es: "No impulsamos centros por comisiones ocultas. Revisamos infracciones estatales, limpieza física y comparamos la capacidad real de atención con las necesidades de salud del residente.",
@@ -2550,7 +4827,16 @@
       ko: "소개 수수료에 따라 특정 시설을 밀어주지 않습니다. 주정부 시정 이력과 시설 청결도를 점검하고 어르신의 건강 상태에 실제로 부합하는 곳만 연결합니다.",
       hy: "Մենք չենք առաջարկում հաստատություններ միայն վարձատրության չափի համար։ Մենք ստուգում ենք նահանգային խախտումները, գնահատում մաքրությունը և համադրում խնամքի հնարավորությունները բնակչի առողջական կարիքների հետ։",
       ru: "Мы не навязываем пансионаты ради высокой комиссии. Мы проверяем государственные отчеты о нарушениях, чистоту помещений и подбираем уход строго под состояние здоровья жильца.",
-      ar: "لا نروج للمرافق بناءً على العمولات المرتفعة. نفحص تقارير المخالفات الحكومية ونراجع النظافة ونطابق قدرات الرعاية مباشرة مع الاحتياجات الصحية للمقيم."
+      ar: "لا نروج للمرافق بناءً على العمولات المرتفعة. نفحص تقارير المخالفات الحكومية ونراجع النظافة ونطابق قدرات الرعاية مباشرة مع الاحتياجات الصحية للمقيم.",
+      fa: "ما مراکز را بر اساس پورسانت معرفی تحمیل نمی‌کنیم. گزارش‌های تخلفات ایالتی را بررسی می‌کنیم، نظافت محیط را می‌سنجیم و توانمندی‌های مراقبتی مرکز را دقیقاً با نیازهای سلامت مقیم تطبیق می‌دهیم.",
+      hi: "हम रेफ़रल कमीशन के लालच में किसी केंद्र की सिफ़ारिश नहीं करते। हम राज्य निरीक्षण रिकॉर्ड देखते हैं, स्वच्छता की जांच करते हैं और देखभाल क्षमता का सीधे निवासी की स्वास्थ्य आवश्यकताओं से मिलान करते हैं।",
+      pa: "ਅਸੀਂ ਕਮਿਸ਼ਨ ਦੇ ਲਾਲਚ ਵਿੱਚ ਕਿਸੇ ਕੇਂਦਰ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕਰਦੇ। ਅਸੀਂ ਸਰਕਾਰੀ ਉਲੰਘਣਾਵਾਂ (citations) ਦੀ ਜਾਂਚ ਕਰਦੇ ਹਾਂ, ਸਫ਼ਾਈ ਦਾ ਜਾਇਜ਼ਾ ਲੈਂਦੇ ਹਾਂ, ਅਤੇ ਦੇਖਭਾਲ ਸਮਰੱਥਾ ਦਾ ਸਿੱਧਾ ਮਿਲਾਪ ਨਿਵਾਸੀ ਦੀਆਂ ਸਿਹਤ ਲੋੜਾਂ ਨਾਲ ਕਰਦੇ ਹਾਂ।",
+      ja: "紹介料の多寡で施設を優先推薦することは決してありません。州の違反・指導履歴を確認し、施設の清潔さを確かめ、ご入居者様の健康状態に真に見合うケア体制を備えた施設のみをご提案いたします。",
+      uk: "Ми не нав’язуємо заклади заради вигоди. Ми перевіряємо державні приписи, оцінюємо реальну чистоту приміщень і підбираємо можливості догляду точно під медичні потреби мешканця.",
+      he: "איננו דוחפים מתקנים על סמך עמלות הפניה. אנו בודקים דוחות ליקויים רשמיים, בוחנים ניקיון ומתאימים את היכולות הטיפוליות ישירות לצרכים הבריאותיים של הדייר.",
+      km: "យើងមិនជំរុញមណ្ឌលណាមួយដោយផ្អែកលើកម្រៃជើងសារលាក់កំបាំងឡើយ។ យើងត្រួតពិនិត្យកំណត់ត្រាល្មើសបទប្បញ្ញត្តិរដ្ឋ ពិនិត្យអនាម័យទីតាំង និងផ្គូផ្គងសមត្ថភាពថែទាំដោយផ្ទាល់ជាមួយតម្រូវការសុខភាពរបស់អ្នកស្នាក់នៅ។",
+      fr: "Nous n'orientons jamais vers un établissement en fonction de commissions. Nous inspectons les citations officielles de l'État, vérifions la propreté des lieux et faisons correspondre les capacités de soins aux besoins de santé réels du résident.",
+      pt: "Não indicamos casas com base em comissões ocultas. Analisamos históricos de autuações estaduais, avaliamos limpeza e estrutura e alinhamos a capacidade assistencial diretamente às necessidades de saúde do residente."
     },
     "Tell us your story": {
       es: "Cuéntenos su historia",
@@ -2560,7 +4846,16 @@
       ko: "가족의 이야기를 들려주세요",
       hy: "Պատմեք մեզ ձեր պատմությունը",
       ru: "Расскажите свою историю",
-      ar: "أخبرنا بقصتك"
+      ar: "أخبرنا بقصتك",
+      fa: "داستان خود را با ما در میان بگذارید",
+      hi: "अपनी कहानी हमें बताएँ",
+      pa: "ਸਾਨੂੰ ਆਪਣੀ ਸਥਿਤੀ ਦੱਸੋ",
+      ja: "まずはお話をお聞かせください",
+      uk: "Розкажіть вашу історію",
+      he: "ספרו לנו את הסיפור שלכם",
+      km: "ប្រាប់យើងពីរឿងរ៉ាវរបស់លោកអ្នក",
+      fr: "Racontez-nous votre histoire",
+      pt: "Conte-nos a sua história"
     },
     "We begin with a confidential discovery discussion. We listen to medical histories, family dynamics, geographic boundaries, or your entrepreneurial goals for an RCFE business.": {
       es: "Comenzamos con una conversación confidencial. Escuchamos el historial médico, la dinámica familiar, la zona geográfica preferida o sus metas emprendedoras para abrir un RCFE.",
@@ -2570,7 +4865,16 @@
       ko: "비밀이 보장되는 초기 상담으로 시작합니다. 병력, 가족 상황, 희망 지역, 혹은 RCFE 창업 목표까지 세심히 경청합니다.",
       hy: "Մենք սկսում ենք գաղտնի նախնական զրույցով։ Լսում ենք բժշկական պատմությունը, ընտանեկան իրավիճակը, նախընտրելի շրջանները կամ RCFE բիզնեսի ձեր նպատակները։",
       ru: "Мы начинаем с конфиденциальной беседы: изучаем медицинскую ситуацию, пожелания семьи, географию или ваши бизнес-цели по открытию RCFE.",
-      ar: "نبدأ بمحادثة استكشافية سرية نستمع فيها للتاريخ الطبي، وظروف العائلة، والنطاق الجغرافي، أو أهدافك في إطلاق مشروع RCFE."
+      ar: "نبدأ بمحادثة استكشافية سرية نستمع فيها للتاريخ الطبي، وظروف العائلة، والنطاق الجغرافي، أو أهدافك في إطلاق مشروع RCFE.",
+      fa: "کار را با یک گفتگوی محرمانه آشنایی آغاز می‌کنیم. به سوابق پزشکی، شرایط خانواده، محدوده جغرافیایی مورد نظر یا اهداف کارآفرینانه شما برای راه‌اندازی RCFE گوش می‌دهیم.",
+      hi: "हम एक गोपनीय प्रारंभिक बातचीत से शुरुआत करते हैं। हम चिकित्सा इतिहास, पारिवारिक परिस्थितियों, पसंदीदा क्षेत्र या RCFE व्यवसाय के लिए आपके उद्यमशील लक्ष्यों को ध्यान से सुनते हैं।",
+      pa: "ਅਸੀਂ ਇੱਕ ਗੁਪਤ ਸ਼ੁਰੂਆਤੀ ਗੱਲਬਾਤ ਨਾਲ ਆਗਾਜ਼ ਕਰਦੇ ਹਾਂ। ਅਸੀਂ ਡਾਕਟਰੀ ਇਤਿਹਾਸ, ਪਰਿਵਾਰਕ ਹਾਲਾਤ, ਪਸੰਦੀਦਾ ਇਲਾਕੇ, ਜਾਂ RCFE ਕਾਰੋਬਾਰ ਲਈ ਤੁਹਾਡੇ ਉੱਦਮੀ ਟੀਚਿਆਂ ਨੂੰ ਧਿਆਨ ਨਾਲ ਸੁਣਦੇ ਹਾਂ।",
+      ja: "まずは守秘義務を厳守した個別ヒアリングから始めます。病歴やご家族のご事情、ご希望エリア、あるいは RCFE 開業に向けた事業構想を丁寧にお伺いいたします。",
+      uk: "Ми починаємо з конфіденційної ознайомчої розмови. Уважно вислуховуємо медичну історію, родинну ситуацію, побажання щодо району або ваші підприємницькі плани відкриття RCFE.",
+      he: "אנו מתחילים בשיחת היכרות חסויה. אנו מקשיבים לרקע הרפואי, לדינמיקה המשפחתית, לאזורים המועדפים או ליעדים העסקיים שלכם בהקמת RCFE.",
+      km: "យើងចាប់ផ្តើមដោយការពិភាក្សាស្វែងយល់ជាការសម្ងាត់។ យើងស្តាប់ប្រវត្តិវេជ្ជសាស្ត្រ ស្ថានភាពគ្រួសារ ព្រំដែនភូមិសាស្ត្រ ឬគោលដៅសហគ្រិនរបស់លោកអ្នកសម្រាប់អាជីវកម្ម RCFE។",
+      fr: "Nous commençons par un entretien exploratoire confidentiel. Nous écoutons les antécédents médicaux, la dynamique familiale, vos critères géographiques ou vos ambitions entrepreneuriales pour un projet RCFE.",
+      pt: "Começamos com uma conversa inicial confidencial. Ouvimos o histórico médico, a dinâmica familiar, preferências geográficas ou suas metas empreendedoras para abrir um RCFE."
     },
     "Unpack options & verify compliance": {
       es: "Analizar opciones y verificar cumplimiento",
@@ -2580,7 +4884,16 @@
       ko: "옵션 비교 분석 및 규정 준수 확인",
       hy: "Վերլուծել տարբերակները և ստուգել համապատասխանությունը",
       ru: "Разбор вариантов и проверка требований",
-      ar: "تحليل الخيارات والتحقق من الامتثال"
+      ar: "تحليل الخيارات والتحقق من الامتثال",
+      fa: "شفاف‌سازی گزینه‌ها و راستی‌آزمایی مجوزها",
+      hi: "विकल्पों को समझें और अनुपालन सत्यापित करें",
+      pa: "ਵਿਕਲਪਾਂ ਨੂੰ ਸਮਝੋ ਅਤੇ ਨਿਯਮਾਂ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      ja: "選択肢の整理と法令適合性の確認",
+      uk: "Розбір варіантів і перевірка відповідності",
+      he: "מיפוי אפשרויות ובדיקת עמידה בתקנות",
+      km: "ពន្យល់ជម្រើស និងផ្ទៀងផ្ទាត់ការអនុលោមតាមច្បាប់",
+      fr: "Clarifier les options et vérifier la conformité",
+      pt: "Esclarecer opções e validar conformidade"
     },
     "We cut through the jargon. We explain the legal differences between RCFE, Hospice Waivers, and Nursing Facilities, verify state licenses, and outline financial costs and schedules.": {
       es: "Eliminamos la jerga técnica. Explicamos las diferencias legales entre RCFE, exenciones de hospicio y enfermería especializada, verificamos licencias estatales y detallamos costos y plazos.",
@@ -2590,7 +4903,16 @@
       ko: "어려운 전문 용어를 쉽게 풀어드립니다. RCFE, 호스피스 면제, 전문간호시설의 법적 차이를 설명하고 주정부 면허를 검증하며 예상 비용과 일정을 투명하게 정리합니다.",
       hy: "Մենք պարզեցնում ենք բարդ տերմինները։ Բացատրում ենք RCFE-ի, Hospice Waiver-ի և բուժքույրական հաստատությունների իրավական տարբերությունները, ստուգում լիցենզիաները և ներկայացնում ծախսերն ու ժամկետները։",
       ru: "Мы объясняем все простым языком: в чем юридическая разница между RCFE, хосписным допуском и домами сестринского ухода, проверяем лицензии и расписываем бюджет и сроки.",
-      ar: "نبسّط المصطلحات المعقدة، ونشرح الفروق القانونية بين RCFE وإعفاءات المحتضرين ومرافق التمريض، ونتحقق من التراخيص ونوضح التكاليف والجداول الزمنية."
+      ar: "نبسّط المصطلحات المعقدة، ونشرح الفروق القانونية بين RCFE وإعفاءات المحتضرين ومرافق التمريض، ونتحقق من التراخيص ونوضح التكاليف والجداول الزمنية.",
+      fa: "اصطلاحات پیچیده را ساده می‌کنیم. تفاوت‌های قانونی بین RCFE، مجوزهای مراقبت تسکینی و مراکز پرستاری را توضیح می‌دهیم، مجوزهای ایالتی را استعلام می‌گیریم و هزینه‌ها و زمان‌بندی را ترسیم می‌کنیم.",
+      hi: "हम जटिल तकनीकी भाषा को सरल बनाते हैं। हम RCFE, हॉस्पिस वेवर और नर्सिंग केंद्रों के बीच के कानूनी अंतर समझाते हैं, राज्य लाइसेंस सत्यापित करते हैं, और वित्तीय लागत व समय-सारिणी स्पष्ट करते हैं।",
+      pa: "ਅਸੀਂ ਗੁੰਝਲਦਾਰ ਸ਼ਬਦਾਵਲੀ ਨੂੰ ਸਰਲ ਬਣਾਉਂਦੇ ਹਾਂ। ਅਸੀਂ RCFE, ਹੌਸਪਿਸ ਛੋਟਾਂ (Hospice Waivers) ਅਤੇ ਨਰਸਿੰਗ ਕੇਂਦਰਾਂ ਵਿਚਕਾਰ ਕਾਨੂੰਨੀ ਫ਼ਰਕ ਸਮਝਾਉਂਦੇ ਹਾਂ, ਰਾਜ ਦੇ ਲਾਇਸੰਸਾਂ ਦੀ ਜਾਂਚ ਕਰਦੇ ਹਾਂ, ਅਤੇ ਵਿੱਤੀ ਖਰਚਿਆਂ ਤੇ ਸਮਾਂ-ਸੂਚੀ ਦੀ ਰੂਪ-ਰੇਖਾ ਦਿੰਦੇ ਹਾਂ।",
+      ja: "専門用語をかみ砕いてお伝えします。RCFE、ホスピス特例承認、看護施設の法的な違いを分かりやすくご説明し、州の認可状況を確認したうえで、費用とスケジュールの見通しを明確にお示しします。",
+      uk: "Ми пояснюємо все без зайвої термінології: юридичну різницю між RCFE, Hospice Waivers і будинками медсестринського догляду, перевіряємо державні ліцензії та детально окреслюємо бюджет і графіки.",
+      he: "אנו מפשטים את המונחים המקצועיים. אנו מסבירים את ההבדלים המשפטיים בין RCFE, אישורי הוספיס ומוסדות סיעודיים, מאמתים רישיונות מדינה ומפרטים עלויות ולוחות זמנים.",
+      km: "យើងកាត់បន្ថយពាក្យបច្ចេកទេសស្មុគស្មាញ។ យើងពន្យល់ពីភាពខុសគ្នាផ្នែកច្បាប់រវាង RCFE, Hospice Waivers និងមណ្ឌលគិលានុបដ្ឋាយិកា ផ្ទៀងផ្ទាត់អាជ្ញាប័ណ្ណរដ្ឋ និងបង្ហាញពីថ្លៃចំណាយហិរញ្ញវត្ថុ និងកាលវិភាគ។",
+      fr: "Nous traduisons le jargon administratif. Nous expliquons les différences juridiques entre RCFE, dérogations pour soins palliatifs et établissements de soins infirmiers, vérifions les licences publiques et détaillons les coûts et les délais.",
+      pt: "Eliminamos o jargão técnico. Explicamos as diferenças legais entre RCFE, Hospice Waivers e Instituições de Enfermagem, conferimos licenças estaduais e detalhamos custos e prazos."
     },
     "Move forward with total confidence": {
       es: "Avance con total confianza",
@@ -2600,7 +4922,16 @@
       ko: "확신과 신뢰를 가지고 다음 단계로",
       hy: "Առաջ շարժվել լիակատար վստահությամբ",
       ru: "Двигайтесь вперед с полной уверенностью",
-      ar: "المضي قدماً بثقة تامة"
+      ar: "المضي قدماً بثقة تامة",
+      fa: "با اطمینان کامل به پیش بروید",
+      hi: "पूर्ण विश्वास के साथ आगे बढ़ें",
+      pa: "ਪੂਰੇ ਭਰੋਸੇ ਨਾਲ ਅੱਗੇ ਵਧੋ",
+      ja: "確かな安心感とともに次のステップへ",
+      uk: "Рухайтеся вперед із повною впевненістю",
+      he: "מתקדמים קדימה בביטחון מלא",
+      km: "ឈានទៅមុខដោយទំនុកចិត្តពេញលេញ",
+      fr: "Avancer en toute confiance",
+      pt: "Avançar com total confiança"
     },
     "Whether signing an admission agreement or walking into your CDSS licensing inspection, you have tailored documentation and an advocate standing right beside you.": {
       es: "Ya sea firmando un contrato de admisión o entrando a su inspección del CDSS, contará con documentación a la medida y un aliado experto a su lado.",
@@ -2610,7 +4941,16 @@
       ko: "입소 계약서에 서명하는 순간이든 CDSS 인허가 현장 실사를 앞둔 순간이든, 맞춤형 서류와 든든한 조력자가 곁에 있습니다.",
       hy: "Անկախ նրանից՝ ստորագրում եք ընդունման պայմանագիր, թե պատրաստվում եք CDSS ստուգման, դուք ունեք հարմարեցված փաստաթղթեր և վստահելի պաշտպան ձեր կողքին։",
       ru: "Подписываете ли вы договор о заселении или готовитесь к инспекции CDSS — у вас на руках будут точные документы и надежный эксперт рядом.",
-      ar: "سواء كنت توقع اتفاقية قبول أو تدخل تفتيش ترخيص CDSS، فستكون معك وثائق مخصصة ومستشار يساندك خطوة بخطوة."
+      ar: "سواء كنت توقع اتفاقية قبول أو تدخل تفتيش ترخيص CDSS، فستكون معك وثائق مخصصة ومستشار يساندك خطوة بخطوة.",
+      fa: "چه در حال امضای قرارداد پذیرش باشید و چه در آستانه بازرسی صدور مجوز CDSS، مدارک اختصاصی و حامی متعهدی را دقیقاً در کنار خود خواهید داشت.",
+      hi: "चाहे आप प्रवेश अनुबंध पर हस्ताक्षर कर रहे हों या अपने CDSS लाइसेंसिंग निरीक्षण में जा रहे हों, आपके पास सटीक दस्तावेज़ और हर कदम पर साथ खड़ा एक सहयोगी होता है।",
+      pa: "ਭਾਵੇਂ ਤੁਸੀਂ ਦਾਖ਼ਲਾ ਸਮਝੌਤੇ 'ਤੇ ਦਸਤਖਤ ਕਰ ਰਹੇ ਹੋ ਜਾਂ ਆਪਣੇ CDSS ਲਾਇਸੰਸਿੰਗ ਨਿਰੀਖਣ ਲਈ ਜਾ ਰਹੇ ਹੋ, ਤੁਹਾਡੇ ਕੋਲ ਢੁੱਕਵੇਂ ਦਸਤਾਵੇਜ਼ ਅਤੇ ਹਰ ਕਦਮ 'ਤੇ ਸਾਥ ਦੇਣ ਵਾਲਾ ਇੱਕ ਸਲਾਹਕਾਰ ਮੌਜੂਦ ਹੁੰਦਾ ਹੈ।",
+      ja: "入居契約書の締結に臨まれる場面でも、CDSS の認可検査を迎えられる場面でも、状況に即した資料と頼れるサポーターが常にお側に寄り添います。",
+      uk: "Чи підписуєте ви договір про поселення, чи проходите ліцензійну інспекцію CDSS — поруч із вами підготовлена документація та надійний захисник ваших інтересів.",
+      he: "בין אם אתם חותמים על הסכם קליטה ובין אם נכנסים לביקורת הרישוי של CDSS, יש לכם מסמכים מותאמים וליווי אישי שעומד לצידכם.",
+      km: "មិនថាកំពុងចុះហត្ថលេខាលើកិច្ចព្រមព្រៀងចូលស្នាក់នៅ ឬដើរចូលទៅក្នុងការត្រួតពិនិត្យអាជ្ញាប័ណ្ណ CDSS នោះទេ លោកអ្នកមានឯកសាររៀបចំជាក់លាក់ និងអ្នកគាំទ្រឈរនៅក្បែរជានិច្ច។",
+      fr: "Qu'il s'agisse de signer un contrat d'admission ou de vous présenter à votre inspection d'agrément du CDSS, vous disposez de documents sur mesure et d'un allié dévoué à vos côtés.",
+      pt: "Seja ao assinar um contrato de admissão ou ao passar pela inspeção de licenciamento do CDSS, você conta com documentação sob medida e uma equipe defensora ao seu lado."
     },
     "Start a conversation": {
       es: "Iniciar una conversación",
@@ -2620,7 +4960,16 @@
       ko: "상담 시작하기",
       hy: "Սկսել զրույցը",
       ru: "Начать разговор",
-      ar: "ابدأ محادثة"
+      ar: "ابدأ محادثة",
+      fa: "شروع گفتگو",
+      hi: "बातचीत शुरू करें",
+      pa: "ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ",
+      ja: "まずは相談してみる",
+      uk: "Розпочати розмову",
+      he: "התחילו שיחה",
+      km: "ចាប់ផ្តើមការសន្ទនា",
+      fr: "Entamer la conversation",
+      pt: "Iniciar uma conversa"
     },
     "Help Center & Resources": {
       es: "Centro de Ayuda y Recursos",
@@ -2630,7 +4979,16 @@
       ko: "지원 센터 및 자료실",
       hy: "Օգնության կենտրոն և ռեսուրսներ",
       ru: "Центр помощи и ресурсы",
-      ar: "مركز المساعدة والموارد"
+      ar: "مركز المساعدة والموارد",
+      fa: "مرکز راهنمایی و منابع",
+      hi: "सहायता केंद्र और संसाधन",
+      pa: "ਮਦਦ ਕੇਂਦਰ ਅਤੇ ਸਰੋਤ",
+      ja: "ヘルプセンター＆お役立ち情報",
+      uk: "Центр допомоги та ресурси",
+      he: "מרכז עזרה ומשאבים",
+      km: "មជ្ឈមណ្ឌលជំនួយ និងធនធាន",
+      fr: "Centre d'aide et ressources",
+      pt: "Central de Ajuda e Recursos"
     },
     "Answers & Compassionate Support": {
       es: "Respuestas y Apoyo Compasivo",
@@ -2640,7 +4998,16 @@
       ko: "명쾌한 답변과 따뜻한 지원",
       hy: "Պատասխաններ և սրտացավ աջակցություն",
       ru: "Ответы на вопросы и поддержка",
-      ar: "إجابات واضحة ودعم متفهم"
+      ar: "إجابات واضحة ودعم متفهم",
+      fa: "پاسخ‌ها و پشتیبانی دلسوزانه",
+      hi: "सटीक उत्तर और संवेदनशील सहयोग",
+      pa: "ਜਵਾਬ ਅਤੇ ਹਮਦਰਦੀ ਭਰੀ ਸਹਾਇਤਾ",
+      ja: "疑問の解消と心のこもったサポート",
+      uk: "Відповіді та чуйна підтримка",
+      he: "תשובות ותמיכה קשובה",
+      km: "ចម្លើយ និងការគាំទ្រប្រកបដោយក្តីមេត្តា",
+      fr: "Réponses et soutien bienveillant",
+      pt: "Respostas e Suporte Acolhedor"
     },
     "Find fast answers to commonly asked elder care and RCFE licensing questions, or reach out directly to our team.": {
       es: "Encuentre respuestas rápidas a las dudas más frecuentes sobre cuidado de adultos mayores y licencias RCFE, o comuníquese directamente con nuestro equipo.",
@@ -2650,7 +5017,16 @@
       ko: "어르신 돌봄과 RCFE 인허가에 관한 자주 묻는 질문의 답을 빠르게 확인하거나 저희 팀에 직접 문의하세요.",
       hy: "Գտեք արագ պատասխաններ տարեցների խնամքի և RCFE լիցենզավորման հաճախ տրվող հարցերին, կամ կապվեք մեր թիմի հետ։",
       ru: "Найдите быстрые ответы на частые вопросы об уходе за пожилыми и лицензировании RCFE или свяжитесь с нашей командой напрямую.",
-      ar: "اعثر على إجابات سريعة للأسئلة الشائعة حول رعاية المسنين وترخيص RCFE، أو تواصل مباشرة مع فريقنا."
+      ar: "اعثر على إجابات سريعة للأسئلة الشائعة حول رعاية المسنين وترخيص RCFE، أو تواصل مباشرة مع فريقنا.",
+      fa: "پاسخ‌های سریع به پرسش‌های متداول درباره مراقبت از سالمندان و اخذ مجوز RCFE را بیابید، یا مستقیماً با تیم ما تماس بگیرید.",
+      hi: "वरिष्ठजन देखभाल और RCFE लाइसेंसिंग से जुड़े आम सवालों के त्वरित उत्तर पाएँ, या सीधे हमारी टीम से संपर्क करें।",
+      pa: "ਬਜ਼ੁਰਗਾਂ ਦੀ ਦੇਖਭਾਲ ਅਤੇ RCFE ਲਾਇਸੰਸਿੰਗ ਬਾਰੇ ਆਮ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲਾਂ ਦੇ ਤੁਰੰਤ ਜਵਾਬ ਲੱਭੋ, ਜਾਂ ਸਿੱਧਾ ਸਾਡੀ ਟੀਮ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      ja: "高齢者ケアや RCFE 認可取得に関してよく寄せられるご質問への回答をご覧いただくか、当チームまで直接お気軽にお問い合わせください。",
+      uk: "Знайдіть швидкі відповіді на найпоширеніші запитання щодо догляду за людьми похилого віку та ліцензування RCFE або зверніться безпосередньо до нашої команди.",
+      he: "מצאו תשובות מהירות לשאלות נפוצות בנושא טיפול במבוגרים ורישוי RCFE, או פנו ישירות לצוות שלנו.",
+      km: "ស្វែងរកចម្លើយរហ័សសម្រាប់សំណួរដែលគេសួរញឹកញាប់អំពីការថែទាំមនុស្សចាស់ និងការសុំអាជ្ញាប័ណ្ណ RCFE ឬទាក់ទងក្រុមការងាររបស់យើងដោយផ្ទាល់។",
+      fr: "Trouvez rapidement des réponses aux questions fréquentes sur les soins aux aînés et l'agrément RCFE, ou contactez directement notre équipe.",
+      pt: "Encontre respostas rápidas para dúvidas frequentes sobre cuidados com idosos e licenciamento RCFE, ou fale diretamente com nossa equipe."
     },
     "Need Help Choosing a Care Home?": {
       es: "¿Necesita ayuda para elegir un hogar de cuidado?",
@@ -2660,7 +5036,16 @@
       ko: "요양홈 선택에 도움이 필요하신가요?",
       hy: "Օգնությո՞ւն է պետք խնամքի տուն ընտրելիս",
       ru: "Нужна помощь с выбором пансионата?",
-      ar: "هل تحتاج مساعدة في اختيار دار رعاية؟"
+      ar: "هل تحتاج مساعدة في اختيار دار رعاية؟",
+      fa: "برای انتخاب خانه مراقبت به کمک نیاز دارید؟",
+      hi: "क्या देखभाल गृह चुनने में मदद चाहिए?",
+      pa: "ਕੀ ਦੇਖਭਾਲ ਘਰ ਚੁਣਨ ਵਿੱਚ ਮਦਦ ਚਾਹੀਦੀ ਹੈ?",
+      ja: "ケアホーム選びでお困りですか？",
+      uk: "Потрібна допомога у виборі будинку догляду?",
+      he: "זקוקים לעזרה בבחירת בית טיפולי?",
+      km: "ត្រូវការជំនួយក្នុងការជ្រើសរើសផ្ទះថែទាំមែនទេ?",
+      fr: "Besoin d'aide pour choisir une maison de soins ?",
+      pt: "Precisa de Ajuda para Escolher uma Casa de Cuidados?"
     },
     "Tell us about your parent's current condition and location. We provide honest recommendations and questions to ask on your tours.": {
       es: "Cuéntenos sobre la condición actual y ubicación de su padre o madre. Ofrecemos recomendaciones honestas y preguntas clave para sus recorridos.",
@@ -2670,7 +5055,16 @@
       ko: "부모님의 현재 건강 상태와 희망 지역을 알려주시면, 솔직한 시설 추천과 투어 시 꼭 확인하실 질문을 안내해 드립니다.",
       hy: "Պատմեք ձեր ծնողի ներկա վիճակի և նախընտրած շրջանի մասին։ Մենք տրամադրում ենք անկեղծ առաջարկներ և շրջայցի հարցեր։",
       ru: "Расскажите о состоянии родителя и желаемом районе. Мы дадим честные рекомендации и список вопросов для просмотра пансионата.",
-      ar: "أخبرنا بحالة والدك الصحية وموقعه الحالي، وسنقدم لك ترشيحات صادقة وأسئلة تطرحها أثناء الزيارات."
+      ar: "أخبرنا بحالة والدك الصحية وموقعه الحالي، وسنقدم لك ترشيحات صادقة وأسئلة تطرحها أثناء الزيارات.",
+      fa: "وضعیت فعلی والدین و محدوده مکانی مورد نظرتان را به ما بگویید. ما پیشنهادهای صادقانه و پرسش‌های کلیدی برای بازدیدهایتان ارائه می‌دهیم.",
+      hi: "हमें अपने माता-पिता की वर्तमान स्थिति और स्थान बताएँ। हम ईमानदार सिफारिशें और केंद्र दौरे पर पूछने योग्य प्रश्न उपलब्ध कराते हैं।",
+      pa: "ਸਾਨੂੰ ਆਪਣੇ ਮਾਤਾ-ਪਿਤਾ ਦੀ ਮੌਜੂਦਾ ਹਾਲਤ ਅਤੇ ਇਲਾਕੇ ਬਾਰੇ ਦੱਸੋ। ਅਸੀਂ ਇਮਾਨਦਾਰ ਸਿਫ਼ਾਰਸ਼ਾਂ ਅਤੇ ਦੌਰੇ ਵੇਲੇ ਪੁੱਛਣ ਵਾਲੇ ਜ਼ਰੂਰੀ ਸਵਾਲ ਦਿੰਦੇ ਹਾਂ।",
+      ja: "親御様の現在のご様子とご希望地域をお知らせください。誠実な施設選びのアドバイスと、見学時に確認すべき質問項目をご案内いたします。",
+      uk: "Розкажіть про поточний стан вашої близької людини та бажаний район. Ми надамо чесні рекомендації та перелік запитань для візитів.",
+      he: "ספרו לנו על מצבו הנוכחי של ההורה ועל האזור המבוקש. נעניק לכם המלצות כנות ושאלות חשובות לסיורים.",
+      km: "ប្រាប់យើងពីស្ថានភាពបច្ចុប្បន្ន និងទីតាំងរបស់ឪពុកម្តាយលោកអ្នក។ យើងផ្តល់ការណែនាំស្មោះត្រង់ និងសំណួរដែលគួរសួរពេលលោកអ្នកទៅទស្សនា។",
+      fr: "Parlez-nous de l'état actuel de votre parent et de votre secteur. Nous vous fournissons des recommandations honnêtes et les bonnes questions à poser lors de vos visites.",
+      pt: "Conte-nos sobre a condição atual do seu familiar e a localização desejada. Oferecemos recomendações honestas e perguntas-chave para suas visitas."
     },
     "Ask a Care Specialist": {
       es: "Preguntar a un especialista",
@@ -2680,7 +5074,16 @@
       ko: "케어 전문가에게 물어보기",
       hy: "Հարցնել խնամքի մասնագետին",
       ru: "Спросить специалиста по уходу",
-      ar: "اسأل أخصائي الرعاية"
+      ar: "اسأل أخصائي الرعاية",
+      fa: "پرسش از متخصص مراقبت",
+      hi: "देखभाल विशेषज्ञ से पूछें",
+      pa: "ਦੇਖਭਾਲ ਮਾਹਿਰ ਤੋਂ ਪੁੱਛੋ",
+      ja: "ケア専門アドバイザーに質問する",
+      uk: "Запитати спеціаліста з догляду",
+      he: "שאלו מומחה לטיפול",
+      km: "សួរអ្នកឯកទេសថែទាំ",
+      fr: "Demander à un spécialiste des soins",
+      pt: "Falar com Especialista em Cuidados"
     },
     "Starting or Licensing an RCFE?": {
       es: "¿Iniciando o licenciando un RCFE?",
@@ -2690,7 +5093,16 @@
       ko: "RCFE 개원이나 인허가를 준비 중이신가요?",
       hy: "Սկսո՞ւմ կամ լիցենզավորո՞ւմ եք RCFE",
       ru: "Открываете или лицензируете RCFE?",
-      ar: "هل تبدأ أو ترخّص دار RCFE؟"
+      ar: "هل تبدأ أو ترخّص دار RCFE؟",
+      fa: "در حال راه‌اندازی یا اخذ مجوز RCFE هستید؟",
+      hi: "RCFE शुरू करना या लाइसेंस लेना चाहते हैं?",
+      pa: "ਕੀ RCFE ਸ਼ੁਰੂ ਕਰ ਰਹੇ ਹੋ ਜਾਂ ਲਾਇਸੰਸ ਲੈ ਰਹੇ ਹੋ?",
+      ja: "RCFE の開業・認可取得をお考えですか？",
+      uk: "Відкриваєте або ліцензуєте RCFE?",
+      he: "פותחים או מרשיינים RCFE?",
+      km: "កំពុងចាប់ផ្តើម ឬសុំអាជ្ញាប័ណ្ណ RCFE មែនទេ?",
+      fr: "Vous lancez ou faites agréer un RCFE ?",
+      pt: "Iniciando ou Licenciando um RCFE?"
     },
     "Whether you need a Plan of Operation or assistance preparing for your LPA walk-through, our compliance team is here for you.": {
       es: "Ya sea que necesite un Plan de Operación o apoyo para prepararse para su recorrido con el LPA, nuestro equipo de cumplimiento está para ayudarle.",
@@ -2700,7 +5112,16 @@
       ko: "운영 계획서(Plan of Operation) 작성이나 LPA 현장 실사 대비가 필요하시다면 저희 규정 준수 전담팀이 도와드립니다.",
       hy: "Անկախ նրանից՝ ձեզ Գործողությունների ծրագիր է պետք, թե LPA ստուգման նախապատրաստում, մեր համապատասխանության թիմը պատրաստ է օգնել։",
       ru: "Нужен ли вам План деятельности или подготовка к обходу с инспектором LPA — наша команда по лицензированию готова помочь.",
-      ar: "سواء كنت بحاجة لخطة تشغيل أو استعداد لمعاينة محلل LPA، فريق الامتثال لدينا هنا لدعمك."
+      ar: "سواء كنت بحاجة لخطة تشغيل أو استعداد لمعاينة محلل LPA، فريق الامتثال لدينا هنا لدعمك.",
+      fa: "چه به یک طرح عملیاتی نیاز داشته باشید و چه به کمک برای آمادگی بازدید LPA، تیم انطباق مقررات ما در کنار شماست.",
+      hi: "चाहे आपको संचालन योजना चाहिए या LPA निरीक्षण की तैयारी में सहायता, हमारी अनुपालन टीम आपके साथ है।",
+      pa: "ਭਾਵੇਂ ਤੁਹਾਨੂੰ ਸੰਚਾਲਨ ਯੋਜਨਾ (Plan of Operation) ਦੀ ਲੋੜ ਹੋਵੇ ਜਾਂ LPA ਨਿਰੀਖਣ ਦੀ ਤਿਆਰੀ ਵਿੱਚ ਮਦਦ, ਸਾਡੀ ਨਿਯਮ-ਪਾਲਣਾ ਟੀਮ ਤੁਹਾਡੇ ਨਾਲ ਹੈ।",
+      ja: "運営計画書の作成から LPA による実地検査の事前準備まで、当社のコンプライアンス専門チームが丁寧にサポートいたします。",
+      uk: "Чи потрібен вам План діяльності, чи підготовка до перевірки інспектора LPA — наша команда з нормативної відповідності завжди поруч.",
+      he: "בין אם אתם זקוקים לתוכנית הפעלה ובין אם להכנה לביקורת של ה-LPA, צוות הציות והרגולציה שלנו כאן בשבילכם.",
+      km: "មិនថាលោកអ្នកត្រូវការផែនការប្រតិបត្តិការ ឬជំនួយត្រៀមខ្លួនសម្រាប់ការដើរពិនិត្យជាមួយ LPA នោះទេ ក្រុមការងារអនុលោមភាពរបស់យើងនៅទីនេះដើម្បីជួយលោកអ្នក។",
+      fr: "Que vous ayez besoin d'un Plan d'exploitation ou d'aide pour préparer la visite de votre LPA, notre équipe conformité est là pour vous accompagner.",
+      pt: "Se você precisa de um Plano de Operação ou apoio para se preparar para a vistoria do LPA, nossa equipe de conformidade está pronta para ajudar."
     },
     "Consult With an RCFE Expert": {
       es: "Consultar con un experto en RCFE",
@@ -2710,7 +5131,16 @@
       ko: "RCFE 전문가와 상담하기",
       hy: "Խորհրդակցել RCFE փորձագետի հետ",
       ru: "Консультация эксперта RCFE",
-      ar: "استشر خبير RCFE"
+      ar: "استشر خبير RCFE",
+      fa: "مشاوره با کارشناس RCFE",
+      hi: "RCFE विशेषज्ञ से परामर्श करें",
+      pa: "RCFE ਮਾਹਿਰ ਨਾਲ ਸਲਾਹ ਕਰੋ",
+      ja: "RCFE 専門家に相談する",
+      uk: "Консультація з експертом RCFE",
+      he: "התייעצו עם מומחה RCFE",
+      km: "ពិគ្រោះជាមួយអ្នកជំនាញ RCFE",
+      fr: "Consulter un expert RCFE",
+      pt: "Consultar Especialista em RCFE"
     },
     "Frequently Asked Questions": {
       es: "Preguntas Frecuentes",
@@ -2720,7 +5150,16 @@
       ko: "자주 묻는 질문 (FAQ)",
       hy: "Հաճախ տրվող հարցեր",
       ru: "Часто задаваемые вопросы",
-      ar: "الأسئلة الشائعة"
+      ar: "الأسئلة الشائعة",
+      fa: "پرسش‌های متداول",
+      hi: "अक्सर पूछे जाने वाले प्रश्न",
+      pa: "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ",
+      ja: "よくあるご質問",
+      uk: "Часті запитання",
+      he: "שאלות נפוצות",
+      km: "សំណួរដែលសួរញឹកញាប់",
+      fr: "Foire aux questions",
+      pt: "Perguntas Frequentes"
     },
     "What is the difference between an RCFE and a Skilled Nursing Facility (SNF)?": {
       es: "¿Cuál es la diferencia entre un RCFE y un Centro de Enfermería Especializada (SNF)?",
@@ -2730,7 +5169,16 @@
       ko: "RCFE와 전문간호요양시설(SNF)은 어떤 차이가 있나요?",
       hy: "Ո՞րն է տարբերությունը RCFE-ի և Մասնագիտացված բուժքույրական հաստատության (SNF) միջև",
       ru: "В чем разница между RCFE и учреждением сестринского ухода (SNF)?",
-      ar: "ما الفرق بين مرفق RCFE ومرفق التمريض الماهر (SNF)؟"
+      ar: "ما الفرق بين مرفق RCFE ومرفق التمريض الماهر (SNF)؟",
+      fa: "تفاوت بین RCFE و مرکز پرستاری تخصصی (SNF) چیست؟",
+      hi: "RCFE और कुशल नर्सिंग केंद्र (SNF) में क्या अंतर है?",
+      pa: "RCFE ਅਤੇ ਸਕਿਲਡ ਨਰਸਿੰਗ ਫੈਸਿਲਿਟੀ (SNF) ਵਿੱਚ ਕੀ ਫ਼ਰਕ ਹੈ?",
+      ja: "RCFE と高度看護介護施設（SNF）の違いは何ですか？",
+      uk: "Яка різниця між RCFE та закладом кваліфікованого медсестринського догляду (SNF)?",
+      he: "מה ההבדל בין RCFE לבין מוסד סיעודי מיומן (SNF)?",
+      km: "តើអ្វីជាភាពខុសគ្នារវាង RCFE និងមណ្ឌលគិលានុបដ្ឋាយិកាជំនាញ (SNF)?",
+      fr: "Quelle est la différence entre un RCFE et un établissement de soins infirmiers spécialisés (SNF) ?",
+      pt: "Qual é a diferença entre um RCFE e uma Skilled Nursing Facility (SNF)?"
     },
     "Does Medicare or Medi-Cal pay for RCFE residential care?": {
       es: "¿Medicare o Medi-Cal cubren el cuidado residencial en un RCFE?",
@@ -2740,7 +5188,16 @@
       ko: "메디케어(Medicare)나 메디칼(Medi-Cal)로 RCFE 비용 지원이 가능한가요?",
       hy: "Արդյո՞ք Medicare-ը կամ Medi-Cal-ը վճարում են RCFE բնակելի խնամքի համար",
       ru: "Оплачивают ли Medicare или Medi-Cal проживание в RCFE?",
-      ar: "هل يغطي Medicare أو Medi-Cal الإقامة في مرافق RCFE؟"
+      ar: "هل يغطي Medicare أو Medi-Cal الإقامة في مرافق RCFE؟",
+      fa: "آیا Medicare یا Medi-Cal هزینه مراقبت مسکونی در RCFE را پرداخت می‌کنند؟",
+      hi: "क्या Medicare या Medi-Cal आवासीय RCFE देखभाल का भुगतान करते हैं?",
+      pa: "ਕੀ Medicare ਜਾਂ Medi-Cal RCFE ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਦਾ ਖਰਚ ਦਿੰਦੇ ਹਨ?",
+      ja: "メディケア（Medicare）や Medi-Cal は RCFE での居住型ケア費用を負担してくれますか？",
+      uk: "Чи оплачують Medicare або Medi-Cal проживання з доглядом в RCFE?",
+      he: "האם Medicare או Medi-Cal משלמים עבור טיפול במעון RCFE?",
+      km: "តើ Medicare ឬ Medi-Cal បង់ថ្លៃសម្រាប់ការថែទាំស្នាក់នៅ RCFE ដែរឬទេ?",
+      fr: "Medicare ou Medi-Cal prennent-ils en charge l'hébergement en RCFE ?",
+      pt: "O Medicare ou o Medi-Cal pagam por cuidados residenciais em um RCFE?"
     },
     "How long does it take to obtain an RCFE license in California?": {
       es: "¿Cuánto tiempo toma obtener una licencia RCFE en California?",
@@ -2750,7 +5207,16 @@
       ko: "캘리포니아에서 RCFE 라이선스를 취득하는 데 얼마나 걸리나요?",
       hy: "Որքա՞ն ժամանակ է պահանջվում Կալիֆոռնիայում RCFE լիցենզիա ստանալու համար",
       ru: "Сколько времени занимает получение лицензии RCFE в Калифорнии?",
-      ar: "كم يستغرق الحصول على ترخيص RCFE في كاليفورنيا؟"
+      ar: "كم يستغرق الحصول على ترخيص RCFE في كاليفورنيا؟",
+      fa: "دریافت مجوز RCFE در کالیفرنیا چقدر طول می‌کشد؟",
+      hi: "कैलिफ़ोर्निया में RCFE लाइसेंस प्राप्त करने में कितना समय लगता है?",
+      pa: "ਕੈਲੀਫੋਰਨੀਆ ਵਿੱਚ RCFE ਲਾਇਸੰਸ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਕਿੰਨਾ ਸਮਾਂ ਲੱਗਦਾ ਹੈ?",
+      ja: "カリフォルニア州で RCFE ライセンスを取得するにはどのくらいの期間がかかりますか？",
+      uk: "Скільки часу триває отримання ліцензії RCFE у Каліфорнії?",
+      he: "כמה זמן לוקח לקבל רישיון RCFE בקליפורניה?",
+      km: "តើត្រូវចំណាយពេលប៉ុន្មានដើម្បីទទួលបានអាជ្ញាប័ណ្ណ RCFE នៅរដ្ឋ California?",
+      fr: "Combien de temps faut-il pour obtenir une licence RCFE en Californie ?",
+      pt: "Quanto tempo leva para obter uma licença de RCFE na Califórnia?"
     },
     "Why do many families prefer a 6-bed care home over a 150-room facility?": {
       es: "¿Por qué muchas familias prefieren una casa de 6 camas frente a un centro de 150 habitaciones?",
@@ -2760,7 +5226,16 @@
       ko: "많은 가족들이 150실 대형 시설보다 6인실 소규모 케어 홈을 선호하는 이유는 무엇인가요?",
       hy: "Ինչո՞ւ են շատ ընտանիքներ նախընտրում 6 տեղանոց խնամքի տունը 150 սենյականոց հաստատությունից",
       ru: "Почему многие семьи предпочитают пансионат на 6 мест большому комплексу на 150 номеров?",
-      ar: "لماذا تفضل كثير من العائلات داراً من 6 أسرّة على مرفق يضم 150 غرفة؟"
+      ar: "لماذا تفضل كثير من العائلات داراً من 6 أسرّة على مرفق يضم 150 غرفة؟",
+      fa: "چرا بسیاری از خانواده‌ها یک خانه مراقبت ۶ تختخوابی را به مجتمع ۱۵۰ اتاقه ترجیح می‌دهند؟",
+      hi: "कई परिवार 150-कमरे वाले बड़े केंद्र के बजाय 6-बेड देखभाल गृह को प्राथमिकता क्यों देते हैं?",
+      pa: "ਬਹੁਤ ਸਾਰੇ ਪਰਿਵਾਰ 150-ਕਮਰਿਆਂ ਵਾਲੇ ਵੱਡੇ ਕੇਂਦਰ ਦੀ ਬਜਾਏ 6-ਬੈੱਡ ਵਾਲੇ ਦੇਖਭਾਲ ਘਰ ਨੂੰ ਕਿਉਂ ਤਰਜੀਹ ਦਿੰਦੇ ਹਨ?",
+      ja: "多くのご家族が150室規模の大型施設よりも6床のケアホームを選ばれるのはなぜですか？",
+      uk: "Чому багато родин обирають будинок догляду на 6 ліжок замість комплексу на 150 кімнат?",
+      he: "מדוע משפחות רבות מעדיפות בית טיפולי של 6 מיטות על פני מתקן של 150 חדרים?",
+      km: "ហេតុអ្វីបានជាគ្រួសារជាច្រើនចូលចិត្តផ្ទះថែទាំ 6 គ្រែ ជាងមណ្ឌល 150 បន្ទប់?",
+      fr: "Pourquoi de nombreuses familles préfèrent-elles un foyer de 6 lits à un établissement de 150 chambres ?",
+      pt: "Por que muitas famílias preferem uma casa de 6 vagas a uma instituição com 150 quartos?"
     },
     "Large facilities can be overwhelming for seniors with dementia, mobility limits, or sensory overload. A standard 6-bed RCFE operates inside a quiet residential neighborhood with 1 caregiver for every 3 residents, family-style meals cooked in a real kitchen, and personalized familiarity where staff notice even subtle daily changes.": {
       es: "Los centros grandes pueden resultar abrumadores para adultos mayores con demencia, movilidad reducida o sobrecarga sensorial. Un RCFE estándar de 6 camas funciona en un vecindario residencial tranquilo, con 1 cuidador por cada 3 residentes, comidas caseras en una cocina real y atención cercana donde el personal nota hasta cambios sutiles diarios.",
@@ -2770,7 +5245,16 @@
       ko: "치매나 거동 제한이 있거나 자극에 예민한 어르신께는 대형 시설이 다소 압도적일 수 있습니다. 일반적인 6인실 RCFE는 조용한 주거 단지 내에 위치하며 입소자 3명당 1명의 돌봄 인력이 상주하고, 가정식 주방에서 직접 조리한 식사와 세심한 관찰을 통해 작은 컨디션 변화까지 빠르게 살핍니다.",
       hy: "Մեծ հաստատությունները կարող են ճնշող լինել դեմենցիայով, շարժման սահմանափակումներով կամ զգայական գերբեռնվածությամբ տարեցների համար։ Ստանդարտ 6 տեղանոց RCFE-ն գործում է հանգիստ թաղամասում՝ 1 խնամակալ 3 բնակչի համար հարաբերակցությամբ, տնական սննդով և անհատական ուշադրությամբ, երբ անձնակազմը նկատում է անգամ ամենափոքր փոփոխությունները։",
       ru: "Крупные центры могут вызывать стресс у пожилых с деменцией или проблемами подвижности. Небольшой RCFE на 6 мест работает в тихом жилом районе, где на 3 жильцов приходится 1 сиделка, еда готовится на домашней кухне, а персонал замечает малейшие изменения в самочувствии.",
-      ar: "المرافق الضخمة قد تكون مرهقة لكبار السن المصابين بالخرف أو محدودية الحركة أو الحساسية الحسية. تعمل دار RCFE من 6 أسرّة داخل حي سكني هادئ بنسبة مقدم رعاية واحد لكل 3 مقيمين، ووجبات منزلية طازجة، ورعاية قريبة تلاحظ أدق التغيرات اليومية."
+      ar: "المرافق الضخمة قد تكون مرهقة لكبار السن المصابين بالخرف أو محدودية الحركة أو الحساسية الحسية. تعمل دار RCFE من 6 أسرّة داخل حي سكني هادئ بنسبة مقدم رعاية واحد لكل 3 مقيمين، ووجبات منزلية طازجة، ورعاية قريبة تلاحظ أدق التغيرات اليومية.",
+      fa: "مجتمع‌های بزرگ می‌توانند برای سالمندان مبتلا به زوال عقل، محدودیت حرکتی یا حساسیت حسی طاقت‌فرسا باشند. یک RCFE استاندارد ۶ تختخوابی در محله‌ای آرام و مسکونی با نسبت ۱ مراقب برای هر ۳ مقیم فعالیت می‌کند، غذاهای خانوادگی در آشپزخانه واقعی پخته می‌شود و آشنایی فردی باعث می‌شود کارکنان حتی تغییرات ظریف روزانه را تشخیص دهند.",
+      hi: "बड़े केंद्र डिमेंशिया, चलने-फिरने की सीमा या संवेदनशीलता से जूझ रहे वरिष्ठजनों के लिए बोझिल हो सकते हैं। एक सामान्य 6-बेड RCFE शांत आवासीय मोहल्ले में संचालित होता है जहाँ हर 3 निवासियों पर 1 देखभालकर्ता होता है, असली रसोई में घर जैसा भोजन बनता है और स्टाफ़ हर छोटे दैनिक बदलाव पर भी व्यक्तिगत ध्यान देता है।",
+      pa: "ਵੱਡੇ ਕੇਂਦਰ ਡਿਮੇਨਸ਼ੀਆ, ਤੁਰਨ-ਫਿਰਨ ਦੀ ਸੀਮਾ ਜਾਂ ਸ਼ੋਰ-ਸ਼ਰਾਬੇ ਪ੍ਰਤੀ ਸੰਵੇਦਨਸ਼ੀਲ ਬਜ਼ੁਰਗਾਂ ਲਈ ਭਾਰੀ ਪੈ ਸਕਦੇ ਹਨ। ਇੱਕ ਮਿਆਰੀ 6-ਬੈੱਡ RCFE ਸ਼ਾਂਤ ਰਿਹਾਇਸ਼ੀ ਮੁਹੱਲੇ ਵਿੱਚ ਹੁੰਦਾ ਹੈ ਜਿੱਥੇ ਹਰ 3 ਨਿਵਾਸੀਆਂ ਲਈ 1 ਦੇਖਭਾਲ ਕਰਤਾ ਹੁੰਦਾ ਹੈ, ਅਸਲ ਰਸੋਈ ਵਿੱਚ ਪਰਿਵਾਰ ਵਾਂਗ ਤਾਜ਼ਾ ਖਾਣਾ ਪਕਾਇਆ ਜਾਂਦਾ ਹੈ, ਅਤੇ ਨਿੱਜੀ ਸਾਂਝ ਹੁੰਦੀ ਹੈ ਜਿੱਥੇ ਸਟਾਫ ਰੋਜ਼ਾਨਾ ਦੀਆਂ ਨਿੱਕੀਆਂ ਤਬਦੀਲੀਆਂ ਨੂੰ ਵੀ ਤੁਰੰਤ ਭਾਂਪ ਲੈਂਦਾ ਹੈ।",
+      ja: "大規模な施設は、認知症や移動制限のあるご高齢者、あるいは音や人の多さに負担を感じやすい方にとって刺激が強すぎる場合があります。標準的な6床の RCFE は静かな住宅街の中にあり、入居者3名に対して介護スタッフ1名の体制で、一般家庭のキッチンで作られる温かい手料理と、日々のわずかな変化にもすぐ気づけるきめ細かな見守りが受けられます。",
+      uk: "Великі заклади можуть бути виснажливими для людей похилого віку з деменцією, обмеженою рухливістю чи чутливістю до шуму. Стандартний 6-місний RCFE розташований у тихому житловому районі зі співвідношенням 1 доглядальник на 3 мешканців, домашнім харчуванням зі справжньої кухні та уважним підходом, коли персонал помічає навіть найменші щоденні зміни.",
+      he: "מתקנים גדולים עלולים להציף מבוגרים המתמודדים עם דמנציה, מגבלות ניידות או רגישות חושית. מעון RCFE תקני בן 6 מיטות פועל בשכונת מגורים שקטה עם מטפל אחד לכל 3 דיירים, ארוחות ביתיות המבושלות במטבח אמיתי והיכרות אישית שבה הצוות מבחין אפילו בשינויים יומיומיים עדינים.",
+      km: "មណ្ឌលខ្នាតធំអាចធ្វើឱ្យមនុស្សចាស់ដែលមានជំងឺភ្លេចភ្លាំង ការកម្រិតចលនា ឬភាពរំញោចអារម្មណ៍ខ្លាំងមានអារម្មណ៍តានតឹង។ RCFE ស្តង់ដារខ្នាត 6 គ្រែដំណើរការនៅក្នុងសង្កាត់លំនៅដ្ឋានស្ងប់ស្ងាត់ ដោយមានអ្នកថែទាំ 1 នាក់សម្រាប់អ្នកស្នាក់នៅរៀងរាល់ 3 នាក់ អាហារបែបគ្រួសារចម្អិនក្នុងផ្ទះបាយពិតប្រាកដ និងភាពស្និទ្ធស្នាលផ្ទាល់ខ្លួនដែលបុគ្គលិកអាចសម្គាល់ឃើញសូម្បីតែការផ្លាស់ប្តូរតិចតួចប្រចាំថ្ងៃ។",
+      fr: "Les grands établissements peuvent être déstabilisants pour les seniors atteints de démence, à mobilité réduite ou sensibles à la surcharge sensorielle. Un RCFE standard de 6 lits fonctionne au cœur d'un quartier résidentiel calme avec 1 soignant pour 3 résidents, des repas familiaux préparés dans une vraie cuisine et une attention personnalisée permettant au personnel de remarquer le moindre changement quotidien.",
+      pt: "Instituições muito grandes podem ser exaustivas para idosos com demência, mobilidade reduzida ou sobrecarga sensorial. Um RCFE padrão de 6 vagas funciona em um bairro residencial tranquilo, com 1 cuidador para cada 3 residentes, refeições caseiras preparadas em uma cozinha de verdade e atenção próxima em que a equipe percebe até mudanças sutis no dia a dia."
     },
     "How does Love RCFE make money? (Our Transparent Revenue Model)": {
       es: "¿Cómo genera ingresos Love RCFE? (Nuestro modelo transparente)",
@@ -2780,7 +5264,16 @@
       ko: "Love RCFE는 어떻게 운영되나요? (투명한 수익 구조 안내)",
       hy: "Ինչպե՞ս է վարձատրվում Love RCFE-ն (Մեր թափանցիկ մոդելը)",
       ru: "Как зарабатывает Love RCFE? (Наша прозрачная модель)",
-      ar: "كيف تحقق Love RCFE دخلها؟ (نموذج الإيرادات الشفاف)"
+      ar: "كيف تحقق Love RCFE دخلها؟ (نموذج الإيرادات الشفاف)",
+      fa: "درآمد Love RCFE چگونه تأمین می‌شود؟ (مدل درآمدی شفاف ما)",
+      hi: "Love RCFE कैसे आय अर्जित करता है? (हमारा पारदर्शी राजस्व मॉडल)",
+      pa: "Love RCFE ਦੀ ਆਮਦਨ ਕਿਵੇਂ ਹੁੰਦੀ ਹੈ? (ਸਾਡਾ ਪਾਰਦਰਸ਼ੀ ਆਮਦਨ ਮਾਡਲ)",
+      ja: "Love RCFE の収益の仕組みはどうなっていますか？（明朗な料金・報酬モデル）",
+      uk: "Як заробляє Love RCFE? (Наша прозора модель доходів)",
+      he: "איך Love RCFE מתפרנסת? (מודל ההכנסות השקוף שלנו)",
+      km: "តើ Love RCFE រកប្រាក់ចំណូលដោយរបៀបណា? (គំរូប្រាក់ចំណូលប្រកបដោយតម្លាភាពរបស់យើង)",
+      fr: "Comment Love RCFE est-il rémunéré ? (Notre modèle de rémunération transparent)",
+      pt: "Como a Love RCFE é remunerada? (Nosso Modelo Transparente de Receita)"
     },
     "We believe in 100% transparency. Love RCFE has two distinct, ethical service tracks with clear revenue models:": {
       es: "Creemos en la transparencia del 100%. Love RCFE maneja dos líneas de servicio éticas y bien diferenciadas:",
@@ -2790,7 +5283,16 @@
       ko: "저희는 100% 투명성을 원칙으로 합니다. Love RCFE는 명확히 구분된 두 가지 정직한 서비스 체계를 운영합니다:",
       hy: "Մենք հավատում ենք 100% թափանցիկությանը։ Love RCFE-ն ունի երկու հստակ և էթիկական ծառայողական ուղղություն՝",
       ru: "Мы придерживаемся полной прозрачности. У Love RCFE два четких этичных направления работы:",
-      ar: "نؤمن بالشفافية الكاملة بنسبة 100%. تعتمد Love RCFE مسارين أخلاقيين واضحين:"
+      ar: "نؤمن بالشفافية الكاملة بنسبة 100%. تعتمد Love RCFE مسارين أخلاقيين واضحين:",
+      fa: "ما به شفافیت ۱۰۰٪ باور داریم. Love RCFE دارای دو مسیر خدمات مجزا و اخلاق‌مدار با مدل‌های درآمدی روشن است:",
+      hi: "हम 100% पारदर्शिता में विश्वास रखते हैं। Love RCFE के पास स्पष्ट राजस्व मॉडल के साथ दो अलग और नैतिक सेवा मार्ग हैं:",
+      pa: "ਅਸੀਂ 100% ਪਾਰਦਰਸ਼ਤਾ ਵਿੱਚ ਵਿਸ਼ਵਾਸ ਰੱਖਦੇ ਹਾਂ। Love RCFE ਦੀਆਂ ਸਪੱਸ਼ਟ ਆਮਦਨ ਨੀਤੀਆਂ ਵਾਲੀਆਂ ਦੋ ਵੱਖ-ਵੱਖ, ਨੈਤਿਕ ਸੇਵਾ ਸ਼੍ਰੇਣੀਆਂ ਹਨ:",
+      ja: "私たちは100%の透明性を大切にしています。Love RCFE では倫理基準に基づいた2つの明確な事業領域を設けております：",
+      uk: "Ми віримо у 100% прозорість. Love RCFE працює за двома окремими етичними напрямками з чіткою моделлю оплати:",
+      he: "אנו מאמינים בשקיפות של 100%. ל-Love RCFE יש שני מסלולי שירות אתיים ונפרדים עם מודלי תמחור ברורים:",
+      km: "យើងជឿជាក់លើតម្លាភាព 100%។ Love RCFE មានផ្នែកសេវាកម្មប្រកបដោយក្រមសីលធម៌ពីរផ្សេងគ្នាជាមួយនឹងគំរូប្រាក់ចំណូលច្បាស់លាស់៖",
+      fr: "Nous croyons en une transparence totale. Love RCFE propose deux pôles de services distincts et éthiques avec des modèles de rémunération clairs :",
+      pt: "Acreditamos em 100% de transparência. A Love RCFE atua em duas frentes éticas distintas, com modelos de remuneração claros:"
     },
     "For Seniors & Families (100% Free)": {
       es: "Para Adultos Mayores y Familias (100% Gratis)",
@@ -2800,7 +5302,16 @@
       ko: "어르신 및 가족 (100% 무료)",
       hy: "Տարեցների և ընտանիքների համար (100% անվճար)",
       ru: "Для пожилых и семей (100% бесплатно)",
-      ar: "لكبار السن والعائلات (مجاني 100%)"
+      ar: "لكبار السن والعائلات (مجاني 100%)",
+      fa: "برای سالمندان و خانواده‌ها (۱۰۰٪ رایگان)",
+      hi: "वरिष्ठजनों और परिवारों के लिए (100% निःशुल्क)",
+      pa: "ਬਜ਼ੁਰਗਾਂ ਅਤੇ ਪਰਿਵਾਰਾਂ ਲਈ (100% ਮੁਫ਼ਤ)",
+      ja: "ご高齢者・ご家族向け（完全無料）",
+      uk: "Для людей похилого віку та родин (100% безкоштовно)",
+      he: "לאזרחים ותיקים ומשפחות (100% חינם)",
+      km: "សម្រាប់មនុស្សចាស់ និងគ្រួសារ (ឥតគិតថ្លៃ 100%)",
+      fr: "Pour les aînés et les familles (100 % gratuit)",
+      pt: "Para Idosos e Famílias (100% Gratuito)"
     },
     "For RCFE Operators (Professional Consulting)": {
       es: "Para Operadores de RCFE (Consultoría Profesional)",
@@ -2810,7 +5321,16 @@
       ko: "RCFE 운영자 (전문 유료 컨설팅)",
       hy: "RCFE օպերատորների համար (Մասնագիտական խորհրդատվություն)",
       ru: "Для операторов RCFE (профессиональный консалтинг)",
-      ar: "لمشغلي RCFE (استشارات مهنية)"
+      ar: "لمشغلي RCFE (استشارات مهنية)",
+      fa: "برای بهره‌برداران RCFE (مشاوره تخصصی)",
+      hi: "RCFE संचालकों के लिए (व्यावसायिक परामर्श)",
+      pa: "RCFE ਸੰਚਾਲਕਾਂ ਲਈ (ਪੇਸ਼ੇਵਰ ਸਲਾਹ)",
+      ja: "RCFE 事業者向け（専門コンサルティング）",
+      uk: "Для операторів RCFE (професійний консалтинг)",
+      he: "לממפעילי RCFE (ייעוץ מקצועי)",
+      km: "សម្រាប់អ្នកបើកមណ្ឌល RCFE (ការប្រឹក្សាវិជ្ជាជីវៈ)",
+      fr: "Pour les exploitants de RCFE (Conseil professionnel)",
+      pt: "Para Operadores de RCFE (Consultoria Profissional)"
     },
     "Have a specific or urgent question not listed here?": {
       es: "¿Tiene una pregunta específica o urgente que no aparece aquí?",
@@ -2820,7 +5340,16 @@
       ko: "목록에 없는 구체적이거나 긴급한 질문이 있으신가요?",
       hy: "Ունե՞ք հատուկ կամ հրատապ հարց, որն այստեղ նշված չէ",
       ru: "Есть срочный или индивидуальный вопрос, которого нет в списке?",
-      ar: "هل لديك سؤال محدد أو عاجل غير مذكور هنا؟"
+      ar: "هل لديك سؤال محدد أو عاجل غير مذكور هنا؟",
+      fa: "پرسش خاص یا فوری دارید که در اینجا نیامده است؟",
+      hi: "क्या आपका कोई विशेष या तत्काल प्रश्न है जो यहाँ सूचीबद्ध नहीं है?",
+      pa: "ਕੀ ਤੁਹਾਡਾ ਕੋਈ ਖ਼ਾਸ ਜਾਂ ਜ਼ਰੂਰੀ ਸਵਾਲ ਹੈ ਜੋ ਇੱਥੇ ਸ਼ਾਮਲ ਨਹੀਂ ਹੈ?",
+      ja: "こちらに載っていない個別のご質問や、お急ぎのご相談がございますか？",
+      uk: "Маєте особливе чи термінове запитання, якого немає у списку?",
+      he: "יש לכם שאלה ספציפית או דחופה שאינה מופיעה כאן?",
+      km: "មានសំណួរជាក់លាក់ ឬបន្ទាន់ដែលមិនមានក្នុងបញ្ជីនេះមែនទេ?",
+      fr: "Vous avez une question spécifique ou urgente qui ne figure pas ici ?",
+      pt: "Tem uma dúvida específica ou urgente que não está listada aqui?"
     },
     "Open the Contact Form": {
       es: "Abrir formulario de contacto",
@@ -2830,7 +5359,16 @@
       ko: "문의 양식 열기",
       hy: "Բացել կապի ձևը",
       ru: "Открыть форму связи",
-      ar: "افتح نموذج التواصل"
+      ar: "افتح نموذج التواصل",
+      fa: "باز کردن فرم تماس",
+      hi: "संपर्क फ़ॉर्म खोलें",
+      pa: "ਸੰਪਰਕ ਫਾਰਮ ਖੋਲ੍ਹੋ",
+      ja: "お問い合わせフォームを開く",
+      uk: "Відкрити контактну форму",
+      he: "פתחו את טופס יצירת הקשר",
+      km: "បើកទម្រង់ទំនាក់ទំនង",
+      fr: "Ouvrir le formulaire de contact",
+      pt: "Abrir Formulário de Contato"
     },
     "Start a Conversation": {
       es: "Inicie una Conversación",
@@ -2840,7 +5378,16 @@
       ko: "상담 대화 시작하기",
       hy: "Սկսել զրույցը",
       ru: "Начать диалог",
-      ar: "ابدأ محادثة"
+      ar: "ابدأ محادثة",
+      fa: "شروع یک گفتگو",
+      hi: "बातचीत शुरू करें",
+      pa: "ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ",
+      ja: "ご相談をはじめる",
+      uk: "Розпочати розмову",
+      he: "התחילו שיחה",
+      km: "ចាប់ផ្តើមការសន្ទនា",
+      fr: "Entamer une conversation",
+      pt: "Iniciar uma Conversa"
     },
     "We are here to listen.": {
       es: "Estamos aquí para escucharle.",
@@ -2850,7 +5397,16 @@
       ko: "언제든 귀 기울여 듣겠습니다.",
       hy: "Մենք այստեղ ենք՝ ձեզ լսելու համար։",
       ru: "Мы готовы вас выслушать.",
-      ar: "نحن هنا للاستماع إليك."
+      ar: "نحن هنا للاستماع إليك.",
+      fa: "ما اینجا هستیم تا بشنویم.",
+      hi: "हम आपकी बात सुनने के लिए यहाँ हैं।",
+      pa: "ਅਸੀਂ ਤੁਹਾਡੀ ਗੱਲ ਸੁਣਨ ਲਈ ਹਾਜ਼ਰ ਹਾਂ।",
+      ja: "お話をじっくりお伺いいたします。",
+      uk: "Ми тут, щоб уважно вислухати вас.",
+      he: "אנחנו כאן כדי להקשיב.",
+      km: "យើងនៅទីនេះដើម្បីស្តាប់។",
+      fr: "Nous sommes à votre écoute.",
+      pt: "Estamos aqui para ouvir você."
     },
     "Tell us a little about your current situation. Whether you need immediate elder care placement or strategic consulting to license a new RCFE, our team responds promptly within 1 business day.": {
       es: "Cuéntenos brevemente su situación actual. Ya sea ubicación urgente para un familiar o consultoría estratégica para licenciar un nuevo RCFE, nuestro equipo responde en 1 día hábil.",
@@ -2860,7 +5416,16 @@
       ko: "현재 상황을 간단히 들려주세요. 긴급 어르신 입소 연계든 신규 RCFE 인허가 전략 컨설팅이든 영업일 기준 1일 이내에 신속히 답변드립니다.",
       hy: "Պատմեք մեզ ձեր ներկա իրավիճակի մասին։ Անկախ նրանից՝ անհապաղ տեղավորում է պետք, թե խորհրդատվություն նոր RCFE լիցենզավորելու համար, մեր թիմը պատասխանում է 1 աշխատանքային օրվա ընթացքում։",
       ru: "Расскажите о вашей ситуации. Будь то срочный подбор пансионата или консалтинг по лицензированию нового RCFE, наша команда ответит в течение 1 рабочего дня.",
-      ar: "أخبرنا قليلاً عن وضعك الحالي. سواء احتجت لتسكين فوري لكبار السن أو استشارة لترخيص RCFE جديد، يرد فريقنا خلال يوم عمل واحد."
+      ar: "أخبرنا قليلاً عن وضعك الحالي. سواء احتجت لتسكين فوري لكبار السن أو استشارة لترخيص RCFE جديد، يرد فريقنا خلال يوم عمل واحد.",
+      fa: "کمی درباره شرایط فعلی خود برایمان بگویید. چه به اسکان فوری سالمند نیاز داشته باشید و چه به مشاوره راهبردی برای دریافت مجوز یک RCFE جدید، تیم ما سریعاً ظرف ۱ روز کاری پاسخ می‌دهد.",
+      hi: "हमें अपनी वर्तमान स्थिति के बारे में थोड़ा बताएँ। चाहे आपको तत्काल वरिष्ठजन देखभाल प्लेसमेंट चाहिए या नया RCFE लाइसेंस लेने के लिए रणनीतिक परामर्श, हमारी टीम 1 कार्यदिवस के भीतर शीघ्र उत्तर देती है।",
+      pa: "ਸਾਨੂੰ ਆਪਣੀ ਮੌਜੂਦਾ ਸਥਿਤੀ ਬਾਰੇ ਥੋੜ੍ਹਾ ਦੱਸੋ। ਭਾਵੇਂ ਤੁਹਾਨੂੰ ਬਜ਼ੁਰਗਾਂ ਦੀ ਦੇਖਭਾਲ ਲਈ ਤੁਰੰਤ ਰਿਹਾਇਸ਼ ਦੀ ਲੋੜ ਹੋਵੇ ਜਾਂ ਨਵੇਂ RCFE ਦੇ ਲਾਇਸੰਸ ਲਈ ਰਣਨੀਤਕ ਸਲਾਹ, ਸਾਡੀ ਟੀਮ 1 ਕਾਰੋਬਾਰੀ ਦਿਨ ਦੇ ਅੰਦਰ ਤੁਰੰਤ ਜਵਾਬ ਦਿੰਦੀ ਹੈ।",
+      ja: "現在のご状況を簡単にお知らせください。急ぎの高齢者施設探しから新規 RCFE 認可取得の戦略コンサルティングまで、当チームが1営業日以内に迅速にご返信いたします。",
+      uk: "Розкажіть трохи про вашу ситуацію. Незалежно від того, чи потрібне вам негайне влаштування близької людини, чи стратегічний консалтинг для ліцензування нового RCFE, наша команда оперативно відповість протягом 1 робочого дня.",
+      he: "ספרו לנו מעט על המצב הנוכחי שלכם. בין אם אתם זקוקים לשיבוץ מיידי לטיפול במבוגר ובין אם לייעוץ אסטרטגי לרישוי RCFE חדש, הצוות שלנו משיב במהירות תוך יום עסקים אחד.",
+      km: "ប្រាប់យើងបន្តិចអំពីស្ថានភាពបច្ចុប្បន្នរបស់លោកអ្នក។ មិនថាលោកអ្នកត្រូវការកន្លែងថែទាំមនុស្សចាស់បន្ទាន់ ឬការប្រឹក្សាយុទ្ធសាស្ត្រដើម្បីសុំអាជ្ញាប័ណ្ណ RCFE ថ្មីនោះទេ ក្រុមការងាររបស់យើងនឹងឆ្លើយតបយ៉ាងឆាប់រហ័សក្នុងរយៈពេល 1 ថ្ងៃធ្វើការ។",
+      fr: "Parlez-nous brièvement de votre situation actuelle. Que vous ayez besoin d'un placement immédiat pour un proche âgé ou d'un accompagnement stratégique pour obtenir l'agrément d'un nouveau RCFE, notre équipe vous répond rapidement sous 1 jour ouvrable.",
+      pt: "Conte um pouco sobre sua situação atual. Seja para acolhimento imediato de um idoso ou consultoria estratégica para licenciar um novo RCFE, nossa equipe responde em até 1 dia útil."
     },
     "Direct Phone": {
       es: "Teléfono Directo",
@@ -2870,7 +5435,16 @@
       ko: "직통 전화",
       hy: "Ուղիղ հեռախոսահամար",
       ru: "Прямой телефон",
-      ar: "الهاتف المباشر"
+      ar: "الهاتف المباشر",
+      fa: "تلفن مستقیم",
+      hi: "सीधा फ़ोन",
+      pa: "ਸਿੱਧਾ ਫ਼ੋਨ",
+      ja: "直通お電話番号",
+      uk: "Прямий телефон",
+      he: "טלפון ישיר",
+      km: "ទូរស័ព្ទផ្ទាល់",
+      fr: "Téléphone direct",
+      pt: "Telefone Direto"
     },
     "Monday – Saturday: 8:00 AM – 7:00 PM PT": {
       es: "Lunes – Sábado: 8:00 AM – 7:00 PM (Hora del Pacífico)",
@@ -2880,7 +5454,16 @@
       ko: "월요일 – 토요일: 오전 8:00 – 오후 7:00 (태평양 표준시)",
       hy: "Երկուշաբթի – Շաբաթ․ 8:00 – 19:00 PT",
       ru: "Понедельник – суббота: 8:00 – 19:00 PT",
-      ar: "الاثنين – السبت: 8:00 صباحاً – 7:00 مساءً بتوقيت المحيط الهادئ"
+      ar: "الاثنين – السبت: 8:00 صباحاً – 7:00 مساءً بتوقيت المحيط الهادئ",
+      fa: "دوشنبه تا شنبه: ۸:۰۰ صبح تا ۷:۰۰ عصر PT",
+      hi: "सोमवार – शनिवार: सुबह 8:00 – शाम 7:00 PT",
+      pa: "ਸੋਮਵਾਰ – ਸ਼ਨੀਵਾਰ: ਸਵੇਰੇ 8:00 – ਸ਼ਾਮ 7:00 ਵਜੇ PT",
+      ja: "月曜日〜土曜日：午前8:00〜午後7:00（太平洋時間）",
+      uk: "Понеділок – субота: 8:00 – 19:00 PT",
+      he: "שני – שבת: 8:00 – 19:00 שעון פסיפיק (PT)",
+      km: "ចន្ទ – សៅរ៍៖ 8:00 ព្រឹក – 7:00 ល្ងាច PT",
+      fr: "Lundi – Samedi : 8 h 00 – 19 h 00 (PT)",
+      pt: "Segunda a Sábado: 8:00 – 19:00 PT"
     },
     "Email Inquiries": {
       es: "Consultas por Correo",
@@ -2890,7 +5473,16 @@
       ko: "이메일 문의",
       hy: "Էլ․ փոստի հարցումներ",
       ru: "Электронная почта",
-      ar: "استفسارات البريد الإلكتروني"
+      ar: "استفسارات البريد الإلكتروني",
+      fa: "استعلام‌های ایمیلی",
+      hi: "ईमेल पूछताछ",
+      pa: "ਈਮੇਲ ਪੁੱਛਗਿੱਛ",
+      ja: "メールでのお問い合わせ",
+      uk: "Запити електронною поштою",
+      he: "פניות באימייל",
+      km: "ការសាកសួរតាមអ៊ីមែល",
+      fr: "Demandes par e-mail",
+      pt: "Consultas por E-mail"
     },
     "General inquiries & licensing packets": {
       es: "Consultas generales y paquetes de licenciamiento",
@@ -2900,7 +5492,16 @@
       ko: "일반 상담 및 인허가 서류 문의",
       hy: "Ընդհանուր հարցումներ և լիցենզավորման փաթեթներ",
       ru: "Общие вопросы и пакеты лицензирования",
-      ar: "الاستفسارات العامة وحزم الترخيص"
+      ar: "الاستفسارات العامة وحزم الترخيص",
+      fa: "پرسش‌های عمومی و بسته‌های اخذ مجوز",
+      hi: "सामान्य पूछताछ और लाइसेंसिंग पैकेट",
+      pa: "ਆਮ ਪੁੱਛਗਿੱਛ ਅਤੇ ਲਾਇਸੰਸਿੰਗ ਪੈਕੇਟ",
+      ja: "一般的なご相談・認可申請書類に関するお問い合わせ",
+      uk: "Загальні запитання та пакети ліцензування",
+      he: "פניות כלליות וחבילות רישוי",
+      km: "ការសាកសួរទូទៅ និងកញ្ចប់ឯកសារអាជ្ញាប័ណ្ណ",
+      fr: "Renseignements généraux et dossiers d'agrément",
+      pt: "Dúvidas gerais e pacotes de licenciamento"
     },
     "Headquarters": {
       es: "Área de Servicio",
@@ -2910,7 +5511,16 @@
       ko: "서비스 지역",
       hy: "Գլխամասային գրասենյակ",
       ru: "География работы",
-      ar: "نطاق الخدمة"
+      ar: "نطاق الخدمة",
+      fa: "دفتر مرکزی",
+      hi: "मुख्यालय",
+      pa: "ਮੁੱਖ ਦਫ਼ਤਰ",
+      ja: "拠点・対応エリア",
+      uk: "Офіс і географія",
+      he: "מטה השירות",
+      km: "ទីស្នាក់ការកណ្តាល",
+      fr: "Siège",
+      pt: "Sede e Área de Atuação"
     },
     "Serving All of California": {
       es: "Atendemos en todo California",
@@ -2920,7 +5530,16 @@
       ko: "캘리포니아 전 지역 서비스",
       hy: "Սպասարկում ենք ամբողջ Կալիֆոռնիան",
       ru: "Работаем по всей Калифорнии",
-      ar: "نخدم جميع أنحاء كاليفورنيا"
+      ar: "نخدم جميع أنحاء كاليفورنيا",
+      fa: "در خدمت سراسر کالیفرنیا",
+      hi: "पूरे कैलिफ़ोर्निया में सेवाएँ",
+      pa: "ਪੂਰੇ ਕੈਲੀਫੋਰਨੀਆ ਵਿੱਚ ਸੇਵਾਵਾਂ",
+      ja: "カリフォルニア州全域に対応",
+      uk: "Обслуговуємо всю Каліфорнію",
+      he: "משרתים את כל רחבי קליפורניה",
+      km: "បម្រើសេវាទូទាំងរដ្ឋ California",
+      fr: "Au service de toute la Californie",
+      pt: "Atendendo Toda a Califórnia"
     },
     "Bay Area • Los Angeles • Orange County • Sacramento": {
       es: "Área de la Bahía • Los Ángeles • Condado de Orange • Sacramento",
@@ -2930,7 +5549,16 @@
       ko: "베이 지역 • 로스앤젤레스 • 오렌지 카운티 • 새크라멘토",
       hy: "Bay Area • Լոս Անջելես • Օրինջ շրջան • Սակրամենտո",
       ru: "Залив Сан-Франциско • Лос-Анджелес • Округ Ориндж • Сакраменто",
-      ar: "منطقة الخليج • لوس أنجلوس • مقاطعة أورانج • ساكرامنتو"
+      ar: "منطقة الخليج • لوس أنجلوس • مقاطعة أورانج • ساكرامنتو",
+      fa: "منطقه خلیج • لس‌آنجلس • اورنج کانتی • ساکرامنتو",
+      hi: "Bay Area • Los Angeles • Orange County और Sacramento",
+      pa: "Bay Area • Los Angeles • Orange County • Sacramento ਖੇਤਰ",
+      ja: "ベイエリア（Bay Area）・ロサンゼルス（Los Angeles）・オレンジ郡（Orange County）・サクラメント（Sacramento）",
+      uk: "Регіони: Bay Area • Los Angeles • Orange County • Sacramento",
+      he: "אזור המפרץ • לוס אנג'לס • מחוז אורנג' • סקרמנטו",
+      km: "តំបន់ Bay Area • Los Angeles • Orange County • Sacramento",
+      fr: "Région de la Bay Area • Los Angeles • Orange County • Sacramento",
+      pt: "Região da Bay Area • Los Angeles • Orange County • Sacramento"
     },
     "Prefer a scheduled phone call?": {
       es: "¿Prefiere una llamada telefónica programada?",
@@ -2940,7 +5568,16 @@
       ko: "원하시는 시간에 전화 상담을 받고 싶으신가요?",
       hy: "Նախընտրո՞ւմ եք նախապես ամրագրված զանգ",
       ru: "Предпочитаете запланированный звонок?",
-      ar: "هل تفضل مكالمة هاتفية مجدولة؟"
+      ar: "هل تفضل مكالمة هاتفية مجدولة؟",
+      fa: "تماس تلفنی زمان‌بندی‌شده را ترجیح می‌دهید؟",
+      hi: "क्या आप पूर्व-निर्धारित फ़ोन कॉल पसंद करेंगे?",
+      pa: "ਕੀ ਤੁਸੀਂ ਨਿਰਧਾਰਤ ਸਮੇਂ 'ਤੇ ਫ਼ੋਨ ਕਾਲ ਪਸੰਦ ਕਰਦੇ ਹੋ?",
+      ja: "ご希望日時の電話予約をご希望ですか？",
+      uk: "Бажаєте запланувати дзвінок на зручний час?",
+      he: "מעדיפים שיחת טלפון מתואמת מראש?",
+      km: "ចូលចិត្តការហៅទូរស័ព្ទដែលបានកំណត់ពេលទុកជាមុនមែនទេ?",
+      fr: "Vous préférez un appel téléphonique planifié ?",
+      pt: "Prefere uma ligação agendada?"
     },
     "Click here to pick a 15-minute slot on our calendar →": {
       es: "Haga clic aquí para elegir un horario de 15 minutos →",
@@ -2950,7 +5587,16 @@
       ko: "여기를 클릭해 15분 상담 시간을 선택하세요 →",
       hy: "Սեղմեք այստեղ՝ 15-րոպեանոց ժամ ընտրելու համար →",
       ru: "Нажмите здесь, чтобы выбрать 15-минутный слот в календаре →",
-      ar: "انقر هنا لاختيار موعد مدته 15 دقيقة في جدولنا →"
+      ar: "انقر هنا لاختيار موعد مدته 15 دقيقة في جدولنا →",
+      fa: "برای انتخاب یک بازه ۱۵ دقیقه‌ای در تقویم ما اینجا کلیک کنید ←",
+      hi: "हमारे कैलेंडर पर 15-मिनट का समय चुनने के लिए यहाँ क्लिक करें →",
+      pa: "ਸਾਡੇ ਕੈਲੰਡਰ ਵਿੱਚੋਂ 15-ਮਿੰਟ ਦਾ ਸਮਾਂ ਚੁਣਨ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ →",
+      ja: "こちらをクリックしてカレンダーから15分枠を選択 →",
+      uk: "Натисніть тут, щоб обрати 15-хвилинний слот у нашому календарі →",
+      he: "לחצו כאן לבחירת מועד של 15 דקות ביומן שלנו ←",
+      km: "ចុចទីនេះដើម្បីជ្រើសរើសម៉ោង 15 នាទីលើប្រតិទិនរបស់យើង →",
+      fr: "Cliquez ici pour choisir un créneau de 15 minutes dans notre calendrier →",
+      pt: "Clique aqui para escolher um horário de 15 minutos em nossa agenda →"
     },
     "Send an Enquiry": {
       es: "Enviar una Consulta",
@@ -2960,7 +5606,16 @@
       ko: "온라인 상담 문의",
       hy: "Ուղարկել հարցում",
       ru: "Отправить запрос",
-      ar: "أرسل استفساراً"
+      ar: "أرسل استفساراً",
+      fa: "ارسال درخواست مشاوره",
+      hi: "पूछताछ भेजें",
+      pa: "ਪੁੱਛਗਿੱਛ ਭੇਜੋ",
+      ja: "お問い合わせを送信",
+      uk: "Надіслати запит",
+      he: "שליחת פנייה",
+      km: "ផ្ញើការសាកសួរ",
+      fr: "Envoyer une demande",
+      pt: "Enviar Mensagem"
     },
     "We respond to every message with personal attention. No spam, ever.": {
       es: "Respondemos cada mensaje con atención personalizada. Nunca enviamos spam.",
@@ -2970,7 +5625,16 @@
       ko: "모든 문의에 담당자가 직접 정성껏 답변드리며, 스팸 연락은 절대 하지 않습니다.",
       hy: "Մենք պատասխանում ենք յուրաքանչյուր նամակի անհատական ուշադրությամբ։ Առանց սպամի։",
       ru: "Мы лично отвечаем на каждое сообщение. Никакого спама.",
-      ar: "نرد على كل رسالة باهتمام شخصي. لا رسائل مزعجة أبداً."
+      ar: "نرد على كل رسالة باهتمام شخصي. لا رسائل مزعجة أبداً.",
+      fa: "ما به هر پیام با توجه شخصی پاسخ می‌دهیم. هرگز هرزنامه ارسال نمی‌کنیم.",
+      hi: "हम हर संदेश का व्यक्तिगत ध्यान से उत्तर देते हैं। कभी कोई स्पैम नहीं।",
+      pa: "ਅਸੀਂ ਹਰ ਸੁਨੇਹੇ ਦਾ ਪੂਰੇ ਨਿੱਜੀ ਧਿਆਨ ਨਾਲ ਜਵਾਬ ਦਿੰਦੇ ਹਾਂ। ਕਦੇ ਕੋਈ ਸਪੈਮ ਨਹੀਂ।",
+      ja: "すべてのメッセージに担当者が心を込めて個別にご返信します。迷惑メールの送信は一切いたしません。",
+      uk: "Ми особисто відповідаємо на кожне повідомлення. Жодного спаму.",
+      he: "אנו משיבים לכל הודעה בתשומת לב אישית. לעולם ללא ספאם.",
+      km: "យើងឆ្លើយតបគ្រប់សារដោយការយកចិត្តទុកដាក់ផ្ទាល់ខ្លួន។ គ្មានសារឥតបានការឡើយ។",
+      fr: "Nous répondons à chaque message avec une attention personnelle. Jamais de courrier indésirable.",
+      pt: "Respondemos a cada mensagem com atenção pessoal. Nunca enviamos spam."
     },
     "I am reaching out regarding *": {
       es: "Me comunico en relación con *",
@@ -2980,7 +5644,16 @@
       ko: "문의 분야 선택 *",
       hy: "Հարցման թեման *",
       ru: "Тема обращения *",
-      ar: "أتواصل بخصوص *"
+      ar: "أتواصل بخصوص *",
+      fa: "موضوع تماس من درباره این مورد است *",
+      hi: "मैं इस विषय पर संपर्क कर रहा/रही हूँ *",
+      pa: "ਮੈਂ ਇਸ ਸਬੰਧ ਵਿੱਚ ਸੰਪਰਕ ਕਰ ਰਿਹਾ/ਰਹੀ ਹਾਂ *",
+      ja: "お問い合わせ内容 *",
+      uk: "Тема мого звернення *",
+      he: "אני פונה בנוגע ל-*",
+      km: "ខ្ញុំទាក់ទងមកពាក់ព័ន្ធនឹង *",
+      fr: "Je vous contacte au sujet de *",
+      pt: "Estou entrando em contato sobre *"
     },
     "Elder Care / Family Placement": {
       es: "Cuidado de Adultos Mayores / Ubicación Familiar",
@@ -2990,7 +5663,16 @@
       ko: "어르신 돌봄 / 가족 입소 연계",
       hy: "Տարեցների խնամք / Ընտանեկան տեղավորում",
       ru: "Уход за пожилыми / Подбор пансионата",
-      ar: "رعاية المسنين / التسكين العائلي"
+      ar: "رعاية المسنين / التسكين العائلي",
+      fa: "مراقبت از سالمندان / اسکان خانواده",
+      hi: "वरिष्ठजन देखभाल / पारिवारिक प्लेसमेंट",
+      pa: "ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ / ਪਰਿਵਾਰਕ ਰਿਹਾਇਸ਼",
+      ja: "高齢者ケア・ご家族の施設探し",
+      uk: "Догляд за літньою людиною / підбір закладу для родини",
+      he: "טיפול במבוגרים / שיבוץ משפחתי",
+      km: "ការថែទាំមនុស្សចាស់ / ការស្វែងរកកន្លែងស្នាក់នៅសម្រាប់គ្រួសារ",
+      fr: "Soins aux aînés / Placement familial",
+      pt: "Cuidados para Idosos / Acolhimento Familiar"
     },
     "RCFE Licensing & Consulting": {
       es: "Licenciamiento RCFE y Consultoría",
@@ -3000,7 +5682,16 @@
       ko: "RCFE 인허가 및 운영 컨설팅",
       hy: "RCFE լիցենզավորում և խորհրդատվություն",
       ru: "Лицензирование RCFE и консалтинг",
-      ar: "ترخيص RCFE والاستشارات"
+      ar: "ترخيص RCFE والاستشارات",
+      fa: "اخذ مجوز و مشاوره RCFE",
+      hi: "RCFE लाइसेंसिंग और परामर्श",
+      pa: "RCFE ਲਾਇਸੰਸਿੰਗ ਅਤੇ ਸਲਾਹ",
+      ja: "RCFE ライセンス取得・開業コンサルティング",
+      uk: "Ліцензування RCFE та консалтинг",
+      he: "רישוי וייעוץ להקמת RCFE",
+      km: "ការសុំអាជ្ញាប័ណ្ណ RCFE និងការប្រឹក្សា",
+      fr: "Agrément RCFE et conseil aux exploitants",
+      pt: "Licenciamento RCFE e Consultoria"
     },
     "Your Full Name *": {
       es: "Nombre Completo *",
@@ -3010,7 +5701,16 @@
       ko: "성함 *",
       hy: "Ձեր անունը և ազգանունը *",
       ru: "Ваше имя и фамилия *",
-      ar: "الاسم الكامل *"
+      ar: "الاسم الكامل *",
+      fa: "نام و نام خانوادگی شما *",
+      hi: "आपका पूरा नाम *",
+      pa: "ਤੁਹਾਡਾ ਪੂਰਾ ਨਾਮ *",
+      ja: "お名前（フルネーム）*",
+      uk: "Ваше повне ім’я *",
+      he: "שם מלא *",
+      km: "ឈ្មោះពេញរបស់លោកអ្នក *",
+      fr: "Votre nom complet *",
+      pt: "Seu Nome Completo *"
     },
     "Phone Number *": {
       es: "Número de Teléfono *",
@@ -3020,7 +5720,16 @@
       ko: "전화번호 *",
       hy: "Հեռախոսահամար *",
       ru: "Номер телефона *",
-      ar: "رقم الهاتف *"
+      ar: "رقم الهاتف *",
+      fa: "شماره تلفن *",
+      hi: "फ़ोन नंबर *",
+      pa: "ਫ਼ੋਨ ਨੰਬਰ *",
+      ja: "お電話番号 *",
+      uk: "Номер телефону *",
+      he: "מספר טלפון *",
+      km: "លេខទូរស័ព្ទ *",
+      fr: "Numéro de téléphone *",
+      pt: "Número de Telefone *"
     },
     "Email Address *": {
       es: "Correo Electrónico *",
@@ -3030,7 +5739,16 @@
       ko: "이메일 주소 *",
       hy: "Էլ․ փոստի հասցե *",
       ru: "Электронная почта *",
-      ar: "البريد الإلكتروني *"
+      ar: "البريد الإلكتروني *",
+      fa: "نشانی ایمیل *",
+      hi: "ईमेल पता *",
+      pa: "ਈਮੇਲ ਪਤਾ *",
+      ja: "メールアドレス *",
+      uk: "Електронна пошта *",
+      he: "כתובת אימייל *",
+      km: "អាសយដ្ឋានអ៊ីមែល *",
+      fr: "Adresse e-mail *",
+      pt: "Endereço de E-mail *"
     },
     "Preferred City / Region": {
       es: "Ciudad o Región Preferida",
@@ -3040,7 +5758,16 @@
       ko: "희망 도시 또는 지역",
       hy: "Նախընտրելի քաղաք / տարածաշրջան",
       ru: "Предпочтительный город / район",
-      ar: "المدينة / المنطقة المفضلة"
+      ar: "المدينة / المنطقة المفضلة",
+      fa: "شهر / منطقه مورد نظر",
+      hi: "पसंदीदा शहर / क्षेत्र",
+      pa: "ਪਸੰਦੀਦਾ ਸ਼ਹਿਰ / ਖੇਤਰ",
+      ja: "ご希望の都市・エリア",
+      uk: "Бажане місто / регіон",
+      he: "עיר / אזור מועדפים",
+      km: "ទីក្រុង / តំបន់ដែលចង់បាន",
+      fr: "Ville ou région souhaitée",
+      pt: "Cidade / Região de Preferência"
     },
     "How Can We Help You? *": {
       es: "¿Cómo Podemos Ayudarle? *",
@@ -3050,7 +5777,16 @@
       ko: "어떤 도움이 필요하신가요? *",
       hy: "Ինչպե՞ս կարող ենք օգնել ձեզ *",
       ru: "Чем мы можем вам помочь? *",
-      ar: "كيف يمكننا مساعدتك؟ *"
+      ar: "كيف يمكننا مساعدتك؟ *",
+      fa: "چگونه می‌توانیم به شما کمک کنیم؟ *",
+      hi: "हम आपकी कैसे मदद कर सकते हैं? *",
+      pa: "ਅਸੀਂ ਤੁਹਾਡੀ ਕੀ ਮਦਦ ਕਰ ਸਕਦੇ ਹਾਂ? *",
+      ja: "ご相談内容の詳細 *",
+      uk: "Чим ми можемо вам допомогти? *",
+      he: "איך נוכל לעזור לכם? *",
+      km: "តើយើងអាចជួយលោកអ្នកដោយរបៀបណា? *",
+      fr: "Comment pouvons-nous vous aider ? *",
+      pt: "Como Podemos Ajudar? *"
     },
     "Max 3000 chars": {
       es: "Máx. 3000 caracteres",
@@ -3060,7 +5796,16 @@
       ko: "최대 3,000자",
       hy: "Առավելագույնը 3000 նիշ",
       ru: "Макс. 3000 символов",
-      ar: "الحد الأقصى 3000 حرف"
+      ar: "الحد الأقصى 3000 حرف",
+      fa: "حداکثر ۳۰۰۰ کاراکتر",
+      hi: "अधिकतम 3000 अक्षर",
+      pa: "ਵੱਧ ਤੋਂ ਵੱਧ 3000 ਅੱਖਰ",
+      ja: "最大3,000文字",
+      uk: "Макс. 3000 символів",
+      he: "עד 3,000 תווים",
+      km: "អតិបរមា 3000 តួអក្សរ",
+      fr: "Max 3 000 caractères",
+      pt: "Máx. 3000 caracteres"
     },
     "Leave this field empty": {
       es: "Dejar este campo vacío",
@@ -3070,7 +5815,16 @@
       ko: "이 칸은 비워 두세요",
       hy: "Թողեք այս դաշտը դատարկ",
       ru: "Оставьте это поле пустым",
-      ar: "اترك هذا الحقل فارغاً"
+      ar: "اترك هذا الحقل فارغاً",
+      fa: "این فیلد را خالی بگذارید",
+      hi: "इस फ़ील्ड को खाली छोड़ें",
+      pa: "ਇਹ ਖਾਨਾ ਖਾਲੀ ਛੱਡੋ",
+      ja: "この欄は空欄のままにしてください",
+      uk: "Залиште це поле порожнім",
+      he: "השאירו שדה זה ריק",
+      km: "ទុកប្រអប់នេះឱ្យនៅទំនេរ",
+      fr: "Laissez ce champ vide",
+      pt: "Deixe este campo em branco"
     },
     "Send Your Message": {
       es: "Enviar Mensaje",
@@ -3080,7 +5834,16 @@
       ko: "메시지 보내기",
       hy: "Ուղարկել հաղորդագրությունը",
       ru: "Отправить сообщение",
-      ar: "إرسال رسالتك"
+      ar: "إرسال رسالتك",
+      fa: "ارسال پیام شما",
+      hi: "अपना संदेश भेजें",
+      pa: "ਆਪਣਾ ਸੁਨੇਹਾ ਭੇਜੋ",
+      ja: "メッセージを送信する",
+      uk: "Надіслати повідомлення",
+      he: "שליחת הודעה",
+      km: "ផ្ញើសាររបស់លោកអ្នក",
+      fr: "Envoyer votre message",
+      pt: "Enviar Mensagem"
     },
     "We respect your privacy. Inquiries are transmitted securely and kept strictly confidential. Please do not include Social Security numbers, financial account details, or medical records.": {
       es: "Respetamos su privacidad. Las consultas se transmiten de forma segura y confidencial. Por favor, no incluya números de Seguro Social, datos bancarios ni historiales médicos.",
@@ -3090,7 +5853,16 @@
       ko: "귀하의 개인정보를 소중히 보호합니다. 모든 문의 내용은 안전하게 암호화되어 기밀로 처리됩니다. 사회보장번호(SSN), 금융 계좌 정보, 상세 의료 기록은 입력하지 말아 주세요.",
       hy: "Մենք հարգում ենք ձեր գաղտնիությունը։ Հարցումները փոխանցվում են պաշտպանված եղանակով և մնում են խիստ գաղտնի։ Խնդրում ենք չնշել SSN, ֆինանսական կամ բժշկական գաղտնի տվյալներ։",
       ru: "Мы уважаем вашу конфиденциальность. Запросы передаются безопасно и строго конфиденциальны. Пожалуйста, не указывайте номера SSN, финансовые реквизиты или медицинские выписки.",
-      ar: "نحترم خصوصيتك. تُنقل الاستفسارات بأمان وتبقى سرية تماماً. يرجى عدم تضمين أرقام الضمان الاجتماعي أو الحسابات البنكية أو السجلات الطبية."
+      ar: "نحترم خصوصيتك. تُنقل الاستفسارات بأمان وتبقى سرية تماماً. يرجى عدم تضمين أرقام الضمان الاجتماعي أو الحسابات البنكية أو السجلات الطبية.",
+      fa: "ما به حریم خصوصی شما احترام می‌گذاریم. درخواست‌ها به‌صورت امن منتقل شده و کاملاً محرمانه نگهداری می‌شوند. لطفاً شماره تأمین اجتماعی (SSN)، اطلاعات حساب مالی یا سوابق پزشکی را وارد نکنید.",
+      hi: "हम आपकी गोपनीयता का सम्मान करते हैं। सभी पूछताछ सुरक्षित रूप से भेजी जाती हैं और पूरी तरह गोपनीय रखी जाती हैं। कृपया सोशल सिक्योरिटी नंबर, वित्तीय खाता विवरण या मेडिकल रिकॉर्ड शामिल न करें।",
+      pa: "ਅਸੀਂ ਤੁਹਾਡੀ ਗੋਪਨੀਯਤਾ ਦਾ ਸਤਿਕਾਰ ਕਰਦੇ ਹਾਂ। ਪੁੱਛਗਿੱਛਾਂ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਭੇਜੀਆਂ ਜਾਂਦੀਆਂ ਹਨ ਅਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਗੁਪਤ ਰੱਖੀਆਂ ਜਾਂਦੀਆਂ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਸੋਸ਼ਲ ਸਿਕਿਉਰਿਟੀ ਨੰਬਰ, ਵਿੱਤੀ ਖਾਤੇ ਦੇ ਵੇਰਵੇ ਜਾਂ ਡਾਕਟਰੀ ਰਿਕਾਰਡ ਸ਼ਾਮਲ ਨਾ ਕਰੋ।",
+      ja: "プライバシーを厳守いたします。お問い合わせ内容は暗号化通信で送信され、厳重に守秘管理されます。社会保障番号（SSN）、金融口座情報、詳細な医療記録はご記入にならないようお願いいたします。",
+      uk: "Ми поважаємо вашу приватність. Усі запити передаються захищеними каналами та зберігаються в суворій конфіденційності. Будь ласка, не зазначайте номери соціального страхування, банківські реквізити чи медичні документи.",
+      he: "אנו מכבדים את פרטיותכם. פניות מועברות באופן מאובטח ונשמרות בסודיות מוחלטת. אנא אל תכללו מספרי Social Security, פרטי חשבון בנק או רשומות רפואיות.",
+      km: "យើងគោរពឯកជនភាពរបស់លោកអ្នក។ ការសាកសួរត្រូវបានបញ្ជូនដោយសុវត្ថិភាព និងរក្សាជាការសម្ងាត់យ៉ាងតឹងរ៉ឹង។ សូមកុំបញ្ចូលលេខសន្តិសុខសង្គម ព័ត៌មានគណនីហិរញ្ញវត្ថុ ឬកំណត់ត្រាវេជ្ជសាស្ត្រ។",
+      fr: "Nous respectons votre vie privée. Vos demandes sont transmises de manière sécurisée et traitées en toute confidentialité. Merci de ne pas inclure de numéros de sécurité sociale (SSN), de coordonnées bancaires ou de dossiers médicaux.",
+      pt: "Respeitamos sua privacidade. As mensagens são transmitidas com segurança e mantidas em sigilo absoluto. Por favor, não inclua números de Social Security, dados bancários ou prontuários médicos."
     },
     "Website Information": {
       es: "Información del Sitio Web",
@@ -3100,7 +5872,16 @@
       ko: "웹사이트 이용 안내",
       hy: "Կայքի տեղեկություններ",
       ru: "Информация о сайте",
-      ar: "معلومات الموقع"
+      ar: "معلومات الموقع",
+      fa: "اطلاعات وب‌سایت",
+      hi: "वेबसाइट जानकारी",
+      pa: "ਵੈੱਬਸਾਈਟ ਜਾਣਕਾਰੀ",
+      ja: "ウェブサイトに関する情報",
+      uk: "Інформація про сайт",
+      he: "מידע על האתר",
+      km: "ព័ត៌មានគេហទំព័រ",
+      fr: "Informations sur le site web",
+      pt: "Informações do Site"
     },
     "Terms of Use": {
       es: "Términos de Uso",
@@ -3110,7 +5891,16 @@
       ko: "이용약관",
       hy: "Օգտագործման պայմաններ",
       ru: "Условия использования",
-      ar: "شروط الاستخدام"
+      ar: "شروط الاستخدام",
+      fa: "شرایط استفاده",
+      hi: "उपयोग की शर्तें",
+      pa: "ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ",
+      ja: "利用規約",
+      uk: "Умови використання",
+      he: "תנאי שימוש",
+      km: "លក្ខខណ្ឌនៃការប្រើប្រាស់",
+      fr: "Conditions d'utilisation",
+      pt: "Termos de Uso"
     },
     "1. Using This Website": {
       es: "1. Uso de este sitio web",
@@ -3120,7 +5910,16 @@
       ko: "1. 웹사이트 이용",
       hy: "1. Կայքի օգտագործումը",
       ru: "1. Использование сайта",
-      ar: "1. استخدام هذا الموقع"
+      ar: "1. استخدام هذا الموقع",
+      fa: "۱. استفاده از این وب‌سایت",
+      hi: "1. इस वेबसाइट का उपयोग",
+      pa: "1. ਇਸ ਵੈੱਬਸਾਈਟ ਦੀ ਵਰਤੋਂ",
+      ja: "1. 本ウェブサイトのご利用について",
+      uk: "1. Використання цього вебсайту",
+      he: "1. שימוש באתר זה",
+      km: "1. ការប្រើប្រាស់គេហទំព័រនេះ",
+      fr: "1. Utilisation de ce site web",
+      pt: "1. Uso Deste Site"
     },
     "This website shares general information about Love RCFE’s advisory and consulting services. You may use it to learn about our services, utilize interactive planning calculators, and submit enquiries. Please provide accurate contact information and do not use the form to transmit unlawful, abusive, or copyrighted materials.": {
       es: "Este sitio web comparte información general sobre los servicios de asesoría y consultoría de Love RCFE. Puede utilizarlo para conocer nuestros servicios, usar las calculadoras interactivas y enviar consultas. Por favor proporcione datos reales y no envíe contenido ilícito, abusivo ni protegido por derechos de autor.",
@@ -3130,7 +5929,16 @@
       ko: "본 웹사이트는 Love RCFE의 상담 및 컨설팅 서비스에 관한 일반 정보를 제공합니다. 서비스 안내 확인, 비용 계산기 사용, 온라인 문의 접수 용도로 이용하실 수 있으며, 정확한 연락처를 기재하시고 불법적이거나 저작권을 침해하는 내용을 전송하지 마시기 바랍니다.",
       hy: "Այս կայքը ներկայացնում է ընդհանուր տեղեկություններ Love RCFE-ի խորհրդատվական ծառայությունների մասին։ Դուք կարող եք ծանոթանալ ծառայություններին, օգտագործել հաշվիչները և ուղարկել հարցումներ։ Խնդրում ենք տրամադրել ճիշտ կոնտակտային տվյալներ և չօգտագործել ձևը անօրինական կամ վնասակար նյութեր ուղարկելու համար։",
       ru: "Этот сайт содержит общую информацию о консультационных услугах Love RCFE. Вы можете изучать наши услуги, пользоваться калькуляторами и отправлять запросы. Просим указывать достоверные контакты и не использовать формы для передачи незаконных или оскорбительных материалов.",
-      ar: "يشارك هذا الموقع معلومات عامة حول الخدمات الإرشادية والاستشارية لدى Love RCFE. يمكنك استخدامه للتعرف على خدماتنا وحاسبات التخطيط التفاعلية وتقديم الاستفسارات مع الحرص على دقة معلومات الاتصال وعدم إرسال أي مواد مخالفة."
+      ar: "يشارك هذا الموقع معلومات عامة حول الخدمات الإرشادية والاستشارية لدى Love RCFE. يمكنك استخدامه للتعرف على خدماتنا وحاسبات التخطيط التفاعلية وتقديم الاستفسارات مع الحرص على دقة معلومات الاتصال وعدم إرسال أي مواد مخالفة.",
+      fa: "این وب‌سایت اطلاعات کلی درباره خدمات مشاوره و راهنمایی Love RCFE ارائه می‌دهد. می‌توانید از آن برای آشنایی با خدمات ما، استفاده از ماشین‌حساب‌های تعاملی برنامه‌ریزی و ارسال درخواست‌ها بهره ببرید. لطفاً اطلاعات تماس دقیق ارائه دهید و از این فرم برای ارسال مطالب غیرقانونی، توهین‌آمیز یا دارای حق نشر استفاده نکنید.",
+      hi: "यह वेबसाइट Love RCFE की सलाहकार और परामर्श सेवाओं के बारे में सामान्य जानकारी साझा करती है। आप इसका उपयोग हमारी सेवाओं के बारे में जानने, इंटरैक्टिव योजना कैलकुलेटर इस्तेमाल करने और पूछताछ भेजने के लिए कर सकते हैं। कृपया सही संपर्क जानकारी दें और फ़ॉर्म का उपयोग किसी अवैध, अपमानजनक या कॉपीराइट सामग्री को भेजने के लिए न करें।",
+      pa: "ਇਹ ਵੈੱਬਸਾਈਟ Love RCFE ਦੀਆਂ ਮਾਰਗਦਰਸ਼ਨ ਅਤੇ ਸਲਾਹ ਸੇਵਾਵਾਂ ਬਾਰੇ ਆਮ ਜਾਣਕਾਰੀ ਸਾਂਝੀ ਕਰਦੀ ਹੈ। ਤੁਸੀਂ ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਬਾਰੇ ਜਾਣਨ, ਇੰਟਰਐਕਟਿਵ ਯੋਜਨਾ ਕੈਲਕੂਲੇਟਰ ਵਰਤਣ ਅਤੇ ਪੁੱਛਗਿੱਛ ਭੇਜਣ ਲਈ ਇਸ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹੋ। ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਸੰਪਰਕ ਜਾਣਕਾਰੀ ਦਿਓ ਅਤੇ ਗੈਰ-ਕਾਨੂੰਨੀ, ਅਪਮਾਨਜਨਕ ਜਾਂ ਕਾਪੀਰਾਈਟ ਸਮੱਗਰੀ ਭੇਜਣ ਲਈ ਫਾਰਮ ਦੀ ਵਰਤੋਂ ਨਾ ਕਰੋ।",
+      ja: "本ウェブサイトは、Love RCFE のアドバイザリーおよびコンサルティングサービスに関する一般的な情報を提供するものです。サービス内容のご確認、費用試算などの対話型ツールの利用、およびお問い合わせの送信にご活用いただけます。お問い合わせの際は正確な連絡先をご入力いただき、違法・誹謗中傷または著作権侵害にあたる内容の送信はお控えください。",
+      uk: "Цей вебсайт надає загальну інформацію про консультативні послуги Love RCFE. Ви можете використовувати його для ознайомлення з послугами, роботи з інтерактивними калькуляторами планування та надсилання запитів. Будь ласка, вказуйте достовірні контактні дані та не використовуйте форму для передачі незаконних, образливих або захищених авторським правом матеріалів.",
+      he: "אתר זה מציג מידע כללי על שירותי הייעוץ והליווי של Love RCFE. הנכם רשאים להשתמש בו כדי ללמוד על שירותינו, להיעזר במחשבוני התכנון האינטראקטיביים ולשלוח פניות. אנא ספקו פרטי קשר מדויקים ואל תשתמשו בטופס להעברת חומרים בלתי חוקיים, פוגעניים או מוגנים בזכויות יוצרים.",
+      km: "គេហទំព័រនេះចែករំលែកព័ត៌មានទូទៅអំពីសេវាកម្មប្រឹក្សា និងយោបល់របស់ Love RCFE។ លោកអ្នកអាចប្រើប្រាស់វាដើម្បីស្វែងយល់អំពីសេវាកម្មរបស់យើង ប្រើប្រាស់ម៉ាស៊ីនគណនាផែនការអន្តរកម្ម និងផ្ញើការសាកសួរ។ សូមផ្តល់ព័ត៌មានទំនាក់ទំនងត្រឹមត្រូវ និងកុំប្រើប្រាស់ទម្រង់នេះដើម្បីផ្ញើឯកសារខុសច្បាប់ រំលោភបំពាន ឬជាប់កម្មសិទ្ធិបញ្ញា។",
+      fr: "Ce site présente des informations générales sur les services d'orientation et de conseil de Love RCFE. Vous pouvez l'utiliser pour découvrir nos services, utiliser nos calculateurs de planification interactifs et nous adresser vos demandes. Veuillez fournir des coordonnées exactes et ne pas utiliser le formulaire pour transmettre des contenus illicites, abusifs ou protégés par le droit d'auteur.",
+      pt: "Este site apresenta informações gerais sobre os serviços de assessoria e consultoria da Love RCFE. Você pode utilizá-lo para conhecer nossos serviços, usar calculadoras interativas de planejamento e enviar consultas. Forneça informações de contato verdadeiras e não utilize o formulário para enviar conteúdo ilícito, abusivo ou protegido por direitos autorais."
     },
     "2. Advisory Guidance, Not Medical or Legal Guarantee": {
       es: "2. Orientación informativa, no garantía médica ni legal",
@@ -3140,7 +5948,16 @@
       ko: "2. 자문 안내이며 의학적·법률적 보증이 아님",
       hy: "2. Խորհրդատվական բնույթ, ոչ բժշկական կամ իրավական երաշխիք",
       ru: "2. Информационный характер, без медицинских или юридических гарантий",
-      ar: "2. إرشاد استشاري وليس ضماناً طبياً أو قانونياً"
+      ar: "2. إرشاد استشاري وليس ضماناً طبياً أو قانونياً",
+      fa: "۲. راهنمایی مشورتی، نه تضمین پزشکی یا حقوقی",
+      hi: "2. सलाहकार मार्गदर्शन, चिकित्सा या कानूनी गारंटी नहीं",
+      pa: "2. ਸਲਾਹਕਾਰੀ ਮਾਰਗਦਰਸ਼ਨ, ਡਾਕਟਰੀ ਜਾਂ ਕਾਨੂੰਨੀ ਗਾਰੰਟੀ ਨਹੀਂ",
+      ja: "2. 情報提供および助言について（医療・法的保証の否認）",
+      uk: "2. Консультативний характер без медичних або юридичних гарантій",
+      he: "2. הכוונה וייעוץ בלבד, ללא התחייבות רפואית או משפטית",
+      km: "2. ការណែនាំប្រឹក្សា មិនមែនជាការធានាផ្នែកវេជ្ជសាស្ត្រ ឬផ្លូវច្បាប់ទេ",
+      fr: "2. Accompagnement informatif, sans garantie médicale ni juridique",
+      pt: "2. Orientação Consultiva, Sem Garantia Médica ou Jurídica"
     },
     "Information on this website is for general educational and placement assistance purposes only. It does not replace formal counsel from licensed attorneys, medical physicians, or state licensing regulators. Submitting an enquiry does not establish an attorney-client or fiduciary consulting relationship, nor does it guarantee specific placement availability or state license approval from the California Department of Social Services (CDSS).": {
       es: "La información de este sitio tiene fines exclusivamente educativos y de orientación. No sustituye el criterio formal de abogados con licencia, médicos ni autoridades reguladoras estatales. Enviar una consulta no crea relación abogado-cliente ni fiduciaria, ni garantiza disponibilidad específica de plazas o aprobación de licencia ante el CDSS.",
@@ -3150,7 +5967,16 @@
       ko: "본 웹사이트의 정보는 일반적인 교육 및 입소 지원 안내 목적이며, 면허 변호사, 의사 또는 주정부 인허가 기관의 공식 판단을 대신하지 않습니다. 문의 접수로 변호사-의뢰인 관계가 성립되거나 특정 입소 자리 및 CDSS 라이선스 승인이 보장되지는 않습니다.",
       hy: "Կայքի տեղեկությունները կրում են միայն կրթական և տեղավորման աջակցության բնույթ։ Դրանք չեն փոխարինում լիցենզավորված փաստաբանի, բժշկի կամ պետական տեսչության խորհրդատվությանը։ Հարցում ուղարկելը չի ստեղծում իրավաբանական պարտավորություն և չի երաշխավորում կոնկրետ տեղ կամ CDSS լիցենզիայի հաստատում։",
       ru: "Информация на сайте предназначена только для ознакомления и помощи в поиске жилья. Она не заменяет официальных рекомендаций юристов, врачей или госорганов. Отправка заявки не создает юридических обязательств и не гарантирует наличие мест или одобрение лицензии со стороны CDSS.",
-      ar: "المعلومات الواردة في هذا الموقع لأغراض التوعية والمساعدة العامة فقط، ولا تغني عن استشارة المحامين المرخصين أو الأطباء أو الجهات التنظيمية. تقديم الاستفسار لا ينشئ علاقة تعاقدية قانونية ولا يضمن توافر سرير محدد أو موافقة ترخيص من CDSS."
+      ar: "المعلومات الواردة في هذا الموقع لأغراض التوعية والمساعدة العامة فقط، ولا تغني عن استشارة المحامين المرخصين أو الأطباء أو الجهات التنظيمية. تقديم الاستفسار لا ينشئ علاقة تعاقدية قانونية ولا يضمن توافر سرير محدد أو موافقة ترخيص من CDSS.",
+      fa: "اطلاعات موجود در این وب‌سایت صرفاً برای آموزش عمومی و کمک به اسکان است و جایگزین مشاوره رسمی وکلای دارای پروانه، پزشکان یا نهادهای نظارتی صدور مجوز ایالتی نمی‌شود. ارسال درخواست به منزله ایجاد رابطه وکیل-موکل یا مشاوره امانی نیست و تضمینی برای موجود بودن جای خالی در مرکز خاص یا تأیید مجوز ایالتی از سوی اداره خدمات اجتماعی کالیفرنیا (CDSS) ایجاد نمی‌کند.",
+      hi: "इस वेबसाइट पर दी गई जानकारी केवल सामान्य शैक्षिक और प्लेसमेंट सहायता उद्देश्यों के लिए है। यह लाइसेंस प्राप्त वकीलों, चिकित्सकों या राज्य लाइसेंसिंग नियामकों की औपचारिक सलाह का स्थान नहीं लेती। पूछताछ सबमिट करने से वकील-मुवक्किल या न्यासी (fiduciary) परामर्श संबंध स्थापित नहीं होता है, न ही यह किसी विशेष प्लेसमेंट उपलब्धता या कैलिफ़ोर्निया सामाजिक सेवा विभाग (CDSS) से राज्य लाइसेंस स्वीकृति की गारंटी देता है।",
+      pa: "ਇਸ ਵੈੱਬਸਾਈਟ 'ਤੇ ਦਿੱਤੀ ਜਾਣਕਾਰੀ ਸਿਰਫ਼ ਆਮ ਸਿੱਖਿਆ ਅਤੇ ਰਿਹਾਇਸ਼ ਸਹਾਇਤਾ ਦੇ ਉਦੇਸ਼ਾਂ ਲਈ ਹੈ। ਇਹ ਲਾਇਸੰਸਸ਼ੁਦਾ ਵਕੀਲਾਂ, ਡਾਕਟਰਾਂ ਜਾਂ ਰਾਜ ਦੇ ਲਾਇਸੰਸਿੰਗ ਅਧਿਕਾਰੀਆਂ ਦੀ ਰਸਮੀ ਸਲਾਹ ਦੀ ਥਾਂ ਨਹੀਂ ਲੈਂਦੀ। ਪੁੱਛਗਿੱਛ ਭੇਜਣ ਨਾਲ ਵਕੀਲ-ਗਾਹਕ ਜਾਂ ਭਰੋਸੇਮੰਦ ਸਲਾਹਕਾਰ ਸਬੰਧ ਸਥਾਪਤ ਨਹੀਂ ਹੁੰਦਾ, ਅਤੇ ਨਾ ਹੀ ਇਹ ਕਿਸੇ ਖ਼ਾਸ ਰਿਹਾਇਸ਼ ਦੀ ਉਪਲਬਧਤਾ ਜਾਂ California Department of Social Services (CDSS) ਵੱਲੋਂ ਰਾਜ ਲਾਇਸੰਸ ਦੀ ਮਨਜ਼ੂਰੀ ਦੀ ਗਾਰੰਟੀ ਦਿੰਦਾ ਹੈ।",
+      ja: "本ウェブサイトに掲載されている情報は、一般的な知識の提供および入居相談の補助を目的としたものであり、弁護士、医師、または州の認可当局による正式な助言・判断に代わるものではありません。お問い合わせの送信によって弁護士・依頼者関係や受託者責任に基づく契約関係が生じるものではなく、特定施設の空き保証やカリフォルニア州社会福祉局（CDSS）による認可取得を保証するものでもありません。",
+      uk: "Матеріали на цьому сайті призначені виключно для загального інформування та допомоги з підбором догляду. Вони не замінюють офіційних консультацій ліцензованих юристів, лікарів чи державних органів ліцензування. Надсилання запиту не створює відносин «адвокат–клієнт» або фідуціарного зобов’язання та не гарантує наявності місць у конкретному закладі або отримання державної ліцензії від California Department of Social Services (CDSS).",
+      he: "המידע באתר זה נועד למטרות מידע כללי וסיוע בשיבוץ בלבד, ואינו מחליף ייעוץ פורמלי מעורכי דין מורשים, רופאים או רשויות רישוי ממלכתיות. שליחת פנייה אינה יוצרת יחסי עורך דין-לקוח או יחסי נאמנות, ואינה מבטיחה זמינות מקום מסוים או קבלת רישיון ממחלקת השירותים החברתיים של קליפורניה (CDSS).",
+      km: "ព័ត៌មាននៅលើគេហទំព័រនេះគឺសម្រាប់គោលបំណងអប់រំទូទៅ និងជំនួយស្វែងរកកន្លែងស្នាក់នៅប៉ុណ្ណោះ។ វាមិនជំនួសការប្រឹក្សាផ្លូវការពីមេធាវីមានអាជ្ញាប័ណ្ណ វេជ្ជបណ្ឌិត ឬនិយតករអាជ្ញាប័ណ្ណរដ្ឋឡើយ។ ការផ្ញើការសាកសួរមិនបង្កើតទំនាក់ទំនងមេធាវី-កូនក្តី ឬការប្រឹក្សាផ្នែកជឿទុកចិត្ត និងមិនធានាភាពមានគ្រែទំនេរជាក់លាក់ ឬការអនុម័តអាជ្ញាប័ណ្ណរដ្ឋពីនាយកដ្ឋានសេវាសង្គមរដ្ឋ California (CDSS) ឡើយ។",
+      fr: "Les informations figurant sur ce site sont fournies à titre purement éducatif et d'aide au placement. Elles ne remplacent pas l'avis formel d'avocats agréés, de médecins ou des autorités publiques d'agrément. L'envoi d'une demande ne crée aucune relation avocat-client ni mandat fiduciaire, et ne garantit ni la disponibilité d'une place précise ni l'octroi d'une licence par le Département des services sociaux de Californie (CDSS).",
+      pt: "As informações deste site têm caráter exclusivamente educativo e de apoio ao encaminhamento. Não substituem orientação formal de advogados habilitados, médicos ou órgãos estaduais reguladores. O envio de uma consulta não cria vínculo advogado-cliente ou fiduciário, nem garante disponibilidade imediata de vagas ou aprovação de licença estadual pelo California Department of Social Services (CDSS)."
     },
     "3. Interactive Tools and Estimations": {
       es: "3. Herramientas interactivas y estimaciones",
@@ -3160,7 +5986,16 @@
       ko: "3. 인터랙티브 도구 및 추정치",
       hy: "3. Ինտերակտիվ գործիքներ և հաշվարկներ",
       ru: "3. Интерактивные инструменты и расчеты",
-      ar: "3. الأدوات التفاعلية والتقديرات"
+      ar: "3. الأدوات التفاعلية والتقديرات",
+      fa: "۳. ابزارهای تعاملی و برآوردها",
+      hi: "3. इंटरैक्टिव उपकरण और अनुमान",
+      pa: "3. ਇੰਟਰਐਕਟਿਵ ਸਾਧਨ ਅਤੇ ਅਨੁਮਾਨ",
+      ja: "3. 対話型ツールおよび概算見積りについて",
+      uk: "3. Інтерактивні інструменти та орієнтовні розрахунки",
+      he: "3. כלים אינטראקטיביים ואומדנים",
+      km: "3. ឧបករណ៍អន្តរកម្ម និងការប៉ាន់ស្មាន",
+      fr: "3. Outils interactifs et estimations",
+      pt: "3. Ferramentas Interativas e Estimativas"
     },
     "Cost calculators and level-of-care assessment tools are provided for ballpark estimation only. Actual monthly facility charges are determined exclusively by the individual residential care home following their formal Physician's Assessment (LIC 602A) and pre-admission appraisal.": {
       es: "Las calculadoras de costos y herramientas de autoevaluación ofrecen solo estimaciones aproximadas. Las tarifas mensuales reales son determinadas únicamente por cada centro residencial tras su Evaluación Médica formal (LIC 602A) y valoración previa al ingreso.",
@@ -3170,7 +6005,16 @@
       ko: "비용 계산기와 자가진단 도구는 대략적인 추산치만을 제공합니다. 실제 월 이용 요금은 각 주거형 요양홈이 공식 의사 평가서(LIC 602A)와 입소 전 평가를 마친 후 최종 결정합니다.",
       hy: "Արժեքի հաշվիչները և խնամքի մակարդակի գնահատման գործիքները նախատեսված են միայն նախնական կողմնորոշման համար։ Փաստացի ամսավճարները որոշվում են անմիջապես խնամքի տան կողմից՝ LIC 602A բժշկական եզրակացությունից և նախնական գնահատումից հետո։",
       ru: "Калькуляторы и тесты предназначены только для ориентировочной оценки. Точная ежемесячная плата определяется конкретным пансионатом после изучения медицинской формы LIC 602A и оценки при приеме.",
-      ar: "تُقدم حاسبات التكلفة وأدوات التقييم للتقدير التقريبي فقط. وتُحدد الرسوم الشهرية الفعلية حصراً من قبل دار الرعاية بعد مراجعة التقييم الطبي (LIC 602A) وتقييم ما قبل القبول."
+      ar: "تُقدم حاسبات التكلفة وأدوات التقييم للتقدير التقريبي فقط. وتُحدد الرسوم الشهرية الفعلية حصراً من قبل دار الرعاية بعد مراجعة التقييم الطبي (LIC 602A) وتقييم ما قبل القبول.",
+      fa: "ماشین‌حساب‌های هزینه و ابزارهای ارزیابی سطح مراقبت صرفاً برای برآورد تقریبی ارائه شده‌اند. هزینه‌های ماهانه واقعی مرکز منحصراً توسط خود خانه مراقبت مسکونی پس از ارزیابی رسمی پزشک (LIC 602A) و ارزیابی پیش از پذیرش تعیین می‌شود.",
+      hi: "लागत कैलकुलेटर और देखभाल-स्तर मूल्यांकन उपकरण केवल अनुमानित जानकारी देने के लिए प्रदान किए जाते हैं। वास्तविक मासिक केंद्र शुल्क का निर्धारण संबंधित आवासीय देखभाल गृह द्वारा उनके औपचारिक चिकित्सक मूल्यांकन (LIC 602A) और प्रवेश-पूर्व जांच के बाद ही किया जाता है।",
+      pa: "ਖਰਚ ਕੈਲਕੂਲੇਟਰ ਅਤੇ ਦੇਖਭਾਲ-ਪੱਧਰ ਮੁਲਾਂਕਣ ਸਾਧਨ ਸਿਰਫ਼ ਅੰਦਾਜ਼ੇ ਲਈ ਦਿੱਤੇ ਗਏ ਹਨ। ਅਸਲ ਮਹੀਨਾਵਾਰ ਕੇਂਦਰ ਫੀਸਾਂ ਸਬੰਧਤ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਘਰ ਵੱਲੋਂ ਰਸਮੀ ਡਾਕਟਰੀ ਮੁਲਾਂਕਣ (LIC 602A) ਅਤੇ ਦਾਖ਼ਲੇ ਤੋਂ ਪਹਿਲਾਂ ਦੀ ਜਾਂਚ ਤੋਂ ਬਾਅਦ ਹੀ ਨਿਰਧਾਰਤ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।",
+      ja: "費用シミュレーターおよび必要ケア度診断ツールは、大まかな目安を把握するための参考情報として提供されています。実際の月額施設利用料は、各居住型ケアホームが医師評価書（LIC 602A）および入居前アセスメントを実施したうえで個別に決定いたします。",
+      uk: "Калькулятори вартості та інструменти оцінки рівня догляду призначені лише для приблизного орієнтування. Остаточну щомісячну вартість встановлює виключно конкретний будинок догляду після офіційного медичного висновку лікаря (LIC 602A) та передприйомної оцінки.",
+      he: "מחשבוני העלויות וכלי הערכת רמת הטיפול נועדו להערכה משוערת בלבד. התעריף החודשי בפועל נקבע בלעדית על ידי כל בית טיפולי לאחר קבלת הערכת רופא רשמית (LIC 602A) והערכת קדם-קליטה.",
+      km: "ម៉ាស៊ីនគណនាថ្លៃចំណាយ និងឧបករណ៍វាយតម្លៃកម្រិតថែទាំត្រូវបានផ្តល់ជូនសម្រាប់ការប៉ាន់ស្មានប្រហាក់ប្រហែលប៉ុណ្ណោះ។ ថ្លៃសេវាមណ្ឌលប្រចាំខែពិតប្រាកដត្រូវបានកំណត់ផ្តាច់មុខដោយផ្ទះថែទាំស្នាក់នៅនីមួយៗ បន្ទាប់ពីការវាយតម្លៃផ្លូវការរបស់វេជ្ជបណ្ឌិត (LIC 602A) និងការវាយតម្លៃមុនចូលស្នាក់នៅ។",
+      fr: "Les calculateurs de coûts et les outils d'évaluation du niveau de soins sont fournis uniquement à titre estimatif. Les tarifs mensuels réels sont fixés exclusivement par chaque foyer résidentiel à l'issue de l'évaluation médicale formelle (LIC 602A) et de l'évaluation préalable à l'admission.",
+      pt: "As calculadoras de custo e ferramentas de avaliação do nível de cuidados fornecem apenas estimativas referenciais. Os valores mensais efetivos são definidos exclusivamente por cada casa residencial após a Avaliação Médica formal (LIC 602A) e avaliação pré-admissional."
     },
     "4. Changes & Contact": {
       es: "4. Cambios y Contacto",
@@ -3180,7 +6024,16 @@
       ko: "4. 약관 변경 및 문의",
       hy: "4. Փոփոխություններ և կապ",
       ru: "4. Изменения и контакты",
-      ar: "4. التعديلات والتواصل"
+      ar: "4. التعديلات والتواصل",
+      fa: "۴. تغییرات و تماس",
+      hi: "4. बदलाव और संपर्क",
+      pa: "4. ਤਬਦੀਲੀਆਂ ਅਤੇ ਸੰਪਰਕ",
+      ja: "4. 規約の改定およびお問い合わせ",
+      uk: "4. Зміни та контакти",
+      he: "4. שינויים ויצירת קשר",
+      km: "4. ការផ្លាស់ប្តូរ និងទំនាក់ទំនង",
+      fr: "4. Modifications et contact",
+      pt: "4. Alterações e Contato"
     },
     "These terms may be updated periodically to reflect changes in regulatory standards or service offerings. For questions, please reach out via our contact page.": {
       es: "Estos términos pueden actualizarse periódicamente para reflejar cambios regulatorios o de servicios. Si tiene dudas, contáctenos mediante nuestra página de contacto.",
@@ -3190,7 +6043,16 @@
       ko: "본 약관은 법규 기준이나 제공 서비스 변경에 따라 주기적으로 업데이트될 수 있습니다. 문의 사항은 문의하기 페이지를 이용해 주세요.",
       hy: "Այս պայմանները կարող են պարբերաբար թարմացվել՝ արտացոլելով կանոնակարգային կամ ծառայությունների փոփոխությունները։ Հարցերի դեպքում դիմեք մեզ կապի էջի միջոցով։",
       ru: "Настоящие условия могут периодически обновляться в соответствии с изменениями норм или перечня услуг. По всем вопросам обращайтесь через страницу контактов.",
-      ar: "قد يتم تحديث هذه الشروط دورياً لتعكس التغييرات التنظيمية أو تطوير الخدمات. للاستفسارات، يرجى التواصل عبر صفحة الاتصال."
+      ar: "قد يتم تحديث هذه الشروط دورياً لتعكس التغييرات التنظيمية أو تطوير الخدمات. للاستفسارات، يرجى التواصل عبر صفحة الاتصال.",
+      fa: "این شرایط ممکن است به‌صورت دوره‌ای برای انعکاس تغییرات در استانداردهای مقرراتی یا خدمات ارائه‌شده به‌روزرسانی شوند. در صورت داشتن پرسش، لطفاً از طریق صفحه تماس با ما در ارتباط باشید.",
+      hi: "नियामक मानकों या सेवाओं में बदलाव के अनुसार इन शर्तों को समय-समय पर अपडेट किया जा सकता है। किसी भी प्रश्न के लिए कृपया हमारे संपर्क पृष्ठ के माध्यम से संपर्क करें।",
+      pa: "ਨਿਯਮਾਂ ਜਾਂ ਸੇਵਾਵਾਂ ਵਿੱਚ ਤਬਦੀਲੀਆਂ ਅਨੁਸਾਰ ਇਨ੍ਹਾਂ ਸ਼ਰਤਾਂ ਨੂੰ ਸਮੇਂ-ਸਮੇਂ 'ਤੇ ਅੱਪਡੇਟ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਸਵਾਲਾਂ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ ਸਾਡੇ ਸੰਪਰਕ ਪੰਨੇ ਰਾਹੀਂ ਰਾਬਤਾ ਕਰੋ।",
+      ja: "本利用規約は、関係法令の改正やサービス内容の変更に伴い随時改定されることがあります。ご不明な点がございましたら、お問い合わせページよりご連絡ください。",
+      uk: "Ці умови можуть періодично оновлюватися відповідно до змін у нормативних стандартах чи переліку послуг. Якщо маєте запитання, зв’яжіться з нами через сторінку контактів.",
+      he: "תנאים אלו עשויים להתעדכן מעת לעת כדי לשקף שינויים בתקנות או בהיצע השירותים. לשאלות, אנא פנו אלינו דרך דף יצירת הקשר.",
+      km: "លក្ខខណ្ឌទាំងនេះអាចត្រូវបានធ្វើបច្ចុប្បន្នភាពជាប្រចាំ ដើម្បីឆ្លុះបញ្ចាំងពីការផ្លាស់ប្តូរស្តង់ដារបទប្បញ្ញត្តិ ឬការផ្តល់សេវា។ សម្រាប់សំណួរផ្សេងៗ សូមទាក់ទងតាមរយៈទំព័រទំនាក់ទំនងរបស់យើង។",
+      fr: "Ces conditions peuvent être mises à jour périodiquement afin de refléter l'évolution des normes réglementaires ou de notre offre de services. Pour toute question, veuillez nous écrire via notre page de contact.",
+      pt: "Estes termos podem ser atualizados periodicamente para refletir mudanças nas normas regulatórias ou nos serviços oferecidos. Em caso de dúvidas, entre em contato pela nossa página de contato."
     },
     "Have a question? Contact us": {
       es: "¿Tiene preguntas? Contáctenos",
@@ -3200,7 +6062,16 @@
       ko: "궁금한 점이 있으신가요? 문의하기",
       hy: "Հարց ունե՞ք։ Կապվեք մեզ հետ",
       ru: "Есть вопросы? Свяжитесь с нами",
-      ar: "هل لديك سؤال؟ تواصل معنا"
+      ar: "هل لديك سؤال؟ تواصل معنا",
+      fa: "پرسشی دارید؟ با ما تماس بگیرید",
+      hi: "कोई प्रश्न है? हमसे संपर्क करें",
+      pa: "ਕੀ ਕੋਈ ਸਵਾਲ ਹੈ? ਸਾਡੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      ja: "ご質問がございましたらお気軽にお問い合わせください",
+      uk: "Маєте запитання? Зв’яжіться з нами",
+      he: "יש לכם שאלה? צרו איתנו קשר",
+      km: "មានសំណួរមែនទេ? ទាក់ទងមកយើង",
+      fr: "Une question ? Contactez-nous",
+      pt: "Tem alguma dúvida? Fale conosco"
     },
     "Your Information": {
       es: "Su Información",
@@ -3210,7 +6081,16 @@
       ko: "개인정보 안내",
       hy: "Ձեր տեղեկությունները",
       ru: "Ваши данные",
-      ar: "معلوماتك"
+      ar: "معلوماتك",
+      fa: "اطلاعات شما",
+      hi: "आपकी जानकारी",
+      pa: "ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ",
+      ja: "お客様の個人情報の取り扱い",
+      uk: "Ваші дані",
+      he: "המידע שלכם",
+      km: "ព័ត៌មានរបស់លោកអ្នក",
+      fr: "Vos informations",
+      pt: "Suas Informações"
     },
     "Privacy Policy": {
       es: "Política de Privacidad",
@@ -3220,7 +6100,16 @@
       ko: "개인정보 처리방침",
       hy: "Գաղտնիության քաղաքականություն",
       ru: "Политика конфиденциальности",
-      ar: "سياسة الخصوصية"
+      ar: "سياسة الخصوصية",
+      fa: "سیاست حفظ حریم خصوصی",
+      hi: "गोपनीयता नीति",
+      pa: "ਗੋਪਨੀਯਤਾ ਨੀਤੀ",
+      ja: "プライバシーポリシー",
+      uk: "Політика конфіденційності",
+      he: "מדיניות פרטיות",
+      km: "គោលការណ៍ឯកជនភាព",
+      fr: "Politique de confidentialité",
+      pt: "Política de Privacidade"
     },
     "1. Information We Collect": {
       es: "1. Información que recopilamos",
@@ -3230,7 +6119,16 @@
       ko: "1. 수집하는 정보",
       hy: "1. Ինչ տեղեկություններ ենք հավաքում",
       ru: "1. Какую информацию мы собираем",
-      ar: "1. المعلومات التي نجمعها"
+      ar: "1. المعلومات التي نجمعها",
+      fa: "۱. اطلاعاتی که جمع‌آوری می‌کنیم",
+      hi: "1. हम कौन-सी जानकारी एकत्र करते हैं",
+      pa: "1. ਜਾਣਕਾਰੀ ਜੋ ਅਸੀਂ ਇਕੱਠੀ ਕਰਦੇ ਹਾਂ",
+      ja: "1. 収集する情報について",
+      uk: "1. Яку інформацію ми збираємо",
+      he: "1. מידע שאנו אוספים",
+      km: "1. ព័ត៌មានដែលយើងប្រមូល",
+      fr: "1. Informations que nous collectons",
+      pt: "1. Informações que Coletamos"
     },
     "When you submit an enquiry through our contact forms or assessment tools, we collect the details you voluntarily submit: your name, email address, phone number, geographic region, inquiry category, message details, and submission timestamp. We do not sell your personal contact information to third-party marketing brokers.": {
       es: "Cuando envía una consulta mediante nuestros formularios o herramientas, recopilamos los datos que proporciona voluntariamente: nombre, correo, teléfono, región, tipo de consulta, mensaje y hora de envío. Nunca vendemos su información personal a corredores de datos ni terceros.",
@@ -3240,7 +6138,16 @@
       ko: "문의 양식이나 자가진단 도구를 제출하실 때, 성함, 이메일, 전화번호, 희망 지역, 문의 유형, 메시지 내용, 접수 시각 등 자발적으로 입력하신 정보를 수집합니다. 수집된 연락처 정보는 제3자 마케팅 업체에 절대 판매하지 않습니다.",
       hy: "Երբ դուք ուղարկում եք հարցում մեր ձևերի կամ գնահատման գործիքների միջոցով, մենք հավաքում ենք ձեր կամավոր տրամադրած տվյալները՝ անուն, էլ․ փոստ, հեռախոս, տարածաշրջան, թեմա, հաղորդագրություն և ուղարկման ժամանակ։ Մենք չենք վաճառում ձեր տվյալները երրորդ կողմերին։",
       ru: "Когда вы отправляете заявку через наши формы или тесты, мы собираем данные, указанные вами добровольно: имя, email, телефон, регион, категорию обращения, текст сообщения и время отправки. Мы не продаем ваши данные третьим лицам.",
-      ar: "عند إرسال استفسار عبر نماذجنا أو أدوات التقييم، نجمع البيانات التي تقدمها طوعاً: الاسم، البريد الإلكتروني، رقم الهاتف، المنطقة، فئة الطلب، تفاصيل الرسالة، ووقت الإرسال. نحن لا نبيع بيانات الاتصال الخاصة بك لأي وسطاء تسويق."
+      ar: "عند إرسال استفسار عبر نماذجنا أو أدوات التقييم، نجمع البيانات التي تقدمها طوعاً: الاسم، البريد الإلكتروني، رقم الهاتف، المنطقة، فئة الطلب، تفاصيل الرسالة، ووقت الإرسال. نحن لا نبيع بيانات الاتصال الخاصة بك لأي وسطاء تسويق.",
+      fa: "هنگامی که از طریق فرم‌های تماس یا ابزارهای ارزیابی ما درخواستی ثبت می‌کنید، اطلاعاتی را که داوطلبانه ارائه می‌دهید گردآوری می‌کنیم: نام، نشانی ایمیل، شماره تلفن، منطقه جغرافیایی، دسته‌بندی درخواست، جزئیات پیام و زمان ثبت. ما اطلاعات تماس شخصی شما را به دلالان بازاریابی شخص ثالث نمی‌فروشیم.",
+      hi: "जब आप हमारे संपर्क फ़ॉर्म या मूल्यांकन उपकरणों के माध्यम से पूछताछ भेजते हैं, तो हम वे विवरण एकत्र करते हैं जो आप स्वेच्छा से देते हैं: आपका नाम, ईमेल पता, फ़ोन नंबर, भौगोलिक क्षेत्र, पूछताछ श्रेणी, संदेश विवरण और भेजने का समय। हम आपकी व्यक्तिगत संपर्क जानकारी किसी तीसरे पक्ष के मार्केटिंग ब्रोकर को नहीं बेचते हैं।",
+      pa: "ਜਦੋਂ ਤੁਸੀਂ ਸਾਡੇ ਸੰਪਰਕ ਫਾਰਮਾਂ ਜਾਂ ਮੁਲਾਂਕਣ ਸਾਧਨਾਂ ਰਾਹੀਂ ਪੁੱਛਗਿੱਛ ਭੇਜਦੇ ਹੋ, ਤਾਂ ਅਸੀਂ ਉਹ ਵੇਰਵੇ ਇਕੱਠੇ ਕਰਦੇ ਹਾਂ ਜੋ ਤੁਸੀਂ ਆਪਣੀ ਮਰਜ਼ੀ ਨਾਲ ਦਿੰਦੇ ਹੋ: ਤੁਹਾਡਾ ਨਾਮ, ਈਮੇਲ ਪਤਾ, ਫ਼ੋਨ ਨੰਬਰ, ਭੂਗੋਲਿਕ ਖੇਤਰ, ਪੁੱਛਗਿੱਛ ਸ਼੍ਰੇਣੀ, ਸੁਨੇਹੇ ਦੇ ਵੇਰਵੇ ਅਤੇ ਜਮ੍ਹਾਂ ਕਰਨ ਦਾ ਸਮਾਂ। ਅਸੀਂ ਤੁਹਾਡੀ ਨਿੱਜੀ ਸੰਪਰਕ ਜਾਣਕਾਰੀ ਕਿਸੇ ਤੀਜੀ-ਧਿਰ ਦੇ ਮਾਰਕੀਟਿੰਗ ਦਲਾਲਾਂ ਨੂੰ ਨਹੀਂ ਵੇਚਦੇ।",
+      ja: "お問い合わせフォームや診断ツールをご利用いただく際、お客様が任意で入力された情報（お名前、メールアドレス、お電話番号、ご希望地域、お問い合わせ種別、ご相談内容、送信日時）を収集いたします。お客様の個人連絡先情報を第三者のマーケティング業者等へ販売することは一切ございません。",
+      uk: "Коли ви надсилаєте запит через наші контактні форми або інструменти оцінки, ми збираємо дані, які ви добровільно вказуєте: ім’я, електронну пошту, номер телефону, регіон, категорію звернення, текст повідомлення та час надсилання. Ми не продаємо вашу особисту контактну інформацію стороннім маркетинговим брокерам.",
+      he: "בעת שליחת פנייה דרך טופסי הקשר או כלי ההערכה שלנו, אנו אוספים את הפרטים שמסרתם מרצונכם: שם, כתובת אימייל, מספר טלפון, אזור גיאוגרפי, נושא הפנייה, תוכן ההודעה וחותמת הזמן. איננו מוכרים את פרטי הקשר האישיים שלכם לסוכנויות שיווק חיצוניות.",
+      km: "នៅពេលលោកអ្នកផ្ញើការសាកសួរតាមរយៈទម្រង់ទំនាក់ទំនង ឬឧបករណ៍វាយតម្លៃរបស់យើង យើងប្រមូលព័ត៌មានលម្អិតដែលលោកអ្នកដាក់ស្នើដោយស្ម័គ្រចិត្ត៖ ឈ្មោះ អាសយដ្ឋានអ៊ីមែល លេខទូរស័ព្ទ តំបន់ភូមិសាស្ត្រ ប្រភេទការសាកសួរ ខ្លឹមសារសារ និងពេលវេលាផ្ញើ។ យើងមិនលក់ព័ត៌មានទំនាក់ទំនងផ្ទាល់ខ្លួនរបស់លោកអ្នកទៅឱ្យឈ្មួញកណ្តាលទីផ្សារភាគីទីបីឡើយ។",
+      fr: "Lorsque vous soumettez une demande via nos formulaires de contact ou outils d'évaluation, nous collectons les renseignements que vous transmettez volontairement : votre nom, adresse e-mail, numéro de téléphone, région géographique, catégorie de demande, contenu du message et horodatage de l'envoi. Nous ne vendons jamais vos coordonnées personnelles à des courtiers tiers en marketing.",
+      pt: "Quando você envia uma consulta por meio dos nossos formulários de contato ou ferramentas de avaliação, coletamos os dados fornecidos voluntariamente: nome, e-mail, telefone, região geográfica, categoria da consulta, detalhes da mensagem e data/hora do envio. Nunca vendemos seus dados pessoais de contato para corretores de marketing terceiros."
     },
     "2. How Your Information is Used": {
       es: "2. Cómo usamos su información",
@@ -3250,7 +6157,16 @@
       ko: "2. 정보의 이용 목적",
       hy: "2. Ինչպես է օգտագործվում ձեր տեղեկությունը",
       ru: "2. Как используется ваша информация",
-      ar: "2. كيف نستخدم معلوماتك"
+      ar: "2. كيف نستخدم معلوماتك",
+      fa: "۲. نحوه استفاده از اطلاعات شما",
+      hi: "2. आपकी जानकारी का उपयोग कैसे किया जाता है",
+      pa: "2. ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਦੀ ਵਰਤੋਂ ਕਿਵੇਂ ਹੁੰਦੀ ਹੈ",
+      ja: "2. 情報の利用目的",
+      uk: "2. Як використовується ваша інформація",
+      he: "2. כיצד אנו משתמשים במידע שלכם",
+      km: "2. របៀបដែលព័ត៌មានរបស់លោកអ្នកត្រូវបានប្រើប្រាស់",
+      fr: "2. Utilisation de vos informations",
+      pt: "2. Como Suas Informações São Utilizadas"
     },
     "The information you provide is utilized exclusively by our advisory team to respond to your request, assess appropriate senior living placement options, or provide consulting proposals for RCFE licensing. We may coordinate directly with licensed care homes you specifically authorize us to contact on your behalf.": {
       es: "Nuestro equipo asesor utiliza su información exclusivamente para responder a su solicitud, evaluar opciones de cuidado residencial o preparar propuestas de licenciamiento RCFE. Solo coordinamos con centros con licencia cuando usted nos autorice expresamente.",
@@ -3260,7 +6176,16 @@
       ko: "제공하신 정보는 상담 답변, 적합한 어르신 거주 시설 평가 또는 RCFE 인허가 컨설팅 제안에 한해 전담 상담팀만 사용합니다. 귀하가 명시적으로 동의하신 경우에만 인가된 요양홈과 직접 조율합니다.",
       hy: "Տրամադրված տվյալները օգտագործվում են բացառապես մեր թիմի կողմից՝ ձեր հարցմանը պատասխանելու, համապատասխան խնամքի տարբերակներ առաջարկելու կամ RCFE լիցենզավորման խորհրդատվություն տալու համար։ Մենք կարող ենք կապվել լիցենզավորված տների հետ միայն ձեր համաձայնությամբ։",
       ru: "Предоставленные сведения используются исключительно нашей командой для ответа на запрос, подбора подходящего пансионата или подготовки предложений по лицензированию RCFE. С лицензированными домами мы связываемся только с вашего разрешения.",
-      ar: "تُستخدم المعلومات التي تقدمها حصراً من قِبل فريقنا الاستشاري للرد على طلبك، وتقييم خيارات الإقامة المناسبة، أو تقديم عروض استشارات ترخيص RCFE. ولا نتواصل مع الدور المرخصة إلا بموافقتك."
+      ar: "تُستخدم المعلومات التي تقدمها حصراً من قِبل فريقنا الاستشاري للرد على طلبك، وتقييم خيارات الإقامة المناسبة، أو تقديم عروض استشارات ترخيص RCFE. ولا نتواصل مع الدور المرخصة إلا بموافقتك.",
+      fa: "اطلاعاتی که ارائه می‌دهید منحصراً توسط تیم مشاوره ما برای پاسخ به درخواست شما، بررسی گزینه‌های مناسب زندگی سالمندان یا ارائه پیشنهادهای مشاوره برای اخذ مجوز RCFE استفاده می‌شود. ممکن است مستقیماً با خانه‌های مراقبت دارای مجوزی که شما مشخصاً اجازه تماس به نیابت از خود را می‌دهید هماهنگ کنیم.",
+      hi: "आपके द्वारा दी गई जानकारी का उपयोग विशेष रूप से हमारी सलाहकार टीम द्वारा आपके अनुरोध का उत्तर देने, उपयुक्त वरिष्ठजन आवास विकल्पों का आकलन करने, या RCFE लाइसेंसिंग के लिए परामर्श प्रस्ताव प्रदान करने के लिए किया जाता है। जिन लाइसेंस प्राप्त देखभाल गृहों से आप विशेष रूप से हमें अपनी ओर से संपर्क करने की अनुमति देते हैं, हम केवल उन्हीं के साथ समन्वय कर सकते हैं।",
+      pa: "ਤੁਹਾਡੇ ਵੱਲੋਂ ਦਿੱਤੀ ਜਾਣਕਾਰੀ ਦੀ ਵਰਤੋਂ ਕੇਵਲ ਸਾਡੀ ਸਲਾਹਕਾਰ ਟੀਮ ਵੱਲੋਂ ਤੁਹਾਡੀ ਬੇਨਤੀ ਦਾ ਜਵਾਬ ਦੇਣ, ਬਜ਼ੁਰਗਾਂ ਦੀ ਰਿਹਾਇਸ਼ ਦੇ ਢੁੱਕਵੇਂ ਵਿਕਲਪਾਂ ਦਾ ਮੁਲਾਂਕਣ ਕਰਨ, ਜਾਂ RCFE ਲਾਇਸੰਸਿੰਗ ਲਈ ਸਲਾਹ ਪ੍ਰਸਤਾਵ ਦੇਣ ਵਾਸਤੇ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਉਨ੍ਹਾਂ ਲਾਇਸੰਸਸ਼ੁਦਾ ਦੇਖਭਾਲ ਘਰਾਂ ਨਾਲ ਸਿੱਧਾ ਤਾਲਮੇਲ ਕਰ ਸਕਦੇ ਹਾਂ ਜਿਨ੍ਹਾਂ ਨਾਲ ਤੁਹਾਡੀ ਤਰਫ਼ੋਂ ਸੰਪਰਕ ਕਰਨ ਲਈ ਤੁਸੀਂ ਸਾਨੂੰ ਖ਼ਾਸ ਇਜਾਜ਼ਤ ਦਿੰਦੇ ਹੋ।",
+      ja: "ご提供いただいた情報は、お問い合わせへのご回答、適切なシニア向け住まいの選定支援、または RCFE 認可取得コンサルティングのご提案を行う目的のみに当アドバイザリーチームが使用します。お客様から明確にご承認いただいた場合に限り、代理として認可ケアホームへ直接確認・調整を行うことがございます。",
+      uk: "Надана інформація використовується виключно нашою командою консультантів для відповіді на ваш запит, оцінки відповідних варіантів догляду або підготовки консалтингових пропозицій щодо ліцензування RCFE. Ми можемо напряму контактувати лише з тими ліцензованими закладами, до яких ви спеціально дозволите нам звернутися від вашого імені.",
+      he: "המידע שאתם מוסרים משמש אך ורק את צוות הייעוץ שלנו למענה לפנייתכם, להערכת אפשרויות שיבוץ מתאימות לטיפול במבוגרים או להכנת הצעות ייעוץ לרישוי RCFE. אנו עשויים לתאם ישירות מול מעונות מורשים שאישרתם לנו במפורש לפנות אליהם בשמכם.",
+      km: "ព័ត៌មានដែលលោកអ្នកផ្តល់ជូនត្រូវបានប្រើប្រាស់ផ្តាច់មុខដោយក្រុមទីប្រឹក្សារបស់យើង ដើម្បីឆ្លើយតបសំណើរបស់លោកអ្នក វាយតម្លៃជម្រើសកន្លែងស្នាក់នៅសម្រាប់មនុស្សចាស់ដែលសមរម្យ ឬផ្តល់សំណើប្រឹក្សាសម្រាប់ការសុំអាជ្ញាប័ណ្ណ RCFE។ យើងអាចសម្របសម្រួលដោយផ្ទាល់ជាមួយផ្ទះថែទាំមានអាជ្ញាប័ណ្ណដែលលោកអ្នកអនុញ្ញាតឱ្យយើងទាក់ទងជំនួសលោកអ្នកជាពិសេស។",
+      fr: "Les informations fournies sont utilisées exclusivement par notre équipe de conseil pour répondre à votre demande, évaluer des solutions adaptées d'hébergement pour seniors ou formuler des propositions d'accompagnement à l'agrément RCFE. Nous pouvons contacter directement les maisons de soins agréées que vous nous autorisez expressément à solliciter en votre nom.",
+      pt: "As informações fornecidas são usadas exclusivamente por nossa equipe para responder à sua solicitação, avaliar opções adequadas de moradia sênior ou apresentar propostas de consultoria para licenciamento RCFE. Podemos entrar em contato diretamente com casas licenciadas apenas quando você autorizar expressamente que o façamos em seu nome."
     },
     "3. Medical Information Notice": {
       es: "3. Aviso sobre información médica",
@@ -3270,7 +6195,16 @@
       ko: "3. 의료 정보 입력 유의사항",
       hy: "3. Ծանուցում բժշկական տվյալների մասին",
       ru: "3. Уведомление о медицинских данных",
-      ar: "3. تنبيه المعلومات الطبية"
+      ar: "3. تنبيه المعلومات الطبية",
+      fa: "۳. اطلاعیه اطلاعات پزشکی",
+      hi: "3. चिकित्सा जानकारी सूचना",
+      pa: "3. ਡਾਕਟਰੀ ਜਾਣਕਾਰੀ ਸਬੰਧੀ ਸੂਚਨਾ",
+      ja: "3. 医療情報に関するご注意",
+      uk: "3. Повідомлення щодо медичної інформації",
+      he: "3. הודעה לגבי מידע רפואי",
+      km: "3. សេចក្តីជូនដំណឹងអំពីព័ត៌មានវេជ្ជសាស្ត្រ",
+      fr: "3. Avis concernant les données médicales",
+      pt: "3. Aviso sobre Informações Médicas"
     },
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": {
       es: "Por favor no envíe números completos de Seguro Social, historiales clínicos detallados ni información médica protegida (PHI) en formularios web abiertos. Las evaluaciones sensibles (como el Formulario LIC 602A) solo se comparten por canales seguros compatibles con HIPAA.",
@@ -3280,7 +6214,16 @@
       ko: "공개 웹 양식을 통해 사회보장번호 전체, 상세 병력 또는 보호 대상 건강 정보(PHI)를 전송하지 마세요. LIC 602A 같은 민감한 의료 평가 서류는 정식 입소 심사 중 HIPAA 보안 채널을 통해서만 전달됩니다.",
       hy: "Խնդրում ենք չուղարկել SSN համարներ, մանրամասն բժշկական պատմություն կամ գաղտնի բուժտեղեկատվություն բաց վեբ ձևերով։ Գաղտնի բժշկական փաստաթղթերը (օր․ LIC 602A) փոխանցվում են միայն պաշտպանված HIPAA ալիքներով՝ պաշտոնական ընդունման փուլում։",
       ru: "Пожалуйста, не отправляйте номера SSN, подробные истории болезни и медицинскую тайну (PHI) через открытые веб-формы. Чувствительные документы (например, форму LIC 602A) передаются только по защищенным каналам, соответствующим HIPAA.",
-      ar: "يرجى عدم إرسال أرقام الضمان الاجتماعي أو السجلات الطبية المفصلة عبر نماذج الويب المفتوحة. تُشارك التقارير الطبية الحساسة (مثل نموذج LIC 602A) فقط عبر قنوات مشفرة متوافقة مع HIPAA أثناء إجراءات القبول."
+      ar: "يرجى عدم إرسال أرقام الضمان الاجتماعي أو السجلات الطبية المفصلة عبر نماذج الويب المفتوحة. تُشارك التقارير الطبية الحساسة (مثل نموذج LIC 602A) فقط عبر قنوات مشفرة متوافقة مع HIPAA أثناء إجراءات القبول.",
+      fa: "لطفاً شماره کامل تأمین اجتماعی (SSN)، سوابق دقیق پزشکی یا اطلاعات سلامت محافظت‌شده (PHI) را از طریق فرم‌های عمومی وب ارسال نکنید. ارزیابی‌های پزشکی حساس (مانند فرم LIC 602A کالیفرنیا) تنها در جریان بررسی‌های رسمی پذیرش و از طریق کانال‌های امن منطبق با HIPAA به اشتراک گذاشته می‌شوند.",
+      hi: "कृपया खुले सार्वजनिक वेब फ़ॉर्म के माध्यम से पूरा सोशल सिक्योरिटी नंबर, विस्तृत चिकित्सा इतिहास या संरक्षित स्वास्थ्य जानकारी (PHI) सबमिट न करें। संवेदनशील चिकित्सा मूल्यांकन (जैसे कैलिफ़ोर्निया फ़ॉर्म LIC 602A) औपचारिक प्रवेश समीक्षा के दौरान केवल सुरक्षित, HIPAA-अनुपालित माध्यमों से साझा किए जाते हैं।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਖੁੱਲ੍ਹੇ ਜਨਤਕ ਵੈੱਬ ਫਾਰਮਾਂ ਰਾਹੀਂ ਪੂਰੇ ਸੋਸ਼ਲ ਸਿਕਿਉਰਿਟੀ ਨੰਬਰ, ਵਿਸਤ੍ਰਿਤ ਡਾਕਟਰੀ ਇਤਿਹਾਸ ਜਾਂ ਸੁਰੱਖਿਅਤ ਸਿਹਤ ਜਾਣਕਾਰੀ (PHI) ਨਾ ਭੇਜੋ। ਸੰਵੇਦਨਸ਼ੀਲ ਡਾਕਟਰੀ ਮੁਲਾਂਕਣ (ਜਿਵੇਂ ਕਿ California Form LIC 602A) ਰਸਮੀ ਦਾਖ਼ਲਾ ਸਮੀਖਿਆ ਦੌਰਾਨ ਸਿਰਫ਼ ਸੁਰੱਖਿਅਤ, HIPAA-ਅਨੁਕੂਲ ਮਾਧਿਅਮਾਂ ਰਾਹੀਂ ਹੀ ਸਾਂਝੇ ਕੀਤੇ ਜਾਂਦੇ ਹਨ।",
+      ja: "公開ウェブフォームからは、社会保障番号（SSN）の全桁、詳細な既往歴、または保護対象医療情報（PHI）を送信しないでください。カリフォルニア州様式 LIC 602A などの機微な医療評価書類は、正式な入居審査の段階で HIPAA 準拠の安全な通信経路を通じてのみ共有いたします。",
+      uk: "Будь ласка, не надсилайте повні номери соціального страхування, детальні історії хвороб або захищену медичну інформацію (PHI) через відкриті вебформи. Конфіденційні медичні документи (наприклад, каліфорнійська форма LIC 602A) передаються лише захищеними каналами відповідно до вимог HIPAA під час офіційного розгляду прийому.",
+      he: "אנא אל תשלחו מספרי Social Security מלאים, היסטוריה רפואית מפורטת או מידע רפואי מוגן (PHI) דרך טופסי אינטרנט פתוחים. הערכות רפואיות רגישות (כגון טופס קליפורניה LIC 602A) מועברות רק בערוצים מאובטחים התואמים לתקן HIPAA במהלך בדיקות קליטה רשמיות.",
+      km: "សូមកុំផ្ញើលេខសន្តិសុខសង្គមពេញលេញ ប្រវត្តិវេជ្ជសាស្ត្រលម្អិត ឬព័ត៌មានសុខភាពដែលត្រូវបានការពារ (PHI) តាមរយៈទម្រង់គេហទំព័រសាធារណៈឡើយ។ ការវាយតម្លៃវេជ្ជសាស្ត្ររសើប (ដូចជាទម្រង់ California LIC 602A) ត្រូវបានចែករំលែកតែតាមរយៈបណ្តាញសុវត្ថិភាពដែលអនុលោមតាម HIPAA ក្នុងអំឡុងពេលពិនិត្យចូលស្នាក់នៅផ្លូវការប៉ុណ្ណោះ។",
+      fr: "Veuillez ne pas transmettre de numéros de sécurité sociale complets, d'antécédents médicaux détaillés ni d'informations de santé protégées (PHI) via des formulaires web publics. Les évaluations médicales sensibles (telles que le formulaire californien LIC 602A) sont partagées uniquement par des canaux sécurisés conformes à HIPAA lors de l'examen formel d'admission.",
+      pt: "Por favor, não envie números completos de Social Security, históricos clínicos detalhados ou informações de saúde protegidas (PHI) em formulários públicos abertos na web. Avaliações médicas sensíveis (como o formulário estadual LIC 602A) são compartilhadas apenas por canais seguros e compatíveis com HIPAA durante análises formais de admissão."
     },
     "4. Data Access & Removal Requests": {
       es: "4. Acceso y eliminación de datos",
@@ -3290,7 +6233,16 @@
       ko: "4. 정보 열람 및 삭제 요청",
       hy: "4. Տվյալների հասանելիություն և հեռացման պահանջներ",
       ru: "4. Доступ к данным и запрос на удаление",
-      ar: "4. الوصول للبيانات وطلبات الحذف"
+      ar: "4. الوصول للبيانات وطلبات الحذف",
+      fa: "۴. دسترسی به داده‌ها و درخواست حذف",
+      hi: "4. डेटा पहुंच और हटाने के अनुरोध",
+      pa: "4. ਡੇਟਾ ਪਹੁੰਚ ਅਤੇ ਹਟਾਉਣ ਦੀਆਂ ਬੇਨਤੀਆਂ",
+      ja: "4. データの開示および削除請求",
+      uk: "4. Запити на доступ і видалення даних",
+      he: "4. גישה לנתונים ובקשות מחיקה",
+      km: "4. សំណើចូលប្រើ និងលុបទិន្នន័យ",
+      fr: "4. Accès aux données et demandes de suppression",
+      pt: "4. Acesso aos Dados e Pedidos de Exclusão"
     },
     "5. Services We Use": {
       es: "5. Servicios que utilizamos",
@@ -3300,7 +6252,16 @@
       ko: "5. 이용 중인 외부 기술 서비스",
       hy: "5. Մեր կողմից օգտագործվող ծառայությունները",
       ru: "5. Используемые сервисы",
-      ar: "5. الخدمات التي نستخدمها"
+      ar: "5. الخدمات التي نستخدمها",
+      fa: "۵. خدماتی که استفاده می‌کنیم",
+      hi: "5. हम जिन सेवाओं का उपयोग करते हैं",
+      pa: "5. ਸੇਵਾਵਾਂ ਜੋ ਅਸੀਂ ਵਰਤਦੇ ਹਾਂ",
+      ja: "5. 利用している外部サービス",
+      uk: "5. Сервіси, які ми використовуємо",
+      he: "5. שירותים שאנו עושים בהם שימוש",
+      km: "5. សេវាកម្មដែលយើងប្រើប្រាស់",
+      fr: "5. Services tiers utilisés",
+      pt: "5. Serviços que Utilizamos"
     },
     "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": {
       es: "Para operar este sitio utilizamos algunos servicios esenciales: Cloudflare (alojamiento, base de datos, protección contra spam y estadísticas respetuosas de la privacidad), Formspree (para enviarnos por correo sus consultas) y Google Fonts (tipografías). La información enviada en los formularios pasa por estos servicios para poder recibirla y responderle.",
@@ -3310,7 +6271,16 @@
       ko: "본 웹사이트 운영을 위해 Cloudflare(웹 호스팅, 데이터베이스 저장, 스팸 차단, 개인정보 친화적 방문 통계), Formspree(접수된 문의를 이메일로 전달), Google Fonts(글꼴 표시) 서비스를 이용합니다. 양식으로 제출하신 정보는 상담 접수 및 답변 처리를 위해 해당 서비스를 거칠 수 있습니다.",
       hy: "Այս կայքի աշխատանքի համար մենք օգտվում ենք մի քանի ծառայություններից՝ Cloudflare (հոսթինգ, տվյալների բազա, սպամից պաշտպանություն և գաղտնիությանը համահունչ վիճակագրություն), Formspree (նամակների փոխանցում) և Google Fonts (տառատեսակներ)։ Ձևերով ուղարկված տվյալները կարող են անցնել այս ծառայություններով՝ պատասխանելու նպատակով։",
       ru: "Для работы сайта мы используем несколько сторонних сервисов: Cloudflare (хостинг, база данных, защита от спама и приватная аналитика), Formspree (пересылка ваших сообщений на почту) и Google Fonts (отображение шрифтов). Переданные через формы данные могут обрабатываться ими для доставки вашего обращения.",
-      ar: "لتشغيل هذا الموقع نعتمد على خدمات خارجية: Cloudflare (الاستضافة وقاعدة البيانات والحماية من الرسائل العشوائية)، وFormspree (لإرسال الرسائل إلى بريدنا)، وGoogle Fonts (لعرض الخطوط). قد تمر البيانات المرسلة عبر هذه الخدمات لنتمكن من استلامها والرد عليك."
+      ar: "لتشغيل هذا الموقع نعتمد على خدمات خارجية: Cloudflare (الاستضافة وقاعدة البيانات والحماية من الرسائل العشوائية)، وFormspree (لإرسال الرسائل إلى بريدنا)، وGoogle Fonts (لعرض الخطوط). قد تمر البيانات المرسلة عبر هذه الخدمات لنتمكن من استلامها والرد عليك.",
+      fa: "برای اجرای این وب‌سایت به چند سرویس شخص ثالث متکی هستیم: Cloudflare (میزبانی وب‌سایت، ذخیره‌سازی پایگاه داده، محافظت در برابر هرزنامه و آمار ترافیک دوستدار حریم خصوصی)، Formspree (برای ارسال پیام‌های ثبت‌شده شما به ایمیل ما) و Google Fonts (برای نمایش فونت‌های سایت). اطلاعاتی که از طریق فرم‌های ما ارسال می‌کنید ممکن است از این سرویس‌ها عبور کند تا بتوانیم آن را دریافت و پاسخ دهیم.",
+      hi: "इस वेबसाइट को चलाने के लिए हम कुछ तृतीय-पक्ष सेवाओं पर निर्भर करते हैं: Cloudflare (वेबसाइट होस्टिंग, डेटाबेस संग्रहण, स्पैम सुरक्षा और गोपनीयता-अनुकूल ट्रैफ़िक आँकड़े), Formspree (आपके द्वारा भेजे गए संदेश हमें ईमेल करने के लिए), और Google Fonts (साइट के फ़ॉन्ट प्रदर्शित करने के लिए)। हमारे फ़ॉर्म के माध्यम से आपके द्वारा भेजी गई जानकारी इन सेवाओं से होकर गुजर सकती है ताकि हम उसे प्राप्त कर सकें और उत्तर दे सकें।",
+      pa: "ਇਸ ਸਾਈਟ ਨੂੰ ਚਲਾਉਣ ਲਈ ਅਸੀਂ ਕੁਝ ਤੀਜੀ-ਧਿਰ ਦੀਆਂ ਸੇਵਾਵਾਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦੇ ਹਾਂ: Cloudflare (ਵੈੱਬਸਾਈਟ ਹੋਸਟਿੰਗ, ਡੇਟਾਬੇਸ ਸਟੋਰੇਜ, ਸਪੈਮ ਸੁਰੱਖਿਆ ਅਤੇ ਗੋਪਨੀਯਤਾ-ਪੱਖੀ ਟ੍ਰੈਫਿਕ ਅੰਕੜੇ), Formspree (ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੇ ਸੁਨੇਹੇ ਸਾਨੂੰ ਈਮੇਲ ਕਰਨ ਲਈ), ਅਤੇ Google Fonts (ਸਾਈਟ ਦੇ ਫੌਂਟ ਦਿਖਾਉਣ ਲਈ)। ਸਾਡੇ ਫਾਰਮਾਂ ਰਾਹੀਂ ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੀ ਜਾਣਕਾਰੀ ਇਨ੍ਹਾਂ ਸੇਵਾਵਾਂ ਵਿੱਚੋਂ ਲੰਘ ਸਕਦੀ ਹੈ ਤਾਂ ਜੋ ਅਸੀਂ ਇਸ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਕੇ ਜਵਾਬ ਦੇ ਸਕੀਏ।",
+      ja: "当サイトの運営にあたり、Cloudflare（ウェブサイトホスティング、データベース保管、スパム対策、プライバシーに配慮したアクセス統計）、Formspree（送信されたメッセージのメール転送）、および Google Fonts（サイト上の書体表示）といった外部サービスを利用しています。フォームから送信された情報は、当社が受信してご返信するためにこれらのサービスを経由する場合があります。",
+      uk: "Для роботи цього сайту ми покладаємося на кілька сторонніх сервісів: Cloudflare (хостинг, збереження баз даних, захист від спаму та безпечна для приватності статистика відвідувань), Formspree (для пересилання нам ваших повідомлень електронною поштою) та Google Fonts (для відображення шрифтів сайту). Інформація, надіслана через наші форми, може проходити через ці сервіси, щоб ми могли отримати її та відповісти вам.",
+      he: "לתפעול אתר זה אנו מסתמכים על מספר שירותי צד שלישי: Cloudflare (אחסון אתר, מסד נתונים, הגנה מספאם וסטטיסטיקת תנועה שומרת פרטיות), Formspree (להעברת ההודעות שתשלחו אלינו באימייל) ו-Google Fonts (להצגת גופני האתר). מידע שתשלחו בטפסים עשוי לעבור דרך שירותים אלה כדי שנוכל לקבלו ולהשיב לכם.",
+      km: "ដើម្បីដំណើរការគេហទំព័រនេះ យើងពឹងផ្អែកលើសេវាកម្មភាគីទីបីមួយចំនួន៖ Cloudflare (ការបង្ហោះគេហទំព័រ ការផ្ទុកទិន្នន័យ ការការពារសារឥតបានការ និងស្ថិតិចរាចរណ៍ដែលគោរពឯកជនភាព), Formspree (ដើម្បីផ្ញើសារដែលលោកអ្នកដាក់ស្នើមកកាន់អ៊ីមែលរបស់យើង) និង Google Fonts (ដើម្បីបង្ហាញពុម្ពអក្សររបស់គេហទំព័រ)។ ព័ត៌មានដែលលោកអ្នកផ្ញើតាមទម្រង់របស់យើងអាចឆ្លងកាត់សេវាកម្មទាំងនេះ ដើម្បីឱ្យយើងអាចទទួល និងឆ្លើយតបបាន។",
+      fr: "Pour faire fonctionner ce site, nous utilisons quelques services tiers : Cloudflare (hébergement web, stockage de base de données, protection anti-spam et statistiques de fréquentation respectueuses de la vie privée), Formspree (pour nous transmettre par e-mail les messages que vous envoyez) et Google Fonts (pour afficher les polices de caractères du site). Les informations que vous envoyez via nos formulaires peuvent transiter par ces services afin que nous puissions les recevoir et y répondre.",
+      pt: "Para operar este site utilizamos alguns serviços de terceiros: Cloudflare (hospedagem do site, armazenamento em banco de dados, proteção contra spam e estatísticas de tráfego respeitosas à privacidade), Formspree (para nos encaminhar por e-mail as mensagens enviadas) e Google Fonts (para exibição das fontes do site). Os dados enviados pelos formulários podem transitar por esses serviços para que possamos recebê-los e responder a você."
     },
     "Contact our Privacy Officer": {
       es: "Contactar al Oficial de Privacidad",
@@ -3320,7 +6290,16 @@
       ko: "개인정보 보호 담당자 문의",
       hy: "Կապվել գաղտնիության պատասխանատուի հետ",
       ru: "Связаться по вопросам приватности",
-      ar: "تواصل مع مسؤول الخصوصية"
+      ar: "تواصل مع مسؤول الخصوصية",
+      fa: "تماس با مسئول حریم خصوصی ما",
+      hi: "हमारे गोपनीयता अधिकारी से संपर्क करें",
+      pa: "ਸਾਡੇ ਗੋਪਨੀਯਤਾ ਅਧਿਕਾਰੀ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
+      ja: "個人情報保護担当へ問い合わせる",
+      uk: "Зв’язатися з відповідальним за конфіденційність",
+      he: "פנו לממונה על הפרטיות",
+      km: "ទាក់ទងមន្ត្រីឯកជនភាពរបស់យើង",
+      fr: "Contacter notre responsable de la confidentialité",
+      pt: "Falar com Nosso Responsável pela Privacidade"
     },
     "Call Love RCFE": {
       es: "Llamar a Love RCFE",
@@ -3330,7 +6309,16 @@
       ko: "Love RCFE 전화 연결",
       hy: "Զանգահարել Love RCFE",
       ru: "Позвонить в Love RCFE",
-      ar: "اتصل بـ Love RCFE"
+      ar: "اتصل بـ Love RCFE",
+      fa: "تماس با Love RCFE",
+      hi: "Love RCFE को कॉल करें",
+      pa: "Love RCFE ਨੂੰ ਕਾਲ ਕਰੋ",
+      ja: "Love RCFE にお電話する",
+      uk: "Зателефонувати до Love RCFE",
+      he: "חייגו ל-Love RCFE",
+      km: "ទូរស័ព្ទទៅ Love RCFE",
+      fr: "Appeler Love RCFE",
+      pt: "Ligar para a Love RCFE"
     },
     "Talk with an advisor. Free and confidential.": {
       es: "Hable con un asesor. Gratis y confidencial.",
@@ -3340,7 +6328,16 @@
       ko: "전문 상담사와 통화하세요. 무료이며 비밀이 보장됩니다.",
       hy: "Խոսեք խորհրդատուի հետ։ Անվճար և գաղտնի։",
       ru: "Поговорите с консультантом. Бесплатно и конфиденциально.",
-      ar: "تحدث مع مستشار. خدمة مجانية وسرية."
+      ar: "تحدث مع مستشار. خدمة مجانية وسرية.",
+      fa: "با یک مشاور گفتگو کنید. رایگان و محرمانه.",
+      hi: "सलाहकार से बात करें। निःशुल्क और गोपनीय।",
+      pa: "ਸਲਾਹਕਾਰ ਨਾਲ ਗੱਲ ਕਰੋ। ਮੁਫ਼ਤ ਅਤੇ ਗੁਪਤ।",
+      ja: "アドバイザーに無料・秘密厳守でご相談いただけます。",
+      uk: "Поспілкуйтеся з консультантом. Безкоштовно та конфіденційно.",
+      he: "שוחחו עם יועץ. חינם ובסודיות מלאה.",
+      km: "ពិភាក្សាជាមួយទីប្រឹក្សា។ ឥតគិតថ្លៃ និងរក្សាការសម្ងាត់។",
+      fr: "Parlez à un conseiller. Gratuit et confidentiel.",
+      pt: "Fale com um consultor. Gratuito e confidencial."
     },
     "Direct Elder Care & Licensing Line": {
       es: "Línea Directa de Cuidado y Licenciamiento",
@@ -3350,7 +6347,16 @@
       ko: "어르신 돌봄 및 인허가 직통 번호",
       hy: "Տարեցների խնամքի և լիցենզավորման ուղիղ գիծ",
       ru: "Прямая линия по уходу и лицензированию",
-      ar: "الخط المباشر لرعاية المسنين والترخيص"
+      ar: "الخط المباشر لرعاية المسنين والترخيص",
+      fa: "خط مستقیم مراقبت از سالمندان و اخذ مجوز",
+      hi: "सीधी वरिष्ठजन देखभाल और लाइसेंसिंग लाइन",
+      pa: "ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਅਤੇ ਲਾਇਸੰਸਿੰਗ ਸਿੱਧੀ ਲਾਈਨ",
+      ja: "高齢者ケア・認可取得相談 直通ダイヤル",
+      uk: "Пряма лінія з питань догляду та ліцензування",
+      he: "קו ישיר לטיפול במבוגרים ולרישוי",
+      km: "ខ្សែទូរស័ព្ទផ្ទាល់សម្រាប់ការថែទាំមនុស្សចាស់ និងការសុំអាជ្ញាប័ណ្ណ",
+      fr: "Ligne directe soins aux aînés et agrément",
+      pt: "Linha Direta de Cuidados e Licenciamento"
     },
     "Copy number": {
       es: "Copiar número",
@@ -3360,7 +6366,16 @@
       ko: "번호 복사",
       hy: "Պատճենել համարը",
       ru: "Скопировать номер",
-      ar: "نسخ الرقم"
+      ar: "نسخ الرقم",
+      fa: "کپی شماره",
+      hi: "नंबर कॉपी करें",
+      pa: "ਨੰਬਰ ਕਾਪੀ ਕਰੋ",
+      ja: "電話番号をコピー",
+      uk: "Копіювати номер",
+      he: "העתקת מספר",
+      km: "ចម្លងលេខ",
+      fr: "Copier le numéro",
+      pt: "Copiar número"
     },
     "Copied": {
       es: "Copiado",
@@ -3370,7 +6385,16 @@
       ko: "복사됨",
       hy: "Պատճենված է",
       ru: "Скопировано",
-      ar: "تم النسخ"
+      ar: "تم النسخ",
+      fa: "کپی شد",
+      hi: "कॉपी हो गया",
+      pa: "ਕਾਪੀ ਹੋ ਗਿਆ",
+      ja: "コピー済み",
+      uk: "Скопійовано",
+      he: "הועתק",
+      km: "បានចម្លង",
+      fr: "Copié",
+      pt: "Copiado"
     },
     "Press Ctrl+C to copy": {
       es: "Presione Ctrl+C para copiar",
@@ -3380,7 +6404,16 @@
       ko: "Ctrl+C를 눌러 복사하세요",
       hy: "Սեղմեք Ctrl+C՝ պատճենելու համար",
       ru: "Нажмите Ctrl+C для копирования",
-      ar: "اضغط Ctrl+C للنسخ"
+      ar: "اضغط Ctrl+C للنسخ",
+      fa: "برای کپی Ctrl+C را بزنید",
+      hi: "कॉपी करने के लिए Ctrl+C दबाएँ",
+      pa: "ਕਾਪੀ ਕਰਨ ਲਈ Ctrl+C ਦਬਾਓ",
+      ja: "Ctrl+C を押してコピー",
+      uk: "Натисніть Ctrl+C, щоб скопіювати",
+      he: "לחצו Ctrl+C להעתקה",
+      km: "ចុច Ctrl+C ដើម្បីចម្លង",
+      fr: "Appuyez sur Ctrl+C pour copier",
+      pt: "Pressione Ctrl+C para copiar"
     },
     "Open in calling app": {
       es: "Abrir en aplicación de llamadas",
@@ -3390,7 +6423,16 @@
       ko: "전화 앱으로 바로 걸기",
       hy: "Բացել զանգի հավելվածով",
       ru: "Открыть в приложении для звонков",
-      ar: "فتح في تطبيق الاتصال"
+      ar: "فتح في تطبيق الاتصال",
+      fa: "باز کردن در برنامه تماس",
+      hi: "कॉलिंग ऐप में खोलें",
+      pa: "ਕਾਲਿੰਗ ਐਪ ਵਿੱਚ ਖੋਲ੍ਹੋ",
+      ja: "通話アプリで開く",
+      uk: "Відкрити у додатку для дзвінків",
+      he: "פתיחה באפליקציית השיחות",
+      km: "បើកក្នុងកម្មវិធីហៅទូរស័ព្ទ",
+      fr: "Ouvrir dans l'application d'appel",
+      pt: "Abrir no aplicativo de chamadas"
     },
     "Prefer not to call right now?": {
       es: "¿Prefiere no llamar en este momento?",
@@ -3400,7 +6442,16 @@
       ko: "지금 바로 전화 통화가 어려우신가요?",
       hy: "Չե՞ք ցանկանում զանգահարել հենց հիմա",
       ru: "Не хотите звонить прямо сейчас?",
-      ar: "لا تفضل الاتصال الآن؟"
+      ar: "لا تفضل الاتصال الآن؟",
+      fa: "ترجیح می‌دهید الان تماس نگیرید؟",
+      hi: "अभी कॉल नहीं करना चाहते?",
+      pa: "ਕੀ ਇਸ ਵੇਲੇ ਕਾਲ ਨਹੀਂ ਕਰਨਾ ਚਾਹੁੰਦੇ?",
+      ja: "今すぐのお電話が難しい場合は？",
+      uk: "Незручно телефонувати прямо зараз?",
+      he: "מעדיפים לא להתקשר כרגע?",
+      km: "មិនចង់ទូរស័ព្ទឥឡូវនេះមែនទេ?",
+      fr: "Vous préférez ne pas appeler maintenant ?",
+      pt: "Prefere não ligar agora?"
     },
     "Request a callback": {
       es: "Solicitar devolución de llamada",
@@ -3410,7 +6461,16 @@
       ko: "전화 예약 요청",
       hy: "Պատվիրել հետզանգ",
       ru: "Заказать обратный звонок",
-      ar: "اطلب معاودة الاتصال"
+      ar: "اطلب معاودة الاتصال",
+      fa: "درخواست تماس برگشتی",
+      hi: "कॉलबैक का अनुरोध करें",
+      pa: "ਕਾਲਬੈਕ ਦੀ ਬੇਨਤੀ ਕਰੋ",
+      ja: "折り返し電話を予約する",
+      uk: "Замовити зворотний дзвінок",
+      he: "בקשו שיחה חוזרת",
+      km: "ស្នើសុំការហៅត្រឡប់",
+      fr: "Demander un rappel",
+      pt: "Solicitar retorno de ligação"
     },
     "Send an email": {
       es: "Enviar correo electrónico",
@@ -3420,7 +6480,16 @@
       ko: "이메일 보내기",
       hy: "Ուղարկել էլ․ նամակ",
       ru: "Отправить письмо",
-      ar: "أرسل بريداً إلكترونياً"
+      ar: "أرسل بريداً إلكترونياً",
+      fa: "ارسال ایمیل",
+      hi: "ईमेल भेजें",
+      pa: "ਈਮੇਲ ਭੇਜੋ",
+      ja: "メールを送る",
+      uk: "Надіслати листа",
+      he: "שליחת אימייל",
+      km: "ផ្ញើអ៊ីមែល",
+      fr: "Envoyer un e-mail",
+      pt: "Enviar um e-mail"
     },
     "Schedule a 15-Minute Advisory Call": {
       es: "Programar Llamada de Asesoría de 15 Minutos",
@@ -3430,7 +6499,16 @@
       ko: "15분 무료 전화 상담 예약",
       hy: "Ամրագրել 15-րոպեանոց խորհրդատվական զանգ",
       ru: "Запланировать 15-минутный звонок",
-      ar: "حدد موعد مكالمة إرشادية لمدة 15 دقيقة"
+      ar: "حدد موعد مكالمة إرشادية لمدة 15 دقيقة",
+      fa: "رزرو تماس مشاوره ۱۵ دقیقه‌ای",
+      hi: "15-मिनट की सलाहकार कॉल शेड्यूल करें",
+      pa: "15-ਮਿੰਟ ਦੀ ਸਲਾਹ ਕਾਲ ਤੈਅ ਕਰੋ",
+      ja: "15分間・個別電話相談を予約",
+      uk: "Запланувати 15-хвилинний дзвінок",
+      he: "תיאום שיחת ייעוץ של 15 דקות",
+      km: "កំណត់ពេលហៅពិគ្រោះយោបល់រយៈពេល 15 នាទី",
+      fr: "Planifier un appel conseil de 15 minutes",
+      pt: "Agendar Ligação de Assessoria de 15 Minutos"
     },
     "Complimentary, confidential phone consultation.": {
       es: "Consulta telefónica gratuita y confidencial.",
@@ -3440,7 +6518,16 @@
       ko: "부담 없는 무료·비공개 전화 상담입니다.",
       hy: "Անվճար և գաղտնի հեռախոսային խորհրդատվություն։",
       ru: "Бесплатная конфиденциальная консультация по телефону.",
-      ar: "استشارة هاتفية مجانية وسرية."
+      ar: "استشارة هاتفية مجانية وسرية.",
+      fa: "مشاوره تلفنی رایگان و محرمانه.",
+      hi: "निःशुल्क, गोपनीय फ़ोन परामर्श।",
+      pa: "ਮੁਫ਼ਤ ਅਤੇ ਗੁਪਤ ਫ਼ੋਨ ਸਲਾਹ-ਮਸ਼ਵਰਾ।",
+      ja: "完全無料・秘密厳守のお電話相談です。",
+      uk: "Безкоштовна конфіденційна телефонна консультація.",
+      he: "שיחת ייעוץ טלפונית חסויה וללא עלות.",
+      km: "ការពិគ្រោះតាមទូរស័ព្ទឥតគិតថ្លៃ និងរក្សាការសម្ងាត់។",
+      fr: "Consultation téléphonique gratuite et confidentielle.",
+      pt: "Consultoria telefônica gratuita e confidencial."
     },
     "Your Name *": {
       es: "Su Nombre *",
@@ -3450,7 +6537,16 @@
       ko: "성함 *",
       hy: "Ձեր անունը *",
       ru: "Ваше имя *",
-      ar: "اسمك *"
+      ar: "اسمك *",
+      fa: "نام شما *",
+      hi: "आपका नाम *",
+      pa: "ਤੁਹਾਡਾ ਨਾਮ *",
+      ja: "お名前 *",
+      uk: "Ваше ім’я *",
+      he: "שמכם *",
+      km: "ឈ្មោះរបស់លោកអ្នក *",
+      fr: "Votre nom *",
+      pt: "Seu Nome *"
     },
     "Preferred Date *": {
       es: "Fecha Preferida *",
@@ -3460,7 +6556,16 @@
       ko: "희망 날짜 *",
       hy: "Նախընտրելի ամսաթիվ *",
       ru: "Удобная дата *",
-      ar: "التاريخ المفضل *"
+      ar: "التاريخ المفضل *",
+      fa: "تاریخ مورد نظر *",
+      hi: "पसंदीदा तारीख *",
+      pa: "ਪਸੰਦੀਦਾ ਤਾਰੀਖ਼ *",
+      ja: "ご希望日 *",
+      uk: "Бажана дата *",
+      he: "תאריך מועדף *",
+      km: "កាលបរិច្ឆេទដែលចង់បាន *",
+      fr: "Date souhaitée *",
+      pt: "Data Preferida *"
     },
     "Time of Day *": {
       es: "Horario del Día *",
@@ -3470,7 +6575,16 @@
       ko: "희망 시간대 *",
       hy: "Օրվա ժամը *",
       ru: "Время дня *",
-      ar: "الفترة الزمنية *"
+      ar: "الفترة الزمنية *",
+      fa: "بازه زمانی روز *",
+      hi: "दिन का समय *",
+      pa: "ਦਿਨ ਦਾ ਸਮਾਂ *",
+      ja: "ご希望の時間帯 *",
+      uk: "Зручний час доби *",
+      he: "שעה ביום *",
+      km: "ពេលវេលាក្នុងថ្ងៃ *",
+      fr: "Moment de la journée *",
+      pt: "Período do Dia *"
     },
     "Morning (9am - 12pm)": {
       es: "Mañana (9am - 12pm)",
@@ -3480,7 +6594,16 @@
       ko: "오전 (오전 9시 - 오후 12시)",
       hy: "Առավոտյան (9:00 - 12:00)",
       ru: "Утро (9:00 - 12:00)",
-      ar: "الصباح (9 ص - 12 م)"
+      ar: "الصباح (9 ص - 12 م)",
+      fa: "صبح (۹ صبح تا ۱۲ ظهر)",
+      hi: "सुबह (9 बजे - 12 बजे)",
+      pa: "ਸਵੇਰ (9am - 12pm)",
+      ja: "午前（9:00〜12:00）",
+      uk: "Ранок (9:00 – 12:00)",
+      he: "בוקר (9:00–12:00)",
+      km: "ពេលព្រឹក (9 ព្រឹក - 12 ថ្ងៃត្រង់)",
+      fr: "Matin (9 h – 12 h)",
+      pt: "Manhã (9h - 12h)"
     },
     "Afternoon (1pm - 4pm)": {
       es: "Tarde (1pm - 4pm)",
@@ -3490,7 +6613,16 @@
       ko: "오후 (오후 1시 - 4시)",
       hy: "Ցերեկը (13:00 - 16:00)",
       ru: "День (13:00 - 16:00)",
-      ar: "بعد الظهر (1 م - 4 م)"
+      ar: "بعد الظهر (1 م - 4 م)",
+      fa: "بعدازظهر (۱ تا ۴ عصر)",
+      hi: "दोपहर (1 बजे - 4 बजे)",
+      pa: "ਦੁਪਹਿਰ (1pm - 4pm)",
+      ja: "午後（13:00〜16:00）",
+      uk: "День (13:00 – 16:00)",
+      he: "צהריים (13:00–16:00)",
+      km: "ពេលរសៀល (1 រសៀល - 4 ល្ងាច)",
+      fr: "Après-midi (13 h – 16 h)",
+      pt: "Tarde (13h - 16h)"
     },
     "Late Afternoon (4pm - 6pm)": {
       es: "Última hora de la tarde (4pm - 6pm)",
@@ -3500,7 +6632,16 @@
       ko: "늦은 오후 (오후 4시 - 6시)",
       hy: "Երեկոյան (16:00 - 18:00)",
       ru: "Поздний день (16:00 - 18:00)",
-      ar: "أواخر العصر (4 م - 6 م)"
+      ar: "أواخر العصر (4 م - 6 م)",
+      fa: "اواخر عصر (۴ تا ۶ عصر)",
+      hi: "देर दोपहर (4 बजे - 6 बजे)",
+      pa: "ਦੇਰ ਦੁਪਹਿਰ (4pm - 6pm)",
+      ja: "夕方（16:00〜18:00）",
+      uk: "Пізній день (16:00 – 18:00)",
+      he: "אחר הצהריים (16:00–18:00)",
+      km: "ពេលល្ងាច (4 ល្ងាច - 6 ល្ងាច)",
+      fr: "Fin d'après-midi (16 h – 18 h)",
+      pt: "Final da Tarde (16h - 18h)"
     },
     "We make calls Monday through Saturday. Times are Pacific.": {
       es: "Realizamos llamadas de lunes a sábado. Horario del Pacífico (PT).",
@@ -3510,7 +6651,16 @@
       ko: "전화 상담은 월요일부터 토요일까지(태평양 표준시 기준) 진행됩니다.",
       hy: "Մենք զանգահարում ենք երկուշաբթիից շաբաթ։ Ժամերը նշված են Խաղաղօվկիանոսյան ժամանակով (PT)։",
       ru: "Мы звоним с понедельника по субботу. Указано тихоокеанское время (PT).",
-      ar: "نجري المكالمات من الاثنين إلى السبت بتوقيت المحيط الهادئ (PT)."
+      ar: "نجري المكالمات من الاثنين إلى السبت بتوقيت المحيط الهادئ (PT).",
+      fa: "ما از دوشنبه تا شنبه تماس می‌گیریم. زمان‌ها به وقت اقیانوس آرام (PT) است.",
+      hi: "हम सोमवार से शनिवार तक कॉल करते हैं। समय पैसिफ़िक (PT) में है।",
+      pa: "ਅਸੀਂ ਸੋਮਵਾਰ ਤੋਂ ਸ਼ਨੀਵਾਰ ਤੱਕ ਕਾਲ ਕਰਦੇ ਹਾਂ। ਸਮਾਂ Pacific ਸਮੇਂ ਅਨੁਸਾਰ ਹੈ।",
+      ja: "お電話でのご相談は月曜日〜土曜日に承っております（時間はすべて太平洋時間です）。",
+      uk: "Ми телефонуємо з понеділка по суботу. Вказано тихоокеанський час (PT).",
+      he: "אנו מבצעים שיחות בימים שני עד שבת. השעות הן לפי שעון פסיפיק (PT).",
+      km: "យើងធ្វើការហៅទូរស័ព្ទពីថ្ងៃចន្ទ ដល់ថ្ងៃសៅរ៍។ ម៉ោងជាម៉ោង Pacific។",
+      fr: "Nous passons nos appels du lundi au samedi. Les horaires sont en heure du Pacifique (PT).",
+      pt: "Realizamos ligações de segunda a sábado. Horários no fuso do Pacífico (PT)."
     },
     "Main Topic of Discussion": {
       es: "Tema Principal de la Consulta",
@@ -3520,7 +6670,16 @@
       ko: "주요 상담 주제",
       hy: "Քննարկման հիմնական թեման",
       ru: "Основная тема разговора",
-      ar: "الموضوع الرئيسي للمناقشة"
+      ar: "الموضوع الرئيسي للمناقشة",
+      fa: "موضوع اصلی گفتگو",
+      hi: "चर्चा का मुख्य विषय",
+      pa: "ਗੱਲਬਾਤ ਦਾ ਮੁੱਖ ਵਿਸ਼ਾ",
+      ja: "主なご相談内容",
+      uk: "Основна тема розмови",
+      he: "נושא השיחה העיקרי",
+      km: "ប្រធានបទសំខាន់នៃការពិភាក្សា",
+      fr: "Sujet principal de l'échange",
+      pt: "Assunto Principal da Conversa"
     },
     "Elder Care Placement for a Loved One": {
       es: "Ubicación en Cuidado para un Ser Querido",
@@ -3530,7 +6689,16 @@
       ko: "어르신 요양홈 입소 연계 상담",
       hy: "Հարազատի տեղավորում տարեցների խնամքի տանը",
       ru: "Подбор пансионата для близкого человека",
-      ar: "تسكين قريب في دار رعاية المسنين"
+      ar: "تسكين قريب في دار رعاية المسنين",
+      fa: "اسکان مراقبتی برای یکی از عزیزان سالمند",
+      hi: "किसी प्रियजन के लिए वरिष्ठजन देखभाल प्लेसमेंट",
+      pa: "ਕਿਸੇ ਪਿਆਰੇ ਲਈ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਰਿਹਾਇਸ਼",
+      ja: "大切なご家族の高齢者ケア施設探し",
+      uk: "Підбір догляду для близької людини",
+      he: "שיבוץ לטיפול במבוגרים עבור אדם יקר",
+      km: "ការរៀបចំកន្លែងថែទាំមនុស្សចាស់សម្រាប់មនុស្សជាទីស្រឡាញ់",
+      fr: "Placement en soins pour un proche âgé",
+      pt: "Acolhimento de Idoso para um Ente Querido"
     },
     "Opening an RCFE / Title 22 Consulting": {
       es: "Abrir un RCFE / Consultoría Título 22",
@@ -3540,7 +6708,16 @@
       ko: "RCFE 개원 / Title 22 인허가 컨설팅",
       hy: "RCFE բացում / Title 22 խորհրդատվություն",
       ru: "Открытие RCFE / консалтинг по Title 22",
-      ar: "افتتاح RCFE / استشارات Title 22"
+      ar: "افتتاح RCFE / استشارات Title 22",
+      fa: "راه‌اندازی RCFE / مشاوره مقررات Title 22",
+      hi: "RCFE खोलना / Title 22 परामर्श",
+      pa: "RCFE ਖੋਲ੍ਹਣਾ / Title 22 ਸਲਾਹ",
+      ja: "RCFE 開業・Title 22 コンサルティング",
+      uk: "Відкриття RCFE / консалтинг за Title 22",
+      he: "פתיחת RCFE / ייעוץ Title 22",
+      km: "ការបើក RCFE / ការប្រឹក្សា Title 22",
+      fr: "Ouverture d'un RCFE / Conseil Title 22",
+      pt: "Abertura de RCFE / Consultoria Title 22"
     },
     "VA Aid & Attendance / Medi-Cal ALW Questions": {
       es: "Preguntas sobre VA Aid & Attendance / Medi-Cal ALW",
@@ -3550,7 +6727,16 @@
       ko: "VA 보훈 연금 / Medi-Cal ALW 지원 문의",
       hy: "Հարցեր VA Aid & Attendance / Medi-Cal ALW մասին",
       ru: "Вопросы по VA Aid & Attendance / Medi-Cal ALW",
-      ar: "أسئلة حول VA Aid & Attendance / Medi-Cal ALW"
+      ar: "أسئلة حول VA Aid & Attendance / Medi-Cal ALW",
+      fa: "پرسش‌های مربوط به VA Aid & Attendance / Medi-Cal ALW",
+      hi: "VA Aid & Attendance / Medi-Cal ALW प्रश्न",
+      pa: "VA Aid & Attendance / Medi-Cal ALW ਸਵਾਲ",
+      ja: "VA Aid & Attendance・Medi-Cal ALW に関するご質問",
+      uk: "Запитання щодо VA Aid & Attendance / Medi-Cal ALW",
+      he: "שאלות בנושא VA Aid & Attendance / Medi-Cal ALW",
+      km: "សំណួរអំពី VA Aid & Attendance / Medi-Cal ALW",
+      fr: "Questions sur VA Aid & Attendance / Medi-Cal ALW",
+      pt: "Dúvidas sobre VA Aid & Attendance / Medi-Cal ALW"
     },
     "Request My Call": {
       es: "Solicitar mi Llamada",
@@ -3560,7 +6746,16 @@
       ko: "전화 상담 신청하기",
       hy: "Պատվիրել զանգը",
       ru: "Заказать звонок",
-      ar: "اطلب مكالمتي"
+      ar: "اطلب مكالمتي",
+      fa: "ثبت درخواست تماس",
+      hi: "मेरी कॉल बुक करें",
+      pa: "ਮੇਰੀ ਕਾਲ ਦੀ ਬੇਨਤੀ ਭੇਜੋ",
+      ja: "電話相談を予約する",
+      uk: "Замовити дзвінок",
+      he: "בקשת שיחה",
+      km: "ស្នើសុំការហៅរបស់ខ្ញុំ",
+      fr: "Demander mon appel",
+      pt: "Solicitar Minha Ligação"
     },
     "We respect your privacy and use your details only to arrange your call. Please do not share Social Security numbers, financial details, or medical records.": {
       es: "Respetamos su privacidad y usamos sus datos solo para coordinar su llamada. No comparta Seguro Social, datos bancarios ni historiales médicos.",
@@ -3570,7 +6765,16 @@
       ko: "입력하신 정보는 상담 예약 일정 조율에만 사용됩니다. 사회보장번호(SSN), 금융 정보, 의료 기록은 입력하지 말아 주세요.",
       hy: "Մենք հարգում ենք ձեր գաղտնիությունը և տվյալներն օգտագործում ենք միայն զանգը կազմակերպելու համար։ Մի նշեք SSN, ֆինանսական կամ բժշկական տվյալներ։",
       ru: "Мы уважаем вашу приватность и используем контакты только для организации звонка. Не указывайте SSN, банковские или медицинские данные.",
-      ar: "نحترم خصوصيتك ونستخدم بياناتك لترتيب المكالمة فقط. يرجى عدم مشاركة أرقام الضمان الاجتماعي أو البيانات البنكية أو السجلات الطبية."
+      ar: "نحترم خصوصيتك ونستخدم بياناتك لترتيب المكالمة فقط. يرجى عدم مشاركة أرقام الضمان الاجتماعي أو البيانات البنكية أو السجلات الطبية.",
+      fa: "ما به حریم خصوصی شما احترام می‌گذاریم و از اطلاعات شما فقط برای هماهنگی تماس استفاده می‌کنیم. لطفاً شماره تأمین اجتماعی، اطلاعات مالی یا سوابق پزشکی را به اشتراک نگذارید.",
+      hi: "हम आपकी गोपनीयता का सम्मान करते हैं और आपके विवरण का उपयोग केवल आपकी कॉल की व्यवस्था करने के लिए करते हैं। कृपया सोशल सिक्योरिटी नंबर, वित्तीय विवरण या मेडिकल रिकॉर्ड साझा न करें।",
+      pa: "ਅਸੀਂ ਤੁਹਾਡੀ ਗੋਪਨੀਯਤਾ ਦਾ ਸਤਿਕਾਰ ਕਰਦੇ ਹਾਂ ਅਤੇ ਤੁਹਾਡੇ ਵੇਰਵਿਆਂ ਦੀ ਵਰਤੋਂ ਸਿਰਫ਼ ਕਾਲ ਦਾ ਪ੍ਰਬੰਧ ਕਰਨ ਲਈ ਕਰਦੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਸੋਸ਼ਲ ਸਿਕਿਉਰਿਟੀ ਨੰਬਰ, ਵਿੱਤੀ ਵੇਰਵੇ ਜਾਂ ਡਾਕਟਰੀ ਰਿਕਾਰਡ ਸਾਂਝੇ ਨਾ ਕਰੋ।",
+      ja: "プライバシーを尊重し、ご入力いただいた情報は電話相談の手配のみに使用します。社会保障番号、金融情報、医療記録のご記入はお控えください。",
+      uk: "Ми поважаємо вашу приватність і використовуємо надані дані лише для організації дзвінка. Будь ласка, не повідомляйте номери соціального страхування, фінансові реквізити чи медичні записи.",
+      he: "אנו מכבדים את פרטיותכם ומשתמשים בפרטיכם רק לתיאום השיחה. אנא אל תשתפו מספרי Social Security, פרטים פיננסיים או תיקים רפואיים.",
+      km: "យើងគោរពឯកជនភាពរបស់លោកអ្នក ហើយប្រើព័ត៌មានលម្អិតរបស់លោកអ្នកសម្រាប់រៀបចំការហៅរបស់លោកអ្នកប៉ុណ្ណោះ។ សូមកុំចែករំលែកលេខសន្តិសុខសង្គម ព័ត៌មានហិរញ្ញវត្ថុ ឬកំណត់ត្រាវេជ្ជសាស្ត្រ។",
+      fr: "Nous respectons votre vie privée et n'utilisons vos coordonnées que pour organiser votre appel. Veuillez ne pas communiquer de numéros de sécurité sociale, d'informations financières ni de dossiers médicaux.",
+      pt: "Respeitamos sua privacidade e usamos seus dados apenas para agendar sua ligação. Por favor, não compartilhe números de Social Security, dados financeiros ou prontuários médicos."
     },
     "Fast Placement Assessment": {
       es: "Evaluación Rápida de Cuidado",
@@ -3580,7 +6784,16 @@
       ko: "빠른 입소 적합성 진단",
       hy: "Արագ տեղավորման գնահատում",
       ru: "Быстрая оценка для подбора",
-      ar: "تقييم سريع للتسكين"
+      ar: "تقييم سريع للتسكين",
+      fa: "ارزیابی سریع اسکان",
+      hi: "त्वरित प्लेसमेंट मूल्यांकन",
+      pa: "ਤੇਜ਼ ਰਿਹਾਇਸ਼ ਮੁਲਾਂਕਣ",
+      ja: "クイック入居ケア診断",
+      uk: "Швидка оцінка потреб",
+      he: "הערכת שיבוץ מהירה",
+      km: "ការវាយតម្លៃរកកន្លែងស្នាក់នៅរហ័ស",
+      fr: "Évaluation rapide de placement",
+      pt: "Avaliação Rápida de Acolhimento"
     },
     "Care Assessment Wizard": {
       es: "Asistente de Evaluación de Cuidado",
@@ -3590,7 +6803,16 @@
       ko: "맞춤 돌봄 평가 마법사",
       hy: "Խնամքի գնահատման ուղեցույց",
       ru: "Помощник оценки ухода",
-      ar: "مساعد تقييم الرعاية"
+      ar: "مساعد تقييم الرعاية",
+      fa: "دستیار هوشمند ارزیابی مراقبت",
+      hi: "देखभाल मूल्यांकन विज़ार्ड",
+      pa: "ਦੇਖਭਾਲ ਮੁਲਾਂਕਣ ਸਹਾਇਕ",
+      ja: "ケア診断ウィザード",
+      uk: "Майстер оцінки догляду",
+      he: "אשף הערכת הטיפול",
+      km: "អ្នកជំនួយការវាយតម្លៃការថែទាំ",
+      fr: "Assistant d'évaluation des soins",
+      pt: "Assistente de Avaliação de Cuidados"
     },
     "Get an instant recommendation tailored to your loved one's specific needs.": {
       es: "Obtenga una recomendación inmediata adaptada a las necesidades específicas de su ser querido.",
@@ -3600,7 +6822,16 @@
       ko: "어르신의 구체적인 상태에 맞춘 즉각적인 돌봄 추천을 받아보세요.",
       hy: "Ստացեք ակնթարթային առաջարկ՝ հարմարեցված ձեր հարազատի կարիքներին։",
       ru: "Получите мгновенную рекомендацию под индивидуальные потребности вашего близкого.",
-      ar: "احصل على توصية فورية مصممة لاحتياجات قريبك الخاصة."
+      ar: "احصل على توصية فورية مصممة لاحتياجات قريبك الخاصة.",
+      fa: "پیشنهادی فوری و متناسب با نیازهای خاص عزیزتان دریافت کنید.",
+      hi: "अपने प्रियजन की विशिष्ट आवश्यकताओं के अनुरूप तुरंत सिफारिश प्राप्त करें।",
+      pa: "ਆਪਣੇ ਪਿਆਰੇ ਦੀਆਂ ਖ਼ਾਸ ਲੋੜਾਂ ਅਨੁਸਾਰ ਤੁਰੰਤ ਸਿਫ਼ਾਰਸ਼ ਪ੍ਰਾਪਤ ਕਰੋ।",
+      ja: "大切なご家族のご状況に合わせた最適な施設提案をすぐにご確認いただけます。",
+      uk: "Отримайте миттєву рекомендацію, адаптовану до конкретних потреб вашої близької людини.",
+      he: "קבלו המלצה מיידית המותאמת לצרכים הספציפיים של יקירכם.",
+      km: "ទទួលបានការណែនាំភ្លាមៗដែលរៀបចំតាមតម្រូវការជាក់លាក់របស់មនុស្សជាទីស្រឡាញ់របស់លោកអ្នក។",
+      fr: "Obtenez une recommandation immédiate adaptée aux besoins spécifiques de votre proche.",
+      pt: "Receba uma recomendação imediata adaptada às necessidades específicas do seu ente querido."
     },
     "Thoughtful, objective guidance rooted in deep care. Dedicated to connecting families with compassionate elder care and empowering operators to build licensed, compliant California care facilities.": {
       es: "Orientación reflexiva y objetiva basada en un cuidado profundo. Dedicados a conectar familias con cuidado compasivo y apoyar a operadores a construir centros con licencia en California.",
@@ -3610,7 +6841,16 @@
       ko: "깊은 배려에 바탕을 둔 사려 깊고 객관적인 안내. 가족과 따뜻한 어르신 돌봄을 잇고, 운영자들이 적법하고 신뢰받는 캘리포니아 요양 시설을 세우도록 함께합니다.",
       hy: "Խորիմաստ, անաչառ խորհրդատվություն՝ հիմնված սրտացավ հոգատարության վրա։ Օգնում ենք ընտանիքներին գտնել վստահելի խնամք և աջակցում ենք օպերատորներին՝ Կալիֆոռնիայում կառուցելու լիցենզավորված խնամքի տներ։",
       ru: "Вдумчивое и объективное руководство, основанное на искренней заботе. Помогаем семьям найти достойный уход, а операторам — создать лицензированные пансионаты в Калифорнии.",
-      ar: "إرشاد مدروس وموضوعي نابع من اهتمام صادق. نكرّس عملنا لربط العائلات برعاية رحيمة ومساعدة المشغلين في بناء مرافق رعاية مرخصة وممتثلة في كاليفورنيا."
+      ar: "إرشاد مدروس وموضوعي نابع من اهتمام صادق. نكرّس عملنا لربط العائلات برعاية رحيمة ومساعدة المشغلين في بناء مرافق رعاية مرخصة وممتثلة في كاليفورنيا.",
+      fa: "راهنمایی سنجیده و بی‌طرفانه برخاسته از مراقبت عمیق. متعهد به پیوند خانواده‌ها با مراقبت دلسوزانه سالمندان و توانمندسازی بهره‌برداران برای ساخت مراکز مراقبتی دارای مجوز و منطبق با مقررات کالیفرنیا.",
+      hi: "गहरी संवेदना पर आधारित सुविचारित और निष्पक्ष मार्गदर्शन। परिवारों को करुणामय वरिष्ठजन देखभाल से जोड़ने और संचालकों को कैलिफ़ोर्निया में लाइसेंस प्राप्त, नियम-अनुपालित देखभाल केंद्र बनाने में सशक्त बनाने के लिए समर्पित।",
+      pa: "ਡੂੰਘੀ ਸੰਵੇਦਨਾ ਨਾਲ ਭਰਿਆ ਸੁਚੱਜਾ ਅਤੇ ਨਿਰਪੱਖ ਮਾਰਗਦਰਸ਼ਨ। ਪਰਿਵਾਰਾਂ ਨੂੰ ਹਮਦਰਦੀ ਭਰੀ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਨਾਲ ਜੋੜਨ ਅਤੇ ਸੰਚਾਲਕਾਂ ਨੂੰ ਕੈਲੀਫੋਰਨੀਆ ਵਿੱਚ ਲਾਇਸੰਸਸ਼ੁਦਾ ਤੇ ਨਿਯਮ-ਅਨੁਕੂਲ ਦੇਖਭਾਲ ਕੇਂਦਰ ਬਣਾਉਣ ਦੇ ਸਮਰੱਥ ਬਣਾਉਣ ਲਈ ਸਮਰਪਿਤ।",
+      ja: "深い思いやりに根ざした、思慮深く客観的なご案内。温かな高齢者ケアを求めるご家族と施設をつなぎ、事業者の皆様がカリフォルニア州の法令に適合した認可ケア施設を築けるよう全力で支援いたします。",
+      uk: "Вдумлива, об’єктивна підтримка, заснована на щирій турботі. Ми допомагаємо родинам знаходити чуйний догляд для літніх близьких і підтримуємо операторів у створенні ліцензованих будинків догляду в Каліфорнії відповідно до всіх вимог.",
+      he: "הכוונה שקולה ואובייקטיבית מתוך דאגה עמוקה. מוקדשים לחיבור משפחות למעונות טיפול מסורים ולהעצמת מפעילים בהקמת מתקני טיפול מורשים ותקניים בקליפורניה.",
+      km: "ការណែនាំប្រកបដោយការគិតគូរ និងមិនលំអៀងដែលចាក់ឫសក្នុងការយកចិត្តទុកដាក់ដ៏ជ្រាលជ្រៅ។ ឧទ្ទិសដល់ការតភ្ជាប់គ្រួសារជាមួយការថែទាំមនុស្សចាស់ប្រកបដោយក្តីមេត្តា និងផ្តល់អំណាចដល់អ្នកបើកមណ្ឌលដើម្បីកសាងមណ្ឌលថែទាំមានអាជ្ញាប័ណ្ណ និងស្របច្បាប់នៅរដ្ឋ California។",
+      fr: "Un accompagnement réfléchi et objectif, guidé par une profonde sollicitude. Dédié à relier les familles à des soins bienveillants pour les aînés et à aider les exploitants à bâtir des établissements californiens agréés et conformes.",
+      pt: "Orientação serena e objetiva baseada em cuidado genuíno. Dedicada a conectar famílias a cuidados humanizados para idosos e capacitar operadores a construir residenciais licenciados e em conformidade na Califórnia."
     },
     "California Title 22 Specialists": {
       es: "Especialistas en Título 22 de California",
@@ -3620,7 +6860,16 @@
       ko: "캘리포니아 Title 22 전문 컨설팅",
       hy: "Կալիֆոռնիայի Title 22 մասնագետներ",
       ru: "Эксперты по California Title 22",
-      ar: "متخصصون في لوائح California Title 22"
+      ar: "متخصصون في لوائح California Title 22",
+      fa: "متخصصان مقررات Title 22 کالیفرنیا",
+      hi: "कैलिफ़ोर्निया Title 22 विशेषज्ञ",
+      pa: "ਕੈਲੀਫੋਰਨੀਆ Title 22 ਮਾਹਿਰ",
+      ja: "カリフォルニア州 Title 22 専門アドバイザー",
+      uk: "Спеціалісти з Title 22 у Каліфорнії",
+      he: "מומחי California Title 22",
+      km: "អ្នកឯកទេស Title 22 នៅរដ្ឋ California",
+      fr: "Spécialistes du Title 22 en Californie",
+      pt: "Especialistas no Title 22 da Califórnia"
     },
     "Navigation": {
       es: "Navegación",
@@ -3630,7 +6879,16 @@
       ko: "바로가기",
       hy: "Նավիգացիա",
       ru: "Навигация",
-      ar: "التنقل"
+      ar: "التنقل",
+      fa: "ناوبری",
+      hi: "नेविगेशन",
+      pa: "ਨੈਵੀਗੇਸ਼ਨ",
+      ja: "ナビゲーション",
+      uk: "Навігація",
+      he: "ניווט",
+      km: "ការរុករក",
+      fr: "Navigation du site",
+      pt: "Navegação"
     },
     "Cost Calculator & Assessment": {
       es: "Calculadora y Evaluación",
@@ -3640,7 +6898,16 @@
       ko: "비용 계산기 및 자가진단",
       hy: "Արժեքի հաշվիչ և գնահատում",
       ru: "Калькулятор и оценка ухода",
-      ar: "حاسبة التكلفة والتقييم"
+      ar: "حاسبة التكلفة والتقييم",
+      fa: "ماشین‌حساب هزینه و ارزیابی",
+      hi: "लागत कैलकुलेटर और मूल्यांकन",
+      pa: "ਖਰਚ ਕੈਲਕੂਲੇਟਰ ਅਤੇ ਮੁਲਾਂਕਣ",
+      ja: "費用試算・ケア診断",
+      uk: "Калькулятор вартості та оцінка",
+      he: "מחשבון עלויות והערכה",
+      km: "ម៉ាស៊ីនគណនាថ្លៃចំណាយ និងការវាយតម្លៃ",
+      fr: "Calculateur de coûts et évaluation",
+      pt: "Calculadora de Custos e Avaliação"
     },
     "Direct Assistance": {
       es: "Asistencia Directa",
@@ -3650,7 +6917,16 @@
       ko: "직통 상담 안내",
       hy: "Ուղիղ աջակցություն",
       ru: "Прямая связь",
-      ar: "المساعدة المباشرة"
+      ar: "المساعدة المباشرة",
+      fa: "راهنمایی مستقیم",
+      hi: "सीधी सहायता",
+      pa: "ਸਿੱਧੀ ਸਹਾਇਤਾ",
+      ja: "直接のお問い合わせ",
+      uk: "Пряма допомога",
+      he: "סיוע ישיר",
+      km: "ជំនួយផ្ទាល់",
+      fr: "Assistance directe",
+      pt: "Atendimento Direto"
     },
     "Mon–Sat 8:00 AM – 7:00 PM PT": {
       es: "Lun–Sáb 8:00 AM – 7:00 PM PT",
@@ -3660,7 +6936,16 @@
       ko: "월–토 오전 8:00 – 오후 7:00 PT",
       hy: "Երկ–Շաբ 8:00 – 19:00 PT",
       ru: "Пн–Сб 8:00 – 19:00 PT",
-      ar: "الاثنين–السبت 8:00 ص – 7:00 م PT"
+      ar: "الاثنين–السبت 8:00 ص – 7:00 م PT",
+      fa: "دوشنبه–شنبه ۸:۰۰ صبح – ۷:۰۰ عصر PT",
+      hi: "सोम–शनि सुबह 8:00 – शाम 7:00 PT",
+      pa: "ਸੋਮ–ਸ਼ਨੀ ਸਵੇਰੇ 8:00 – ਸ਼ਾਮ 7:00 ਵਜੇ PT",
+      ja: "月〜土 午前8:00〜午後7:00（太平洋時間）",
+      uk: "Пн–Сб 8:00 – 19:00 PT",
+      he: "ב'–שבת 8:00 – 19:00 PT",
+      km: "ចន្ទ–សៅរ៍ 8:00 ព្រឹក – 7:00 ល្ងាច PT",
+      fr: "Lun–Sam 8 h 00 – 19 h 00 (PT)",
+      pt: "Seg–Sáb 8:00 – 19:00 PT"
     },
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": {
       es: "Love RCFE. Todos los derechos reservados. Asesoría privada y cuidadosa para adultos mayores.",
@@ -3670,7 +6955,16 @@
       ko: "Love RCFE. All rights reserved. 프라이버시를 존중하는 사려 깊은 어르신 돌봄 안내.",
       hy: "Love RCFE։ Բոլոր իրավունքները պաշտպանված են։ Գաղտնի, սրտացավ ուղեկցում։",
       ru: "Love RCFE. Все права защищены. Деликатная помощь по уходу за пожилыми.",
-      ar: "Love RCFE. جميع الحقوق محفوظة. إرشاد خاص ومدروس لرعاية المسنين."
+      ar: "Love RCFE. جميع الحقوق محفوظة. إرشاد خاص ومدروس لرعاية المسنين.",
+      fa: "Love RCFE. تمامی حقوق محفوظ است. راهنمایی خصوصی و دلسوزانه برای مراقبت از سالمندان.",
+      hi: "Love RCFE। सर्वाधिकार सुरक्षित। निजी, संवेदनशील वरिष्ठजन देखभाल मार्गदर्शन।",
+      pa: "Love RCFE. ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ। ਨਿੱਜੀ, ਸੁਚੱਜਾ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਮਾਰਗਦਰਸ਼ਨ।",
+      ja: "Love RCFE. All rights reserved. プライバシーを尊重した丁寧な高齢者ケア相談。",
+      uk: "Love RCFE. Усі права захищено. Приватний, дбайливий супровід у питаннях догляду за людьми похилого віку.",
+      he: "Love RCFE. כל הזכויות שמורות. הכוונה פרטית וקשובה לטיפול במבוגרים.",
+      km: "Love RCFE។ រក្សាសិទ្ធិគ្រប់យ៉ាង។ ការណែនាំអំពីការថែទាំមនុស្សចាស់ប្រកបដោយភាពឯកជន និងការយកចិត្តទុកដាក់។",
+      fr: "Love RCFE. Tous droits réservés. Accompagnement privé et attentionné pour les soins aux aînés.",
+      pt: "Love RCFE. Todos os direitos reservados. Orientação privada e acolhedora em cuidados para idosos."
     },
     "Support": {
       es: "Soporte",
@@ -3680,7 +6974,16 @@
       ko: "고객지원",
       hy: "Աջակցություն",
       ru: "Поддержка",
-      ar: "الدعم"
+      ar: "الدعم",
+      fa: "پشتیبانی",
+      hi: "सहायता",
+      pa: "ਸਹਾਇਤਾ",
+      ja: "サポート",
+      uk: "Підтримка",
+      he: "תמיכה",
+      km: "ជំនួយ",
+      fr: "Aide et soutien",
+      pt: "Suporte"
     },
     "Call us": {
       es: "Llámenos",
@@ -3690,7 +6993,16 @@
       ko: "전화 걸기",
       hy: "Զանգահարել մեզ",
       ru: "Позвонить нам",
-      ar: "اتصل بنا"
+      ar: "اتصل بنا",
+      fa: "با ما تماس بگیرید",
+      hi: "हमें कॉल करें",
+      pa: "ਸਾਨੂੰ ਕਾਲ ਕਰੋ",
+      ja: "お電話でお問い合わせ",
+      uk: "Зателефонуйте нам",
+      he: "התקשרו אלינו",
+      km: "ទូរស័ព្ទមកយើង",
+      fr: "Appelez-nous",
+      pt: "Ligue para nós"
     },
 
     // 404.html specific phrases
@@ -3702,7 +7014,16 @@
       ko: "404 • 페이지를 찾을 수 없습니다",
       hy: "404 • Էջը չի գտնվել",
       ru: "404 • Страница не найдена",
-      ar: "404 • الصفحة غير موجودة"
+      ar: "404 • الصفحة غير موجودة",
+      fa: "۴۰۴ • صفحه پیدا نشد",
+      hi: "404 • पृष्ठ नहीं मिला",
+      pa: "404 • ਪੰਨਾ ਨਹੀਂ ਮਿਲਿਆ",
+      ja: "404 • ページが見つかりません",
+      uk: "404 • Сторінку не знайдено",
+      he: "404 • הדף לא נמצא",
+      km: "404 • រកមិនឃើញទំព័រនេះទេ",
+      fr: "404 • Page introuvable",
+      pt: "404 • Página Não Encontrada"
     },
     "We couldn’t find that page.": {
       es: "No pudimos encontrar esa página.",
@@ -3712,7 +7033,16 @@
       ko: "요청하신 페이지를 찾을 수 없습니다.",
       hy: "Մենք չկարողացանք գտնել այդ էջը։",
       ru: "Нам не удалось найти эту страницу.",
-      ar: "لم نتمكن من العثور على هذه الصفحة."
+      ar: "لم نتمكن من العثور على هذه الصفحة.",
+      fa: "نتوانستیم آن صفحه را پیدا کنیم.",
+      hi: "हमें वह पृष्ठ नहीं मिला।",
+      pa: "ਸਾਨੂੰ ਉਹ ਪੰਨਾ ਨਹੀਂ ਮਿਲ ਸਕਿਆ।",
+      ja: "お探しのページが見つかりませんでした。",
+      uk: "Нам не вдалося знайти цю сторінку.",
+      he: "לא הצלחנו למצוא דף זה.",
+      km: "យើងរកមិនឃើញទំព័រនោះទេ។",
+      fr: "Nous n'avons pas trouvé cette page.",
+      pt: "Não conseguimos encontrar essa página."
     },
     "The link may have moved or been mistyped, but we’re right here to help you find elder care placement or California RCFE licensing guidance.": {
       es: "El enlace pudo haberse movido o escrito mal, pero estamos aquí para ayudarle a encontrar cuidado para adultos mayores u orientación de licencias RCFE en California.",
@@ -3722,7 +7052,16 @@
       ko: "링크가 이동되었거나 잘못 입력되었을 수 있지만, 어르신 요양홈 연계와 캘리포니아 RCFE 인허가 안내는 언제든 도와드릴 수 있습니다.",
       hy: "Հղումը հնարավոր է տեղափոխվել է կամ սխալ է մուտքագրված, բայց մենք այստեղ ենք՝ օգնելու ձեզ տարեցների խնամքի կամ Կալիֆոռնիայի RCFE լիցենզավորման հարցերում։",
       ru: "Возможно, страница перемещена или в адресе опечатка, но мы рядом и готовы помочь вам с подбором ухода или лицензированием RCFE в Калифорнии.",
-      ar: "ربما نُقل الرابط أو كُتب بشكل خاطئ، لكننا هنا لمساعدتك في إيجاد دار رعاية أو إرشادك لترخيص RCFE في كاليفورنيا."
+      ar: "ربما نُقل الرابط أو كُتب بشكل خاطئ، لكننا هنا لمساعدتك في إيجاد دار رعاية أو إرشادك لترخيص RCFE في كاليفورنيا.",
+      fa: "ممکن است پیوند جابه‌جا شده یا اشتباه تایپ شده باشد، اما ما همین‌جا هستیم تا در یافتن محل مراقبت از سالمندان یا راهنمایی اخذ مجوز RCFE کالیفرنیا به شما کمک کنیم.",
+      hi: "हो सकता है यह लिंक स्थानांतरित हो गया हो या गलत टाइप हुआ हो, लेकिन वरिष्ठजन देखभाल प्लेसमेंट या कैलिफ़ोर्निया RCFE लाइसेंसिंग मार्गदर्शन में आपकी मदद करने के लिए हम यहीं हैं।",
+      pa: "ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਲਿੰਕ ਬਦਲ ਗਿਆ ਹੋਵੇ ਜਾਂ ਗਲਤ ਟਾਈਪ ਹੋਇਆ ਹੋਵੇ, ਪਰ ਅਸੀਂ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਰਿਹਾਇਸ਼ ਜਾਂ ਕੈਲੀਫੋਰਨੀਆ RCFE ਲਾਇਸੰਸਿੰਗ ਮਾਰਗਦਰਸ਼ਨ ਵਿੱਚ ਤੁਹਾਡੀ ਮਦਦ ਕਰਨ ਲਈ ਇੱਥੇ ਹਾਜ਼ਰ ਹਾਂ।",
+      ja: "リンク先が移動したか、URL が誤っている可能性があります。高齢者ケア施設の探し方やカリフォルニア州 RCFE 認可取得のご案内について、私たちがすぐにお手伝いいたします。",
+      uk: "Посилання могло змінитися або містити помилку, але ми поруч і готові допомогти вам знайти догляд для близької людини чи супровід у ліцензуванні RCFE в Каліфорнії.",
+      he: "ייתכן שהקישור הועבר או הוקלד בשגיאה, אך אנחנו כאן כדי לעזור לכם למצוא שיבוץ לטיפול במבוגרים או ליווי לרישוי RCFE בקליפורניה.",
+      km: "តំណភ្ជាប់អាចត្រូវបានផ្លាស់ប្តូរ ឬវាយខុស ប៉ុន្តែយើងនៅទីនេះដើម្បីជួយលោកអ្នកស្វែងរកកន្លែងថែទាំមនុស្សចាស់ ឬការណែនាំសុំអាជ្ញាប័ណ្ណ RCFE នៅរដ្ឋ California។",
+      fr: "Le lien a peut-être été déplacé ou mal saisi, mais nous sommes là pour vous aider dans votre recherche de placement pour aînés ou d'agrément RCFE en Californie.",
+      pt: "O link pode ter sido movido ou digitado incorretamente, mas estamos aqui para ajudar você a encontrar cuidados para idosos ou orientação sobre licenciamento RCFE na Califórnia."
     },
     "Back to Home": {
       es: "Volver al Inicio",
@@ -3732,7 +7071,16 @@
       ko: "홈으로 돌아가기",
       hy: "Վերադառնալ գլխավոր",
       ru: "На главную",
-      ar: "العودة للرئيسية"
+      ar: "العودة للرئيسية",
+      fa: "بازگشت به خانه",
+      hi: "होम पर वापस जाएँ",
+      pa: "ਮੁੱਖ ਪੰਨੇ 'ਤੇ ਵਾਪਸ ਜਾਓ",
+      ja: "ホームへ戻る",
+      uk: "На головну",
+      he: "חזרה לדף הבית",
+      km: "ត្រឡប់ទៅទំព័រដើម",
+      fr: "Retour à l'accueil",
+      pt: "Voltar ao Início"
     },
     "Talk with an Advisor": {
       es: "Hablar con un Asesor",
@@ -3742,7 +7090,16 @@
       ko: "전문 상담사 연결",
       hy: "Խոսել խորհրդատուի հետ",
       ru: "Поговорить с консультантом",
-      ar: "تحدث مع مستشار"
+      ar: "تحدث مع مستشار",
+      fa: "گفتگو با مشاور",
+      hi: "सलाहकार से बात करें",
+      pa: "ਸਲਾਹਕਾਰ ਨਾਲ ਗੱਲ ਕਰੋ",
+      ja: "アドバイザーに相談する",
+      uk: "Поспілкуватися з консультантом",
+      he: "שוחחו עם יועץ",
+      km: "ពិភាក្សាជាមួយទីប្រឹក្សា",
+      fr: "Parler à un conseiller",
+      pt: "Falar com um Consultor"
     },
     "Popular Destinations": {
       es: "Secciones Populares",
@@ -3752,7 +7109,16 @@
       ko: "주요 메뉴 바로가기",
       hy: "Հայտնի բաժիններ",
       ru: "Популярные разделы",
-      ar: "صفحات شائعة"
+      ar: "صفحات شائعة",
+      fa: "صفحات پرکاربرد",
+      hi: "लोकप्रिय पृष्ठ",
+      pa: "ਮੁੱਖ ਪੰਨੇ",
+      ja: "よく見られているページ",
+      uk: "Популярні розділи",
+      he: "דפים מבוקשים",
+      km: "គោលដៅពេញនិយម",
+      fr: "Pages populaires",
+      pt: "Páginas Mais Procuradas"
     },
     "Services & Consulting": {
       es: "Servicios y Consultoría",
@@ -3762,7 +7128,16 @@
       ko: "서비스 및 컨설팅",
       hy: "Ծառայություններ և խորհրդատվություն",
       ru: "Услуги и консалтинг",
-      ar: "الخدمات والاستشارات"
+      ar: "الخدمات والاستشارات",
+      fa: "خدمات و مشاوره",
+      hi: "सेवाएँ और परामर्श",
+      pa: "ਸੇਵਾਵਾਂ ਅਤੇ ਸਲਾਹ",
+      ja: "サービス・コンサルティング",
+      uk: "Послуги та консалтинг",
+      he: "שירותים וייעוץ",
+      km: "សេវាកម្ម និងការប្រឹក្សា",
+      fr: "Services et conseil",
+      pt: "Serviços e Consultoria"
     },
     "Care Cost Calculator": {
       es: "Calculadora de Costos",
@@ -3772,7 +7147,16 @@
       ko: "돌봄 비용 계산기",
       hy: "Խնամքի արժեքի հաշվիչ",
       ru: "Калькулятор стоимости ухода",
-      ar: "حاسبة تكلفة الرعاية"
+      ar: "حاسبة تكلفة الرعاية",
+      fa: "ماشین‌حساب هزینه مراقبت",
+      hi: "देखभाल लागत कैलकुलेटर",
+      pa: "ਦੇਖਭਾਲ ਖਰਚ ਕੈਲਕੂਲੇਟਰ",
+      ja: "ケア費用シミュレーター",
+      uk: "Калькулятор вартості догляду",
+      he: "מחשבון עלויות טיפול",
+      km: "ម៉ាស៊ីនគណនាថ្លៃថែទាំ",
+      fr: "Calculateur du coût des soins",
+      pt: "Calculadora de Custos de Cuidado"
     },
     "Love RCFE. Thoughtful elder care & California Title 22 guidance.": {
       es: "Love RCFE. Cuidado reflexivo de adultos mayores y asesoría Título 22 de California.",
@@ -3782,7 +7166,16 @@
       ko: "Love RCFE. 사려 깊은 어르신 돌봄 및 캘리포니아 Title 22 전문 안내.",
       hy: "Love RCFE։ Հոգատար խնամք և Կալիֆոռնիայի Title 22 խորհրդատվություն։",
       ru: "Love RCFE. Забота о пожилых и консалтинг по California Title 22.",
-      ar: "Love RCFE. رعاية مسنين مدروسة وإرشاد لوائح Title 22 في كاليفورنيا."
+      ar: "Love RCFE. رعاية مسنين مدروسة وإرشاد لوائح Title 22 في كاليفورنيا.",
+      fa: "Love RCFE. راهنمایی دلسوزانه مراقبت از سالمندان و مقررات Title 22 کالیفرنیا.",
+      hi: "Love RCFE। संवेदनशील वरिष्ठजन देखभाल और कैलिफ़ोर्निया Title 22 मार्गदर्शन।",
+      pa: "Love RCFE. ਸੁਚੱਜੀ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਅਤੇ ਕੈਲੀਫੋਰਨੀਆ Title 22 ਮਾਰਗਦਰਸ਼ਨ।",
+      ja: "Love RCFE. 思いやりのある高齢者ケアとカリフォルニア州 Title 22 専門案内。",
+      uk: "Love RCFE. Дбайливий підбір догляду та супровід за Title 22 у Каліфорнії.",
+      he: "Love RCFE. הכוונה רגישה לטיפול במבוגרים וליווי California Title 22.",
+      km: "Love RCFE។ ការថែទាំមនុស្សចាស់ប្រកបដោយការយកចិត្តទុកដាក់ និងការណែនាំ Title 22 នៅរដ្ឋ California។",
+      fr: "Love RCFE. Accompagnement attentionné pour les aînés et expertise Title 22 en Californie.",
+      pt: "Love RCFE. Cuidados acolhedores para idosos e orientação no Title 22 da Califórnia."
     },
 
     // Attributes (aria-label, title, placeholder)
@@ -3794,7 +7187,16 @@
       ko: "Love RCFE 홈페이지",
       hy: "Love RCFE գլխավոր էջ",
       ru: "Главная страница Love RCFE",
-      ar: "الصفحة الرئيسية لـ Love RCFE"
+      ar: "الصفحة الرئيسية لـ Love RCFE",
+      fa: "صفحه اصلی Love RCFE",
+      hi: "Love RCFE होमपेज",
+      pa: "Love RCFE ਮੁੱਖ ਪੰਨਾ",
+      ja: "Love RCFE ホームページ",
+      uk: "Головна сторінка Love RCFE",
+      he: "דף הבית של Love RCFE",
+      km: "ទំព័រដើម Love RCFE",
+      fr: "Page d'accueil Love RCFE",
+      pt: "Página Inicial da Love RCFE"
     },
     "Main navigation": {
       es: "Navegación principal",
@@ -3804,7 +7206,16 @@
       ko: "주 메뉴",
       hy: "Հիմնական նավիգացիա",
       ru: "Основная навигация",
-      ar: "القائمة الرئيسية"
+      ar: "القائمة الرئيسية",
+      fa: "منوی اصلی",
+      hi: "मुख्य नेविगेशन",
+      pa: "ਮੁੱਖ ਨੈਵੀਗੇਸ਼ਨ",
+      ja: "メインナビゲーション",
+      uk: "Головна навігація",
+      he: "ניווט ראשי",
+      km: "ម៉ឺនុយរុករកសំខាន់",
+      fr: "Navigation principale",
+      pt: "Navegação principal"
     },
     "Change language": {
       es: "Cambiar idioma",
@@ -3814,7 +7225,16 @@
       ko: "언어 변경",
       hy: "Փոխել լեզուն",
       ru: "Сменить язык",
-      ar: "تغيير اللغة"
+      ar: "تغيير اللغة",
+      fa: "تغییر زبان",
+      hi: "भाषा बदलें",
+      pa: "ਭਾਸ਼ਾ ਬਦਲੋ",
+      ja: "言語を変更",
+      uk: "Змінити мову",
+      he: "שינוי שפה",
+      km: "ប្តូរភាសា",
+      fr: "Changer de langue",
+      pt: "Alterar idioma"
     },
     "Toggle dark mode": {
       es: "Alternar modo oscuro",
@@ -3824,7 +7244,16 @@
       ko: "다크 모드 전환",
       hy: "Փոխել մուգ ռեժիմը",
       ru: "Переключить тему",
-      ar: "تبديل الوضع الداكن"
+      ar: "تبديل الوضع الداكن",
+      fa: "تغییر حالت تاریک",
+      hi: "डार्क मोड टॉगल करें",
+      pa: "ਡਾਰਕ ਮੋਡ ਬਦਲੋ",
+      ja: "ダークモードを切り替え",
+      uk: "Перемкнути темну тему",
+      he: "החלפת מצב תצוגה כהה",
+      km: "ប្តូរទម្រង់ងងឹត",
+      fr: "Activer/désactiver le mode sombre",
+      pt: "Alternar modo escuro"
     },
     "Switch to light mode": {
       es: "Cambiar a modo claro",
@@ -3834,7 +7263,16 @@
       ko: "라이트 모드로 전환",
       hy: "Անցնել բաց ռեժիմի",
       ru: "Переключить на светлую тему",
-      ar: "التبديل إلى الوضع الفاتح"
+      ar: "التبديل إلى الوضع الفاتح",
+      fa: "تغییر به حالت روشن",
+      hi: "लाइट मोड पर स्विच करें",
+      pa: "ਲਾਈਟ ਮੋਡ 'ਤੇ ਜਾਓ",
+      ja: "ライトモードに切り替え",
+      uk: "Увімкнути світлу тему",
+      he: "מעבר למצב בהיר",
+      km: "ប្តូរទៅទម្រង់ភ្លឺ",
+      fr: "Passer en mode clair",
+      pt: "Mudar para modo claro"
     },
     "Switch to dark mode": {
       es: "Cambiar a modo oscuro",
@@ -3844,7 +7282,16 @@
       ko: "다크 모드로 전환",
       hy: "Անցնել մուգ ռեժիմի",
       ru: "Переключить на темную тему",
-      ar: "التبديل إلى الوضع الداكن"
+      ar: "التبديل إلى الوضع الداكن",
+      fa: "تغییر به حالت تاریک",
+      hi: "डार्क मोड पर स्विच करें",
+      pa: "ਡਾਰਕ ਮੋਡ 'ਤੇ ਜਾਓ",
+      ja: "ダークモードに切り替え",
+      uk: "Увімкнути темну тему",
+      he: "מעבר למצב כהה",
+      km: "ប្តូរទៅទម្រង់ងងឹត",
+      fr: "Passer en mode sombre",
+      pt: "Mudar para modo escuro"
     },
     "Toggle navigation menu": {
       es: "Abrir o cerrar menú",
@@ -3854,7 +7301,16 @@
       ko: "탐색 메뉴 열기/닫기",
       hy: "Բացել/փակել ընտրացանկը",
       ru: "Открыть/закрыть меню",
-      ar: "فتح/إغلاق قائمة التنقل"
+      ar: "فتح/إغلاق قائمة التنقل",
+      fa: "باز و بسته کردن منوی ناوبری",
+      hi: "नेविगेशन मेनू खोलें या बंद करें",
+      pa: "ਨੈਵੀਗੇਸ਼ਨ ਮੀਨੂ ਖੋਲ੍ਹੋ/ਬੰਦ ਕਰੋ",
+      ja: "ナビゲーションメニューを開閉",
+      uk: "Відкрити або закрити меню навігації",
+      he: "פתיחה/סגירה של תפריט הניווט",
+      km: "បើក/បិទម៉ឺនុយរុករក",
+      fr: "Ouvrir/fermer le menu de navigation",
+      pt: "Abrir ou fechar menu de navegação"
     },
     "Care planning tools": {
       es: "Herramientas de planificación",
@@ -3864,7 +7320,16 @@
       ko: "돌봄 계획 도구",
       hy: "Խնամքի պլանավորման գործիքներ",
       ru: "Инструменты планирования ухода",
-      ar: "أدوات تخطيط الرعاية"
+      ar: "أدوات تخطيط الرعاية",
+      fa: "ابزارهای برنامه‌ریزی مراقبت",
+      hi: "देखभाल योजना उपकरण",
+      pa: "ਦੇਖਭਾਲ ਯੋਜਨਾ ਸਾਧਨ",
+      ja: "ケア計画ツール",
+      uk: "Інструменти планування догляду",
+      he: "כלי תכנון טיפול",
+      km: "ឧបករណ៍រៀបចំផែនការថែទាំ",
+      fr: "Outils de planification des soins",
+      pt: "Ferramentas de planejamento de cuidados"
     },
     "Open calculator": {
       es: "Abrir calculadora",
@@ -3874,7 +7339,16 @@
       ko: "계산기 열기",
       hy: "Բացել հաշվիչը",
       ru: "Открыть калькулятор",
-      ar: "فتح الحاسبة"
+      ar: "فتح الحاسبة",
+      fa: "باز کردن ماشین‌حساب",
+      hi: "कैलकुलेटर खोलें",
+      pa: "ਕੈਲਕੂਲੇਟਰ ਖੋਲ੍ਹੋ",
+      ja: "電卓を開く",
+      uk: "Відкрити калькулятор",
+      he: "פתיחת מחשבון",
+      km: "បើកម៉ាស៊ីនគណនា",
+      fr: "Ouvrir le calculateur",
+      pt: "Abrir calculadora"
     },
     "Hide calculator": {
       es: "Ocultar calculadora",
@@ -3884,7 +7358,16 @@
       ko: "계산기 숨기기",
       hy: "Թաքցնել հաշվիչը",
       ru: "Скрыть калькулятор",
-      ar: "إخفاء الحاسبة"
+      ar: "إخفاء الحاسبة",
+      fa: "پنهان کردن ماشین‌حساب",
+      hi: "कैलकुलेटर छिपाएँ",
+      pa: "ਕੈਲਕੂਲੇਟਰ ਲੁਕਾਓ",
+      ja: "電卓を隠す",
+      uk: "Сховати калькулятор",
+      he: "הסתרת מחשבון",
+      km: "លាក់ម៉ាស៊ីនគណនា",
+      fr: "Masquer le calculateur",
+      pt: "Ocultar calculadora"
     },
     "Open the budget calculator": {
       es: "Abrir la calculadora de presupuesto",
@@ -3894,7 +7377,16 @@
       ko: "예산 계산기 열기",
       hy: "Բացել բյուջեի հաշվիչը",
       ru: "Открыть калькулятор бюджета",
-      ar: "فتح حاسبة الميزانية"
+      ar: "فتح حاسبة الميزانية",
+      fa: "باز کردن ماشین‌حساب بودجه",
+      hi: "बजट कैलकुलेटर खोलें",
+      pa: "ਬਜਟ ਕੈਲਕੂਲੇਟਰ ਖੋਲ੍ਹੋ",
+      ja: "予算電卓を開く",
+      uk: "Відкрити калькулятор бюджету",
+      he: "פתיחת מחשבון התקציב",
+      km: "បើកម៉ាស៊ីនគណនាថវិកា",
+      fr: "Ouvrir le calculateur de budget",
+      pt: "Abrir a calculadora de orçamento"
     },
     "Hide the budget calculator": {
       es: "Ocultar la calculadora de presupuesto",
@@ -3904,7 +7396,16 @@
       ko: "예산 계산기 숨기기",
       hy: "Թաքցնել բյուջեի հաշվիչը",
       ru: "Скрыть калькулятор бюджета",
-      ar: "إخفاء حاسبة الميزانية"
+      ar: "إخفاء حاسبة الميزانية",
+      fa: "پنهان کردن ماشین‌حساب بودجه",
+      hi: "बजट कैलकुलेटर छिपाएँ",
+      pa: "ਬਜਟ ਕੈਲਕੂਲੇਟਰ ਲੁਕਾਓ",
+      ja: "予算電卓を隠す",
+      uk: "Сховати калькулятор бюджету",
+      he: "הסתרת מחשבון התקציב",
+      km: "លាក់ម៉ាស៊ីនគណនាថវិកា",
+      fr: "Masquer le calculateur de budget",
+      pt: "Ocultar a calculadora de orçamento"
     },
     "Copy result to clipboard": {
       es: "Copiar resultado al portapapeles",
@@ -3914,7 +7415,16 @@
       ko: "결과를 클립보드에 복사",
       hy: "Պատճենել արդյունքը",
       ru: "Скопировать результат",
-      ar: "نسخ النتيجة إلى الحافظة"
+      ar: "نسخ النتيجة إلى الحافظة",
+      fa: "کپی نتیجه در کلیپ‌بورد",
+      hi: "परिणाम क्लिपबोर्ड पर कॉपी करें",
+      pa: "ਨਤੀਜਾ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕਰੋ",
+      ja: "計算結果をクリップボードにコピー",
+      uk: "Скопіювати результат у буфер обміну",
+      he: "העתקת התוצאה ללוח",
+      km: "ចម្លងលទ្ធផលទៅក្ដារតម្បៀតខ្ទាស់",
+      fr: "Copier le résultat dans le presse-papiers",
+      pt: "Copiar resultado para a área de transferência"
     },
     "Apply to Care Inquiry": {
       es: "Aplicar a consulta de cuidado",
@@ -3924,7 +7434,16 @@
       ko: "돌봄 문의에 적용하기",
       hy: "Կիրառել հարցման մեջ",
       ru: "Применить к заявке",
-      ar: "تطبيق على طلب الرعاية"
+      ar: "تطبيق على طلب الرعاية",
+      fa: "اعمال در درخواست مراقبت",
+      hi: "देखभाल पूछताछ में लागू करें",
+      pa: "ਦੇਖਭਾਲ ਪੁੱਛਗਿੱਛ ਵਿੱਚ ਲਾਗੂ ਕਰੋ",
+      ja: "お問い合わせ欄に反映する",
+      uk: "Додати до запиту щодо догляду",
+      he: "הוספה לפניית הטיפול",
+      km: "អនុវត្តទៅក្នុងការសាកសួរថែទាំ",
+      fr: "Appliquer à la demande de soins",
+      pt: "Aplicar à Consulta de Cuidados"
     },
     "Close calculator": {
       es: "Cerrar calculadora",
@@ -3934,7 +7453,16 @@
       ko: "계산기 닫기",
       hy: "Փակել հաշվիչը",
       ru: "Закрыть калькулятор",
-      ar: "إغلاق الحاسبة"
+      ar: "إغلاق الحاسبة",
+      fa: "بستن ماشین‌حساب",
+      hi: "कैलकुलेटर बंद करें",
+      pa: "ਕੈਲਕੂਲੇਟਰ ਬੰਦ ਕਰੋ",
+      ja: "電卓を閉じる",
+      uk: "Закрити калькулятор",
+      he: "סגירת מחשבון",
+      km: "បិទម៉ាស៊ីនគណនា",
+      fr: "Fermer le calculateur",
+      pt: "Fechar calculadora"
     },
     "Backspace": {
       es: "Retroceso",
@@ -3944,7 +7472,16 @@
       ko: "지우기",
       hy: "Ջնջել",
       ru: "Стереть",
-      ar: "مسح حرف"
+      ar: "مسح حرف",
+      fa: "پاک کردن یک رقم",
+      hi: "बैकस्पेस",
+      pa: "ਬੈਕਸਪੇਸ",
+      ja: "1文字削除",
+      uk: "Стерти символ",
+      he: "מחיקה",
+      km: "លុបថយក្រោយ",
+      fr: "Effacer",
+      pt: "Apagar"
     },
     "e.g. Eleanor Vance": {
       es: "ej. María González",
@@ -3954,7 +7491,16 @@
       ko: "예: 홍길동",
       hy: "օր․ Արմեն Հակոբյան",
       ru: "напр., Анна Соколова",
-      ar: "مثال: سعاد المنصور"
+      ar: "مثال: سعاد المنصور",
+      fa: "مثلاً النور ونس",
+      hi: "उदा. Eleanor Vance",
+      pa: "ਜਿਵੇਂ: ਹਰਪ੍ਰੀਤ ਕੌਰ",
+      ja: "例：佐藤 花子",
+      uk: "напр. Олена Коваленко",
+      he: "למשל, אלינור ואנס",
+      km: "ឧ. Eleanor Vance",
+      fr: "p. ex. Eleanor Vance",
+      pt: "ex.: Helena Silva"
     },
     "1234567890": {
       es: "1234567890",
@@ -3964,7 +7510,16 @@
       ko: "1234567890",
       hy: "1234567890",
       ru: "1234567890",
-      ar: "1234567890"
+      ar: "1234567890",
+      fa: "1234567890",
+      hi: "1234567890",
+      pa: "1234567890",
+      ja: "1234567890",
+      uk: "1234567890",
+      he: "1234567890",
+      km: "1234567890",
+      fr: "1234567890",
+      pt: "1234567890"
     },
     "you@domain.com": {
       es: "usted@correo.com",
@@ -3974,7 +7529,16 @@
       ko: "example@email.com",
       hy: "you@domain.com",
       ru: "you@domain.com",
-      ar: "you@domain.com"
+      ar: "you@domain.com",
+      fa: "you@domain.com",
+      hi: "yourname@example.com",
+      pa: "you@domain.com",
+      ja: "yourname@example.com",
+      uk: "vash.email@example.com",
+      he: "yourname@example.com",
+      km: "yourname@example.com",
+      fr: "vous@domaine.com",
+      pt: "seunome@exemplo.com"
     },
     "e.g. San Jose, Irvine, Roseville": {
       es: "ej. San José, Irvine, Sacramento",
@@ -3984,7 +7548,16 @@
       ko: "예: San Jose, Irvine, Fullerton",
       hy: "օր․ Գլենդել, Բըրբենք, Սան Խոսե",
       ru: "напр., Лос-Анджелес, Сан-Хосе, Сакраменто",
-      ar: "مثال: لوس أنجلوس، إرفاين، سان خوسيه"
+      ar: "مثال: لوس أنجلوس، إرفاين، سان خوسيه",
+      fa: "مثلاً سن‌خوزه، ارواین، روزویل",
+      hi: "उदा. San Jose, Irvine, Roseville",
+      pa: "ਜਿਵੇਂ: San Jose, Irvine, Roseville",
+      ja: "例：San Jose, Irvine, Roseville",
+      uk: "напр. San Jose, Irvine, Roseville",
+      he: "למשל: San Jose, Irvine, Roseville",
+      km: "ឧ. San Jose, Irvine, Roseville",
+      fr: "p. ex. San Jose, Irvine, Roseville",
+      pt: "ex.: San Jose, Irvine, Roseville"
     },
     "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": {
       es: "Comparta su plazo deseado, región y mejor horario para contactarle, o describa su proyecto de centro de cuidado (omita historiales médicos o Seguro Social)...",
@@ -3994,7 +7567,16 @@
       ko: "희망 입소 시기, 지역, 연락 가능한 시간대를 알려주시거나 준비 중인 요양홈 개원 계획을 적어주세요(상세 의료 기록 및 SSN 제외)...",
       hy: "Նշեք ցանկալի ժամկետները, շրջանը և կապի հարմար ժամը, կամ նկարագրեք ձեր RCFE նախագիծը (մի ներառեք բժշկական գրառումներ կամ SSN)...",
       ru: "Укажите желаемые сроки, район и удобное время для звонка, либо опишите проект вашего пансионата (пожалуйста, без медицинских выписок и SSN)...",
-      ar: "شاركنا الجدول الزمني المفضل والمنطقة وأفضل وقت للتواصل، أو صف مشروع دار الرعاية المرتقب (يرجى عدم ذكر السجلات الطبية أو أرقام SSN)..."
+      ar: "شاركنا الجدول الزمني المفضل والمنطقة وأفضل وقت للتواصل، أو صف مشروع دار الرعاية المرتقب (يرجى عدم ذكر السجلات الطبية أو أرقام SSN)...",
+      fa: "بازه زمانی مورد نظر، منطقه و بهترین زمان تماس با خودتان را بنویسید، یا پروژه خانه مراقبتی خود را شرح دهید (لطفاً سوابق پزشکی یا شماره SSN را درج نکنید)...",
+      hi: "अपनी पसंदीदा समय-सीमा, क्षेत्र और संपर्क करने का उपयुक्त समय साझा करें, या अपने प्रस्तावित देखभाल गृह प्रोजेक्ट का विवरण दें (कृपया मेडिकल रिकॉर्ड या SSN शामिल न करें)...",
+      pa: "ਆਪਣੀ ਪਸੰਦੀਦਾ ਸਮਾਂ-ਸੀਮਾ, ਖੇਤਰ ਅਤੇ ਸੰਪਰਕ ਕਰਨ ਦਾ ਸਭ ਤੋਂ ਵਧੀਆ ਸਮਾਂ ਸਾਂਝਾ ਕਰੋ, ਜਾਂ ਆਪਣੇ ਭਾਵੀ ਦੇਖਭਾਲ ਘਰ ਪ੍ਰੋਜੈਕਟ ਬਾਰੇ ਦੱਸੋ (ਕਿਰਪਾ ਕਰਕੇ ਡਾਕਟਰੀ ਰਿਕਾਰਡ ਜਾਂ SSN ਸ਼ਾਮਲ ਨਾ ਕਰੋ)...",
+      ja: "ご希望の時期、地域、ご連絡しやすい時間帯、または開業をご検討中のケアホーム計画についてお知らせください（医療記録や社会保障番号はご記入にならないでください）...",
+      uk: "Вкажіть бажані терміни, регіон і зручний час для зв’язку або опишіть ваш майбутній проєкт будинку догляду (будь ласка, без медичних виписок і SSN)...",
+      he: "שתפו אותנו בלוח הזמנים המועדף, האזור והזמן הנוח לחזרה אליכם, או תארו את פרויקט המעון הטיפולי שאתם מתכננים (אנא הימנעו מציון רשומות רפואיות או מספרי SSN)...",
+      km: "ចែករំលែករយៈពេល តំបន់ និងពេលវេលាល្អបំផុតដើម្បីទាក់ទងលោកអ្នក ឬពិពណ៌នាគម្រោងផ្ទះថែទាំអនាគតរបស់លោកអ្នក (សូមកុំបញ្ចូលកំណត់ត្រាវេជ្ជសាស្ត្រ ឬ SSN)...",
+      fr: "Indiquez le délai souhaité, la région et le meilleur moment pour vous joindre, ou décrivez votre projet de maison de soins (merci d'omettre les dossiers médicaux ou numéros SSN)...",
+      pt: "Informe seu prazo desejado, região e melhor horário para contato, ou descreva seu projeto de casa de cuidados (evite incluir prontuários médicos ou SSNs)..."
     },
     "Close dialog": {
       es: "Cerrar ventana",
@@ -4004,7 +7586,16 @@
       ko: "창 닫기",
       hy: "Փակել պատուհանը",
       ru: "Закрыть окно",
-      ar: "إغلاق النافذة"
+      ar: "إغلاق النافذة",
+      fa: "بستن پنجره",
+      hi: "संवाद बंद करें",
+      pa: "ਡਾਇਲਾਗ ਬੰਦ ਕਰੋ",
+      ja: "ダイアログを閉じる",
+      uk: "Закрити вікно",
+      he: "סגירת חלון",
+      km: "បិទប្រអប់សន្ទនា",
+      fr: "Fermer la fenêtre",
+      pt: "Fechar janela"
     },
     "Full name": {
       es: "Nombre completo",
@@ -4014,7 +7605,16 @@
       ko: "성함",
       hy: "Անուն Ազգանուն",
       ru: "Имя и фамилия",
-      ar: "الاسم الكامل"
+      ar: "الاسم الكامل",
+      fa: "نام و نام خانوادگی",
+      hi: "पूरा नाम",
+      pa: "ਪੂਰਾ ਨਾਮ",
+      ja: "お名前（フルネーム）",
+      uk: "Повне ім’я",
+      he: "שם מלא",
+      km: "ឈ្មោះពេញ",
+      fr: "Nom complet",
+      pt: "Nome completo"
     },
     "Back to top": {
       es: "Volver arriba",
@@ -4024,7 +7624,16 @@
       ko: "맨 위로",
       hy: "Վերադառնալ վերև",
       ru: "Наверх",
-      ar: "العودة للأعلى"
+      ar: "العودة للأعلى",
+      fa: "بازگشت به بالا",
+      hi: "शीर्ष पर वापस जाएँ",
+      pa: "ਸਿਖਰ 'ਤੇ ਵਾਪਸ ਜਾਓ",
+      ja: "ページトップへ戻る",
+      uk: "Догори",
+      he: "חזרה למעלה",
+      km: "ត្រឡប់ទៅខាងលើ",
+      fr: "Haut de page",
+      pt: "Voltar ao topo"
     },
 
     // Dynamic strings from app.js
@@ -4036,7 +7645,16 @@
       ko: "현재 상담 가능 (오후 7:00 PT 마감)",
       hy: "Հիմա բաց է, փակվում է 19:00 PT",
       ru: "Сейчас открыто, закрывается в 19:00 PT",
-      ar: "مفتوح الآن، يغلق الساعة 7:00 مساءً PT"
+      ar: "مفتوح الآن، يغلق الساعة 7:00 مساءً PT",
+      fa: "اکنون باز است، تا ساعت ۷:۰۰ عصر PT",
+      hi: "अभी खुला है, शाम 7:00 बजे PT पर बंद होगा",
+      pa: "ਹੁਣ ਖੁੱਲ੍ਹਾ ਹੈ, ਸ਼ਾਮ 7:00 ਵਜੇ PT ਬੰਦ ਹੋਵੇਗਾ",
+      ja: "現在営業中です（午後7:00 PT まで）",
+      uk: "Зараз відчинено, працюємо до 19:00 PT",
+      he: "פתוח עכשיו, נסגר בשעה 19:00 PT",
+      km: "បើកដំណើរការឥឡូវនេះ បិទនៅម៉ោង 7:00 ល្ងាច PT",
+      fr: "Ouvert actuellement, ferme à 19 h 00 (PT)",
+      pt: "Aberto agora, fecha às 19:00 PT"
     },
     "Closed right now, opens today at 8:00 AM PT": {
       es: "Cerrado ahora, abre hoy a las 8:00 AM PT",
@@ -4046,7 +7664,16 @@
       ko: "현재 업무 시간 외 (오늘 오전 8:00 PT 오픈)",
       hy: "Հիմա փակ է, կբացվի այսօր՝ 8:00 PT",
       ru: "Сейчас закрыто, откроется сегодня в 8:00 PT",
-      ar: "مغلق الآن، يفتح اليوم الساعة 8:00 صباحاً PT"
+      ar: "مغلق الآن، يفتح اليوم الساعة 8:00 صباحاً PT",
+      fa: "اکنون بسته است، امروز ساعت ۸:۰۰ صبح PT باز می‌شود",
+      hi: "अभी बंद है, आज सुबह 8:00 बजे PT पर खुलेगा",
+      pa: "ਇਸ ਵੇਲੇ ਬੰਦ ਹੈ, ਅੱਜ ਸਵੇਰੇ 8:00 ਵਜੇ PT ਖੁੱਲ੍ਹੇਗਾ",
+      ja: "現在は営業時間外です（本日 午前8:00 PT より営業）",
+      uk: "Зараз зачинено, відкриваємося сьогодні о 8:00 PT",
+      he: "סגור כעת, נפתח היום בשעה 8:00 PT",
+      km: "បិទនៅពេលនេះ បើកថ្ងៃនេះនៅម៉ោង 8:00 ព្រឹក PT",
+      fr: "Fermé actuellement, ouvre aujourd'hui à 8 h 00 (PT)",
+      pt: "Fechado agora, abre hoje às 8:00 PT"
     },
     "Closed right now, opens {when} at 8:00 AM PT": {
       es: "Cerrado ahora, abre {when} a las 8:00 AM PT",
@@ -4056,7 +7683,16 @@
       ko: "현재 업무 시간 외 ({when} 오전 8:00 PT 오픈)",
       hy: "Հիմա փակ է, կբացվի {when}՝ 8:00 PT",
       ru: "Сейчас закрыто, откроется {when} в 8:00 PT",
-      ar: "مغلق الآن، يفتح {when} الساعة 8:00 صباحاً PT"
+      ar: "مغلق الآن، يفتح {when} الساعة 8:00 صباحاً PT",
+      fa: "اکنون بسته است، {when} ساعت ۸:۰۰ صبح PT باز می‌شود",
+      hi: "अभी बंद है, {when} सुबह 8:00 बजे PT पर खुलेगा",
+      pa: "ਇਸ ਵੇਲੇ ਬੰਦ ਹੈ, {when} ਸਵੇਰੇ 8:00 ਵਜੇ PT ਖੁੱਲ੍ਹੇਗਾ",
+      ja: "現在は営業時間外です（{when} 午前8:00 PT より営業）",
+      uk: "Зараз зачинено, відкриваємося {when} о 8:00 PT",
+      he: "סגור כעת, נפתח ב{when} בשעה 8:00 PT",
+      km: "បិទនៅពេលនេះ បើកវិញនៅ {when} ម៉ោង 8:00 ព្រឹក PT",
+      fr: "Fermé actuellement, ouvre {when} à 8 h 00 (PT)",
+      pt: "Fechado agora, abre {when} às 8:00 PT"
     },
     "Closed right now": {
       es: "Cerrado en este momento",
@@ -4066,7 +7702,16 @@
       ko: "현재 업무 시간 외",
       hy: "Հիմա փակ է",
       ru: "Сейчас закрыто",
-      ar: "مغلق الآن"
+      ar: "مغلق الآن",
+      fa: "اکنون بسته است",
+      hi: "अभी बंद है",
+      pa: "ਇਸ ਵੇਲੇ ਬੰਦ ਹੈ",
+      ja: "現在は営業時間外です",
+      uk: "Зараз зачинено",
+      he: "סגור כעת",
+      km: "បិទនៅពេលនេះ",
+      fr: "Fermé actuellement",
+      pt: "Fechado agora"
     },
     "tomorrow": {
       es: "mañana",
@@ -4076,15 +7721,24 @@
       ko: "내일",
       hy: "վաղը",
       ru: "завтра",
-      ar: "غداً"
+      ar: "غداً",
+      fa: "فردا",
+      hi: "कल",
+      pa: "ਕੱਲ੍ਹ",
+      ja: "明日",
+      uk: "завтра",
+      he: "מחר",
+      km: "ថ្ងៃស្អែក",
+      fr: "demain",
+      pt: "amanhã"
     },
-    "Monday": { es: "el lunes", zh: "周一", tl: "sa Lunes", vi: "Thứ Hai", ko: "월요일", hy: "երկուշաբթի", ru: "в понедельник", ar: "الاثنين" },
-    "Tuesday": { es: "el martes", zh: "周二", tl: "sa Martes", vi: "Thứ Ba", ko: "화요일", hy: "երեքշաբթի", ru: "во вторник", ar: "الثلاثاء" },
-    "Wednesday": { es: "el miércoles", zh: "周三", tl: "sa Miyerkules", vi: "Thứ Tư", ko: "수요일", hy: "չորեքշաբթի", ru: "в среду", ar: "الأربعاء" },
-    "Thursday": { es: "el jueves", zh: "周四", tl: "sa Huwebes", vi: "Thứ Năm", ko: "목요일", hy: "հինգշաբթի", ru: "в четверг", ar: "الخميس" },
-    "Friday": { es: "el viernes", zh: "周五", tl: "sa Biyernes", vi: "Thứ Sáu", ko: "금요일", hy: "ուրբաթ", ru: "в пятницу", ar: "الجمعة" },
-    "Saturday": { es: "el sábado", zh: "周六", tl: "sa Sabado", vi: "Thứ Bảy", ko: "토요일", hy: "շաբաթ", ru: "в субботу", ar: "السبت" },
-    "Sunday": { es: "el domingo", zh: "周日", tl: "sa Linggo", vi: "Chủ Nhật", ko: "일요일", hy: "կիրակի", ru: "в воскресенье", ar: "الأحد" },
+    "Monday": { es: "el lunes", zh: "周一", tl: "sa Lunes", vi: "Thứ Hai", ko: "월요일", hy: "երկուշաբթի", ru: "в понедельник", ar: "الاثنين", fa: "دوشنبه", hi: "सोमवार", pa: "ਸੋਮਵਾਰ ਨੂੰ", ja: "月曜日", uk: "у понеділок", he: "יום שני", km: "ថ្ងៃចន្ទ", fr: "lundi", pt: "segunda-feira" },
+    "Tuesday": { es: "el martes", zh: "周二", tl: "sa Martes", vi: "Thứ Ba", ko: "화요일", hy: "երեքշաբթի", ru: "во вторник", ar: "الثلاثاء", fa: "سه‌شنبه", hi: "मंगलवार", pa: "ਮੰਗਲਵਾਰ ਨੂੰ", ja: "火曜日", uk: "у вівторок", he: "יום שלישי", km: "ថ្ងៃអង្គារ", fr: "mardi", pt: "terça-feira" },
+    "Wednesday": { es: "el miércoles", zh: "周三", tl: "sa Miyerkules", vi: "Thứ Tư", ko: "수요일", hy: "չորեքշաբթի", ru: "в среду", ar: "الأربعاء", fa: "چهارشنبه", hi: "बुधवार", pa: "ਬੁੱਧਵਾਰ ਨੂੰ", ja: "水曜日", uk: "у середу", he: "יום רביעי", km: "ថ្ងៃពុធ", fr: "mercredi", pt: "quarta-feira" },
+    "Thursday": { es: "el jueves", zh: "周四", tl: "sa Huwebes", vi: "Thứ Năm", ko: "목요일", hy: "հինգշաբթի", ru: "в четверг", ar: "الخميس", fa: "پنجشنبه", hi: "गुरुवार", pa: "ਵੀਰਵਾਰ ਨੂੰ", ja: "木曜日", uk: "у четвер", he: "יום חמישי", km: "ថ្ងៃព្រហស្បតិ៍", fr: "jeudi", pt: "quinta-feira" },
+    "Friday": { es: "el viernes", zh: "周五", tl: "sa Biyernes", vi: "Thứ Sáu", ko: "금요일", hy: "ուրբաթ", ru: "в пятницу", ar: "الجمعة", fa: "جمعه", hi: "शुक्रवार", pa: "ਸ਼ੁੱਕਰਵਾਰ ਨੂੰ", ja: "金曜日", uk: "у п’ятницю", he: "יום שישי", km: "ថ្ងៃសុក្រ", fr: "vendredi", pt: "sexta-feira" },
+    "Saturday": { es: "el sábado", zh: "周六", tl: "sa Sabado", vi: "Thứ Bảy", ko: "토요일", hy: "շաբաթ", ru: "в субботу", ar: "السبت", fa: "شنبه", hi: "शनिवार", pa: "ਸ਼ਨੀਵਾਰ ਨੂੰ", ja: "土曜日", uk: "у суботу", he: "יום שבת", km: "ថ្ងៃសៅរ៍", fr: "samedi", pt: "sábado" },
+    "Sunday": { es: "el domingo", zh: "周日", tl: "sa Linggo", vi: "Chủ Nhật", ko: "일요일", hy: "կիրակի", ru: "в воскресенье", ar: "الأحد", fa: "یکشنبه", hi: "रविवार", pa: "ਐਤਵਾਰ ਨੂੰ", ja: "日曜日", uk: "у неділю", he: "יום ראשון", km: "ថ្ងៃអាទិត្យ", fr: "dimanche", pt: "domingo" },
     "The security check could not load. Please turn off ad blockers for this site, or call (818) 217-5755 or email loveRCFE@gmail.com.": {
       es: "No se pudo cargar la verificación de seguridad. Desactive bloqueadores de anuncios para este sitio o llame al (818) 217-5755 / escriba a loveRCFE@gmail.com.",
       zh: "安全验证组件未能加载。请为本站关闭广告拦截插件，或直接致电 (818) 217-5755 / 发送邮件至 loveRCFE@gmail.com。",
@@ -4093,7 +7747,16 @@
       ko: "보안 확인 모듈을 불러오지 못했습니다. 이 사이트의 광고 차단 기능을 끄시거나 (818) 217-5755 전화 또는 loveRCFE@gmail.com 으로 연락해 주세요.",
       hy: "Անվտանգության ստուգումը չհաջողվեց բեռնել։ Անջատեք գովազդի արգելափակիչները կամ զանգահարեք (818) 217-5755, կամ գրեք loveRCFE@gmail.com հասցեով։",
       ru: "Не удалось загрузить проверку безопасности. Отключите блокировщик рекламы для этого сайта, позвоните по номеру (818) 217-5755 или напишите на loveRCFE@gmail.com.",
-      ar: "تعذر تحميل التحقق الأمني. يرجى تعطيل مانع الإعلانات لهذا الموقع، أو الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com."
+      ar: "تعذر تحميل التحقق الأمني. يرجى تعطيل مانع الإعلانات لهذا الموقع، أو الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com.",
+      fa: "بررسی امنیتی بارگذاری نشد. لطفاً مسدودکننده تبلیغات را برای این سایت غیرفعال کنید، یا با (818) 217-5755 تماس بگیرید و یا به loveRCFE@gmail.com ایمیل بزنید.",
+      hi: "सुरक्षा जांच लोड नहीं हो सकी। कृपया इस साइट के लिए विज्ञापन अवरोधक (ad blockers) बंद करें, या (818) 217-5755 पर कॉल करें अथवा loveRCFE@gmail.com पर ईमेल भेजें।",
+      pa: "ਸੁਰੱਖਿਆ ਜਾਂਚ ਲੋਡ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਇਸ ਸਾਈਟ ਲਈ ਐਡ ਬਲੌਕਰ ਬੰਦ ਕਰੋ, ਜਾਂ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
+      ja: "セキュリティ確認を読み込めませんでした。このサイトで広告ブロッカーをオフにしていただくか、(818) 217-5755 までお電話、または loveRCFE@gmail.com までメールでご連絡ください。",
+      uk: "Не вдалося завантажити перевірку безпеки. Вимкніть блокувальники реклами для цього сайту або зателефонуйте на (818) 217-5755 чи напишіть на loveRCFE@gmail.com.",
+      he: "בדיקת האבטחה לא נטענה. אנא כבו חוסמי פרסומות עבור אתר זה, או התקשרו למספר (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
+      km: "មិនអាចផ្ទុកការត្រួតពិនិត្យសុវត្ថិភាពបានទេ។ សូមបិទកម្មវិធីទប់ស្កាត់ការផ្សាយពាណិជ្ជកម្មសម្រាប់គេហទំព័រនេះ ឬទូរស័ព្ទទៅ (818) 217-5755 ឬអ៊ីមែល loveRCFE@gmail.com។",
+      fr: "La vérification de sécurité n'a pas pu se charger. Veuillez désactiver les bloqueurs de publicités pour ce site, ou appeler le (818) 217-5755 ou écrire à loveRCFE@gmail.com.",
+      pt: "Não foi possível carregar a verificação de segurança. Desative bloqueadores de anúncios para este site ou ligue para (818) 217-5755 / escreva para loveRCFE@gmail.com."
     },
     "For your privacy, please do not include Social Security numbers in web messages.": {
       es: "Por su privacidad, no incluya números de Seguro Social en mensajes web.",
@@ -4103,7 +7766,16 @@
       ko: "개인정보 보호를 위해 웹 메시지에 사회보장번호(SSN)를 포함하지 말아 주세요.",
       hy: "Ձեր գաղտնիության համար խնդրում ենք հաղորդագրություններում չնշել Սոցիալական ապահովության (SSN) համարներ։",
       ru: "В целях конфиденциальности не указывайте номера социального страхования (SSN) в веб-сообщениях.",
-      ar: "لخصوصيتك، يرجى عدم إدراج أرقام الضمان الاجتماعي في رسائل الموقع."
+      ar: "لخصوصيتك، يرجى عدم إدراج أرقام الضمان الاجتماعي في رسائل الموقع.",
+      fa: "برای حفظ حریم خصوصی خود، لطفاً شماره تأمین اجتماعی (SSN) را در پیام‌های وب وارد نکنید.",
+      hi: "आपकी गोपनीयता के लिए, कृपया वेब संदेशों में सोशल सिक्योरिटी नंबर शामिल न करें।",
+      pa: "ਤੁਹਾਡੀ ਗੋਪਨੀਯਤਾ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ ਵੈੱਬ ਸੁਨੇਹਿਆਂ ਵਿੱਚ ਸੋਸ਼ਲ ਸਿਕਿਉਰਿਟੀ ਨੰਬਰ ਸ਼ਾਮਲ ਨਾ ਕਰੋ।",
+      ja: "プライバシー保護のため、ウェブフォームからのメッセージには社会保障番号（SSN）をご記入にならないでください。",
+      uk: "Заради вашої конфіденційності не вказуйте номери соціального страхування у вебповідомленнях.",
+      he: "לשמירה על פרטיותכם, אנא אל תכללו מספרי Social Security בהודעות אינטרנט.",
+      km: "ដើម្បីឯកជនភាពរបស់លោកអ្នក សូមកុំបញ្ចូលលេខសន្តិសុខសង្គមក្នុងសារលើគេហទំព័រ។",
+      fr: "Pour protéger votre vie privée, veuillez ne pas inclure de numéros de sécurité sociale dans les messages web.",
+      pt: "Para sua privacidade, não inclua números de Social Security em mensagens na web."
     },
     "Please check the highlighted fields.": {
       es: "Por favor revise los campos indicados.",
@@ -4113,7 +7785,16 @@
       ko: "입력하신 항목을 다시 확인해 주세요.",
       hy: "Խնդրում ենք ստուգել ընդգծված դաշտերը։",
       ru: "Пожалуйста, проверьте выделенные поля.",
-      ar: "يرجى مراجعة الحقول المظللة."
+      ar: "يرجى مراجعة الحقول المظللة.",
+      fa: "لطفاً فیلدهای مشخص‌شده را بررسی کنید.",
+      hi: "कृपया हाइलाइट किए गए फ़ील्ड की जांच करें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਉਭਾਰੇ ਗਏ ਖਾਨਿਆਂ ਦੀ ਜਾਂਚ ਕਰੋ।",
+      ja: "赤く強調表示された入力欄をご確認のうえ修正してください。",
+      uk: "Будь ласка, перевірте виділені поля.",
+      he: "אנא בדקו את השדות המסומנים.",
+      km: "សូមពិនិត្យមើលប្រអប់ដែលបានបន្លិចពណ៌។",
+      fr: "Veuillez vérifier les champs mis en évidence.",
+      pt: "Por favor, verifique os campos destacados."
     },
     "Please enter or calculate a valid budget amount on the calculator first.": {
       es: "Primero ingrese o calcule un monto de presupuesto válido en la calculadora.",
@@ -4123,7 +7804,16 @@
       ko: "먼저 계산기에서 유효한 예산 금액을 입력하거나 계산해 주세요.",
       hy: "Սկզբում հաշվիչում մուտքագրեք կամ հաշվարկեք վավեր բյուջեի գումար։",
       ru: "Сначала введите или рассчитайте корректную сумму бюджета в калькуляторе.",
-      ar: "يرجى إدخال أو حساب مبلغ ميزانية صحيح في الحاسبة أولاً."
+      ar: "يرجى إدخال أو حساب مبلغ ميزانية صحيح في الحاسبة أولاً.",
+      fa: "لطفاً ابتدا مبلغ بودجه معتبری را در ماشین‌حساب وارد یا محاسبه کنید.",
+      hi: "कृपया पहले कैलकुलेटर पर एक मान्य बजट राशि दर्ज करें या गणना करें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਕੈਲਕੂਲੇਟਰ 'ਤੇ ਸਹੀ ਬਜਟ ਰਕਮ ਦਰਜ ਕਰੋ ਜਾਂ ਗਣਨਾ ਕਰੋ।",
+      ja: "先に電卓ツールで有効なご予算金額をご入力またはご計算ください。",
+      uk: "Спочатку введіть або розрахуйте коректну суму бюджету на калькуляторі.",
+      he: "אנא הזינו או חשבו תחילה סכום תקציב תקין במחשבון.",
+      km: "សូមបញ្ចូល ឬគណនាចំនួនថវិកាត្រឹមត្រូវនៅលើម៉ាស៊ីនគណនាជាមុនសិន។",
+      fr: "Veuillez d'abord saisir ou calculer un budget valide dans le calculateur.",
+      pt: "Por favor, digite ou calcule primeiro um valor de orçamento válido na calculadora."
     },
     "Specialized Memory Care Community or Secured RCFE": {
       es: "Comunidad Especializada en Cuidado de la Memoria o RCFE Seguro",
@@ -4133,7 +7823,16 @@
       ko: "치매 전문 케어 커뮤니티 또는 안전 출입 통제 RCFE",
       hy: "Մասնագիտացված հիշողության խնամքի կենտրոն կամ պաշտպանված RCFE",
       ru: "Специализированный центр ухода за памятью или защищенный RCFE",
-      ar: "مجمع متخصص لرعاية الذاكرة أو مرفق RCFE مؤمّن"
+      ar: "مجمع متخصص لرعاية الذاكرة أو مرفق RCFE مؤمّن",
+      fa: "مجتمع تخصصی مراقبت حافظه یا RCFE ایمن‌شده",
+      hi: "विशेषज्ञ मेमोरी केयर समुदाय या सुरक्षित RCFE",
+      pa: "ਵਿਸ਼ੇਸ਼ ਮੈਮੋਰੀ ਕੇਅਰ ਕਮਿਊਨਿਟੀ ਜਾਂ ਸੁਰੱਖਿਅਤ RCFE",
+      ja: "認知症専門メモリーケア施設、または安全管理設備を備えた RCFE",
+      uk: "Спеціалізована спільнота догляду при деменції або захищений RCFE",
+      he: "קהילת טיפול ייעודית בדמנציה או RCFE מאובטח",
+      km: "សហគមន៍ថែទាំអ្នកជំងឺចងចាំឯកទេស ឬ RCFE មានសុវត្ថិភាពខ្ពស់",
+      fr: "Unité spécialisée de soins de la mémoire ou RCFE sécurisé",
+      pt: "Comunidade Especializada em Memória ou RCFE com Segurança Monitorada"
     },
     "Given memory impairment and potential wandering risks, your loved one requires a state-licensed facility with certified delayed egress security, dementia-trained 24/7 care staff, and predictable sensory routines.": {
       es: "Dado el deterioro de memoria y el riesgo de deambulación, su ser querido necesita un centro con licencia estatal que cuente con puertas certificadas de salida retardada, personal capacitado 24/7 en demencia y rutinas tranquilas.",
@@ -4143,7 +7842,16 @@
       ko: "기억력 저하와 배회 위험을 고려할 때, 지연 개방 보안 출입문 인증, 24시간 치매 전문 교육 인력, 안정적인 일상 루틴을 갖춘 주정부 인가 시설이 필요합니다.",
       hy: "Հաշվի առնելով հիշողության խանգարումը և մոլորվելու ռիսկը՝ ձեր հարազատին անհրաժեշտ է պետական լիցենզավորված հաստատություն՝ հավաստագրված ուշացված ելքի անվտանգությամբ, դեմենցիայի մասնագիտացված 24/7 անձնակազմով և կանխատեսելի առօրյայով։",
       ru: "Учитывая нарушения памяти и риск ухода из дома, вашему близкому требуется лицензированный центр с сертифицированной защитой выходов, обученным работе с деменцией персоналом 24/7 и предсказуемым спокойным режимом.",
-      ar: "نظراً لضعف الذاكرة واحتمال مخاطر التجوال، يحتاج قريبك إلى مرفق مرخص بأمان مخارج بتأخير زمني، وطاقم رعاية مدرب على الخرف على مدار الساعة، وروتين هادئ ومنتظم."
+      ar: "نظراً لضعف الذاكرة واحتمال مخاطر التجوال، يحتاج قريبك إلى مرفق مرخص بأمان مخارج بتأخير زمني، وطاقم رعاية مدرب على الخرف على مدار الساعة، وروتين هادئ ومنتظم.",
+      fa: "با توجه به اختلال حافظه و احتمال سرگردانی، عزیز شما به مرکزی دارای مجوز ایالتی با سیستم خروج ایمن با تأخیر تأییدشده، کارکنان آموزش‌دیده ۲۴ ساعته در زمینه زوال عقل و برنامه‌های حسی قابل پیش‌بینی نیاز دارد.",
+      hi: "स्मृति हानि और भटकने के संभावित जोखिम को देखते हुए, आपके प्रियजन को ऐसे राज्य-लाइसेंस प्राप्त केंद्र की आवश्यकता है जहाँ प्रमाणित विलंबित निकास सुरक्षा (Delayed Egress), डिमेंशिया-प्रशिक्षित 24/7 देखभाल स्टाफ़ और शांत नियमित दिनचर्या उपलब्ध हो।",
+      pa: "ਯਾਦਾਸ਼ਤ ਦੀ ਕਮਜ਼ੋਰੀ ਅਤੇ ਭਟਕਣ ਦੇ ਸੰਭਾਵੀ ਖ਼ਤਰੇ ਨੂੰ ਦੇਖਦੇ ਹੋਏ, ਤੁਹਾਡੇ ਪਿਆਰੇ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਨਿਕਾਸ ਸੁਰੱਖਿਆ (delayed egress), ਡਿਮੇਨਸ਼ੀਆ ਦੀ ਸਿਖਲਾਈ ਪ੍ਰਾਪਤ 24/7 ਦੇਖਭਾਲ ਸਟਾਫ ਅਤੇ ਨਿਯਮਤ ਸ਼ਾਂਤ ਰੁਟੀਨ ਵਾਲੇ ਰਾਜ-ਲਾਇਸੰਸਸ਼ੁਦਾ ਕੇਂਦਰ ਦੀ ਲੋੜ ਹੈ।",
+      ja: "記憶面の低下や徘徊のリスクが見られるため、州の認可を受けた遅延解錠（Delayed Egress）安全システム、認知症ケアの専門研修を受けた24時間常駐スタッフ、そして落ち着いた予測可能な生活リズムを備えた施設をおすすめします。",
+      uk: "З огляду на порушення пам’яті та ризик блукання, вашій близькій людині потрібен ліцензований штатом заклад із сертифікованою системою затриманого виходу, цілодобовим персоналом, навченим роботі з деменцією, та спокійним передбачуваним розпорядком.",
+      he: "לאור ירידה בזיכרון וסיכון אפשרי לשוטטות, יקירכם זקוק למתקן מורשה מטעם המדינה עם מערכת עיכוב יציאה מוסמכת, צוות מטפלים 24/7 המוכשר לדמנציה ושגרה חושית רגועה וצפויה.",
+      km: "ដោយសារមានបញ្ហាចុះខ្សោយការចងចាំ និងហានិភ័យអាចដើរវង្វេង មនុស្សជាទីស្រឡាញ់របស់លោកអ្នកត្រូវការមណ្ឌលមានអាជ្ញាប័ណ្ណរដ្ឋដែលមានប្រព័ន្ធសុវត្ថិភាពទ្វារពន្យារពេលចេញ (delayed egress) បុគ្គលិកថែទាំ 24/7 ដែលបានបណ្តុះបណ្តាលផ្នែកជំងឺភ្លេចភ្លាំង និងទម្លាប់ប្រចាំថ្ងៃដែលទៀងទាត់។",
+      fr: "Compte tenu des troubles de la mémoire et des risques éventuels d'errance, votre proche nécessite un établissement agréé par l'État disposant de sorties à ouverture temporisée certifiées, d'un personnel formé à la démence 24 h/24 et de repères sensoriels apaisants.",
+      pt: "Diante do comprometimento de memória e possível risco de perambulação, seu ente querido precisa de um residencial licenciado com saída controlada certificada, equipe treinada em demência 24 horas por dia e rotinas sensoriais previsíveis."
     },
     "Does the home have an approved Dementia Plan of Operation on file with CDSS?": {
       es: "¿El hogar tiene un Plan de Operación para Demencia aprobado ante el CDSS?",
@@ -4153,7 +7861,16 @@
       ko: "해당 시설이 CDSS에 승인된 치매 운영 계획서(Dementia Plan of Operation)를 보유하고 있나요?",
       hy: "Արդյո՞ք տունն ունի CDSS-ում գրանցված և հաստատված Դեմենցիայի գործողությունների ծրագիր",
       ru: "Есть ли у пансионата утвержденный CDSS План работы с деменцией?",
-      ar: "هل لدى الدار خطة تشغيل معتمدة للخرف مسجلة لدى CDSS؟"
+      ar: "هل لدى الدار خطة تشغيل معتمدة للخرف مسجلة لدى CDSS؟",
+      fa: "آیا خانه دارای طرح عملیاتی مصوب مراقبت از زوال عقل در پرونده CDSS است؟",
+      hi: "क्या इस देखभाल गृह के पास CDSS के पास दर्ज एक स्वीकृत डिमेंशिया संचालन योजना (Dementia Plan of Operation) है?",
+      pa: "ਕੀ ਘਰ ਕੋਲ CDSS ਵਿੱਚ ਦਰਜ ਪ੍ਰਵਾਨਿਤ ਡਿਮੇਨਸ਼ੀਆ ਸੰਚਾਲਨ ਯੋਜਨਾ (Dementia Plan of Operation) ਹੈ?",
+      ja: "施設は CDSS に承認・登録された「認知症運営計画書（Dementia Plan of Operation）」を保有していますか？",
+      uk: "Чи має заклад затверджений CDSS План діяльності для догляду за людьми з деменцією?",
+      he: "האם למעון יש תוכנית הפעלה מאושרת לטיפול בדמנציה (Dementia Plan of Operation) בתיקי CDSS?",
+      km: "តើផ្ទះថែទាំមានផែនការប្រតិបត្តិការជំងឺភ្លេចភ្លាំង (Dementia Plan of Operation) ដែលបានអនុម័តរក្សាទុកជាមួយ CDSS ដែរឬទេ?",
+      fr: "L'établissement dispose-t-il d'un plan d'exploitation pour la démence approuvé et déposé auprès du CDSS ?",
+      pt: "A casa possui um Plano de Operação para Demência aprovado e arquivado no CDSS?"
     },
     "Are perimeter pathways and exits secured with delayed egress and audible chimes?": {
       es: "¿Los accesos y salidas están protegidos con salida retardada y alarmas audibles?",
@@ -4163,7 +7880,16 @@
       ko: "외부 통로와 출입문이 지연 개방 보안장치 및 알림 차임으로 보호되어 있나요?",
       hy: "Արդյո՞ք տարածքի ելքերն ու դռները պաշտպանված են ուշացված ելքով և ձայնային ազդանշաններով",
       ru: "Оборудованы ли выходы и периметр системой задержки открывания и звуковыми сигналами?",
-      ar: "هل الممرات والمخارج مؤمّنة بأقفال تأخير الخروج وأجراس تنبيه مسموعة؟"
+      ar: "هل الممرات والمخارج مؤمّنة بأقفال تأخير الخروج وأجراس تنبيه مسموعة؟",
+      fa: "آیا مسیرهای پیرامونی و خروجی‌ها با سیستم تأخیر خروج و زنگ هشدار صوتی ایمن شده‌اند؟",
+      hi: "क्या बाहरी रास्ते और निकास द्वार विलंबित निकास (Delayed Egress) और ध्वनि अलार्म से सुरक्षित हैं?",
+      pa: "ਕੀ ਬਾਹਰੀ ਰਸਤੇ ਅਤੇ ਨਿਕਾਸ ਦਰਵਾਜ਼ੇ ਦੇਰੀ-ਨਿਕਾਸ ਸੁਰੱਖਿਆ (delayed egress) ਅਤੇ ਸੁਣਾਈ ਦੇਣ ਵਾਲੀ ਘੰਟੀ ਨਾਲ ਸੁਰੱਖਿਅਤ ਹਨ?",
+      ja: "敷地の外周通路や出入口は、遅延解錠装置と警告チャイムで安全に管理されていますか？",
+      uk: "Чи обладнано периметр і виходи системою затриманого відкриття дверей та звуковими сигналами?",
+      he: "האם שבילי ההיקף והיציאות מאובטחים עם מנגנון עיכוב יציאה וצליל התרעה?",
+      km: "តើផ្លូវជុំវិញ និងច្រកចេញត្រូវបានការពារដោយទ្វារពន្យារពេលចេញ និងសំឡេងរោទ៍ដែរឬទេ?",
+      fr: "Les accès extérieurs et les sorties sont-ils sécurisés par temporisation et signaux sonores ?",
+      pt: "As áreas externas e saídas contam com travas temporizadas e alertas sonoros?"
     },
     "What is the staff-to-resident ratio during the night shift?": {
       es: "¿Cuál es la proporción de cuidadores por residente en el turno nocturno?",
@@ -4173,7 +7899,16 @@
       ko: "야간 근무 시간대의 직원 대 입소자 비율은 어떻게 되나요?",
       hy: "Որքա՞ն է գիշերային հերթափոխի ընթացքում անձնակազմ-բնակիչ հարաբերակցությունը",
       ru: "Каково соотношение персонала и жильцов в ночную смену?",
-      ar: "ما هي نسبة مقدمي الرعاية إلى المقيمين خلال النوبة الليلية؟"
+      ar: "ما هي نسبة مقدمي الرعاية إلى المقيمين خلال النوبة الليلية؟",
+      fa: "نسبت مراقب به مقیم در شیفت شب چقدر است؟",
+      hi: "रात्रि शिफ्ट के दौरान स्टाफ़ और निवासियों का अनुपात क्या रहता है?",
+      pa: "ਰਾਤ ਦੀ ਸ਼ਿਫਟ ਦੌਰਾਨ ਸਟਾਫ ਅਤੇ ਨਿਵਾਸੀਆਂ ਦਾ ਅਨੁਪਾਤ ਕੀ ਹੁੰਦਾ ਹੈ?",
+      ja: "夜間帯におけるスタッフと入居者の配置比率はどのくらいですか？",
+      uk: "Яке співвідношення персоналу до мешканців під час нічної зміни?",
+      he: "מהו יחס המטפלים לדיירים במהלך משמרת הלילה?",
+      km: "តើសមាមាត្របុគ្គលិកធៀបនឹងអ្នកស្នាក់នៅក្នុងវេនយប់មានប៉ុន្មាន?",
+      fr: "Quel est le ratio personnel/résidents durant l'équipe de nuit ?",
+      pt: "Qual é a proporção de cuidadores por residente durante o turno da noite?"
     },
     "How does staff redirect agitation or exit-seeking without chemical sedation?": {
       es: "¿Cómo redirige el personal la agitación o intentos de salida sin sedación química?",
@@ -4183,7 +7918,16 @@
       ko: "약물 진정 없이 초조함이나 외출 충동을 어떻게 안전하게 전환·유도하나요?",
       hy: "Ինչպե՞ս է անձնակազմը հանգստացնում տագնապը կամ դուրս գալու փորձերը՝ առանց դեղորայքային ճնշման",
       ru: "Как сотрудники мягко перенаправляют тревожность или попытки уйти без применения седативных препаратов?",
-      ar: "كيف يهدئ الطاقم الانفعال أو محاولات الخروج دون اللجوء إلى المهدئات الدوائية؟"
+      ar: "كيف يهدئ الطاقم الانفعال أو محاولات الخروج دون اللجوء إلى المهدئات الدوائية؟",
+      fa: "کارکنان چگونه بی‌قراری یا تلاش برای خروج را بدون آرام‌بخش‌های شیمیایی مدیریت و هدایت می‌کنند؟",
+      hi: "स्टाफ़ बिना नशीली दवाओं के उपयोग के बेचैनी या बाहर निकलने की प्रवृत्ति को शांति से कैसे संभालता है?",
+      pa: "ਬੇਚੈਨੀ ਜਾਂ ਬਾਹਰ ਜਾਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਵੇਲੇ ਸਟਾਫ ਬੇਹੋਸ਼ੀ ਦੀਆਂ ਦਵਾਈਆਂ ਤੋਂ ਬਿਨਾਂ ਕਿਵੇਂ ਧਿਆਨ ਵੰਡਾਉਂਦਾ ਹੈ?",
+      ja: "不穏な状態や帰宅願望（外出企図）が見られた際、薬剤に頼らずスタッフがどのように気持ちをそらして寄り添っていますか？",
+      uk: "Як персонал м’яко заспокоює тривожність або спроби вийти з приміщення без медикаментозної седації?",
+      he: "כיצד הצוות מרגיע אי-שקט או רצון לצאת מהמבנה ללא הרדמה כימית?",
+      km: "តើបុគ្គលិកបង្វែរចំណាប់អារម្មណ៍ពេលមានការរសាប់រសល់ ឬដើររកច្រកចេញដោយមិនប្រើថ្នាំស្ងប់សរសៃប្រសាទដោយរបៀបណា?",
+      fr: "Comment le personnel apaise-t-il l'agitation ou les envies de sortie sans recourir à une sédation médicamenteuse ?",
+      pt: "Como a equipe redireciona episódios de agitação ou tentativa de saída sem sedação química?"
     },
     "High-Acuity Residential Board & Care with Hospice Waiver": {
       es: "Hogar Residencial de Alta Complejidad con Exención de Hospicio",
@@ -4193,7 +7937,16 @@
       ko: "호스피스 면제 승인 고중증 주거형 보드앤케어",
       hy: "Բարձր խնամքի բնակելի տուն (Board & Care)՝ Հոսպիսային բացառմամբ",
       ru: "Домашний пансионат интенсивного ухода с хосписным допуском",
-      ar: "دار رعاية سكنية عالية الكثافة مع إعفاء رعاية المحتضرين"
+      ar: "دار رعاية سكنية عالية الكثافة مع إعفاء رعاية المحتضرين",
+      fa: "خانه مراقبت مسکونی با سطح مراقبت بالا و مجوز مراقبت تسکینی",
+      hi: "हॉस्पिस वेवर सहित उच्च-देखभाल आवासीय बोर्ड एंड केयर",
+      pa: "ਹੌਸਪਿਸ ਛੋਟ (Hospice Waiver) ਵਾਲਾ ਉੱਚ-ਦੇਖਭਾਲ ਰਿਹਾਇਸ਼ੀ ਬੋਰਡ ਐਂਡ ਕੇਅਰ (Board & Care)",
+      ja: "ホスピス特例承認を備えた重度ケア対応の少人数制 Board & Care",
+      uk: "Житловий будинок догляду високої складності (Board & Care) з Hospice Waiver",
+      he: "בית טיפולי למורכבות גבוהה (Board & Care) עם אישור הוספיס",
+      km: "ផ្ទះថែទាំស្នាក់នៅកម្រិតធ្ងន់ (Board & Care) ជាមួយការលើកលែង Hospice Waiver",
+      fr: "Foyer résidentiel de soins lourds avec dérogation soins palliatifs",
+      pt: "Casa Residencial de Cuidados de Alta Complexidade com Hospice Waiver"
     },
     "Because significant help with mobility, turning, or transfers is necessary, an intimate 6-bed residential home provides the essential 1-on-3 caregiver ratio required to prevent falls, skin breakdown, and hospital readmissions.": {
       es: "Dado que requiere apoyo significativo para movilidad, cambios posturales o traslados, una casa residencial de 6 camas brinda la proporción de 1 cuidador por 3 residentes indispensable para prevenir caídas, úlceras y reingresos hospitalarios.",
@@ -4203,7 +7956,16 @@
       ko: "거동, 체위 변경, 이동에 상당한 도움이 필요하므로 낙상, 욕창, 재입원을 예방하기 위한 1대3 밀착 케어 비율이 갖춰진 6인실 주거형 요양홈이 최적입니다.",
       hy: "Քանի որ անհրաժեշտ է էական օգնություն շարժման, շրջելու կամ տեղափոխելու համար, փոքր 6 տեղանոց տունը ապահովում է անհրաժեշտ 1-ը-3 խնամակալի հարաբերակցություն՝ ընկնելուց, պառկելախոցերից և հիվանդանոց վերադառնալուց խուսափելու համար։",
       ru: "Поскольку требуется серьезная помощь с передвижением и перемещением, небольшой дом на 6 мест обеспечивает важное соотношение сиделок 1 к 3, предотвращая падения, пролежни и повторные госпитализации.",
-      ar: "نظراً للحاجة لمساعدة كبيرة في الحركة والتقليب والانتقال، توفر الدار السكنية المكونة من 6 أسرّة نسبة 1 إلى 3 الأساسية لمنع السقوط وتقرحات الفراش وتكرار دخول المستشفى."
+      ar: "نظراً للحاجة لمساعدة كبيرة في الحركة والتقليب والانتقال، توفر الدار السكنية المكونة من 6 أسرّة نسبة 1 إلى 3 الأساسية لمنع السقوط وتقرحات الفراش وتكرار دخول المستشفى.",
+      fa: "از آنجا که کمک قابل توجهی برای تحرک، تغییر وضعیت یا جابه‌جایی لازم است، یک خانه مسکونی صمیمی ۶ تختخوابی نسبت ضروری ۱ مراقب به ۳ مقیم را برای پیشگیری از زمین‌خوردن، زخم بستر و بستری مجدد در بیمارستان فراهم می‌کند.",
+      hi: "चूंकि चलने-फिरने, करवट बदलने या उठाने-बैठने में काफ़ी सहायता आवश्यक है, इसलिए एक आत्मीय 6-बेड आवासीय गृह आवश्यक 1-पर-3 देखभालकर्ता अनुपात प्रदान करता है, जो गिरने, त्वचा के घावों और अस्पताल में दोबारा भर्ती होने से बचाने के लिए ज़रूरी है।",
+      pa: "ਕਿਉਂਕਿ ਤੁਰਨ-ਫਿਰਨ, ਪਾਸਾ ਬਦਲਣ ਜਾਂ ਚੁੱਕਣ-ਬਿਠਾਉਣ ਵਿੱਚ ਕਾਫ਼ੀ ਮਦਦ ਦੀ ਲੋੜ ਹੈ, ਇਸ ਲਈ ਇੱਕ ਨਿੱਘਾ 6-ਬੈੱਡ ਰਿਹਾਇਸ਼ੀ ਘਰ ਡਿੱਗਣ, ਚਮੜੀ ਦੇ ਜ਼ਖ਼ਮਾਂ ਅਤੇ ਹਸਪਤਾਲ ਵਿੱਚ ਮੁੜ-ਦਾਖ਼ਲੇ ਤੋਂ ਬਚਾਅ ਲਈ ਜ਼ਰੂਰੀ 1-ਤੋਂ-3 ਦੇਖਭਾਲ ਅਨੁਪਾਤ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।",
+      ja: "移動・体位変換・移乗に手厚い介助が必要となるため、転倒や褥瘡、再入院を防ぐうえで不可欠な「介護スタッフ1名対入居者3名」の体制を確保できる少人数制6床の居住型ホームが最適です。",
+      uk: "Оскільки потрібна значна допомога з пересуванням, перевертанням або перекладанням, затишний будинок на 6 ліжок забезпечує критично важливе співвідношення 1 доглядальник на 3 мешканців для профілактики падінь, пролежнів і повторних госпіталізацій.",
+      he: "מאחר שנדרש סיוע משמעותי בניידות, שינוי תנוחה או העברות, בית אינטימי של 6 מיטות מספק יחס חיוני של מטפל ל-3 דיירים למניעת נפילות, פצעי לחץ ואשפוזים חוזרים.",
+      km: "ដោយសារត្រូវការជំនួយច្រើនក្នុងការធ្វើចលនា ការប្រែខ្លួន ឬការផ្លាស់ប្តូរទីតាំង ផ្ទះថែទាំស្នាក់នៅខ្នាត 6 គ្រែដ៏កក់ក្តៅផ្តល់សមាមាត្រអ្នកថែទាំ 1 ទល់ 3 ដ៏សំខាន់ ដើម្បីការពារការដួល ដំបៅស្បែក និងការចូលមន្ទីរពេទ្យឡើងវិញ។",
+      fr: "Comme une aide importante pour la mobilité, les retournements ou les transferts est nécessaire, un foyer résidentiel intime de 6 lits offre le ratio indispensable d'un soignant pour trois résidents afin de prévenir les chutes, les escarres et les réhospitalisations.",
+      pt: "Como há necessidade de auxílio expressivo para mobilidade, mudança de decúbito ou transferências, uma casa residencial de 6 vagas oferece a proporção essencial de 1 cuidador para 3 residentes para prevenir quedas, lesões de pele e reinternações."
     },
     "Does the facility have an active Bedridden Clearance and Hospice Waiver for the room?": {
       es: "¿El centro cuenta con Autorización para Postrados y Exención de Hospicio activas para esa habitación?",
@@ -4213,7 +7975,16 @@
       ko: "해당 방에 대해 유효한 와상 입소 승인(Bedridden Clearance)과 호스피스 면제가 적용되나요?",
       hy: "Արդյո՞ք սենյակն ունի գործող Անկողնային բնակչի թույլտվություն և Հոսպիսային բացառում",
       ru: "Имеются ли для этой комнаты действующие допуски для лежачих больных и хосписного ухода?",
-      ar: "هل لدى المرفق تصريح سارٍ لطريحي الفراش وإعفاء رعاية محتضرين لهذه الغرفة؟"
+      ar: "هل لدى المرفق تصريح سارٍ لطريحي الفراش وإعفاء رعاية محتضرين لهذه الغرفة؟",
+      fa: "آیا مرکز دارای تأییدیه فعال پذیرش افراد بستری و مجوز مراقبت تسکینی (Hospice Waiver) برای آن اتاق است؟",
+      hi: "क्या उस कमरे के लिए केंद्र के पास सक्रिय शैयाग्रस्त देखभाल स्वीकृति (Bedridden Clearance) और हॉस्पिस वेवर है?",
+      pa: "ਕੀ ਕੇਂਦਰ ਕੋਲ ਇਸ ਕਮਰੇ ਲਈ ਸਰਗਰਮ ਬਿਸਤਰੇ 'ਤੇ ਸੀਮਤ ਮਰੀਜ਼ਾਂ ਦੀ ਮਨਜ਼ੂਰੀ (Bedridden Clearance) ਅਤੇ ਹੌਸਪਿਸ ਛੋਟ (Hospice Waiver) ਹੈ?",
+      ja: "施設および該当居室は、現在有効な寝たきり入居者受入承認（Bedridden Clearance）とホスピス特例承認（Hospice Waiver）を取得していますか？",
+      uk: "Чи має заклад чинний дозвіл на лежачих мешканців (Bedridden Clearance) та Hospice Waiver саме для цієї кімнати?",
+      he: "האם למתקן יש אישור פעיל למרותקי מיטה (Bedridden Clearance) ואישור הוספיס עבור החדר?",
+      km: "តើមណ្ឌលមានការអនុញ្ញាតសម្រាប់អ្នកសម្រាកលើគ្រែ (Bedridden Clearance) និង Hospice Waiver សកម្មសម្រាប់បន្ទប់នោះដែរឬទេ?",
+      fr: "L'établissement possède-t-il une autorisation active pour résidents alités et une dérogation pour soins palliatifs pour cette chambre ?",
+      pt: "O residencial possui liberação para acamados e Hospice Waiver ativos para o quarto?"
     },
     "Can caregivers perform 2-person physical transfers or operate a hoyer lift safely?": {
       es: "¿Pueden los cuidadores hacer traslados físicos entre 2 personas o usar grúa Hoyer con seguridad?",
@@ -4223,7 +7994,16 @@
       ko: "요양보호사들이 2인 신체 이동 보조 또는 호이어 리프트(Hoyer lift)를 안전하게 다룰 수 있나요?",
       hy: "Արդյո՞ք խնամակալները կարող են անվտանգ կատարել 2 անձով տեղափոխում կամ օգտագործել վերամբարձ սարք",
       ru: "Могут ли сиделки безопасно выполнять перемещение вдвоем или работать с подъемником Хойера?",
-      ar: "هل يمكن لمقدمي الرعاية النقل الجسدي بشخصين أو تشغيل رافعة هوير بأمان؟"
+      ar: "هل يمكن لمقدمي الرعاية النقل الجسدي بشخصين أو تشغيل رافعة هوير بأمان؟",
+      fa: "آیا مراقبان می‌توانند جابه‌جایی فیزیکی ۲ نفره انجام دهند یا از بالابر Hoyer به‌طور ایمن استفاده کنند؟",
+      hi: "क्या देखभालकर्ता 2 व्यक्तियों की शारीरिक सहायता से स्थानांतरण कर सकते हैं या होयर लिफ़्ट (Hoyer Lift) को सुरक्षित रूप से चला सकते हैं?",
+      pa: "ਕੀ ਦੇਖਭਾਲ ਕਰਤਾ 2-ਵਿਅਕਤੀਆਂ ਵੱਲੋਂ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਚੁੱਕਣ-ਬਿਠਾਉਣ ਜਾਂ ਹੋਇਰ ਲਿਫਟ (Hoyer lift) ਚਲਾਉਣ ਦੇ ਸਮਰੱਥ ਹਨ?",
+      ja: "スタッフは2名体制での身体移乗や、介護用リフト（Hoyerリフト）の安全な操作に対応できますか？",
+      uk: "Чи вміють доглядальники безпечно перекладати людину вдвох або користуватися підйомником Hoyer?",
+      he: "האם המטפלים מיומנים בביצוע העברות פיזיות של שני אנשים או בהפעלה בטוחה של מנוף הרמה (Hoyer Lift)?",
+      km: "តើអ្នកថែទាំអាចអនុវត្តការលើកផ្លាស់ប្តូរទីតាំងដោយមនុស្ស 2 នាក់ ឬប្រើឧបករណ៍ hoyer lift ដោយសុវត្ថិភាពបានដែរឬទេ?",
+      fr: "Les soignants peuvent-ils effectuer des transferts physiques à deux personnes ou utiliser un lève-personne en toute sécurité ?",
+      pt: "Os cuidadores realizam transferências físicas em dupla ou operam guincho de elevação com segurança?"
     },
     "How frequently are non-ambulatory residents turned and repositioned?": {
       es: "¿Con qué frecuencia cambian de posición a los residentes no ambulatorios?",
@@ -4233,7 +8013,16 @@
       ko: "거동이 불가능한 입소자의 체위 변경은 얼마나 자주 시행하나요?",
       hy: "Որքա՞ն հաճախ են շրջում և փոխում չքայլող բնակիչների դիրքը",
       ru: "Как часто переворачивают и меняют положение лежачих жильцов?",
-      ar: "كم مرة يتم تقليب وتغيير وضعية المقيمين غير القادرين على المشي؟"
+      ar: "كم مرة يتم تقليب وتغيير وضعية المقيمين غير القادرين على المشي؟",
+      fa: "مقیمان غیرمتحرک هر چند وقت یک‌بار چرخانده و تغییر وضعیت داده می‌شوند؟",
+      hi: "चलने-फिरने में असमर्थ निवासियों की करवट और स्थिति कितनी बार बदली जाती है?",
+      pa: "ਚੱਲਣ-ਫਿਰਨ ਤੋਂ ਅਸਮਰੱਥ ਨਿਵਾਸੀਆਂ ਦਾ ਪਾਸਾ ਕਿੰਨੀ ਵਾਰ ਬਦਲਿਆ ਜਾਂਦਾ ਹੈ?",
+      ja: "自力歩行が難しいご入居者様への体位変換はどのくらいの頻度で行われていますか？",
+      uk: "Як часто перевертають та змінюють положення тіла немобільних мешканців?",
+      he: "באיזו תדירות משנים תנוחה לדיירים שאינם מתניידים?",
+      km: "តើអ្នកស្នាក់នៅដែលមិនអាចដើរបានត្រូវបានប្រែខ្លួន និងកែសម្រួលឥរិយាបថញឹកញាប់ប៉ុណ្ណា?",
+      fr: "À quelle fréquence les résidents non ambulatoires sont-ils retournés et repositionnés ?",
+      pt: "Com que frequência residentes não deambulantes são reposicionados na cama?"
     },
     "Does the visiting home health or hospice nurse have direct 24/7 coordination with staff?": {
       es: "¿La enfermera visitante o de hospicio tiene coordinación directa 24/7 con el personal?",
@@ -4243,7 +8032,16 @@
       ko: "방문 간호사 또는 호스피스 간호사와 시설 직원 간 24시간 직접 연락 체계가 있나요?",
       hy: "Արդյո՞ք այցելող բուժքույրն ունի 24/7 ուղիղ կապ տան անձնակազմի հետ",
       ru: "Имеется ли у выездной медсестры или хосписа круглосуточная связь с персоналом?",
-      ar: "هل يوجد تنسيق مباشر على مدار 24/7 بين ممرضة الرعاية المنزلية أو الهوسبيس والطاقم؟"
+      ar: "هل يوجد تنسيق مباشر على مدار 24/7 بين ممرضة الرعاية المنزلية أو الهوسبيس والطاقم؟",
+      fa: "آیا پرستار مراقبت در منزل یا تیم مراقبت تسکینی هماهنگی مستقیم ۲۴ ساعته با کارکنان دارد؟",
+      hi: "क्या विज़िटिंग होम हेल्थ या हॉस्पिस नर्स का स्टाफ़ के साथ सीधा 24/7 समन्वय रहता है?",
+      pa: "ਕੀ ਘਰੇਲੂ ਸਿਹਤ ਜਾਂ ਹੌਸਪਿਸ ਨਰਸ ਦਾ ਸਟਾਫ ਨਾਲ 24/7 ਸਿੱਧਾ ਤਾਲਮੇਲ ਰਹਿੰਦਾ ਹੈ?",
+      ja: "訪問看護やホスピスの看護師と施設スタッフとの間で、24時間直接連携できる体制が整っていますか？",
+      uk: "Чи має приїзна медсестра хоспісу або домашнього догляду цілодобовий прямий зв’язок із персоналом?",
+      he: "האם לאחות הביקור של שירותי הבריאות הביתיים או ההוספיס יש תיאום ישיר 24/7 עם הצוות?",
+      km: "តើគិលានុបដ្ឋាយិកាថែទាំសុខភាពតាមផ្ទះ ឬ hospice ដែលចុះមកពិនិត្យមានការសម្របសម្រួលផ្ទាល់ 24/7 ជាមួយបុគ្គលិកដែរឬទេ?",
+      fr: "L'infirmière de soins à domicile ou de soins palliatifs bénéficie-t-elle d'une coordination directe 24 h/24 et 7 j/7 avec l'équipe ?",
+      pt: "A enfermeira visitante de atendimento domiciliar ou hospice mantém comunicação direta 24/7 com a equipe da casa?"
     },
     "Assisted Living Community / Independent Living": {
       es: "Comunidad de Vivienda Asistida / Vida Independiente",
@@ -4253,7 +8051,16 @@
       ko: "어시스티드 리빙 커뮤니티 / 시니어 독립 주거",
       hy: "Assisted Living համայնք / Անկախ բնակություն",
       ru: "Сообщество Assisted Living / Самостоятельное проживание",
-      ar: "مجمع معيشة مساعدة / سكن مستقل"
+      ar: "مجمع معيشة مساعدة / سكن مستقل",
+      fa: "مجتمع زندگی همراه با مراقبت / زندگی مستقل",
+      hi: "असिस्टेड लिविंग समुदाय / स्वतंत्र आवास",
+      pa: "ਅਸਿਸਟਡ ਲਿਵਿੰਗ ਕਮਿਊਨਿਟੀ / ਸੁਤੰਤਰ ਰਿਹਾਇਸ਼",
+      ja: "アシステッド・リビング施設 / 自立型シニアレジデンス",
+      uk: "Заклад супроводжуваного проживання / самостійне проживання",
+      he: "קהילת דיור מוגן / דיור עצמאי",
+      km: "សហគមន៍រស់នៅដោយមានជំនួយ (Assisted Living) / ការរស់នៅឯករាជ្យ",
+      fr: "Résidence avec services (Assisted Living) / Résidence autonomie",
+      pt: "Comunidade de Assisted Living / Vida Independente"
     },
     "Your loved one remains largely independent but will thrive with nutritious meal service, vibrant social activities, housekeeping, and medication cueing to maintain dignity and prevent loneliness.": {
       es: "Su ser querido mantiene gran independencia, pero disfrutará mucho más con comidas nutritivas, actividades sociales dinámicas, limpieza y recordatorios de medicinas para preservar su dignidad y evitar el aislamiento.",
@@ -4263,7 +8070,16 @@
       ko: "어르신께서 대체로 자립적이시므로 균형 잡힌 식사, 활기찬 사교 프로그램, 가사 지원, 복약 알림이 어우러진 환경에서 존엄성과 활력을 유지하실 수 있습니다.",
       hy: "Ձեր հարազատը մեծապես ինքնուրույն է, բայց ավելի լավ կզգա առողջ սննդի, աշխույժ շփումների, տնային մաքրության և դեղերի հիշեցման միջավայրում՝ արժանապատվությունը պահելու և միայնությունից խուսափելու համար։",
       ru: "Ваш близкий в целом самостоятелен, но расцветет благодаря полноценному питанию, интересному общению, уборке и напоминанию о лекарствах — в атмосфере уважения и без одиночества.",
-      ar: "قريبك ما زال مستقلاً إلى حد كبير، لكنه سيزدهر مع وجبات مغذية وأنشطة اجتماعية مبهجة وخدمة تنظيف وتذكير بالأدوية للحفاظ على الكرامة وتجنب الوحدة."
+      ar: "قريبك ما زال مستقلاً إلى حد كبير، لكنه سيزدهر مع وجبات مغذية وأنشطة اجتماعية مبهجة وخدمة تنظيف وتذكير بالأدوية للحفاظ على الكرامة وتجنب الوحدة.",
+      fa: "عزیز شما تا حد زیادی مستقل باقی مانده است، اما با سرویس غذای مغذی، برنامه‌های اجتماعی پرنشاط، خدمات خانه‌داری و یادآوری دارو برای حفظ کرامت و پیشگیری از تنهایی، کیفیت زندگی بهتری خواهد داشت.",
+      hi: "आपके प्रियजन काफी हद तक स्वतंत्र हैं, लेकिन सम्मान बनाए रखने और अकेलेपन से बचने के लिए पौष्टिक भोजन सेवा, सक्रिय सामाजिक गतिविधियों, हाउसकीपिंग और दवा की समय पर याद दिलाने की व्यवस्था से वे और बेहतर जीवन जी सकेंगे।",
+      pa: "ਤੁਹਾਡਾ ਪਿਆਰਾ ਜ਼ਿਆਦਾਤਰ ਆਤਮ-ਨਿਰਭਰ ਹੈ, ਪਰ ਸਨਮਾਨ ਬਣਾਈ ਰੱਖਣ ਅਤੇ ਇਕੱਲੇਪਣ ਤੋਂ ਬਚਣ ਲਈ ਪੌਸ਼ਟਿਕ ਭੋਜਨ ਸੇਵਾ, ਜੀਵੰਤ ਸਮਾਜਿਕ ਗਤੀਵਿਧੀਆਂ, ਘਰ ਦੀ ਸਫ਼ਾਈ ਅਤੇ ਦਵਾਈ ਦੀ ਯਾਦ-ਦਹਾਨੀ ਨਾਲ ਹੋਰ ਖੁਸ਼ਹਾਲ ਰਹੇਗਾ।",
+      ja: "ご対象者様は自立度が高いご状況ですので、栄養バランスの良いお食事、活気ある交流イベント、居室清掃、服薬の声かけが整った環境で、尊厳を保ちつつ孤立を防ぎながら生き生きとお過ごしいただけます。",
+      uk: "Ваша близька людина здебільшого залишається самостійною, але почуватиметься чудово завдяки повноцінному харчуванню, активному спілкуванню, прибиранню та контролю прийому ліків для збереження гідності й захисту від самотності.",
+      he: "יקירכם עצמאי ברובו אך יפרח עם ארוחות מזינות, פעילויות חברתיות מגוונות, שירותי ניקיון ותזכורת תרופות לשמירה על כבודו ומניעת בדידות.",
+      km: "មនុស្សជាទីស្រឡាញ់របស់លោកអ្នកនៅតែអាចរស់នៅឯករាជ្យបានច្រើន ប៉ុន្តែនឹងកាន់តែរីករាយជាមួយសេវាអាហារបំប៉នសុខភាព សកម្មភាពសង្គមដ៏រស់រវើក ការសម្អាតផ្ទះ និងការរំលឹកលេបថ្នាំ ដើម្បីរក្សាសេចក្តីថ្លៃថ្នូរ និងការពារភាពឯកោ។",
+      fr: "Votre proche conserve une grande autonomie, mais s'épanouira grâce à des repas nutritifs, une vie sociale dynamique, l'entretien du logement et des rappels de médicaments favorisant dignité et lien social.",
+      pt: "Seu ente querido mantém boa independência, mas se beneficiará muito com refeições nutritivas, atividades sociais envolventes, serviço de limpeza e lembretes de medicação para preservar a dignidade e evitar o isolamento."
     },
     "What social activities, gardening, and creative programs take place daily?": {
       es: "¿Qué actividades sociales, de jardinería y programas creativos se realizan diariamente?",
@@ -4273,7 +8089,16 @@
       ko: "매일 어떤 사교 모임, 원예 활동, 창의적 프로그램이 운영되나요?",
       hy: "Ի՞նչ սոցիալական, այգեգործական և ստեղծագործական զբաղմունքներ են կազմակերպվում ամեն օր",
       ru: "Какие досуговые, творческие программы и занятия на свежем воздухе проводятся ежедневно?",
-      ar: "ما الأنشطة الاجتماعية والبستنة والبرامج الإبداعية التي تُقام يومياً؟"
+      ar: "ما الأنشطة الاجتماعية والبستنة والبرامج الإبداعية التي تُقام يومياً؟",
+      fa: "چه فعالیت‌های اجتماعی، باغبانی و برنامه‌های خلاقانه‌ای روزانه برگزار می‌شود؟",
+      hi: "प्रतिदिन कौन-सी सामाजिक गतिविधियाँ, बागवानी और रचनात्मक कार्यक्रम आयोजित किए जाते हैं?",
+      pa: "ਰੋਜ਼ਾਨਾ ਕਿਹੜੀਆਂ ਸਮਾਜਿਕ ਗਤੀਵਿਧੀਆਂ, ਬਾਗਬਾਨੀ ਅਤੇ ਰਚਨਾਤਮਕ ਪ੍ਰੋਗਰਾਮ ਹੁੰਦੇ ਹਨ?",
+      ja: "毎日どのような交流イベント、園芸、創作プログラムが行われていますか？",
+      uk: "Які соціальні заходи, садівництво та творчі заняття проводяться щодня?",
+      he: "אילו פעילויות חברתיות, גינון וחוגי יצירה מתקיימים מדי יום?",
+      km: "តើមានសកម្មភាពសង្គម ការដាំដុះសួន និងកម្មវិធីច្នៃប្រឌិតអ្វីខ្លះកើតឡើងជារៀងរាល់ថ្ងៃ?",
+      fr: "Quelles activités sociales, de jardinage et ateliers créatifs ont lieu chaque jour ?",
+      pt: "Quais atividades sociais, jardinagem e programas criativos acontecem diariamente?"
     },
     "Are transportation services provided for doctor appointments and shopping?": {
       es: "¿Ofrecen transporte para citas médicas y compras?",
@@ -4283,7 +8108,16 @@
       ko: "병원 진료 예약 및 쇼핑을 위한 차량 이동 서비스가 제공되나요?",
       hy: "Արդյո՞ք տրամադրվում է տրանսպորտ բժշկի այցերի և գնումների համար",
       ru: "Предоставляется ли транспорт для поездок к врачам и за покупками?",
-      ar: "هل تتوفر خدمات مواصلات لمواعيد الأطباء والتسوق؟"
+      ar: "هل تتوفر خدمات مواصلات لمواعيد الأطباء والتسوق؟",
+      fa: "آیا خدمات ایاب‌وذهاب برای نوبت‌های پزشکی و خرید ارائه می‌شود؟",
+      hi: "क्या डॉक्टर के अपॉइंटमेंट और खरीदारी के लिए परिवहन सेवा उपलब्ध कराई जाती है?",
+      pa: "ਕੀ ਡਾਕਟਰ ਦੀਆਂ ਮੁਲਾਕਾਤਾਂ ਅਤੇ ਖਰੀਦਦਾਰੀ ਲਈ ਆਵਾਜਾਈ ਸੇਵਾਵਾਂ ਦਿੱਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ?",
+      ja: "通院や日常の買い物向けの送迎サービスは提供されていますか？",
+      uk: "Чи надається транспорт для поїздок до лікаря та за покупками?",
+      he: "האם ניתנים שירותי הסעה לתורים רפואיים ולקניות?",
+      km: "តើមានផ្តល់សេវាដឹកជញ្ជូនសម្រាប់ការណាត់ជួបវេជ្ជបណ្ឌិត និងការទិញទំនិញដែរឬទេ?",
+      fr: "Un service de transport est-il assuré pour les rendez-vous médicaux et les courses ?",
+      pt: "Há transporte disponível para consultas médicas e compras?"
     },
     "How are changes in health or subtle cognitive changes reported to family?": {
       es: "¿Cómo informan a la familia sobre cambios sutiles de salud o memoria?",
@@ -4293,7 +8127,16 @@
       ko: "건강이나 인지 기능에 미세한 변화가 생겼을 때 가족에게 어떻게 알리나요?",
       hy: "Ինչպե՞ս են ընտանիքին հաղորդվում առողջության կամ հիշողության նույնիսկ փոքր փոփոխությունները",
       ru: "Как семье сообщают об изменениях в самочувствии или когнитивном состоянии?",
-      ar: "كيف يتم إبلاغ العائلة بالتغيرات الصحية أو التغيرات الإدراكية الطفيفة؟"
+      ar: "كيف يتم إبلاغ العائلة بالتغيرات الصحية أو التغيرات الإدراكية الطفيفة؟",
+      fa: "تغییرات وضعیت سلامت یا تغییرات ظریف شناختی چگونه به خانواده گزارش می‌شوند؟",
+      hi: "स्वास्थ्य या संज्ञानात्मक स्थिति में होने वाले सूक्ष्म बदलावों की सूचना परिवार को कैसे दी जाती है?",
+      pa: "ਸਿਹਤ ਜਾਂ ਮਾਨਸਿਕ ਸਥਿਤੀ ਵਿੱਚ ਨਿੱਕੀਆਂ ਤਬਦੀਲੀਆਂ ਦੀ ਜਾਣਕਾਰੀ ਪਰਿਵਾਰ ਨੂੰ ਕਿਵੇਂ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ?",
+      ja: "体調や認知面のわずかな変化があった場合、ご家族にはどのように報告されますか？",
+      uk: "Як родині повідомляють про зміни у здоров’ї або найменші когнітивні зміни?",
+      he: "כיצד מדווחים למשפחה על שינויים בבריאות או שינויים קוגניטיביים עדינים?",
+      km: "តើការផ្លាស់ប្តូរសុខភាព ឬការផ្លាស់ប្តូរការយល់ដឹងតិចតួចត្រូវបានរាយការណ៍ទៅគ្រួសារដោយរបៀបណា?",
+      fr: "Comment les évolutions de l'état de santé ou les légers changements cognitifs sont-ils signalés à la famille ?",
+      pt: "Como alterações na saúde ou mudanças cognitivas sutis são comunicadas à família?"
     },
     "Are medications managed and logged by trained caregivers under strict physician orders?": {
       es: "¿Los medicamentos son administrados y registrados por cuidadores capacitados bajo estricta orden médica?",
@@ -4303,7 +8146,16 @@
       ko: "투약이 전문 교육을 받은 요양보호사에 의해 의사 처방대로 철저히 관리·기록되나요?",
       hy: "Արդյո՞ք դեղերը կառավարվում և գրանցվում են պատրաստված խնամակալների կողմից՝ խիստ բժշկի ցուցումով",
       ru: "Контролируются и фиксируются ли лекарства обученным персоналом строго по назначению врача?",
-      ar: "هل تُدار الأدوية وتُسجل من قِبل مقدمي رعاية مدربين وفق أوامر الطبيب الصارمة؟"
+      ar: "هل تُدار الأدوية وتُسجل من قِبل مقدمي رعاية مدربين وفق أوامر الطبيب الصارمة؟",
+      fa: "آیا داروها توسط مراقبان آموزش‌دیده و دقیقاً مطابق دستورات پزشک مدیریت و ثبت می‌شوند؟",
+      hi: "क्या दवाइयों का प्रबंधन और रिकॉर्ड प्रशिक्षित देखभालकर्ताओं द्वारा सख्त चिकित्सक निर्देशों के अनुसार किया जाता है?",
+      pa: "ਕੀ ਦਵਾਈਆਂ ਦੀ ਸੰਭਾਲ ਅਤੇ ਰਿਕਾਰਡ ਡਾਕਟਰ ਦੇ ਸਖ਼ਤ ਹੁਕਮਾਂ ਹੇਠ ਸਿਖਲਾਈ ਪ੍ਰਾਪਤ ਦੇਖਭਾਲ ਕਰਤਿਆਂ ਵੱਲੋਂ ਰੱਖਿਆ ਜਾਂਦਾ ਹੈ?",
+      ja: "お薬は、研修を受けたスタッフが医師の厳格な指示のもとで管理・記録していますか？",
+      uk: "Чи контролюють і фіксують прийом ліків підготовлені доглядальники суворо за призначенням лікаря?",
+      he: "האם התרופות מנוהלות ומתועדות על ידי מטפלים מוסמכים אך ורק על פי הוראות הרופא?",
+      km: "តើថ្នាំពេទ្យត្រូវបានគ្រប់គ្រង និងកត់ត្រាដោយអ្នកថែទាំដែលបានបណ្តុះបណ្តាល ក្រោមវេជ្ជបញ្ជាតឹងរ៉ឹងរបស់វេជ្ជបណ្ឌិតដែរឬទេ?",
+      fr: "Les médicaments sont-ils gérés et consignés par des soignants formés, strictement selon les ordonnances médicales ?",
+      pt: "Os medicamentos são controlados e registrados por cuidadores capacitados sob rigorosa prescrição médica?"
     },
     "Is night staff awake or on-call sleep? (Awake staff is strongly recommended).": {
       es: "¿El personal nocturno permanece despierto o duerme de guardia? (Se recomienda ampliamente personal despierto).",
@@ -4313,7 +8165,16 @@
       ko: "야간 직원이 밤새 깨어 상주하나요, 아니면 취침 대기(on-call)인가요? (상시 깨어 있는 인력을 강력히 권장합니다).",
       hy: "Գիշերային անձնակազմը արթո՞ւն է հերթապահում, թե՞ քնած է տեղում (խիստ խորհուրդ է տրվում արթուն հերթապահություն)",
       ru: "Ночной персонал бодрствует на смене или спит по вызову? (Настоятельно рекомендуется бодрствующий персонал).",
-      ar: "هل طاقم الليل مستيقظ أم نائم تحت الطلب؟ (يُوصى بشدة بالطاقم المستيقظ)."
+      ar: "هل طاقم الليل مستيقظ أم نائم تحت الطلب؟ (يُوصى بشدة بالطاقم المستيقظ).",
+      fa: "آیا نیروی شب بیدار است یا به‌صورت خوابیده و در دسترس (on-call)؟ (حضور مراقب بیدار اکیداً توصیه می‌شود).",
+      hi: "क्या रात्रि स्टाफ़ पूरी रात जागता रहता है या सोता हुआ ऑन-कॉल रहता है? (जागृत स्टाफ़ की पुरज़ोर सलाह दी जाती है)।",
+      pa: "ਕੀ ਰਾਤ ਦਾ ਸਟਾਫ ਜਾਗਦਾ ਰਹਿੰਦਾ ਹੈ ਜਾਂ ਸੌਂ ਕੇ ਆਨ-ਕਾਲ ਰਹਿੰਦਾ ਹੈ? (ਜਾਗਦੇ ਸਟਾਫ ਦੀ ਸਖ਼ਤ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ)।",
+      ja: "夜間スタッフは常時起きて勤務していますか、それとも待機（仮眠）体制ですか？（常時覚醒スタッフが強く推奨されます）。",
+      uk: "Нічний персонал не спить на зміні чи чергує зі сном за викликом? (Наполегливо рекомендуємо несплячий персонал).",
+      he: "האם צוות הלילה ערני או בכוננות שינה? (מומלץ מאוד צוות ערני).",
+      km: "តើបុគ្គលិកវេនយប់នៅភ្ញាក់ ឬគេងប្រចាំការ? (ណែនាំយ៉ាងខ្លាំងឱ្យមានបុគ្គលិកភ្ញាក់)។",
+      fr: "Le personnel de nuit reste-t-il éveillé ou dort-il sur place d'astreinte ? (Un personnel éveillé est vivement recommandé).",
+      pt: "A equipe noturna fica acordada ou em sobreaviso dormindo? (Equipe acordada é altamente recomendada)."
     },
     "Can residents bring their own familiar bedroom furniture?": {
       es: "¿Pueden los residentes traer sus propios muebles familiares para el dormitorio?",
@@ -4323,7 +8184,16 @@
       ko: "입소 시 익숙한 본인 방 가구를 가져와 배치할 수 있나요?",
       hy: "Կարո՞ղ են բնակիչները բերել իրենց հարազատ ննջասենյակային կահույքը",
       ru: "Могут ли жильцы привезти привычную мебель для своей спальни?",
-      ar: "هل يمكن للمقيمين إحضار أثاث غرفهم المألوف؟"
+      ar: "هل يمكن للمقيمين إحضار أثاث غرفهم المألوف؟",
+      fa: "آیا مقیمان می‌توانند مبلمان آشنای اتاق خواب خودشان را بیاورند؟",
+      hi: "क्या निवासी अपने परिचित बेडरूम का फ़र्नीचर साथ ला सकते हैं?",
+      pa: "ਕੀ ਨਿਵਾਸੀ ਆਪਣੇ ਜਾਣੇ-ਪਛਾਣੇ ਬੈੱਡਰੂਮ ਦਾ ਫਰਨੀਚਰ ਨਾਲ ਲਿਆ ਸਕਦੇ ਹਨ?",
+      ja: "入居者様が使い慣れたご自宅の寝室家具を持ち込むことは可能ですか？",
+      uk: "Чи можуть мешканці привезти власні звичні меблі для спальні?",
+      he: "האם דיירים יכולים להביא רהיטי חדר שינה מוכרים מהבית?",
+      km: "តើអ្នកស្នាក់នៅអាចនាំយកគ្រឿងសង្ហារិមបន្ទប់គេងដែលធ្លាប់ស្គាល់របស់ខ្លួនមកជាមួយបានដែរឬទេ?",
+      fr: "Les résidents peuvent-ils apporter leur propre mobilier familier pour leur chambre ?",
+      pt: "Os residentes podem levar seus próprios móveis familiares para o quarto?"
     },
     "What is the monthly rate stability policy when care needs increase?": {
       es: "¿Cuál es la política de estabilidad de tarifa mensual si aumentan las necesidades de cuidado?",
@@ -4333,7 +8203,16 @@
       ko: "추후 돌봄 필요도가 높아질 때 월 비용 인상 및 안정화 기준은 어떻게 되나요?",
       hy: "Ինչպիսի՞ն է ամսավճարի կայունության քաղաքականությունը, երբ խնամքի կարիքները մեծանում են",
       ru: "Какова политика фиксации ежемесячной платы при росте потребности в уходе?",
-      ar: "ما سياسة استقرار الرسوم الشهرية عند زيادة احتياجات الرعاية؟"
+      ar: "ما سياسة استقرار الرسوم الشهرية عند زيادة احتياجات الرعاية؟",
+      fa: "در صورت افزایش نیازهای مراقبتی، سیاست ثبات نرخ ماهانه چگونه است؟",
+      hi: "जब देखभाल की आवश्यकताएँ बढ़ती हैं, तो मासिक शुल्क स्थिरता नीति क्या होती है?",
+      pa: "ਜਦੋਂ ਦੇਖਭਾਲ ਦੀਆਂ ਲੋੜਾਂ ਵਧਦੀਆਂ ਹਨ ਤਾਂ ਮਹੀਨਾਵਾਰ ਦਰ ਦੀ ਸਥਿਰਤਾ ਬਾਰੇ ਨੀਤੀ ਕੀ ਹੈ?",
+      ja: "今後必要な介護度が増えた場合、月額利用料の改定や安定性に関する方針はどのようになっていますか？",
+      uk: "Яка політика щодо стабільності щомісячної оплати у разі зростання потреб у догляді?",
+      he: "מהי מדיניות יציבות התעריף החודשי כאשר צורכי הטיפול גדלים?",
+      km: "តើគោលនយោបាយស្ថិរភាពអត្រាតម្លៃប្រចាំខែមានលក្ខណៈដូចម្តេច នៅពេលតម្រូវការថែទាំកើនឡើង?",
+      fr: "Quelle est la politique de stabilité du tarif mensuel lorsque les besoins en soins augmentent ?",
+      pt: "Qual é a política de reajuste da mensalidade quando aumentam as necessidades de cuidado?"
     },
     "Please fill out all required fields.": {
       es: "Por favor complete todos los campos obligatorios.",
@@ -4343,7 +8222,16 @@
       ko: "필수 입력 항목을 모두 작성해 주세요.",
       hy: "Խնդրում ենք լրացնել բոլոր պարտադիր դաշտերը։",
       ru: "Пожалуйста, заполните все обязательные поля.",
-      ar: "يرجى ملء جميع الحقول المطلوبة."
+      ar: "يرجى ملء جميع الحقول المطلوبة.",
+      fa: "لطفاً تمامی فیلدهای الزامی را پر کنید.",
+      hi: "कृपया सभी आवश्यक फ़ील्ड भरें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਸਾਰੇ ਲੋੜੀਂਦੇ ਖਾਨੇ ਭਰੋ।",
+      ja: "必須項目をすべてご入力ください。",
+      uk: "Будь ласка, заповніть усі обов’язкові поля.",
+      he: "אנא מלאו את כל שדות החובה.",
+      km: "សូមបំពេញគ្រប់ប្រអប់ដែលតម្រូវទាំងអស់។",
+      fr: "Veuillez remplir tous les champs obligatoires.",
+      pt: "Por favor, preencha todos os campos obrigatórios."
     },
     "We make calls Monday through Saturday. Please pick another date.": {
       es: "Realizamos llamadas de lunes a sábado. Por favor elija otra fecha.",
@@ -4353,7 +8241,16 @@
       ko: "전화 상담은 월요일부터 토요일까지 가능합니다. 다른 날짜를 선택해 주세요.",
       hy: "Մենք զանգահարում ենք երկուշաբթիից շաբաթ։ Խնդրում ենք ընտրել այլ ամսաթիվ։",
       ru: "Мы звоним с понедельника по субботу. Пожалуйста, выберите другую дату.",
-      ar: "نجري المكالمات من الاثنين إلى السبت. يرجى اختيار تاريخ آخر."
+      ar: "نجري المكالمات من الاثنين إلى السبت. يرجى اختيار تاريخ آخر.",
+      fa: "ما از دوشنبه تا شنبه تماس می‌گیریم. لطفاً تاریخ دیگری را انتخاب کنید.",
+      hi: "हम सोमवार से शनिवार तक कॉल करते हैं। कृपया कोई अन्य तारीख चुनें।",
+      pa: "ਅਸੀਂ ਸੋਮਵਾਰ ਤੋਂ ਸ਼ਨੀਵਾਰ ਤੱਕ ਕਾਲ ਕਰਦੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਕੋਈ ਹੋਰ ਤਾਰੀਖ਼ ਚੁਣੋ।",
+      ja: "お電話でのご相談は月曜日〜土曜日に承っております。別の日付をお選びください。",
+      uk: "Ми здійснюємо дзвінки з понеділка по суботу. Будь ласка, оберіть іншу дату.",
+      he: "אנו מקיימים שיחות בימים שני עד שבת. אנא בחרו תאריך אחר.",
+      km: "យើងធ្វើការហៅទូរស័ព្ទពីថ្ងៃចន្ទ ដល់ថ្ងៃសៅរ៍។ សូមជ្រើសរើសកាលបរិច្ឆេទផ្សេងទៀត។",
+      fr: "Nous passons nos appels du lundi au samedi. Veuillez choisir une autre date.",
+      pt: "Realizamos ligações de segunda a sábado. Por favor, escolha outra data."
     },
     "Sending your call request…": {
       es: "Enviando su solicitud de llamada…",
@@ -4363,7 +8260,16 @@
       ko: "전화 상담 예약을 전송하고 있습니다…",
       hy: "Ուղարկվում է զանգի հարցումը…",
       ru: "Отправляем запрос на звонок…",
-      ar: "جارٍ إرسال طلب المكالمة…"
+      ar: "جارٍ إرسال طلب المكالمة…",
+      fa: "در حال ارسال درخواست تماس شما…",
+      hi: "आपका कॉल अनुरोध भेजा जा रहा है…",
+      pa: "ਤੁਹਾਡੀ ਕਾਲ ਬੇਨਤੀ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ…",
+      ja: "電話相談のご予約を送信しています…",
+      uk: "Надсилаємо ваш запит на дзвінок…",
+      he: "שולח את בקשת השיחה…",
+      km: "កំពុងផ្ញើសំណើហៅទូរស័ព្ទរបស់លោកអ្នក…",
+      fr: "Envoi de votre demande d'appel…",
+      pt: "Enviando sua solicitação de ligação…"
     },
     "✓ Request received. An advisor will call you on {date} ({time}) to confirm.": {
       es: "✓ Solicitud recibida. Un asesor le llamará el {date} ({time}) para confirmar.",
@@ -4373,7 +8279,16 @@
       ko: "✓ 예약 요청이 접수되었습니다. 상담사가 {date} ({time})에 확인 전화를 드리겠습니다.",
       hy: "✓ Հարցումը ստացվեց։ Խորհրդատուն կզանգահարի ձեզ {date}-ին ({time})՝ հաստատելու համար։",
       ru: "✓ Заявка получена. Консультант позвонит вам {date} ({time}) для подтверждения.",
-      ar: "✓ تم استلام الطلب. سيتصل بك مستشار في {date} ({time}) للتأكيد."
+      ar: "✓ تم استلام الطلب. سيتصل بك مستشار في {date} ({time}) للتأكيد.",
+      fa: "✓ درخواست دریافت شد. یک مشاور در تاریخ {date} ({time}) برای تأیید با شما تماس خواهد گرفت.",
+      hi: "✓ अनुरोध प्राप्त हुआ। पुष्टि के लिए एक सलाहकार आपको {date} ({time}) पर कॉल करेगा।",
+      pa: "✓ ਬੇਨਤੀ ਪ੍ਰਾਪਤ ਹੋਈ। ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਇੱਕ ਸਲਾਹਕਾਰ ਤੁਹਾਨੂੰ {date} ({time}) ਨੂੰ ਕਾਲ ਕਰੇਗਾ।",
+      ja: "✓ ご予約を受け付けました。確認のため、アドバイザーより {date}（{time}）にお電話いたします。",
+      uk: "✓ Запит отримано. Консультант зателефонує вам {date} ({time}) для підтвердження.",
+      he: "✓ הבקשה התקבלה. יועץ יתקשר אליכם ב-{date} ({time}) לאישור.",
+      km: "✓ បានទទួលសំណើហើយ។ ទីប្រឹក្សានឹងទូរស័ព្ទទៅលោកអ្នកនៅថ្ងៃ {date} ({time}) ដើម្បីបញ្ជាក់។",
+      fr: "✓ Demande reçue. Un conseiller vous appellera le {date} ({time}) pour confirmer.",
+      pt: "✓ Solicitação recebida. Um consultor ligará para você em {date} ({time}) para confirmar."
     },
     "Sending your confidential enquiry…": {
       es: "Enviando su consulta confidencial…",
@@ -4383,7 +8298,16 @@
       ko: "비밀이 보장되는 상담 문의를 전송하고 있습니다…",
       hy: "Ուղարկվում է ձեր գաղտնի հարցումը…",
       ru: "Отправляем ваш конфиденциальный запрос…",
-      ar: "جارٍ إرسال استفسارك السري…"
+      ar: "جارٍ إرسال استفسارك السري…",
+      fa: "در حال ارسال درخواست محرمانه شما…",
+      hi: "आपकी गोपनीय पूछताछ भेजी जा रही है…",
+      pa: "ਤੁਹਾਡੀ ਗੁਪਤ ਪੁੱਛਗਿੱਛ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ…",
+      ja: "秘密厳守のお問い合わせ内容を送信しています…",
+      uk: "Надсилаємо ваш конфіденційний запит…",
+      he: "שולח את פנייתכם החסויה…",
+      km: "កំពុងផ្ញើការសាកសួរជាការសម្ងាត់របស់លោកអ្នក…",
+      fr: "Envoi de votre demande confidentielle…",
+      pt: "Enviando sua consulta confidencial…"
     },
     "✓ Thank you, {name}. Your message was sent. An elder care advisor will reply within 1 business day.": {
       es: "✓ Gracias, {name}. Su mensaje fue enviado. Un asesor responderá dentro de 1 día hábil.",
@@ -4393,7 +8317,16 @@
       ko: "✓ 감사합니다, {name}님. 메시지가 성공적으로 전송되었습니다. 담당 상담사가 영업일 기준 1일 이내에 답변드리겠습니다.",
       hy: "✓ Շնորհակալություն, {name}։ Ձեր հաղորդագրությունը ուղարկվեց։ Մեր խորհրդատուն կպատասխանի 1 աշխատանքային օրվա ընթացքում։",
       ru: "✓ Спасибо, {name}. Ваше сообщение отправлено. Консультант ответит вам в течение 1 рабочего дня.",
-      ar: "✓ شكراً لك يا {name}. تم إرسال رسالتك، وسيرد عليك مستشار رعاية خلال يوم عمل واحد."
+      ar: "✓ شكراً لك يا {name}. تم إرسال رسالتك، وسيرد عليك مستشار رعاية خلال يوم عمل واحد.",
+      fa: "✓ سپاسگزاریم، {name}. پیام شما ارسال شد. یک مشاور مراقبت از سالمندان ظرف ۱ روز کاری پاسخ خواهد داد.",
+      hi: "✓ धन्यवाद, {name}। आपका संदेश भेज दिया गया है। एक वरिष्ठजन देखभाल सलाहकार 1 कार्यदिवस के भीतर उत्तर देगा।",
+      pa: "✓ ਧੰਨਵਾਦ, {name}। ਤੁਹਾਡਾ ਸੁਨੇਹਾ ਭੇਜ ਦਿੱਤਾ ਗਿਆ ਹੈ। ਇੱਕ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਸਲਾਹਕਾਰ 1 ਕਾਰੋਬਾਰੀ ਦਿਨ ਦੇ ਅੰਦਰ ਜਵਾਬ ਦੇਵੇਗਾ।",
+      ja: "✓ {name} 様、ありがとうございます。メッセージを送信いたしました。高齢者ケア専門アドバイザーより1営業日以内にご返信いたします。",
+      uk: "✓ Дякуємо, {name}. Ваше повідомлення надіслано. Консультант з питань догляду відповість протягом 1 робочого дня.",
+      he: "✓ תודה, {name}. הודעתכם נשלחה. יועץ לטיפול במבוגרים ישיב תוך יום עסקים אחד.",
+      km: "✓ សូមអរគុណ {name}។ សាររបស់លោកអ្នកត្រូវបានផ្ញើរួចហើយ។ ទីប្រឹក្សាថែទាំមនុស្សចាស់នឹងឆ្លើយតបក្នុងរយៈពេល 1 ថ្ងៃធ្វើការ។",
+      fr: "✓ Merci, {name}. Votre message a bien été envoyé. Un conseiller en soins aux aînés vous répondra sous 1 jour ouvrable.",
+      pt: "✓ Obrigado(a), {name}. Sua mensagem foi enviada. Um consultor em cuidados para idosos responderá em até 1 dia útil."
     },
     "If your email app didn't open automatically, ": {
       es: "Si su aplicación de correo no se abrió automáticamente, ",
@@ -4403,7 +8336,16 @@
       ko: "이메일 앱이 자동으로 열리지 않았다면 ",
       hy: "Եթե ձեր էլ․ փոստի ծրագիրը ավտոմատ չբացվեց, ",
       ru: "Если почтовая программа не открылась автоматически, ",
-      ar: "إذا لم يفتح تطبيق البريد تلقائياً، "
+      ar: "إذا لم يفتح تطبيق البريد تلقائياً، ",
+      fa: "اگر برنامه ایمیل شما به‌طور خودکار باز نشد، ",
+      hi: "यदि आपका ईमेल ऐप अपने आप नहीं खुला, तो ",
+      pa: "ਜੇ ਤੁਹਾਡੀ ਈਮੇਲ ਐਪ ਆਪਣੇ-ਆਪ ਨਹੀਂ ਖੁੱਲ੍ਹੀ, ਤਾਂ ",
+      ja: "メールアプリが自動で開かない場合は、",
+      uk: "Якщо ваш поштовий клієнт не відкрився автоматично, ",
+      he: "אם תוכנת האימייל שלכם לא נפתחה אוטומטית, ",
+      km: "ប្រសិនបើកម្មវិធីអ៊ីមែលរបស់លោកអ្នកមិនបានបើកដោយស្វ័យប្រវត្តិទេ សូម",
+      fr: "Si votre application de messagerie ne s'est pas ouverte automatiquement, ",
+      pt: "Se seu aplicativo de e-mail não abriu automaticamente, "
     },
     "click here to send by email": {
       es: "haga clic aquí para enviar por correo",
@@ -4413,7 +8355,16 @@
       ko: "여기를 클릭해 이메일로 보내기",
       hy: "սեղմեք այստեղ՝ էլ․ նամակ ուղարկելու համար",
       ru: "нажмите здесь, чтобы отправить письмо",
-      ar: "انقر هنا للإرسال عبر البريد الإلكتروني"
+      ar: "انقر هنا للإرسال عبر البريد الإلكتروني",
+      fa: "برای ارسال از طریق ایمیل اینجا کلیک کنید",
+      hi: "ईमेल द्वारा भेजने के लिए यहाँ क्लिक करें",
+      pa: "ਈਮੇਲ ਰਾਹੀਂ ਭੇਜਣ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ",
+      ja: "こちらをクリックしてメールで送信",
+      uk: "натисніть тут, щоб надіслати електронною поштою",
+      he: "לחצו כאן לשליחה באימייל",
+      km: "ចុចទីនេះដើម្បីផ្ញើតាមអ៊ីមែល",
+      fr: "cliquez ici pour envoyer par e-mail",
+      pt: "clique aqui para enviar por e-mail"
     },
     ", email ": {
       es: ", escriba a ",
@@ -4423,7 +8374,16 @@
       ko: ", 또는 ",
       hy: ", գրեք ",
       ru: ", напишите на ",
-      ar: "، أو راسل "
+      ar: "، أو راسل ",
+      fa: "، به این نشانی ایمیل بزنید: ",
+      hi: ", या ईमेल करें ",
+      pa: ", ਇਸ ਪਤੇ 'ਤੇ ਈਮੇਲ ਕਰੋ: ",
+      ja: "、またはメール宛先 ",
+      uk: ", напишіть на ",
+      he: ", שלחו אימייל אל ",
+      km: ", អ៊ីមែលទៅ ",
+      fr: ", écrivez à ",
+      pt: ", envie um e-mail para "
     },
     ", or call {phone}.": {
       es: ", o llame al {phone}.",
@@ -4433,7 +8393,16 @@
       ko: " 번호로 전화해 주세요.",
       hy: ", կամ զանգահարեք {phone}։",
       ru: ", или позвоните по номеру {phone}.",
-      ar: "، أو اتصل على {phone}."
+      ar: "، أو اتصل على {phone}.",
+      fa: "، یا با شماره {phone} تماس بگیرید.",
+      hi: ", या {phone} पर कॉल करें।",
+      pa: ", ਜਾਂ {phone} 'ਤੇ ਕਾਲ ਕਰੋ।",
+      ja: "、またはお電話 {phone} までご連絡ください。",
+      uk: " або зателефонуйте на {phone}.",
+      he: ", או התקשרו אל {phone}.",
+      km: " ឬទូរស័ព្ទទៅលេខ {phone}។",
+      fr: ", ou appelez le {phone}.",
+      pt: ", ou ligue para {phone}."
     },
 
     // Alt attributes, prefill templates & API error messages
@@ -4445,7 +8414,16 @@
       ko: "집에서 따뜻하고 편안한 시간을 함께 보내고 있는 어르신과 돌봄 요양보호사",
       hy: "Տարեցը և խնամակալը տանը կիսում են ջերմ ու հանգիստ պահ",
       ru: "Пожилой человек и сиделка проводят теплый, спокойный момент вместе дома",
-      ar: "مسنّ ومقدمة رعاية يتشاركان لحظة دافئة ومطمئنة معاً في المنزل"
+      ar: "مسنّ ومقدمة رعاية يتشاركان لحظة دافئة ومطمئنة معاً في المنزل",
+      fa: "سالمند و مراقب در حال تجربه لحظه‌ای گرم و آرامش‌بخش در کنار هم در خانه",
+      hi: "घर पर एक बुज़ुर्ग और देखभालकर्ता साथ में आत्मीय और सुकून भरा पल साझा करते हुए",
+      pa: "ਘਰ ਵਿੱਚ ਇਕੱਠੇ ਇੱਕ ਨਿੱਘਾ ਅਤੇ ਦਿਲਾਸੇ ਭਰਿਆ ਪਲ ਸਾਂਝਾ ਕਰਦੇ ਬਜ਼ੁਰਗ ਅਤੇ ਦੇਖਭਾਲ ਕਰਤਾ",
+      ja: "家庭的な環境で、介護スタッフとともに温かく安心感のあるひとときを過ごす高齢者",
+      uk: "Людина похилого віку та доглядальник у теплій, заспокійливій домашній атмосфері",
+      he: "אדם מבוגר ומטפל חולקים רגע חם ומרגיע יחד בבית",
+      km: "មនុស្សចាស់ និងអ្នកថែទាំកំពុងចែករំលែកពេលវេលាដ៏កក់ក្តៅ និងជឿជាក់ជាមួយគ្នានៅផ្ទះ",
+      fr: "Personne âgée et aide-soignante partageant un moment chaleureux et rassurant à la maison",
+      pt: "Idoso e cuidadora compartilhando um momento acolhedor e tranquilo juntos em casa"
     },
     "Elder parent or relative": {
       es: "Padre, madre o familiar mayor",
@@ -4455,7 +8433,16 @@
       ko: "연로하신 부모님 또는 가족",
       hy: "Տարեց ծնող կամ հարազատ",
       ru: "Пожилой родитель или родственник",
-      ar: "والد مسن أو قريب"
+      ar: "والد مسن أو قريب",
+      fa: "والدین سالمند یا یکی از بستگان",
+      hi: "बुज़ुर्ग माता-पिता या रिश्तेदार",
+      pa: "ਬਜ਼ੁਰਗ ਮਾਤਾ-ਪਿਤਾ ਜਾਂ ਰਿਸ਼ਤੇਦਾਰ",
+      ja: "ご高齢の親御様・ご親族",
+      uk: "Літній родич або хтось із батьків",
+      he: "הורה מבוגר או קרוב משפחה",
+      km: "ឪពុកម្តាយ ឬសាច់ញាតិវ័យចំណាស់",
+      fr: "Parent âgé ou proche",
+      pt: "Mãe, pai ou familiar idoso"
     },
     "Spouse or partner": {
       es: "Cónyuge o pareja",
@@ -4465,7 +8452,16 @@
       ko: "배우자 또는 파트너",
       hy: "Ամուսին կամ կողակից",
       ru: "Супруг или партнер",
-      ar: "الزوج أو الشريك"
+      ar: "الزوج أو الشريك",
+      fa: "همسر یا شریک زندگی",
+      hi: "जीवनसाथी या साथी",
+      pa: "ਜੀਵਨ-ਸਾਥੀ ਜਾਂ ਪਾਰਟਨਰ",
+      ja: "配偶者・パートナー",
+      uk: "Чоловік, дружина або партнер",
+      he: "בן או בת זוג",
+      km: "សហព័ទ្ធ ឬដៃគូជីវិត",
+      fr: "Conjoint ou partenaire",
+      pt: "Cônjuge ou companheiro(a)"
     },
     "A client or patient (social worker / discharge planner)": {
       es: "Un cliente o paciente (trabajador social / planificador de alta)",
@@ -4475,7 +8471,16 @@
       ko: "고객 또는 환자(사회복지사 / 퇴원 코디네이터)",
       hy: "Հաճախորդ կամ բուժառու (սոցիալական աշխատող / դուրսգրման համակարգող)",
       ru: "Клиент или пациент (соцработник / координатор выписки)",
-      ar: "عميل أو مريض (أخصائي اجتماعي / منسق خروج)"
+      ar: "عميل أو مريض (أخصائي اجتماعي / منسق خروج)",
+      fa: "یک مراجع یا بیمار (مددکار اجتماعی / برنامه‌ریز ترخیص)",
+      hi: "कोई क्लाइंट या रोगी (सोशल वर्कर / डिस्चार्ज प्लानर)",
+      pa: "ਕੋਈ ਗਾਹਕ ਜਾਂ ਮਰੀਜ਼ (ਸੋਸ਼ਲ ਵਰਕਰ / ਡਿਸਚਾਰਜ ਪਲੈਨਰ)",
+      ja: "担当クライアント・患者様（ソーシャルワーカー / 退院調整担当）",
+      uk: "Клієнт або пацієнт (соціальний працівник / координатор виписки)",
+      he: "מטופל או לקוח (עובד סוציאלי / מתאם שחרור)",
+      km: "អតិថិជន ឬអ្នកជំងឺ (បុគ្គលិកសង្គមកិច្ច / អ្នករៀបចំផែនការចេញពីមន្ទីរពេទ្យ)",
+      fr: "Un client ou patient (travailleur social / coordinateur de sortie)",
+      pt: "Um cliente ou paciente (assistente social / planejamento de alta)"
     },
     "Sharp and clear": {
       es: "Lúcido y con claridad mental",
@@ -4485,7 +8490,16 @@
       ko: "인지가 또렷하고 명료함",
       hy: "Սթափ և պարզ միտք",
       ru: "Ясный и четкий ум",
-      ar: "ذهن صافٍ وواعٍ"
+      ar: "ذهن صافٍ وواعٍ",
+      fa: "هوشیار و ذهن شفاف",
+      hi: "सजग और स्पष्ट",
+      pa: "ਚੁਸਤ ਅਤੇ ਸਪੱਸ਼ਟ",
+      ja: "はっきりしており明瞭",
+      uk: "Ясний розум",
+      he: "חד וצלול",
+      km: "ស្មារតីវាងវៃ និងច្បាស់លាស់",
+      fr: "Esprit vif et lucide",
+      pt: "Lúcido e claro"
     },
     "Mild forgetfulness": {
       es: "Olvidos leves",
@@ -4495,7 +8509,16 @@
       ko: "가벼운 건망증",
       hy: "Թեթև մոռացկոտություն",
       ru: "Легкая забывчивость",
-      ar: "نسيان خفيف"
+      ar: "نسيان خفيف",
+      fa: "فراموشی خفیف",
+      hi: "हल्का भुलक्कड़पन",
+      pa: "ਹਲਕੀ ਭੁੱਲਣ ਦੀ ਆਦਤ",
+      ja: "軽い物忘れがある",
+      uk: "Легка забудькуватість",
+      he: "שכחה קלה",
+      km: "ភ្លេចភ្លាំងតិចតួច",
+      fr: "Oublis légers",
+      pt: "Esquecimento leve"
     },
     "Alzheimer's or moderate dementia": {
       es: "Alzheimer o demencia moderada",
@@ -4505,7 +8528,16 @@
       ko: "알츠하이머 또는 중등도 치매",
       hy: "Ալցհայմեր կամ չափավոր դեմենցիա",
       ru: "Болезнь Альцгеймера или умеренная деменция",
-      ar: "ألزهايمر أو خرف متوسط"
+      ar: "ألزهايمر أو خرف متوسط",
+      fa: "آلزایمر یا زوال عقل متوسط",
+      hi: "अल्ज़ाइमर या मध्यम डिमेंशिया",
+      pa: "ਅਲਜ਼ਾਈਮਰ ਜਾਂ ਦਰਮਿਆਨਾ ਡਿਮੇਨਸ਼ੀਆ",
+      ja: "アルツハイマー病または中等度の認知症",
+      uk: "Хвороба Альцгеймера або помірна деменція",
+      he: "אלצהיימר או דמנציה בינונית",
+      km: "ជំងឺ Alzheimer's ឬជំងឺភ្លេចភ្លាំងកម្រិតមធ្យម",
+      fr: "Maladie d'Alzheimer ou démence modérée",
+      pt: "Alzheimer ou demência moderada"
     },
     "Independent or minimal help": {
       es: "Independiente o ayuda mínima",
@@ -4515,7 +8547,16 @@
       ko: "자립 가능 또는 최소 보조",
       hy: "Անկախ կամ նվազագույն օգնություն",
       ru: "Самостоятельный или с минимальной помощью",
-      ar: "مستقل أو مساعدة بسيطة"
+      ar: "مستقل أو مساعدة بسيطة",
+      fa: "مستقل یا کمک حداقلی",
+      hi: "स्वतंत्र या न्यूनतम सहायता",
+      pa: "ਆਤਮ-ਨਿਰਭਰ ਜਾਂ ਘੱਟੋ-ਘੱਟ ਮਦਦ",
+      ja: "自立または最小限の支援",
+      uk: "Самостійність або мінімальна допомога",
+      he: "עצמאי או סיוע מינימלי",
+      km: "ឯករាជ្យ ឬជំនួយតិចតួច",
+      fr: "Autonome ou aide minimale",
+      pt: "Independente ou apoio mínimo"
     },
     "Help with bathing, dressing, or transfers": {
       es: "Ayuda para bañarse, vestirse o trasladarse",
@@ -4525,7 +8566,16 @@
       ko: "목욕, 착탈의 또는 이동 보조 필요",
       hy: "Օգնություն լողանալիս, հագնվելիս կամ տեղաշարժվելիս",
       ru: "Помощь при купании, одевании или пересаживании",
-      ar: "مساعدة في الاستحمام أو اللبس أو الانتقال"
+      ar: "مساعدة في الاستحمام أو اللبس أو الانتقال",
+      fa: "کمک برای استحمام، لباس پوشیدن یا جابه‌جایی",
+      hi: "स्नान, कपड़े पहनने या उठने-बैठने में सहायता",
+      pa: "ਨਹਾਉਣ, ਕੱਪੜੇ ਪਾਉਣ ਜਾਂ ਉੱਠਣ-ਬੈਠਣ ਵਿੱਚ ਮਦਦ",
+      ja: "入浴・着替え・移乗の介助が必要",
+      uk: "Допомога з купанням, одяганням або переміщенням",
+      he: "עזרה ברחצה, לבוש או מעברים",
+      km: "ជំនួយក្នុងការងូតទឹក ការស្លៀកពាក់ ឬការផ្លាស់ប្តូរទីតាំង",
+      fr: "Aide pour la toilette, l'habillage ou les transferts",
+      pt: "Apoio para banho, vestir-se ou transferências"
     },
     "Bedridden or total care": {
       es: "En cama o cuidado total",
@@ -4535,7 +8585,16 @@
       ko: "와상 상태 또는 전적인 돌봄 필요",
       hy: "Անկողնային կամ ամբողջական խնամք",
       ru: "Лежачий больной или полный уход",
-      ar: "طريح الفراش أو رعاية كاملة"
+      ar: "طريح الفراش أو رعاية كاملة",
+      fa: "بستری یا مراقبت کامل",
+      hi: "शैयाग्रस्त या पूर्ण देखभाल",
+      pa: "ਬਿਸਤਰੇ 'ਤੇ ਸੀਮਤ ਜਾਂ ਪੂਰੀ ਦੇਖਭਾਲ",
+      ja: "寝たきりまたは全面介助が必要",
+      uk: "Лежачий стан або повний догляд",
+      he: "מרותק למיטה או טיפול מלא",
+      km: "សម្រាកលើគ្រែ ឬការថែទាំទាំងស្រុង",
+      fr: "Alité ou prise en charge totale",
+      pt: "Acamado ou cuidado integral"
     },
     "Immediate (1-7 days)": {
       es: "Inmediato (1 a 7 días)",
@@ -4545,7 +8604,16 @@
       ko: "긴급(1~7일 이내)",
       hy: "Անհապաղ (1–7 օր)",
       ru: "Срочно (1–7 дней)",
-      ar: "فوري (1-7 أيام)"
+      ar: "فوري (1-7 أيام)",
+      fa: "فوری (۱ تا ۷ روز)",
+      hi: "तत्काल (1-7 दिन)",
+      pa: "ਤੁਰੰਤ (1-7 ਦਿਨ)",
+      ja: "至急（1〜7日以内）",
+      uk: "Негайно (1–7 днів)",
+      he: "מיידי (1–7 ימים)",
+      km: "បន្ទាន់ (1-7 ថ្ងៃ)",
+      fr: "Immédiat (1 à 7 jours)",
+      pt: "Imediato (1-7 dias)"
     },
     "Next 30-60 days": {
       es: "Próximos 30 a 60 días",
@@ -4555,7 +8623,16 @@
       ko: "30~60일 이내",
       hy: "Առաջիկա 30–60 օրը",
       ru: "Ближайшие 30–60 дней",
-      ar: "خلال 30-60 يوماً القادمة"
+      ar: "خلال 30-60 يوماً القادمة",
+      fa: "۳۰ تا ۶۰ روز آینده",
+      hi: "अगले 30-60 दिन",
+      pa: "ਅਗਲੇ 30-60 ਦਿਨ",
+      ja: "今後30〜60日以内",
+      uk: "Найближчі 30–60 днів",
+      he: "ב-30–60 הימים הקרובים",
+      km: "30-60 ថ្ងៃខាងមុខ",
+      fr: "Dans les 30 à 60 prochains jours",
+      pt: "Próximos 30-60 dias"
     },
     "Future research": {
       es: "Investigación futura",
@@ -4565,7 +8642,16 @@
       ko: "향후 계획 및 정보 수집",
       hy: "Ապագայի ուսումնասիրություն",
       ru: "Изучение на будущее",
-      ar: "بحث مستقبلي"
+      ar: "بحث مستقبلي",
+      fa: "بررسی برای آینده",
+      hi: "भविष्य के लिए जानकारी",
+      pa: "ਭਵਿੱਖ ਲਈ ਖੋਜ-ਪੜਤਾਲ",
+      ja: "将来のための情報収集",
+      uk: "На майбутнє",
+      he: "בדיקה לעתיד",
+      km: "ស្រាវជ្រាវសម្រាប់អនាគត",
+      fr: "Recherche pour l'avenir",
+      pt: "Pesquisa futura"
     },
     "Not answered": {
       es: "Sin respuesta",
@@ -4575,7 +8661,16 @@
       ko: "응답 없음",
       hy: "Պատասխան չկա",
       ru: "Нет ответа",
-      ar: "بدون إجابة"
+      ar: "بدون إجابة",
+      fa: "پاسخ داده نشده",
+      hi: "उत्तर नहीं दिया गया",
+      pa: "ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ",
+      ja: "未回答",
+      uk: "Не вказано",
+      he: "לא נענה",
+      km: "មិនទាន់បានឆ្លើយ",
+      fr: "Non renseigné",
+      pt: "Não respondido"
     },
     "Personalized Residential Care": {
       es: "Cuidado Residencial Personalizado",
@@ -4585,7 +8680,16 @@
       ko: "맞춤형 주거 돌봄(RCFE)",
       hy: "Անհատականացված բնակելի խնամք",
       ru: "Персональный домашний уход",
-      ar: "رعاية سكنية مخصصة"
+      ar: "رعاية سكنية مخصصة",
+      fa: "مراقبت مسکونی اختصاصی",
+      hi: "व्यक्तिगत आवासीय देखभाल",
+      pa: "ਨਿੱਜੀ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ",
+      ja: "ご状況に合わせた個別居住型ケア",
+      uk: "Персоналізований житловий догляд",
+      he: "טיפול ביתי מותאם אישית",
+      km: "ការថែទាំស្នាក់នៅផ្ទាល់ខ្លួន",
+      fr: "Soins résidentiels personnalisés",
+      pt: "Cuidado Residencial Personalizado"
     },
     "Residential Care": {
       es: "Cuidado Residencial",
@@ -4595,7 +8699,16 @@
       ko: "주거형 돌봄",
       hy: "Բնակելի խնամք",
       ru: "Проживание с уходом",
-      ar: "رعاية سكنية"
+      ar: "رعاية سكنية",
+      fa: "مراقبت مسکونی",
+      hi: "आवासीय देखभाल",
+      pa: "ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ",
+      ja: "居住型ケア",
+      uk: "Житловий догляд",
+      he: "טיפול ביתי במעון",
+      km: "ការថែទាំស្នាក់នៅ",
+      fr: "Soins résidentiels",
+      pt: "Cuidado Residencial"
     },
     "Hello Love RCFE Team,\n\nI calculated my family's monthly elder care budget using your calculator at approximately {amount}/month.\n\nPlease provide vetted licensed residential care facility (RCFE) recommendations and cost breakdown options that fit within this budget.": {
       es: "Hola equipo de Love RCFE,\n\nCalculé el presupuesto mensual de cuidado para mi familia usando su calculadora en aproximadamente {amount}/mes.\n\nPor favor envíenme recomendaciones de centros RCFE verificados con licencia y opciones que se ajusten a este presupuesto.",
@@ -4605,7 +8718,16 @@
       ko: "안녕하세요 Love RCFE 팀,\n\n웹사이트 계산기로 산출한 저희 가족의 월 어르신 돌봄 예산은 약 {amount}/월입니다.\n\n이 예산에 맞는 검증된 인가 RCFE 요양홈 추천과 비용 구성을 안내해 주세요.",
       hy: "Բարև Love RCFE թիմ,\n\nՁեր հաշվիչով ես հաշվարկել եմ մեր ընտանիքի տարեցների խնամքի ամսական բյուջեն՝ մոտավորապես {amount}/ամիս։\n\nԽնդրում եմ առաջարկել ստուգված լիցենզավորված RCFE տներ և արժեքի տարբերակներ այս բյուջեի շրջանակում։",
       ru: "Здравствуйте, команда Love RCFE!\n\nЯ рассчитал(а) ежемесячный бюджет нашей семьи на уход с помощью вашего калькулятора — около {amount}/мес.\n\nПожалуйста, подберите проверенные лицензированные пансионаты RCFE и варианты стоимости в рамках этого бюджета.",
-      ar: "مرحباً فريق Love RCFE،\n\nلقد حسبت الميزانية الشهرية لرعاية عائلتنا باستخدام حاسبتكم بحوالي {amount}/شهر.\n\nيرجى تزويدي بتوصيات لدور رعاية سكنية (RCFE) مرخصة ومفحوصة وخيارات تكلفة تناسب هذه الميزانية."
+      ar: "مرحباً فريق Love RCFE،\n\nلقد حسبت الميزانية الشهرية لرعاية عائلتنا باستخدام حاسبتكم بحوالي {amount}/شهر.\n\nيرجى تزويدي بتوصيات لدور رعاية سكنية (RCFE) مرخصة ومفحوصة وخيارات تكلفة تناسب هذه الميزانية.",
+      fa: "سلام تیم Love RCFE،\n\nمن بودجه ماهانه مراقبت از سالمند خانواده خود را با ماشین‌حساب شما حدود {amount} در ماه محاسبه کردم.\n\nلطفاً فهرستی از مراکز مراقبت مسکونی دارای مجوز و بررسی‌شده (RCFE) و گزینه‌های تفکیک هزینه متناسب با این بودجه را برایم ارسال کنید.",
+      hi: "नमस्ते Love RCFE टीम,\n\nमैंने आपके कैलकुलेटर का उपयोग करके अपने परिवार के मासिक वरिष्ठजन देखभाल बजट की गणना लगभग {amount}/माह की है।\n\nकृपया इस बजट के अनुरूप जाँचे-परखे लाइसेंस प्राप्त आवासीय देखभाल केंद्र (RCFE) विकल्प और लागत विवरण प्रदान करें।",
+      pa: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ Love RCFE ਟੀਮ,\n\nਮੈਂ ਤੁਹਾਡੇ ਕੈਲਕੂਲੇਟਰ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਪਰਿਵਾਰ ਦੇ ਮਹੀਨਾਵਾਰ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਬਜਟ ਦਾ ਅੰਦਾਜ਼ਾ ਲਗਭਗ {amount}/ਮਹੀਨਾ ਲਗਾਇਆ ਹੈ।\n\nਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚੇ-ਪਰਖੇ ਲਾਇਸੰਸਸ਼ੁਦਾ ਰਿਹਾਇਸ਼ੀ ਦੇਖਭਾਲ ਕੇਂਦਰਾਂ (RCFE) ਦੀਆਂ ਸਿਫ਼ਾਰਸ਼ਾਂ ਅਤੇ ਖਰਚਿਆਂ ਦੇ ਵੇਰਵੇ ਵਾਲੇ ਵਿਕਲਪ ਦਿਓ ਜੋ ਇਸ ਬਜਟ ਵਿੱਚ ਆਉਂਦੇ ਹੋਣ।",
+      ja: "Love RCFE ご担当者様\n\n貴サイトの費用計算ツールを用いて家族の高齢者ケア月額予算を試算したところ、約 {amount}/月 となりました。\n\nこのご予算の範囲内で検討できる、審査済みの認可高齢者居住型ケア施設（RCFE）の候補と費用の内訳案をご案内いただけますでしょうか。",
+      uk: "Вітаю, командо Love RCFE,\n\nЯ розрахував(ла) щомісячний бюджет нашої родини на догляд за допомогою вашого калькулятора — орієнтовно {amount}/міс.\n\nБудь ласка, поділіться перевіреними рекомендаціями ліцензованих житлових будинків догляду (RCFE) та варіантами розбивки вартості в межах цього бюджету.",
+      he: "שלום צוות Love RCFE,\n\nחישבתי את תקציב הטיפול החודשי של משפחתי באמצעות המחשבון שלכם והוא עומד על כ-{amount} לחודש.\n\nאשמח לקבל המלצות בדוקות על מעונות טיפוליים מורשים (RCFE) ופירוט אפשרויות עלות המתאימות לתקציב זה.",
+      km: "សួស្តីក្រុមការងារ Love RCFE,\n\nខ្ញុំបានគណនាថវិកាថែទាំមនុស្សចាស់ប្រចាំខែរបស់គ្រួសារខ្ញុំដោយប្រើម៉ាស៊ីនគណនារបស់លោកអ្នក ក្នុងតម្លៃប្រហែល {amount}/ខែ។\n\nសូមផ្តល់ការណែនាំអំពីមណ្ឌលថែទាំស្នាក់នៅដែលមានអាជ្ញាប័ណ្ណ និងឆ្លងកាត់ការត្រួតពិនិត្យ (RCFE) ព្រមទាំងជម្រើសលម្អិតនៃថ្លៃចំណាយដែលសមស្របនឹងថវិកានេះ។",
+      fr: "Bonjour l'équipe Love RCFE,\n\nJ'ai estimé le budget mensuel de soins aux aînés de ma famille à l'aide de votre calculateur à environ {amount}/mois.\n\nMerci de bien vouloir me transmettre des recommandations vérifiées d'établissements résidentiels de soins agréés (RCFE) ainsi qu'une estimation des coûts correspondant à ce budget.",
+      pt: "Olá equipe Love RCFE,\n\nCalculei o orçamento mensal de cuidados para minha família usando sua calculadora em aproximadamente {amount}/mês.\n\nPor favor, enviem recomendações criteriosas de casas residenciais licenciadas (RCFE) e detalhamento de custos que se encaixem neste orçamento."
     },
     "Hello Love RCFE Team,\n\nI used your cost calculator and would like personalized recommendations for care:\n• Region: {region}\n• Care Level: {care}\n• Room Preference: {room}\n• Estimated Monthly Budget: {range}\n\nPlease reach out to me with vetted licensed care facilities that match this criteria.": {
       es: "Hola equipo de Love RCFE,\n\nUsé su calculadora de costos y deseo recomendaciones personalizadas:\n• Región: {region}\n• Nivel de cuidado: {care}\n• Tipo de habitación: {room}\n• Presupuesto mensual estimado: {range}\n\nPor favor contáctenme con centros con licencia verificados que coincidan con estos criterios.",
@@ -4615,7 +8737,16 @@
       ko: "안녕하세요 Love RCFE 팀,\n\n비용 계산기를 이용해 아래 조건에 맞는 맞춤 추천을 요청드립니다:\n• 지역: {region}\n• 돌봄 수준: {care}\n• 객실 유형: {room}\n• 예상 월 예산: {range}\n\n조건에 부합하는 검증된 인가 요양 시설 정보를 안내해 주세요.",
       hy: "Բարև Love RCFE թիմ,\n\nՕգտագործեցի արժեքի հաշվիչը և ցանկանում եմ ստանալ անհատական առաջարկներ․\n• Տարածաշրջան՝ {region}\n• Խնամքի մակարդակ՝ {care}\n• Սենյակի տեսակ՝ {room}\n• Գնահատված ամսական բյուջե՝ {range}\n\nԽնդրում եմ կապվել ինձ հետ այս չափանիշներին համապատասխանող լիցենզավորված տների համար։",
       ru: "Здравствуйте, команда Love RCFE!\n\nЯ воспользовался(лась) калькулятором и хотел(а) бы получить подбор вариантов:\n• Регион: {region}\n• Уровень ухода: {care}\n• Тип комнаты: {room}\n• Ориентировочный бюджет в месяц: {range}\n\nПожалуйста, свяжитесь со мной и предложите проверенные лицензированные пансионаты по этим критериям.",
-      ar: "مرحباً فريق Love RCFE،\n\nاستخدمت حاسبة التكلفة وأرغب في توصيات رعاية مخصصة:\n• المنطقة: {region}\n• مستوى الرعاية: {care}\n• نوع الغرفة المفضل: {room}\n• الميزانية الشهرية التقديرية: {range}\n\nيرجى التواصل معي بقائمة دور رعاية مرخصة تطابق هذه المعايير."
+      ar: "مرحباً فريق Love RCFE،\n\nاستخدمت حاسبة التكلفة وأرغب في توصيات رعاية مخصصة:\n• المنطقة: {region}\n• مستوى الرعاية: {care}\n• نوع الغرفة المفضل: {room}\n• الميزانية الشهرية التقديرية: {range}\n\nيرجى التواصل معي بقائمة دور رعاية مرخصة تطابق هذه المعايير.",
+      fa: "سلام تیم Love RCFE،\n\nمن از ماشین‌حساب هزینه شما استفاده کردم و مایل به دریافت پیشنهادهای اختصاصی مراقبت هستم:\n• منطقه: {region}\n• سطح مراقبت: {care}\n• نوع اتاق ترجیحی: {room}\n• بودجه ماهانه برآوردشده: {range}\n\nلطفاً درباره مراکز مراقبت دارای مجوز و بررسی‌شده که با این معیارها مطابقت دارند با من تماس بگیرید.",
+      hi: "नमस्ते Love RCFE टीम,\n\nमैंने आपके लागत कैलकुलेटर का उपयोग किया है और देखभाल के लिए व्यक्तिगत सिफारिशें चाहता/चाहती हूँ:\n• क्षेत्र: {region}\n• देखभाल स्तर: {care}\n• कमरे की प्राथमिकता: {room}\n• अनुमानित मासिक बजट: {range}\n\nकृपया इन मानदंडों से मेल खाने वाले जाँचे-परखे लाइसेंस प्राप्त देखभाल केंद्रों के साथ मुझसे संपर्क करें।",
+      pa: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ Love RCFE ਟੀਮ,\n\nਮੈਂ ਤੁਹਾਡੇ ਖਰਚ ਕੈਲਕੂਲੇਟਰ ਦੀ ਵਰਤੋਂ ਕੀਤੀ ਹੈ ਅਤੇ ਦੇਖਭਾਲ ਲਈ ਨਿੱਜੀ ਸਿਫ਼ਾਰਸ਼ਾਂ ਚਾਹੁੰਦਾ/ਚਾਹੁੰਦੀ ਹਾਂ:\n• ਖੇਤਰ: {region}\n• ਦੇਖਭਾਲ ਦਾ ਪੱਧਰ: {care}\n• ਕਮਰੇ ਦੀ ਪਸੰਦ: {room}\n• ਅਨੁਮਾਨਿਤ ਮਹੀਨਾਵਾਰ ਬਜਟ: {range}\n\nਕਿਰਪਾ ਕਰਕੇ ਇਨ੍ਹਾਂ ਲੋੜਾਂ ਨਾਲ ਮੇਲ ਖਾਂਦੇ ਜਾਂਚੇ-ਪਰਖੇ ਲਾਇਸੰਸਸ਼ੁਦਾ ਦੇਖਭਾਲ ਕੇਂਦਰਾਂ ਦੀ ਜਾਣਕਾਰੀ ਦੇਣ ਲਈ ਮੇਰੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      ja: "Love RCFE ご担当者様\n\n貴サイトの費用シミュレーターを利用いたしましたので、以下の条件に合う個別の施設ご提案を希望いたします：\n• ご希望地域：{region}\n• 必要なケアレベル：{care}\n• ご希望のお部屋タイプ：{room}\n• 月額予算の目安：{range}\n\n上記の条件に合致する、調査済みの認可ケア施設についてご連絡いただけますと幸いです。",
+      uk: "Вітаю, командо Love RCFE,\n\nЯ скористався(лася) вашим калькулятором вартості й хотів(ла) би отримати індивідуальні рекомендації щодо догляду:\n• Регіон: {region}\n• Рівень догляду: {care}\n• Тип кімнати: {room}\n• Орієнтовний щомісячний бюджет: {range}\n\nБудь ласка, зв’яжіться зі мною з добіркою перевірених ліцензованих закладів, які відповідають цим критеріям.",
+      he: "שלום צוות Love RCFE,\n\nהשתמשתי במחשבון העלויות שלכם ואשמח לקבל המלצות טיפול מותאמות אישית:\n• אזור: {region}\n• רמת טיפול: {care}\n• העדפת חדר: {room}\n• תקציב חודשי משוער: {range}\n\nאנא צרו איתי קשר עם מעונות מורשים ובדוקים המתאימים לקריטריונים אלה.",
+      km: "សួស្តីក្រុមការងារ Love RCFE,\n\nខ្ញុំបានប្រើម៉ាស៊ីនគណនាថ្លៃចំណាយរបស់លោកអ្នក ហើយចង់ទទួលបានការណែនាំផ្ទាល់ខ្លួនសម្រាប់ការថែទាំ៖\n• តំបន់៖ {region}\n• កម្រិតថែទាំ៖ {care}\n• ប្រភេទបន្ទប់ដែលចង់បាន៖ {room}\n• ថវិកាប្រចាំខែប៉ាន់ស្មាន៖ {range}\n\nសូមទាក់ទងមកខ្ញុំជាមួយមណ្ឌលថែទាំមានអាជ្ញាប័ណ្ណដែលឆ្លងកាត់ការត្រួតពិនិត្យ និងត្រូវគ្នានឹងលក្ខខណ្ឌទាំងនេះ។",
+      fr: "Bonjour l'équipe Love RCFE,\n\nJ'ai utilisé votre calculateur de coûts et souhaiterais recevoir des recommandations personnalisées pour des soins :\n• Région : {region}\n• Niveau de soins : {care}\n• Préférence de chambre : {room}\n• Budget mensuel estimé : {range}\n\nMerci de me contacter avec des établissements agréés et vérifiés correspondant à ces critères.",
+      pt: "Olá equipe Love RCFE,\n\nUtilizei a calculadora de custos de vocês e gostaria de receber recomendações personalizadas de cuidado:\n• Região: {region}\n• Nível de Cuidado: {care}\n• Preferência de Quarto: {room}\n• Orçamento Mensal Estimado: {range}\n\nPor favor, entrem em contato com opções de residenciais licenciados e avaliados que atendam a esses critérios."
     },
     "Hello Love RCFE Advisory Team,\n\nI completed your Care Level Assessment and received the following recommendation:\n• Target Care Setting: {title}\n• Exploring care for: {recipient}\n• Cognitive status: {memory}\n• Physical ADL needs: {adl}\n• Placement Timeframe: {timeline}\n\nPlease contact me with licensed facility openings and touring support.": {
       es: "Hola equipo asesor de Love RCFE,\n\nCompleté la Evaluación de Nivel de Cuidado y recibí esta recomendación:\n• Entorno recomendado: {title}\n• Cuidado para: {recipient}\n• Estado cognitivo: {memory}\n• Necesidades físicas (ADL): {adl}\n• Plazo estimado: {timeline}\n\nPor favor contáctenme con vacantes disponibles y apoyo para visitas.",
@@ -4625,7 +8756,16 @@
       ko: "안녕하세요 Love RCFE 상담팀,\n\n돌봄 수준 자가진단을 완료하여 다음과 같은 추천 결과를 받았습니다:\n• 추천 돌봄 형태: {title}\n• 대상자: {recipient}\n• 인지 상태: {memory}\n• 신체 활동 보조 필요: {adl}\n• 희망 입소 시기: {timeline}\n\n입소 가능한 인가 시설 및 투어 일정을 안내해 주세요.",
       hy: "Բարև Love RCFE խորհրդատվական թիմ,\n\nԱնցա խնամքի մակարդակի գնահատումը և ստացա հետևյալ առաջարկը․\n• Առաջարկվող խնամքի տեսակ՝ {title}\n• Ում համար՝ {recipient}\n• Ճանաչողական վիճակ՝ {memory}\n• Ֆիզիկական օգնություն (ADL)՝ {adl}\n• Ժամկետ՝ {timeline}\n\nԽնդրում եմ կապվել ինձ հետ ազատ տեղերի և շրջայցերի համար։",
       ru: "Здравствуйте, команда Love RCFE!\n\nЯ прошел(а) оценку уровня ухода и получил(а) следующую рекомендацию:\n• Подходящий формат: {title}\n• Для кого: {recipient}\n• Когнитивное состояние: {memory}\n• Физическая помощь (ADL): {adl}\n• Сроки переезда: {timeline}\n\nПожалуйста, свяжитесь со мной для подбора свободных мест и организации просмотров.",
-      ar: "مرحباً فريق استشارات Love RCFE،\n\nأكملت تقييم مستوى الرعاية وحصلت على التوصية التالية:\n• بيئة الرعاية المقترحة: {title}\n• البحث عن رعاية لـ: {recipient}\n• الحالة الإدراكية: {memory}\n• الاحتياجات البدنية (ADL): {adl}\n• الإطار الزمني للتسكين: {timeline}\n\nيرجى التواصل معي بالأماكن الشاغرة في الدور المرخصة وترتيب المعاينة."
+      ar: "مرحباً فريق استشارات Love RCFE،\n\nأكملت تقييم مستوى الرعاية وحصلت على التوصية التالية:\n• بيئة الرعاية المقترحة: {title}\n• البحث عن رعاية لـ: {recipient}\n• الحالة الإدراكية: {memory}\n• الاحتياجات البدنية (ADL): {adl}\n• الإطار الزمني للتسكين: {timeline}\n\nيرجى التواصل معي بالأماكن الشاغرة في الدور المرخصة وترتيب المعاينة.",
+      fa: "سلام تیم مشاوره Love RCFE،\n\nمن ارزیابی سطح مراقبت شما را تکمیل کردم و پیشنهاد زیر را دریافت نمودم:\n• محیط مراقبتی پیشنهادی: {title}\n• بررسی مراقبت برای: {recipient}\n• وضعیت شناختی و حافظه: {memory}\n• نیازهای فیزیکی (ADLs): {adl}\n• بازه زمانی مورد نیاز: {timeline}\n\nلطفاً برای معرفی ظرفیت‌های خالی مراکز دارای مجوز و هماهنگی بازدید با من تماس بگیرید.",
+      hi: "नमस्ते Love RCFE सलाहकार टीम,\n\nमैंने आपका देखभाल स्तर मूल्यांकन पूरा किया और मुझे निम्नलिखित सिफारिश प्राप्त हुई:\n• लक्षित देखभाल व्यवस्था: {title}\n• किसके लिए देखभाल: {recipient}\n• संज्ञानात्मक स्थिति: {memory}\n• शारीरिक ADL आवश्यकताएँ: {adl}\n• प्लेसमेंट समय-सीमा: {timeline}\n\nकृपया लाइसेंस प्राप्त केंद्रों में उपलब्ध स्थानों और विज़िट सहायता के लिए मुझसे संपर्क करें।",
+      pa: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ Love RCFE ਸਲਾਹਕਾਰ ਟੀਮ,\n\nਮੈਂ ਤੁਹਾਡਾ ਦੇਖਭਾਲ ਪੱਧਰ ਮੁਲਾਂਕਣ ਪੂਰਾ ਕੀਤਾ ਅਤੇ ਮੈਨੂੰ ਹੇਠ ਲਿਖੀ ਸਿਫ਼ਾਰਸ਼ ਮਿਲੀ:\n• ਢੁੱਕਵਾਂ ਦੇਖਭਾਲ ਮਾਹੌਲ: {title}\n• ਕਿਸ ਲਈ ਦੇਖਭਾਲ ਲੱਭ ਰਹੇ ਹਾਂ: {recipient}\n• ਯਾਦਾਸ਼ਤ ਦੀ ਸਥਿਤੀ: {memory}\n• ਸਰੀਰਕ ADL ਲੋੜਾਂ: {adl}\n• ਰਿਹਾਇਸ਼ ਦੀ ਸਮਾਂ-ਸੀਮਾ: {timeline}\n\nਕਿਰਪਾ ਕਰਕੇ ਲਾਇਸੰਸਸ਼ੁਦਾ ਕੇਂਦਰਾਂ ਵਿੱਚ ਉਪਲਬਧ ਥਾਵਾਂ ਅਤੇ ਦੌਰੇ ਵਿੱਚ ਮਦਦ ਲਈ ਮੇਰੇ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
+      ja: "Love RCFE アドバイザリーチーム 御中\n\n貴サイトの必要ケアレベル診断を完了し、以下の推奨結果を受け取りました：\n• 推奨ケア形態：{title}\n• ケアの対象者：{recipient}\n• 認知・記憶の状態：{memory}\n• 身体的な ADL の必要性：{adl}\n• ご入居の希望時期：{timeline}\n\n認可施設の空き状況のご案内と施設見学のサポートについて、ぜひご連絡をお願いいたします。",
+      uk: "Вітаю, командо консультантів Love RCFE,\n\nЯ пройшов(ла) вашу оцінку рівня догляду та отримав(ла) таку рекомендацію:\n• Рекомендований формат догляду: {title}\n• Для кого підбирається догляд: {recipient}\n• Когнітивний стан: {memory}\n• Потреби у фізичній активності (ADL): {adl}\n• Термін влаштування: {timeline}\n\nБудь ласка, зв’яжіться зі мною щодо вільних місць у ліцензованих закладах та організації переглядів.",
+      he: "שלום צוות הייעוץ של Love RCFE,\n\nהשלמתי את הערכת רמת הטיפול וקיבלתי את ההמלצה הבאה:\n• מסגרת טיפול מומלצת: {title}\n• הטיפול מיועד עבור: {recipient}\n• מצב קוגניטיבי: {memory}\n• צרכי ADL פיזיים: {adl}\n• לוח זמנים לשיבוץ: {timeline}\n\nאנא צרו איתי קשר בנוגע למקומות פנויים במתקנים מורשים וליווי לסיורים.",
+      km: "សួស្តីក្រុមទីប្រឹក្សា Love RCFE,\n\nខ្ញុំបានបញ្ចប់ការវាយតម្លៃកម្រិតថែទាំរបស់លោកអ្នក ហើយទទួលបានការណែនាំដូចខាងក្រោម៖\n• កន្លែងថែទាំគោលដៅ៖ {title}\n• ស្វែងរកការថែទាំសម្រាប់៖ {recipient}\n• ស្ថានភាពការយល់ដឹង និងចងចាំ៖ {memory}\n• តម្រូវការសកម្មភាពប្រចាំថ្ងៃផ្នែករាងកាយ (ADL)៖ {adl}\n• រយៈពេលចូលស្នាក់នៅ៖ {timeline}\n\nសូមទាក់ទងមកខ្ញុំជាមួយព័ត៌មានកន្លែងទំនេរនៅមណ្ឌលមានអាជ្ញាប័ណ្ណ និងជំនួយក្នុងការទៅទស្សនា។",
+      fr: "Bonjour l'équipe de conseil Love RCFE,\n\nJ'ai complété votre évaluation du niveau de soins et obtenu la recommandation suivante :\n• Cadre de soins ciblé : {title}\n• Recherche de soins pour : {recipient}\n• État cognitif : {memory}\n• Besoins physiques (AVQ) : {adl}\n• Délai de placement : {timeline}\n\nMerci de me contacter afin de connaître les places disponibles en établissement agréé et d'organiser des visites.",
+      pt: "Olá equipe de assessoria Love RCFE,\n\nConcluí a Avaliação de Nível de Cuidados e recebi a seguinte recomendação:\n• Ambiente de Cuidado Indicado: {title}\n• Buscando cuidados para: {recipient}\n• Estado cognitivo: {memory}\n• Necessidades físicas (ADLs): {adl}\n• Prazo para Acolhimento: {timeline}\n\nPor favor, entrem em contato com vagas em residenciais licenciados e apoio para visitas."
     },
     "Hello Love RCFE Advisory Team,\n\nI completed your Care Assessment Wizard and received the following custom match:\n• Recommended Setting: {title}\n• Care recipient: {recipient}\n• Memory status: {memory}\n• Physical ADL needs: {adl}\n• Timeframe: {timeline}\n\nPlease reach out with verified California licensed facilities in my area.": {
       es: "Hola equipo asesor de Love RCFE,\n\nCompleté el Asistente de Evaluación de Cuidado y obtuve esta recomendación personalizada:\n• Entorno recomendado: {title}\n• Persona a cuidar: {recipient}\n• Estado de memoria: {memory}\n• Necesidades físicas (ADL): {adl}\n• Plazo estimado: {timeline}\n\nPor favor contáctenme con centros verificados con licencia en California en mi zona.",
@@ -4635,7 +8775,16 @@
       ko: "안녕하세요 Love RCFE 상담팀,\n\n맞춤 돌봄 평가 마법사를 완료하여 다음 결과를 받았습니다:\n• 추천 형태: {title}\n• 돌봄 대상자: {recipient}\n• 기억력 상태: {memory}\n• 신체 보조 필요도: {adl}\n• 희망 시기: {timeline}\n\n거주 지역 인근의 검증된 캘리포니아 인가 시설 정보를 부탁드립니다.",
       hy: "Բարև Love RCFE խորհրդատվական թիմ,\n\nԱվարտեցի խնամքի գնահատման ուղեցույցը և ստացա անհատական առաջարկ․\n• Առաջարկվող միջավայր՝ {title}\n• Խնամք ստացող՝ {recipient}\n• Հիշողության վիճակ՝ {memory}\n• Ֆիզիկական օգնություն (ADL)՝ {adl}\n• Ժամկետ՝ {timeline}\n\nԽնդրում եմ կապվել ինձ հետ իմ տարածքում ստուգված կալիֆոռնիական լիցենզավորված տների համար։",
       ru: "Здравствуйте, команда Love RCFE!\n\nЯ прошел(а) мастер оценки ухода и получил(а) персональный результат:\n• Рекомендованный формат: {title}\n• Для кого: {recipient}\n• Состояние памяти: {memory}\n• Физическая помощь (ADL): {adl}\n• Сроки: {timeline}\n\nПожалуйста, подскажите проверенные лицензированные пансионаты Калифорнии в нашем районе.",
-      ar: "مرحباً فريق استشارات Love RCFE،\n\nأكملت مساعد تقييم الرعاية وحصلت على الترشيح المخصص التالي:\n• البيئة الموصى بها: {title}\n• المستفيد من الرعاية: {recipient}\n• حالة الذاكرة: {memory}\n• الاحتياجات البدنية (ADL): {adl}\n• الإطار الزمني: {timeline}\n\nيرجى التواصل معي بدور مرخصة وموثقة في كاليفورنيا ضمن منطقتي."
+      ar: "مرحباً فريق استشارات Love RCFE،\n\nأكملت مساعد تقييم الرعاية وحصلت على الترشيح المخصص التالي:\n• البيئة الموصى بها: {title}\n• المستفيد من الرعاية: {recipient}\n• حالة الذاكرة: {memory}\n• الاحتياجات البدنية (ADL): {adl}\n• الإطار الزمني: {timeline}\n\nيرجى التواصل معي بدور مرخصة وموثقة في كاليفورنيا ضمن منطقتي.",
+      fa: "سلام تیم مشاوره Love RCFE،\n\nمن دستیار هوشمند ارزیابی مراقبت شما را تکمیل کردم و گزینه اختصاصی زیر به من پیشنهاد شد:\n• محیط پیشنهادی: {title}\n• فرد نیازمند مراقبت: {recipient}\n• وضعیت حافظه: {memory}\n• نیازهای فیزیکی (ADLs): {adl}\n• بازه زمانی: {timeline}\n\nلطفاً درباره مراکز تأییدشده و دارای مجوز کالیفرنیا در منطقه من با من تماس بگیرید.",
+      hi: "नमस्ते Love RCFE सलाहकार टीम,\n\nमैंने आपका देखभाल मूल्यांकन विज़ार्ड पूरा किया और मुझे निम्नलिखित उपयुक्त मिलान प्राप्त हुआ:\n• अनुशंसित व्यवस्था: {title}\n• देखभाल प्राप्तकर्ता: {recipient}\n• स्मृति स्थिति: {memory}\n• शारीरिक ADL आवश्यकताएँ: {adl}\n• समय-सीमा: {timeline}\n\nकृपया मेरे क्षेत्र में सत्यापित कैलिफ़ोर्निया लाइसेंस प्राप्त केंद्रों के साथ संपर्क करें।",
+      pa: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ Love RCFE ਸਲਾਹਕਾਰ ਟੀਮ,\n\nਮੈਂ ਤੁਹਾਡਾ ਦੇਖਭਾਲ ਮੁਲਾਂਕਣ ਸਹਾਇਕ ਪੂਰਾ ਕੀਤਾ ਅਤੇ ਮੈਨੂੰ ਹੇਠ ਲਿਖਿਆ ਖ਼ਾਸ ਮਿਲਾਪ ਮਿਲਿਆ:\n• ਸਿਫ਼ਾਰਸ਼ ਕੀਤਾ ਮਾਹੌਲ: {title}\n• ਦੇਖਭਾਲ ਪ੍ਰਾਪਤਕਰਤਾ: {recipient}\n• ਯਾਦਾਸ਼ਤ ਦੀ ਸਥਿਤੀ: {memory}\n• ਸਰੀਰਕ ADL ਲੋੜਾਂ: {adl}\n• ਸਮਾਂ-ਸੀਮਾ: {timeline}\n\nਕਿਰਪਾ ਕਰਕੇ ਮੇਰੇ ਇਲਾਕੇ ਵਿੱਚ ਪ੍ਰਮਾਣਿਤ ਕੈਲੀਫੋਰਨੀਆ ਲਾਇਸੰਸਸ਼ੁਦਾ ਕੇਂਦਰਾਂ ਬਾਰੇ ਜਾਣਕਾਰੀ ਦੇਣ ਲਈ ਸੰਪਰਕ ਕਰੋ।",
+      ja: "Love RCFE アドバイザリーチーム 御中\n\n貴サイトのケア診断ウィザードを完了し、以下のカスタム提案を受け取りました：\n• 推奨施設形態：{title}\n• ケアの対象者：{recipient}\n• 記憶・認知の状態：{memory}\n• 身体的な ADL の必要性：{adl}\n• ご希望時期：{timeline}\n\n私の希望エリアにあるカリフォルニア州公式認可施設の情報について、ご連絡をお願いいたします。",
+      uk: "Вітаю, командо консультантів Love RCFE,\n\nЯ заповнив(ла) ваш Майстер оцінки догляду й отримав(ла) такий індивідуальний підбір:\n• Рекомендований формат: {title}\n• Отримувач догляду: {recipient}\n• Стан пам’яті: {memory}\n• Потреби у фізичній активності (ADL): {adl}\n• Терміни: {timeline}\n\nБудь ласка, надішліть інформацію про перевірені ліцензовані заклади Каліфорнії у моєму районі.",
+      he: "שלום צוות הייעוץ של Love RCFE,\n\nהשלמתי את אשף הערכת הטיפול וקיבלתי את ההתאמה האישית הבאה:\n• מסגרת מומלצת: {title}\n• מקבל הטיפול: {recipient}\n• מצב זיכרון: {memory}\n• צרכי ADL פיזיים: {adl}\n• לוח זמנים: {timeline}\n\nאנא צרו איתי קשר עם מתקנים מאומתים ומורשים בקליפורניה באזור שלי.",
+      km: "សួស្តីក្រុមទីប្រឹក្សា Love RCFE,\n\nខ្ញុំបានបញ្ចប់អ្នកជំនួយការវាយតម្លៃការថែទាំរបស់លោកអ្នក ហើយទទួលបានការផ្គូផ្គងផ្ទាល់ខ្លួនដូចខាងក្រោម៖\n• កន្លែងដែលបានណែនាំ៖ {title}\n• អ្នកទទួលការថែទាំ៖ {recipient}\n• ស្ថានភាពការចងចាំ៖ {memory}\n• តម្រូវការសកម្មភាពប្រចាំថ្ងៃផ្នែករាងកាយ (ADL)៖ {adl}\n• រយៈពេល៖ {timeline}\n\nសូមទាក់ទងមកខ្ញុំជាមួយមណ្ឌលមានអាជ្ញាប័ណ្ណរដ្ឋ California ដែលបានផ្ទៀងផ្ទាត់នៅក្នុងតំបន់របស់ខ្ញុំ។",
+      fr: "Bonjour l'équipe de conseil Love RCFE,\n\nJ'ai complété votre assistant d'évaluation des soins et obtenu la correspondance personnalisée suivante :\n• Cadre recommandé : {title}\n• Bénéficiaire des soins : {recipient}\n• État de la mémoire : {memory}\n• Besoins physiques (AVQ) : {adl}\n• Délai : {timeline}\n\nMerci de me recontacter avec des établissements agréés de Californie vérifiés dans mon secteur.",
+      pt: "Olá equipe de assessoria Love RCFE,\n\nConcluí o Assistente de Avaliação de Cuidados e recebi a seguinte indicação personalizada:\n• Ambiente Recomendado: {title}\n• Pessoa assistida: {recipient}\n• Estado da memória: {memory}\n• Necessidades físicas (ADLs): {adl}\n• Prazo: {timeline}\n\nPor favor, entrem em contato com residenciais licenciados e verificados na Califórnia em minha região."
     },
     "Too many submissions. Please call (818) 217-5755 or email loveRCFE@gmail.com.": {
       es: "Demasiados envíos seguidos. Por favor llame al (818) 217-5755 o escriba a loveRCFE@gmail.com.",
@@ -4645,7 +8794,16 @@
       ko: "요청이 너무 많습니다. (818) 217-5755 로 전화하시거나 loveRCFE@gmail.com 으로 이메일을 보내주세요.",
       hy: "Չափազանց շատ հարցումներ։ Խնդրում ենք զանգահարել (818) 217-5755 կամ գրել loveRCFE@gmail.com հասցեով։",
       ru: "Слишком много отправок. Пожалуйста, позвоните по номеру (818) 217-5755 или напишите на loveRCFE@gmail.com.",
-      ar: "تم إرسال عدد كبير جداً من الطلبات. يرجى الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com."
+      ar: "تم إرسال عدد كبير جداً من الطلبات. يرجى الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com.",
+      fa: "تعداد درخواست‌ها بیش از حد مجاز است. لطفاً با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید.",
+      hi: "बहुत अधिक अनुरोध भेजे गए हैं। कृपया (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल भेजें।",
+      pa: "ਬਹੁਤ ਜ਼ਿਆਦਾ ਬੇਨਤੀਆਂ ਭੇਜੀਆਂ ਗਈਆਂ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
+      ja: "送信回数が上限を超えました。恐れ入りますが、(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。",
+      uk: "Забагато надісланих запитів. Будь ласка, зателефонуйте на (818) 217-5755 або напишіть на loveRCFE@gmail.com.",
+      he: "נשלחו יותר מדי פניות. אנא התקשרו למספר (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
+      km: "ការដាក់ស្នើច្រើនពេក។ សូមទូរស័ព្ទទៅ (818) 217-5755 ឬអ៊ីមែល loveRCFE@gmail.com។",
+      fr: "Trop d'envois. Veuillez appeler le (818) 217-5755 ou écrire à loveRCFE@gmail.com.",
+      pt: "Muitas tentativas de envio. Por favor, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com."
     },
     "Please enter your name.": {
       es: "Por favor ingrese su nombre.",
@@ -4655,7 +8813,16 @@
       ko: "성함을 입력해 주세요.",
       hy: "Խնդրում ենք մուտքագրել ձեր անունը։",
       ru: "Пожалуйста, введите ваше имя.",
-      ar: "يرجى إدخال اسمك."
+      ar: "يرجى إدخال اسمك.",
+      fa: "لطفاً نام خود را وارد کنید.",
+      hi: "कृपया अपना नाम दर्ज करें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਨਾਮ ਦਰਜ ਕਰੋ।",
+      ja: "お名前をご入力ください。",
+      uk: "Будь ласка, введіть ваше ім’я.",
+      he: "אנא הזינו את שמכם.",
+      km: "សូមបញ្ចូលឈ្មោះរបស់លោកអ្នក។",
+      fr: "Veuillez saisir votre nom.",
+      pt: "Por favor, informe seu nome."
     },
     "Please enter a valid email address.": {
       es: "Por favor ingrese un correo electrónico válido.",
@@ -4665,7 +8832,16 @@
       ko: "올바른 이메일 주소를 입력해 주세요.",
       hy: "Խնդրում ենք մուտքագրել վավեր էլ․ փոստի հասցե։",
       ru: "Пожалуйста, введите корректный адрес эл. почты.",
-      ar: "يرجى إدخال بريد إلكتروني صحيح."
+      ar: "يرجى إدخال بريد إلكتروني صحيح.",
+      fa: "لطفاً یک نشانی ایمیل معتبر وارد کنید.",
+      hi: "कृपया एक मान्य ईमेल पता दर्ज करें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਸਹੀ ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ।",
+      ja: "有効なメールアドレスをご入力ください。",
+      uk: "Будь ласка, введіть коректну електронну адресу.",
+      he: "אנא הזינו כתובת אימייל תקינה.",
+      km: "សូមបញ្ចូលអាសយដ្ឋានអ៊ីមែលដែលត្រឹមត្រូវ។",
+      fr: "Veuillez saisir une adresse e-mail valide.",
+      pt: "Por favor, informe um endereço de e-mail válido."
     },
     "Please enter a valid phone number.": {
       es: "Por favor ingrese un número de teléfono válido.",
@@ -4675,7 +8851,16 @@
       ko: "올바른 전화번호를 입력해 주세요.",
       hy: "Խնդրում ենք մուտքագրել վավեր հեռախոսահամար։",
       ru: "Пожалуйста, введите корректный номер телефона.",
-      ar: "يرجى إدخال رقم هاتف صحيح."
+      ar: "يرجى إدخال رقم هاتف صحيح.",
+      fa: "لطفاً یک شماره تلفن معتبر وارد کنید.",
+      hi: "कृपया एक मान्य फ़ोन नंबर दर्ज करें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਸਹੀ ਫ਼ੋਨ ਨੰਬਰ ਦਰਜ ਕਰੋ।",
+      ja: "有効なお電話番号をご入力ください。",
+      uk: "Будь ласка, введіть коректний номер телефону.",
+      he: "אנא הזינו מספר טלפון תקין.",
+      km: "សូមបញ្ចូលលេខទូរស័ព្ទដែលត្រឹមត្រូវ។",
+      fr: "Veuillez saisir un numéro de téléphone valide.",
+      pt: "Por favor, informe um número de telefone válido."
     },
     "Please tell us a little about how we can help.": {
       es: "Por favor cuéntenos brevemente cómo podemos ayudarle.",
@@ -4685,7 +8870,16 @@
       ko: "어떤 도움이 필요하신지 간단히 적어 주세요.",
       hy: "Խնդրում ենք հակիրճ նկարագրել, թե ինչպես կարող ենք օգնել։",
       ru: "Пожалуйста, кратко опишите, чем мы можем вам помочь.",
-      ar: "يرجى كتابة نبذة مختصرة عن كيف يمكننا مساعدتك."
+      ar: "يرجى كتابة نبذة مختصرة عن كيف يمكننا مساعدتك.",
+      fa: "لطفاً به‌طور مختصر بنویسید چگونه می‌توانیم کمکتان کنیم.",
+      hi: "कृपया हमें थोड़ा बताएँ कि हम किस प्रकार सहायता कर सकते हैं।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਸਾਨੂੰ ਥੋੜ੍ਹਾ ਦੱਸੋ ਕਿ ਅਸੀਂ ਤੁਹਾਡੀ ਕਿਵੇਂ ਮਦਦ ਕਰ ਸਕਦੇ ਹਾਂ।",
+      ja: "どのようなご相談内容か、簡単にお知らせください。",
+      uk: "Будь ласка, розкажіть трохи про те, чим ми можемо допомогти.",
+      he: "אנא ספרו לנו מעט כיצד נוכל לעזור.",
+      km: "សូមប្រាប់យើងបន្តិចអំពីរបៀបដែលយើងអាចជួយបាន។",
+      fr: "Veuillez nous indiquer brièvement comment nous pouvons vous aider.",
+      pt: "Por favor, conte um pouco sobre como podemos ajudar."
     },
     "Please choose a preferred date.": {
       es: "Por favor elija una fecha preferida.",
@@ -4695,7 +8889,16 @@
       ko: "희망 날짜를 선택해 주세요.",
       hy: "Խնդրում ենք ընտրել նախընտրելի ամսաթիվ։",
       ru: "Пожалуйста, выберите удобную дату.",
-      ar: "يرجى اختيار التاريخ المفضل."
+      ar: "يرجى اختيار التاريخ المفضل.",
+      fa: "لطفاً تاریخ مورد نظر خود را انتخاب کنید.",
+      hi: "कृपया एक पसंदीदा तारीख चुनें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਪਸੰਦੀਦਾ ਤਾਰੀਖ਼ ਚੁਣੋ।",
+      ja: "ご希望日をお選びください。",
+      uk: "Будь ласка, оберіть бажану дату.",
+      he: "אנא בחרו תאריך מועדף.",
+      km: "សូមជ្រើសរើសកាលបរិច្ឆេទដែលចង់បាន។",
+      fr: "Veuillez choisir une date souhaitée.",
+      pt: "Por favor, escolha uma data de preferência."
     },
     "Please choose a valid date.": {
       es: "Por favor elija una fecha válida.",
@@ -4705,7 +8908,16 @@
       ko: "올바른 날짜를 선택해 주세요.",
       hy: "Խնդրում ենք ընտրել վավեր ամսաթիվ։",
       ru: "Пожалуйста, выберите корректную дату.",
-      ar: "يرجى اختيار تاريخ صحيح."
+      ar: "يرجى اختيار تاريخ صحيح.",
+      fa: "لطفاً یک تاریخ معتبر انتخاب کنید.",
+      hi: "कृपया एक मान्य तारीख चुनें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਤਾਰੀਖ਼ ਚੁਣੋ।",
+      ja: "有効な日付をお選びください。",
+      uk: "Будь ласка, оберіть коректну дату.",
+      he: "אנא בחרו תאריך תקין.",
+      km: "សូមជ្រើសរើសកាលបរិច្ឆេទដែលត្រឹមត្រូវ។",
+      fr: "Veuillez choisir une date valide.",
+      pt: "Por favor, escolha uma data válida."
     },
     "Please choose a future date.": {
       es: "Por favor elija una fecha futura.",
@@ -4715,7 +8927,16 @@
       ko: "오늘 이후의 날짜를 선택해 주세요.",
       hy: "Խնդրում ենք ընտրել գալիք ամսաթիվ։",
       ru: "Пожалуйста, выберите дату в будущем.",
-      ar: "يرجى اختيار تاريخ قادم في المستقبل."
+      ar: "يرجى اختيار تاريخ قادم في المستقبل.",
+      fa: "لطفاً تاریخی در آینده انتخاب کنید.",
+      hi: "कृपया भविष्य की कोई तारीख चुनें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਆਉਣ ਵਾਲੀ ਤਾਰੀਖ਼ ਚੁਣੋ।",
+      ja: "本日以降の日付をお選びください。",
+      uk: "Будь ласка, оберіть дату в майбутньому.",
+      he: "אנא בחרו תאריך עתידי.",
+      km: "សូមជ្រើសរើសកាលបរិច្ឆេទនៅពេលអនាគត។",
+      fr: "Veuillez choisir une date future.",
+      pt: "Por favor, escolha uma data futura."
     },
     "Please choose a date within the next 3 months.": {
       es: "Por favor elija una fecha dentro de los próximos 3 meses.",
@@ -4725,7 +8946,16 @@
       ko: "향후 3개월 이내의 날짜를 선택해 주세요.",
       hy: "Խնդրում ենք ընտրել առաջիկա 3 ամսվա ընթացքում գտնվող ամսաթիվ։",
       ru: "Пожалуйста, выберите дату в пределах ближайших 3 месяцев.",
-      ar: "يرجى اختيار تاريخ خلال الأشهر الثلاثة القادمة."
+      ar: "يرجى اختيار تاريخ خلال الأشهر الثلاثة القادمة.",
+      fa: "لطفاً تاریخی در ۳ ماه آینده انتخاب کنید.",
+      hi: "कृपया अगले 3 महीनों के भीतर की कोई तारीख चुनें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਅਗਲੇ 3 ਮਹੀਨਿਆਂ ਦੇ ਅੰਦਰ ਦੀ ਤਾਰੀਖ਼ ਚੁਣੋ।",
+      ja: "本日より3か月以内の日付をお選びください。",
+      uk: "Будь ласка, оберіть дату в межах наступних 3 місяців.",
+      he: "אנא בחרו תאריך בתוך 3 החודשים הקרובים.",
+      km: "សូមជ្រើសរើសកាលបរិច្ឆេទក្នុងរយៈពេល 3 ខែខាងមុខ។",
+      fr: "Veuillez choisir une date dans les 3 prochains mois.",
+      pt: "Por favor, escolha uma data dentro dos próximos 3 meses."
     },
     "Please choose a time from the list.": {
       es: "Por favor elija un horario de la lista.",
@@ -4735,7 +8965,16 @@
       ko: "목록에서 시간대를 선택해 주세요.",
       hy: "Խնդրում ենք ցանկից ընտրել ժամանակահատված։",
       ru: "Пожалуйста, выберите время из списка.",
-      ar: "يرجى اختيار وقت من القائمة."
+      ar: "يرجى اختيار وقت من القائمة.",
+      fa: "لطفاً یک زمان از فهرست انتخاب کنید.",
+      hi: "कृपया सूची में से एक समय चुनें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਸੂਚੀ ਵਿੱਚੋਂ ਸਮਾਂ ਚੁਣੋ।",
+      ja: "リストからご希望の時間帯をお選びください。",
+      uk: "Будь ласка, оберіть час зі списку.",
+      he: "אנא בחרו שעה מהרשימה.",
+      km: "សូមជ្រើសរើសពេលវេលាពីបញ្ជី។",
+      fr: "Veuillez choisir un horaire dans la liste.",
+      pt: "Por favor, escolha um horário da lista."
     },
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": {
       es: "Por favor complete la verificación de seguridad. Si no aparece, llame al (818) 217-5755 o escriba a loveRCFE@gmail.com.",
@@ -4745,7 +8984,16 @@
       ko: "보안 확인을 완료해 주세요. 화면에 나타나지 않으면 (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 연락해 주세요.",
       hy: "Խնդրում ենք անցնել անվտանգության ստուգումը։ Եթե այն չի երևում, զանգահարեք (818) 217-5755 կամ գրեք loveRCFE@gmail.com։",
       ru: "Пожалуйста, пройдите проверку безопасности. Если она не отображается, позвоните (818) 217-5755 или напишите на loveRCFE@gmail.com.",
-      ar: "يرجى إتمام التحقق الأمني. إذا لم يظهر، اتصل على (818) 217-5755 أو راسل loveRCFE@gmail.com."
+      ar: "يرجى إتمام التحقق الأمني. إذا لم يظهر، اتصل على (818) 217-5755 أو راسل loveRCFE@gmail.com.",
+      fa: "لطفاً بررسی امنیتی را تکمیل کنید. اگر نمایش داده نمی‌شود، با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید.",
+      hi: "कृपया सुरक्षा जांच पूरी करें। यदि यह दिखाई नहीं देती है, तो (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।",
+      pa: "ਕਿਰਪਾ ਕਰਕੇ ਸੁਰੱਖਿਆ ਜਾਂਚ ਪੂਰੀ ਕਰੋ। ਜੇ ਇਹ ਦਿਖਾਈ ਨਹੀਂ ਦਿੰਦੀ, ਤਾਂ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
+      ja: "セキュリティ確認を完了してください。表示されない場合は、(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。",
+      uk: "Будь ласка, пройдіть перевірку безпеки. Якщо вона не відображається, зателефонуйте на (818) 217-5755 або напишіть на loveRCFE@gmail.com.",
+      he: "אנא השלימו את בדיקת האבטחה. אם אינה מופיעה, התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
+      km: "សូមបំពេញការត្រួតពិនិត្យសុវត្ថិភាព។ ប្រសិនបើវាមិនបង្ហាញទេ សូមទូរស័ព្ទទៅ (818) 217-5755 ឬអ៊ីមែល loveRCFE@gmail.com។",
+      fr: "Veuillez effectuer la vérification de sécurité. Si elle ne s'affiche pas, appelez le (818) 217-5755 ou écrivez à loveRCFE@gmail.com.",
+      pt: "Por favor, conclua a verificação de segurança. Caso ela não apareça, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com."
     },
     "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": {
       es: "La verificación de seguridad no está disponible temporalmente. Llame al (818) 217-5755 o escriba a loveRCFE@gmail.com.",
@@ -4755,7 +9003,16 @@
       ko: "보안 인증을 일시적으로 이용할 수 없습니다. (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 문의해 주세요.",
       hy: "Անվտանգության ստուգումը ժամանակավորապես անհասանելի է։ Զանգահարեք (818) 217-5755 կամ գրեք loveRCFE@gmail.com։",
       ru: "Проверка безопасности временно недоступна. Позвоните (818) 217-5755 или напишите на loveRCFE@gmail.com.",
-      ar: "التحقق الأمني غير متاح مؤقتاً. يرجى الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com."
+      ar: "التحقق الأمني غير متاح مؤقتاً. يرجى الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com.",
+      fa: "تأیید امنیتی موقتاً در دسترس نیست. لطفاً با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید.",
+      hi: "सुरक्षा सत्यापन अस्थायी रूप से अनुपलब्ध है। कृपया (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।",
+      pa: "ਸੁਰੱਖਿਆ ਤਸਦੀਕ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
+      ja: "セキュリティ認証が一時的にご利用いただけません。(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。",
+      uk: "Перевірка безпеки тимчасово недоступна. Будь ласка, зателефонуйте на (818) 217-5755 або напишіть на loveRCFE@gmail.com.",
+      he: "אימות האבטחה אינו זמין זמנית. אנא התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
+      km: "ការផ្ទៀងផ្ទាត់សុវត្ថិភាពមិនអាចប្រើបានជាបណ្តោះអាសន្នទេ។ សូមទូរស័ព្ទទៅ (818) 217-5755 ឬអ៊ីមែល loveRCFE@gmail.com។",
+      fr: "La vérification de sécurité est temporairement indisponible. Veuillez appeler le (818) 217-5755 ou écrire à loveRCFE@gmail.com.",
+      pt: "A verificação de segurança está temporariamente indisponível. Por favor, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com."
     }
   };
 

@@ -570,19 +570,26 @@
     html:not(.dark) .text-brand-accent { color: #8a4f2c; }
     html:not(.dark) .bg-brand-accent { background-color: #8a4f2c; }
     html:not(.dark) .border-brand-accent { border-color: #8a4f2c; }
-    html[lang="ar"] body {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) body {
       text-align: left;
     }
-    html[lang="ar"] :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote) {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote) {
       unicode-bidi: plaintext;
     }
-    html[lang="ar"] :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
       unicode-bidi: plaintext;
       text-align: left;
     }
-    html[lang="ar"] :is(a[href^="tel:"], input[type="tel"], input[type="email"], #neon-calculator-widget, .lang-dropdown) {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(a[href^="tel:"], input[type="tel"], input[type="email"], #neon-calculator-widget, .lang-dropdown) {
       direction: ltr;
       unicode-bidi: isolate;
+    }
+    .lang-dropdown {
+      scrollbar-width: thin;
+      scrollbar-color: #b7c6b1 transparent;
+    }
+    html.dark .lang-dropdown {
+      scrollbar-color: #365041 transparent;
     }
   </style>
 </head>
@@ -648,8 +655,8 @@
               <span class="lang-current-code notranslate" translate="no">EN</span>
               <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
             </button>
-            <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-56 rounded-2xl border shadow-xl py-1.5 z-50">
-              <div class="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
+            <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-56 max-h-80 overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
+              <div class="sticky top-0 z-10 bg-inherit px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
               <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
                 <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
                 <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green"></i>
@@ -686,6 +693,42 @@
                 <span><span>العربية</span> <span class="text-xs text-brand-muted ml-1">Arabic</span></span>
                 <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
               </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="fa" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>فارسی</span> <span class="text-xs text-brand-muted ml-1">Persian</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="hi" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>हिन्दी</span> <span class="text-xs text-brand-muted ml-1">Hindi</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="pa" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>ਪੰਜਾਬੀ</span> <span class="text-xs text-brand-muted ml-1">Punjabi</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="ja" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>日本語</span> <span class="text-xs text-brand-muted ml-1">Japanese</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="uk" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>Українська</span> <span class="text-xs text-brand-muted ml-1">Ukrainian</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="he" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>עברית</span> <span class="text-xs text-brand-muted ml-1">Hebrew</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="km" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>ខ្មែរ</span> <span class="text-xs text-brand-muted ml-1">Khmer</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>Français</span> <span class="text-xs text-brand-muted ml-1">French</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="pt" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>Português</span> <span class="text-xs text-brand-muted ml-1">Portuguese</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
             </div>
           </div>
 
@@ -704,8 +747,8 @@
             <i data-lucide="globe" class="w-4 h-4"></i>
             <span class="lang-current-code notranslate" translate="no">EN</span>
           </button>
-          <div id="lang-dropdown-mobile" role="menu" aria-labelledby="lang-toggle-btn-mobile" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-52 rounded-2xl border shadow-xl py-1.5 z-50">
-            <div class="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
+          <div id="lang-dropdown-mobile" role="menu" aria-labelledby="lang-toggle-btn-mobile" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-52 max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
+            <div class="sticky top-0 z-10 bg-inherit px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
             <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
               <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green"></i>
@@ -740,6 +783,42 @@
             </button>
             <button type="button" role="menuitemradio" aria-checked="false" data-lang="ar" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
               <span><span>العربية</span> <span class="text-xs text-brand-muted ml-1">Arabic</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="fa" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>فارسی</span> <span class="text-xs text-brand-muted ml-1">Persian</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="hi" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>हिन्दी</span> <span class="text-xs text-brand-muted ml-1">Hindi</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="pa" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>ਪੰਜਾਬੀ</span> <span class="text-xs text-brand-muted ml-1">Punjabi</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="ja" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>日本語</span> <span class="text-xs text-brand-muted ml-1">Japanese</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="uk" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Українська</span> <span class="text-xs text-brand-muted ml-1">Ukrainian</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="he" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>עברית</span> <span class="text-xs text-brand-muted ml-1">Hebrew</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="km" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>ខ្មែរ</span> <span class="text-xs text-brand-muted ml-1">Khmer</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Français</span> <span class="text-xs text-brand-muted ml-1">French</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="pt" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Português</span> <span class="text-xs text-brand-muted ml-1">Portuguese</span></span>
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
             </button>
           </div>

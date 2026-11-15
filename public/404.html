@@ -59,20 +59,61 @@
     html.dark .lang-option:hover { background-color: #24352b !important; }
     html.dark .lang-option[aria-checked="true"] { background-color: #1e3327 !important; color: #4ade80 !important; font-weight: 700; }
     html.dark footer { border-color: #283a30 !important; }
-    html[lang="ar"] body {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) body {
       text-align: left;
     }
-    html[lang="ar"] :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote) {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote) {
       unicode-bidi: plaintext;
     }
-    html[lang="ar"] :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
       unicode-bidi: plaintext;
       text-align: left;
     }
-    html[lang="ar"] :is(a[href^="tel:"], .lang-dropdown) {
+    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(a[href^="tel:"], .lang-dropdown) {
       direction: ltr;
       unicode-bidi: isolate;
     }
+    .lang-dropdown {
+      scrollbar-width: thin;
+      scrollbar-color: #b7c6b1 transparent;
+    }
+    html.dark .lang-dropdown {
+      scrollbar-color: #365041 transparent;
+    }
+    .hero-404-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      direction: ltr;
+    }
+    .hero-404-svg {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 12px 24px rgba(49, 93, 72, 0.12));
+    }
+    .hero-404-digit {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 138px;
+      fill: #315d48;
+      letter-spacing: -0.04em;
+    }
+    .hero-404-halo { fill: #e8f1e4; }
+    .hero-404-ring-outer { stroke: #315d48; }
+    .hero-404-ring-inner { fill: #f9e7d6; stroke: #8a4f2c; }
+    .hero-404-tick { stroke: #8a4f2c; }
+    .hero-404-house { stroke: #315d48; fill: none; }
+    .hero-404-heart { fill: #8a4f2c; }
+    html.dark .hero-404-svg { filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45)); }
+    html.dark .hero-404-digit { fill: #4ade80; }
+    html.dark .hero-404-halo { fill: #1e2e24; }
+    html.dark .hero-404-ring-outer { stroke: #4ade80; }
+    html.dark .hero-404-ring-inner { fill: #28201a; stroke: #f0a57d; }
+    html.dark .hero-404-tick { stroke: #f0a57d; }
+    html.dark .hero-404-house { stroke: #86efac; }
+    html.dark .hero-404-heart { fill: #f0a57d; }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-ink min-h-screen flex flex-col">
@@ -95,8 +136,8 @@
             <span class="lang-current-code notranslate" translate="no">EN</span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
           </button>
-          <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-56 rounded-2xl border shadow-xl py-1.5 z-50">
-            <div class="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
+          <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-56 max-h-80 overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
+            <div class="sticky top-0 z-10 bg-inherit px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
             <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
               <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green"></i>
@@ -133,6 +174,42 @@
               <span><span>العربية</span> <span class="text-xs text-brand-muted ml-1">Arabic</span></span>
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
             </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="fa" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>فارسی</span> <span class="text-xs text-brand-muted ml-1">Persian</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="hi" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>हिन्दी</span> <span class="text-xs text-brand-muted ml-1">Hindi</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="pa" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>ਪੰਜਾਬੀ</span> <span class="text-xs text-brand-muted ml-1">Punjabi</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="ja" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>日本語</span> <span class="text-xs text-brand-muted ml-1">Japanese</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="uk" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Українська</span> <span class="text-xs text-brand-muted ml-1">Ukrainian</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="he" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>עברית</span> <span class="text-xs text-brand-muted ml-1">Hebrew</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="km" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>ខ្មែរ</span> <span class="text-xs text-brand-muted ml-1">Khmer</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Français</span> <span class="text-xs text-brand-muted ml-1">French</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="pt" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>Português</span> <span class="text-xs text-brand-muted ml-1">Portuguese</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
           </div>
         </div>
         <button id="theme-btn" type="button" aria-label="Toggle dark mode" class="p-2.5 rounded-full border border-brand-line text-brand-ink hover:bg-brand-sageLight/60 transition flex items-center justify-center">
@@ -148,6 +225,32 @@
 
   <main class="flex-1 flex items-center justify-center px-6 py-14 sm:py-20">
     <section class="surface bg-white max-w-2xl w-full rounded-3xl border border-brand-line shadow-lg p-8 sm:p-12 text-center">
+      <!-- Massive Editorial 404 Logo Emblem -->
+      <div class="hero-404-wrap notranslate" translate="no" aria-hidden="true">
+        <svg class="hero-404-svg" viewBox="0 0 460 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse class="hero-404-halo" cx="230" cy="84" rx="190" ry="64" opacity="0.65"/>
+          <text class="hero-404-digit" x="88" y="132" text-anchor="middle">4</text>
+
+          <!-- Central Care-Home + Heart "0" Medallion -->
+          <g transform="translate(230, 84)">
+            <circle class="hero-404-ring-outer" cx="0" cy="0" r="64" stroke-width="5.5" opacity="0.22"/>
+            <circle class="hero-404-ring-outer" cx="0" cy="0" r="56" stroke-width="6"/>
+            <circle class="hero-404-ring-inner" cx="0" cy="0" r="44" stroke-width="2.5" stroke-dasharray="5 5"/>
+            <line class="hero-404-tick" x1="0" y1="-64" x2="0" y2="-54" stroke-width="3.5" stroke-linecap="round"/>
+            <line class="hero-404-tick" x1="0" y1="54" x2="0" y2="64" stroke-width="3.5" stroke-linecap="round"/>
+            <line class="hero-404-tick" x1="-64" y1="0" x2="-54" y2="0" stroke-width="3.5" stroke-linecap="round"/>
+            <line class="hero-404-tick" x1="54" y1="0" x2="64" y2="0" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Residential roof outline -->
+            <path class="hero-404-house" d="M-24 -2 L0 -23 L24 -2" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero-404-house" d="M-17 3 V20 H17 V3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Warm care heart inside home -->
+            <path class="hero-404-heart" d="M0 15.5 C0 15.5 -10 8.5 -10 2.5 C-10 -0.8 -7.3 -3.2 -4.2 -3.2 C-2.2 -3.2 -0.8 -2.1 0 -0.7 C0.8 -2.1 2.2 -3.2 4.2 -3.2 C7.3 -3.2 10 -0.8 10 2.5 C10 8.5 0 15.5 0 15.5 Z"/>
+          </g>
+
+          <text class="hero-404-digit" x="372" y="132" text-anchor="middle">4</text>
+        </svg>
+      </div>
+
       <div class="inline-flex items-center gap-2 bg-brand-accentLight border border-brand-accent/20 px-3.5 py-1.5 rounded-full text-brand-accent eyebrow mb-5">
         <i data-lucide="compass" class="w-3.5 h-3.5"></i>
         <span>404 • Page Not Found</span>
