@@ -1,6 +1,30 @@
 import { ensureSchema, jsonResponse, clean, clientIp, tooManyRequests } from '../../lib/db.js';
 
 const LIMITS = { name: 120, email: 254, phone: 40, city: 100, message: 3000, inquiryType: 80, short: 80 };
+const MAX_DAYS_AHEAD = 100; // the booking form offers 90 days; small slack for time zones
+const TIME_RE = /^(morning|afternoon|late afternoon|evening)\b/i;
+const ALLOWED_SOURCES = new Set(['home', 'services', 'tools', 'approach', 'support', 'contact', 'terms', 'privacy']);
+
+// "YYYY-MM-DD" -> Date (UTC midnight) if it is a real calendar date, else null
+function parseYmd(str) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(str || '')) return null;
+  const [y, m, d] = str.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return date.getUTCFullYear() === y && date.getUTCMonth() === m - 1 && date.getUTCDate() === d ? date : null;
+}
+
+// Today's date in California, as YYYY-MM-DD
+function pacificToday() {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(new Date());
+}
+
+function addDays(ymd, n) {
+  const [y, m, d] = ymd.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d + n)).toISOString().slice(0, 10);
+}
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export async function onRequestPost({ request, env, waitUntil }) {
@@ -37,7 +61,7 @@ export async function onRequestPost({ request, env, waitUntil }) {
     message: clean(body.message, LIMITS.message),
     preferredDate: clean(body.preferred_date, LIMITS.short) || null,
     preferredTime: clean(body.preferred_time, LIMITS.short) || null,
-    source: clean(body.source, 40),
+    source: ALLOWED_SOURCES.has(clean(body.source, 40)) ? clean(body.source, 40) : (clean(body.source, 40) ? 'other' : ''),
   };
 
   const errors = {};
@@ -48,13 +72,23 @@ export async function onRequestPost({ request, env, waitUntil }) {
     errors.message = 'Please tell us a little about how we can help.';
   }
   if (kind === 'call_request') {
+    const dateOk = parseYmd(record.preferredDate);
     if (!record.preferredDate) {
       errors.preferred_date = 'Please choose a preferred date.';
-    } else if (/^\d{4}-\d{2}-\d{2}$/.test(record.preferredDate)) {
-      const [y, m, d] = record.preferredDate.split('-').map(Number);
-      if (new Date(y, m - 1, d).getDay() === 0) {
+    } else if (!dateOk) {
+      errors.preferred_date = 'Please choose a valid date.';
+    } else {
+      const today = pacificToday();
+      if (record.preferredDate < today) {
+        errors.preferred_date = 'Please choose a future date.';
+      } else if (record.preferredDate > addDays(today, MAX_DAYS_AHEAD)) {
+        errors.preferred_date = 'Please choose a date within the next 3 months.';
+      } else if (dateOk.getUTCDay() === 0) {
         errors.preferred_date = 'We make calls Monday through Saturday. Please pick another date.';
       }
+    }
+    if (record.preferredTime && !TIME_RE.test(record.preferredTime)) {
+      errors.preferred_time = 'Please choose a time from the list.';
     }
   }
 

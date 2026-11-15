@@ -88,7 +88,7 @@ async function authorize(request, env) {
   if (wait > 0) {
     return jsonResponse(
       { error: `Too many wrong passwords. Please try again in ${Math.ceil(wait / 60)} minute(s).` },
-      429,
+      423,
       { 'Retry-After': String(wait) }
     );
   }
@@ -146,7 +146,7 @@ export async function onRequestPatch({ request, env }) {
   const values = [];
   if ('handled' in body) {
     sets.push('handled = ?');
-    values.push(body.handled ? 1 : 0);
+    values.push(body.handled === true || body.handled === 1 ? 1 : 0);
   }
   if ('stage' in body) {
     if (!STAGES.includes(body.stage)) {
@@ -163,19 +163,19 @@ export async function onRequestPatch({ request, env }) {
     return jsonResponse({ error: 'Nothing to update.' }, 400);
   }
 
-  const update = await env.DB
+  await env.DB
     .prepare(`UPDATE leads SET ${sets.join(', ')} WHERE id = ?`)
     .bind(...values, id)
     .run();
-
-  if (!update?.meta?.changes) {
-    return jsonResponse({ error: 'Lead not found.' }, 404);
-  }
 
   const updated = await env.DB
     .prepare(`SELECT ${LEAD_COLUMNS} FROM leads WHERE id = ?`)
     .bind(id)
     .first();
+
+  if (!updated) {
+    return jsonResponse({ error: 'Lead not found.' }, 404);
+  }
 
   return jsonResponse({ lead: mapLead(updated) });
 }
