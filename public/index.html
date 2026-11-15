@@ -1225,7 +1225,7 @@
                 <div>
                   <span class="text-xs font-bold uppercase tracking-wider text-brand-muted">Estimated Monthly Investment</span>
                   <div class="mt-2 flex items-baseline gap-2">
-                    <span id="calc-result-range" aria-live="polite" class="display text-3xl sm:text-4xl font-bold text-brand-green">$5,200 – $6,400</span>
+                    <span id="calc-result-range" aria-live="polite" class="display text-3xl sm:text-4xl font-bold text-brand-green">$5,510 – $6,670</span>
                     <span class="text-xs text-brand-muted">/ month</span>
                   </div>
                   <p class="text-xs text-brand-muted mt-1">Estimates include base room and tiered care level add-ons. Illustrative only: actual rates vary by home and this is not a quote.</p>
@@ -1233,18 +1233,18 @@
                   <div class="mt-6 pt-6 border-t border-brand-line space-y-3 text-sm">
                     <div class="flex justify-between">
                       <span class="text-brand-muted">Residential 6-Bed Board &amp; Care:</span>
-                      <span id="calc-rcfe-price" class="font-bold text-brand-ink">$5,200/mo</span>
+                      <span id="calc-rcfe-price" class="font-bold text-brand-ink">$5,800/mo</span>
                     </div>
                     <div class="flex justify-between">
                       <span class="text-brand-muted">Large Assisted Living Community:</span>
-                      <span id="calc-facility-price" class="font-bold text-brand-ink">$6,100/mo</span>
+                      <span id="calc-facility-price" class="font-bold text-brand-ink">$7,250/mo</span>
                     </div>
                     <div class="flex justify-between items-baseline">
                       <div>
                         <span class="text-brand-muted">Equivalent 24/7 In-Home Agency Care:</span>
                         <span class="block text-[10px] text-brand-muted">720 hrs/mo at prevailing California agency rates</span>
                       </div>
-                      <span id="calc-homecare-price" class="font-bold text-red-700 dark:text-red-400">$25,920/mo</span>
+                      <span id="calc-homecare-price" class="font-bold text-red-700 dark:text-red-400">$27,360/mo</span>
                     </div>
                   </div>
 
@@ -1936,6 +1936,13 @@
                 You retain the right to inspect, correct, or request the deletion of any contact information we hold. Simply email us at <a href="mailto:loveRCFE@gmail.com" class="text-brand-green underline font-semibold">loveRCFE@gmail.com</a> with the subject "Data Removal Request."
               </p>
             </div>
+
+            <div>
+              <h2 class="display text-2xl font-semibold text-brand-ink mb-3">5. Services We Use</h2>
+              <p class="text-brand-muted leading-relaxed">
+                To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Resend and Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.
+              </p>
+            </div>
           </div>
 
           <div class="mt-8">
@@ -2335,7 +2342,7 @@
       if (!window.turnstile) return;
       document.querySelectorAll('.cf-ts').forEach(el => {
         if (tsWidgets[el.id] !== undefined) return;
-        if (el.closest('.hidden')) return; // booking popup renders when it opens
+        if (el.closest('[hidden], .hidden')) return; // renders when its page or popup is shown
         try {
           tsWidgets[el.id] = turnstile.render(el, { sitekey: TURNSTILE_SITE_KEY, theme: 'auto' });
         } catch (e) { tsShowError(el); }
@@ -2507,6 +2514,9 @@
 
       // Refresh icons in newly revealed view
       refreshIcons();
+
+      // Spam-check widget renders once its page is visible
+      if (typeof initTurnstile === 'function') initTurnstile();
     }
 
     // ==================== DARK / LIGHT MODE CONTROLLER ====================
@@ -2830,17 +2840,11 @@
       // Create Lucide Icons
       refreshIcons();
 
-      // Initialize Lead Inbox count badge
-      updateLeadBadge();
-
-      // Initialize Calculator values
-      calculateCosts();
-
-      // Initialize Date Picker in Booking Modal
-      initBookingDatePicker();
-
-      // Initialize In-Page Quiz Progress Bar
-      updateQuizProgress(1);
+      // Calculator values, booking date picker, and quiz progress bar.
+      // Each runs on its own so one failure can't stop the others (or the skip link below).
+      [calculateCosts, initBookingDatePicker, () => updateQuizProgress(1)].forEach(step => {
+        try { step(); } catch (err) { console.error('Init step failed:', err); }
+      });
 
       // Skip link: jump to content without changing the hash (which would break view routing)
       const skipLink = document.querySelector('a[href="#main-content"]');

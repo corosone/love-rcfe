@@ -172,7 +172,7 @@
     }
 
     function escapeHtml(str) {
-      if (!str) return '';
+      if (str == null) return '';
       return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -240,8 +240,10 @@
         if (err.status === 401) {
           sessionStorage.removeItem(TOKEN_KEY);
           showLogin(err.message);
-        } else if (err.status === 429) {
+        } else if (err.status === 423) {
           sessionStorage.removeItem(TOKEN_KEY);
+          showLogin(err.message);
+        } else if (err.status === 429) {
           showLogin(err.message);
         } else if (err.status === 503) {
           showLogin(err.message);
@@ -353,8 +355,8 @@
         const created = new Date(l.createdAt).toLocaleString('en-US', {
           month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'
         });
-        const telHref = 'tel:' + encodeURIComponent(String(l.phone || '').replace(/[^+\d]/g, ''));
-        const mailHref = 'mailto:' + encodeURIComponent(String(l.email || ''));
+        const telHref = 'tel:' + encodeURI(String(l.phone || '').replace(/[^+\d]/g, ''));
+        const mailHref = 'mailto:' + encodeURI(String(l.email || ''));
         return `
           <article class="surface bg-white rounded-2xl border border-brand-line p-5 shadow-sm space-y-3 ${l.handled ? 'opacity-75' : ''}">
             <div class="flex flex-wrap items-start justify-between gap-3">
