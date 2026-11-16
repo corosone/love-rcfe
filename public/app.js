@@ -1238,7 +1238,7 @@
         const rec = getCareRecommendation(ans);
         modalQuizState.lastRec = rec;
         const lang = window.LoveI18n ? window.LoveI18n.getLang() : 'en';
-        const modalUrgentHtml = (window.LoveI18n && window.LoveI18n.BLOCKS && window.LoveI18n.BLOCKS.modal_urgent_p && (window.LoveI18n.BLOCKS.modal_urgent_p[lang] || window.LoveI18n.BLOCKS.modal_urgent_p.en))
+        const modalUrgentHtml = (window.LoveI18n && typeof window.LoveI18n.getBlock === 'function' && window.LoveI18n.getBlock('modal_urgent_p'))
           || 'With an immediate 1–7 day timeframe, call our intake hotline at <a href="tel:+18182175755" data-call class="underline font-bold text-brand-ink dark:text-amber-300">(818) 217-5755</a> for emergency openings and priority tour booking.';
 
         content.innerHTML = `

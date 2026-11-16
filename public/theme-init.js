@@ -24,9 +24,27 @@
     // Same rule as i18n.js: an unknown ?lang= value falls back to the saved language.
     var sLang = LANG_RE.test(qLang || '') ? qLang : (localStorage.getItem('lovercfe_lang') || 'en');
     if (LANG_RE.test(sLang) && sLang !== 'en') {
-      document.documentElement.lang = sLang;
-      document.documentElement.setAttribute('translate', 'no');
-      document.documentElement.classList.add('notranslate');
+      var root = document.documentElement;
+      root.lang = sLang;
+      root.setAttribute('translate', 'no');
+      root.classList.add('notranslate');
+      // Start downloading this language's translations now, while the page is still loading,
+      // and keep the page invisible until /i18n.js has applied them (at most 3 seconds).
+      var style = document.createElement('style');
+      style.id = 'i18n-pending-style';
+      style.textContent = 'html.i18n-pending body{visibility:hidden}';
+      document.head.appendChild(style);
+      root.classList.add('i18n-pending');
+      var data = document.createElement('script');
+      data.id = 'i18n-data-' + sLang;
+      data.src = '/i18n/' + sLang + '.js';
+      data.async = true;
+      data.onerror = function () {
+        data.setAttribute('data-failed', '1');
+        root.classList.remove('i18n-pending');
+      };
+      document.head.appendChild(data);
+      setTimeout(function () { root.classList.remove('i18n-pending'); }, 3000);
     }
   } catch (e) {}
 })();
