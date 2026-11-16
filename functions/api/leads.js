@@ -57,6 +57,8 @@ async function forwardToFormspree(endpoint, record, siteOrigin) {
         message: record.message,
         preferred_date: record.preferredDate,
         preferred_time: record.preferredTime,
+        ip_address: record.ip,
+        ip_location: record.ipPlace || 'Unknown',
       }),
     });
     if (!res.ok) {
@@ -105,6 +107,9 @@ export async function onRequestPost(context) {
     preferredDate: clean(body.preferred_date, LIMITS.short) || null,
     preferredTime: clean(body.preferred_time, LIMITS.short) || null,
     source: ALLOWED_SOURCES.has(rawSource) ? rawSource : (rawSource ? 'other' : ''),
+    // Who sent it, from Cloudflare (never from the form): shown in the inbox, console and email.
+    ip: ip.slice(0, 64),
+    ipPlace: cfLocation(request).slice(0, 80),
   };
 
   const errors = {};
@@ -191,9 +196,8 @@ export async function onRequestPost(context) {
         record.preferredDate,
         record.preferredTime,
         record.source,
-        // Shown to staff and the developer next to the message. Not included in the notification email.
-        ip.slice(0, 64),
-        cfLocation(request).slice(0, 80)
+        record.ip,
+        record.ipPlace
       )
       .run();
 
