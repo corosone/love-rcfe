@@ -1,9 +1,9 @@
 import {
-  ensureSchema, jsonResponse, verifySameOrigin, readJsonBody, clientIp, tooManyRequests,
-  checkAdminConfig, checkAdminPrereqs, checkPasswordWithLockout, enforceTurnstile, getCookie,
-  getSessionSigningMaterial, createSessionToken, revokeSessionToken, sessionCookieHeader,
-  SESSION_COOKIE, SESSION_TTL_SEC,
+  jsonResponse, verifySameOrigin, readJsonBody, clientIp, tooManyRequests,
+  checkAdminConfig, checkAdminPrereqs, checkPasswordWithLockout, enforceTurnstile,
+  getSessionSigningMaterial, createSessionToken, sessionCookieHeader, SESSION_TTL_SEC,
 } from '../../../lib/db.js';
+import { signOutEverywhere } from '../../../lib/dev.js';
 
 // Staff sign-in. Order matters: cheap checks first, then the Turnstile spam check,
 // and only then anything that writes to the database (rate limits, lockout, session).
@@ -52,27 +52,9 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-// Sign out: revoke this session on the server and clear the cookie.
-export async function onRequestDelete({ request, env }) {
-  const originErr = verifySameOrigin(request);
-  if (originErr) return originErr;
-
-  const token = getCookie(request, SESSION_COOKIE);
-  if (token && env?.DB) {
-    try {
-      await ensureSchema(env.DB);
-      const material = await getSessionSigningMaterial(env, { create: false });
-      if (material) {
-        await revokeSessionToken(token, material, env.DB);
-      }
-    } catch (err) {
-      console.warn('Session revocation skipped:', err?.message);
-    }
-  }
-
-  return jsonResponse({ ok: true }, 200, {
-    'Set-Cookie': sessionCookieHeader(request, '', 0),
-  });
+// Sign out: revoke this browser's sessions on the server and clear its cookies.
+export function onRequestDelete({ request, env }) {
+  return signOutEverywhere(request, env);
 }
 
 export function onRequest() {

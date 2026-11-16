@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Developer Console | Love RCFE</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23315d48'/%3E%3Cpath d='M16 24s-7-4.6-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 23 14c0 5.4-7 10-7 10z' fill='%23dce7d9'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+  <script src="/icons.js"></script>
+  <!-- Tailwind CSS: built at deploy time into /tailwind.css by "npm run build" -->
+  <link id="tw-css" rel="stylesheet" href="/tailwind.css">
+  <script src="/turnstile-gate.js"></script>
+  <script src="/corosone.js"></script>
+  <!-- Cloudflare Turnstile (hidden security check on the sign-in form) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=loveTurnstileReady" async defer crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .display { font-family: 'Fraunces', serif; }
+    html.dark body { background-color: #121915; color: #e6ede8; }
+    html.dark .surface { background-color: #1a251f !important; border-color: #2d4034 !important; }
+    html.dark .surface-soft { background-color: #151e19 !important; border-color: #2d4034 !important; }
+    html.dark .text-brand-ink { color: #e6ede8 !important; }
+    html.dark .text-brand-muted { color: #a7b8ad !important; }
+    html.dark .text-brand-green { color: #4ade80 !important; }
+    html.dark .text-brand-accent { color: #f0a57d !important; }
+    html.dark .border-brand-line { border-color: #2d4034 !important; }
+    html.dark .bg-brand-sageLight,
+    html.dark .bg-brand-sageLight\/60 { background-color: #1e2e24 !important; }
+    html.dark .bg-brand-cream\/70 { background-color: #151e19 !important; }
+    html.dark .hover\:bg-brand-sageLight\/40:hover { background-color: #24352b !important; }
+    html.dark input { background-color: #121915 !important; color: #e6ede8 !important; border-color: #2d4034 !important; }
+    .cf-ts.ts-visible { margin-top: 1rem; }
+    .code-input { letter-spacing: 0.5em; text-align: center; font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .dev-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .dev-table th { text-align: left; font-weight: 700; padding: 8px 10px; border-bottom: 1px solid #d9ded4; white-space: nowrap; }
+    .dev-table td { padding: 8px 10px; border-bottom: 1px solid #d9ded4; vertical-align: top; }
+    .dev-table tr:last-child td { border-bottom: 0; }
+    html.dark .dev-table th, html.dark .dev-table td { border-color: #2d4034; }
+    .dev-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+    @media (min-width: 640px) { .dev-stats { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; } }
+    .dev-scroll { overflow-x: auto; }
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: 8px; flex-shrink: 0; }
+    .status-ok { background: #16a34a; }
+    .status-warn { background: #d97706; }
+    .status-bad { background: #dc2626; }
+  </style>
+</head>
+<body class="bg-brand-cream text-brand-ink min-h-screen flex flex-col antialiased">
+  <header class="surface bg-white border-b border-brand-line sticky top-0 z-30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-9 h-9 rounded-xl bg-brand-green text-white flex items-center justify-center shrink-0" title="Back to Love RCFE website">
+          <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+        </a>
+        <div>
+          <h1 class="display text-lg font-bold leading-tight text-brand-ink">Love RCFE Developer Console</h1>
+          <p class="text-[11px] text-brand-muted">Owner access · email, password and emailed code required</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="theme-btn" type="button" class="p-2 rounded-full border border-brand-line text-brand-ink hover:bg-brand-sageLight/40 transition" aria-label="Toggle dark mode">
+          <i data-lucide="moon" class="w-4 h-4"></i>
+        </button>
+        <a id="inbox-link" href="/staff" class="hidden px-3.5 py-1.5 rounded-full border border-brand-line text-xs font-semibold text-brand-ink hover:bg-brand-sageLight/40 transition">
+          Staff Inbox
+        </a>
+        <button id="signout-btn" type="button" class="hidden px-3.5 py-1.5 rounded-full border border-brand-line text-xs font-semibold text-brand-muted hover:text-brand-ink transition">
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8">
+    <!-- Step 1: email + password -->
+    <section id="login-view" class="max-w-md mx-auto mt-8 surface bg-white rounded-3xl border border-brand-line shadow-lg p-7 sm:p-8">
+      <div class="w-11 h-11 rounded-2xl bg-brand-sageLight text-brand-green flex items-center justify-center mb-4">
+        <i data-lucide="shield-check" class="w-5 h-5"></i>
+      </div>
+      <h2 class="display text-2xl font-semibold text-brand-ink mb-1">Developer Sign In</h2>
+      <p class="text-sm text-brand-muted mb-6">Step 1 of 2. Enter your developer email and password. A 6-digit code will then be emailed to your verification address.</p>
+
+      <form id="login-form" class="space-y-4" novalidate>
+        <div>
+          <label for="dev-email" class="block text-xs font-bold uppercase tracking-wider text-brand-ink mb-1.5">Email</label>
+          <input id="dev-email" type="email" autocomplete="username" required maxlength="254" placeholder="Enter developer email" class="w-full px-4 py-3 rounded-xl border border-brand-line text-sm focus:outline-none focus:ring-2 focus:ring-brand-green">
+        </div>
+        <div>
+          <label for="dev-password" class="block text-xs font-bold uppercase tracking-wider text-brand-ink mb-1.5">Password</label>
+          <input id="dev-password" type="password" autocomplete="current-password" required maxlength="256" placeholder="Enter developer password" class="w-full px-4 py-3 rounded-xl border border-brand-line text-sm focus:outline-none focus:ring-2 focus:ring-brand-green">
+          <!-- Hidden security check: takes no space unless Cloudflare needs the visitor to tick a box -->
+          <div id="ts-dev" class="cf-ts flex justify-center"></div>
+        </div>
+        <button id="login-submit" type="submit" class="w-full rounded-full bg-brand-green text-white py-3 font-bold text-sm hover:bg-brand-greenDark transition shadow-sm disabled:opacity-60">
+          Continue
+        </button>
+        <p id="login-error" role="status" class="text-xs font-semibold text-red-600 dark:text-red-400 min-h-4"></p>
+      </form>
+    </section>
+
+    <!-- Step 2: emailed code -->
+    <section id="code-view" class="hidden max-w-md mx-auto mt-8 surface bg-white rounded-3xl border border-brand-line shadow-lg p-7 sm:p-8">
+      <div class="w-11 h-11 rounded-2xl bg-brand-sageLight text-brand-green flex items-center justify-center mb-4">
+        <i data-lucide="mail" class="w-5 h-5"></i>
+      </div>
+      <h2 class="display text-2xl font-semibold text-brand-ink mb-1">Check Your Email</h2>
+      <p class="text-sm text-brand-muted mb-6">Step 2 of 2. We emailed a 6-digit code to your verification address. It works for 10 minutes, in this browser only.</p>
+
+      <form id="code-form" class="space-y-4" novalidate>
+        <div>
+          <label for="dev-code" class="block text-xs font-bold uppercase tracking-wider text-brand-ink mb-1.5">6-digit code</label>
+          <input id="dev-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required placeholder="000000" class="code-input w-full px-4 py-3 rounded-xl border border-brand-line focus:outline-none focus:ring-2 focus:ring-brand-green">
+        </div>
+        <button id="code-submit" type="submit" class="w-full rounded-full bg-brand-green text-white py-3 font-bold text-sm hover:bg-brand-greenDark transition shadow-sm disabled:opacity-60">
+          Verify and Sign In
+        </button>
+        <p id="code-error" role="status" class="text-xs font-semibold text-red-600 dark:text-red-400 min-h-4"></p>
+        <div class="text-center">
+          <button id="code-restart" type="button" class="text-xs text-brand-muted hover:text-brand-ink underline">
+            Didn't get it? Start over
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Console -->
+    <section id="console-view" class="hidden space-y-6">
+      <div class="surface bg-white p-4 rounded-2xl border border-brand-line flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <p id="session-info" role="status" class="text-xs font-semibold text-brand-muted"></p>
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="/staff" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-green text-white text-xs font-bold hover:bg-brand-greenDark transition">
+            <i data-lucide="inbox" class="w-3.5 h-3.5"></i> Open Staff Inbox
+          </a>
+          <button id="refresh-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Numbers -->
+      <div class="dev-stats">
+        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+          <p class="text-xs font-semibold text-brand-muted">Total Leads</p>
+          <p id="stat-total" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+        </div>
+        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+          <p class="text-xs font-semibold text-brand-muted">Open Leads</p>
+          <p id="stat-open" class="display text-2xl font-bold text-brand-green mt-1">0</p>
+        </div>
+        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+          <p class="text-xs font-semibold text-brand-muted">New This Week</p>
+          <p id="stat-week" class="display text-2xl font-bold text-brand-accent mt-1">0</p>
+        </div>
+        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+          <p class="text-xs font-semibold text-brand-muted">Staff Signed In</p>
+          <p id="stat-staff" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+        </div>
+        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+          <p class="text-xs font-semibold text-brand-muted">Active Lockouts</p>
+          <p id="stat-lockouts" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- Settings check -->
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">Site Settings Check</h2>
+          <p class="text-xs text-brand-muted mb-3">Shows whether each Cloudflare setting is in place. Secret values are never shown.</p>
+          <ul id="config-list" class="space-y-2 text-xs text-brand-ink"></ul>
+        </div>
+
+        <!-- Tools -->
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">Tools</h2>
+          <p class="text-xs text-brand-muted mb-3">Each use is recorded in the activity log below.</p>
+          <div class="space-y-3">
+            <div>
+              <button type="button" data-tool="signout_staff" class="px-4 py-1.5 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition disabled:opacity-60">
+                Sign out all staff
+              </button>
+              <p class="text-[11px] text-brand-muted mt-1">Ends every staff inbox session. Staff sign in again with the staff password.</p>
+            </div>
+            <div>
+              <button type="button" data-tool="clear_lockouts" class="px-4 py-1.5 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition disabled:opacity-60">
+                Clear sign-in lockouts
+              </button>
+              <p class="text-[11px] text-brand-muted mt-1">Removes "too many wrong passwords" blocks so staff can sign in again.</p>
+            </div>
+            <div>
+              <button type="button" data-tool="test_lead_email" class="px-4 py-1.5 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition disabled:opacity-60">
+                Send test lead email
+              </button>
+              <p class="text-[11px] text-brand-muted mt-1">Sends a test through the enquiry notification email and reports whether it was accepted.</p>
+            </div>
+          </div>
+          <p id="tool-status" role="status" class="text-xs font-semibold text-brand-green mt-3 min-h-4"></p>
+        </div>
+      </div>
+
+      <!-- Activity -->
+      <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+        <h2 class="text-sm font-bold text-brand-ink mb-1">Developer Activity</h2>
+        <p class="text-xs text-brand-muted mb-3">The last 30 developer sign-in events and tool uses, newest first.</p>
+        <div class="dev-scroll">
+          <table class="dev-table text-brand-ink">
+            <thead>
+              <tr><th>When</th><th>Event</th><th>IP address</th><th>Details</th></tr>
+            </thead>
+            <tbody id="activity-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <p id="console-status" role="status" class="text-xs font-semibold text-brand-muted min-h-4"></p>
+    </section>
+  </main>
+</body>
+</html>

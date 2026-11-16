@@ -1,4 +1,4 @@
-import { jsonResponse, clean, readJsonBody, authorizeAdmin } from '../../../lib/db.js';
+import { jsonResponse, clean, readJsonBody, authorizeAdmin, readDevSession } from '../../../lib/db.js';
 
 const STAGES = ['new', 'called', 'tour', 'waiting'];
 const DEFAULT_LIMIT = 500;
@@ -64,10 +64,13 @@ export async function onRequestGet({ request, env }) {
 
     const rows = listRes?.results || [];
     const total = Number(countRow?.total ?? rows.length);
+    // Lets the inbox show a link back to the developer console for a signed-in developer.
+    const developer = Boolean(await readDevSession(request, env).catch(() => null));
     return jsonResponse({
       leads: rows.map(mapLead),
       total,
       hasMore: offset + rows.length < total,
+      ...(developer ? { developer: true } : {}),
     });
   } catch (err) {
     console.error('Failed to load leads:', err);

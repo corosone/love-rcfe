@@ -22,51 +22,9 @@
   }
 
   // ---------- Cloudflare Turnstile on the sign-in form ----------
-  // Same site key as the public contact forms. The server checks the token before it
-  // looks at the password, so automated password guessing is blocked up front.
-  const TURNSTILE_SITE_KEY = '0x4AAAAAAF_J9TXjVKsqM-AR';
-  let tsLoginWidget;
-
-  function initStaffTurnstile() {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initStaffTurnstile, { once: true });
-      return;
-    }
-    const el = document.getElementById('ts-login');
-    if (!el || !window.turnstile || tsLoginWidget !== undefined) return;
-    try {
-      tsLoginWidget = window.turnstile.render(el, {
-        sitekey: TURNSTILE_SITE_KEY,
-        theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
-      });
-    } catch (e) {
-      showTurnstileError(el);
-    }
-  }
-  // Called by the Turnstile script once it loads (?onload=initStaffTurnstile)
-  window.initStaffTurnstile = initStaffTurnstile;
-
-  function showTurnstileError(el) {
-    el.textContent = '';
-    const p = document.createElement('p');
-    p.className = 'text-xs font-semibold text-red-600 dark:text-red-400 text-center';
-    p.textContent = 'The security check could not load. Turn off ad or script blockers for this site, then reload the page.';
-    el.appendChild(p);
-  }
-
-  function turnstileToken() {
-    try {
-      return tsLoginWidget !== undefined ? (window.turnstile.getResponse(tsLoginWidget) || '') : '';
-    } catch (e) {
-      return '';
-    }
-  }
-
-  function resetTurnstile() {
-    try {
-      if (tsLoginWidget !== undefined) window.turnstile.reset(tsLoginWidget);
-    } catch (e) {}
-  }
+  // The check runs hidden in the background (see /turnstile-gate.js). The server verifies its
+  // token before it looks at the password, so automated password guessing is blocked up front.
+  const loginGate = window.LoveTurnstile ? window.LoveTurnstile.mount('ts-login') : null;
 
   function toggleTheme() {
     const dark = !document.documentElement.classList.contains('dark');
@@ -131,6 +89,8 @@
     document.getElementById('login-view').classList.remove('hidden');
     document.getElementById('dashboard-view').classList.add('hidden');
     document.getElementById('signout-btn').classList.add('hidden');
+    const devLink = document.getElementById('dev-link');
+    if (devLink) devLink.classList.add('hidden');
     document.getElementById('login-error').textContent = errorMsg;
   }
 
@@ -178,6 +138,9 @@
       allLeads = append ? [...allLeads, ...incoming] : incoming;
       totalLeads = Number(data.total ?? allLeads.length);
       hasMoreLeads = Boolean(data.hasMore);
+      // A signed-in developer gets a link back to the developer console.
+      const devLink = document.getElementById('dev-link');
+      if (devLink) devLink.classList.toggle('hidden', !data.developer);
       showDashboard();
       if (statusEl) {
         statusEl.textContent = hasMoreLeads
@@ -480,14 +443,21 @@
         const pw = document.getElementById('inbox-password').value;
         const btn = document.getElementById('login-submit');
         const errorEl = document.getElementById('login-error');
-        const token = turnstileToken();
-        if (tsLoginWidget !== undefined && !token) {
-          errorEl.textContent = 'Please complete the security check above, then try again.';
-          return;
-        }
         btn.disabled = true;
         errorEl.textContent = '';
+        let sent = false;
         try {
+          // Wait for the hidden security check (usually instant; it only shows a box if Cloudflare needs one).
+          let token = '';
+          if (loginGate) {
+            const check = await loginGate.getToken();
+            if (!check.token && check.reason !== 'unavailable') {
+              errorEl.textContent = loginGate.message(check.reason);
+              return;
+            }
+            token = check.token;
+          }
+          sent = true;
           await apiFetch('/api/admin/session', {
             method: 'POST',
             body: JSON.stringify({ password: pw, turnstile_token: token })
@@ -498,8 +468,8 @@
           errorEl.textContent = err.message;
         } finally {
           btn.disabled = false;
-          // Each Turnstile token works only once, so get a fresh one for the next attempt.
-          resetTurnstile();
+          // Each security-check token works only once, so get a fresh one for the next attempt.
+          if (sent && loginGate) loginGate.reset();
         }
       });
     }
@@ -568,13 +538,6 @@
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'hidden') flushUnsavedNotes();
     });
-
-    // Turnstile: render now if its script already loaded, otherwise its onload callback does it.
-    initStaffTurnstile();
-    setTimeout(() => {
-      const el = document.getElementById('ts-login');
-      if (el && !window.turnstile) showTurnstileError(el);
-    }, 6000);
 
     refreshIcons();
     loadLeads({ silentAuth: true });
