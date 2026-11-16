@@ -9,10 +9,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- Tailwind CSS: built at deploy time into /tailwind.css; falls back to the CDN via /staff.js if missing -->
+  <script src="/icons.js"></script>
+  <!-- Tailwind CSS: built at deploy time into /tailwind.css by "npm run build" -->
   <link id="tw-css" rel="stylesheet" href="/tailwind.css">
   <script src="/staff.js"></script>
+  <!-- Cloudflare Turnstile (spam protection on the sign-in form) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=initStaffTurnstile" async defer crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     body { font-family: 'DM Sans', sans-serif; }
     .display { font-family: 'Fraunces', serif; }
@@ -77,6 +79,7 @@
           <label for="inbox-password" class="block text-xs font-bold uppercase tracking-wider text-brand-ink mb-1.5">Inbox Password</label>
           <input id="inbox-password" type="password" autocomplete="current-password" required placeholder="Enter staff password" class="w-full px-4 py-3 rounded-xl border border-brand-line text-sm focus:outline-none focus:ring-2 focus:ring-brand-green">
         </div>
+        <div id="ts-login" class="cf-ts flex justify-center min-h-[65px]"></div>
         <button id="login-submit" type="submit" class="w-full rounded-full bg-brand-green text-white py-3 font-bold text-sm hover:bg-brand-greenDark transition shadow-sm disabled:opacity-60">
           Open Staff Inbox
         </button>

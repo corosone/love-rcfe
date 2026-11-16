@@ -1,34 +1,48 @@
 import {
-  ensureSchema, jsonResponse, verifySameOrigin, readJsonBody,
-  checkAdminPrereqs, checkPasswordWithLockout, getCookie, getSessionSecret,
-  createSessionToken, revokeSessionToken, sessionCookieHeader,
+  ensureSchema, jsonResponse, verifySameOrigin, readJsonBody, clientIp, tooManyRequests,
+  checkAdminConfig, checkAdminPrereqs, checkPasswordWithLockout, enforceTurnstile, getCookie,
+  getSessionSigningMaterial, createSessionToken, revokeSessionToken, sessionCookieHeader,
   SESSION_COOKIE, SESSION_TTL_SEC,
 } from '../../../lib/db.js';
 
+// Staff sign-in. Order matters: cheap checks first, then the Turnstile spam check,
+// and only then anything that writes to the database (rate limits, lockout, session).
 export async function onRequestPost({ request, env }) {
   const originErr = verifySameOrigin(request);
   if (originErr) return originErr;
 
-  const prereqError = await checkAdminPrereqs(request, env);
-  if (prereqError) return prereqError;
+  const configError = checkAdminConfig(env);
+  if (configError) return configError;
 
-  const parsed = await readJsonBody(request, 4096);
+  if (tooManyRequests(`signin:${clientIp(request)}`, 20, 60 * 1000)) {
+    return jsonResponse({ error: 'Too many login attempts. Please wait a minute and try again.' }, 429);
+  }
+
+  const parsed = await readJsonBody(request, 8192);
   if (!parsed.ok) return parsed.response;
   const body = parsed.data;
 
   if (typeof body.password !== 'string' || !body.password) {
     return jsonResponse({ error: 'Please enter the staff password.' }, 400);
   }
-  if (body.password.length > 256) {
-    return jsonResponse({ error: 'Incorrect password.' }, 401);
-  }
+
+  const turnstileError = await enforceTurnstile(
+    request,
+    env,
+    body.turnstile_token,
+    'Please complete the security check, then try again.'
+  );
+  if (turnstileError) return turnstileError;
+
+  const prereqError = await checkAdminPrereqs(request, env);
+  if (prereqError) return prereqError;
 
   const denied = await checkPasswordWithLockout(request, env, body.password);
   if (denied) return denied;
 
   try {
-    const secret = await getSessionSecret(env);
-    const token = await createSessionToken(secret, SESSION_TTL_SEC, env.DB);
+    const material = await getSessionSigningMaterial(env);
+    const token = await createSessionToken(material, SESSION_TTL_SEC, env.DB);
     return jsonResponse({ ok: true }, 200, {
       'Set-Cookie': sessionCookieHeader(request, token, SESSION_TTL_SEC),
     });
@@ -38,6 +52,7 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
+// Sign out: revoke this session on the server and clear the cookie.
 export async function onRequestDelete({ request, env }) {
   const originErr = verifySameOrigin(request);
   if (originErr) return originErr;
@@ -46,9 +61,9 @@ export async function onRequestDelete({ request, env }) {
   if (token && env?.DB) {
     try {
       await ensureSchema(env.DB);
-      const secret = await getSessionSecret(env);
-      if (secret) {
-        await revokeSessionToken(token, secret, env.DB);
+      const material = await getSessionSigningMaterial(env, { create: false });
+      if (material) {
+        await revokeSessionToken(token, material, env.DB);
       }
     } catch (err) {
       console.warn('Session revocation skipped:', err?.message);

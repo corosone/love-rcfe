@@ -1,5 +1,5 @@
 import {
-  ensureSchema, jsonResponse, clean, clientIp,
+  ensureSchema, jsonResponse, clean, clientIp, enforceTurnstile,
   verifySameOrigin, readJsonBody, tooManyRequests, tooManyRequestsD1,
 } from '../../lib/db.js';
 
@@ -31,7 +31,43 @@ function addDays(ymd, n) {
 
 const EMAIL_RE = /^[^\s@<>'"\u0000-\u001f]+@[^\s@<>'"\u0000-\u001f]+\.[^\s@<>'"\u0000-\u001f]{2,}$/;
 
-export async function onRequestPost({ request, env }) {
+const FORMSPREE_URL_RE = /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/;
+
+// Emails the saved lead to staff through Formspree. Runs on the server only, after the
+// Turnstile and rate-limit checks, so the form address is never exposed to visitors.
+// Never throws: the lead is already stored in D1, so a failed email must not fail the request.
+async function forwardToFormspree(endpoint, record, siteOrigin) {
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Origin: siteOrigin,
+        Referer: `${siteOrigin}/`,
+      },
+      body: JSON.stringify({
+        kind: record.kind,
+        inquiry_type: record.inquiryType,
+        name: record.name,
+        email: record.email,
+        phone: record.phone,
+        city: record.city,
+        message: record.message,
+        preferred_date: record.preferredDate,
+        preferred_time: record.preferredTime,
+      }),
+    });
+    if (!res.ok) {
+      console.error('Formspree email notification failed with HTTP status', res.status);
+    }
+  } catch (err) {
+    console.error('Formspree email notification could not be sent:', err?.message);
+  }
+}
+
+export async function onRequestPost(context) {
+  const { request, env } = context;
   const originErr = verifySameOrigin(request);
   if (originErr) return originErr;
 
@@ -108,24 +144,14 @@ export async function onRequestPost({ request, env }) {
   if (!record.message) record.message = '(no message)';
 
   // Turnstile spam check (enforced when TURNSTILE_SECRET is set; fails closed if REQUIRE_TURNSTILE=true)
-  if (env?.TURNSTILE_SECRET) {
-    const token = clean(body.turnstile_token, 4096);
-    const expectedHost = new URL(request.url).hostname;
-    const ok = token ? await verifyTurnstile(env.TURNSTILE_SECRET, token, ip, expectedHost) : false;
-    if (!ok) {
-      return jsonResponse(
-        { error: 'Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.' },
-        422
-      );
-    }
-  } else if (env?.REQUIRE_TURNSTILE === 'true') {
-    return jsonResponse(
-      { error: 'Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.' },
-      503
-    );
-  } else {
-    console.warn('TURNSTILE_SECRET is not set; relying on origin, payload, and D1 rate-limit protections.');
-  }
+  const turnstileError = await enforceTurnstile(
+    request,
+    env,
+    body.turnstile_token,
+    'Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.',
+    'Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.'
+  );
+  if (turnstileError) return turnstileError;
 
   if (!env?.DB) {
     return jsonResponse({ error: 'Database is not bound yet.' }, 503);
@@ -146,7 +172,7 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    const result = await env.DB
+    await env.DB
       .prepare(`
         INSERT INTO leads (
           kind, inquiry_type, name, email, phone, city, message, preferred_date, preferred_time, source
@@ -166,60 +192,35 @@ export async function onRequestPost({ request, env }) {
       )
       .run();
 
-    // Optional server-side Formspree forwarding if FORMSPREE_ENDPOINT is set in Cloudflare env
-    if (env?.FORMSPREE_ENDPOINT && /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/.test(env.FORMSPREE_ENDPOINT)) {
-      fetch(env.FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          kind: record.kind,
-          inquiry_type: record.inquiryType,
-          name: record.name,
-          email: record.email,
-          phone: record.phone,
-          city: record.city,
-          message: record.message,
-          preferred_date: record.preferredDate,
-          preferred_time: record.preferredTime,
-        }),
-      }).catch(() => {});
+    // Email notification: set FORMSPREE_ENDPOINT in Cloudflare Pages → Settings → Variables and Secrets.
+    // waitUntil keeps the function alive until the email request finishes, without delaying the visitor.
+    const formspreeEndpoint = typeof env?.FORMSPREE_ENDPOINT === 'string' ? env.FORMSPREE_ENDPOINT.trim() : '';
+    if (!formspreeEndpoint) {
+      console.warn('FORMSPREE_ENDPOINT is not set; the lead was saved to the staff inbox but no email was sent.');
+    } else if (!FORMSPREE_URL_RE.test(formspreeEndpoint)) {
+      console.error('FORMSPREE_ENDPOINT is not a valid Formspree form address (expected https://formspree.io/f/<form id>); no email was sent.');
+    } else {
+      context.waitUntil(forwardToFormspree(formspreeEndpoint, record, new URL(request.url).origin));
     }
 
-    return jsonResponse({ ok: true, id: result?.meta?.last_row_id ?? null }, 201);
+    // Optional automatic clean-up: set LEAD_RETENTION_DAYS (e.g. 365) in Cloudflare to delete
+    // leads older than that many days. Runs on roughly 1 in 20 submissions.
+    const retentionDays = Number.parseInt(env?.LEAD_RETENTION_DAYS || '', 10);
+    if (Number.isInteger(retentionDays) && retentionDays >= 30 && Math.random() < 0.05) {
+      context.waitUntil(
+        env.DB
+          .prepare("DELETE FROM leads WHERE created_at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now', ?)")
+          .bind(`-${retentionDays} days`)
+          .run()
+          .catch((err) => console.error('Lead retention clean-up failed:', err?.message))
+      );
+    }
+
+    // The lead number is not returned: sequential ids would reveal how many enquiries the site receives.
+    return jsonResponse({ ok: true }, 201);
   } catch (err) {
     console.error('Failed to save lead:', err);
     return jsonResponse({ error: 'Could not save your message right now.' }, 500);
-  }
-}
-
-// Returns true only when Turnstile verifies the token and hostname (fail-closed on network/API errors).
-async function verifyTurnstile(secret, token, ip, expectedHost) {
-  try {
-    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret, response: token, remoteip: ip }),
-    });
-    if (!res.ok) {
-      console.error('Turnstile verify HTTP error:', res.status);
-      return false;
-    }
-    const data = await res.json();
-    if (data.success !== true) return false;
-    if (
-      data.hostname &&
-      expectedHost &&
-      expectedHost !== 'localhost' &&
-      expectedHost !== '127.0.0.1' &&
-      data.hostname !== expectedHost
-    ) {
-      console.warn('Turnstile hostname mismatch:', data.hostname, 'vs', expectedHost);
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.error('Turnstile verify unreachable:', err);
-    return false;
   }
 }
 

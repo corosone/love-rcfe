@@ -9037,15 +9037,30 @@
     } catch (e) {}
   }
 
+  // Own-property lookups only. A plain obj[key] lookup would also find built-in
+  // properties such as "constructor" or "toString", so ?lang=constructor used to
+  // replace every piece of text on the page with "function Object() { [native code] }".
+  function own(obj, key) {
+    return obj != null && typeof key === 'string' && Object.prototype.hasOwnProperty.call(obj, key);
+  }
+  function pick(obj, key) {
+    return own(obj, key) ? obj[key] : undefined;
+  }
+  function translationOf(table, key, lang) {
+    var entry = pick(table, key);
+    var value = entry && typeof entry === 'object' ? pick(entry, lang) : undefined;
+    return typeof value === 'string' && value ? value : undefined;
+  }
+
   var currentLang = getSavedLang();
   syncDocumentLangAttrs(currentLang);
 
   function getSavedLang() {
     try {
       var q = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
-      if (q && LANGUAGES[q]) return q;
+      if (q && own(LANGUAGES, q)) return q;
       var saved = localStorage.getItem(STORAGE_KEY);
-      if (saved && LANGUAGES[saved]) return saved;
+      if (saved && own(LANGUAGES, saved)) return saved;
     } catch (e) {}
     return 'en';
   }
@@ -9057,8 +9072,9 @@
   function t(text, vars) {
     var raw = String(text || '');
     var out = raw;
-    if (currentLang !== 'en' && DICT[raw] && DICT[raw][currentLang]) {
-      out = DICT[raw][currentLang];
+    var tr = currentLang !== 'en' ? translationOf(DICT, raw, currentLang) : undefined;
+    if (tr) {
+      out = tr;
     }
     if (vars && typeof vars === 'object') {
       Object.keys(vars).forEach(function (k) {
@@ -9092,8 +9108,8 @@
       var key = el.getAttribute('data-i18n-block');
       if (currentLang === 'en') {
         el.innerHTML = origBlockMap.get(el);
-      } else if (BLOCKS[key] && BLOCKS[key][currentLang]) {
-        el.innerHTML = BLOCKS[key][currentLang];
+      } else if (translationOf(BLOCKS, key, currentLang)) {
+        el.innerHTML = translationOf(BLOCKS, key, currentLang);
       }
     });
 
@@ -9117,8 +9133,8 @@
         var norm = String(origVal || '').replace(/\s+/g, ' ').trim();
         if (currentLang === 'en') {
           el.setAttribute(attr, origVal);
-        } else if (DICT[norm] && DICT[norm][currentLang]) {
-          el.setAttribute(attr, DICT[norm][currentLang]);
+        } else if (translationOf(DICT, norm, currentLang)) {
+          el.setAttribute(attr, translationOf(DICT, norm, currentLang));
         }
       });
     });
@@ -9135,12 +9151,12 @@
         }
         var orig = origTextMap.get(textNode);
         var trimmed = orig.replace(/\s+/g, ' ').trim();
-        if (!trimmed || !DICT[trimmed]) continue;
+        if (!trimmed || !own(DICT, trimmed)) continue;
         var leadMatch = orig.match(/^\s*/);
         var trailMatch = orig.match(/\s*$/);
         var lead = leadMatch ? leadMatch[0] : '';
         var trail = trailMatch ? trailMatch[0] : '';
-        var translated = currentLang === 'en' ? trimmed : (DICT[trimmed][currentLang] || trimmed);
+        var translated = currentLang === 'en' ? trimmed : (translationOf(DICT, trimmed, currentLang) || trimmed);
         var nextVal = lead + translated + trail;
         if (textNode.nodeValue !== nextVal) {
           textNode.nodeValue = nextVal;
@@ -9155,7 +9171,7 @@
   }
 
   function updateHeaderControls() {
-    var meta = LANGUAGES[currentLang] || LANGUAGES.en;
+    var meta = pick(LANGUAGES, currentLang) || LANGUAGES.en;
     syncDocumentLangAttrs(currentLang);
 
     document.querySelectorAll('.lang-current-code').forEach(function (el) {
@@ -9246,7 +9262,7 @@
   }
 
   function setLang(code) {
-    var next = LANGUAGES[code] ? code : 'en';
+    var next = own(LANGUAGES, code) ? code : 'en';
     currentLang = next;
     saveLang(next);
     updateHeaderControls();
@@ -9333,7 +9349,7 @@
     init: init,
     setLang: setLang,
     getLang: function () { return currentLang; },
-    getIntlLocale: function () { return (LANGUAGES[currentLang] && LANGUAGES[currentLang].intl) || 'en-US'; },
+    getIntlLocale: function () { var m = pick(LANGUAGES, currentLang); return (m && m.intl) || 'en-US'; },
     t: t,
     applyDom: applyDom,
     toggleMenu: toggleMenu,

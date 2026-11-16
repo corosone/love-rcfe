@@ -31,10 +31,10 @@
   <!-- Cloudflare Turnstile (spam protection) -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=initTurnstile" async defer crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-- Lucide Icons -->
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Lucide icons (self-hosted subset, see /icons.js) -->
+  <script src="/icons.js"></script>
   
-  <!-- Tailwind CSS: built at deploy time into /tailwind.css; falls back to the CDN via /theme-init.js if missing -->
+  <!-- Tailwind CSS: built at deploy time into /tailwind.css by "npm run build" -->
   <link id="tw-css" rel="stylesheet" href="/tailwind.css">
   <script src="/theme-init.js"></script>
 

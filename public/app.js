@@ -4,8 +4,9 @@
       phoneDisplay: '(818) 217-5755',
       phoneCopy: '(818) 217-5755'
     };
-    // Formspree email notification fallback & Cloudflare Pages Functions + D1 API endpoint
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzerzkry';
+    // Leads are saved by the Cloudflare Pages Function at /api/leads (D1 database).
+    // Email notifications are sent by that function on the server (FORMSPREE_ENDPOINT in Cloudflare),
+    // never from the browser, so every email has passed the Turnstile and rate-limit checks.
     const FORM_ENDPOINT = (typeof window !== 'undefined' && typeof window.__FORM_ENDPOINT__ === 'string' && window.__FORM_ENDPOINT__.startsWith('/'))
       ? window.__FORM_ENDPOINT__
       : '/api/leads';
@@ -248,32 +249,13 @@
           };
         }
 
-        if (res.ok) {
-          // Also notify Formspree non-blockingly so inquiries reach email immediately
-          if (FORM_ENDPOINT === '/api/leads' && FORMSPREE_ENDPOINT) {
-            fetch(FORMSPREE_ENDPOINT, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({ ...record, _gotcha: '' }),
-              keepalive: true
-            }).catch(() => {});
-          }
-          return { ok: true, reason: '' };
-        }
+        if (res.ok) return { ok: true, reason: '' };
+
+        // Server error: the form handlers offer the email-draft / phone fallback
+        return { ok: false, reason: 'http-' + res.status };
       } catch (err) {
-        // Fall through to Formspree fallback only on network/5xx failure
+        return { ok: false, reason: 'network' };
       }
-
-      if (FORM_ENDPOINT === '/api/leads' && FORMSPREE_ENDPOINT) {
-        try {
-          const { res } = await postJson(FORMSPREE_ENDPOINT, { ...record, _gotcha: '' });
-          return { ok: res.ok, reason: res.ok ? '' : 'http-' + res.status };
-        } catch (err) {
-          return { ok: false, reason: 'network' };
-        }
-      }
-
-      return { ok: false, reason: 'http-error' };
     }
 
     function openMailDraft(record) {
@@ -668,10 +650,16 @@
     // Keyboard support for the calculator
     document.addEventListener('keydown', e => {
       const widget = document.getElementById('neon-calculator-widget');
-      if (!widget || widget.classList.contains('hidden')) return;
+      // Only when the calculator is actually on screen (open, and its page is the one showing)
+      if (!widget || widget.classList.contains('hidden') || widget.offsetParent === null) return;
+      // Leave shortcuts (Ctrl+C, Cmd+R, Alt+…) and popups alone
+      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || modalStack.length) return;
 
-      const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-      if (tag === 'input' || tag === 'textarea' || tag === 'select' || tag === 'button') return;
+      // Leave keys alone while focus is on anything interactive: form fields, buttons,
+      // links (Enter must still open a focused link), and editable content.
+      const active = document.activeElement;
+      if (active && active !== document.body && active.closest &&
+          active.closest('input, textarea, select, button, a[href], summary, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="link"], [role="menuitem"], [role="tab"]')) return;
 
       if (e.key >= '0' && e.key <= '9') {
         neonInput('NUM', e.key);

@@ -8,43 +8,6 @@
     }
   } catch (e) {}
 
-  function loadTwFallback() {
-    if (document.getElementById('tw-cdn-fallback')) return;
-    var s = document.createElement('script');
-    s.id = 'tw-cdn-fallback';
-    s.src = 'https://cdn.tailwindcss.com/3.4.17';
-    s.crossOrigin = 'anonymous';
-    s.referrerPolicy = 'no-referrer';
-    s.onload = function () {
-      if (window.tailwind) {
-        window.tailwind.config = {
-          darkMode: 'class',
-          theme: {
-            extend: {
-              colors: {
-                brand: {
-                  ink: '#26382f', muted: '#59685f', cream: '#f8f5ee', creamLight: '#fcfbfa',
-                  sage: '#dce7d9', sageLight: '#edf2e9', green: '#315d48', greenDark: '#203d30',
-                  accent: '#a96b46', accentLight: '#f5eee5', line: '#d9ded4'
-                }
-              },
-              fontFamily: {
-                sans: ['"DM Sans"', 'sans-serif'],
-                display: ['"Fraunces"', 'serif']
-              }
-            }
-          }
-        };
-      }
-    };
-    document.head.appendChild(s);
-  }
-
-  var twLink = document.getElementById('tw-css');
-  if (twLink) {
-    twLink.addEventListener('error', loadTwFallback);
-  }
-
   let allLeads = [];
   let totalLeads = 0;
   let hasMoreLeads = false;
@@ -56,6 +19,53 @@
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
     }
+  }
+
+  // ---------- Cloudflare Turnstile on the sign-in form ----------
+  // Same site key as the public contact forms. The server checks the token before it
+  // looks at the password, so automated password guessing is blocked up front.
+  const TURNSTILE_SITE_KEY = '0x4AAAAAAF_J9TXjVKsqM-AR';
+  let tsLoginWidget;
+
+  function initStaffTurnstile() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initStaffTurnstile, { once: true });
+      return;
+    }
+    const el = document.getElementById('ts-login');
+    if (!el || !window.turnstile || tsLoginWidget !== undefined) return;
+    try {
+      tsLoginWidget = window.turnstile.render(el, {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+      });
+    } catch (e) {
+      showTurnstileError(el);
+    }
+  }
+  // Called by the Turnstile script once it loads (?onload=initStaffTurnstile)
+  window.initStaffTurnstile = initStaffTurnstile;
+
+  function showTurnstileError(el) {
+    el.textContent = '';
+    const p = document.createElement('p');
+    p.className = 'text-xs font-semibold text-red-600 dark:text-red-400 text-center';
+    p.textContent = 'The security check could not load. Turn off ad or script blockers for this site, then reload the page.';
+    el.appendChild(p);
+  }
+
+  function turnstileToken() {
+    try {
+      return tsLoginWidget !== undefined ? (window.turnstile.getResponse(tsLoginWidget) || '') : '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function resetTurnstile() {
+    try {
+      if (tsLoginWidget !== undefined) window.turnstile.reset(tsLoginWidget);
+    } catch (e) {}
   }
 
   function toggleTheme() {
@@ -90,7 +100,7 @@
   const stageOptions = (cur) => Object.entries(STAGE_LABELS)
     .map(([v, label]) => `<option value="${escapeHtml(v)}" ${v === (cur || 'new') ? 'selected' : ''}>${escapeHtml(label)}</option>`).join('');
   const findLead = (id) => allLeads.find(l => Number(l.id) === Number(id));
-  const hasUnsavedNotes = () => allLeads.some(l => l._savedNotes !== undefined && l.notes !== l._savedNotes);
+  const hasUnsavedNotes = () => allLeads.some(l => l._savingNotes || (l._savedNotes !== undefined && l.notes !== l._savedNotes));
 
   function parseCreatedAt(raw) {
     if (!raw) return new Date(NaN);
@@ -133,6 +143,10 @@
   }
 
   async function signOut() {
+    // Save any note still being typed before the session ends.
+    await Promise.all(allLeads
+      .filter(l => l._savedNotes !== undefined && l.notes !== l._savedNotes)
+      .map(l => saveNote(Number(l.id))));
     try {
       await apiFetch('/api/admin/session', { method: 'DELETE' });
     } catch (e) {}
@@ -217,24 +231,74 @@
     }
   }
 
+  // Notes save automatically 1.5 seconds after you stop typing, when you click away,
+  // and (best effort) when the tab is closed. The browser also warns before leaving
+  // the page while a note has not been saved yet.
+  const NOTE_AUTOSAVE_MS = 1500;
+  const noteTimers = new Map();
+
   function noteDraft(id, value) {
     const target = findLead(id);
     if (!target) return;
     if (target._savedNotes === undefined) target._savedNotes = target.notes || '';
     target.notes = value;
+    const statusEl = document.getElementById('note-status-' + id);
+    if (statusEl && target.notes !== target._savedNotes) statusEl.textContent = 'Unsaved changes…';
+    clearTimeout(noteTimers.get(id));
+    noteTimers.set(id, setTimeout(() => saveNote(id), NOTE_AUTOSAVE_MS));
   }
 
   async function saveNote(id) {
+    clearTimeout(noteTimers.get(id));
+    noteTimers.delete(id);
     const target = findLead(id);
     if (!target || target._savedNotes === undefined || target.notes === target._savedNotes) return;
-    const statusEl = document.getElementById('note-status-' + id);
-    try {
-      await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, notes: target.notes }) });
-      target._savedNotes = target.notes;
-      if (statusEl) { statusEl.textContent = 'Saved'; setTimeout(() => { statusEl.textContent = ''; }, 2000); }
-    } catch (err) {
-      if (statusEl) statusEl.textContent = 'Not saved: ' + err.message;
+    if (target._savingNotes) {
+      // A save is already running; save again once it finishes so the latest text is stored.
+      target._saveAgain = true;
+      return;
     }
+    const sent = target.notes;
+    target._savingNotes = true;
+    const statusEl = () => document.getElementById('note-status-' + id);
+    if (statusEl()) statusEl().textContent = 'Saving…';
+    try {
+      await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, notes: sent }) });
+      // Mark only the text that was actually sent as saved (typing may have continued meanwhile).
+      target._savedNotes = sent;
+      const el = statusEl();
+      if (el && target.notes === sent) {
+        el.textContent = 'Saved';
+        setTimeout(() => { if (el.textContent === 'Saved') el.textContent = ''; }, 2000);
+      }
+    } catch (err) {
+      if (statusEl()) statusEl().textContent = 'Not saved: ' + err.message;
+      handleAuthFailure(err);
+    } finally {
+      target._savingNotes = false;
+      if (target._saveAgain) {
+        target._saveAgain = false;
+        if (target.notes !== target._savedNotes) saveNote(id);
+      }
+    }
+  }
+
+  // Last-chance save when the tab is hidden or closed. keepalive lets the request finish
+  // after the page is gone.
+  function flushUnsavedNotes() {
+    allLeads.forEach((l) => {
+      if (l._savedNotes === undefined || l.notes === l._savedNotes || l._savingNotes) return;
+      clearTimeout(noteTimers.get(Number(l.id)));
+      try {
+        fetch('/api/admin/leads', {
+          method: 'PATCH',
+          credentials: 'same-origin',
+          keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: Number(l.id), notes: l.notes }),
+        }).then((res) => { if (res.ok) l._savedNotes = l.notes; }).catch(() => {});
+      } catch (e) {}
+    });
   }
 
   async function deleteLead(id) {
@@ -416,12 +480,17 @@
         const pw = document.getElementById('inbox-password').value;
         const btn = document.getElementById('login-submit');
         const errorEl = document.getElementById('login-error');
+        const token = turnstileToken();
+        if (tsLoginWidget !== undefined && !token) {
+          errorEl.textContent = 'Please complete the security check above, then try again.';
+          return;
+        }
         btn.disabled = true;
         errorEl.textContent = '';
         try {
           await apiFetch('/api/admin/session', {
             method: 'POST',
-            body: JSON.stringify({ password: pw })
+            body: JSON.stringify({ password: pw, turnstile_token: token })
           });
           document.getElementById('inbox-password').value = '';
           await loadLeads();
@@ -429,6 +498,8 @@
           errorEl.textContent = err.message;
         } finally {
           btn.disabled = false;
+          // Each Turnstile token works only once, so get a fresh one for the next attempt.
+          resetTurnstile();
         }
       });
     }
@@ -485,6 +556,25 @@
         renderLeads();
       });
     }
+
+    // Warn before leaving the page while a note is unsaved, and try to save it on the way out.
+    window.addEventListener('beforeunload', (e) => {
+      if (isSignedIn && hasUnsavedNotes()) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+    window.addEventListener('pagehide', flushUnsavedNotes);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') flushUnsavedNotes();
+    });
+
+    // Turnstile: render now if its script already loaded, otherwise its onload callback does it.
+    initStaffTurnstile();
+    setTimeout(() => {
+      const el = document.getElementById('ts-login');
+      if (el && !window.turnstile) showTurnstileError(el);
+    }, 6000);
 
     refreshIcons();
     loadLeads({ silentAuth: true });

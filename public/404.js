@@ -8,43 +8,6 @@
     if (m) m.setAttribute('content', isDark ? '#121915' : '#315d48');
   } catch (e) {}
 
-  function loadTwFallback() {
-    if (document.getElementById('tw-cdn-fallback')) return;
-    var s = document.createElement('script');
-    s.id = 'tw-cdn-fallback';
-    s.src = 'https://cdn.tailwindcss.com/3.4.17';
-    s.crossOrigin = 'anonymous';
-    s.referrerPolicy = 'no-referrer';
-    s.onload = function () {
-      if (window.tailwind) {
-        window.tailwind.config = {
-          darkMode: 'class',
-          theme: {
-            extend: {
-              colors: {
-                brand: {
-                  ink: '#26382f', muted: '#59685f', cream: '#f8f5ee', creamLight: '#fcfbfa',
-                  sage: '#dce7d9', sageLight: '#edf2e9', green: '#315d48', greenDark: '#203d30',
-                  accent: '#a96b46', accentLight: '#f5eee5', line: '#d9ded4'
-                }
-              },
-              fontFamily: {
-                sans: ['"DM Sans"', 'sans-serif'],
-                display: ['"Fraunces"', 'serif']
-              }
-            }
-          }
-        };
-      }
-    };
-    document.head.appendChild(s);
-  }
-
-  var twLink = document.getElementById('tw-css');
-  if (twLink) {
-    twLink.addEventListener('error', loadTwFallback);
-  }
-
   function refreshIcons() {
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
