@@ -16,6 +16,8 @@
   const loginGate = window.LoveTurnstile ? window.LoveTurnstile.mount('ts-dev') : null;
   let signedIn = false;
   let lastOverview = null;
+  let blockedIps = new Set(); // addresses blocked from the forms and staff inbox
+  let yourIp = '';            // the address this console is being used from
 
   const $ = (id) => document.getElementById(id);
   const has = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
@@ -255,7 +257,9 @@
     cleanup_records: 'Tool: cleaned up old records',
     clear_requests: 'Tool: cleared request log',
     pause_requests: 'Tool: paused request logging',
-    resume_requests: 'Tool: resumed request logging'
+    resume_requests: 'Tool: resumed request logging',
+    block_ip: 'Tool: blocked an IP address',
+    unblock_ip: 'Tool: unblocked an IP address'
   };
 
   const FAILURE_LABELS = [
@@ -302,6 +306,9 @@
 
   function renderOverview(data) {
     lastOverview = data;
+    blockedIps = new Set((Array.isArray(data.blocks) ? data.blocks : []).map((b) => b.ip));
+    yourIp = String(data.yourIp || '');
+    renderBlocks(Array.isArray(data.blocks) ? data.blocks : []);
     const sec = data.security || {};
     $('stat-total').textContent = data.leads.total;
     $('stat-open').textContent = data.leads.open;
@@ -333,12 +340,12 @@
       fb.appendChild(el('tr', {}, [td(label), td(day(key), 'dv-num'), td(week(key), 'dv-num')]));
     });
     const sources = Array.isArray(sec.failureSources) ? sec.failureSources : [];
-    if (!sources.length) emptyRow($('sources-body'), 4, 'No failed sign-ins in the last 7 days.');
+    if (!sources.length) emptyRow($('sources-body'), 5, 'No failed sign-ins in the last 7 days.');
     else {
       const sb = $('sources-body');
       sb.textContent = '';
       sources.forEach((s) => {
-        sb.appendChild(el('tr', {}, [td(ipButton(s.ip)), td(s.count, 'dv-num'), td(s.place || 'Unknown'), td(formatTime(s.last))]));
+        sb.appendChild(el('tr', {}, [td(ipButton(s.ip)), td(s.count, 'dv-num'), td(s.place || 'Unknown'), td(formatTime(s.last)), td(blockAction(s.ip))]));
       });
     }
 
@@ -560,7 +567,7 @@
       if (!flags.childNodes.length) flags.appendChild(el('span', { className: 'text-brand-muted', text: 'None' }));
       // Clicking the IP address opens the Requests tab showing everything else it did.
       const from = l.ip
-        ? el('div', {}, [ipButton(l.ip), el('div', { className: 'text-brand-muted', text: l.ipPlace || 'Unknown location' })])
+        ? el('div', {}, [ipButton(l.ip), el('div', { className: 'text-brand-muted', text: l.ipPlace || 'Unknown location' }), (() => { const a = blockAction(l.ip); if (!a) return null; const w = el('div', { attrs: { style: 'margin-top:0.35rem' } }); w.appendChild(typeof a === 'string' ? document.createTextNode(a) : a); return w; })()])
         : el('span', { className: 'text-brand-muted', text: 'Not recorded', title: 'Sent before IP addresses were saved' });
       const tr = el('tr', {}, [td(box), td(formatIso(l.createdAt)), td(nameCell), td(contact), td(from), td(msg), td(flags)]);
       body.appendChild(tr);
@@ -638,21 +645,109 @@
   }
 
   // ---------- Requests ----------
-  // Page visits only by default. Forms and sign-ins also make requests to the site's server;
-  // those are recorded but only shown when chosen in the drop-down.
+  // The log holds page visits only (requests to the site's server are not recorded).
   let requestsQuery = { q: '', type: 'view' };
   let requestsRows = [];
   let requestsSeq = 0; // only the newest search may update the table
 
+  // An IP address as a link that shows its page visits, with a "Blocked" tag when it is blocked.
   function ipButton(ip) {
-    const b = el('button', { className: 'dv-link dv-mono', text: ip || 'unknown', attrs: { type: 'button', title: 'Show only this address' } });
+    const b = el('button', { className: 'dv-link dv-mono', text: ip || 'unknown', attrs: { type: 'button', title: 'Show this address\'s page visits' } });
     b.addEventListener('click', () => {
       $('requests-q').value = ip || '';
       loadedTabs.add('requests');
       setTab('requests', { load: false }); // loaded just below, already filtered
       loadRequests({ q: ip || '', type: $('requests-type').value });
     });
+    if (!blockedIps.has(ip)) return b;
+    return el('span', {}, [b, el('span', { className: 'dv-chip dv-chip-bad', text: 'Blocked', attrs: { style: 'margin-left:0.4rem' } })]);
+  }
+
+  // ---------- Blocked IP addresses ----------
+  // "Block" / "Unblock" button shown beside an address in the tables.
+  function blockAction(ip) {
+    if (!ip || ip === 'unknown') return '';
+    if (ip === yourIp) return el('span', { className: 'text-brand-muted', text: 'You' });
+    const blocked = blockedIps.has(ip);
+    const b = el('button', { className: 'dv-btn' + (blocked ? '' : ' dv-btn-danger'), text: blocked ? 'Unblock' : 'Block', attrs: { type: 'button' } });
+    b.addEventListener('click', () => (blocked ? unblockIp(ip, b) : startBlock(ip)));
     return b;
+  }
+
+  // Fills in the block form on the Security tab, so you can choose how long and add a reason.
+  function startBlock(ip) {
+    setTab('security');
+    $('block-ip').value = ip;
+    $('block-reason').value = '';
+    $('blocks-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => { try { $('block-reason').focus(); } catch (e) {} }, 300);
+  }
+
+  function renderBlocks(blocks) {
+    const body = $('blocks-body');
+    $('block-you').textContent = yourIp ? `You are using ${yourIp} right now, so that address cannot be blocked.` : '';
+    if (!blocks.length) { emptyRow(body, 6, 'No addresses are blocked.'); return; }
+    body.textContent = '';
+    blocks.forEach((x) => {
+      const unblock = el('button', { className: 'dv-btn', text: 'Unblock', attrs: { type: 'button' } });
+      unblock.addEventListener('click', () => unblockIp(x.ip, unblock));
+      body.appendChild(el('tr', {}, [
+        td(el('span', { className: 'dv-mono', text: x.ip })),
+        td(x.reason || '-'),
+        td(formatTime(x.createdAt)),
+        td(Number(x.expiresAt) === 0 ? 'Never' : formatTime(x.expiresAt)),
+        td(x.hits ? `${x.hits}${x.lastHit ? ' (last ' + formatTime(x.lastHit) + ')' : ''}` : '0', 'dv-num'),
+        td(unblock)
+      ]));
+    });
+  }
+
+  async function afterBlockChange() {
+    await loadOverview();
+    // Redraw lists that show "Blocked" tags and Block buttons.
+    if (loadedTabs.has('requests')) loadRequests(requestsQuery);
+    if (loadedTabs.has('leads')) loadLeads(leadsQuery);
+  }
+
+  async function submitBlock(e) {
+    e.preventDefault();
+    const ip = $('block-ip').value.trim();
+    const reason = $('block-reason').value.trim();
+    const days = Number($('block-days').value);
+    if (!ip) { setStatus('bad', 'Enter the IP address to block.'); $('block-ip').focus(); return; }
+    if (ip === yourIp) { setStatus('bad', 'That is the address you are using right now, so it cannot be blocked.'); return; }
+    const length = days === 0 ? 'permanently' : `for ${plural(days, 'day', 'days')}`;
+    if (!confirm(`Block ${ip} ${length}?\n\nIt will still be able to open the website, but it won't be able to send enquiries or call requests, or sign in to the staff inbox.`)) return;
+    const btn = $('block-submit');
+    btn.disabled = true;
+    setStatus('busy', 'Blocking…');
+    try {
+      const data = await callTool('block_ip', { ip, reason, days });
+      setStatus('ok', data.message);
+      $('block-ip').value = '';
+      $('block-reason').value = '';
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    } finally {
+      btn.disabled = false;
+    }
+    await afterBlockChange();
+  }
+
+  async function unblockIp(ip, button) {
+    if (!confirm(`Unblock ${ip}? It will be able to send enquiries and sign in to the staff inbox again.`)) return;
+    if (button) button.disabled = true;
+    setStatus('busy', 'Unblocking…');
+    try {
+      const data = await callTool('unblock_ip', { ip });
+      setStatus('ok', data.message);
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+      if (button) button.disabled = false;
+    }
+    await afterBlockChange();
   }
 
   async function loadRequests(query = requestsQuery, { append = false } = {}) {
@@ -686,45 +781,34 @@
 
   function renderRequests(data) {
     const s = data.last24h || {};
-    const visitsOnly = requestsQuery.type === 'view';
+    const notFoundOnly = requestsQuery.type === 'errors';
     $('req-total').textContent = s.total || 0;
     $('req-ips').textContent = s.uniqueIps || 0;
     $('req-errors').textContent = s.errors || 0;
-    $('req-total-label').textContent = visitsOnly ? 'Page Visits (24h)' : 'Requests (24h)';
-    $('req-errors-label').textContent = visitsOnly ? 'Pages Not Found (24h)' : 'Errors (24h)';
-    $('topips-count-label').textContent = visitsOnly ? 'Visits' : 'Requests';
-    $('topips-errors-label').textContent = visitsOnly ? 'Not found' : 'Errors';
-    $('requests-title').textContent = visitsOnly ? 'Page Visits' : 'Requests';
-    $('requests-path-label').textContent = visitsOnly ? 'Page' : 'Address';
-    $('requests-body').closest('table').classList.toggle('req-visits-only', visitsOnly);
+    $('requests-body').closest('table').classList.add('req-visits-only');
     $('requests-paused').classList.toggle('hidden', !data.paused);
     if (data.keep) {
-      $('requests-about').textContent = (visitsOnly
-        ? 'Every page visit, newest first, with the IP address it came from.'
-        : 'Page visits plus the server requests that forms and sign-ins make, newest first.')
-        + ` The newest ${Number(data.keep.rows).toLocaleString('en-US')} records are kept, for up to ${data.keep.days} days.`;
+      $('requests-about').textContent = 'Every page visit, newest first, with the IP address it came from.'
+        + ` The newest ${Number(data.keep.rows).toLocaleString('en-US')} are kept, for up to ${data.keep.days} days.`;
     }
 
     const tb = $('topips-body');
     const top = Array.isArray(data.topIps) ? data.topIps : [];
-    if (!top.length) emptyRow(tb, 6, visitsOnly ? 'No page visits in the last 24 hours.' : 'No requests in the last 24 hours.');
+    if (!top.length) emptyRow(tb, 7, 'No page visits in the last 24 hours.');
     else {
       tb.textContent = '';
-      top.forEach((t) => tb.appendChild(el('tr', {}, [td(ipButton(t.ip)), td(t.count, 'dv-num'), td(t.errors, 'dv-num'), td(t.place || 'Unknown'), td(t.device || ''), td(formatTime(t.last))])));
+      top.forEach((t) => tb.appendChild(el('tr', {}, [td(ipButton(t.ip)), td(t.count, 'dv-num'), td(t.errors, 'dv-num'), td(t.place || 'Unknown'), td(t.device || ''), td(formatTime(t.last)), td(blockAction(t.ip))])));
     }
 
     const body = $('requests-body');
     if (!requestsRows.length) {
-      emptyRow(body, 7, visitsOnly
-        ? (requestsQuery.q ? 'No page visits match. This address may only have used forms or sign-ins: choose "Page visits + server requests" above to check.' : 'No page visits recorded yet.')
-        : 'No requests match.');
+      emptyRow(body, 7, requestsQuery.q || notFoundOnly ? 'No page visits match.' : 'No page visits recorded yet.');
     } else {
       body.textContent = '';
       requestsRows.forEach((r) => {
-        const type = r.kind === 'view'
-          ? el('span', { className: 'dv-chip dv-chip-view', text: 'Page visit' })
-          : r.kind === 'note' ? el('span', { className: 'dv-chip dv-chip-note', text: 'Note' })
-          : el('span', { className: 'dv-chip dv-chip-api', text: 'Server ' + (r.method || '') });
+        const type = r.kind === 'note'
+          ? el('span', { className: 'dv-chip dv-chip-note', text: 'Note' })
+          : el('span', { className: 'dv-chip dv-chip-view', text: 'Page visit' });
         body.appendChild(el('tr', {}, [
           td(formatTime(r.at)), td(type), td(el('span', { className: 'dv-mono', text: r.path || '' })),
           td(statusChip(r)), td(ipButton(r.ip)), td(r.place || 'Unknown'), td(r.device || '')
@@ -732,7 +816,7 @@
       });
     }
     $('requests-more').classList.toggle('hidden', !data.hasMore);
-    $('requests-info').textContent = `Showing ${visitsOnly ? plural(requestsRows.length, 'page visit', 'page visits') : plural(requestsRows.length, 'request', 'requests')}${requestsQuery.q ? ` matching "${requestsQuery.q}"` : ''}.`;
+    $('requests-info').textContent = `Showing ${plural(requestsRows.length, notFoundOnly ? '"page not found" visit' : 'page visit', notFoundOnly ? '"page not found" visits' : 'page visits')}${requestsQuery.q ? ` matching "${requestsQuery.q}"` : ''}.`;
     refreshIcons();
   }
 
@@ -894,6 +978,7 @@
     $('requests-search').addEventListener('submit', (e) => { e.preventDefault(); loadRequests({ q: $('requests-q').value.trim(), type: $('requests-type').value }); });
     $('requests-reset').addEventListener('click', () => { $('requests-q').value = ''; $('requests-type').value = 'view'; loadRequests({ q: '', type: 'view' }); });
     $('requests-more').addEventListener('click', () => loadRequests(requestsQuery, { append: true }));
+    $('block-form').addEventListener('submit', submitBlock);
 
     $('sitecheck-btn').addEventListener('click', runSiteCheck);
     $('db-btn').addEventListener('click', checkDatabase);

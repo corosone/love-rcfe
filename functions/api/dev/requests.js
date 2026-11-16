@@ -1,15 +1,14 @@
-// GET /api/dev/requests — the request log (developer session required)
-//   ?q=      text to look for in the IP address, page/API address, location or browser
-//   ?type=   view (page visits only; what the console shows by default) | all | api | errors
-//            The 24-hour summary and busiest addresses count page visits only for "view",
-//            and everything otherwise.
+// GET /api/dev/requests — the page-visit log (developer session required)
+//   ?q=      text to look for in the IP address, page, location or browser
+//   ?type=   view (all page visits, the default) | errors (pages not found only)
+// Server requests recorded by an earlier version of the site are never shown.
 //   ?before= show rows older than this row number (for "Load older")
 import { jsonResponse } from '../../../lib/db.js';
 import { authorizeDev } from '../../../lib/dev.js';
 import { requestLogPaused, KEEP_ROWS, KEEP_DAYS } from '../../../lib/requestlog.js';
 
 const PAGE_SIZE = 100;
-const TYPES = new Set(['all', 'view', 'api', 'errors']);
+const TYPES = new Set(['view', 'errors']);
 const likeEscape = (s) => s.replace(/[\\%_]/g, (c) => `\\${c}`);
 
 export async function onRequestGet({ request, env }) {
@@ -18,15 +17,13 @@ export async function onRequestGet({ request, env }) {
 
   const params = new URL(request.url).searchParams;
   const q = (params.get('q') || '').trim().slice(0, 100);
-  const type = TYPES.has(params.get('type')) ? params.get('type') : 'all';
+  const type = TYPES.has(params.get('type')) ? params.get('type') : 'view';
   const beforeRaw = Number(params.get('before'));
   const before = Number.isInteger(beforeRaw) && beforeRaw > 0 ? beforeRaw : 0;
 
-  const where = [];
+  const where = ["kind IN ('view', 'note')"];
   const binds = [];
-  if (type === 'view') where.push("kind = 'view'");
-  else if (type === 'api') where.push("kind = 'api'");
-  else if (type === 'errors') where.push('status >= 400');
+  if (type === 'errors') where.push("kind = 'view' AND status >= 400");
   if (q) {
     const like = `%${likeEscape(q)}%`;
     where.push("(ip = ? OR ip LIKE ? ESCAPE '\\' OR path LIKE ? ESCAPE '\\' OR place LIKE ? ESCAPE '\\' OR device LIKE ? ESCAPE '\\')");
@@ -36,8 +33,8 @@ export async function onRequestGet({ request, env }) {
     where.push('id < ?');
     binds.push(before);
   }
-  const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
-  const scopeSql = type === 'view' ? "kind = 'view'" : "kind != 'note'"; // fixed text, never user input
+  const whereSql = `WHERE ${where.join(' AND ')}`;
+  const scopeSql = "kind = 'view'"; // fixed text, never user input
   const dayAgo = Math.floor(Date.now() / 1000) - 86400;
 
   try {

@@ -308,6 +308,32 @@
           </div>
         </div>
 
+        <div id="blocks-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">Blocked IP Addresses</h2>
+          <p class="text-xs text-brand-muted mb-3">A blocked address can still open the website, but it cannot send enquiries or call requests, or sign in to the staff inbox. It is shown a message with your phone number and email instead, in case it is a real person on a shared network. This console is never blocked. The "Turned away" count updates about once a minute.</p>
+          <form id="block-form" class="dv-toolbar" novalidate>
+            <label for="block-ip" class="sr-only">IP address to block</label>
+            <input id="block-ip" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="45" placeholder="IP address, e.g. 203.0.113.7" class="dv-input dv-mono">
+            <label for="block-reason" class="sr-only">Reason (optional)</label>
+            <input id="block-reason" type="text" maxlength="100" placeholder="Reason (optional), e.g. spam" class="dv-input">
+            <label for="block-days" class="sr-only">How long</label>
+            <select id="block-days" class="dv-input dv-select">
+              <option value="1">For 1 day</option>
+              <option value="7" selected>For 7 days</option>
+              <option value="30">For 30 days</option>
+              <option value="0">Permanently</option>
+            </select>
+            <button type="submit" id="block-submit" class="dv-btn dv-btn-danger">Block</button>
+          </form>
+          <p id="block-you" class="dv-help"></p>
+          <div class="dev-scroll mt-3">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>IP address</th><th>Reason</th><th>Blocked</th><th>Ends</th><th class="dv-num" title="Requests from this address that were turned away. Updated about once a minute.">Turned away</th><th></th></tr></thead>
+              <tbody id="blocks-body"></tbody>
+            </table>
+          </div>
+        </div>
+
         <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
           <h2 class="text-sm font-bold text-brand-ink mb-1">Failed Sign-in Summary</h2>
           <p class="text-xs text-brand-muted mb-3">How often sign-ins failed or were blocked. A few are normal (typos). Many from one address usually means someone is guessing.</p>
@@ -320,7 +346,7 @@
           <h3 class="text-xs font-bold text-brand-ink mt-5 mb-2">Where most failed attempts came from (last 7 days)</h3>
           <div class="dev-scroll">
             <table class="dev-table text-brand-ink">
-              <thead><tr><th>IP address</th><th class="dv-num">Attempts</th><th>Approximate location</th><th>Most recent</th></tr></thead>
+              <thead><tr><th>IP address</th><th class="dv-num">Attempts</th><th>Approximate location</th><th>Most recent</th><th></th></tr></thead>
               <tbody id="sources-body"></tbody>
             </table>
           </div>
@@ -391,7 +417,7 @@
           <p class="text-xs text-brand-muted mb-3">Select an address to see only what it did.</p>
           <div class="dev-scroll">
             <table class="dev-table text-brand-ink">
-              <thead><tr><th>IP address</th><th id="topips-count-label" class="dv-num">Visits</th><th id="topips-errors-label" class="dv-num">Not found</th><th>Approximate location</th><th>Browser</th><th>Last seen</th></tr></thead>
+              <thead><tr><th>IP address</th><th id="topips-count-label" class="dv-num">Visits</th><th id="topips-errors-label" class="dv-num">Not found</th><th>Approximate location</th><th>Browser</th><th>Last seen</th><th></th></tr></thead>
               <tbody id="topips-body"></tbody>
             </table>
           </div>
@@ -413,10 +439,8 @@
             <input id="requests-q" type="search" maxlength="100" placeholder="IP address, page, location or browser" class="dv-input">
             <label for="requests-type" class="sr-only">Type of request</label>
             <select id="requests-type" class="dv-input dv-select">
-              <option value="view" selected>Page visits</option>
-              <option value="all">Page visits + server requests</option>
-              <option value="api">Server requests only</option>
-              <option value="errors">Errors only</option>
+              <option value="view" selected>All page visits</option>
+              <option value="errors">Pages not found only</option>
             </select>
             <button type="submit" class="dv-btn">Show</button>
             <button type="button" id="requests-reset" class="dv-btn">Reset</button>

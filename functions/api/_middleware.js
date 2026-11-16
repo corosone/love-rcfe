@@ -1,7 +1,12 @@
-// Runs around every /api request: lets the request through unchanged, then records it in the
-// developer console's request log after the response has been sent (context.waitUntil), so it
-// never slows anything down. Logging errors are swallowed inside logRequest.
-import { logRequest, shouldLogApiRequest } from '../../lib/requestlog.js';
+// Runs in front of every /api request (the enquiry forms, the staff inbox and the developer
+// console). It turns away IP addresses blocked in the developer console, and otherwise lets
+// the request through unchanged. It does not record anything: the request log only holds
+// page visits (see functions/api/visit.js).
+//
+// Never blocked:
+//   /api/dev/...  the developer console, so the owner can always sign in and unblock
+//   /api/visit    page-visit records, so you can see whether a blocked address is still visiting
+import { isBlocked, recordBlockedHit, blockedResponse } from '../../lib/blocklist.js';
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -11,15 +16,10 @@ export async function onRequest(context) {
   } catch {
     return context.next();
   }
-  let response;
-  try {
-    response = await context.next();
-  } catch (err) {
-    if (shouldLogApiRequest(request.method, pathname, 500)) {
-      context.waitUntil(logRequest(env, request, { kind: 'api', method: request.method, path: pathname, status: 500 }));
-    }
-    throw err;
+
+  if (!pathname.startsWith('/api/dev/') && pathname !== '/api/visit' && (await isBlocked(env, request))) {
+    context.waitUntil(recordBlockedHit(env, request));
+    return blockedResponse();
   }
-  if (shouldLogApiRequest(request.method, pathname, response.status)) context.waitUntil(logRequest(env, request, { kind: 'api', method: request.method, path: pathname, status: response.status }));
-  return response;
+  return context.next();
 }

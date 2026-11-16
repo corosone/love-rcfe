@@ -5,6 +5,7 @@ import {
   authorizeDev, devAudit, FORMSPREE_URL_RE, setDevLock, sendTestCodeEmail, retentionDays,
 } from '../../../lib/dev.js';
 import { setRequestLogPaused } from '../../../lib/requestlog.js';
+import { addBlock, removeBlock } from '../../../lib/blocklist.js';
 
 const MAX_DELETE_IDS = 50; // Cloudflare D1 allows at most 100 values per query; stay well under it
 
@@ -53,6 +54,17 @@ const ACTIONS = {
   async unlock_dev(request, env) {
     await setDevLock(env, false);
     return { message: 'Developer sign-in is unlocked.' };
+  },
+
+  // Blocks an IP address from the enquiry forms and the staff inbox (options: ip, reason, days).
+  async block_ip(request, env, session, options) {
+    const r = await addBlock(env, request, options);
+    return r.ok ? { message: r.message, detail: `${r.ip} · ${r.length}` } : r;
+  },
+
+  async unblock_ip(request, env, session, options) {
+    const r = await removeBlock(env, options?.ip);
+    return r.ok ? { message: r.message, detail: r.ip } : r;
   },
 
   // ----- Email checks -----
@@ -148,11 +160,13 @@ const ACTIONS = {
       env.DB.prepare('DELETE FROM admin_sessions WHERE expires_at <= ?').bind(now).run(),
       env.DB.prepare('DELETE FROM dev_sessions WHERE expires_at <= ?').bind(now).run(),
       env.DB.prepare('DELETE FROM dev_challenges WHERE expires_at <= ?').bind(now).run(),
+      env.DB.prepare('DELETE FROM blocked_ips WHERE expires_at != 0 AND expires_at <= ?').bind(now).run(),
+      env.DB.prepare("DELETE FROM request_log WHERE kind = 'api'").run(),
     ]);
-    const [limits, attempts, staff, devs, codes] = runs.map((r) => Number(r?.meta?.changes || 0));
-    const total = limits + attempts + staff + devs + codes;
+    const [limits, attempts, staff, devs, codes, blocks, oldServer] = runs.map((r) => Number(r?.meta?.changes || 0));
+    const total = limits + attempts + staff + devs + codes + blocks + oldServer;
     return {
-      message: `Removed ${total} old record(s): ${limits} rate-limit counter(s), ${attempts} finished lockout(s), ${staff + devs} expired session(s), ${codes} expired code(s).`,
+      message: `Removed ${total} old record(s): ${limits} rate-limit counter(s), ${attempts} finished lockout(s), ${staff + devs} expired session(s), ${codes} expired code(s), ${blocks} ended block(s), ${oldServer} old server-request record(s).`,
       detail: `${total} record(s)`,
     };
   },

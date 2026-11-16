@@ -1,8 +1,9 @@
 // GET /api/dev/overview — everything the developer console shows (developer session required)
-import { jsonResponse } from '../../../lib/db.js';
+import { jsonResponse, clientIp } from '../../../lib/db.js';
 import { authorizeDev, devConfigSummary, devLockState, retentionDays } from '../../../lib/dev.js';
 import { placeFromDetail } from '../../../lib/reqinfo.js';
 import { requestLogPaused } from '../../../lib/requestlog.js';
+import { listBlocks, normalizeIp } from '../../../lib/blocklist.js';
 
 // Events that count as failed or blocked sign-ins in the security summary.
 const FAIL_EVENTS = ['wrong_password', 'wrong_code', 'blocked_locked', 'code_limit', 'staff_wrong_password', 'staff_locked_out'];
@@ -17,7 +18,7 @@ export async function onRequestGet({ request, env }) {
   const weekAgo = now - 7 * 86400;
   const keepDays = retentionDays(env);
   try {
-    const [leads, staffSessions, devSessions, lockouts, audit, failCounts, failSources, lock, oldLeads, paused] = await Promise.all([
+    const [leads, staffSessions, devSessions, lockouts, audit, failCounts, failSources, lock, oldLeads, paused, blocks] = await Promise.all([
       env.DB.prepare(`
         SELECT
           COUNT(*) AS total,
@@ -44,6 +45,7 @@ export async function onRequestGet({ request, env }) {
         ? env.DB.prepare("SELECT COUNT(*) AS n FROM leads WHERE created_at < strftime('%Y-%m-%dT%H:%M:%fZ', 'now', ?)").bind(`-${keepDays} days`).first()
         : Promise.resolve(null),
       requestLogPaused(env, { fresh: true }),
+      listBlocks(env.DB),
     ]);
 
     // The place for each top source comes from its most recent failed event.
@@ -90,6 +92,9 @@ export async function onRequestGet({ request, env }) {
         })),
       },
       requestLog: { paused: Boolean(paused) },
+      blocks,
+      // Lets the console warn before you block the address you are using yourself.
+      yourIp: normalizeIp(clientIp(request)) || clientIp(request),
       config: devConfigSummary(env),
       activity: (audit?.results || []).map((r) => ({ at: r.at, event: r.event, ip: r.ip, detail: r.detail })),
     });

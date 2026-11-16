@@ -13,6 +13,7 @@ const TABLES = [
   ['admin_sessions', 'Staff sessions'],
   ['dev_sessions', 'Developer sessions'],
   ['dev_challenges', 'Pending sign-in codes'],
+  ['blocked_ips', 'Blocked IP addresses'],
   ['app_secrets', 'Site settings and secrets'],
 ];
 const FREE_DB_SIZE_BYTES = 500 * 1024 * 1024; // 500 MB per database on the free plan
