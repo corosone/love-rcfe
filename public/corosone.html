@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
   <script src="/icons.js"></script>
+  <script src="/visit.js" defer></script>
   <!-- Tailwind CSS: built at deploy time into /tailwind.css by "npm run build" -->
   <link id="tw-css" rel="stylesheet" href="/tailwind.css">
   <script src="/turnstile-gate.js"></script>
@@ -41,11 +42,84 @@
     html.dark .dev-table th, html.dark .dev-table td { border-color: #2d4034; }
     .dev-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
     @media (min-width: 640px) { .dev-stats { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; } }
-    .dev-scroll { overflow-x: auto; }
+    .dev-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .dev-scroll > .dev-table { min-width: 640px; } /* on phones, wide tables scroll inside their box instead of squashing */
+    .dv-msg { min-width: 14rem; }
     .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: 8px; flex-shrink: 0; }
     .status-ok { background: #16a34a; }
     .status-warn { background: #d97706; }
     .status-bad { background: #dc2626; }
+
+    /* ---- Console tools (plain CSS so the page never depends on the Tailwind build) ---- */
+    /* "hidden" must always win over the display values below (e.g. .dv-btn, .dv-banner). */
+    .hidden { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .dv-grid-2 { display: grid; gap: 1.25rem; }
+    @media (min-width: 768px) { .dv-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 640px) { .dv-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .dv-tabs { display: flex; gap: 0.25rem; overflow-x: auto; border-bottom: 1px solid #d9ded4; scrollbar-width: thin; }
+    .dv-tabs button { padding: 0.6rem 0.9rem; font-size: 13px; font-weight: 700; color: #59685f; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; background: none; }
+    .dv-tabs button:hover { color: #26382f; }
+    .dv-tabs button[aria-selected="true"] { color: #315d48; border-bottom-color: #315d48; }
+    .dv-tabs button:focus-visible, .dv-btn:focus-visible, .dv-seg button:focus-visible, .dv-link:focus-visible { outline: 2px solid #315d48; outline-offset: 2px; }
+    .dv-btn { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.4rem 0.95rem; border-radius: 9999px; border: 1px solid #d9ded4; font-size: 12px; font-weight: 700; color: #26382f; background: transparent; transition: background-color .15s; cursor: pointer; }
+    .dv-btn:hover:not(:disabled) { background: rgba(237, 242, 233, 0.6); }
+    .dv-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .dv-btn-danger { color: #b91c1c; border-color: #f3c4c4; }
+    .dv-btn-danger:hover:not(:disabled) { background: #fef2f2; }
+    .dv-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .dv-help { font-size: 11px; color: #59685f; margin-top: 0.3rem; }
+    .dv-note { font-size: 12px; color: #26382f; background: #f5eee5; border-radius: 0.75rem; padding: 0.6rem 0.8rem; margin-top: 0.75rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+    .dv-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+    .dv-input { flex: 1 1 14rem; min-width: 0; padding: 0.5rem 0.85rem; border-radius: 0.75rem; border: 1px solid #d9ded4; font-size: 13px; background: #fff; color: #26382f; }
+    .dv-input:focus { outline: none; box-shadow: 0 0 0 2px #315d48; }
+    .dv-select { flex: 0 1 12rem; }
+    .dv-num { text-align: right !important; font-variant-numeric: tabular-nums; }
+    .dv-banner { display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 1rem; border-radius: 1rem; font-size: 13px; border: 1px solid; }
+    .dv-banner-bad { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+    .dv-banner-warn { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+    .dv-status { padding: 0.7rem 1rem; border-radius: 1rem; font-size: 12px; font-weight: 600; border: 1px solid #d9ded4; background: #fff; }
+    .dv-status.is-ok { color: #166534; background: #f0fdf4; border-color: #bbf7d0; }
+    .dv-status.is-bad { color: #991b1b; background: #fef2f2; border-color: #fecaca; }
+    .dv-status.is-busy { color: #59685f; }
+    .dv-chip { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 9999px; margin: 0 0.25rem 0.25rem 0; white-space: nowrap; background: #fef3c7; color: #92400e; }
+    .dv-chip-view { background: #dcfce7; color: #166534; }
+    .dv-chip-api { background: #e0e7ff; color: #3730a3; }
+    .dv-chip-note { background: #f3f4f6; color: #374151; }
+    .dv-chip-bad { background: #fee2e2; color: #991b1b; }
+    .dv-link { background: none; border: 0; padding: 0; color: #315d48; font-weight: 700; text-decoration: underline; cursor: pointer; font-size: inherit; }
+    .dv-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; word-break: break-all; }
+    .dv-msg { max-width: 28rem; white-space: pre-wrap; word-break: break-word; }
+    .dv-meter { height: 8px; border-radius: 9999px; background: #edf2e9; overflow: hidden; }
+    .dv-meter span { display: block; height: 100%; background: #315d48; width: 0; }
+    .dv-seg { display: inline-flex; border: 1px solid #d9ded4; border-radius: 9999px; overflow: hidden; flex-shrink: 0; }
+    .dv-seg button { padding: 0.35rem 0.85rem; font-size: 12px; font-weight: 700; color: #59685f; background: transparent; }
+    .dv-seg button[aria-pressed="true"] { background: #315d48; color: #fff; }
+    .dev-table tbody tr.is-selected td { background: rgba(237, 242, 233, 0.7); }
+    html.dark .dv-tabs { border-color: #2d4034; }
+    html.dark .dv-tabs button { color: #a7b8ad; }
+    html.dark .dv-tabs button:hover { color: #e6ede8; }
+    html.dark .dv-tabs button[aria-selected="true"] { color: #4ade80; border-bottom-color: #4ade80; }
+    html.dark .dv-btn { color: #e6ede8; border-color: #2d4034; }
+    html.dark .dv-btn:hover:not(:disabled) { background: #24352b; }
+    html.dark .dv-btn-danger { color: #fca5a5; border-color: #7f1d1d; }
+    html.dark .dv-btn-danger:hover:not(:disabled) { background: #3b1a1a; }
+    html.dark .dv-help { color: #a7b8ad; }
+    html.dark .dv-note { background: #2a2219; color: #e6ede8; }
+    html.dark .dv-input { background: #121915; color: #e6ede8; border-color: #2d4034; }
+    html.dark .dv-banner-bad { background: #3b1a1a; border-color: #7f1d1d; color: #fecaca; }
+    html.dark .dv-banner-warn { background: #3a2e12; border-color: #78591a; color: #fde68a; }
+    html.dark .dv-status { background: #1a251f; border-color: #2d4034; }
+    html.dark .dv-status.is-ok { color: #86efac; background: #14281c; border-color: #1f5133; }
+    html.dark .dv-status.is-bad { color: #fecaca; background: #3b1a1a; border-color: #7f1d1d; }
+    html.dark .dv-status.is-busy { color: #a7b8ad; }
+    html.dark .dv-link { color: #4ade80; }
+    html.dark .dv-meter { background: #24352b; }
+    html.dark .dv-meter span { background: #4ade80; }
+    html.dark .dv-seg { border-color: #2d4034; }
+    html.dark .dv-seg button { color: #a7b8ad; }
+    html.dark .dv-seg button[aria-pressed="true"] { background: #4ade80; color: #121915; }
+    html.dark .dev-table tbody tr.is-selected td { background: #1e2e24; }
   </style>
 </head>
 <body class="bg-brand-cream text-brand-ink min-h-screen flex flex-col antialiased">
@@ -128,7 +202,7 @@
     </section>
 
     <!-- Console -->
-    <section id="console-view" class="hidden space-y-6">
+    <section id="console-view" class="hidden space-y-5">
       <div class="surface bg-white p-4 rounded-2xl border border-brand-line flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <p id="session-info" role="status" class="text-xs font-semibold text-brand-muted"></p>
         <div class="flex flex-wrap items-center gap-2">
@@ -141,77 +215,322 @@
         </div>
       </div>
 
-      <!-- Numbers -->
-      <div class="dev-stats">
-        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-          <p class="text-xs font-semibold text-brand-muted">Total Leads</p>
-          <p id="stat-total" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+      <!-- Shown while the developer sign-in is locked -->
+      <div id="lock-banner" class="dv-banner dv-banner-bad hidden" role="alert">
+        <i data-lucide="lock" class="w-4 h-4 shrink-0"></i>
+        <p class="flex-1"><strong>Developer sign-in is locked.</strong> <span id="lock-banner-text"></span></p>
+        <button type="button" data-tool="unlock_dev" class="dv-btn">Unlock</button>
+      </div>
+
+      <!-- Result of the last tool used -->
+      <p id="tool-status" role="status" aria-live="polite" class="dv-status hidden"></p>
+
+      <nav class="dv-tabs" role="tablist" aria-label="Console sections">
+        <button type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-tab="overview">Overview</button>
+        <button type="button" role="tab" id="tab-security" aria-controls="panel-security" aria-selected="false" data-tab="security">Security</button>
+        <button type="button" role="tab" id="tab-leads" aria-controls="panel-leads" aria-selected="false" data-tab="leads">Enquiries</button>
+        <button type="button" role="tab" id="tab-requests" aria-controls="panel-requests" aria-selected="false" data-tab="requests">Requests</button>
+        <button type="button" role="tab" id="tab-site" aria-controls="panel-site" aria-selected="false" data-tab="site">Site &amp; Database</button>
+        <button type="button" role="tab" id="tab-activity" aria-controls="panel-activity" aria-selected="false" data-tab="activity">Activity</button>
+      </nav>
+
+      <!-- ===== Overview ===== -->
+      <div id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" class="space-y-5">
+        <div class="dev-stats">
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Total Leads</p>
+            <p id="stat-total" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+          </div>
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Open Leads</p>
+            <p id="stat-open" class="display text-2xl font-bold text-brand-green mt-1">0</p>
+          </div>
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">New This Week</p>
+            <p id="stat-week" class="display text-2xl font-bold text-brand-accent mt-1">0</p>
+          </div>
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Staff Signed In</p>
+            <p id="stat-staff" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+          </div>
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Active Lockouts</p>
+            <p id="stat-lockouts" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+          </div>
         </div>
-        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-          <p class="text-xs font-semibold text-brand-muted">Open Leads</p>
-          <p id="stat-open" class="display text-2xl font-bold text-brand-green mt-1">0</p>
-        </div>
-        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-          <p class="text-xs font-semibold text-brand-muted">New This Week</p>
-          <p id="stat-week" class="display text-2xl font-bold text-brand-accent mt-1">0</p>
-        </div>
-        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-          <p class="text-xs font-semibold text-brand-muted">Staff Signed In</p>
-          <p id="stat-staff" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
-        </div>
-        <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-          <p class="text-xs font-semibold text-brand-muted">Active Lockouts</p>
-          <p id="stat-lockouts" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+
+        <div class="dv-grid-2">
+          <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+            <h2 class="text-sm font-bold text-brand-ink mb-1">Site Settings Check</h2>
+            <p class="text-xs text-brand-muted mb-3">Shows whether each Cloudflare setting is in place. Secret values are never shown.</p>
+            <ul id="config-list" class="space-y-2 text-xs text-brand-ink"></ul>
+          </div>
+          <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+            <h2 class="text-sm font-bold text-brand-ink mb-1">Failed Sign-ins (last 24 hours)</h2>
+            <p class="text-xs text-brand-muted mb-3">Wrong passwords and codes for the staff inbox and this console. Details are on the Security tab.</p>
+            <ul id="overview-failures" class="space-y-2 text-xs text-brand-ink"></ul>
+          </div>
         </div>
       </div>
 
-      <div class="grid gap-6 sm:grid-cols-2">
-        <!-- Settings check -->
-        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
-          <h2 class="text-sm font-bold text-brand-ink mb-1">Site Settings Check</h2>
-          <p class="text-xs text-brand-muted mb-3">Shows whether each Cloudflare setting is in place. Secret values are never shown.</p>
-          <ul id="config-list" class="space-y-2 text-xs text-brand-ink"></ul>
-        </div>
+      <!-- ===== Security ===== -->
+      <div id="panel-security" role="tabpanel" aria-labelledby="tab-security" class="space-y-5 hidden">
+        <div class="dv-grid-2">
+          <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+            <h2 class="text-sm font-bold text-brand-ink mb-1">Emergency Lock</h2>
+            <p id="lock-state" class="text-xs text-brand-muted mb-3"></p>
+            <div class="dv-actions">
+              <button type="button" id="lock-btn" data-tool="lock_dev" class="dv-btn dv-btn-danger">Lock developer sign-in</button>
+              <button type="button" id="unlock-btn" data-tool="unlock_dev" class="dv-btn hidden">Unlock developer sign-in</button>
+            </div>
+            <p class="dv-help">Locking blocks every new developer sign-in, even with the right email, password and code, and signs out your other developer devices. This device stays signed in so you can unlock it. Changing DEV_PASSWORD in Cloudflare also unlocks it.</p>
+          </div>
 
-        <!-- Tools -->
-        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
-          <h2 class="text-sm font-bold text-brand-ink mb-1">Tools</h2>
-          <p class="text-xs text-brand-muted mb-3">Each use is recorded in the activity log below.</p>
-          <div class="space-y-3">
-            <div>
-              <button type="button" data-tool="signout_staff" class="px-4 py-1.5 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition disabled:opacity-60">
-                Sign out all staff
-              </button>
-              <p class="text-[11px] text-brand-muted mt-1">Ends every staff inbox session. Staff sign in again with the staff password.</p>
-            </div>
-            <div>
-              <button type="button" data-tool="clear_lockouts" class="px-4 py-1.5 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition disabled:opacity-60">
-                Clear sign-in lockouts
-              </button>
-              <p class="text-[11px] text-brand-muted mt-1">Removes "too many wrong passwords" blocks so staff can sign in again.</p>
-            </div>
-            <div>
-              <button type="button" data-tool="test_lead_email" class="px-4 py-1.5 rounded-full border border-brand-line text-xs font-bold text-brand-ink hover:bg-brand-sageLight/40 transition disabled:opacity-60">
-                Send test lead email
-              </button>
-              <p class="text-[11px] text-brand-muted mt-1">Sends a test through the enquiry notification email and reports whether it was accepted.</p>
+          <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+            <h2 class="text-sm font-bold text-brand-ink mb-1">Sessions</h2>
+            <p id="sessions-state" class="text-xs text-brand-muted mb-3"></p>
+            <div class="space-y-3">
+              <div>
+                <button type="button" data-tool="signout_other_devs" class="dv-btn">Sign out my other developer devices</button>
+                <p class="dv-help">Ends every developer session except this one.</p>
+              </div>
+              <div>
+                <button type="button" data-tool="signout_staff" class="dv-btn">Sign out all staff</button>
+                <p class="dv-help">Ends every staff inbox session. Staff sign in again with the staff password.</p>
+              </div>
+              <div>
+                <button type="button" data-tool="clear_lockouts" class="dv-btn">Clear sign-in lockouts</button>
+                <p class="dv-help">Removes "too many wrong passwords" blocks so staff can sign in again.</p>
+              </div>
             </div>
           </div>
-          <p id="tool-status" role="status" class="text-xs font-semibold text-brand-green mt-3 min-h-4"></p>
+        </div>
+
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">Failed Sign-in Summary</h2>
+          <p class="text-xs text-brand-muted mb-3">How often sign-ins failed or were blocked. A few are normal (typos). Many from one address usually means someone is guessing.</p>
+          <div class="dev-scroll">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>What happened</th><th class="dv-num">Last 24 hours</th><th class="dv-num">Last 7 days</th></tr></thead>
+              <tbody id="failures-body"></tbody>
+            </table>
+          </div>
+          <h3 class="text-xs font-bold text-brand-ink mt-5 mb-2">Where most failed attempts came from (last 7 days)</h3>
+          <div class="dev-scroll">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>IP address</th><th class="dv-num">Attempts</th><th>Approximate location</th><th>Most recent</th></tr></thead>
+              <tbody id="sources-body"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
-      <!-- Activity -->
-      <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
-        <h2 class="text-sm font-bold text-brand-ink mb-1">Developer Activity</h2>
-        <p class="text-xs text-brand-muted mb-3">The last 30 developer sign-in events and tool uses, newest first.</p>
-        <div class="dev-scroll">
-          <table class="dev-table text-brand-ink">
-            <thead>
-              <tr><th>When</th><th>Event</th><th>IP address</th><th>Details</th></tr>
-            </thead>
-            <tbody id="activity-body"></tbody>
-          </table>
+      <!-- ===== Enquiries ===== -->
+      <div id="panel-leads" role="tabpanel" aria-labelledby="tab-leads" class="space-y-5 hidden">
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Enquiries</h2>
+              <p class="text-xs text-brand-muted">Search, find spam, delete, or download everything as a spreadsheet. Deleting is permanent.</p>
+            </div>
+            <button type="button" id="export-btn" class="dv-btn shrink-0"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download all (spreadsheet)</button>
+          </div>
+          <form id="leads-search" class="dv-toolbar" role="search">
+            <label for="leads-q" class="sr-only">Search enquiries</label>
+            <input id="leads-q" type="search" maxlength="100" placeholder="Search name, email, phone, city or message" class="dv-input">
+            <button type="submit" class="dv-btn">Search</button>
+            <button type="button" id="leads-spam" class="dv-btn">Show likely spam</button>
+            <button type="button" id="leads-all" class="dv-btn">Show all</button>
+          </form>
+          <p id="old-leads" class="dv-note hidden"></p>
+          <div class="dv-toolbar mt-3">
+            <button type="button" id="leads-delete" class="dv-btn dv-btn-danger" disabled>Delete selected</button>
+            <p id="leads-info" role="status" class="text-xs text-brand-muted"></p>
+          </div>
+          <div class="dev-scroll mt-2">
+            <table class="dev-table text-brand-ink">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="leads-check-all" aria-label="Select all shown enquiries"></th>
+                  <th>Received</th><th>Name</th><th>Contact</th><th>Message</th><th>Spam signs</th>
+                </tr>
+              </thead>
+              <tbody id="leads-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Requests ===== -->
+      <div id="panel-requests" role="tabpanel" aria-labelledby="tab-requests" class="space-y-5 hidden">
+        <div id="requests-paused" class="dv-banner dv-banner-warn hidden" role="status">
+          <i data-lucide="pause" class="w-4 h-4 shrink-0"></i>
+          <p class="flex-1">Request logging is paused. Nothing new is being recorded.</p>
+          <button type="button" data-tool="resume_requests" class="dv-btn">Resume</button>
+        </div>
+
+        <div class="dev-stats dv-stats-4">
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Requests (24h)</p>
+            <p id="req-total" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+          </div>
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Page Visits (24h)</p>
+            <p id="req-views" class="display text-2xl font-bold text-brand-green mt-1">0</p>
+          </div>
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Different IPs (24h)</p>
+            <p id="req-ips" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
+          </div>
+          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
+            <p class="text-xs font-semibold text-brand-muted">Errors (24h)</p>
+            <p id="req-errors" class="display text-2xl font-bold text-brand-accent mt-1">0</p>
+          </div>
+        </div>
+
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">Busiest IP Addresses (last 24 hours)</h2>
+          <p class="text-xs text-brand-muted mb-3">Select an address to see only its requests.</p>
+          <div class="dev-scroll">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>IP address</th><th class="dv-num">Requests</th><th class="dv-num">Errors</th><th>Approximate location</th><th>Browser</th><th>Last seen</th></tr></thead>
+              <tbody id="topips-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">All Requests</h2>
+              <p id="requests-about" class="text-xs text-brand-muted">Every request to the site's server (/api) and every page visit, newest first, with the IP address it came from.</p>
+            </div>
+            <div class="dv-actions shrink-0">
+              <button type="button" id="pause-btn" data-tool="pause_requests" class="dv-btn">Pause logging</button>
+              <button type="button" data-tool="clear_requests" class="dv-btn dv-btn-danger">Clear log</button>
+            </div>
+          </div>
+          <form id="requests-search" class="dv-toolbar" role="search">
+            <label for="requests-q" class="sr-only">Search requests</label>
+            <input id="requests-q" type="search" maxlength="100" placeholder="IP address, page, location or browser" class="dv-input">
+            <label for="requests-type" class="sr-only">Type of request</label>
+            <select id="requests-type" class="dv-input dv-select">
+              <option value="all">Everything</option>
+              <option value="view">Page visits</option>
+              <option value="api">Server requests (/api)</option>
+              <option value="errors">Errors only</option>
+            </select>
+            <button type="submit" class="dv-btn">Show</button>
+            <button type="button" id="requests-reset" class="dv-btn">Reset</button>
+          </form>
+          <div class="dev-scroll mt-3">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>When</th><th>Type</th><th>Address</th><th>Result</th><th>IP address</th><th>Approximate location</th><th>Browser</th></tr></thead>
+              <tbody id="requests-body"></tbody>
+            </table>
+          </div>
+          <div class="dv-toolbar mt-3">
+            <button type="button" id="requests-more" class="dv-btn hidden">Load older</button>
+            <p id="requests-info" role="status" class="text-xs text-brand-muted"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Site & Database ===== -->
+      <div id="panel-site" role="tabpanel" aria-labelledby="tab-site" class="space-y-5 hidden">
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Site Check</h2>
+              <p class="text-xs text-brand-muted">Loads every page, script, image and language file from your browser, and checks the security settings, so you can see anything broken, missing or slow.</p>
+            </div>
+            <button type="button" id="sitecheck-btn" class="dv-btn shrink-0">Run site check</button>
+          </div>
+          <p id="sitecheck-summary" role="status" class="text-xs font-semibold text-brand-ink"></p>
+          <div class="dev-scroll mt-2">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>Check</th><th>Result</th><th class="dv-num">Time</th><th class="dv-num">Size</th></tr></thead>
+              <tbody id="sitecheck-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="dv-grid-2">
+          <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <div>
+                <h2 class="text-sm font-bold text-brand-ink mb-1">Database</h2>
+                <p class="text-xs text-brand-muted">How much is stored, compared with Cloudflare's free plan.</p>
+              </div>
+              <button type="button" id="db-btn" class="dv-btn shrink-0">Check database</button>
+            </div>
+            <p id="db-size" class="text-xs text-brand-ink"></p>
+            <div class="dv-meter mt-2 hidden" id="db-meter"><span id="db-meter-fill"></span></div>
+            <div class="dev-scroll mt-3">
+              <table class="dev-table text-brand-ink">
+                <thead><tr><th>What</th><th class="dv-num">Rows</th></tr></thead>
+                <tbody id="db-body"></tbody>
+              </table>
+            </div>
+            <p class="dv-help">The free plan also allows 5 million rows read and 100,000 rows written per day. Today's usage is on Cloudflare's dashboard under D1 → your database → Metrics.</p>
+          </div>
+
+          <div class="surface bg-white p-5 rounded-2xl border border-brand-line space-y-4">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Email Checks</h2>
+              <div class="space-y-3 mt-3">
+                <div>
+                  <button type="button" data-tool="test_lead_email" class="dv-btn">Send test enquiry email</button>
+                  <p class="dv-help">Sends a test through the enquiry notification email (Formspree).</p>
+                </div>
+                <div>
+                  <button type="button" data-tool="test_code_email" class="dv-btn">Send test code email</button>
+                  <p class="dv-help">Sends a test (with no code) to the address that receives your sign-in codes (Resend). Up to 5 per hour.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Maintenance</h2>
+              <div class="space-y-3 mt-3">
+                <div>
+                  <button type="button" data-tool="cleanup_records" class="dv-btn">Clean up old records</button>
+                  <p class="dv-help">Removes expired sessions and codes, finished lockouts and old rate-limit counters. Never removes enquiries, active lockouts or your sign-in.</p>
+                </div>
+                <div>
+                  <button type="button" data-tool="clear_activity" data-mode="older30" class="dv-btn">Delete activity older than 30 days</button>
+                </div>
+                <div>
+                  <button type="button" data-tool="clear_activity" data-mode="all" class="dv-btn dv-btn-danger">Clear the whole activity log</button>
+                  <p class="dv-help">One entry is kept saying the log was cleared, and from which IP address.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Activity ===== -->
+      <div id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" class="space-y-5 hidden">
+        <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Activity</h2>
+              <p class="text-xs text-brand-muted">The last 100 sign-in events (staff and developer) and tool uses, newest first.</p>
+            </div>
+            <div class="dv-seg" role="group" aria-label="Show activity for">
+              <button type="button" data-activity="all" aria-pressed="true">All</button>
+              <button type="button" data-activity="dev" aria-pressed="false">Developer</button>
+              <button type="button" data-activity="staff" aria-pressed="false">Staff</button>
+            </div>
+          </div>
+          <div class="dev-scroll">
+            <table class="dev-table text-brand-ink">
+              <thead>
+                <tr><th>When</th><th>Event</th><th>IP address</th><th>Details</th></tr>
+              </thead>
+              <tbody id="activity-body"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 

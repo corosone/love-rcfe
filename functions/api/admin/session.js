@@ -3,7 +3,7 @@ import {
   checkAdminConfig, checkAdminPrereqs, checkPasswordWithLockout, enforceTurnstile,
   getSessionSigningMaterial, createSessionToken, sessionCookieHeader, SESSION_TTL_SEC,
 } from '../../../lib/db.js';
-import { signOutEverywhere } from '../../../lib/dev.js';
+import { signOutEverywhere, devAudit } from '../../../lib/dev.js';
 
 // Staff sign-in. Order matters: cheap checks first, then the Turnstile spam check,
 // and only then anything that writes to the database (rate limits, lockout, session).
@@ -38,11 +38,17 @@ export async function onRequestPost({ request, env }) {
   if (prereqError) return prereqError;
 
   const denied = await checkPasswordWithLockout(request, env, body.password);
-  if (denied) return denied;
+  if (denied) {
+    // Staff sign-in history for the developer console (wrong passwords and lockout blocks).
+    if (denied.status === 401) await devAudit(env, request, 'staff_wrong_password');
+    else if (denied.status === 423) await devAudit(env, request, 'staff_locked_out');
+    return denied;
+  }
 
   try {
     const material = await getSessionSigningMaterial(env);
     const token = await createSessionToken(material, SESSION_TTL_SEC, env.DB);
+    await devAudit(env, request, 'staff_signed_in');
     return jsonResponse({ ok: true }, 200, {
       'Set-Cookie': sessionCookieHeader(request, token, SESSION_TTL_SEC),
     });
