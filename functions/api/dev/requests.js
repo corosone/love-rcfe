@@ -1,6 +1,8 @@
 // GET /api/dev/requests — the request log (developer session required)
 //   ?q=      text to look for in the IP address, page/API address, location or browser
-//   ?type=   all | view | api | errors
+//   ?type=   view (page visits only; what the console shows by default) | all | api | errors
+//            The 24-hour summary and busiest addresses count page visits only for "view",
+//            and everything otherwise.
 //   ?before= show rows older than this row number (for "Load older")
 import { jsonResponse } from '../../../lib/db.js';
 import { authorizeDev } from '../../../lib/dev.js';
@@ -35,6 +37,7 @@ export async function onRequestGet({ request, env }) {
     binds.push(before);
   }
   const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
+  const scopeSql = type === 'view' ? "kind = 'view'" : "kind != 'note'"; // fixed text, never user input
   const dayAgo = Math.floor(Date.now() / 1000) - 86400;
 
   try {
@@ -49,12 +52,12 @@ export async function onRequestGet({ request, env }) {
           COALESCE(SUM(CASE WHEN kind = 'view' THEN 1 ELSE 0 END), 0) AS views,
           COALESCE(SUM(CASE WHEN status >= 400 THEN 1 ELSE 0 END), 0) AS errors,
           COUNT(DISTINCT ip) AS ips
-        FROM request_log WHERE at >= ? AND kind != 'note'
+        FROM request_log WHERE at >= ? AND ${scopeSql}
       `).bind(dayAgo).first(),
       env.DB.prepare(`
         SELECT ip, COUNT(*) AS n, MAX(at) AS last, MAX(id) AS lastId,
           COALESCE(SUM(CASE WHEN status >= 400 THEN 1 ELSE 0 END), 0) AS errors
-        FROM request_log WHERE at >= ? AND kind != 'note'
+        FROM request_log WHERE at >= ? AND ${scopeSql}
         GROUP BY ip ORDER BY n DESC, last DESC LIMIT 10
       `).bind(dayAgo).all(),
       requestLogPaused(env, { fresh: true }),

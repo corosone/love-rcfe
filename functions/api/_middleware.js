@@ -11,15 +11,15 @@ export async function onRequest(context) {
   } catch {
     return context.next();
   }
-  const record = shouldLogApiRequest(request.method, pathname);
-
   let response;
   try {
     response = await context.next();
   } catch (err) {
-    if (record) context.waitUntil(logRequest(env, request, { kind: 'api', method: request.method, path: pathname, status: 500 }));
+    if (shouldLogApiRequest(request.method, pathname, 500)) {
+      context.waitUntil(logRequest(env, request, { kind: 'api', method: request.method, path: pathname, status: 500 }));
+    }
     throw err;
   }
-  if (record) context.waitUntil(logRequest(env, request, { kind: 'api', method: request.method, path: pathname, status: response.status }));
+  if (shouldLogApiRequest(request.method, pathname, response.status)) context.waitUntil(logRequest(env, request, { kind: 'api', method: request.method, path: pathname, status: response.status }));
   return response;
 }

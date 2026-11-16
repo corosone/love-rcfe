@@ -56,7 +56,9 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     .dv-grid-2 { display: grid; gap: 1.25rem; }
     @media (min-width: 768px) { .dv-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (min-width: 640px) { .dv-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    @media (min-width: 640px) { .dv-stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    /* While only page visits are shown, the "Type" column would say the same thing on every row. */
+    .req-visits-only th:nth-child(2), .req-visits-only td:nth-child(2) { display: none; }
     .dv-tabs { display: flex; gap: 0.25rem; overflow-x: auto; border-bottom: 1px solid #d9ded4; scrollbar-width: thin; }
     .dv-tabs button { padding: 0.6rem 0.9rem; font-size: 13px; font-weight: 700; color: #59685f; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; background: none; }
     .dv-tabs button:hover { color: #26382f; }
@@ -369,31 +371,27 @@
           <button type="button" data-tool="resume_requests" class="dv-btn">Resume</button>
         </div>
 
-        <div class="dev-stats dv-stats-4">
+        <div class="dev-stats dv-stats-3">
           <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-            <p class="text-xs font-semibold text-brand-muted">Requests (24h)</p>
-            <p id="req-total" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
-          </div>
-          <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-            <p class="text-xs font-semibold text-brand-muted">Page Visits (24h)</p>
-            <p id="req-views" class="display text-2xl font-bold text-brand-green mt-1">0</p>
+            <p id="req-total-label" class="text-xs font-semibold text-brand-muted">Page Visits (24h)</p>
+            <p id="req-total" class="display text-2xl font-bold text-brand-green mt-1">0</p>
           </div>
           <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
             <p class="text-xs font-semibold text-brand-muted">Different IPs (24h)</p>
             <p id="req-ips" class="display text-2xl font-bold text-brand-ink mt-1">0</p>
           </div>
           <div class="surface bg-white p-4 rounded-2xl border border-brand-line">
-            <p class="text-xs font-semibold text-brand-muted">Errors (24h)</p>
+            <p id="req-errors-label" class="text-xs font-semibold text-brand-muted">Pages Not Found (24h)</p>
             <p id="req-errors" class="display text-2xl font-bold text-brand-accent mt-1">0</p>
           </div>
         </div>
 
         <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
           <h2 class="text-sm font-bold text-brand-ink mb-1">Busiest IP Addresses (last 24 hours)</h2>
-          <p class="text-xs text-brand-muted mb-3">Select an address to see only its requests.</p>
+          <p class="text-xs text-brand-muted mb-3">Select an address to see only what it did.</p>
           <div class="dev-scroll">
             <table class="dev-table text-brand-ink">
-              <thead><tr><th>IP address</th><th class="dv-num">Requests</th><th class="dv-num">Errors</th><th>Approximate location</th><th>Browser</th><th>Last seen</th></tr></thead>
+              <thead><tr><th>IP address</th><th id="topips-count-label" class="dv-num">Visits</th><th id="topips-errors-label" class="dv-num">Not found</th><th>Approximate location</th><th>Browser</th><th>Last seen</th></tr></thead>
               <tbody id="topips-body"></tbody>
             </table>
           </div>
@@ -402,8 +400,8 @@
         <div class="surface bg-white p-5 rounded-2xl border border-brand-line">
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
             <div>
-              <h2 class="text-sm font-bold text-brand-ink mb-1">All Requests</h2>
-              <p id="requests-about" class="text-xs text-brand-muted">Every request to the site's server (/api) and every page visit, newest first, with the IP address it came from.</p>
+              <h2 id="requests-title" class="text-sm font-bold text-brand-ink mb-1">Page Visits</h2>
+              <p id="requests-about" class="text-xs text-brand-muted">Every page visit, newest first, with the IP address it came from.</p>
             </div>
             <div class="dv-actions shrink-0">
               <button type="button" id="pause-btn" data-tool="pause_requests" class="dv-btn">Pause logging</button>
@@ -415,9 +413,9 @@
             <input id="requests-q" type="search" maxlength="100" placeholder="IP address, page, location or browser" class="dv-input">
             <label for="requests-type" class="sr-only">Type of request</label>
             <select id="requests-type" class="dv-input dv-select">
-              <option value="all">Everything</option>
-              <option value="view">Page visits</option>
-              <option value="api">Server requests (/api)</option>
+              <option value="view" selected>Page visits</option>
+              <option value="all">Page visits + server requests</option>
+              <option value="api">Server requests only</option>
               <option value="errors">Errors only</option>
             </select>
             <button type="submit" class="dv-btn">Show</button>
@@ -425,7 +423,7 @@
           </form>
           <div class="dev-scroll mt-3">
             <table class="dev-table text-brand-ink">
-              <thead><tr><th>When</th><th>Type</th><th>Address</th><th>Result</th><th>IP address</th><th>Approximate location</th><th>Browser</th></tr></thead>
+              <thead><tr><th>When</th><th>Type</th><th id="requests-path-label">Page</th><th>Result</th><th>IP address</th><th>Approximate location</th><th>Browser</th></tr></thead>
               <tbody id="requests-body"></tbody>
             </table>
           </div>

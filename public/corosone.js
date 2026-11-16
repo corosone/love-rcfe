@@ -638,7 +638,9 @@
   }
 
   // ---------- Requests ----------
-  let requestsQuery = { q: '', type: 'all' };
+  // Page visits only by default. Forms and sign-ins also make requests to the site's server;
+  // those are recorded but only shown when chosen in the drop-down.
+  let requestsQuery = { q: '', type: 'view' };
   let requestsRows = [];
   let requestsSeq = 0; // only the newest search may update the table
 
@@ -646,21 +648,20 @@
     const b = el('button', { className: 'dv-link dv-mono', text: ip || 'unknown', attrs: { type: 'button', title: 'Show only this address' } });
     b.addEventListener('click', () => {
       $('requests-q').value = ip || '';
-      $('requests-type').value = 'all';
       loadedTabs.add('requests');
       setTab('requests', { load: false }); // loaded just below, already filtered
-      loadRequests({ q: ip || '', type: 'all' });
+      loadRequests({ q: ip || '', type: $('requests-type').value });
     });
     return b;
   }
 
   async function loadRequests(query = requestsQuery, { append = false } = {}) {
-    requestsQuery = { q: String(query.q || ''), type: String(query.type || 'all') };
+    requestsQuery = { q: String(query.q || ''), type: String(query.type || 'view') };
     const info = $('requests-info');
     info.textContent = 'Loading…';
     const params = new URLSearchParams();
     if (requestsQuery.q) params.set('q', requestsQuery.q);
-    if (requestsQuery.type !== 'all') params.set('type', requestsQuery.type);
+    params.set('type', requestsQuery.type);
     if (append && requestsRows.length) params.set('before', String(requestsRows[requestsRows.length - 1].id));
     const seq = ++requestsSeq;
     try {
@@ -685,18 +686,28 @@
 
   function renderRequests(data) {
     const s = data.last24h || {};
+    const visitsOnly = requestsQuery.type === 'view';
     $('req-total').textContent = s.total || 0;
-    $('req-views').textContent = s.views || 0;
     $('req-ips').textContent = s.uniqueIps || 0;
     $('req-errors').textContent = s.errors || 0;
+    $('req-total-label').textContent = visitsOnly ? 'Page Visits (24h)' : 'Requests (24h)';
+    $('req-errors-label').textContent = visitsOnly ? 'Pages Not Found (24h)' : 'Errors (24h)';
+    $('topips-count-label').textContent = visitsOnly ? 'Visits' : 'Requests';
+    $('topips-errors-label').textContent = visitsOnly ? 'Not found' : 'Errors';
+    $('requests-title').textContent = visitsOnly ? 'Page Visits' : 'Requests';
+    $('requests-path-label').textContent = visitsOnly ? 'Page' : 'Address';
+    $('requests-body').closest('table').classList.toggle('req-visits-only', visitsOnly);
     $('requests-paused').classList.toggle('hidden', !data.paused);
     if (data.keep) {
-      $('requests-about').textContent = `Every request to the site's server (/api) and every page visit, newest first, with the IP address it came from. The newest ${Number(data.keep.rows).toLocaleString('en-US')} are kept, for up to ${data.keep.days} days. Visitors whose browser blocks scripts appear only when they use a form.`;
+      $('requests-about').textContent = (visitsOnly
+        ? 'Every page visit, newest first, with the IP address it came from.'
+        : 'Page visits plus the server requests that forms and sign-ins make, newest first.')
+        + ` The newest ${Number(data.keep.rows).toLocaleString('en-US')} records are kept, for up to ${data.keep.days} days.`;
     }
 
     const tb = $('topips-body');
     const top = Array.isArray(data.topIps) ? data.topIps : [];
-    if (!top.length) emptyRow(tb, 6, 'No requests in the last 24 hours.');
+    if (!top.length) emptyRow(tb, 6, visitsOnly ? 'No page visits in the last 24 hours.' : 'No requests in the last 24 hours.');
     else {
       tb.textContent = '';
       top.forEach((t) => tb.appendChild(el('tr', {}, [td(ipButton(t.ip)), td(t.count, 'dv-num'), td(t.errors, 'dv-num'), td(t.place || 'Unknown'), td(t.device || ''), td(formatTime(t.last))])));
@@ -704,7 +715,9 @@
 
     const body = $('requests-body');
     if (!requestsRows.length) {
-      emptyRow(body, 7, requestsQuery.q || requestsQuery.type !== 'all' ? 'No requests match.' : 'No requests recorded yet.');
+      emptyRow(body, 7, visitsOnly
+        ? (requestsQuery.q ? 'No page visits match. This address may only have used forms or sign-ins: choose "Page visits + server requests" above to check.' : 'No page visits recorded yet.')
+        : 'No requests match.');
     } else {
       body.textContent = '';
       requestsRows.forEach((r) => {
@@ -719,7 +732,7 @@
       });
     }
     $('requests-more').classList.toggle('hidden', !data.hasMore);
-    $('requests-info').textContent = `Showing ${plural(requestsRows.length, 'request', 'requests')}${requestsQuery.q ? ` matching "${requestsQuery.q}"` : ''}.`;
+    $('requests-info').textContent = `Showing ${visitsOnly ? plural(requestsRows.length, 'page visit', 'page visits') : plural(requestsRows.length, 'request', 'requests')}${requestsQuery.q ? ` matching "${requestsQuery.q}"` : ''}.`;
     refreshIcons();
   }
 
@@ -879,7 +892,7 @@
     $('export-btn').addEventListener('click', exportLeads);
 
     $('requests-search').addEventListener('submit', (e) => { e.preventDefault(); loadRequests({ q: $('requests-q').value.trim(), type: $('requests-type').value }); });
-    $('requests-reset').addEventListener('click', () => { $('requests-q').value = ''; $('requests-type').value = 'all'; loadRequests({ q: '', type: 'all' }); });
+    $('requests-reset').addEventListener('click', () => { $('requests-q').value = ''; $('requests-type').value = 'view'; loadRequests({ q: '', type: 'view' }); });
     $('requests-more').addEventListener('click', () => loadRequests(requestsQuery, { append: true }));
 
     $('sitecheck-btn').addEventListener('click', runSiteCheck);
