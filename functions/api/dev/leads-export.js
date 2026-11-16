@@ -14,7 +14,7 @@ export async function onRequestGet({ request, env }) {
     const res = await env.DB
       .prepare(`
         SELECT id, created_at, kind, inquiry_type, name, email, phone, city, message,
-               preferred_date, preferred_time, stage, handled, notes, source
+               preferred_date, preferred_time, stage, handled, notes, source, ip, ip_place
         FROM leads ORDER BY created_at DESC, id DESC LIMIT ?
       `)
       .bind(MAX_ROWS)

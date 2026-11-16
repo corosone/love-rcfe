@@ -19,6 +19,8 @@ const LEAD_COLUMNS = `
   stage,
   notes,
   source,
+  ip,
+  ip_place AS ipPlace,
   created_at AS createdAt
 `;
 
@@ -39,6 +41,8 @@ function mapLead(row) {
     stage: row.stage || 'new',
     notes: row.notes || '',
     source: row.source || '',
+    ip: row.ip || '',
+    ipPlace: row.ipPlace || '',
     createdAt: row.createdAt,
   };
 }

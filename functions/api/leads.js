@@ -2,6 +2,7 @@ import {
   ensureSchema, jsonResponse, clean, clientIp, enforceTurnstile,
   verifySameOrigin, readJsonBody, tooManyRequests, tooManyRequestsD1,
 } from '../../lib/db.js';
+import { cfLocation } from '../../lib/reqinfo.js';
 
 const LIMITS = { name: 120, email: 254, phone: 40, city: 100, message: 3000, inquiryType: 80, short: 80 };
 const MAX_DAYS_AHEAD = 100; // the booking form offers 90 days; small slack for time zones
@@ -175,8 +176,9 @@ export async function onRequestPost(context) {
     await env.DB
       .prepare(`
         INSERT INTO leads (
-          kind, inquiry_type, name, email, phone, city, message, preferred_date, preferred_time, source
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          kind, inquiry_type, name, email, phone, city, message, preferred_date, preferred_time, source,
+          ip, ip_place
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `)
       .bind(
         record.kind,
@@ -188,7 +190,10 @@ export async function onRequestPost(context) {
         record.message,
         record.preferredDate,
         record.preferredTime,
-        record.source
+        record.source,
+        // Shown to staff and the developer next to the message. Not included in the notification email.
+        ip.slice(0, 64),
+        cfLocation(request).slice(0, 80)
       )
       .run();
 

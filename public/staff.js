@@ -300,7 +300,7 @@
       if (currentFilter === 'handled' && !l.handled) return false;
       if (currentFilter === 'calls' && l.kind !== 'call_request') return false;
       if (!q) return true;
-      return [l.name, l.email, l.phone, l.city, l.inquiryType, l.message, l.notes, STAGE_LABELS[l.stage], sourceLabel(l.source)]
+      return [l.name, l.email, l.phone, l.city, l.inquiryType, l.message, l.notes, STAGE_LABELS[l.stage], sourceLabel(l.source), l.ip, l.ipPlace]
         .some(v => String(v || '').toLowerCase().includes(q));
     });
 
@@ -357,6 +357,7 @@
             <div class="text-right">
               <span class="text-[11px] text-brand-muted">${escapeHtml(created)}</span>
               ${l.source ? `<p class="text-[11px] text-brand-muted mt-0.5">From: ${escapeHtml(sourceLabel(l.source))}</p>` : ''}
+              ${l.ip ? `<p class="text-[11px] text-brand-muted mt-0.5" title="The internet address this message was sent from. The location is approximate.">IP: <span class="font-semibold text-brand-ink">${escapeHtml(l.ip)}</span>${l.ipPlace ? ` · ${escapeHtml(l.ipPlace)}` : ''}</p>` : ''}
             </div>
           </div>
 
@@ -397,11 +398,11 @@
     if (hasMoreLeads && !confirm(`Only the latest ${allLeads.length} of ${totalLeads} leads are loaded. Export these ${allLeads.length} leads anyway?`)) {
       return;
     }
-    const headers = ['ID', 'Kind', 'Inquiry Type', 'Name', 'Phone', 'Email', 'City', 'Preferred Date', 'Preferred Time', 'Handled', 'Message', 'Created At', 'Stage', 'Source', 'Notes'];
+    const headers = ['ID', 'Kind', 'Inquiry Type', 'Name', 'Phone', 'Email', 'City', 'Preferred Date', 'Preferred Time', 'Handled', 'Message', 'Created At', 'Stage', 'Source', 'Notes', 'IP Address', 'IP Location'];
     const rows = allLeads.map(l => [
       l.id, l.kind, l.inquiryType, l.name, l.phone, l.email, l.city,
       l.preferredDate || '', l.preferredTime || '', l.handled ? 'Yes' : 'No',
-      l.message, l.createdAt, STAGE_LABELS[l.stage] || '', l.source || '', l.notes || ''
+      l.message, l.createdAt, STAGE_LABELS[l.stage] || '', l.source || '', l.notes || '', l.ip || '', l.ipPlace || ''
     ].map(csvCell).join(','));
     const csv = '\ufeff' + [headers.join(','), ...rows].join('\r\n');
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));

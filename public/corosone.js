@@ -536,7 +536,7 @@
       summary = `Showing the newest ${leads.length} of ${data.total} enquiries.`;
     }
     $('leads-info').textContent = summary;
-    if (!leads.length) { emptyRow(body, 6, leadsQuery.spam ? 'Nothing looks like spam.' : 'No enquiries found.'); return; }
+    if (!leads.length) { emptyRow(body, 7, leadsQuery.spam ? 'Nothing looks like spam.' : 'No enquiries found.'); return; }
     body.textContent = '';
     leads.forEach((l) => {
       const id = Number(l.id);
@@ -558,7 +558,11 @@
       const flags = el('div');
       (Array.isArray(l.flags) ? l.flags : []).forEach((f) => flags.appendChild(el('span', { className: 'dv-chip', text: f })));
       if (!flags.childNodes.length) flags.appendChild(el('span', { className: 'text-brand-muted', text: 'None' }));
-      const tr = el('tr', {}, [td(box), td(formatIso(l.createdAt)), td(nameCell), td(contact), td(msg), td(flags)]);
+      // Clicking the IP address opens the Requests tab showing everything else it did.
+      const from = l.ip
+        ? el('div', {}, [ipButton(l.ip), el('div', { className: 'text-brand-muted', text: l.ipPlace || 'Unknown location' })])
+        : el('span', { className: 'text-brand-muted', text: 'Not recorded', title: 'Sent before IP addresses were saved' });
+      const tr = el('tr', {}, [td(box), td(formatIso(l.createdAt)), td(nameCell), td(contact), td(from), td(msg), td(flags)]);
       body.appendChild(tr);
     });
   }
