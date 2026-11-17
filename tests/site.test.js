@@ -265,21 +265,119 @@ test('names for voice control and screen readers match the visible text (English
   }
 });
 
-test('switching language from the menu translates the page and remembers the choice', async () => {
-  const { page, context, seen } = await open('/');
+test('switching language from the menu goes to that language\'s own address and remembers the choice', async () => {
+  const { page, context, seen } = await open('/#services');
   await page.click('#lang-toggle-btn');
   assert.ok(await page.evaluate(() => !document.getElementById('lang-dropdown').classList.contains('hidden')), 'the language menu opens');
   await page.click('#lang-dropdown [data-lang="vi"]');
-  await page.waitForFunction(() => document.querySelector('#lang-toggle-btn .lang-current-code').textContent === 'VI');
+  await page.waitForURL(site.origin + '/vi/#services');
+  await page.waitForLoadState('networkidle');
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'vi');
-  assert.notEqual(await page.locator('#hero-title').textContent(), 'A little more clarity. A lot more care.');
+  assert.equal(await page.locator('#lang-toggle-btn .lang-current-code').textContent(), 'VI');
+  assert.equal(await page.evaluate(() => localStorage.getItem('lovercfe_lang')), 'vi');
+  assert.ok(await page.evaluate(() => !document.getElementById('services').hidden), 'the visitor stays on the same section');
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(300);
   const fonts = seen.requests.filter((u) => u.includes('/fonts/')).map((u) => u.split('/').pop());
   assert.ok(fonts.some((f) => f.includes('vietnamese')) && fonts.some((f) => f.includes('latin-ext')), 'Vietnamese letters use the extra font files from this site');
-  await page.reload({ waitUntil: 'networkidle' });
-  await page.waitForFunction(() => document.querySelector('#lang-toggle-btn .lang-current-code').textContent === 'VI');
+
+  // From one language to another, and back to English
+  // (whichever language button the top bar is showing: French uses the compact bar at this width)
+  await page.locator('[data-lang-toggle]:visible').first().click();
+  await page.locator('.lang-dropdown:not(.hidden) [data-lang="fr"]').click();
+  await page.waitForURL(site.origin + '/fr/#services');
+  await page.waitForLoadState('networkidle');
+  await page.locator('[data-lang-toggle]:visible').first().click();
+  await page.locator('.lang-dropdown:not(.hidden) [data-lang="en"]').click();
+  await page.waitForURL(site.origin + '/#services');
+  await page.waitForLoadState('networkidle');
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'en');
+  assert.equal(await page.locator('#hero-title').textContent().then((t) => t.replace(/\s+/g, ' ').trim()), 'A little more clarity. A lot more care.');
   assert.deepEqual(seen.errors, []);
+  await context.close();
+});
+
+test('every language has its own ready-translated page that search engines can read', async () => {
+  const englishHtml = await (await fetch(site.origin + '/')).text();
+  const englishTitle = englishHtml.match(/<title>([^<]*)<\/title>/)[1];
+  assert.equal((englishHtml.match(/<link rel="alternate" hreflang=/g) || []).length, 19);
+  for (const lang of LANGS.filter((l) => l !== 'en')) {
+    const res = await fetch(`${site.origin}/${lang}/`);
+    assert.equal(res.status, 200, `/${lang}/ exists`);
+    const html = await res.text(); // the page exactly as a search engine receives it, before any script runs
+    assert.match(html, new RegExp(`<html lang="${lang}"[^>]* data-prerendered="${lang}"`), `${lang}: marked with its language`);
+    const title = html.match(/<title>([^<]*)<\/title>/)[1];
+    assert.ok(title.startsWith('Love RCFE | ') && title !== englishTitle, `${lang}: translated title`);
+    assert.ok(html.includes(`<link rel="canonical" href="https://love-rcfe.pages.dev/${lang}/">`), `${lang}: canonical address`);
+    assert.ok(html.includes(`<meta property="og:url" content="https://love-rcfe.pages.dev/${lang}/">`));
+    assert.equal((html.match(/<link rel="alternate" hreflang=/g) || []).length, 19, `${lang}: lists all language addresses`);
+    assert.ok(!html.includes('A little more clarity.'), `${lang}: the main heading is not English`);
+    assert.ok(!/<meta name="robots" content="[^"]*noindex/.test(html), `${lang}: may be listed`);
+    const description = html.match(/<meta name="description" content="([^"]*)"/)[1];
+    assert.ok(description.length > 40 && !description.startsWith('Personalized placement guidance'), `${lang}: translated description`);
+  }
+  const sitemap = await (await fetch(site.origin + '/sitemap.xml')).text();
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 18);
+  for (const lang of LANGS.filter((l) => l !== 'en')) assert.ok(sitemap.includes(`<loc>https://love-rcfe.pages.dev/${lang}/</loc>`));
+});
+
+test('a language page shows its language from the first moment and its tools are translated too', async () => {
+  const { page, context, seen } = await open('/es/', {
+    // Slow the language file down: the page text must already be Spanish without it
+    setup: (p) => p.route('**/i18n/es.js', async (route) => { await new Promise((r) => setTimeout(r, 800)); route.continue(); }),
+    wait: 'domcontentloaded',
+  });
+  const early = await page.evaluate(() => ({
+    hidden: document.documentElement.classList.contains('i18n-pending'),
+    heading: document.getElementById('hero-title').textContent.replace(/\s+/g, ' ').trim(),
+    code: document.querySelector('#lang-toggle-btn .lang-current-code').textContent,
+  }));
+  assert.equal(early.hidden, false, 'the page is not hidden while the language file loads');
+  assert.notEqual(early.heading, 'A little more clarity. A lot more care.');
+  assert.equal(early.code, 'ES');
+
+  await page.waitForLoadState('networkidle');
+  assert.match(await page.title(), /Asesoría/, 'the tab title is Spanish');
+  await page.evaluate(() => { location.hash = 'tools'; });
+  await page.waitForTimeout(400);
+  const toolsText = await page.locator('#tools').textContent();
+  assert.doesNotMatch(toolsText, /Estimated Monthly|Monthly Total|Select a /, 'text built by scripts is translated as well');
+  assert.equal(seen.requests.filter((u) => u.endsWith('/i18n/es.js')).length, 1, 'the language file is downloaded once');
+  assert.deepEqual(seen.errors, []);
+  await context.close();
+});
+
+test('the address decides the language, and the old ways of choosing one still work', async () => {
+  // A visitor whose saved language is French opens the Spanish address: Spanish wins
+  const a = await open('/es/', { setup: (p) => p.addInitScript(() => { try { localStorage.setItem('lovercfe_lang', 'fr'); } catch (e) {} }) });
+  assert.equal(await a.page.evaluate(() => document.documentElement.lang), 'es');
+  assert.equal(await a.page.locator('#lang-toggle-btn .lang-current-code').textContent(), 'ES');
+  await a.context.close();
+
+  // The plain address with a saved language translates in place, as before
+  const b = await open('/', { setup: (p) => p.addInitScript(() => { try { localStorage.setItem('lovercfe_lang', 'fr'); } catch (e) {} }) });
+  await b.page.waitForFunction(() => document.querySelector('#lang-toggle-btn .lang-current-code').textContent === 'FR');
+  assert.notEqual((await b.page.locator('#hero-title').textContent()).replace(/\s+/g, ' ').trim(), 'A little more clarity. A lot more care.');
+  await b.context.close();
+
+  // Old links with ?lang= still work
+  const c = await open('/?lang=ko');
+  await c.page.waitForFunction(() => document.documentElement.lang === 'ko');
+  await c.context.close();
+});
+
+test('an enquiry can be sent from a language page', async () => {
+  const { page, context } = await open('/es/#contact');
+  await page.waitForSelector('#ts-contact .stub-ts');
+  await page.fill('#contact [name="name"]', 'Prueba Navegador');
+  await page.fill('#contact [name="email"]', 'prueba@example.com');
+  await page.fill('#contact [name="phone"]', '8185550125');
+  await page.fill('#contact [name="message"]', 'Enviado por la prueba automática.');
+  for (const box of await page.locator('#contact form input[type="checkbox"][required]').all()) await box.check();
+  await page.locator('#contact form [type="submit"]').click();
+  await page.waitForFunction(() => /Prueba Navegador/.test(document.querySelector('#contact form').parentElement.textContent), null, { timeout: 10000 });
+  await site.settle();
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM leads WHERE email = 'prueba@example.com'")[0].n, 1);
   await context.close();
 });
 
@@ -300,8 +398,7 @@ test('every language file loads and translates the main heading', async () => {
 test('the page never slides sideways: every language on phones, tablets and laptops', async () => {
   const problems = [];
   for (const lang of LANGS) {
-    const { page, context } = await open(lang === 'en' ? '/' : `/?lang=${lang}`, { width: 320, height: 800 });
-    if (lang !== 'en') await page.waitForFunction((code) => document.documentElement.lang === code, lang);
+    const { page, context } = await open(lang === 'en' ? '/' : `/${lang}/`, { width: 320, height: 800 });
     await page.waitForTimeout(200);
     for (const width of [320, 390, 768, 1024]) {
       await page.setViewportSize({ width, height: 800 });
@@ -329,7 +426,7 @@ test('top bar: shows the full menu when it fits and the menu button when it does
     return { page, context, result };
   };
 
-  for (const [path, width, fullMenu] of [['/', 390, false], ['/', 900, false], ['/', 1280, true], ['/', 1920, true], ['/?lang=zh', 1024, true], ['/?lang=hy', 1440, false]]) {
+  for (const [path, width, fullMenu] of [['/', 390, false], ['/', 900, false], ['/', 1280, true], ['/', 1920, true], ['/zh/', 1024, true], ['/hy/', 1440, false]]) {
     const { context, result } = await state(path, width);
     assert.deepEqual(result, { menu: fullMenu, button: !fullMenu, over: 0 }, `${path} at ${width}px`);
     await context.close();

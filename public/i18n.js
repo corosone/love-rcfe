@@ -151,7 +151,38 @@
     loadLang(currentLang, function () {});
   }
 
+  // Each language also has its own address, /es/, /zh/ and so on: a copy of the home page
+  // that is already translated (built by scripts/build-pages.js, so search engines can read
+  // it). On those addresses the address decides the language.
+  function pathLang() {
+    try {
+      var m = /^\/([a-z]{2})(?:\/|$)/.exec(window.location.pathname);
+      return m && m[1] !== 'en' && own(LANGUAGES, m[1]) ? m[1] : '';
+    } catch (e) {
+      return '';
+    }
+  }
+  // True on a home page address: "/" or a language address such as "/es/"
+  function onHomeAddress() {
+    try {
+      var p = window.location.pathname;
+      return p === '/' || p === '/index.html' || (!!pathLang() && /^\/[a-z]{2}\/?(?:index\.html)?$/.test(p));
+    } catch (e) {
+      return false;
+    }
+  }
+  function homeAddressFor(code) {
+    return code === 'en' ? '/' : '/' + code + '/';
+  }
+  // True when this page arrived already translated into the current language
+  function isPrerendered() {
+    var html = document.documentElement;
+    return !!html && currentLang !== 'en' && html.getAttribute('data-prerendered') === currentLang;
+  }
+
   function getSavedLang() {
+    var fromPath = pathLang();
+    if (fromPath) return fromPath;
     try {
       var q = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
       if (q && own(LANGUAGES, q)) return q;
@@ -372,6 +403,20 @@
   // the page stays in its current language.
   function setLang(code) {
     var next = own(LANGUAGES, code) ? code : 'en';
+    // On the home page, changing language means going to that language's own address.
+    if (onHomeAddress()) {
+      var here = window.location.pathname.replace(/index\.html$/, '');
+      if (here !== homeAddressFor(next) && here + '/' !== homeAddressFor(next)) {
+        saveLang(next);
+        closeMenus();
+        window.location.assign(homeAddressFor(next) + window.location.hash);
+        return;
+      }
+      if (isPrerendered() && next === currentLang) {
+        closeMenus();
+        return;
+      }
+    }
     var token = ++switchToken;
     closeMenus();
     var root = document.documentElement;
@@ -394,14 +439,23 @@
     initialized = true;
     bindMenuScrollListeners();
     updateHeaderControls();
-    if (currentLang === 'en' || dataFor(currentLang)) {
+    if (currentLang === 'en' || (dataFor(currentLang) && !isPrerendered())) {
       applyDom(document);
       setPending(false);
       return;
     }
-    // The language file is still downloading: keep the page hidden briefly, then translate.
     var target = currentLang;
     var token = switchToken;
+    if (isPrerendered()) {
+      // The page text is already in this language. Only the words that scripts insert later
+      // (calculator, quiz, form messages) need the language file.
+      setPending(false);
+      loadLang(target, function (ok) {
+        if (ok && token === switchToken && currentLang === target) notifyChange(target);
+      });
+      return;
+    }
+    // The language file is still downloading: keep the page hidden briefly, then translate.
     setPending(true);
     loadLang(target, function (ok) {
       setPending(false);
