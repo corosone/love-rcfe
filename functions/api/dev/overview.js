@@ -1,9 +1,11 @@
 // GET /api/dev/overview — everything the developer console shows (developer session required)
+// GET /api/dev/overview?detail=<activity id> — every device detail stored with one activity row
 import { jsonResponse, clientIp } from '../../../lib/db.js';
 import { authorizeDev, devConfigSummary, devLockState, retentionDays } from '../../../lib/dev.js';
 import { placeFromDetail } from '../../../lib/reqinfo.js';
 import { requestLogPaused } from '../../../lib/requestlog.js';
 import { listBlocks, normalizeIp } from '../../../lib/blocklist.js';
+import { infoFromJson, deviceAddresses, deviceSections } from '../../../lib/deviceinfo.js';
 
 // Events that count as failed or blocked sign-ins in the security summary.
 const FAIL_EVENTS = ['wrong_password', 'wrong_code', 'blocked_locked', 'code_limit', 'staff_wrong_password', 'staff_locked_out'];
@@ -12,6 +14,32 @@ const FAIL_IN = FAIL_EVENTS.map(() => '?').join(', ');
 export async function onRequestGet({ request, env }) {
   const { denied, session } = await authorizeDev(request, env);
   if (denied) return denied;
+
+  // One activity row's full device details (the "Details" button on the Activity tab).
+  const detailId = new URL(request.url).searchParams.get('detail');
+  if (detailId !== null) {
+    if (!/^\d{1,12}$/.test(detailId)) return jsonResponse({ error: 'Unknown activity entry.' }, 400);
+    try {
+      const row = await env.DB.prepare('SELECT id, at, event, ip, info FROM dev_audit WHERE id = ?').bind(Number(detailId)).first();
+      if (!row) return jsonResponse({ error: 'That activity entry no longer exists.' }, 404);
+      const info = infoFromJson(row.info);
+      const addr = info ? deviceAddresses(info) : { long: null, short: null };
+      return jsonResponse({
+        ok: true,
+        id: Number(row.id),
+        at: Number(row.at),
+        event: row.event,
+        addresses: [
+          addr.long ? { kind: 'long', ip: addr.long.ip, source: addr.long.source } : null,
+          addr.short ? { kind: 'short', ip: addr.short.ip, source: addr.short.source } : null,
+        ].filter(Boolean),
+        sections: info ? deviceSections(info) : [],
+      });
+    } catch (err) {
+      console.error('Developer activity detail failed:', err);
+      return jsonResponse({ error: 'Database read error.' }, 500);
+    }
+  }
 
   const now = Math.floor(Date.now() / 1000);
   const dayAgo = now - 86400;
@@ -31,7 +59,7 @@ export async function onRequestGet({ request, env }) {
       env.DB.prepare('SELECT COUNT(*) AS n FROM admin_sessions WHERE expires_at > ?').bind(now).first(),
       env.DB.prepare('SELECT COUNT(*) AS n FROM dev_sessions WHERE expires_at > ?').bind(now).first(),
       env.DB.prepare('SELECT COUNT(*) AS n FROM auth_attempts WHERE locked_until > ?').bind(now).first(),
-      env.DB.prepare('SELECT at, event, ip, detail FROM dev_audit ORDER BY id DESC LIMIT 100').all(),
+      env.DB.prepare('SELECT id, at, event, ip, detail, info FROM dev_audit ORDER BY id DESC LIMIT 100').all(),
       env.DB.prepare(`
         SELECT event, COALESCE(SUM(CASE WHEN at >= ? THEN 1 ELSE 0 END), 0) AS day, COUNT(*) AS week
         FROM dev_audit WHERE at >= ? AND event IN (${FAIL_IN}) GROUP BY event
@@ -96,7 +124,19 @@ export async function onRequestGet({ request, env }) {
       // Lets the console warn before you block the address you are using yourself.
       yourIp: normalizeIp(clientIp(request)) || clientIp(request),
       config: devConfigSummary(env),
-      activity: (audit?.results || []).map((r) => ({ at: r.at, event: r.event, ip: r.ip, detail: r.detail })),
+      activity: (audit?.results || []).map((r) => {
+        const item = { id: Number(r.id), at: r.at, event: r.event, ip: r.ip, detail: r.detail, hasInfo: false };
+        const info = infoFromJson(r.info);
+        if (info) {
+          item.hasInfo = true;
+          // The device's other address (the one the site did not see), when the browser reported it.
+          const addr = deviceAddresses(info);
+          const other = addr.long && addr.long.source === 'reported' ? { kind: 'long', ip: addr.long.ip }
+            : addr.short && addr.short.source === 'reported' ? { kind: 'short', ip: addr.short.ip } : null;
+          if (other) item.otherIp = other;
+        }
+        return item;
+      }),
     });
   } catch (err) {
     console.error('Developer overview failed:', err);
