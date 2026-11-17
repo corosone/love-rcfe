@@ -5,7 +5,6 @@ const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const { startServer } = require('./helpers/server.js');
 
-const CRON_SECRET = 'test-cron-secret-0123456789abcdef-0123456789';
 const INBOX_PASSWORD = 'correct horse battery staple';
 
 let site;
@@ -19,7 +18,6 @@ before(async () => {
     DEV_EMAIL: 'owner@example.com',
     RESEND_API_KEY: 're_test_key',
     FORMSPREE_ENDPOINT: 'https://formspree.io/f/testform',
-    CRON_SECRET,
   });
 });
 
@@ -235,35 +233,26 @@ test('a blocked address is turned away from the enquiry form but not recorded as
 
 // ---------- Weekly summary ----------
 
-test('the weekly summary refuses callers without the secret', async () => {
-  site.outside.length = 0;
-  const none = await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '203.0.113.60' });
-  assert.equal(none.status, 401);
-  const wrong = await site.api('/api/cron/weekly-summary', { method: 'POST', headers: { authorization: 'Bearer wrong-secret' }, ip: '203.0.113.60' });
-  assert.equal(wrong.status, 401);
-  const get = await site.api('/api/cron/weekly-summary', { headers: { authorization: `Bearer ${CRON_SECRET}` } });
-  assert.equal(get.status, 405);
-  assert.equal(site.outside.length, 0, 'no email was sent');
-});
+const lastSent = () => Number(site.db._rows("SELECT value FROM app_secrets WHERE name = 'weekly_summary_last_sent'")[0]?.value) || 0;
+const setLastSent = (sec) => site.db._run("INSERT INTO app_secrets (name, value) VALUES ('weekly_summary_last_sent', ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value", String(sec));
+const summaryMails = () => site.outside.filter((c) => c.url === 'https://api.resend.com/emails');
 
-test('guessing the weekly summary secret is slowed down', async () => {
-  let res;
-  for (let i = 0; i < 12; i++) {
-    res = await site.api('/api/cron/weekly-summary', { method: 'POST', headers: { authorization: `Bearer guess-${i}` }, ip: '203.0.113.61' });
-  }
-  assert.equal(res.status, 429);
+test('the weekly summary address only accepts POST', async () => {
+  site.outside.length = 0;
+  const res = await site.api('/api/cron/weekly-summary', { ip: '203.0.113.60' });
+  assert.equal(res.status, 405);
+  assert.equal(summaryMails().length, 0);
 });
 
 test('the weekly summary emails numbers only, and tells the caller nothing else', async () => {
   site.outside.length = 0;
-  const res = await site.api('/api/cron/weekly-summary', { method: 'POST', headers: { authorization: `Bearer ${CRON_SECRET}` }, ip: '203.0.113.62' });
+  const res = await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '203.0.113.62' });
   assert.equal(res.status, 200);
   assert.deepEqual(await res.json(), { ok: true, sent: true });
 
-  const mail = site.outside.find((c) => c.url === 'https://api.resend.com/emails');
-  assert.ok(mail, 'an email was sent through Resend');
-  const sent = JSON.parse(mail.body);
-  assert.deepEqual(sent.to, ['owner@example.com']);
+  assert.equal(summaryMails().length, 1, 'one email was sent through Resend');
+  const sent = JSON.parse(summaryMails()[0].body);
+  assert.deepEqual(sent.to, ['owner@example.com'], 'it only goes to the owner');
   assert.match(sent.subject, /weekly summary: \d+ new enquir/);
 
   const total = leadCount();
@@ -281,6 +270,59 @@ test('the weekly summary emails numbers only, and tells the caller nothing else'
   }
 });
 
+test('the weekly summary is sent at most once every 5 days, however often it is asked for', async () => {
+  site.outside.length = 0;
+  for (let i = 0; i < 3; i++) {
+    const res = await site.api('/api/cron/weekly-summary', { method: 'POST', ip: `203.0.113.${70 + i}` });
+    assert.equal(res.status, 200);
+    const data = await res.json();
+    assert.equal(data.sent, false);
+  }
+  assert.equal(summaryMails().length, 0, 'no second email');
+
+  // 4 days and 23 hours later: still too soon
+  const now = Math.floor(Date.now() / 1000);
+  setLastSent(now - (5 * 24 * 60 * 60 - 3600));
+  const early = await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '203.0.113.73' });
+  assert.equal((await early.json()).sent, false);
+
+  // 5 days later: sent again, and the time is recorded
+  setLastSent(now - 5 * 24 * 60 * 60 - 60);
+  const later = await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '203.0.113.74' });
+  assert.deepEqual(await later.json(), { ok: true, sent: true });
+  assert.equal(summaryMails().length, 1);
+  assert.ok(lastSent() >= now);
+});
+
+test('two requests at the same moment send only one email', async () => {
+  site.outside.length = 0;
+  setLastSent(1);
+  const results = await Promise.all([1, 2, 3, 4].map((i) => site.api('/api/cron/weekly-summary', { method: 'POST', ip: `203.0.113.${80 + i}` }).then((r) => r.json())));
+  assert.equal(results.filter((r) => r.sent).length, 1);
+  assert.equal(summaryMails().length, 1);
+});
+
+test('if the email service refuses, the attempt is not counted, so the next call can try again', async () => {
+  const { onRequestPost } = await import('../functions/api/cron/weekly-summary.js');
+  const before = Math.floor(Date.now() / 1000) - 6 * 24 * 60 * 60;
+  setLastSent(before);
+  // No email service configured at all
+  const res = await onRequestPost({
+    request: new Request(site.origin + '/api/cron/weekly-summary', { method: 'POST', headers: { 'x-forwarded-for': '203.0.113.90' } }),
+    env: { ...site.env, RESEND_API_KEY: '', DEV_CODE_FORMSPREE_ENDPOINT: '' },
+  });
+  assert.equal(res.status, 502);
+  assert.equal(lastSent(), before, 'the last-sent time is put back');
+});
+
+test('the weekly summary address cannot be hammered', async () => {
+  let res;
+  for (let i = 0; i < 8; i++) {
+    res = await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '203.0.113.95' });
+  }
+  assert.equal(res.status, 429);
+});
+
 test('the weekly summary only counts the last 7 days', async () => {
   const { buildWeeklySummary } = await import('../functions/api/cron/weekly-summary.js');
   const old = new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString();
@@ -296,15 +338,4 @@ test('the weekly summary only counts the last 7 days', async () => {
   const future = await buildWeeklySummary(site.db, Date.now() + 30 * 24 * 60 * 60 * 1000);
   assert.equal(future.enquiries.total, 0);
   assert.equal(future.visits.views, 0);
-});
-
-test('the weekly summary does nothing until CRON_SECRET is set', async () => {
-  const { onRequestPost } = await import('../functions/api/cron/weekly-summary.js');
-  for (const value of [undefined, '', 'too-short']) {
-    const res = await onRequestPost({
-      request: new Request(site.origin + '/api/cron/weekly-summary', { method: 'POST', headers: { authorization: `Bearer ${value || ''}` } }),
-      env: { ...site.env, CRON_SECRET: value },
-    });
-    assert.equal(res.status, 503);
-  }
 });

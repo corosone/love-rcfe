@@ -4,21 +4,23 @@
 // (.github/workflows/weekly-summary.yml) calls this address once a week:
 //
 //   POST /api/cron/weekly-summary
-//   Authorization: Bearer <CRON_SECRET>
 //
-// CRON_SECRET is a long random value stored in two places: Cloudflare (Pages > Settings >
-// Variables and Secrets) and the GitHub repository's Actions secrets. Without it this
-// address does nothing.
+// No password or secret is needed, so there is nothing to set up. Instead the address is
+// made harmless for anyone else who finds it:
+//   - it sends at most one email every 5 days, however often it is called;
+//   - the email only ever goes to the owner (DEV_EMAIL), through the same sender as the
+//     6-digit sign-in codes;
+//   - the email holds numbers only: no names, messages, phone numbers or IP addresses;
+//   - the reply to the caller says only whether an email was sent.
+// The worst a stranger can do is make one week's email arrive early.
 //
-// The email goes to the developer address (DEV_EMAIL) through the same sender as the
-// 6-digit sign-in codes. It holds numbers only: no names, messages, phone numbers or IP
-// addresses of families. The reply to the caller says only whether the email was sent,
-// because GitHub Action logs of a public repository can be read by anyone.
-import { ensureSchema, jsonResponse, clientIp, verifyPassword, tooManyRequestsD1 } from '../../../lib/db.js';
+// 5 days (not 7) so that an email sent by hand mid-week does not block the next Monday's.
+import { ensureSchema, jsonResponse, clientIp, tooManyRequestsD1 } from '../../../lib/db.js';
 import { sendDevEmail } from '../../../lib/dev.js';
 
-const MIN_SECRET_LENGTH = 32;
 const DAYS = 7;
+const MIN_GAP_SEC = 5 * 24 * 60 * 60;
+const LAST_SENT_NAME = 'weekly_summary_last_sent';
 
 const n = (row, key = 'n') => Number(row?.[key]) || 0;
 
@@ -133,31 +135,67 @@ export function summaryEmail(s, origin) {
   return { subject, text: lines.join('\n') };
 }
 
+// Marks "an email is being sent now", but only if the last one was at least 5 days ago.
+// One database statement, so two calls at the same moment cannot both get through.
+// Returns the earlier time (so it can be put back if sending fails), or null when it is too soon.
+async function claimSend(db, nowSec) {
+  const before = await db.prepare('SELECT value FROM app_secrets WHERE name = ?').bind(LAST_SENT_NAME).first();
+  const previous = Number(before?.value) || 0;
+  const result = await db
+    .prepare(`
+      INSERT INTO app_secrets (name, value) VALUES (?, ?)
+      ON CONFLICT(name) DO UPDATE SET value = excluded.value
+      WHERE CAST(app_secrets.value AS INTEGER) <= ?
+    `)
+    .bind(LAST_SENT_NAME, String(nowSec), nowSec - MIN_GAP_SEC)
+    .run();
+  return result?.meta?.changes ? { previous } : null;
+}
+
+async function releaseSend(db, previous) {
+  if (previous) {
+    await db.prepare('UPDATE app_secrets SET value = ? WHERE name = ?').bind(String(previous), LAST_SENT_NAME).run();
+  } else {
+    await db.prepare('DELETE FROM app_secrets WHERE name = ?').bind(LAST_SENT_NAME).run();
+  }
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  const secret = typeof env?.CRON_SECRET === 'string' ? env.CRON_SECRET.trim() : '';
-  if (secret.length < MIN_SECRET_LENGTH) {
-    return jsonResponse({ error: 'The weekly summary is not set up.' }, 503);
-  }
   if (!env?.DB) {
     return jsonResponse({ error: 'Database is not bound yet.' }, 503);
   }
 
-  const header = request.headers.get('authorization') || '';
-  const given = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
-  if (!(await verifyPassword(given, secret))) {
-    // Slow down guessing: after 10 wrong tries from one address, refuse for 10 minutes.
-    const limited = await tooManyRequestsD1(env.DB, `cron:${clientIp(request)}`, 10, 10 * 60);
-    return jsonResponse({ error: limited ? 'Too many attempts.' : 'Not allowed.' }, limited ? 429 : 401);
-  }
-
   try {
     await ensureSchema(env.DB);
-    const summary = await buildWeeklySummary(env.DB);
-    const { subject, text } = summaryEmail(summary, new URL(request.url).origin);
-    const result = await sendDevEmail(env, request, subject, text);
+
+    // Calls are cheap to refuse, but keep them few: 6 an hour from one address, 20 an hour in all.
+    const [ipLimited, allLimited] = await Promise.all([
+      tooManyRequestsD1(env.DB, `cron:${clientIp(request)}`, 6, 60 * 60),
+      tooManyRequestsD1(env.DB, 'cron:__global__', 20, 60 * 60),
+    ]);
+    if (ipLimited || allLimited) {
+      return jsonResponse({ error: 'Too many requests.' }, 429);
+    }
+
+    const claim = await claimSend(env.DB, Math.floor(Date.now() / 1000));
+    if (!claim) {
+      return jsonResponse({ ok: true, sent: false, reason: 'A summary was already sent in the last 5 days.' });
+    }
+
+    let result;
+    try {
+      const summary = await buildWeeklySummary(env.DB);
+      const { subject, text } = summaryEmail(summary, new URL(request.url).origin);
+      result = await sendDevEmail(env, request, subject, text);
+    } catch (err) {
+      await releaseSend(env.DB, claim.previous);
+      throw err;
+    }
     if (!result.ok) {
+      // Nothing went out, so do not count it: the next call may try again.
+      await releaseSend(env.DB, claim.previous);
       return jsonResponse({ ok: false, sent: false, error: 'The summary email could not be sent.' }, 502);
     }
     return jsonResponse({ ok: true, sent: true });
