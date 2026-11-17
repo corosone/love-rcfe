@@ -1,4 +1,5 @@
 import { jsonResponse, clean, readJsonBody, authorizeAdmin, readDevSession } from '../../../lib/db.js';
+import { devAudit } from '../../../lib/dev.js';
 
 const STAGES = ['new', 'called', 'tour', 'waiting'];
 const DEFAULT_LIMIT = 500;
@@ -52,6 +53,21 @@ export async function onRequestGet({ request, env }) {
   if (denied) return denied;
 
   const params = new URL(request.url).searchParams;
+
+  // ?summary=1: just the counts, for the number in the browser tab title while the inbox
+  // tab is in the background (much lighter than loading every message).
+  if (params.get('summary') === '1') {
+    try {
+      const row = await env.DB
+        .prepare('SELECT COUNT(*) AS total, COALESCE(SUM(CASE WHEN handled = 0 THEN 1 ELSE 0 END), 0) AS open FROM leads')
+        .first();
+      return jsonResponse({ ok: true, open: Number(row?.open || 0), total: Number(row?.total || 0) });
+    } catch (err) {
+      console.error('Failed to count leads:', err);
+      return jsonResponse({ error: 'Database read error.' }, 500);
+    }
+  }
+
   const rawLimit = Number(params.get('limit') || DEFAULT_LIMIT);
   const rawOffset = Number(params.get('offset') || 0);
   const limit = Number.isInteger(rawLimit) && rawLimit > 0 ? Math.min(rawLimit, DEFAULT_LIMIT) : DEFAULT_LIMIT;
@@ -149,7 +165,11 @@ export async function onRequestDelete({ request, env }) {
   if (!parsed.ok) return parsed.response;
   const body = parsed.data;
 
-  const urlId = new URL(request.url).searchParams.get('id');
+  const urlParams = new URL(request.url).searchParams;
+  const urlId = urlParams.get('id');
+  // "Mark as spam" deletes the message like Delete does, and also notes the sender's address
+  // in the developer's activity log so the owner can decide whether to block it.
+  const spam = urlParams.get('spam') === '1' || body?.spam === true;
   const rawId = urlId && urlId.trim() ? urlId : body?.id;
   const id = Number(rawId);
   if (!Number.isInteger(id) || id <= 0) {
@@ -157,15 +177,20 @@ export async function onRequestDelete({ request, env }) {
   }
 
   try {
-    const result = await env.DB
-      .prepare('DELETE FROM leads WHERE id = ?')
+    const removed = await env.DB
+      .prepare('DELETE FROM leads WHERE id = ? RETURNING ip, ip_place')
       .bind(id)
-      .run();
+      .first();
 
-    if (!result?.meta?.changes) {
+    if (!removed) {
       return jsonResponse({ error: 'Lead not found.' }, 404);
     }
 
+    if (spam) {
+      const sender = String(removed.ip || '').trim();
+      const place = String(removed.ip_place || '').trim();
+      await devAudit(env, request, 'staff_marked_spam', sender ? `${sender}${place ? ` · ${place}` : ''}` : 'sender address not recorded');
+    }
     return jsonResponse({ ok: true, id });
   } catch (err) {
     console.error('Failed to delete lead:', err);
