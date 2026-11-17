@@ -671,3 +671,22 @@ test('staff inbox: only GET, PATCH and DELETE are accepted', async () => {
   const res = await inboxCall('POST', '', { id: 1 });
   assert.equal(res.status, 405);
 });
+
+test('staff inbox: messages not yet handled always come in the first batch, with counts for everything stored', async () => {
+  const old = new Date(Date.now() - 60 * 86400000).toISOString();
+  site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('call_request', 'x', 'Oldest Waiting', 'w@example.com', '8185550100', 'm', ?, 0)", old);
+  for (let i = 0; i < 3; i++) {
+    site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('enquiry', 'x', 'Newer Handled', 'h@example.com', '8185550100', 'm', ?, 1)", new Date().toISOString());
+  }
+  const res = await inboxCall('GET', '?limit=2');
+  assert.equal(res.status, 200);
+  const data = await res.json();
+  const real = site.db._rows("SELECT COUNT(*) AS total, SUM(handled = 0) AS open, SUM(handled = 0 AND kind = 'call_request') AS calls FROM leads")[0];
+  assert.deepEqual(data.counts, { open: real.open, handled: real.total - real.open, openCalls: real.calls });
+  assert.equal(data.total, real.total);
+  assert.ok(data.leads.every((l) => !l.handled) || real.open < 2, 'the first batch is messages not yet handled');
+  const all = await (await inboxCall('GET', '?limit=500')).json();
+  const firstHandled = all.leads.findIndex((l) => l.handled);
+  assert.ok(all.leads.slice(firstHandled).every((l) => l.handled), 'every message not yet handled comes before the handled ones');
+  assert.ok(all.leads.some((l) => l.name === 'Oldest Waiting'));
+});

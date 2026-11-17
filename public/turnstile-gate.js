@@ -44,6 +44,7 @@
       watchVisibility(el);
     }
     try {
+      el.textContent = ''; // clears the "could not load" message when the script arrived late
       gate.widget = window.turnstile.render(el, {
         sitekey: SITE_KEY,
         theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
@@ -64,7 +65,9 @@
   }
 
   function mount(id) {
-    var gate = { id: id, widget: undefined, failed: false, watching: false };
+    // failed: rendering threw (give up). late: the script has not arrived after 7 seconds; a
+    // message is shown, but the check still starts if the script turns up afterwards.
+    var gate = { id: id, widget: undefined, failed: false, late: false, watching: false };
     gates.push(gate);
 
     function start() {
@@ -73,7 +76,7 @@
       setTimeout(function () {
         var el = document.getElementById(id);
         if (el && gate.widget === undefined && !gate.failed) {
-          gate.failed = true;
+          gate.late = true;
           if (!gate.watching) { gate.watching = true; watchVisibility(el); }
           showError(el, LOAD_ERROR);
         }
@@ -93,7 +96,7 @@
           (function poll() {
             render(gate);
             if (gate.widget === undefined) {
-              if (gate.failed || Date.now() > deadline) return resolve({ token: '', reason: 'unavailable' });
+              if (gate.failed || (gate.late && !window.turnstile) || Date.now() > deadline) return resolve({ token: '', reason: 'unavailable' });
               return setTimeout(poll, 150);
             }
             var token = currentToken(gate);
