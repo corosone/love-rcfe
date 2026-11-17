@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "공개 웹 양식을 통해 사회보장번호 전체, 상세 병력 또는 보호 대상 건강 정보(PHI)를 전송하지 마세요. LIC 602A 같은 민감한 의료 평가 서류는 정식 입소 심사 중 HIPAA 보안 채널을 통해서만 전달됩니다.",
     "4. Data Access & Removal Requests": "4. 정보 열람 및 삭제 요청",
     "5. Services We Use": "5. 이용 중인 외부 기술 서비스",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "본 웹사이트 운영을 위해 Cloudflare(웹 호스팅, 데이터베이스 저장, 스팸 차단, 개인정보 친화적 방문 통계), Formspree(접수된 문의를 이메일로 전달), Google Fonts(글꼴 표시) 서비스를 이용합니다. 양식으로 제출하신 정보는 상담 접수 및 답변 처리를 위해 해당 서비스를 거칠 수 있습니다.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "본 웹사이트 운영을 위해 Cloudflare(웹 호스팅, 데이터베이스 저장, 스팸 차단, 개인정보 친화적 방문 통계) 및 Formspree(접수된 문의를 이메일로 전달) 서비스를 이용합니다. 양식으로 제출하신 정보는 상담 접수 및 답변 처리를 위해 해당 서비스를 거칠 수 있습니다.",
     "Contact our Privacy Officer": "개인정보 보호 담당자 문의",
     "Call Love RCFE": "Love RCFE 전화 연결",
     "Talk with an advisor. Free and confidential.": "전문 상담사와 통화하세요. 무료이며 비밀이 보장됩니다.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "향후 3개월 이내의 날짜를 선택해 주세요.",
     "Please choose a time from the list.": "목록에서 시간대를 선택해 주세요.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "보안 확인을 완료해 주세요. 화면에 나타나지 않으면 (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 연락해 주세요.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "보안 인증을 일시적으로 이용할 수 없습니다. (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 문의해 주세요."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "보안 인증을 일시적으로 이용할 수 없습니다. (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 문의해 주세요.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "기기 확인으로 스팸을 막습니다.",
+    "Visit history improves support.": "방문 기록으로 더 나은 지원을 드립니다.",
+    "Network details prevent abuse.": "네트워크 정보로 악용을 방지합니다.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}부터 {to}까지 휴무입니다. {next}부터 통화 예약이 가능합니다.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "{to}까지 휴무입니다. 지금 보내신 메시지는 {next}부터 답변드립니다.",
+    "We are away on that date. Please choose {next} or later.": "해당 날짜는 휴무입니다. {next} 이후 날짜를 선택해 주세요.",
+    "We are away on that date. Please pick another date.": "해당 날짜는 휴무입니다. 다른 날짜를 선택해 주세요."
   },
   blocks: {
     "hero_title": "조금 더 선명한 안내.<br><span class=\"italic text-brand-green font-normal\">훨씬 더 깊은 돌봄.</span>",

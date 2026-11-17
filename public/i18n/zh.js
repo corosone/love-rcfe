@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "请勿通过公开网页表单提交完整的社会安全号码（SSN）、详细病历或受保护健康信息（PHI）。诸如加州 LIC 602A 等敏感医疗评估文件仅在正式入院审查期间通过符合 HIPAA 安全标准的加密渠道传输。",
     "4. Data Access & Removal Requests": "4. 数据查阅与删除请求",
     "5. Services We Use": "5. 本站依赖的第三方技术服务",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "为保障本网站稳定运行，我们依赖以下第三方技术服务：Cloudflare（网站托管、数据库存储、垃圾信息防护及隐私友好的访问统计）、Formspree（用于将您提交的留言转发至我们的顾问邮箱）以及 Google Fonts（网页字体渲染）。您通过表单提交的内容可能会经过上述服务以便我们接收与回复。",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "为保障本网站稳定运行，我们依赖以下第三方技术服务：Cloudflare（网站托管、数据库存储、垃圾信息防护及隐私友好的访问统计）以及 Formspree（用于将您提交的留言转发至我们的顾问邮箱）。您通过表单提交的内容可能会经过上述服务以便我们接收与回复。",
     "Contact our Privacy Officer": "联系隐私保护专员",
     "Call Love RCFE": "致电 Love RCFE",
     "Talk with an advisor. Free and confidential.": "与顾问通话 · 免费且严格保密。",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "请选择未来 3 个月内的日期。",
     "Please choose a time from the list.": "请从列表中选择一个时段。",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "请先完成安全验证。若未显示，请致电 (818) 217-5755 或发送邮件至 loveRCFE@gmail.com。",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "安全验证暂不可用。请致电 (818) 217-5755 或发邮件至 loveRCFE@gmail.com。"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "安全验证暂不可用。请致电 (818) 217-5755 或发邮件至 loveRCFE@gmail.com。",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "设备检查可防止垃圾信息。",
+    "Visit history improves support.": "访问记录帮助改进服务。",
+    "Network details prevent abuse.": "网络信息用于防止滥用。",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "我们将于{from}至{to}休假。{next}起可预约通话。",
+    "We are away until {to}. Messages sent now are answered from {next}.": "我们休假至{to}。现在发送的留言将从{next}起回复。",
+    "We are away on that date. Please choose {next} or later.": "我们当天休假。请选择{next}或之后的日期。",
+    "We are away on that date. Please pick another date.": "我们当天休假。请选择其他日期。"
   },
   blocks: {
     "hero_title": "多一份清晰指引。<br><span class=\"italic text-brand-green font-normal\">多十分用心照护。</span>",

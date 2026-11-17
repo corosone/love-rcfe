@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "אנא אל תשלחו מספרי Social Security מלאים, היסטוריה רפואית מפורטת או מידע רפואי מוגן (PHI) דרך טופסי אינטרנט פתוחים. הערכות רפואיות רגישות (כגון טופס קליפורניה LIC 602A) מועברות רק בערוצים מאובטחים התואמים לתקן HIPAA במהלך בדיקות קליטה רשמיות.",
     "4. Data Access & Removal Requests": "4. גישה לנתונים ובקשות מחיקה",
     "5. Services We Use": "5. שירותים שאנו עושים בהם שימוש",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "לתפעול אתר זה אנו מסתמכים על מספר שירותי צד שלישי: Cloudflare (אחסון אתר, מסד נתונים, הגנה מספאם וסטטיסטיקת תנועה שומרת פרטיות), Formspree (להעברת ההודעות שתשלחו אלינו באימייל) ו-Google Fonts (להצגת גופני האתר). מידע שתשלחו בטפסים עשוי לעבור דרך שירותים אלה כדי שנוכל לקבלו ולהשיב לכם.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "לתפעול אתר זה אנו מסתמכים על מספר שירותי צד שלישי: Cloudflare (אחסון אתר, מסד נתונים, הגנה מספאם וסטטיסטיקת תנועה שומרת פרטיות) ו-Formspree (להעברת ההודעות שתשלחו אלינו באימייל). מידע שתשלחו בטפסים עשוי לעבור דרך שירותים אלה כדי שנוכל לקבלו ולהשיב לכם.",
     "Contact our Privacy Officer": "פנו לממונה על הפרטיות",
     "Call Love RCFE": "חייגו ל-Love RCFE",
     "Talk with an advisor. Free and confidential.": "שוחחו עם יועץ. חינם ובסודיות מלאה.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "אנא בחרו תאריך בתוך 3 החודשים הקרובים.",
     "Please choose a time from the list.": "אנא בחרו שעה מהרשימה.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "אנא השלימו את בדיקת האבטחה. אם אינה מופיעה, התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "אימות האבטחה אינו זמין זמנית. אנא התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "אימות האבטחה אינו זמין זמנית. אנא התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "בדיקת מכשיר מונעת ספאם.",
+    "Visit history improves support.": "היסטוריית ביקורים משפרת את התמיכה.",
+    "Network details prevent abuse.": "פרטי רשת מונעים שימוש לרעה.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "אנחנו בחופשה מ-{from} עד {to}. אפשר לקבוע שיחה החל מ-{next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "אנחנו בחופשה עד {to}. על הודעות שיישלחו עכשיו נענה החל מ-{next}.",
+    "We are away on that date. Please choose {next} or later.": "אנחנו בחופשה בתאריך הזה. נא לבחור את {next} או תאריך מאוחר יותר.",
+    "We are away on that date. Please pick another date.": "אנחנו בחופשה בתאריך הזה. נא לבחור תאריך אחר."
   },
   blocks: {
     "hero_title": "קצת יותר בהירות.<br> <span class=\"italic text-brand-green font-normal\">הרבה יותר דאגה ומסירות.</span>",

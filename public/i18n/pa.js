@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "ਕਿਰਪਾ ਕਰਕੇ ਖੁੱਲ੍ਹੇ ਜਨਤਕ ਵੈੱਬ ਫਾਰਮਾਂ ਰਾਹੀਂ ਪੂਰੇ ਸੋਸ਼ਲ ਸਿਕਿਉਰਿਟੀ ਨੰਬਰ, ਵਿਸਤ੍ਰਿਤ ਡਾਕਟਰੀ ਇਤਿਹਾਸ ਜਾਂ ਸੁਰੱਖਿਅਤ ਸਿਹਤ ਜਾਣਕਾਰੀ (PHI) ਨਾ ਭੇਜੋ। ਸੰਵੇਦਨਸ਼ੀਲ ਡਾਕਟਰੀ ਮੁਲਾਂਕਣ (ਜਿਵੇਂ ਕਿ California Form LIC 602A) ਰਸਮੀ ਦਾਖ਼ਲਾ ਸਮੀਖਿਆ ਦੌਰਾਨ ਸਿਰਫ਼ ਸੁਰੱਖਿਅਤ, HIPAA-ਅਨੁਕੂਲ ਮਾਧਿਅਮਾਂ ਰਾਹੀਂ ਹੀ ਸਾਂਝੇ ਕੀਤੇ ਜਾਂਦੇ ਹਨ।",
     "4. Data Access & Removal Requests": "4. ਡੇਟਾ ਪਹੁੰਚ ਅਤੇ ਹਟਾਉਣ ਦੀਆਂ ਬੇਨਤੀਆਂ",
     "5. Services We Use": "5. ਸੇਵਾਵਾਂ ਜੋ ਅਸੀਂ ਵਰਤਦੇ ਹਾਂ",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ਇਸ ਸਾਈਟ ਨੂੰ ਚਲਾਉਣ ਲਈ ਅਸੀਂ ਕੁਝ ਤੀਜੀ-ਧਿਰ ਦੀਆਂ ਸੇਵਾਵਾਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦੇ ਹਾਂ: Cloudflare (ਵੈੱਬਸਾਈਟ ਹੋਸਟਿੰਗ, ਡੇਟਾਬੇਸ ਸਟੋਰੇਜ, ਸਪੈਮ ਸੁਰੱਖਿਆ ਅਤੇ ਗੋਪਨੀਯਤਾ-ਪੱਖੀ ਟ੍ਰੈਫਿਕ ਅੰਕੜੇ), Formspree (ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੇ ਸੁਨੇਹੇ ਸਾਨੂੰ ਈਮੇਲ ਕਰਨ ਲਈ), ਅਤੇ Google Fonts (ਸਾਈਟ ਦੇ ਫੌਂਟ ਦਿਖਾਉਣ ਲਈ)। ਸਾਡੇ ਫਾਰਮਾਂ ਰਾਹੀਂ ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੀ ਜਾਣਕਾਰੀ ਇਨ੍ਹਾਂ ਸੇਵਾਵਾਂ ਵਿੱਚੋਂ ਲੰਘ ਸਕਦੀ ਹੈ ਤਾਂ ਜੋ ਅਸੀਂ ਇਸ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਕੇ ਜਵਾਬ ਦੇ ਸਕੀਏ।",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ਇਸ ਸਾਈਟ ਨੂੰ ਚਲਾਉਣ ਲਈ ਅਸੀਂ ਕੁਝ ਤੀਜੀ-ਧਿਰ ਦੀਆਂ ਸੇਵਾਵਾਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦੇ ਹਾਂ: Cloudflare (ਵੈੱਬਸਾਈਟ ਹੋਸਟਿੰਗ, ਡੇਟਾਬੇਸ ਸਟੋਰੇਜ, ਸਪੈਮ ਸੁਰੱਖਿਆ ਅਤੇ ਗੋਪਨੀਯਤਾ-ਪੱਖੀ ਟ੍ਰੈਫਿਕ ਅੰਕੜੇ) ਅਤੇ Formspree (ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੇ ਸੁਨੇਹੇ ਸਾਨੂੰ ਈਮੇਲ ਕਰਨ ਲਈ)। ਸਾਡੇ ਫਾਰਮਾਂ ਰਾਹੀਂ ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੀ ਜਾਣਕਾਰੀ ਇਨ੍ਹਾਂ ਸੇਵਾਵਾਂ ਵਿੱਚੋਂ ਲੰਘ ਸਕਦੀ ਹੈ ਤਾਂ ਜੋ ਅਸੀਂ ਇਸ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਕੇ ਜਵਾਬ ਦੇ ਸਕੀਏ।",
     "Contact our Privacy Officer": "ਸਾਡੇ ਗੋਪਨੀਯਤਾ ਅਧਿਕਾਰੀ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
     "Call Love RCFE": "Love RCFE ਨੂੰ ਕਾਲ ਕਰੋ",
     "Talk with an advisor. Free and confidential.": "ਸਲਾਹਕਾਰ ਨਾਲ ਗੱਲ ਕਰੋ। ਮੁਫ਼ਤ ਅਤੇ ਗੁਪਤ।",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "ਕਿਰਪਾ ਕਰਕੇ ਅਗਲੇ 3 ਮਹੀਨਿਆਂ ਦੇ ਅੰਦਰ ਦੀ ਤਾਰੀਖ਼ ਚੁਣੋ।",
     "Please choose a time from the list.": "ਕਿਰਪਾ ਕਰਕੇ ਸੂਚੀ ਵਿੱਚੋਂ ਸਮਾਂ ਚੁਣੋ।",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "ਕਿਰਪਾ ਕਰਕੇ ਸੁਰੱਖਿਆ ਜਾਂਚ ਪੂਰੀ ਕਰੋ। ਜੇ ਇਹ ਦਿਖਾਈ ਨਹੀਂ ਦਿੰਦੀ, ਤਾਂ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "ਸੁਰੱਖਿਆ ਤਸਦੀਕ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "ਸੁਰੱਖਿਆ ਤਸਦੀਕ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "ਡਿਵਾਈਸ ਜਾਂਚ ਸਪੈਮ ਰੋਕਦੀ ਹੈ।",
+    "Visit history improves support.": "ਵਿਜ਼ਿਟ ਇਤਿਹਾਸ ਨਾਲ ਬਿਹਤਰ ਸਹਾਇਤਾ ਮਿਲਦੀ ਹੈ।",
+    "Network details prevent abuse.": "ਨੈੱਟਵਰਕ ਵੇਰਵੇ ਦੁਰਵਰਤੋਂ ਰੋਕਦੇ ਹਨ।",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "ਅਸੀਂ {from} ਤੋਂ {to} ਤੱਕ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। {next} ਤੋਂ ਕਾਲ ਬੁੱਕ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।",
+    "We are away until {to}. Messages sent now are answered from {next}.": "ਅਸੀਂ {to} ਤੱਕ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਹੁਣ ਭੇਜੇ ਸੁਨੇਹਿਆਂ ਦਾ ਜਵਾਬ {next} ਤੋਂ ਦਿੱਤਾ ਜਾਵੇਗਾ।",
+    "We are away on that date. Please choose {next} or later.": "ਉਸ ਦਿਨ ਅਸੀਂ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ {next} ਜਾਂ ਉਸ ਤੋਂ ਬਾਅਦ ਦੀ ਤਾਰੀਖ ਚੁਣੋ।",
+    "We are away on that date. Please pick another date.": "ਉਸ ਦਿਨ ਅਸੀਂ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਕੋਈ ਹੋਰ ਤਾਰੀਖ ਚੁਣੋ।"
   },
   blocks: {
     "hero_title": "ਥੋੜ੍ਹੀ ਹੋਰ ਸਪੱਸ਼ਟਤਾ।<br> <span class=\"italic text-brand-green font-normal\">ਬਹੁਤ ਜ਼ਿਆਦਾ ਦੇਖਭਾਲ।</span>",

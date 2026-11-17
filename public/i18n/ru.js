@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Пожалуйста, не отправляйте номера SSN, подробные истории болезни и медицинскую тайну (PHI) через открытые веб-формы. Чувствительные документы (например, форму LIC 602A) передаются только по защищенным каналам, соответствующим HIPAA.",
     "4. Data Access & Removal Requests": "4. Доступ к данным и запрос на удаление",
     "5. Services We Use": "5. Используемые сервисы",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Для работы сайта мы используем несколько сторонних сервисов: Cloudflare (хостинг, база данных, защита от спама и приватная аналитика), Formspree (пересылка ваших сообщений на почту) и Google Fonts (отображение шрифтов). Переданные через формы данные могут обрабатываться ими для доставки вашего обращения.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Для работы сайта мы используем несколько сторонних сервисов: Cloudflare (хостинг, база данных, защита от спама и приватная аналитика) и Formspree (пересылка ваших сообщений на почту). Переданные через формы данные могут обрабатываться ими для доставки вашего обращения.",
     "Contact our Privacy Officer": "Связаться по вопросам приватности",
     "Call Love RCFE": "Позвонить в Love RCFE",
     "Talk with an advisor. Free and confidential.": "Поговорите с консультантом. Бесплатно и конфиденциально.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Пожалуйста, выберите дату в пределах ближайших 3 месяцев.",
     "Please choose a time from the list.": "Пожалуйста, выберите время из списка.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Пожалуйста, пройдите проверку безопасности. Если она не отображается, позвоните (818) 217-5755 или напишите на loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Проверка безопасности временно недоступна. Позвоните (818) 217-5755 или напишите на loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Проверка безопасности временно недоступна. Позвоните (818) 217-5755 или напишите на loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Проверка устройства защищает от спама.",
+    "Visit history improves support.": "История посещений улучшает поддержку.",
+    "Network details prevent abuse.": "Сетевые данные предотвращают злоупотребления.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Мы не работаем с {from} по {to}. Звонок можно заказать с {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Мы не работаем до {to}. На сообщения, отправленные сейчас, мы ответим с {next}.",
+    "We are away on that date. Please choose {next} or later.": "В этот день мы не работаем. Выберите {next} или более позднюю дату.",
+    "We are away on that date. Please pick another date.": "В этот день мы не работаем. Пожалуйста, выберите другую дату."
   },
   blocks: {
     "hero_title": "Больше ясности.<br><span class=\"italic text-brand-green font-normal\">Больше заботы.</span>",

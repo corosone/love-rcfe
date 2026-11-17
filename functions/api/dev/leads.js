@@ -5,6 +5,7 @@
 import { jsonResponse } from '../../../lib/db.js';
 import { authorizeDev } from '../../../lib/dev.js';
 import { spamReasons, repeatSets } from '../../../lib/leadtools.js';
+import { rowNetwork } from '../../../lib/devtools.js';
 
 const MAX_RESULTS = 200;
 const SPAM_SCAN = 2000;
@@ -22,8 +23,8 @@ export async function onRequestGet({ request, env }) {
   const binds = [];
   if (q) {
     const like = `%${likeEscape(q)}%`;
-    where.push("(name LIKE ? ESCAPE '\\' OR email LIKE ? ESCAPE '\\' OR phone LIKE ? ESCAPE '\\' OR city LIKE ? ESCAPE '\\' OR message LIKE ? ESCAPE '\\' OR ip LIKE ? ESCAPE '\\')");
-    binds.push(like, like, like, like, like, like);
+    where.push("(name LIKE ? ESCAPE '\\' OR email LIKE ? ESCAPE '\\' OR phone LIKE ? ESCAPE '\\' OR city LIKE ? ESCAPE '\\' OR message LIKE ? ESCAPE '\\' OR ip LIKE ? ESCAPE '\\' OR isp LIKE ? ESCAPE '\\')");
+    binds.push(like, like, like, like, like, like, like);
   }
   const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
 
@@ -32,7 +33,7 @@ export async function onRequestGet({ request, env }) {
       env.DB
         .prepare(`
           SELECT id, kind, inquiry_type AS inquiryType, name, email, phone, city, message,
-                 handled, stage, ip, ip_place AS ipPlace, created_at AS createdAt
+                 handled, stage, ip, ip_place AS ipPlace, isp, asn, device, duplicate_of AS duplicateOf, created_at AS createdAt
           FROM leads ${whereSql} ORDER BY created_at DESC, id DESC LIMIT ?
         `)
         .bind(...binds, spamOnly ? SPAM_SCAN : MAX_RESULTS + 1)
@@ -56,6 +57,9 @@ export async function onRequestGet({ request, env }) {
       createdAt: r.createdAt,
       ip: r.ip || '',
       ipPlace: r.ipPlace || '',
+      network: rowNetwork(r.asn, r.isp),
+      device: r.device || '',
+      duplicateOf: Number(r.duplicateOf || 0),
       flags: spamReasons(r, repeats),
     }));
     if (spamOnly) list = list.filter((l) => l.flags.length);

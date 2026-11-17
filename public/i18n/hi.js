@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "कृपया खुले सार्वजनिक वेब फ़ॉर्म के माध्यम से पूरा सोशल सिक्योरिटी नंबर, विस्तृत चिकित्सा इतिहास या संरक्षित स्वास्थ्य जानकारी (PHI) सबमिट न करें। संवेदनशील चिकित्सा मूल्यांकन (जैसे कैलिफ़ोर्निया फ़ॉर्म LIC 602A) औपचारिक प्रवेश समीक्षा के दौरान केवल सुरक्षित, HIPAA-अनुपालित माध्यमों से साझा किए जाते हैं।",
     "4. Data Access & Removal Requests": "4. डेटा पहुंच और हटाने के अनुरोध",
     "5. Services We Use": "5. हम जिन सेवाओं का उपयोग करते हैं",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "इस वेबसाइट को चलाने के लिए हम कुछ तृतीय-पक्ष सेवाओं पर निर्भर करते हैं: Cloudflare (वेबसाइट होस्टिंग, डेटाबेस संग्रहण, स्पैम सुरक्षा और गोपनीयता-अनुकूल ट्रैफ़िक आँकड़े), Formspree (आपके द्वारा भेजे गए संदेश हमें ईमेल करने के लिए), और Google Fonts (साइट के फ़ॉन्ट प्रदर्शित करने के लिए)। हमारे फ़ॉर्म के माध्यम से आपके द्वारा भेजी गई जानकारी इन सेवाओं से होकर गुजर सकती है ताकि हम उसे प्राप्त कर सकें और उत्तर दे सकें।",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "इस वेबसाइट को चलाने के लिए हम कुछ तृतीय-पक्ष सेवाओं पर निर्भर करते हैं: Cloudflare (वेबसाइट होस्टिंग, डेटाबेस संग्रहण, स्पैम सुरक्षा और गोपनीयता-अनुकूल ट्रैफ़िक आँकड़े) और Formspree (आपके द्वारा भेजे गए संदेश हमें ईमेल करने के लिए)। हमारे फ़ॉर्म के माध्यम से आपके द्वारा भेजी गई जानकारी इन सेवाओं से होकर गुजर सकती है ताकि हम उसे प्राप्त कर सकें और उत्तर दे सकें।",
     "Contact our Privacy Officer": "हमारे गोपनीयता अधिकारी से संपर्क करें",
     "Call Love RCFE": "Love RCFE को कॉल करें",
     "Talk with an advisor. Free and confidential.": "सलाहकार से बात करें। निःशुल्क और गोपनीय।",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "कृपया अगले 3 महीनों के भीतर की कोई तारीख चुनें।",
     "Please choose a time from the list.": "कृपया सूची में से एक समय चुनें।",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "कृपया सुरक्षा जांच पूरी करें। यदि यह दिखाई नहीं देती है, तो (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "सुरक्षा सत्यापन अस्थायी रूप से अनुपलब्ध है। कृपया (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "सुरक्षा सत्यापन अस्थायी रूप से अनुपलब्ध है। कृपया (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "डिवाइस जाँच स्पैम रोकती है।",
+    "Visit history improves support.": "विज़िट इतिहास से बेहतर सहायता मिलती है।",
+    "Network details prevent abuse.": "नेटवर्क विवरण दुरुपयोग रोकते हैं।",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "हम {from} से {to} तक अवकाश पर हैं। {next} से कॉल बुक की जा सकती है।",
+    "We are away until {to}. Messages sent now are answered from {next}.": "हम {to} तक अवकाश पर हैं। अभी भेजे गए संदेशों का उत्तर {next} से दिया जाएगा।",
+    "We are away on that date. Please choose {next} or later.": "उस दिन हम अवकाश पर हैं। कृपया {next} या उसके बाद की तारीख चुनें।",
+    "We are away on that date. Please pick another date.": "उस दिन हम अवकाश पर हैं। कृपया कोई दूसरी तारीख चुनें।"
   },
   blocks: {
     "hero_title": "थोड़ी अधिक स्पष्टता।<br> <span class=\"italic text-brand-green font-normal\">कहीं अधिक देखभाल।</span>",

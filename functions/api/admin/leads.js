@@ -22,6 +22,8 @@ const LEAD_COLUMNS = `
   source,
   ip,
   ip_place AS ipPlace,
+  first_response_at AS firstResponseAt,
+  duplicate_of AS duplicateOf,
   created_at AS createdAt
 `;
 
@@ -44,6 +46,8 @@ function mapLead(row) {
     source: row.source || '',
     ip: row.ip || '',
     ipPlace: row.ipPlace || '',
+    firstResponseAt: row.firstResponseAt || '',
+    duplicateOf: Number(row.duplicateOf || 0),
     createdAt: row.createdAt,
   };
 }
@@ -144,6 +148,17 @@ export async function onRequestPatch({ request, env }) {
   }
   if (!sets.length) {
     return jsonResponse({ error: 'Nothing to update.' }, 400);
+  }
+  // Follow-up alarm: the first time staff move an enquiry on (a stage other than "new", or
+  // handled) counts as the first reply. handled_at records when it was marked handled.
+  const NOW_SQL = "strftime('%Y-%m-%dT%H:%M:%fZ', 'now')";
+  const actedOn = (Object.hasOwn(body, 'stage') && body.stage !== 'new')
+    || (Object.hasOwn(body, 'handled') && (body.handled === true || body.handled === 1));
+  if (actedOn) sets.push(`first_response_at = CASE WHEN first_response_at = '' THEN ${NOW_SQL} ELSE first_response_at END`);
+  if (Object.hasOwn(body, 'handled')) {
+    sets.push((body.handled === true || body.handled === 1)
+      ? `handled_at = CASE WHEN handled_at = '' THEN ${NOW_SQL} ELSE handled_at END`
+      : "handled_at = ''");
   }
 
   try {

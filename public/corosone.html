@@ -91,6 +91,15 @@
     .dv-chip-api { background: #e0e7ff; color: #3730a3; }
     .dv-chip-note { background: #f3f4f6; color: #374151; }
     .dv-chip-bad { background: #fee2e2; color: #991b1b; }
+    .dv-chip-warn { background: #ffedd5; color: #9a3412; }
+    .dv-group { border: 1px solid #d9ded4; border-radius: 1rem; padding: 0.75rem 0.9rem; }
+    .dv-kv { display: grid; grid-template-columns: minmax(8rem, 13rem) 1fr; gap: 0.2rem 1rem; font-size: 12px; }
+    .dv-kv dt { font-weight: 600; color: #59685f; }
+    .dv-kv dd { margin: 0; word-break: break-word; }
+    @media (max-width: 640px) { .dv-kv { grid-template-columns: 1fr; gap: 0; } .dv-kv dd { margin-bottom: 0.4rem; } }
+    html.dark .dv-chip-warn { background: #431407; color: #fdba74; }
+    html.dark .dv-group { border-color: #2d4034; }
+    html.dark .dv-kv dt { color: #a7b8ad; }
     .dv-link { background: none; border: 0; padding: 0; color: #315d48; font-weight: 700; text-decoration: underline; cursor: pointer; font-size: inherit; }
     .dv-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; word-break: break-all; }
     .dv-msg { max-width: 28rem; white-space: pre-wrap; word-break: break-word; }
@@ -248,6 +257,7 @@
         <button type="button" role="tab" id="tab-security" aria-controls="panel-security" aria-selected="false" data-tab="security">Security</button>
         <button type="button" role="tab" id="tab-leads" aria-controls="panel-leads" aria-selected="false" data-tab="leads">Enquiries</button>
         <button type="button" role="tab" id="tab-requests" aria-controls="panel-requests" aria-selected="false" data-tab="requests">Requests</button>
+        <button type="button" role="tab" id="tab-tools" aria-controls="panel-tools" aria-selected="false" data-tab="tools">Tools</button>
         <button type="button" role="tab" id="tab-site" aria-controls="panel-site" aria-selected="false" data-tab="site">Site &amp; Database</button>
         <button type="button" role="tab" id="tab-activity" aria-controls="panel-activity" aria-selected="false" data-tab="activity">Activity</button>
       </nav>
@@ -329,7 +339,7 @@
           <p class="text-xs text-brand-muted mb-3">A blocked address can still open the website, but it cannot send enquiries or call requests, or sign in to the staff inbox. It is shown a message with your phone number and email instead, in case it is a real person on a shared network. This console is never blocked. The "Turned away" count updates about once a minute. Blocking a long address (one with colons) blocks the whole home or phone network it belongs to, shown ending in /64, because devices change their long address every day or so.</p>
           <form id="block-form" class="dv-toolbar" novalidate>
             <label for="block-ip" class="sr-only">IP address to block</label>
-            <input id="block-ip" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="45" placeholder="IP address (short or long)" class="dv-input dv-mono">
+            <input id="block-ip" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="80" placeholder="IP address (short or long)" class="dv-input dv-mono">
             <label for="block-reason" class="sr-only">Reason (optional)</label>
             <input id="block-reason" type="text" maxlength="100" placeholder="Reason (optional), e.g. spam" class="dv-input">
             <label for="block-days" class="sr-only">How long</label>
@@ -472,6 +482,100 @@
             <button type="button" id="requests-more" class="dv-btn hidden">Load older</button>
             <p id="requests-info" role="status" class="text-xs text-brand-muted"></p>
           </div>
+        </div>
+      </div>
+
+      <!-- ===== Tools ===== -->
+      <div id="panel-tools" role="tabpanel" aria-labelledby="tab-tools" class="space-y-5 hidden">
+        <!-- Follow-up alarm -->
+        <div id="followup-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Follow-up Alarm</h2>
+              <p class="text-xs text-brand-muted">Enquiries nobody has acted on yet that arrived more than a day ago, oldest first. An enquiry counts as answered once staff move it to another stage or mark it handled.</p>
+            </div>
+            <button type="button" id="followup-btn" class="dv-btn shrink-0">Check now</button>
+          </div>
+          <p id="followup-summary" role="status" class="text-xs font-semibold text-brand-ink"></p>
+          <div class="dev-scroll mt-2">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>Received</th><th>Name</th><th>Contact</th><th class="dv-num">Waiting</th></tr></thead>
+              <tbody id="followup-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Duplicate finder -->
+        <div id="dupes-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Duplicate Finder</h2>
+              <p class="text-xs text-brand-muted">Enquiries that look like the same person writing more than once: same email, phone, name and city, or device. The first one in each group is the original. Marking another as a duplicate moves it to Handled with a note; nothing is deleted.</p>
+            </div>
+            <button type="button" id="dupes-btn" class="dv-btn shrink-0">Find duplicates</button>
+          </div>
+          <p id="dupes-summary" role="status" class="text-xs font-semibold text-brand-ink"></p>
+          <div id="dupes-list" class="space-y-3 mt-2"></div>
+        </div>
+
+        <!-- Holiday switch -->
+        <div id="holiday-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">Holiday Switch</h2>
+          <p class="text-xs text-brand-muted mb-3">Pause call bookings while you are away. The booking popup says when you are back and suggests that day, and the contact page shows a short note during the break, in every language. Messages through the contact form still arrive as usual.</p>
+          <p id="holiday-state" role="status" class="text-xs font-semibold text-brand-ink mb-3"></p>
+          <form id="holiday-form" class="dv-toolbar" novalidate>
+            <label for="holiday-from" class="text-xs font-semibold text-brand-muted">First day away</label>
+            <input id="holiday-from" type="date" class="dv-input dv-select" required>
+            <label for="holiday-to" class="text-xs font-semibold text-brand-muted">Last day away</label>
+            <input id="holiday-to" type="date" class="dv-input dv-select" required>
+            <button type="submit" id="holiday-save" class="dv-btn">Pause bookings</button>
+            <button type="button" id="holiday-clear" class="dv-btn hidden">Open bookings again</button>
+          </form>
+          <p class="dv-help">Dates are California dates, and both days are included. A break can be up to 120 days.</p>
+        </div>
+
+        <!-- IP tools -->
+        <div id="iptool-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">IP Address Check</h2>
+          <p class="text-xs text-brand-muted mb-3">Everything about one address: who owns its network (from the public internet registry), whether it looks like a VPN, Tor or a data centre, and everything it did on this site. The VPN check is a strong guess, never proof, and nothing is blocked automatically.</p>
+          <form id="iptool-form" class="dv-toolbar" role="search">
+            <label for="iptool-ip" class="sr-only">IP address to check</label>
+            <input id="iptool-ip" type="text" maxlength="60" placeholder="For example 203.0.113.7 or 2603:8001:9a00::1" class="dv-input dv-mono" autocomplete="off" spellcheck="false">
+            <button type="submit" id="iptool-btn" class="dv-btn">Check address</button>
+          </form>
+          <div id="iptool-result" class="mt-3"></div>
+        </div>
+
+        <!-- Care-home licence lookup -->
+        <div id="licence-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <h2 class="text-sm font-bold text-brand-ink mb-1">Care-Home Licence Lookup</h2>
+          <p class="text-xs text-brand-muted mb-3">Search California's list of licensed care homes for the elderly (RCFEs) by name, licensee, city, ZIP code or licence number. Details shows the state's inspection visits, complaints and citations. Data comes straight from the State of California.</p>
+          <form id="licence-form" class="dv-toolbar" role="search">
+            <label for="licence-q" class="sr-only">Care home to look up</label>
+            <input id="licence-q" type="search" maxlength="60" placeholder="Name, city, ZIP code or licence number" class="dv-input">
+            <label class="text-xs font-semibold text-brand-muted inline-flex items-center gap-1.5"><input id="licence-closed" type="checkbox"> Include closed homes</label>
+            <button type="submit" id="licence-btn" class="dv-btn">Search</button>
+          </form>
+          <p id="licence-info" role="status" class="text-xs text-brand-muted mt-2"></p>
+          <div class="dev-scroll mt-2">
+            <table class="dev-table text-brand-ink">
+              <thead><tr><th>Care home</th><th>City</th><th class="dv-num">Beds</th><th>Status</th><th>Licence</th><th></th></tr></thead>
+              <tbody id="licence-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Translation checker -->
+        <div id="i18ncheck-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-brand-ink mb-1">Translation Checker</h2>
+              <p class="text-xs text-brand-muted">Compares every piece of English text on the website (and the messages its tools show) with all 17 language files, and lists anything not translated yet. Runs in this browser.</p>
+            </div>
+            <button type="button" id="i18ncheck-btn" class="dv-btn shrink-0">Check translations</button>
+          </div>
+          <p id="i18ncheck-summary" role="status" class="text-xs font-semibold text-brand-ink"></p>
+          <div id="i18ncheck-list" class="mt-2"></div>
         </div>
       </div>
 

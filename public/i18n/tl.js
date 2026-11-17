@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Huwag magsumite ng Social Security number, detalyadong kasaysayang medikal, o protektadong impormasyong pangkalusugan (PHI) sa bukas na web form. Ang mga sensitibong ulat tulad ng LIC 602A ay ibinabahagi lamang sa ligtas at HIPAA-compliant na paraan.",
     "4. Data Access & Removal Requests": "4. Pag-access at Pagtanggal ng Datos",
     "5. Services We Use": "5. Mga Serbisyong Ginagamit Namin",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Upang patakbuhin ang site na ito, gumagamit kami ng Cloudflare (hosting, database, proteksyon sa spam, at pribadong estadistika), Formspree (upang maipadala sa aming email ang inyong mensahe), at Google Fonts (para sa mga font ng site).",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Upang patakbuhin ang site na ito, gumagamit kami ng Cloudflare (hosting, database, proteksyon sa spam, at pribadong estadistika) at Formspree (upang maipadala sa aming email ang inyong mensahe).",
     "Contact our Privacy Officer": "Makipag-ugnayan sa Privacy Officer",
     "Call Love RCFE": "Tumawag sa Love RCFE",
     "Talk with an advisor. Free and confidential.": "Makipag-usap sa tagapayo. Libre at kumpidensyal.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Pumili ng petsa sa loob ng susunod na 3 buwan.",
     "Please choose a time from the list.": "Pumili ng oras mula sa listahan.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Pakikumpleto ang security check. Kung hindi ito lumalabas, tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Pansamantalang hindi magamit ang security verification. Tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Pansamantalang hindi magamit ang security verification. Tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Pinipigilan ng device check ang spam.",
+    "Visit history improves support.": "Pinapabuti ng kasaysayan ng pagbisita ang suporta.",
+    "Network details prevent abuse.": "Pinipigilan ng detalye ng network ang pang-aabuso.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Wala kami mula {from} hanggang {to}. Maaaring mag-book ng tawag simula {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Wala kami hanggang {to}. Ang mga mensaheng ipapadala ngayon ay sasagutin simula {next}.",
+    "We are away on that date. Please choose {next} or later.": "Wala kami sa petsang iyon. Pumili ng {next} o mas huli pa.",
+    "We are away on that date. Please pick another date.": "Wala kami sa petsang iyon. Mangyaring pumili ng ibang petsa."
   },
   blocks: {
     "hero_title": "Kaunting linaw pa.<br><span class=\"italic text-brand-green font-normal\">Mas maraming pag-aalaga.</span>",

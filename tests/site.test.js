@@ -651,6 +651,182 @@ test('signing out of the developer console also ends the staff inbox session on 
   await context.close();
 });
 
+// ---------- Device check, holiday switch, privacy lines ----------
+
+test('the device check code is sent only with enquiries and call requests, never with page visits', async () => {
+  const bodies = { leads: [], visit: [] };
+  const { page, context } = await open('/#contact', {
+    wait: 'load',
+    setup: (p) => p.on('request', (r) => {
+      if (r.url().endsWith('/api/leads')) bodies.leads.push(JSON.parse(r.postData()));
+      if (r.url().endsWith('/api/visit')) bodies.visit.push(JSON.parse(r.postData()));
+    }),
+  });
+  await page.fill('#name', 'Device Check');
+  await page.fill('#phone', '(818) 555-0177');
+  await page.fill('#email', 'device-check@example.com');
+  await page.fill('#message', 'Checking the device code is attached.');
+  await page.click('#submit-button');
+  await page.waitForFunction(() => /Thank you/.test(document.getElementById('form-status').textContent));
+  assert.equal(bodies.leads.length, 1);
+  assert.match(bodies.leads[0].device, /^[0-9a-f]{64}$/, 'a one-way code, not the device details');
+  assert.ok(!JSON.stringify(bodies.leads[0]).includes('x' + (await page.evaluate(() => screen.width))), 'no raw screen size is sent');
+  assert.ok(bodies.visit.length >= 1);
+  assert.ok(bodies.visit.every((b) => !('device' in b)), 'page visits carry no device code');
+  const saved = site.db._rows("SELECT device FROM leads WHERE email = 'device-check@example.com'")[0];
+  assert.equal(saved.device, bodies.leads[0].device);
+  await context.close();
+});
+
+test('privacy policy: three short lines (4 words or fewer) about device checks, visit history and network details', async () => {
+  const { page, context } = await open('/#privacy', { wait: 'load' });
+  const lines = await page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
+  assert.deepEqual(lines, ['Device checks stop spam.', 'Visit history improves support.', 'Network details prevent abuse.']);
+  for (const l of lines) assert.ok(l.split(/\s+/).length <= 4, l);
+  assert.doesNotMatch(await page.textContent('#privacy'), /Google Fonts/, 'fonts come from this site now');
+  await context.close();
+  const es = await open('/es/#privacy', { wait: 'load' });
+  const esLines = await es.page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
+  assert.equal(esLines.length, 3);
+  assert.ok(esLines.every((l, i) => l && l !== lines[i]), 'translated on the Spanish page: ' + esLines.join(' | '));
+  await es.context.close();
+});
+
+test('holiday switch: the booking popup and contact page say when we are away, in the visitor\'s language', async () => {
+  const { setHoliday, clearHoliday, pacificToday, addDays } = await import('../lib/settings.js');
+  const today = pacificToday();
+  const to = addDays(today, 6);
+  assert.equal((await setHoliday(site.env, { from: today, to })).ok, true);
+  try {
+    const { page, context } = await open('/#contact', { wait: 'load' });
+    await page.waitForFunction(() => !document.getElementById('contact-holiday').classList.contains('hidden'));
+    assert.match(await page.textContent('#contact-holiday'), /^We are away until .+\. Messages sent now are answered from .+\.$/);
+    await page.$$eval('[data-click="openBookingModal()"]', (xs) => xs[0].click());
+    await page.waitForFunction(() => !document.getElementById('booking-holiday').classList.contains('hidden'));
+    assert.match(await page.textContent('#booking-holiday'), /^We are away from .+ to .+\. Calls can be booked from .+\.$/);
+    const suggested = await page.inputValue('#book-date');
+    assert.ok(suggested > to, `the suggested date ${suggested} is after the break`);
+    // Choosing a day inside the break is refused before anything is sent
+    await page.fill('#book-name', 'Holiday Test');
+    await page.fill('#book-phone', '8185550188');
+    await page.fill('#book-email', 'holiday@example.com');
+    let inside = addDays(today, 2);
+    if (new Date(inside + 'T00:00:00Z').getUTCDay() === 0) inside = addDays(today, 3);
+    await page.$eval('#book-date', (el, v) => { el.min = ''; el.value = v; }, inside);
+    await page.$eval('#booking-form button[type="submit"]', (b) => b.click());
+    await page.waitForFunction(() => /away on that date/.test(document.getElementById('booking-status').textContent));
+    assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM leads WHERE email = 'holiday@example.com'")[0].n, 0);
+    await context.close();
+
+    const es = await open('/es/#contact', { wait: 'load' });
+    await es.page.waitForFunction(() => !document.getElementById('contact-holiday').classList.contains('hidden'));
+    assert.match(await es.page.textContent('#contact-holiday'), /^Estaremos fuera hasta el /);
+    await es.context.close();
+  } finally {
+    await clearHoliday(site.env);
+  }
+  const { page, context } = await open('/#contact', { wait: 'load' });
+  await page.waitForTimeout(400);
+  assert.equal(await page.isVisible('#contact-holiday'), false, 'no note once the switch is off');
+  await context.close();
+});
+
+// Makes sure the database tables exist (they are created on first use), so a test can add rows directly.
+async function ensureTables() {
+  await site.api('/api/visit', { method: 'POST', body: { path: '/' }, ip: '203.0.113.200' });
+  await site.settle();
+}
+
+async function devSignIn(page) {
+  await page.goto(site.origin + '/corosone', { waitUntil: 'load' });
+  site.db._run('DELETE FROM rate_limits');
+  await page.fill('#dev-email', 'owner@example.com');
+  await page.fill('#dev-password', DEV_PASSWORD);
+  await page.click('#login-submit');
+  await page.waitForSelector('#code-view:not(.hidden)');
+  const mail = site.outside.filter((c) => c.url === 'https://api.resend.com/emails').at(-1);
+  await page.fill('#dev-code', /code is: (\d{6})/.exec(JSON.parse(mail.body).text)[1]);
+  await page.click('#code-submit');
+  await page.waitForSelector('#console-view:not(.hidden)');
+}
+
+test('developer console Tools tab: follow-up, duplicates, holiday switch, IP check, licence lookup and translations', async () => {
+  await ensureTables();
+  const iso = (h) => new Date(Date.now() - h * 3600000).toISOString();
+  const add = (name, email, phone, hours) => site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('enquiry', 'x', ?, ?, ?, 'm', ?, 0)", name, email, phone, iso(hours));
+  add('Tools Waiting', 'tools-wait@example.com', '7145550101', 60);
+  add('Tools Twin', 'tools-twin@example.com', '7145550202', 40);
+  add('Tools Twin', 'TOOLS-TWIN@example.com', '714-555-0202', 30);
+  site.setOutsideAnswer((url) => {
+    if (url.startsWith('https://rdap.org/ip/')) return Response.json({ name: 'TEST-NET', startAddress: '203.0.113.0', endAddress: '203.0.113.255', port43: 'whois.arin.net', entities: [{ roles: ['registrant'], vcardArray: ['vcard', [['fn', {}, 'text', 'Example Hosting LLC']]] }] });
+    if (url.includes('torbulkexitlist')) return new Response('185.220.101.1\n');
+    if (url.includes('datastore_search_sql')) return Response.json({ success: true, result: { records: [{ facility_number: 198603605, facility_name: 'ARARAT GARDENS', facility_city: 'GLENDALE', facility_zip: '91205', facility_capacity: 175, facility_status: 'LICENSED' }] } });
+    if (url.includes('FacilityDetail')) return Response.json({ FacilityDetail: { FACILITYNUMBER: '198603605', FACILITYNAME: 'ARARAT GARDENS', LASTVISITDATE: '9/23/2026', CMPCOUNT: '3', TOTSUBALG: '1', TOTTYPEB: '1' }, TSO: {} });
+  });
+  const { page, context, seen } = await open('/corosone', { wait: 'load' });
+  page.on('dialog', (d) => d.accept());
+  try {
+    await devSignIn(page);
+    await page.click('#tab-tools');
+    await page.waitForFunction(() => /waited more than a day/.test(document.getElementById('followup-summary').textContent));
+    assert.ok((await page.textContent('#followup-body')).includes('Tools Waiting'));
+
+    await page.click('#dupes-btn');
+    await page.waitForFunction(() => document.querySelectorAll('#dupes-list .dv-group').length > 0);
+    const twinGroup = page.locator('#dupes-list .dv-group', { hasText: 'Tools Twin' });
+    await twinGroup.locator('button', { hasText: 'Mark as duplicate of' }).click();
+    await page.waitForFunction(() => /marked as a duplicate/.test(document.getElementById('tool-status').textContent));
+    assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM leads WHERE email = 'TOOLS-TWIN@example.com' AND duplicate_of > 0 AND handled = 1")[0].n, 1);
+
+    const { pacificToday, addDays, clearHoliday } = await import('../lib/settings.js');
+    await page.fill('#holiday-from', addDays(pacificToday(), 20));
+    await page.fill('#holiday-to', addDays(pacificToday(), 25));
+    await page.click('#holiday-save');
+    await page.waitForFunction(() => /A break is set from/.test(document.getElementById('holiday-state').textContent));
+    await page.click('#holiday-clear');
+    await page.waitForFunction(() => /No break is set/.test(document.getElementById('holiday-state').textContent));
+    await clearHoliday(site.env);
+
+    await page.fill('#iptool-ip', '203.0.113.9');
+    await page.click('#iptool-btn');
+    await page.waitForFunction(() => /Example Hosting LLC/.test(document.getElementById('iptool-result').textContent));
+    assert.match(await page.textContent('#iptool-result'), /Likely VPN or server/);
+
+    await page.fill('#licence-q', 'ararat');
+    await page.click('#licence-btn');
+    await page.waitForFunction(() => /1 care home found/.test(document.getElementById('licence-info').textContent));
+    await page.click('#licence-body button');
+    await page.waitForFunction(() => /1 substantiated/.test((document.querySelector('.licence-detail') || {}).textContent || ''));
+
+    await page.click('#i18ncheck-btn');
+    await page.waitForFunction(() => /pieces of text/.test(document.getElementById('i18ncheck-summary').textContent), null, { timeout: 15000 });
+    assert.match(await page.textContent('#i18ncheck-summary'), /^All \d+ pieces of text are translated in every language that loaded\.$/);
+    assert.deepEqual(seen.errors.filter((e) => /Refused to|page error/.test(e)), [], 'nothing blocked by the security policy, no script errors');
+  } finally {
+    site.setOutsideAnswer(null);
+    await context.close();
+  }
+});
+
+test('staff inbox: "Waiting" and "Possible duplicate" labels', async () => {
+  await ensureTables();
+  const iso = (h) => new Date(Date.now() - h * 3600000).toISOString();
+  site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('enquiry', 'x', 'Label Waiting', 'label-wait@example.com', '6265550303', 'm', ?, 0)", iso(75));
+  site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('enquiry', 'x', 'Label Twin A', 'twin-a@example.com', '6265550404', 'm', ?, 0)", iso(2));
+  site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('enquiry', 'x', 'Label Twin B', 'twin-b@example.com', '(626) 555-0404', 'm', ?, 0)", iso(1));
+  const { page, context } = await open('/staff', { wait: 'load' });
+  await staffSignIn(page);
+  const card = (name) => page.locator('#leads-list article', { has: page.locator('h3', { hasText: name }) });
+  assert.match(await card('Label Waiting').textContent(), /Waiting 3 days/);
+  assert.doesNotMatch(await card('Label Twin A').textContent(), /Waiting \d+ day/, 'only 2 hours old');
+  assert.match(await card('Label Twin A').textContent(), /Possible duplicate/);
+  assert.match(await card('Label Twin B').textContent(), /Possible duplicate/);
+  // Moving it on (calling them) clears the alarm
+  await card('Label Waiting').locator('select[data-action="stage"]').selectOption('called');
+  await page.waitForFunction(() => ![...document.querySelectorAll('#leads-list article')].some((a) => /Label Waiting/.test(a.textContent) && /Waiting 3 days/.test(a.textContent)));
+  await context.close();
+});
+
 // Last on purpose: it adds 505 messages to the test database.
 test('staff inbox: with more than 500 messages, the counts and the "Open" list still include older ones not yet handled', async () => {
   const old = new Date(Date.now() - 40 * 86400000).toISOString();

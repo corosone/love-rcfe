@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "يرجى عدم إرسال أرقام الضمان الاجتماعي أو السجلات الطبية المفصلة عبر نماذج الويب المفتوحة. تُشارك التقارير الطبية الحساسة (مثل نموذج LIC 602A) فقط عبر قنوات مشفرة متوافقة مع HIPAA أثناء إجراءات القبول.",
     "4. Data Access & Removal Requests": "4. الوصول للبيانات وطلبات الحذف",
     "5. Services We Use": "5. الخدمات التي نستخدمها",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "لتشغيل هذا الموقع نعتمد على خدمات خارجية: Cloudflare (الاستضافة وقاعدة البيانات والحماية من الرسائل العشوائية)، وFormspree (لإرسال الرسائل إلى بريدنا)، وGoogle Fonts (لعرض الخطوط). قد تمر البيانات المرسلة عبر هذه الخدمات لنتمكن من استلامها والرد عليك.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "لتشغيل هذا الموقع نعتمد على خدمات خارجية: Cloudflare (الاستضافة وقاعدة البيانات والحماية من الرسائل العشوائية) وFormspree (لإرسال الرسائل إلى بريدنا). قد تمر البيانات المرسلة عبر هذه الخدمات لنتمكن من استلامها والرد عليك.",
     "Contact our Privacy Officer": "تواصل مع مسؤول الخصوصية",
     "Call Love RCFE": "اتصل بـ Love RCFE",
     "Talk with an advisor. Free and confidential.": "تحدث مع مستشار. خدمة مجانية وسرية.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "يرجى اختيار تاريخ خلال الأشهر الثلاثة القادمة.",
     "Please choose a time from the list.": "يرجى اختيار وقت من القائمة.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "يرجى إتمام التحقق الأمني. إذا لم يظهر، اتصل على (818) 217-5755 أو راسل loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "التحقق الأمني غير متاح مؤقتاً. يرجى الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "التحقق الأمني غير متاح مؤقتاً. يرجى الاتصال على (818) 217-5755 أو مراسلة loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "فحص الجهاز يمنع الرسائل المزعجة.",
+    "Visit history improves support.": "سجل الزيارات يحسّن الدعم.",
+    "Network details prevent abuse.": "بيانات الشبكة تمنع إساءة الاستخدام.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "نحن في إجازة من {from} إلى {to}. يمكن حجز المكالمات ابتداءً من {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "نحن في إجازة حتى {to}. سنرد على الرسائل المرسلة الآن ابتداءً من {next}.",
+    "We are away on that date. Please choose {next} or later.": "نحن في إجازة في ذلك اليوم. يرجى اختيار {next} أو تاريخ لاحق.",
+    "We are away on that date. Please pick another date.": "نحن في إجازة في ذلك اليوم. يرجى اختيار تاريخ آخر."
   },
   blocks: {
     "hero_title": "وضوح أكثر قليلاً.<br><span class=\"italic text-brand-green font-normal\">ورعاية أكبر بكثير.</span>",

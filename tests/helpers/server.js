@@ -62,6 +62,8 @@ async function startServer(env = {}) {
   const background = []; // work the functions asked to finish after replying
   const rules = readHeaderRules();
   let turnstilePasses = true;
+  // Optional stand-in answers for outside services: (url) => Response | undefined
+  let outsideAnswer = null;
 
   // Catch calls to outside services made by the server code
   const realFetch = globalThis.fetch;
@@ -71,7 +73,11 @@ async function startServer(env = {}) {
     let body = init.body;
     if (body instanceof URLSearchParams) body = body.toString();
     else if (body && typeof body !== 'string' && typeof body.entries === 'function') body = Object.fromEntries(body.entries());
-    outside.push({ url, method: init.method || 'GET', body });
+    outside.push({ url, method: init.method || 'GET', body, headers: init.headers || {} });
+    if (outsideAnswer) {
+      const custom = await outsideAnswer(url, init);
+      if (custom) return custom;
+    }
     if (url.includes('challenges.cloudflare.com/turnstile')) {
       return new Response(JSON.stringify({ success: turnstilePasses, hostname: 'localhost' }), { headers: { 'content-type': 'application/json' } });
     }
@@ -149,6 +155,8 @@ async function startServer(env = {}) {
     env: fullEnv,
     outside,
     setTurnstilePasses: (value) => { turnstilePasses = value; },
+    // fn(url, init) returns a Response to use for that outside request, or nothing for the default
+    setOutsideAnswer: (fn) => { outsideAnswer = fn; },
     settle: async () => { await Promise.all(background.splice(0)); },
     // Sends a request the way the site's own pages do (same-origin)
     api: (pathname, { method = 'GET', body, headers = {}, ip } = {}) =>

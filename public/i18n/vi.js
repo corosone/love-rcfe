@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Vui lòng không gửi số An sinh Xã hội đầy đủ, bệnh sử chi tiết hoặc thông tin y tế được bảo vệ (PHI) qua biểu mẫu web công khai. Các hồ sơ y tế nhạy cảm như Mẫu LIC 602A chỉ chia sẻ qua kênh bảo mật chuẩn HIPAA khi làm thủ tục nhập viện.",
     "4. Data Access & Removal Requests": "4. Quyền truy cập & yêu cầu xóa dữ liệu",
     "5. Services We Use": "5. Các dịch vụ chúng tôi sử dụng",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Để vận hành trang web, chúng tôi sử dụng: Cloudflare (lưu trữ web, cơ sở dữ liệu, chống thư rác và thống kê bảo mật), Formspree (chuyển tin nhắn bạn gửi về email của chúng tôi) và Google Fonts (hiển thị phông chữ). Thông tin bạn gửi có thể đi qua các dịch vụ này để chúng tôi tiếp nhận và phản hồi.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Để vận hành trang web, chúng tôi sử dụng: Cloudflare (lưu trữ web, cơ sở dữ liệu, chống thư rác và thống kê bảo mật) và Formspree (chuyển tin nhắn bạn gửi về email của chúng tôi). Thông tin bạn gửi có thể đi qua các dịch vụ này để chúng tôi tiếp nhận và phản hồi.",
     "Contact our Privacy Officer": "Liên hệ Bộ phận Bảo mật",
     "Call Love RCFE": "Gọi cho Love RCFE",
     "Talk with an advisor. Free and confidential.": "Trao đổi với chuyên viên. Miễn phí và bảo mật.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Vui lòng chọn ngày trong vòng 3 tháng tới.",
     "Please choose a time from the list.": "Vui lòng chọn khung giờ từ danh sách.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Vui lòng hoàn tất bước kiểm tra bảo mật. Nếu không hiển thị, hãy gọi (818) 217-5755 hoặc email loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Xác minh bảo mật tạm thời không khả dụng. Vui lòng gọi (818) 217-5755 hoặc email loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Xác minh bảo mật tạm thời không khả dụng. Vui lòng gọi (818) 217-5755 hoặc email loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Kiểm tra thiết bị giúp chặn thư rác.",
+    "Visit history improves support.": "Lịch sử truy cập giúp hỗ trợ tốt hơn.",
+    "Network details prevent abuse.": "Thông tin mạng giúp ngăn lạm dụng.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Chúng tôi nghỉ từ {from} đến {to}. Bạn có thể đặt lịch gọi từ {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Chúng tôi nghỉ đến {to}. Tin nhắn gửi bây giờ sẽ được trả lời từ {next}.",
+    "We are away on that date. Please choose {next} or later.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn {next} hoặc muộn hơn.",
+    "We are away on that date. Please pick another date.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn ngày khác."
   },
   blocks: {
     "hero_title": "Thêm một chút rõ ràng.<br><span class=\"italic text-brand-green font-normal\">Thêm thật nhiều yêu thương.</span>",

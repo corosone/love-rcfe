@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "لطفاً شماره کامل تأمین اجتماعی (SSN)، سوابق دقیق پزشکی یا اطلاعات سلامت محافظت‌شده (PHI) را از طریق فرم‌های عمومی وب ارسال نکنید. ارزیابی‌های پزشکی حساس (مانند فرم LIC 602A کالیفرنیا) تنها در جریان بررسی‌های رسمی پذیرش و از طریق کانال‌های امن منطبق با HIPAA به اشتراک گذاشته می‌شوند.",
     "4. Data Access & Removal Requests": "۴. دسترسی به داده‌ها و درخواست حذف",
     "5. Services We Use": "۵. خدماتی که استفاده می‌کنیم",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "برای اجرای این وب‌سایت به چند سرویس شخص ثالث متکی هستیم: Cloudflare (میزبانی وب‌سایت، ذخیره‌سازی پایگاه داده، محافظت در برابر هرزنامه و آمار ترافیک دوستدار حریم خصوصی)، Formspree (برای ارسال پیام‌های ثبت‌شده شما به ایمیل ما) و Google Fonts (برای نمایش فونت‌های سایت). اطلاعاتی که از طریق فرم‌های ما ارسال می‌کنید ممکن است از این سرویس‌ها عبور کند تا بتوانیم آن را دریافت و پاسخ دهیم.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "برای اجرای این وب‌سایت به چند سرویس شخص ثالث متکی هستیم: Cloudflare (میزبانی وب‌سایت، ذخیره‌سازی پایگاه داده، محافظت در برابر هرزنامه و آمار ترافیک دوستدار حریم خصوصی) و Formspree (برای ارسال پیام‌های ثبت‌شده شما به ایمیل ما). اطلاعاتی که از طریق فرم‌های ما ارسال می‌کنید ممکن است از این سرویس‌ها عبور کند تا بتوانیم آن را دریافت و پاسخ دهیم.",
     "Contact our Privacy Officer": "تماس با مسئول حریم خصوصی ما",
     "Call Love RCFE": "تماس با Love RCFE",
     "Talk with an advisor. Free and confidential.": "با یک مشاور گفتگو کنید. رایگان و محرمانه.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "لطفاً تاریخی در ۳ ماه آینده انتخاب کنید.",
     "Please choose a time from the list.": "لطفاً یک زمان از فهرست انتخاب کنید.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "لطفاً بررسی امنیتی را تکمیل کنید. اگر نمایش داده نمی‌شود، با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "تأیید امنیتی موقتاً در دسترس نیست. لطفاً با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "تأیید امنیتی موقتاً در دسترس نیست. لطفاً با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "بررسی دستگاه از هرزنامه جلوگیری می‌کند.",
+    "Visit history improves support.": "سابقهٔ بازدید پشتیبانی را بهتر می‌کند.",
+    "Network details prevent abuse.": "اطلاعات شبکه از سوءاستفاده جلوگیری می‌کند.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "ما از {from} تا {to} در مرخصی هستیم. از {next} می‌توانید تماس رزرو کنید.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "ما تا {to} در مرخصی هستیم. به پیام‌هایی که اکنون ارسال شوند از {next} پاسخ می‌دهیم.",
+    "We are away on that date. Please choose {next} or later.": "ما در آن روز در مرخصی هستیم. لطفاً {next} یا تاریخی بعد از آن را انتخاب کنید.",
+    "We are away on that date. Please pick another date.": "ما در آن روز در مرخصی هستیم. لطفاً تاریخ دیگری انتخاب کنید."
   },
   blocks: {
     "hero_title": "کمی شفافیت بیشتر.<br> <span class=\"italic text-brand-green font-normal\">مراقبتی بسیار صمیمانه‌تر.</span>",

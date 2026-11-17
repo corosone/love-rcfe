@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "公開ウェブフォームからは、社会保障番号（SSN）の全桁、詳細な既往歴、または保護対象医療情報（PHI）を送信しないでください。カリフォルニア州様式 LIC 602A などの機微な医療評価書類は、正式な入居審査の段階で HIPAA 準拠の安全な通信経路を通じてのみ共有いたします。",
     "4. Data Access & Removal Requests": "4. データの開示および削除請求",
     "5. Services We Use": "5. 利用している外部サービス",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "当サイトの運営にあたり、Cloudflare（ウェブサイトホスティング、データベース保管、スパム対策、プライバシーに配慮したアクセス統計）、Formspree（送信されたメッセージのメール転送）、および Google Fonts（サイト上の書体表示）といった外部サービスを利用しています。フォームから送信された情報は、当社が受信してご返信するためにこれらのサービスを経由する場合があります。",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "当サイトの運営にあたり、Cloudflare（ウェブサイトホスティング、データベース保管、スパム対策、プライバシーに配慮したアクセス統計）および Formspree（送信されたメッセージのメール転送）といった外部サービスを利用しています。フォームから送信された情報は、当社が受信してご返信するためにこれらのサービスを経由する場合があります。",
     "Contact our Privacy Officer": "個人情報保護担当へ問い合わせる",
     "Call Love RCFE": "Love RCFE にお電話する",
     "Talk with an advisor. Free and confidential.": "アドバイザーに無料・秘密厳守でご相談いただけます。",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "本日より3か月以内の日付をお選びください。",
     "Please choose a time from the list.": "リストからご希望の時間帯をお選びください。",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "セキュリティ確認を完了してください。表示されない場合は、(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "セキュリティ認証が一時的にご利用いただけません。(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "セキュリティ認証が一時的にご利用いただけません。(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "端末の確認で迷惑メールを防ぎます。",
+    "Visit history improves support.": "閲覧履歴でより良いサポートを。",
+    "Network details prevent abuse.": "ネットワーク情報で不正利用を防ぎます。",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}から{to}まで休業いたします。お電話のご予約は{next}から承ります。",
+    "We are away until {to}. Messages sent now are answered from {next}.": "{to}まで休業中です。ただいまいただいたメッセージには{next}以降に返信いたします。",
+    "We are away on that date. Please choose {next} or later.": "その日は休業日です。{next}以降の日付をお選びください。",
+    "We are away on that date. Please pick another date.": "その日は休業日です。別の日付をお選びください。"
   },
   blocks: {
     "hero_title": "もう少しの明快さを。<br><span class=\"italic text-brand-green font-normal\">もっと深い思いやりを。</span>",

@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "សូមកុំផ្ញើលេខសន្តិសុខសង្គមពេញលេញ ប្រវត្តិវេជ្ជសាស្ត្រលម្អិត ឬព័ត៌មានសុខភាពដែលត្រូវបានការពារ (PHI) តាមរយៈទម្រង់គេហទំព័រសាធារណៈឡើយ។ ការវាយតម្លៃវេជ្ជសាស្ត្ររសើប (ដូចជាទម្រង់ California LIC 602A) ត្រូវបានចែករំលែកតែតាមរយៈបណ្តាញសុវត្ថិភាពដែលអនុលោមតាម HIPAA ក្នុងអំឡុងពេលពិនិត្យចូលស្នាក់នៅផ្លូវការប៉ុណ្ណោះ។",
     "4. Data Access & Removal Requests": "4. សំណើចូលប្រើ និងលុបទិន្នន័យ",
     "5. Services We Use": "5. សេវាកម្មដែលយើងប្រើប្រាស់",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ដើម្បីដំណើរការគេហទំព័រនេះ យើងពឹងផ្អែកលើសេវាកម្មភាគីទីបីមួយចំនួន៖ Cloudflare (ការបង្ហោះគេហទំព័រ ការផ្ទុកទិន្នន័យ ការការពារសារឥតបានការ និងស្ថិតិចរាចរណ៍ដែលគោរពឯកជនភាព), Formspree (ដើម្បីផ្ញើសារដែលលោកអ្នកដាក់ស្នើមកកាន់អ៊ីមែលរបស់យើង) និង Google Fonts (ដើម្បីបង្ហាញពុម្ពអក្សររបស់គេហទំព័រ)។ ព័ត៌មានដែលលោកអ្នកផ្ញើតាមទម្រង់របស់យើងអាចឆ្លងកាត់សេវាកម្មទាំងនេះ ដើម្បីឱ្យយើងអាចទទួល និងឆ្លើយតបបាន។",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ដើម្បីដំណើរការគេហទំព័រនេះ យើងពឹងផ្អែកលើសេវាកម្មភាគីទីបីមួយចំនួន៖ Cloudflare (ការបង្ហោះគេហទំព័រ ការផ្ទុកទិន្នន័យ ការការពារសារឥតបានការ និងស្ថិតិចរាចរណ៍ដែលគោរពឯកជនភាព) និង Formspree (ដើម្បីផ្ញើសារដែលលោកអ្នកដាក់ស្នើមកកាន់អ៊ីមែលរបស់យើង)។ ព័ត៌មានដែលលោកអ្នកផ្ញើតាមទម្រង់របស់យើងអាចឆ្លងកាត់សេវាកម្មទាំងនេះ ដើម្បីឱ្យយើងអាចទទួល និងឆ្លើយតបបាន។",
     "Contact our Privacy Officer": "ទាក់ទងមន្ត្រីឯកជនភាពរបស់យើង",
     "Call Love RCFE": "ទូរស័ព្ទទៅ Love RCFE",
     "Talk with an advisor. Free and confidential.": "ពិភាក្សាជាមួយទីប្រឹក្សា។ ឥតគិតថ្លៃ និងរក្សាការសម្ងាត់។",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "សូមជ្រើសរើសកាលបរិច្ឆេទក្នុងរយៈពេល 3 ខែខាងមុខ។",
     "Please choose a time from the list.": "សូមជ្រើសរើសពេលវេលាពីបញ្ជី។",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "សូមបំពេញការត្រួតពិនិត្យសុវត្ថិភាព។ ប្រសិនបើវាមិនបង្ហាញទេ សូមទូរស័ព្ទទៅ (818) 217-5755 ឬអ៊ីមែល loveRCFE@gmail.com។",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "ការផ្ទៀងផ្ទាត់សុវត្ថិភាពមិនអាចប្រើបានជាបណ្តោះអាសន្នទេ។ សូមទូរស័ព្ទទៅ (818) 217-5755 ឬអ៊ីមែល loveRCFE@gmail.com។"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "ការផ្ទៀងផ្ទាត់សុវត្ថិភាពមិនអាចប្រើបានជាបណ្តោះអាសន្នទេ។ សូមទូរស័ព្ទទៅ (818) 217-5755 ឬអ៊ីមែល loveRCFE@gmail.com។",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "ការពិនិត្យឧបករណ៍ជួយទប់ស្កាត់សារឥតបានការ។",
+    "Visit history improves support.": "ប្រវត្តិនៃការចូលមើលជួយកែលម្អការគាំទ្រ។",
+    "Network details prevent abuse.": "ព័ត៌មានបណ្ដាញជួយការពារការរំលោភបំពាន។",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "យើងឈប់សម្រាកពី {from} ដល់ {to}។ អាចកក់ការហៅទូរសព្ទចាប់ពី {next}។",
+    "We are away until {to}. Messages sent now are answered from {next}.": "យើងឈប់សម្រាករហូតដល់ {to}។ សារដែលផ្ញើឥឡូវនេះនឹងត្រូវឆ្លើយតបចាប់ពី {next}។",
+    "We are away on that date. Please choose {next} or later.": "យើងឈប់សម្រាកនៅថ្ងៃនោះ។ សូមជ្រើសរើស {next} ឬថ្ងៃក្រោយ។",
+    "We are away on that date. Please pick another date.": "យើងឈប់សម្រាកនៅថ្ងៃនោះ។ សូមជ្រើសរើសកាលបរិច្ឆេទផ្សេង។"
   },
   blocks: {
     "hero_title": "ភាពច្បាស់លាស់កាន់តែច្រើន។<br> <span class=\"italic text-brand-green font-normal\">ការយកចិត្តទុកដាក់កាន់តែខ្លាំង។</span>",

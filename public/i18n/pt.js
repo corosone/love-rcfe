@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Por favor, não envie números completos de Social Security, históricos clínicos detalhados ou informações de saúde protegidas (PHI) em formulários públicos abertos na web. Avaliações médicas sensíveis (como o formulário estadual LIC 602A) são compartilhadas apenas por canais seguros e compatíveis com HIPAA durante análises formais de admissão.",
     "4. Data Access & Removal Requests": "4. Acesso aos Dados e Pedidos de Exclusão",
     "5. Services We Use": "5. Serviços que Utilizamos",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Para operar este site utilizamos alguns serviços de terceiros: Cloudflare (hospedagem do site, armazenamento em banco de dados, proteção contra spam e estatísticas de tráfego respeitosas à privacidade), Formspree (para nos encaminhar por e-mail as mensagens enviadas) e Google Fonts (para exibição das fontes do site). Os dados enviados pelos formulários podem transitar por esses serviços para que possamos recebê-los e responder a você.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Para operar este site utilizamos alguns serviços de terceiros: Cloudflare (hospedagem do site, armazenamento em banco de dados, proteção contra spam e estatísticas de tráfego respeitosas à privacidade) e Formspree (para nos encaminhar por e-mail as mensagens enviadas). Os dados enviados pelos formulários podem transitar por esses serviços para que possamos recebê-los e responder a você.",
     "Contact our Privacy Officer": "Falar com Nosso Responsável pela Privacidade",
     "Call Love RCFE": "Ligar para a Love RCFE",
     "Talk with an advisor. Free and confidential.": "Fale com um consultor. Gratuito e confidencial.",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Por favor, escolha uma data dentro dos próximos 3 meses.",
     "Please choose a time from the list.": "Por favor, escolha um horário da lista.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Por favor, conclua a verificação de segurança. Caso ela não apareça, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "A verificação de segurança está temporariamente indisponível. Por favor, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "A verificação de segurança está temporariamente indisponível. Por favor, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "A verificação do dispositivo bloqueia spam.",
+    "Visit history improves support.": "O histórico de visitas melhora o atendimento.",
+    "Network details prevent abuse.": "Dados de rede evitam abusos.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Estaremos ausentes de {from} a {to}. É possível agendar ligações a partir de {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Estaremos ausentes até {to}. As mensagens enviadas agora serão respondidas a partir de {next}.",
+    "We are away on that date. Please choose {next} or later.": "Estaremos ausentes nesse dia. Escolha {next} ou uma data posterior.",
+    "We are away on that date. Please pick another date.": "Estaremos ausentes nesse dia. Por favor, escolha outra data."
   },
   blocks: {
     "hero_title": "Um pouco mais de clareza.<br> <span class=\"italic text-brand-green font-normal\">Muito mais cuidado.</span>",

@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Խնդրում ենք չուղարկել SSN համարներ, մանրամասն բժշկական պատմություն կամ գաղտնի բուժտեղեկատվություն բաց վեբ ձևերով։ Գաղտնի բժշկական փաստաթղթերը (օր․ LIC 602A) փոխանցվում են միայն պաշտպանված HIPAA ալիքներով՝ պաշտոնական ընդունման փուլում։",
     "4. Data Access & Removal Requests": "4. Տվյալների հասանելիություն և հեռացման պահանջներ",
     "5. Services We Use": "5. Մեր կողմից օգտագործվող ծառայությունները",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and Google Fonts (to display the site's typefaces). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Այս կայքի աշխատանքի համար մենք օգտվում ենք մի քանի ծառայություններից՝ Cloudflare (հոսթինգ, տվյալների բազա, սպամից պաշտպանություն և գաղտնիությանը համահունչ վիճակագրություն), Formspree (նամակների փոխանցում) և Google Fonts (տառատեսակներ)։ Ձևերով ուղարկված տվյալները կարող են անցնել այս ծառայություններով՝ պատասխանելու նպատակով։",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Այս կայքի աշխատանքի համար մենք օգտվում ենք մի քանի ծառայություններից՝ Cloudflare (հոսթինգ, տվյալների բազա, սպամից պաշտպանություն և գաղտնիությանը համահունչ վիճակագրություն) և Formspree (նամակների փոխանցում)։ Ձևերով ուղարկված տվյալները կարող են անցնել այս ծառայություններով՝ պատասխանելու նպատակով։",
     "Contact our Privacy Officer": "Կապվել գաղտնիության պատասխանատուի հետ",
     "Call Love RCFE": "Զանգահարել Love RCFE",
     "Talk with an advisor. Free and confidential.": "Խոսեք խորհրդատուի հետ։ Անվճար և գաղտնի։",
@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Խնդրում ենք ընտրել առաջիկա 3 ամսվա ընթացքում գտնվող ամսաթիվ։",
     "Please choose a time from the list.": "Խնդրում ենք ցանկից ընտրել ժամանակահատված։",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Խնդրում ենք անցնել անվտանգության ստուգումը։ Եթե այն չի երևում, զանգահարեք (818) 217-5755 կամ գրեք loveRCFE@gmail.com։",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Անվտանգության ստուգումը ժամանակավորապես անհասանելի է։ Զանգահարեք (818) 217-5755 կամ գրեք loveRCFE@gmail.com։"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Անվտանգության ստուգումը ժամանակավորապես անհասանելի է։ Զանգահարեք (818) 217-5755 կամ գրեք loveRCFE@gmail.com։",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Սարքի ստուգումը կանխում է սպամը։",
+    "Visit history improves support.": "Այցելությունների պատմությունը բարելավում է աջակցությունը։",
+    "Network details prevent abuse.": "Ցանցային տվյալները կանխում են չարաշահումները։",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Մենք բացակայում ենք {from} – {to}։ Զանգ կարող եք ամրագրել սկսած {next}։",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Մենք բացակայում ենք մինչև {to}։ Այժմ ուղարկված հաղորդագրություններին կպատասխանենք սկսած {next}։",
+    "We are away on that date. Please choose {next} or later.": "Այդ օրը մենք բացակայում ենք։ Խնդրում ենք ընտրել {next} կամ ավելի ուշ։",
+    "We are away on that date. Please pick another date.": "Այդ օրը մենք բացակայում ենք։ Խնդրում ենք ընտրել այլ ամսաթիվ։"
   },
   blocks: {
     "hero_title": "Ավելի շատ հստակություն։<br><span class=\"italic text-brand-green font-normal\">Ավելի շատ հոգատարություն։</span>",
