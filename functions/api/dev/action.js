@@ -96,11 +96,13 @@ const ACTIONS = {
   },
 
   // Sends a test email (with no code) to the address that receives sign-in codes.
-  async test_code_email(request, env) {
+  async test_code_email(request, env, session, options) {
     if (await tooManyRequestsD1(env.DB, 'devtestmail', 5, 3600, { failClosed: true })) {
       return { ok: false, status: 429, message: 'You can send at most 5 test emails per hour. Please try again later.' };
     }
-    const sent = await sendTestCodeEmail(env, request);
+    // options.client: what the console reported about this browser, so the test email shows the
+    // same device details as a real sign-in email (checked field by field in lib/deviceinfo.js).
+    const sent = await sendTestCodeEmail(env, request, options?.client && typeof options.client === 'object' ? options.client : null);
     return sent.ok
       ? { message: 'Test email sent to your verification address. It should arrive within a minute (check spam too).' }
       : { ok: false, message: `The test email could not be sent (${sent.provider}, HTTP ${sent.status}). Check RESEND_API_KEY and DEV_CODE_EMAIL in Cloudflare.`, detail: `${sent.provider} status ${sent.status}` };
