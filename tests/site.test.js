@@ -683,6 +683,7 @@ test('privacy policy: three short lines (4 words or fewer) about device checks, 
   const lines = await page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
   assert.deepEqual(lines, ['Device checks stop spam.', 'Visit history improves support.', 'Network details prevent abuse.']);
   for (const l of lines) assert.ok(l.split(/\s+/).length <= 4, l);
+  assert.doesNotMatch(await page.textContent('#privacy'), /Google Fonts/, 'fonts come from this site now');
   await context.close();
   const es = await open('/es/#privacy', { wait: 'load' });
   const esLines = await es.page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
