@@ -11,8 +11,11 @@
 // the result is exactly what a visitor's browser would produce. Nothing is translated here;
 // to change wording, edit the language file as before.
 //
-// Runs on Cloudflare at deploy time as part of "npm run build". The generated folders are
-// not stored in the repository (see .gitignore).
+// Runs on Cloudflare at deploy time. It is started twice on purpose (see package.json):
+// by "postinstall", which Cloudflare always runs when it installs the packages, and by
+// "npm run build". That way the pages are built whatever build command is saved in the
+// Cloudflare project settings. Running it twice is harmless.
+// The generated folders are not stored in the repository (see .gitignore).
 'use strict';
 
 const fs = require('fs');
