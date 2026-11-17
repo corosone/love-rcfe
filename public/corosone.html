@@ -92,6 +92,18 @@
     .dv-link { background: none; border: 0; padding: 0; color: #315d48; font-weight: 700; text-decoration: underline; cursor: pointer; font-size: inherit; }
     .dv-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; word-break: break-all; }
     .dv-msg { max-width: 28rem; white-space: pre-wrap; word-break: break-word; }
+    /* Sticky + a width set by corosone.js: on a phone the table scrolls sideways inside its box, and the panel stays put at the visible width. */
+    .dv-detail { background: #f7f9f5; border: 1px solid #d9ded4; border-radius: 0.9rem; padding: 0.9rem 1rem; font-size: 12px; white-space: normal; position: sticky; left: 10px; box-sizing: border-box; max-width: 100%; }
+    .dv-detail-addr { margin-bottom: 0.5rem; }
+    .dv-detail-addr-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; }
+    .dv-detail-addr-line .dv-chip { margin: 0; }
+    .dv-detail-label { font-weight: 700; min-width: 9.5rem; }
+    .dv-detail-section { margin-top: 0.9rem; }
+    .dv-detail-section h3 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; color: #59685f; margin-bottom: 0.35rem; }
+    .dv-detail-list { display: grid; grid-template-columns: minmax(9rem, 16rem) 1fr; gap: 0.2rem 1rem; }
+    .dv-detail-list dt { font-weight: 600; color: #59685f; }
+    .dv-detail-list dd { margin: 0; word-break: break-word; }
+    @media (max-width: 640px) { .dv-detail-list { grid-template-columns: 1fr; gap: 0; } .dv-detail-list dd { margin-bottom: 0.4rem; } .dv-detail-label { min-width: 0; width: 100%; } }
     .dv-meter { height: 8px; border-radius: 9999px; background: #edf2e9; overflow: hidden; }
     .dv-meter span { display: block; height: 100%; background: #315d48; width: 0; }
     .dv-seg { display: inline-flex; border: 1px solid #d9ded4; border-radius: 9999px; overflow: hidden; flex-shrink: 0; }
@@ -116,6 +128,8 @@
     html.dark .dv-status.is-bad { color: #fecaca; background: #3b1a1a; border-color: #7f1d1d; }
     html.dark .dv-status.is-busy { color: #a7b8ad; }
     html.dark .dv-link { color: #4ade80; }
+    html.dark .dv-detail { background: #121915; border-color: #2d4034; }
+    html.dark .dv-detail-section h3, html.dark .dv-detail-list dt { color: #a7b8ad; }
     html.dark .dv-meter { background: #24352b; }
     html.dark .dv-meter span { background: #4ade80; }
     html.dark .dv-seg { border-color: #2d4034; }
@@ -310,10 +324,10 @@
 
         <div id="blocks-card" class="surface bg-white p-5 rounded-2xl border border-brand-line">
           <h2 class="text-sm font-bold text-brand-ink mb-1">Blocked IP Addresses</h2>
-          <p class="text-xs text-brand-muted mb-3">A blocked address can still open the website, but it cannot send enquiries or call requests, or sign in to the staff inbox. It is shown a message with your phone number and email instead, in case it is a real person on a shared network. This console is never blocked. The "Turned away" count updates about once a minute.</p>
+          <p class="text-xs text-brand-muted mb-3">A blocked address can still open the website, but it cannot send enquiries or call requests, or sign in to the staff inbox. It is shown a message with your phone number and email instead, in case it is a real person on a shared network. This console is never blocked. The "Turned away" count updates about once a minute. Blocking a long address (one with colons) blocks the whole home or phone network it belongs to, shown ending in /64, because devices change their long address every day or so.</p>
           <form id="block-form" class="dv-toolbar" novalidate>
             <label for="block-ip" class="sr-only">IP address to block</label>
-            <input id="block-ip" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="45" placeholder="IP address, e.g. 203.0.113.7" class="dv-input dv-mono">
+            <input id="block-ip" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="45" placeholder="IP address (short or long)" class="dv-input dv-mono">
             <label for="block-reason" class="sr-only">Reason (optional)</label>
             <input id="block-reason" type="text" maxlength="100" placeholder="Reason (optional), e.g. spam" class="dv-input">
             <label for="block-days" class="sr-only">How long</label>
@@ -555,7 +569,7 @@
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
             <div>
               <h2 class="text-sm font-bold text-brand-ink mb-1">Activity</h2>
-              <p class="text-xs text-brand-muted">The last 100 sign-in events (staff and developer) and tool uses, newest first.</p>
+              <p class="text-xs text-brand-muted">The last 100 sign-in events (staff and developer) and tool uses, newest first. Press Details on an entry to see both of the device's addresses and everything else known about it. Staff cannot see any of this.</p>
             </div>
             <div class="dv-seg" role="group" aria-label="Show activity for">
               <button type="button" data-activity="all" aria-pressed="true">All</button>
@@ -566,7 +580,7 @@
           <div class="dev-scroll">
             <table class="dev-table text-brand-ink">
               <thead>
-                <tr><th>When</th><th>Event</th><th>IP address</th><th>Details</th></tr>
+                <tr><th>When</th><th>Event</th><th>IP address</th><th>Details</th><th aria-label="More"></th></tr>
               </thead>
               <tbody id="activity-body"></tbody>
             </table>
