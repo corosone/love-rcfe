@@ -1,6 +1,7 @@
-// Tests for the server code in /functions and /lib (enquiries, staff sign-in, blocking,
-// the weekly summary). They run the real code against an in-memory database; nothing is
-// sent to the live site, and outside services (Turnstile, Resend, Formspree) are stand-ins.
+// Tests for the server code in /functions and /lib (enquiries, staff sign-in and inbox actions,
+// developer sign-in with an emailed code, blocking, the weekly summary). They run the real code
+// against an in-memory database; nothing is sent to the live site, and outside services
+// (Turnstile, Resend, Formspree) are stand-ins.
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const { startServer } = require('./helpers/server.js');
@@ -16,6 +17,7 @@ before(async () => {
     INBOX_PASSWORD,
     SESSION_SECRET: 'test-session-secret-0123456789abcdef0123456789abcdef',
     DEV_EMAIL: 'owner@example.com',
+    DEV_PASSWORD: 'developer password for tests',
     RESEND_API_KEY: 're_test_key',
     FORMSPREE_ENDPOINT: 'https://formspree.io/f/testform',
   });
@@ -338,4 +340,334 @@ test('the weekly summary only counts the last 7 days', async () => {
   const future = await buildWeeklySummary(site.db, Date.now() + 30 * 24 * 60 * 60 * 1000);
   assert.equal(future.enquiries.total, 0);
   assert.equal(future.visits.views, 0);
+});
+
+// ---------- Developer console sign-in (email + password, then a 6-digit code by email) ----------
+// These run after the weekly-summary tests, so the numbers checked there are not changed.
+
+const DEV_LOGIN = { email: 'owner@example.com', password: 'developer password for tests', turnstile_token: 't' };
+const codeMails = () => site.outside.filter((c) => c.url === 'https://api.resend.com/emails' && /sign-in code/.test(JSON.parse(c.body).subject));
+const codeFrom = (mail) => /sign-in code is: (\d{6})/.exec(JSON.parse(mail.body).text)[1];
+const auditCount = (event) => site.db._rows('SELECT COUNT(*) AS n FROM dev_audit WHERE event = ?', event)[0].n;
+
+// The cookies a reply sets, as { name: value }. An empty value means "delete this cookie".
+function cookiesOf(res) {
+  const out = {};
+  for (const line of res.headers.getSetCookie()) {
+    const [pair] = line.split(';');
+    const i = pair.indexOf('=');
+    out[pair.slice(0, i).trim()] = decodeURIComponent(pair.slice(i + 1).trim());
+  }
+  return out;
+}
+const cookieHeaderFor = (jar) => Object.entries(jar).filter(([, v]) => v).map(([k, v]) => `${k}=${v}`).join('; ');
+
+// The minute-by-minute limits on sign-in attempts would otherwise trip, because these tests
+// make many attempts within seconds. Clearing them is the same as waiting a minute.
+const waitAMinute = () => site.db._run('DELETE FROM rate_limits');
+
+// Step 1 with the right email and password: returns the challenge cookie and the emailed code.
+async function devStepOne(ip) {
+  waitAMinute();
+  const before = codeMails().length;
+  const res = await site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, ip });
+  assert.equal(res.status, 200, await res.clone().text());
+  assert.equal(codeMails().length, before + 1, 'one code email was sent');
+  return { res, jar: cookiesOf(res), code: codeFrom(codeMails().at(-1)) };
+}
+const verify = (jar, code, ip) => site.api('/api/dev/verify', { method: 'POST', body: { code }, headers: { cookie: cookieHeaderFor(jar) }, ip });
+
+test('developer sign-in: a wrong email or password is refused, and no code is emailed', async () => {
+  site.outside.length = 0;
+  waitAMinute();
+  for (const body of [
+    { ...DEV_LOGIN, password: 'not the password at all' },
+    { ...DEV_LOGIN, email: 'someone-else@example.com' },
+  ]) {
+    const res = await site.api('/api/dev/login', { method: 'POST', body, ip: '203.0.113.120' });
+    assert.equal(res.status, 401);
+    assert.deepEqual(await res.json(), { error: 'Incorrect email or password.' }, 'the reply never says which one was wrong');
+    assert.equal(res.headers.getSetCookie().length, 0);
+  }
+  assert.equal(codeMails().length, 0);
+  assert.equal(auditCount('wrong_password'), 2, 'both attempts are in the activity log');
+});
+
+test('developer sign-in: the security check and same-site rule are always required', async () => {
+  site.outside.length = 0;
+  waitAMinute();
+  const noToken = await site.api('/api/dev/login', { method: 'POST', body: { ...DEV_LOGIN, turnstile_token: '' }, ip: '203.0.113.121' });
+  assert.ok(noToken.status >= 400 && noToken.status < 500, `status ${noToken.status}`);
+
+  site.setTurnstilePasses(false);
+  const failed = await site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, ip: '203.0.113.121' });
+  site.setTurnstilePasses(true);
+  assert.ok(failed.status >= 400 && failed.status < 500, `status ${failed.status}`);
+
+  const foreign = await site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, headers: { origin: 'https://evil.example' }, ip: '203.0.113.121' });
+  assert.equal(foreign.status, 403);
+  assert.equal(codeMails().length, 0, 'none of these sent a code');
+});
+
+test('developer sign-in: the right email and password email a code; the right code signs in', async () => {
+  site.outside.length = 0;
+  const ip = '203.0.113.122';
+  const { res, jar, code } = await devStepOne(ip);
+  const data = await res.json();
+  assert.equal(data.step, 'code');
+  assert.ok(!JSON.stringify(data).includes(code), 'the code is only in the email, never in the reply');
+  assert.ok(jar.lovercfe_dev_step, 'a cookie ties the code to this browser');
+  assert.match(res.headers.getSetCookie()[0], /HttpOnly/i);
+  assert.deepEqual(JSON.parse(codeMails()[0].body).to, ['owner@example.com'], 'the code goes to the owner only');
+
+  // Not signed in yet: the console still refuses
+  const early = await site.api('/api/dev/overview', { headers: { cookie: cookieHeaderFor(jar) }, ip });
+  assert.equal(early.status, 401);
+
+  const wrong = await verify(jar, code === '000000' ? '111111' : '000000', ip);
+  assert.equal(wrong.status, 401);
+  assert.match((await wrong.json()).error, /Incorrect code\. 4 tries left/);
+
+  const ok = await verify(jar, code, ip);
+  assert.equal(ok.status, 200);
+  const signedIn = { ...jar, ...cookiesOf(ok) };
+  assert.ok(signedIn.lovercfe_dev, 'a developer session cookie was set');
+  assert.equal(signedIn.lovercfe_dev_step, '', 'the code cookie is removed');
+  assert.match(ok.headers.getSetCookie().find((c) => c.startsWith('lovercfe_dev=')), /HttpOnly.*SameSite=Strict|SameSite=Strict.*HttpOnly/i);
+
+  const overview = await site.api('/api/dev/overview', { headers: { cookie: cookieHeaderFor(signedIn) }, ip });
+  assert.equal(overview.status, 200, 'the console opens');
+  assert.equal(auditCount('signed_in'), 1);
+  assert.equal(auditCount('wrong_code'), 1);
+});
+
+test('developer sign-in: a code works only once', async () => {
+  const ip = '203.0.113.123';
+  const { jar, code } = await devStepOne(ip);
+  assert.equal((await verify(jar, code, ip)).status, 200);
+  const again = await verify(jar, code, ip);
+  assert.equal(again.status, 401);
+  const body = await again.json();
+  assert.equal(body.restart, true, 'the page is told to start again from email and password');
+  assert.equal(cookiesOf(again).lovercfe_dev, undefined, 'no second session');
+});
+
+test('developer sign-in: a code only works in the browser that asked for it', async () => {
+  const ip = '203.0.113.124';
+  const { code } = await devStepOne(ip);
+  const noCookie = await verify({}, code, ip);
+  assert.equal(noCookie.status, 401);
+  assert.equal((await noCookie.json()).restart, true);
+  const madeUp = await verify({ lovercfe_dev_step: 'A'.repeat(32) }, code, ip);
+  assert.equal(madeUp.status, 401);
+  assert.equal(cookiesOf(madeUp).lovercfe_dev, undefined);
+});
+
+test('developer sign-in: 5 wrong codes cancel the sign-in, even if the right code comes next', async () => {
+  const ip = '203.0.113.125';
+  const { jar, code } = await devStepOne(ip);
+  const guesses = ['000000', '111111', '222222', '333333', '444444', '555555'].filter((g) => g !== code).slice(0, 5);
+  const statuses = [];
+  let last;
+  for (const g of guesses) {
+    last = await verify(jar, g, ip);
+    statuses.push(last.status);
+  }
+  assert.deepEqual(statuses, [401, 401, 401, 401, 401]);
+  assert.equal((await last.json()).restart, true, 'the 5th wrong code ends the sign-in');
+  const right = await verify(jar, code, ip);
+  assert.equal(right.status, 401);
+  assert.equal(cookiesOf(right).lovercfe_dev, undefined, 'the right code no longer works');
+  assert.equal(site.db._rows('SELECT COUNT(*) AS n FROM dev_challenges')[0].n, 0);
+});
+
+test('developer sign-in: an expired code does not work', async () => {
+  const ip = '203.0.113.126';
+  const { jar, code } = await devStepOne(ip);
+  site.db._run('UPDATE dev_challenges SET expires_at = ?', Math.floor(Date.now() / 1000) - 1);
+  const res = await verify(jar, code, ip);
+  assert.equal(res.status, 401);
+  assert.match((await res.json()).error, /expired/);
+});
+
+test('developer sign-in: starting a new sign-in cancels the earlier code', async () => {
+  const first = await devStepOne('203.0.113.127');
+  const second = await devStepOne('203.0.113.127');
+  const old = await verify(first.jar, first.code, '203.0.113.127');
+  assert.equal(old.status, 401);
+  assert.equal(cookiesOf(old).lovercfe_dev, undefined);
+  assert.equal((await verify(second.jar, second.code, '203.0.113.127')).status, 200, 'the newest code still works');
+});
+
+test('developer sign-in: at most 5 code emails an hour', async () => {
+  waitAMinute();
+  site.outside.length = 0;
+  const ip = '203.0.113.128';
+  const statuses = [];
+  for (let i = 0; i < 6; i++) {
+    // Only the per-minute limits are cleared between tries; the hourly code-email count stays.
+    site.db._run("DELETE FROM rate_limits WHERE key NOT LIKE 'devsend:%'");
+    const res = await site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, ip });
+    statuses.push(res.status);
+    if (i === 5) assert.match((await res.json()).error, /Too many verification codes/);
+  }
+  assert.deepEqual(statuses, [200, 200, 200, 200, 200, 429], 'the password is right every time, but the 6th code is not sent');
+  assert.equal(codeMails().length, 5);
+  assert.ok(auditCount('code_limit') >= 1, 'written to the activity log');
+});
+
+test('developer sign-in: 5 wrong passwords lock that address for 15 minutes, even with the right password', async () => {
+  const ip = '203.0.113.129';
+  waitAMinute();
+  for (let i = 0; i < 5; i++) {
+    const res = await site.api('/api/dev/login', { method: 'POST', body: { ...DEV_LOGIN, password: `wrong guess number ${i}` }, ip });
+    assert.equal(res.status, 401);
+  }
+  waitAMinute(); // past the per-minute limit, so only the lock is left
+  const locked = await site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, ip });
+  assert.equal(locked.status, 423);
+  assert.match((await locked.json()).error, /Too many wrong sign-in attempts/);
+  const wait = Number(locked.headers.get('retry-after'));
+  assert.ok(wait > 14 * 60 && wait <= 15 * 60, `Retry-After ${wait}`);
+  assert.equal(locked.headers.getSetCookie().length, 0);
+});
+
+test('signing out ends the developer session and any staff session in the same browser', async () => {
+  const ip = '203.0.113.130';
+  const { jar, code } = await devStepOne(ip);
+  const dev = cookiesOf(await verify(jar, code, ip)).lovercfe_dev;
+  const staff = cookiesOf(await site.api('/api/admin/session', { method: 'POST', body: { password: INBOX_PASSWORD, turnstile_token: 't' }, ip })).lovercfe_admin;
+  assert.ok(dev && staff);
+  const both = `lovercfe_dev=${dev}; lovercfe_admin=${staff}`;
+  assert.equal((await site.api('/api/dev/overview', { headers: { cookie: both }, ip })).status, 200);
+  assert.equal((await site.api('/api/admin/leads', { headers: { cookie: both }, ip })).status, 200);
+
+  const out = await site.api('/api/dev/session', { method: 'DELETE', headers: { cookie: both }, ip });
+  assert.equal(out.status, 200);
+  const cleared = cookiesOf(out);
+  assert.equal(cleared.lovercfe_dev, '');
+  assert.equal(cleared.lovercfe_admin, '');
+
+  // The old cookies no longer work, even if someone kept a copy
+  assert.equal((await site.api('/api/dev/overview', { headers: { cookie: `lovercfe_dev=${dev}` }, ip })).status, 401);
+  assert.equal((await site.api('/api/admin/leads', { headers: { cookie: `lovercfe_admin=${staff}` }, ip })).status, 401);
+  assert.ok(auditCount('signed_out') >= 1 && auditCount('staff_signed_out') >= 1);
+});
+
+// ---------- Staff inbox actions ----------
+
+let staffCookie = '';
+const STAFF_IP = '203.0.113.140';
+const inboxCall = (method, query, body, cookie = staffCookie, extraHeaders = {}) =>
+  site.api('/api/admin/leads' + query, { method, body, headers: { cookie, ...extraHeaders }, ip: STAFF_IP });
+const leadRow = (id) => site.db._rows('SELECT * FROM leads WHERE id = ?', id)[0];
+
+async function newLead(name) {
+  site.db._run(
+    "INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled, ip, ip_place) VALUES ('enquiry', 'Family Placement', ?, 'x@example.com', '8185550123', 'message', ?, 0, '198.51.100.77', 'Burbank, US')",
+    name, new Date().toISOString()
+  );
+  return site.db._rows('SELECT MAX(id) AS id FROM leads')[0].id;
+}
+
+test('staff inbox: sign in for the action tests', async () => {
+  const res = await site.api('/api/admin/session', { method: 'POST', body: { password: INBOX_PASSWORD, turnstile_token: 't' }, ip: STAFF_IP });
+  assert.equal(res.status, 200);
+  staffCookie = `lovercfe_admin=${cookiesOf(res).lovercfe_admin}`;
+});
+
+test('staff inbox: moving an enquiry through the stages', async () => {
+  const id = await newLead('Stage Test');
+  for (const stage of ['called', 'tour', 'waiting', 'new']) {
+    const res = await inboxCall('PATCH', '', { id, stage });
+    assert.equal(res.status, 200);
+    assert.equal((await res.json()).lead.stage, stage);
+    assert.equal(leadRow(id).stage, stage, 'saved in the database');
+  }
+  const bad = await inboxCall('PATCH', '', { id, stage: 'archived' });
+  assert.equal(bad.status, 400);
+  assert.equal(leadRow(id).stage, 'new', 'an unknown stage changes nothing');
+});
+
+test('staff inbox: notes are saved, tidied, and limited to 2,000 characters', async () => {
+  const id = await newLead('Notes Test');
+  const res = await inboxCall('PATCH', '', { id, notes: '  Called back Tuesday.\u0000  ' });
+  assert.equal(res.status, 200);
+  assert.equal((await res.json()).lead.notes, 'Called back Tuesday.');
+  await inboxCall('PATCH', '', { id, notes: 'x'.repeat(5000) });
+  assert.equal(leadRow(id).notes.length, 2000);
+  await inboxCall('PATCH', '', { id, notes: '' });
+  assert.equal(leadRow(id).notes, '', 'notes can be cleared');
+});
+
+test('staff inbox: marking an enquiry handled and not handled, and the open count', async () => {
+  const id = await newLead('Handled Test');
+  const count = async () => (await (await inboxCall('GET', '?summary=1')).json());
+  const before = await count();
+  assert.equal((await (await inboxCall('PATCH', '', { id, handled: true })).json()).lead.handled, true);
+  assert.equal((await count()).open, before.open - 1);
+  assert.equal((await (await inboxCall('PATCH', '?id=' + id, { handled: false })).json()).lead.handled, false, 'the id can also be in the address');
+  assert.equal((await count()).open, before.open);
+  assert.equal((await count()).total, before.total);
+});
+
+test('staff inbox: only the fields sent are changed', async () => {
+  const id = await newLead('Partial Test');
+  await inboxCall('PATCH', '', { id, stage: 'tour', notes: 'keep me', handled: true });
+  await inboxCall('PATCH', '', { id, stage: 'waiting' });
+  const row = leadRow(id);
+  assert.deepEqual([row.stage, row.notes, row.handled, row.name], ['waiting', 'keep me', 1, 'Partial Test']);
+  assert.equal((await inboxCall('PATCH', '', { id })).status, 400, 'nothing to update');
+  assert.equal((await inboxCall('PATCH', '', { id, name: 'Changed' })).status, 400, 'other fields cannot be changed');
+  assert.equal(leadRow(id).name, 'Partial Test');
+});
+
+test('staff inbox: bad or unknown enquiry numbers are refused', async () => {
+  for (const id of [0, -1, 1.5, 'abc', null]) {
+    assert.equal((await inboxCall('PATCH', '', { id, stage: 'called' })).status, 400, `id ${id}`);
+    assert.equal((await inboxCall('DELETE', '', { id })).status, 400, `id ${id}`);
+  }
+  assert.equal((await inboxCall('PATCH', '', { id: 999999, stage: 'called' })).status, 404);
+  assert.equal((await inboxCall('DELETE', '?id=999999')).status, 404);
+});
+
+test('staff inbox: delete removes the enquiry', async () => {
+  const id = await newLead('Delete Test');
+  const before = auditCount('staff_marked_spam');
+  const res = await inboxCall('DELETE', '?id=' + id);
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true, id });
+  assert.equal(leadRow(id), undefined);
+  assert.equal(auditCount('staff_marked_spam'), before, 'a plain delete is not reported as spam');
+  assert.equal((await inboxCall('DELETE', '?id=' + id)).status, 404, 'deleting twice finds nothing');
+});
+
+test('staff inbox: "mark as spam" removes the enquiry and notes the sender\'s address for the developer', async () => {
+  const id = await newLead('Spam Test');
+  const res = await inboxCall('DELETE', '?id=' + id + '&spam=1');
+  assert.equal(res.status, 200);
+  assert.equal(leadRow(id), undefined);
+  const logged = site.db._rows("SELECT detail FROM dev_audit WHERE event = 'staff_marked_spam' ORDER BY id DESC LIMIT 1")[0];
+  assert.match(logged.detail, /198\.51\.100\.77 · Burbank, US/);
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM blocked_ips WHERE ip LIKE '198.51.100.77%'")[0].n, 0, 'staff cannot block addresses; only the developer decides');
+});
+
+test('staff inbox: changes are refused without signing in, or from another website', async () => {
+  const id = await newLead('Guarded Test');
+  for (const [method, query, body] of [['PATCH', '', { id, stage: 'called' }], ['DELETE', '?id=' + id, undefined]]) {
+    const anon = await inboxCall(method, query, body, '');
+    assert.equal(anon.status, 401, `${method} without signing in`);
+    const fake = await inboxCall(method, query, body, 'lovercfe_admin=' + 'A'.repeat(43) + '.' + 'B'.repeat(43));
+    assert.equal(fake.status, 401, `${method} with a made-up cookie`);
+    const foreign = await inboxCall(method, query, body, staffCookie, { origin: 'https://evil.example' });
+    assert.equal(foreign.status, 403, `${method} from another website`);
+  }
+  const row = leadRow(id);
+  assert.ok(row, 'still there');
+  assert.equal(row.stage, 'new', 'unchanged');
+});
+
+test('staff inbox: only GET, PATCH and DELETE are accepted', async () => {
+  const res = await inboxCall('POST', '', { id: 1 });
+  assert.equal(res.status, 405);
 });
