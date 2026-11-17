@@ -3,10 +3,14 @@
   X-Frame-Options: DENY
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.pexels.com; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-iBjwwaiHFz799V/i6eIA8Fg5BpVak4o6E6ub1C/LcDY=' 'sha256-Rs29O02YBgzInZGn1b00pY2Yx4N7GkiV0LbObXpCN5Y=' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://images.pexels.com; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# The two 'sha256-...' entries in script-src above allow the two small scripts written into the home
+# page (theme set-up, top-bar check) and nothing else. Changing either script changes its
+# fingerprint; scripts/build-pages.js then stops the deploy and prints the new one to put here.
 
 # Font files never change (a new version gets a new file name), so browsers may keep them
 # for a year instead of re-checking on every visit.
@@ -17,13 +21,13 @@
 # header set by the /* rule, so the browser receives exactly one Content-Security-Policy.
 /staff
   ! Content-Security-Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   Cache-Control: no-store
   X-Robots-Tag: noindex, nofollow
 
 /staff.html
   ! Content-Security-Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   Cache-Control: no-store
   X-Robots-Tag: noindex, nofollow
 
@@ -33,12 +37,12 @@
 # email and the activity log (see corosone.js). No other page may contact them.
 /corosone
   ! Content-Security-Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://ipv4.icanhazip.com https://ipv6.icanhazip.com https://api.ipify.org https://api6.ipify.org; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://ipv4.icanhazip.com https://ipv6.icanhazip.com https://api.ipify.org https://api6.ipify.org; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   Cache-Control: no-store
   X-Robots-Tag: noindex, nofollow
 
 /corosone.html
   ! Content-Security-Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://ipv4.icanhazip.com https://ipv6.icanhazip.com https://api.ipify.org https://api6.ipify.org; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://ipv4.icanhazip.com https://ipv6.icanhazip.com https://api.ipify.org https://api6.ipify.org; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   Cache-Control: no-store
   X-Robots-Tag: noindex, nofollow

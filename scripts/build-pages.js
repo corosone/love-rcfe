@@ -18,6 +18,7 @@
 // The generated folders are not stored in the repository (see .gitignore).
 'use strict';
 
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
@@ -44,6 +45,25 @@ function setContent(document, selector, value) {
 const alternates = (sourceHtml.match(/<link rel="alternate" hreflang="[^"]+" href="[^"]+">/g) || []).length;
 if (alternates !== LANGS.length + 2) {
   fail(`index.html should have ${LANGS.length + 2} hreflang links (17 languages, English, x-default) but has ${alternates}`);
+}
+
+// The home page has two small scripts written into the page itself (theme set-up, and the top-bar
+// check), so the first paint does not wait for extra downloads. The Content-Security-Policy only
+// lets such a script run if its exact sha256 fingerprint is listed in _headers, so any change to
+// one of them must come with its new fingerprint. Stop the build rather than publish a page whose
+// scripts the browser would refuse to run.
+function inlineScriptHashes(document) {
+  return Array.from(document.querySelectorAll('script:not([src])'))
+    .filter((s) => !s.type || /javascript/i.test(s.type))
+    .map((s) => "'sha256-" + crypto.createHash('sha256').update(s.textContent, 'utf8').digest('base64') + "'");
+}
+const headersFile = fs.readFileSync(path.join(PUBLIC, '_headers'), 'utf8');
+const siteCsp = (/^\/\*\r?\n(?:[ \t]+.*\r?\n)*?[ \t]+Content-Security-Policy:(.*)$/m.exec(headersFile) || [])[1] || '';
+if (!siteCsp) fail('could not find the site-wide Content-Security-Policy ("/*" block) in public/_headers');
+for (const hash of inlineScriptHashes(new JSDOM(sourceHtml).window.document)) {
+  if (!siteCsp.includes(hash)) {
+    fail(`an inline <script> in index.html changed. Add ${hash} to script-src in the "/*" Content-Security-Policy in public/_headers (and remove the old one)`);
+  }
 }
 
 const english = new JSDOM(sourceHtml).window.document;

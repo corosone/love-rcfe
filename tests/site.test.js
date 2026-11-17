@@ -63,7 +63,7 @@ test('home page: fonts come from this site, and nothing is loaded that is not ne
   assert.ok(!seen.requests.some((u) => /fonts\.(googleapis|gstatic)\.com/.test(u)), 'no request to Google Fonts');
   assert.equal(turnstileRequests(seen).length, 0, 'the spam check is not downloaded on the home page');
   const fonts = seen.requests.filter((u) => u.includes('/fonts/')).map((u) => u.split('/').pop()).sort();
-  assert.deepEqual(fonts, ['dm-sans-v17-italic-latin.woff2', 'dm-sans-v17-latin.woff2', 'fraunces-v38-italic-latin.woff2', 'fraunces-v38-latin.woff2']);
+  assert.deepEqual(fonts, ['dm-sans-v17-italic-14px-latin.woff2', 'dm-sans-v17-w400-900-latin.woff2', 'fraunces-v38-italic-latin.woff2', 'fraunces-v38-latin.woff2']);
   assert.ok(await page.evaluate(() => document.fonts.check('500 40px Fraunces') && document.fonts.check('italic 400 40px Fraunces') && document.fonts.check('700 16px "DM Sans"') && document.fonts.check('italic 400 14px "DM Sans"')), 'the fonts cover the styles the page uses');
   assert.deepEqual(seen.errors, [], 'no errors in the browser console (this includes security-policy blocks)');
   await context.close();
@@ -112,11 +112,50 @@ test('security headers are sent with every page', async () => {
   assert.equal(res.headers.get('x-content-type-options'), 'nosniff');
   const csp = res.headers.get('content-security-policy') || '';
   assert.match(csp, /default-src 'self'/);
-  assert.match(csp, /script-src 'self' https:\/\/challenges\.cloudflare\.com https:\/\/static\.cloudflareinsights\.com;/, "scripts only from this site and Cloudflare (no 'unsafe-inline')");
+  assert.match(csp, /script-src 'self'( 'sha256-[A-Za-z0-9+\/]{43}=')* https:\/\/challenges\.cloudflare\.com https:\/\/static\.cloudflareinsights\.com;/, "scripts only from this site, Cloudflare, and the home page's two fingerprinted inline scripts");
+  assert.equal((csp.match(/'sha256-/g) || []).length, 2, 'exactly two inline scripts are allowed');
+  assert.doesNotMatch(csp, /unsafe-inline'[^;]*;\s*style-src/, "no 'unsafe-inline' for scripts");
+  assert.doesNotMatch(csp, /fonts\.(googleapis|gstatic)\.com/, 'Google Fonts is no longer allowed: every page uses /fonts/');
   assert.match(csp, /frame-ancestors 'none'/);
-  const font = await fetch(site.origin + '/fonts/dm-sans-v17-latin.woff2');
+  const font = await fetch(site.origin + '/fonts/dm-sans-v17-w400-900-latin.woff2');
   assert.equal(font.headers.get('cache-control'), 'public, max-age=31536000, immutable');
 });
+
+test('home page: the two inline scripts run (their fingerprints match the security policy)', async () => {
+  const { page, context, seen } = await open('/', { width: 1024 });
+  const state = await page.evaluate(() => ({ fit: typeof window.fitHeaderNav, theme: document.querySelector('meta[name="theme-color"]').content }));
+  assert.equal(state.fit, 'function', 'the top-bar script ran');
+  assert.equal(state.theme, '#315d48', 'the theme set-up script ran');
+  assert.deepEqual(seen.errors, [], 'no script was blocked by the security policy');
+  assert.ok(!seen.requests.some((u) => /\/(theme-init|nav-fit)\.js/.test(u)), 'no separate download for them');
+  await context.close();
+});
+
+test('home page: no fade-in on first load, fade-in when moving between pages', async () => {
+  const { page, context } = await open('/');
+  const first = await page.evaluate(() => [document.documentElement.classList.contains('view-anim'), getComputedStyle(document.getElementById('home')).animationName]);
+  assert.deepEqual(first, [false, 'none'], 'the opening text is drawn at once');
+  await go(page, 'services');
+  const later = await page.evaluate(() => [document.documentElement.classList.contains('view-anim'), getComputedStyle(document.getElementById('services')).animationName]);
+  assert.deepEqual(later, [true, 'viewFadeIn']);
+  await context.close();
+});
+
+for (const path of ['/staff', '/corosone', '/no-such-page']) {
+  test(`${path}: fonts come from this site, and headings keep their weight`, async () => {
+    const { page, context, seen } = await open(path, { wait: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+    assert.ok(!seen.requests.some((u) => /fonts\.(googleapis|gstatic)\.com/.test(u)), 'no request to Google Fonts');
+    assert.ok(seen.requests.some((u) => u.includes('/fonts/dm-sans-v17-w400-900-latin.woff2')), 'DM Sans from /fonts/');
+    const ok = await page.evaluate((p) => {
+      const loaded = [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, '') + ' ' + f.weight);
+      return { loaded, boldFraunces: p === '/no-such-page' || loaded.includes('Fraunces 300 900') };
+    }, path);
+    assert.ok(ok.boldFraunces, 'bold and semibold headings use real Fraunces weights: ' + ok.loaded.join(', '));
+    assert.deepEqual(seen.errors.filter((e) => /Refused to|page error/.test(e)), [], 'nothing blocked by the security policy, and no script errors');
+    await context.close();
+  });
+}
 
 // ---------- Hero picture ----------
 
@@ -263,6 +302,38 @@ test('names for voice control and screen readers match the visible text (English
     assert.deepEqual(names.labels, [null, null, null, null], 'no separate spoken label that could differ from the text');
     await context.close();
   }
+});
+
+test('"page not found" page: names for voice control and screen readers match the visible text', async () => {
+  const { page, context } = await open('/no-such-page', { wait: 'load' });
+  const names = await page.evaluate(() => {
+    const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
+    const logo = document.querySelector('header a[href="/#home"]');
+    const lang = document.getElementById('lang-toggle-btn');
+    return { logo: text(logo), lang: text(lang), labels: [logo.getAttribute('aria-label'), lang.getAttribute('aria-label')] };
+  });
+  assert.equal(names.logo, 'Love RCFE. Care & Consulting');
+  assert.equal(names.lang, 'EN Change language');
+  assert.deepEqual(names.labels, [null, null], 'no separate spoken label that could differ from the text');
+  await context.close();
+});
+
+test('headings go down one level at a time in every section (screen readers use them to find their way)', async () => {
+  const { page, context } = await open('/');
+  const problems = await page.evaluate(() => {
+    const out = [];
+    document.querySelectorAll('section.view').forEach((view) => {
+      let last = 0;
+      view.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((h) => {
+        const level = Number(h.tagName[1]);
+        if (level > last + 1) out.push(`#${view.id}: <${h.tagName.toLowerCase()}> "${h.textContent.trim().slice(0, 40)}" comes after <h${last}>`);
+        last = level;
+      });
+    });
+    return out;
+  });
+  assert.deepEqual(problems, []);
+  await context.close();
 });
 
 test('switching language from the menu goes to that language\'s own address and remembers the choice', async () => {
@@ -458,6 +529,21 @@ test('the small footnote under the testimonials is readable in light and dark mo
     });
     assert.equal(result.opacity, '1');
     assert.ok(result.ratio >= 4.5, `${dark ? 'dark' : 'light'} mode contrast is ${result.ratio.toFixed(2)}, needs 4.5`);
+    await context.close();
+  }
+});
+
+test('white text on the terracotta buttons and badges is readable in light and dark mode', async () => {
+  for (const dark of [false, true]) {
+    const { page, context } = await open('/', { dark });
+    const result = await page.evaluate(() => {
+      const lum = (c) => { const v = c.match(/[\d.]+/g).slice(0, 3).map((x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+      const els = [...document.querySelectorAll('.bg-brand-accent.text-white')];
+      const ratios = els.map((el) => { const a = lum(getComputedStyle(el).color), b = lum(getComputedStyle(el).backgroundColor); return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05); });
+      return { count: els.length, worst: Math.min(...ratios) };
+    });
+    assert.ok(result.count >= 5, 'found the terracotta buttons and badges');
+    assert.ok(result.worst >= 4.5, `${dark ? 'dark' : 'light'} mode contrast is ${result.worst.toFixed(2)}, needs 4.5`);
     await context.close();
   }
 });

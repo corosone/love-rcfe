@@ -348,6 +348,9 @@
       const chosen = viewNames.has(name) ? name : 'home';
       currentView = chosen;
       
+      // Fade the new view in, except on first page load (see .view-anim in index.html)
+      if (hasNavigated) document.documentElement.classList.add('view-anim');
+
       // Toggle view visibility
       document.querySelectorAll('.view').forEach(view => {
         view.hidden = view.id !== chosen;
