@@ -371,6 +371,8 @@
       // Update browser history
       if (updateHistory && location.hash !== '#' + chosen) {
         history.pushState({ view: chosen }, '', '#' + chosen);
+        // pushState fires no event, so tell visit.js that the section changed
+        window.dispatchEvent(new Event('lovercfe:viewchange'));
       }
 
       // Update Document Title

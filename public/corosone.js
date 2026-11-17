@@ -765,6 +765,13 @@
   }
 
   async function signOut() {
+    // /api/admin/session is the address that also receives this browser's staff inbox cookie
+    // (it is only sent to /api/admin), so the staff session is ended on the server too, not
+    // just removed from this browser. /api/dev/session then makes sure the developer session
+    // ends even if the first request was refused (for example from a blocked address).
+    try {
+      await apiFetch('/api/admin/session', { method: 'DELETE' });
+    } catch (e) {}
     try {
       await apiFetch('/api/dev/session', { method: 'DELETE' });
     } catch (e) {}

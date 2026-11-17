@@ -27,10 +27,14 @@
 
   send();
   // The main site switches sections without loading a new page (#services, #contact, ...).
+  // Menu links change the address with history.pushState, which fires no event of its own,
+  // so app.js sends "lovercfe:viewchange"; the Back and Forward buttons fire "hashchange".
   var last = location.hash;
-  window.addEventListener('hashchange', function () {
+  function onViewChange() {
     if (location.hash === last) return;
     last = location.hash;
     send();
-  });
+  }
+  window.addEventListener('hashchange', onViewChange);
+  window.addEventListener('lovercfe:viewchange', onViewChange);
 })();

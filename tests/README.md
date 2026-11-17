@@ -12,7 +12,7 @@ stand-ins.
 | File | What it checks |
 |---|---|
 | `api.test.js` | The server code: enquiry form rules, the spam check, rate limits, staff sign-in and lockout, the staff inbox actions (stages, notes, handled, delete, mark as spam), the developer console staying private, the developer sign-in with an emailed 6-digit code (wrong codes, reused or expired codes, the code-email limit, lockout, signing out), blocked addresses, the weekly summary and its once-every-5-days limit. |
-| `site.test.js` | The public pages in a real (headless) Chrome: fonts, pictures, the spam check loading on demand, sending an enquiry, all 18 languages and their own addresses (`/es/`, `/zh/`, ...), sideways scrolling on phones and tablets, the top bar, text contrast. |
+| `site.test.js` | The public pages in a real (headless) Chrome: fonts, pictures, the spam check loading on demand, sending an enquiry, all 18 languages and their own addresses (`/es/`, `/zh/`, ...), sideways scrolling on phones and tablets, the top bar, text contrast, the visit log, the sign-in pages when the security check loads slowly, signing out of the console, pasting the 6-digit code, the staff inbox with more than 500 messages. |
 | `helpers/server.js` | The stand-in for Cloudflare Pages. |
 | `helpers/d1.js` | The stand-in for the D1 database. |
 

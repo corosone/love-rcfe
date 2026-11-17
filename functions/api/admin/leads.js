@@ -74,21 +74,32 @@ export async function onRequestGet({ request, env }) {
   const offset = Number.isInteger(rawOffset) && rawOffset >= 0 ? Math.min(rawOffset, MAX_OFFSET) : 0;
 
   try {
+    // Messages not yet handled come first, so they are always in the first batch the inbox
+    // loads, however many handled ones there are (the inbox shows them newest first anyway).
+    // The counts cover every stored lead, not just the batch that was sent.
     const [countRow, listRes] = await Promise.all([
-      env.DB.prepare('SELECT COUNT(*) AS total FROM leads').first(),
+      env.DB.prepare(`
+        SELECT
+          COUNT(*) AS total,
+          COALESCE(SUM(CASE WHEN handled = 0 THEN 1 ELSE 0 END), 0) AS open,
+          COALESCE(SUM(CASE WHEN handled = 0 AND kind = 'call_request' THEN 1 ELSE 0 END), 0) AS openCalls
+        FROM leads
+      `).first(),
       env.DB
-        .prepare(`SELECT ${LEAD_COLUMNS} FROM leads ORDER BY created_at DESC LIMIT ? OFFSET ?`)
+        .prepare(`SELECT ${LEAD_COLUMNS} FROM leads ORDER BY handled ASC, created_at DESC, id DESC LIMIT ? OFFSET ?`)
         .bind(limit, offset)
         .all(),
     ]);
 
     const rows = listRes?.results || [];
     const total = Number(countRow?.total ?? rows.length);
+    const open = Number(countRow?.open || 0);
     // Lets the inbox show a link back to the developer console for a signed-in developer.
     const developer = Boolean(await readDevSession(request, env).catch(() => null));
     return jsonResponse({
       leads: rows.map(mapLead),
       total,
+      counts: { open, handled: Math.max(0, total - open), openCalls: Number(countRow?.openCalls || 0) },
       hasMore: offset + rows.length < total,
       ...(developer ? { developer: true } : {}),
     });

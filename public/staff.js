@@ -11,6 +11,9 @@
   let allLeads = [];
   let totalLeads = 0;
   let hasMoreLeads = false;
+  // Counts for every stored lead (from the server), not just the ones loaded on this page:
+  // { open, handled, openCalls }. null until the first load.
+  let leadCounts = null;
   let isSignedIn = false;
   let isDeveloper = false; // a signed-in developer also gets the offer to block a spammer's address
   let currentFilter = 'open';
@@ -68,6 +71,27 @@
     return new Date(iso);
   }
 
+  // Newest first. The server sends messages not yet handled first (so none can be left out
+  // of the first batch), but the inbox lists everything by date.
+  function byNewest(a, b) {
+    const ta = parseCreatedAt(a.createdAt).getTime() || 0;
+    const tb = parseCreatedAt(b.createdAt).getTime() || 0;
+    return tb - ta || Number(b.id) - Number(a.id);
+  }
+
+  // Keeps the server's counts right after a change made on this page (until the next refresh).
+  function countChange(lead, { handled, removed = false }) {
+    if (!leadCounts || !lead) return;
+    const wasOpen = !lead.handled;
+    const isOpen = removed ? false : !handled;
+    const call = lead.kind === 'call_request';
+    if (wasOpen && !isOpen) { leadCounts.open -= 1; if (call) leadCounts.openCalls -= 1; }
+    if (!wasOpen && isOpen) { leadCounts.open += 1; if (call) leadCounts.openCalls += 1; }
+    if (!removed && wasOpen && !isOpen) leadCounts.handled += 1;
+    if (!wasOpen && (isOpen || removed)) leadCounts.handled -= 1;
+    Object.keys(leadCounts).forEach((k) => { if (leadCounts[k] < 0) leadCounts[k] = 0; });
+  }
+
   async function apiFetch(url, options = {}) {
     const res = await fetch(url, {
       credentials: 'same-origin',
@@ -114,6 +138,7 @@
     allLeads = [];
     totalLeads = 0;
     hasMoreLeads = false;
+    leadCounts = null;
     document.getElementById('inbox-password').value = '';
     showLogin('');
   }
@@ -123,6 +148,7 @@
       allLeads = [];
       totalLeads = 0;
       hasMoreLeads = false;
+      leadCounts = null;
       showLogin(err.message);
       return true;
     }
@@ -139,6 +165,10 @@
       allLeads = append ? [...allLeads, ...incoming] : incoming;
       totalLeads = Number(data.total ?? allLeads.length);
       hasMoreLeads = Boolean(data.hasMore);
+      const c = data.counts;
+      leadCounts = c && typeof c === 'object'
+        ? { open: Number(c.open) || 0, handled: Number(c.handled) || 0, openCalls: Number(c.openCalls) || 0 }
+        : null;
       // A signed-in developer gets a link back to the developer console.
       const devLink = document.getElementById('dev-link');
       if (devLink) devLink.classList.toggle('hidden', !data.developer);
@@ -178,6 +208,7 @@
         body: JSON.stringify({ id, handled })
       });
       const target = findLead(id);
+      countChange(target, { handled });
       if (target) target.handled = handled;
       renderLeads();
     } catch (err) {
@@ -270,6 +301,7 @@
     if (!confirm('Permanently delete this lead from the database?')) return;
     try {
       await apiFetch(`/api/admin/leads?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+      countChange(findLead(id), { removed: true });
       allLeads = allLeads.filter(l => Number(l.id) !== Number(id));
       if (totalLeads > 0) totalLeads -= 1;
       renderLeads();
@@ -287,6 +319,7 @@
     if (!confirm('Mark this message as spam?\n\nIt will be permanently deleted.' + (ip ? ' The address it was sent from is reported to the site owner.' : ''))) return;
     try {
       await apiFetch(`/api/admin/leads?id=${encodeURIComponent(id)}&spam=1`, { method: 'DELETE' });
+      countChange(lead, { removed: true });
       allLeads = allLeads.filter(l => Number(l.id) !== Number(id));
       if (totalLeads > 0) totalLeads -= 1;
       renderLeads();
@@ -390,9 +423,10 @@
   }
 
   function renderLeads() {
-    const openCount = allLeads.filter(l => !l.handled).length;
-    const handledCount = allLeads.filter(l => l.handled).length;
-    const callsCount = allLeads.filter(l => l.kind === 'call_request' && !l.handled).length;
+    // The server's counts cover every stored lead; the loaded ones are only a fallback.
+    const openCount = leadCounts ? leadCounts.open : allLeads.filter(l => !l.handled).length;
+    const handledCount = leadCounts ? leadCounts.handled : allLeads.filter(l => l.handled).length;
+    const callsCount = leadCounts ? leadCounts.openCalls : allLeads.filter(l => l.kind === 'call_request' && !l.handled).length;
     setTitleCount(openCount);
 
     document.getElementById('stat-open').textContent = openCount;
@@ -408,7 +442,7 @@
     });
 
     const q = searchQuery.toLowerCase();
-    const filtered = allLeads.filter(l => {
+    const filtered = allLeads.slice().sort(byNewest).filter(l => {
       if (currentFilter === 'open' && l.handled) return false;
       if (currentFilter === 'handled' && !l.handled) return false;
       if (currentFilter === 'calls' && l.kind !== 'call_request') return false;
@@ -518,7 +552,7 @@
       return;
     }
     const headers = ['ID', 'Kind', 'Inquiry Type', 'Name', 'Phone', 'Email', 'City', 'Preferred Date', 'Preferred Time', 'Handled', 'Message', 'Created At', 'Stage', 'Source', 'Notes', 'IP Address', 'IP Location'];
-    const rows = allLeads.map(l => [
+    const rows = allLeads.slice().sort(byNewest).map(l => [
       l.id, l.kind, l.inquiryType, l.name, l.phone, l.email, l.city,
       l.preferredDate || '', l.preferredTime || '', l.handled ? 'Yes' : 'No',
       l.message, l.createdAt, STAGE_LABELS[l.stage] || '', l.source || '', l.notes || '', l.ip || '', l.ipPlace || ''

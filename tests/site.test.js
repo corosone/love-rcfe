@@ -16,9 +16,20 @@ const BACKUP_PICTURE = require('node:fs').readFileSync(require('node:path').join
 
 let site;
 let browser;
+const STAFF_PASSWORD = 'staff password for site tests';
+const DEV_PASSWORD = 'developer password for site tests';
 
 before(async () => {
-  site = await startServer({ TURNSTILE_SECRET: 'test-turnstile-secret', REQUIRE_TURNSTILE: 'true' });
+  site = await startServer({
+    TURNSTILE_SECRET: 'test-turnstile-secret',
+    REQUIRE_TURNSTILE: 'true',
+    // For the staff inbox and developer console tests at the end of this file
+    INBOX_PASSWORD: STAFF_PASSWORD,
+    SESSION_SECRET: 'site-test-session-secret-0123456789abcdef0123',
+    DEV_EMAIL: 'owner@example.com',
+    DEV_PASSWORD: DEV_PASSWORD,
+    RESEND_API_KEY: 're_test_key',
+  });
   browser = await chromium.launch();
 });
 
@@ -546,4 +557,131 @@ test('white text on the terracotta buttons and badges is readable in light and d
     assert.ok(result.worst >= 4.5, `${dark ? 'dark' : 'light'} mode contrast is ${result.worst.toFixed(2)}, needs 4.5`);
     await context.close();
   }
+});
+
+// ---------- Visit log ----------
+
+test('visit log: each section opened from the menu is reported once', async () => {
+  const ip = '203.0.113.78';
+  const { page, context } = await open('/', { width: 1400, setup: (p, c) => c.setExtraHTTPHeaders({ 'x-forwarded-for': ip }) });
+  for (const view of ['services', 'contact', 'contact']) {
+    await page.click(`#desktop-nav [data-view-link="${view}"]`);
+    await page.waitForTimeout(150);
+  }
+  await page.goBack(); // the Back button is reported too
+  await page.waitForTimeout(300);
+  await site.settle();
+  const paths = site.db._rows('SELECT path FROM request_log WHERE ip = ? ORDER BY id', ip).map((r) => r.path);
+  assert.deepEqual(paths, ['/', '/#services', '/#contact', '/#services']);
+  await context.close();
+});
+
+// ---------- Sign-in pages ----------
+
+const STUB_LATE = TURNSTILE_STUB + 'window.loveTurnstileReady&&window.loveTurnstileReady();';
+
+test('staff sign-in: the security check still works when Cloudflare\'s script arrives after the 7-second warning', async () => {
+  const { page, context } = await open('/staff', {
+    wait: 'domcontentloaded',
+    setup: (p) => p.route('https://challenges.cloudflare.com/**', async (route) => {
+      await new Promise((r) => setTimeout(r, 8500));
+      route.fulfill({ contentType: 'application/javascript', body: STUB_LATE });
+    }),
+  });
+  await page.waitForFunction(() => /could not load/.test(document.getElementById('ts-login').textContent), null, { timeout: 9000 });
+  await page.waitForFunction(() => window.turnstile, null, { timeout: 5000 });
+  assert.doesNotMatch(await page.textContent('#ts-login'), /could not load/, 'the warning goes away once the check has started');
+  await page.fill('#inbox-password', STAFF_PASSWORD);
+  await page.click('#login-submit');
+  await page.waitForSelector('#dashboard-view:not(.hidden)', { timeout: 5000 });
+  await context.close();
+});
+
+test('staff sign-in: if Cloudflare\'s script never arrives, the page says so instead of waiting forever', async () => {
+  const { page, context } = await open('/staff', { turnstile: 'block', wait: 'load' });
+  await page.waitForFunction(() => /could not load/.test(document.getElementById('ts-login').textContent), null, { timeout: 9000 });
+  await page.fill('#inbox-password', STAFF_PASSWORD);
+  await page.click('#login-submit');
+  await page.waitForFunction(() => document.getElementById('login-error').textContent.length > 0, null, { timeout: 5000 });
+  assert.equal(await page.isVisible('#dashboard-view'), false);
+  await context.close();
+});
+
+async function staffSignIn(page) {
+  await page.fill('#inbox-password', STAFF_PASSWORD);
+  await page.click('#login-submit');
+  await page.waitForSelector('#dashboard-view:not(.hidden)');
+}
+
+test('developer console: a code pasted with a space in it is kept whole', async () => {
+  const { page, context } = await open('/corosone', { wait: 'load' });
+  await page.evaluate(() => document.getElementById('code-view').classList.remove('hidden'));
+  for (const pasted of [' 123456', '123 456', '123456 ']) {
+    await page.fill('#dev-code', '');
+    await page.focus('#dev-code');
+    await page.keyboard.insertText(pasted); // what pasting does
+    assert.equal(await page.inputValue('#dev-code'), '123456', `pasted ${JSON.stringify(pasted)}`);
+  }
+  await context.close();
+});
+
+test('signing out of the developer console also ends the staff inbox session on the server', async () => {
+  const { page, context } = await open('/staff', { wait: 'load' });
+  await staffSignIn(page);
+  const staffCookie = (await context.cookies()).find((c) => c.name === 'lovercfe_admin').value;
+
+  await page.goto(site.origin + '/corosone', { waitUntil: 'load' });
+  site.db._run('DELETE FROM rate_limits');
+  await page.fill('#dev-email', 'owner@example.com');
+  await page.fill('#dev-password', DEV_PASSWORD);
+  await page.click('#login-submit');
+  await page.waitForSelector('#code-view:not(.hidden)');
+  const mail = site.outside.filter((c) => c.url === 'https://api.resend.com/emails').at(-1);
+  await page.fill('#dev-code', /code is: (\d{6})/.exec(JSON.parse(mail.body).text)[1]);
+  await page.click('#code-submit');
+  await page.waitForSelector('#console-view:not(.hidden)');
+  const devCookie = (await context.cookies()).find((c) => c.name === 'lovercfe_dev').value;
+
+  await page.click('#signout-btn');
+  await page.waitForSelector('#login-view:not(.hidden)');
+  assert.deepEqual((await context.cookies()).map((c) => c.name), [], 'no sign-in cookies are left in the browser');
+  // Even a copy of the old cookies no longer works
+  assert.equal((await site.api('/api/admin/leads', { headers: { cookie: `lovercfe_admin=${staffCookie}` } })).status, 401, 'staff session ended');
+  assert.equal((await site.api('/api/dev/overview', { headers: { cookie: `lovercfe_dev=${devCookie}` } })).status, 401, 'developer session ended');
+  await context.close();
+});
+
+// Last on purpose: it adds 505 messages to the test database.
+test('staff inbox: with more than 500 messages, the counts and the "Open" list still include older ones not yet handled', async () => {
+  const old = new Date(Date.now() - 40 * 86400000).toISOString();
+  for (let i = 0; i < 5; i++) {
+    site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES (?, 'x', ?, 'old@example.com', '8185550100', 'm', ?, 0)", i === 0 ? 'call_request' : 'enquiry', `Old Waiting ${i}`, old);
+  }
+  const recent = new Date().toISOString();
+  for (let i = 0; i < 500; i++) {
+    site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('enquiry', 'x', 'Recent Handled', 'r@example.com', '8185550100', 'm', ?, 1)", recent);
+  }
+  const real = site.db._rows("SELECT COUNT(*) AS total, SUM(handled = 0) AS open, SUM(handled = 1) AS handled, SUM(handled = 0 AND kind = 'call_request') AS calls FROM leads")[0];
+
+  const { page, context } = await open('/staff', { wait: 'load' });
+  await staffSignIn(page);
+  const stats = async () => page.evaluate(() => ['stat-open', 'stat-calls', 'stat-handled', 'stat-total'].map((id) => Number(document.getElementById(id).textContent)));
+  assert.deepEqual(await stats(), [real.open, real.calls, real.handled, real.total]);
+  assert.equal(await page.title(), `(${real.open}) Staff Inbox | Love RCFE`);
+  // The "Open" list (shown first) has every message not yet handled, newest first
+  const names = await page.$$eval('#leads-list article h3', (hs) => hs.map((h) => h.textContent));
+  assert.equal(names.length, real.open);
+  assert.deepEqual(names.filter((n) => n.startsWith('Old Waiting')).length, 5);
+  const dates = await page.$$eval('#leads-list article .text-right > span', (xs) => xs.map((x) => Date.parse(x.textContent)));
+  assert.deepEqual(dates, [...dates].sort((a, b) => b - a), 'newest first');
+
+  // Marking one handled and deleting one keep the numbers right without a reload
+  page.on('dialog', (d) => d.accept());
+  await page.click('#leads-list article:has(h3:text-is("Old Waiting 1")) [data-action="toggle-handled"]');
+  await page.waitForFunction((n) => document.getElementById('stat-open').textContent === String(n), real.open - 1);
+  assert.deepEqual(await stats(), [real.open - 1, real.calls, real.handled + 1, real.total]);
+  await page.click('#leads-list article:has(h3:text-is("Old Waiting 0")) [data-action="delete"]');
+  await page.waitForFunction((n) => document.getElementById('stat-open').textContent === String(n), real.open - 2);
+  assert.deepEqual(await stats(), [real.open - 2, real.calls - 1, real.handled + 1, real.total - 1]);
+  await context.close();
 });
