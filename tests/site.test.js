@@ -678,16 +678,34 @@ test('the device check code is sent only with enquiries and call requests, never
   await context.close();
 });
 
-test('privacy policy: three short lines (4 words or fewer) about device checks, visit history and network details', async () => {
+test('privacy policy: all privacy lines are on the privacy page, short (4 words or fewer), and nowhere else', async () => {
   const { page, context } = await open('/#privacy', { wait: 'load' });
   const lines = await page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
-  assert.deepEqual(lines, ['Device checks stop spam.', 'Visit history improves support.', 'Network details prevent abuse.']);
+  assert.deepEqual(lines, [
+    'Device checks stop spam.', 'Visit history improves support.', 'Network details prevent abuse.',
+    'Messages are sent securely.', 'Every enquiry stays confidential.', 'Only used to respond.',
+    'We never send spam.', 'Family records stay confidential.', 'Keep bank details private.',
+  ]);
   for (const l of lines) assert.ok(l.split(/\s+/).length <= 4, l);
+  assert.match(await page.textContent('#privacy'), /6\. Keeping Your Information Safe/);
   assert.doesNotMatch(await page.textContent('#privacy'), /Google Fonts/, 'fonts come from this site now');
+  // No privacy notes anywhere else: other pages, the booking popup, or the message box hint
+  const elsewhere = await page.evaluate(() => {
+    const out = [];
+    const re = /respect your privacy|kept strictly confidential|no spam|social security|omit medical|SSNs?\b/i;
+    document.querySelectorAll('body *:not(script):not(style)').forEach((el) => {
+      if (el.closest('#privacy')) return;
+      for (const n of el.childNodes) if (n.nodeType === 3 && re.test(n.nodeValue)) out.push(n.nodeValue.trim());
+      for (const a of ['placeholder', 'title', 'aria-label']) if (re.test(el.getAttribute(a) || '')) out.push(el.getAttribute(a));
+    });
+    return out;
+  });
+  assert.deepEqual(elsewhere, []);
+  assert.equal((await page.$$eval('p', (ps) => ps.filter((p) => /Representative composite/.test(p.textContent)).map((p) => p.textContent.trim())))[0], '* Representative composite client experiences.');
   await context.close();
   const es = await open('/es/#privacy', { wait: 'load' });
   const esLines = await es.page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
-  assert.equal(esLines.length, 3);
+  assert.equal(esLines.length, 9);
   assert.ok(esLines.every((l, i) => l && l !== lines[i]), 'translated on the Spanish page: ' + esLines.join(' | '));
   await es.context.close();
 });

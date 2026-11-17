@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "Լիցենզավորված RCFE սեփականատեր, Սակրամենտո, Կալիֆոռնիա",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "«Նրանք բացատրեցին տարբերությունը 100 բնակիչ ունեցող առևտրային կենտրոնների և փոքր բնակելի խնամքի տների միջև։ Դա մեզ խնայեց ամսական գրեթե $2,400 և հորս ապահովեց 1-ը-3-ին անհատական ուշադրություն»։",
     "Family Caregivers, Irvine CA": "Ընտանեկան խնամակալներ, Իրվայն, Կալիֆոռնիա",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* Ներկայացուցչական ամփոփված պատմություններ հաճախորդների փորձից։ Ընտանիքների և հաստատությունների իրական տվյալները խիստ գաղտնի են։",
+    "* Representative composite client experiences.": "* Ներկայացուցչական ամփոփված պատմություններ հաճախորդների փորձից։",
     "Our Core Practice": "Մեր հիմնական գործունեությունը",
     "Expert Guidance for Families & Care Providers": "Մասնագիտական ուղեկցում ընտանիքների և խնամքի տրամադրողների համար",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "Խնամքի վերաբերյալ որոշումները ազդում են առողջության, արժանապատվության և խնայողությունների վրա։ Մենք տրամադրում ենք հստակ, անաչառ փորձագիտություն՝ թե՛ հարազատին տեղավորելիս, թե՛ խնամքի բիզնես սկսելիս։",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "Նախընտրո՞ւմ եք նախապես ամրագրված զանգ",
     "Click here to pick a 15-minute slot on our calendar →": "Սեղմեք այստեղ՝ 15-րոպեանոց ժամ ընտրելու համար →",
     "Send an Enquiry": "Ուղարկել հարցում",
-    "We respond to every message with personal attention. No spam, ever.": "Մենք պատասխանում ենք յուրաքանչյուր նամակի անհատական ուշադրությամբ։ Առանց սպամի։",
+    "We respond to every message with personal attention.": "Մենք պատասխանում ենք յուրաքանչյուր նամակի անհատական ուշադրությամբ։",
     "I am reaching out regarding *": "Հարցման թեման *",
     "Elder Care / Family Placement": "Տարեցների խնամք / Ընտանեկան տեղավորում",
     "RCFE Licensing & Consulting": "RCFE լիցենզավորում և խորհրդատվություն",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "օր․ Արմեն Հակոբյան",
     "you@domain.com": "you@domain.com",
     "e.g. San Jose, Irvine, Roseville": "օր․ Գլենդել, Բըրբենք, Սան Խոսե",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "Նշեք ցանկալի ժամկետները, շրջանը և կապի հարմար ժամը, կամ նկարագրեք ձեր RCFE նախագիծը (մի ներառեք բժշկական գրառումներ կամ SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "Նշեք ցանկալի ժամկետները, շրջանը և կապի հարմար ժամը, կամ նկարագրեք ձեր RCFE նախագիծը...",
     "Close dialog": "Փակել պատուհանը",
     "Full name": "Անուն Ազգանուն",
     "Back to top": "Վերադառնալ վերև",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Մենք բացակայում ենք {from} – {to}։ Զանգ կարող եք ամրագրել սկսած {next}։",
     "We are away until {to}. Messages sent now are answered from {next}.": "Մենք բացակայում ենք մինչև {to}։ Այժմ ուղարկված հաղորդագրություններին կպատասխանենք սկսած {next}։",
     "We are away on that date. Please choose {next} or later.": "Այդ օրը մենք բացակայում ենք։ Խնդրում ենք ընտրել {next} կամ ավելի ուշ։",
-    "We are away on that date. Please pick another date.": "Այդ օրը մենք բացակայում ենք։ Խնդրում ենք ընտրել այլ ամսաթիվ։"
+    "We are away on that date. Please pick another date.": "Այդ օրը մենք բացակայում ենք։ Խնդրում ենք ընտրել այլ ամսաթիվ։",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. Ձեր տվյալների պաշտպանությունը",
+    "Messages are sent securely.": "Հաղորդագրություններն ուղարկվում են անվտանգ։",
+    "Every enquiry stays confidential.": "Յուրաքանչյուր հարցում գաղտնի է։",
+    "Only used to respond.": "Օգտագործվում է միայն պատասխանելու համար։",
+    "We never send spam.": "Մենք երբեք սպամ չենք ուղարկում։",
+    "Family records stay confidential.": "Ընտանիքների տվյալները գաղտնի են։",
+    "Keep bank details private.": "Մի՛ ուղարկեք բանկային տվյալներ։"
   },
   blocks: {
     "hero_title": "Ավելի շատ հստակություն։<br><span class=\"italic text-brand-green font-normal\">Ավելի շատ հոգատարություն։</span>",

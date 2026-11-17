@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "लाइसेंस प्राप्त RCFE मालिक, Sacramento CA",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"उन्होंने 100 निवासियों वाले व्यावसायिक असिस्टेड लिविंग केंद्रों और छोटे आवासीय बोर्ड-एंड-केयर घरों के बीच का अंतर समझाया। इससे हमारे लगभग $2,400 प्रति माह बचे और मेरे पिताजी को 1-पर-3 व्यक्तिगत देखभाल मिली।\"",
     "Family Caregivers, Irvine CA": "पारिवारिक देखभालकर्ता, Irvine CA",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* ये प्रतिनिधि और समेकित ग्राहक अनुभव हैं। वास्तविक परिवारों और केंद्रों के रिकॉर्ड पूरी तरह गोपनीय रखे जाते हैं।",
+    "* Representative composite client experiences.": "* ये प्रतिनिधि और समेकित ग्राहक अनुभव हैं।",
     "Our Core Practice": "हमारी मुख्य विशेषज्ञता",
     "Expert Guidance for Families & Care Providers": "परिवारों और देखभाल प्रदाताओं के लिए विशेषज्ञ मार्गदर्शन",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "देखभाल से जुड़े निर्णय स्वास्थ्य, सम्मान और जीवन भर की जमा-पूंजी को प्रभावित करते हैं। चाहे आप किसी प्रियजन के लिए देखभाल गृह चुन रहे हों या वरिष्ठजन देखभाल व्यवसाय शुरू कर रहे हों, हम स्पष्ट और निष्पक्ष विशेषज्ञ सलाह देते हैं।",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "क्या आप पूर्व-निर्धारित फ़ोन कॉल पसंद करेंगे?",
     "Click here to pick a 15-minute slot on our calendar →": "हमारे कैलेंडर पर 15-मिनट का समय चुनने के लिए यहाँ क्लिक करें →",
     "Send an Enquiry": "पूछताछ भेजें",
-    "We respond to every message with personal attention. No spam, ever.": "हम हर संदेश का व्यक्तिगत ध्यान से उत्तर देते हैं। कभी कोई स्पैम नहीं।",
+    "We respond to every message with personal attention.": "हम हर संदेश का व्यक्तिगत ध्यान से उत्तर देते हैं।",
     "I am reaching out regarding *": "मैं इस विषय पर संपर्क कर रहा/रही हूँ *",
     "Elder Care / Family Placement": "वरिष्ठजन देखभाल / पारिवारिक प्लेसमेंट",
     "RCFE Licensing & Consulting": "RCFE लाइसेंसिंग और परामर्श",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "उदा. Eleanor Vance",
     "you@domain.com": "yourname@example.com",
     "e.g. San Jose, Irvine, Roseville": "उदा. San Jose, Irvine, Roseville",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "अपनी पसंदीदा समय-सीमा, क्षेत्र और संपर्क करने का उपयुक्त समय साझा करें, या अपने प्रस्तावित देखभाल गृह प्रोजेक्ट का विवरण दें (कृपया मेडिकल रिकॉर्ड या SSN शामिल न करें)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "अपनी पसंदीदा समय-सीमा, क्षेत्र और संपर्क करने का उपयुक्त समय साझा करें, या अपने प्रस्तावित देखभाल गृह प्रोजेक्ट का विवरण दें...",
     "Close dialog": "संवाद बंद करें",
     "Full name": "पूरा नाम",
     "Back to top": "शीर्ष पर वापस जाएँ",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "हम {from} से {to} तक अवकाश पर हैं। {next} से कॉल बुक की जा सकती है।",
     "We are away until {to}. Messages sent now are answered from {next}.": "हम {to} तक अवकाश पर हैं। अभी भेजे गए संदेशों का उत्तर {next} से दिया जाएगा।",
     "We are away on that date. Please choose {next} or later.": "उस दिन हम अवकाश पर हैं। कृपया {next} या उसके बाद की तारीख चुनें।",
-    "We are away on that date. Please pick another date.": "उस दिन हम अवकाश पर हैं। कृपया कोई दूसरी तारीख चुनें।"
+    "We are away on that date. Please pick another date.": "उस दिन हम अवकाश पर हैं। कृपया कोई दूसरी तारीख चुनें।",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. आपकी जानकारी की सुरक्षा",
+    "Messages are sent securely.": "संदेश सुरक्षित रूप से भेजे जाते हैं।",
+    "Every enquiry stays confidential.": "हर पूछताछ गोपनीय रहती है।",
+    "Only used to respond.": "केवल उत्तर देने के लिए उपयोग।",
+    "We never send spam.": "हम कभी स्पैम नहीं भेजते।",
+    "Family records stay confidential.": "परिवारों के रिकॉर्ड गोपनीय रहते हैं।",
+    "Keep bank details private.": "बैंक विवरण साझा न करें।"
   },
   blocks: {
     "hero_title": "थोड़ी अधिक स्पष्टता।<br> <span class=\"italic text-brand-green font-normal\">कहीं अधिक देखभाल।</span>",

@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "Chủ cơ sở RCFE có giấy phép, Sacramento CA",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"Họ giải thích rõ sự khác biệt giữa khu dưỡng lão thương mại 100 người và nhà chăm sóc nhỏ 6 giường. Điều đó giúp gia đình tiết kiệm gần $2,400/tháng và bố tôi được chăm sóc tỉ lệ 1 kèm 3 tận tình.\"",
     "Family Caregivers, Irvine CA": "Gia đình người chăm sóc, Irvine CA",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* Câu chuyện tiêu biểu tổng hợp từ trải nghiệm khách hàng. Hồ sơ gia đình và cơ sở thực tế được bảo mật tuyệt đối.",
+    "* Representative composite client experiences.": "* Câu chuyện tiêu biểu tổng hợp từ trải nghiệm khách hàng.",
     "Our Core Practice": "Lĩnh Vực Chuyên Môn",
     "Expert Guidance for Families & Care Providers": "Hướng Dẫn Chuyên Sâu Cho Gia Đình & Nhà Vận Hành",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "Quyết định chăm sóc ảnh hưởng đến sức khỏe, phẩm giá và tài sản tích lũy cả đời. Chúng tôi mang đến kiến thức khách quan cho cả gia đình tìm nơi ở lẫn người khởi nghiệp cơ sở chăm sóc.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "Bạn muốn đặt lịch hẹn gọi điện trước?",
     "Click here to pick a 15-minute slot on our calendar →": "Nhấn vào đây để chọn khung giờ 15 phút trên lịch →",
     "Send an Enquiry": "Gửi Thư Tư Vấn",
-    "We respond to every message with personal attention. No spam, ever.": "Chúng tôi trực tiếp phản hồi từng tin nhắn một cách tận tâm. Tuyệt đối không gửi thư rác.",
+    "We respond to every message with personal attention.": "Chúng tôi trực tiếp phản hồi từng tin nhắn một cách tận tâm.",
     "I am reaching out regarding *": "Tôi liên hệ về vấn đề *",
     "Elder Care / Family Placement": "Chăm sóc Người cao tuổi / Tìm nơi ở cho Gia đình",
     "RCFE Licensing & Consulting": "Xin Giấy Phép RCFE & Tư Vấn Mở Cơ Sở",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "VD: Nguyễn Minh Anh",
     "you@domain.com": "ban@domain.com",
     "e.g. San Jose, Irvine, Roseville": "VD: San Jose, Westminster, Garden Grove",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "Chia sẻ thời gian dự kiến, khu vực và giờ thuận tiện liên hệ, hoặc mô tả dự án mở nhà chăm sóc của bạn (vui lòng không ghi bệnh án hay số SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "Chia sẻ thời gian dự kiến, khu vực và giờ thuận tiện liên hệ, hoặc mô tả dự án mở nhà chăm sóc của bạn...",
     "Close dialog": "Đóng hộp thoại",
     "Full name": "Họ và tên",
     "Back to top": "Lên đầu trang",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Chúng tôi nghỉ từ {from} đến {to}. Bạn có thể đặt lịch gọi từ {next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Chúng tôi nghỉ đến {to}. Tin nhắn gửi bây giờ sẽ được trả lời từ {next}.",
     "We are away on that date. Please choose {next} or later.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn {next} hoặc muộn hơn.",
-    "We are away on that date. Please pick another date.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn ngày khác."
+    "We are away on that date. Please pick another date.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn ngày khác.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. Bảo Vệ Thông Tin Của Bạn",
+    "Messages are sent securely.": "Tin nhắn được gửi an toàn.",
+    "Every enquiry stays confidential.": "Mọi yêu cầu đều được bảo mật.",
+    "Only used to respond.": "Chỉ dùng để phản hồi bạn.",
+    "We never send spam.": "Không bao giờ gửi thư rác.",
+    "Family records stay confidential.": "Hồ sơ gia đình được bảo mật.",
+    "Keep bank details private.": "Không gửi thông tin ngân hàng."
   },
   blocks: {
     "hero_title": "Thêm một chút rõ ràng.<br><span class=\"italic text-brand-green font-normal\">Thêm thật nhiều yêu thương.</span>",

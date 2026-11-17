@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "בעלת RCFE מורשה, Sacramento, קליפורניה",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"הם הסבירו לנו את ההבדל בין מתקני דיור מוגן מסחריים של 100 דיירים לבין בתי board-and-care קטנים. זה חסך לנו כמעט $2,400 בחודש והעניק לאבי יחס אישי של מטפל אחד לכל 3 דיירים.\"",
     "Family Caregivers, Irvine CA": "מטפלים משפחתיים, Irvine, קליפורניה",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* חוויות לקוחות מייצגות ומשולבות. רשומות אמיתיות של משפחות ומעונות נשמרות בסודיות מוחלטת.",
+    "* Representative composite client experiences.": "* חוויות לקוחות מייצגות ומשולבות.",
     "Our Core Practice": "תחומי ההתמחות שלנו",
     "Expert Guidance for Families & Care Providers": "ליווי מקצועי למשפחות ולמפעילים טיפוליים",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "החלטות טיפוליות משפיעות על הבריאות, הכבוד וחסכונות החיים. אנו מעניקים מומחיות ברורה ואובייקטיבית בין אם אתם משבצים אדם יקר ובין אם מקימים מעון לטיפול במבוגרים.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "מעדיפים שיחת טלפון מתואמת מראש?",
     "Click here to pick a 15-minute slot on our calendar →": "לחצו כאן לבחירת מועד של 15 דקות ביומן שלנו ←",
     "Send an Enquiry": "שליחת פנייה",
-    "We respond to every message with personal attention. No spam, ever.": "אנו משיבים לכל הודעה בתשומת לב אישית. לעולם ללא ספאם.",
+    "We respond to every message with personal attention.": "אנו משיבים לכל הודעה בתשומת לב אישית.",
     "I am reaching out regarding *": "אני פונה בנוגע ל-*",
     "Elder Care / Family Placement": "טיפול במבוגרים / שיבוץ משפחתי",
     "RCFE Licensing & Consulting": "רישוי וייעוץ להקמת RCFE",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "למשל, אלינור ואנס",
     "you@domain.com": "yourname@example.com",
     "e.g. San Jose, Irvine, Roseville": "למשל: San Jose, Irvine, Roseville",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "שתפו אותנו בלוח הזמנים המועדף, האזור והזמן הנוח לחזרה אליכם, או תארו את פרויקט המעון הטיפולי שאתם מתכננים (אנא הימנעו מציון רשומות רפואיות או מספרי SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "שתפו אותנו בלוח הזמנים המועדף, האזור והזמן הנוח לחזרה אליכם, או תארו את פרויקט המעון הטיפולי שאתם מתכננים...",
     "Close dialog": "סגירת חלון",
     "Full name": "שם מלא",
     "Back to top": "חזרה למעלה",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "אנחנו בחופשה מ-{from} עד {to}. אפשר לקבוע שיחה החל מ-{next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "אנחנו בחופשה עד {to}. על הודעות שיישלחו עכשיו נענה החל מ-{next}.",
     "We are away on that date. Please choose {next} or later.": "אנחנו בחופשה בתאריך הזה. נא לבחור את {next} או תאריך מאוחר יותר.",
-    "We are away on that date. Please pick another date.": "אנחנו בחופשה בתאריך הזה. נא לבחור תאריך אחר."
+    "We are away on that date. Please pick another date.": "אנחנו בחופשה בתאריך הזה. נא לבחור תאריך אחר.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. שמירה על המידע שלכם",
+    "Messages are sent securely.": "ההודעות נשלחות בצורה מאובטחת.",
+    "Every enquiry stays confidential.": "כל פנייה נשמרת בסודיות.",
+    "Only used to respond.": "משמש רק כדי להשיב לכם.",
+    "We never send spam.": "לעולם לא נשלח ספאם.",
+    "Family records stay confidential.": "רשומות המשפחה נשמרות בסודיות.",
+    "Keep bank details private.": "אל תשלחו פרטי בנק."
   },
   blocks: {
     "hero_title": "קצת יותר בהירות.<br> <span class=\"italic text-brand-green font-normal\">הרבה יותר דאגה ומסירות.</span>",

@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "مالک دارای مجوز RCFE، ساکرامنتو، کالیفرنیا",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "«آن‌ها تفاوت میان مجتمع‌های تجاری ۱۰۰ نفره زندگی با مراقبت و خانه‌های کوچک مسکونی را برایمان توضیح دادند. همین موضوع نزدیک به ۲٬۴۰۰ دلار در ماه در هزینه‌هایمان صرفه‌جویی کرد و توجه فردی ۱ به ۳ را برای پدرم فراهم آورد.»",
     "Family Caregivers, Irvine CA": "مراقبان خانواده، ارواین، کالیفرنیا",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* تجربیات نمونه و ترکیبی از مراجعین. سوابق واقعی خانواده‌ها و مراکز کاملاً محرمانه حفظ می‌شود.",
+    "* Representative composite client experiences.": "* تجربیات نمونه و ترکیبی از مراجعین.",
     "Our Core Practice": "حوزه تخصصی اصلی ما",
     "Expert Guidance for Families & Care Providers": "راهنمایی تخصصی برای خانواده‌ها و ارائه‌دهندگان مراقبت",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "تصمیم‌گیری درباره مراقبت بر سلامت، کرامت و پس‌انداز یک عمر زندگی اثر می‌گذارد. چه در حال یافتن محل مناسب برای یکی از عزیزان باشید و چه در حال راه‌اندازی کسب‌وکار مراقبت از سالمندان، ما دانش روشن و بی‌طرفانه ارائه می‌دهیم.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "تماس تلفنی زمان‌بندی‌شده را ترجیح می‌دهید؟",
     "Click here to pick a 15-minute slot on our calendar →": "برای انتخاب یک بازه ۱۵ دقیقه‌ای در تقویم ما اینجا کلیک کنید ←",
     "Send an Enquiry": "ارسال درخواست مشاوره",
-    "We respond to every message with personal attention. No spam, ever.": "ما به هر پیام با توجه شخصی پاسخ می‌دهیم. هرگز هرزنامه ارسال نمی‌کنیم.",
+    "We respond to every message with personal attention.": "ما به هر پیام با توجه شخصی پاسخ می‌دهیم.",
     "I am reaching out regarding *": "موضوع تماس من درباره این مورد است *",
     "Elder Care / Family Placement": "مراقبت از سالمندان / اسکان خانواده",
     "RCFE Licensing & Consulting": "اخذ مجوز و مشاوره RCFE",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "مثلاً النور ونس",
     "you@domain.com": "you@domain.com",
     "e.g. San Jose, Irvine, Roseville": "مثلاً سن‌خوزه، ارواین، روزویل",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "بازه زمانی مورد نظر، منطقه و بهترین زمان تماس با خودتان را بنویسید، یا پروژه خانه مراقبتی خود را شرح دهید (لطفاً سوابق پزشکی یا شماره SSN را درج نکنید)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "بازه زمانی مورد نظر، منطقه و بهترین زمان تماس با خودتان را بنویسید، یا پروژه خانه مراقبتی خود را شرح دهید...",
     "Close dialog": "بستن پنجره",
     "Full name": "نام و نام خانوادگی",
     "Back to top": "بازگشت به بالا",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "ما از {from} تا {to} در مرخصی هستیم. از {next} می‌توانید تماس رزرو کنید.",
     "We are away until {to}. Messages sent now are answered from {next}.": "ما تا {to} در مرخصی هستیم. به پیام‌هایی که اکنون ارسال شوند از {next} پاسخ می‌دهیم.",
     "We are away on that date. Please choose {next} or later.": "ما در آن روز در مرخصی هستیم. لطفاً {next} یا تاریخی بعد از آن را انتخاب کنید.",
-    "We are away on that date. Please pick another date.": "ما در آن روز در مرخصی هستیم. لطفاً تاریخ دیگری انتخاب کنید."
+    "We are away on that date. Please pick another date.": "ما در آن روز در مرخصی هستیم. لطفاً تاریخ دیگری انتخاب کنید.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "۶. حفاظت از اطلاعات شما",
+    "Messages are sent securely.": "پیام‌ها به‌صورت امن ارسال می‌شوند.",
+    "Every enquiry stays confidential.": "هر درخواست محرمانه می‌ماند.",
+    "Only used to respond.": "فقط برای پاسخ‌دادن استفاده می‌شود.",
+    "We never send spam.": "هرگز هرزنامه ارسال نمی‌کنیم.",
+    "Family records stay confidential.": "سوابق خانواده‌ها محرمانه است.",
+    "Keep bank details private.": "اطلاعات بانکی ارسال نکنید."
   },
   blocks: {
     "hero_title": "کمی شفافیت بیشتر.<br> <span class=\"italic text-brand-green font-normal\">مراقبتی بسیار صمیمانه‌تر.</span>",
