@@ -8,6 +8,11 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 
+# Font files never change (a new version gets a new file name), so browsers may keep them
+# for a year instead of re-checking on every visit.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # Staff inbox: replaces (not adds to) the site-wide policy above. "! Header" removes the
 # header set by the /* rule, so the browser receives exactly one Content-Security-Policy.
 /staff
