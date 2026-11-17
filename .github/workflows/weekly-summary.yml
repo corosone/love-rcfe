@@ -1,0 +1,44 @@
+# Asks the site to email the weekly summary to the owner, every Monday morning (Pacific).
+#
+# Cloudflare Pages cannot run on a timer, so GitHub does the timing. The site only sends
+# the email when the request carries CRON_SECRET, which must be saved in two places with
+# the same value:
+#   - GitHub: repository Settings > Secrets and variables > Actions > New repository secret
+#   - Cloudflare: the Pages project > Settings > Variables and Secrets (as a Secret)
+#
+# The email itself is never shown here. This log is public, so it only shows whether the
+# site answered "sent".
+#
+# To send one right now: Actions tab > Weekly summary email > Run workflow.
+# Note: GitHub pauses scheduled workflows after 60 days without any change to the
+# repository; it emails you first, and one click re-enables it.
+name: Weekly summary email
+
+on:
+  schedule:
+    - cron: '23 16 * * 1' # Mondays 16:23 UTC (8:23 am Pacific in winter, 9:23 am in summer)
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ask the site to send the summary
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "CRON_SECRET is not saved in this repository's Actions secrets yet."
+            exit 1
+          fi
+          status=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 60 -X POST \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            https://love-rcfe.pages.dev/api/cron/weekly-summary)
+          echo "The site answered with status $status"
+          if [ "$status" != "200" ]; then
+            echo "200 = sent. 401 = the secret differs between GitHub and Cloudflare. 503 = CRON_SECRET is missing in Cloudflare. 502 = the email service refused."
+            exit 1
+          fi

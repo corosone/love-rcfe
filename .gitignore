@@ -1,0 +1,7 @@
+# Installed packages and local tool folders
+node_modules/
+.wrangler/
+.dev.vars
+
+# Built by Cloudflare at deploy time (npm run build); never edit or upload these
+public/tailwind.css
