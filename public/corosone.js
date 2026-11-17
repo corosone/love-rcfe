@@ -106,6 +106,7 @@
 
   function showLogin(message = '') {
     showView('login-view');
+    gatherClient(); // start early so it is ready by the time the form is filled in
     $('login-error').textContent = message;
     $('dev-password').value = '';
     $('dev-code').value = '';
@@ -122,6 +123,163 @@
 
   function sessionEnded() {
     showLogin('Your session has ended. Please sign in again.');
+  }
+
+  // ---------- Device details for the sign-in email and the activity log ----------
+  // The developer sign-in is the most sensitive door on the site, so every attempt records
+  // as much as possible about the device that made it. The server already sees one address,
+  // the location Cloudflare estimates for it, and what the browser sends with every request.
+  // This part adds what only the browser itself can tell: the device's OTHER address, its
+  // screen, processor, graphics card and so on. It is sent with the sign-in, checked field by
+  // field on the server (lib/deviceinfo.js), and shown only in the code email and this console.
+  //
+  // A device usually has a long (IPv6) and a short (IPv4) address, and the site only sees the
+  // one the browser connected with. These services answer over one kind only, which is how the
+  // page finds the other. If none answers, sign-in works exactly the same, just without it.
+  const ADDRESS_SOURCES = {
+    ipv4: ['https://ipv4.icanhazip.com/', 'https://api.ipify.org/'],
+    ipv6: ['https://ipv6.icanhazip.com/', 'https://api6.ipify.org/']
+  };
+  const IPV4_TEXT_RE = /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
+  const CLIENT_FRESH_MS = 5 * 60 * 1000;
+  let clientInfo = null;   // filled in piece by piece as the answers arrive
+  let clientReady = null;  // settles when every piece has arrived (or given up)
+  let clientAt = 0;
+
+  function looksLikeIp(kind, value) {
+    if (kind === 'ipv4') return IPV4_TEXT_RE.test(value);
+    if (!/^[0-9a-fA-F:]{3,45}$/.test(value) || !value.includes(':')) return false;
+    try { return new URL('http://[' + value + ']/').hostname.length > 2; } catch (e) { return false; }
+  }
+
+  function askAddress(kind, url) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000);
+    return fetch(url, { cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer', signal: ctrl.signal })
+      .then((res) => (res.ok ? res.text() : ''))
+      .then((body) => {
+        const ip = String(body).slice(0, 60).trim();
+        return looksLikeIp(kind, ip) ? ip : '';
+      })
+      .catch(() => '')
+      .finally(() => clearTimeout(timer));
+  }
+
+  async function findAddress(kind) {
+    for (const url of ADDRESS_SOURCES[kind]) {
+      const ip = await askAddress(kind, url);
+      if (ip) return ip;
+    }
+    return '';
+  }
+
+  // Everything the browser will say about itself without asking the person for permission.
+  function readDeviceNow() {
+    const d = {};
+    const set = (key, read) => { try { const v = read(); if (v !== undefined && v !== null && v !== '') d[key] = v; } catch (e) {} };
+    const media = (q) => window.matchMedia(q).matches;
+    set('screenW', () => screen.width);
+    set('screenH', () => screen.height);
+    set('availW', () => screen.availWidth);
+    set('availH', () => screen.availHeight);
+    set('windowW', () => window.innerWidth);
+    set('windowH', () => window.innerHeight);
+    set('pixelRatio', () => Math.round(window.devicePixelRatio * 100) / 100);
+    set('colorDepth', () => screen.colorDepth);
+    set('orientation', () => screen.orientation.type);
+    set('timezone', () => Intl.DateTimeFormat().resolvedOptions().timeZone);
+    set('utcOffset', () => new Date().getTimezoneOffset());
+    set('languages', () => Array.from(navigator.languages || [navigator.language]).slice(0, 8));
+    set('platform', () => navigator.platform);
+    set('vendor', () => navigator.vendor);
+    set('cores', () => navigator.hardwareConcurrency);
+    set('memory', () => navigator.deviceMemory);
+    set('touchPoints', () => navigator.maxTouchPoints);
+    set('cookies', () => navigator.cookieEnabled);
+    set('dnt', () => (navigator.doNotTrack === '1' ? true : navigator.doNotTrack === '0' ? false : undefined));
+    set('gpc', () => (typeof navigator.globalPrivacyControl === 'boolean' ? navigator.globalPrivacyControl : undefined));
+    set('dark', () => media('(prefers-color-scheme: dark)'));
+    set('reducedMotion', () => media('(prefers-reduced-motion: reduce)'));
+    set('pdf', () => (typeof navigator.pdfViewerEnabled === 'boolean' ? navigator.pdfViewerEnabled : undefined));
+    set('webdriver', () => (typeof navigator.webdriver === 'boolean' ? navigator.webdriver : undefined));
+    set('online', () => navigator.onLine);
+    set('pointer', () => (media('(pointer: fine)') ? 'fine' : media('(pointer: coarse)') ? 'coarse' : 'none'));
+    set('hover', () => media('(hover: hover)'));
+    set('referrer', () => document.referrer.slice(0, 200));
+    set('netType', () => navigator.connection.effectiveType);
+    set('netKind', () => navigator.connection.type);
+    set('downlink', () => navigator.connection.downlink);
+    set('rtt', () => navigator.connection.rtt);
+    set('saveData', () => navigator.connection.saveData);
+    // Graphics card name, as the browser's 3D drawing system reports it.
+    try {
+      const gl = document.createElement('canvas').getContext('webgl');
+      if (gl) {
+        const ext = gl.getExtension('WEBGL_debug_renderer_info');
+        set('gpuVendor', () => String(gl.getParameter(ext ? ext.UNMASKED_VENDOR_WEBGL : gl.VENDOR)).slice(0, 80));
+        set('gpu', () => String(gl.getParameter(ext ? ext.UNMASKED_RENDERER_WEBGL : gl.RENDERER)).slice(0, 160));
+        const lose = gl.getExtension('WEBGL_lose_context');
+        if (lose) lose.loseContext();
+      }
+    } catch (e) {}
+    return d;
+  }
+
+  // The parts that take a moment: exact operating system and browser versions, and battery.
+  async function readDeviceSlow(into) {
+    const jobs = [];
+    try {
+      const uad = navigator.userAgentData;
+      if (uad && typeof uad.getHighEntropyValues === 'function') {
+        if (typeof uad.mobile === 'boolean') into.mobile = uad.mobile;
+        if (uad.platform) into.os = String(uad.platform);
+        jobs.push(uad.getHighEntropyValues(['architecture', 'bitness', 'model', 'platformVersion', 'fullVersionList', 'formFactors', 'wow64']).then((h) => {
+          if (h.platform) into.os = String(h.platform);
+          if (h.platformVersion) into.osVersion = String(h.platformVersion);
+          if (h.architecture) into.arch = String(h.architecture);
+          if (h.bitness) into.bitness = String(h.bitness);
+          if (h.model) into.model = String(h.model);
+          if (typeof h.wow64 === 'boolean') into.wow64 = h.wow64;
+          if (Array.isArray(h.formFactors)) into.formFactors = h.formFactors.map(String).slice(0, 4);
+          if (Array.isArray(h.fullVersionList)) into.brands = h.fullVersionList.slice(0, 6).map((b) => ({ brand: String(b.brand), version: String(b.version) }));
+        }).catch(() => {}));
+      }
+    } catch (e) {}
+    try {
+      if (typeof navigator.getBattery === 'function') {
+        jobs.push(navigator.getBattery().then((b) => {
+          if (typeof b.level === 'number') into.batteryLevel = Math.round(b.level * 100);
+          if (typeof b.charging === 'boolean') into.charging = b.charging;
+        }).catch(() => {}));
+      }
+    } catch (e) {}
+    await Promise.all(jobs);
+  }
+
+  // Starts collecting (or reuses a recent collection). Never throws.
+  function gatherClient() {
+    if (clientReady && Date.now() - clientAt < CLIENT_FRESH_MS) return clientReady;
+    clientAt = Date.now();
+    let info;
+    try { info = readDeviceNow(); } catch (e) { info = {}; }
+    clientInfo = info;
+    clientReady = Promise.all([
+      findAddress('ipv4').then((ip) => { if (ip) info.ipv4 = ip; }),
+      findAddress('ipv6').then((ip) => { if (ip) info.ipv6 = ip; }),
+      readDeviceSlow(info)
+    ]).catch(() => {});
+    return clientReady;
+  }
+
+  // What has been collected so far, waiting at most `ms` for the slower answers. Sign-in is
+  // never held up for longer than that: whatever has not arrived is simply left out.
+  async function clientSnapshot(ms) {
+    try {
+      await Promise.race([gatherClient(), new Promise((resolve) => setTimeout(resolve, ms))]);
+      return JSON.parse(JSON.stringify(clientInfo || {}));
+    } catch (e) {
+      return {};
+    }
   }
 
   // ---------- Step 1: email + password ----------
@@ -149,10 +307,11 @@
         }
         token = check.token;
       }
+      const client = await clientSnapshot(2500);
       sent = true;
       await apiFetch('/api/dev/login', {
         method: 'POST',
-        body: JSON.stringify({ email, password, turnstile_token: token })
+        body: JSON.stringify({ email, password, turnstile_token: token, client })
       });
       showCodeStep();
     } catch (err) {
@@ -177,7 +336,8 @@
     btn.disabled = true;
     errorEl.textContent = '';
     try {
-      await apiFetch('/api/dev/verify', { method: 'POST', body: JSON.stringify({ code }) });
+      const client = await clientSnapshot(1500);
+      await apiFetch('/api/dev/verify', { method: 'POST', body: JSON.stringify({ code, client }) });
       $('dev-code').value = '';
       await loadOverview();
       loadTabData(currentTab);
@@ -397,7 +557,7 @@
     const all = lastOverview && Array.isArray(lastOverview.activity) ? lastOverview.activity : [];
     const isStaff = (e) => String(e || '').startsWith('staff_');
     const list = all.filter((item) => activityFilter === 'all' || (activityFilter === 'staff') === isStaff(item.event));
-    if (!list.length) { emptyRow(body, 4, 'No activity yet.'); return; }
+    if (!list.length) { emptyRow(body, 5, 'No activity yet.'); return; }
     body.textContent = '';
     list.forEach((item) => {
       const label = has(EVENT_LABELS, item.event) ? EVENT_LABELS[item.event] : String(item.event || '');
@@ -410,7 +570,108 @@
           detail = el('span', {}, [el('span', { text: detail + ' ' }), typeof action === 'string' ? el('span', { className: 'text-brand-muted', text: action }) : action]);
         }
       }
-      body.appendChild(el('tr', {}, [td(formatTime(item.at)), td(label), td(item.ip || ''), td(detail)]));
+      // Both addresses when known: the one the site saw, and the device's other one underneath.
+      const ipCell = el('div', {}, [el('div', { className: 'dv-mono', text: item.ip || '' })]);
+      if (item.otherIp && item.otherIp.ip) {
+        ipCell.appendChild(el('div', {
+          className: 'dv-mono text-brand-muted',
+          text: `${item.otherIp.kind === 'long' ? 'long' : 'short'}: ${item.otherIp.ip}`,
+          title: 'The device\'s other address, as reported by its browser'
+        }));
+      }
+      let more = '';
+      if (item.hasInfo) {
+        more = el('button', { className: 'dv-btn', text: 'Details', attrs: { type: 'button', 'aria-expanded': 'false' } });
+        more.addEventListener('click', () => toggleActivityDetail(item, row, more));
+      }
+      const row = el('tr', {}, [td(formatTime(item.at)), td(label), td(ipCell), td(detail), td(more)]);
+      body.appendChild(row);
+      if (openActivityId === item.id && item.hasInfo) toggleActivityDetail(item, row, more, { keepOpen: true });
+    });
+  }
+
+  // The "Details" panel under an activity row: both addresses (with Block buttons) and
+  // everything known about the device. Loaded only when asked for.
+  let openActivityId = null;
+  const activityDetailCache = new Map();
+
+  function closeActivityDetail() {
+    const open = document.getElementById('activity-detail-row');
+    if (open) open.remove();
+    document.querySelectorAll('#activity-body button[aria-expanded="true"]').forEach((b) => { b.setAttribute('aria-expanded', 'false'); b.textContent = 'Details'; });
+  }
+
+  async function toggleActivityDetail(item, row, button, { keepOpen = false } = {}) {
+    const wasOpen = button.getAttribute('aria-expanded') === 'true';
+    closeActivityDetail();
+    if (wasOpen && !keepOpen) { openActivityId = null; return; }
+    openActivityId = item.id;
+    button.setAttribute('aria-expanded', 'true');
+    button.textContent = 'Hide';
+    const cell = el('td', { attrs: { colspan: '5' } });
+    const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
+    cell.appendChild(holder);
+    const detailRow = el('tr', { attrs: { id: 'activity-detail-row' } }, [cell]);
+    row.after(detailRow);
+    fitActivityDetail();
+    try {
+      let data = activityDetailCache.get(item.id);
+      if (!data) {
+        data = await apiFetch('/api/dev/overview?detail=' + encodeURIComponent(item.id));
+        activityDetailCache.set(item.id, data);
+        if (activityDetailCache.size > 200) activityDetailCache.delete(activityDetailCache.keys().next().value);
+      }
+      if (openActivityId !== item.id || !detailRow.isConnected) return;
+      renderActivityDetail(holder, data);
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      holder.textContent = err.message || 'Could not load the details.';
+    }
+  }
+
+  // Keeps the panel exactly as wide as the visible part of the table. On a phone the table is
+  // wider than the screen and scrolls sideways inside its box; the panel should not.
+  function fitActivityDetail() {
+    const holder = document.querySelector('#activity-detail-row .dv-detail');
+    if (!holder) return;
+    const scroller = holder.closest('.dev-scroll');
+    if (scroller && scroller.clientWidth > 40) holder.style.width = (scroller.clientWidth - 20) + 'px';
+  }
+  window.addEventListener('resize', fitActivityDetail);
+
+  function renderActivityDetail(holder, data) {
+    holder.textContent = '';
+    const addresses = Array.isArray(data.addresses) ? data.addresses : [];
+    const sections = Array.isArray(data.sections) ? data.sections : [];
+    if (!sections.length) { holder.textContent = 'No device details were stored for this entry.'; return; }
+
+    if (addresses.length) {
+      const box = el('div', { className: 'dv-detail-addr' });
+      addresses.forEach((a) => {
+        const action = blockAction(a.ip);
+        const line = el('div', { className: 'dv-detail-addr-line' }, [
+          el('span', { className: 'dv-detail-label', text: a.kind === 'long' ? 'Long address (IPv6)' : 'Short address (IPv4)' }),
+          ipButton(a.ip),
+          el('span', { className: 'dv-chip ' + (a.source === 'seen' ? 'dv-chip-view' : 'dv-chip-note'), text: a.source === 'seen' ? 'Seen by the site' : 'Reported by the browser' }),
+          typeof action === 'string' ? null : action
+        ]);
+        box.appendChild(line);
+      });
+      const long = addresses.find((a) => a.kind === 'long');
+      box.appendChild(el('p', { className: 'dv-help', text: long
+        ? 'To block this device, block its long address: that blocks the whole home or phone network it belongs to, so it stays blocked when the device changes its address. Block the short address as well if you want to cover both ways in.'
+        : 'Only a short address is known for this entry. Blocking it blocks that exact address.' }));
+      holder.appendChild(box);
+    }
+
+    sections.forEach((section) => {
+      if (section.title === 'Addresses') return; // shown above, with buttons
+      const list = el('dl', { className: 'dv-detail-list' });
+      (Array.isArray(section.rows) ? section.rows : []).forEach((pair) => {
+        list.appendChild(el('dt', { text: pair[0] }));
+        list.appendChild(el('dd', { text: pair[1] }));
+      });
+      holder.appendChild(el('div', { className: 'dv-detail-section' }, [el('h3', { text: section.title }), list]));
     });
   }
 
@@ -489,6 +750,7 @@
     setStatus('busy', 'Working…');
     button.disabled = true;
     try {
+      if (name === 'test_code_email') options = { client: await clientSnapshot(2500) };
       const data = await callTool(name, options);
       setStatus('ok', data.message || 'Done.');
     } catch (err) {
@@ -749,18 +1011,52 @@
       setTab('requests', { load: false }); // loaded just below, already filtered
       loadRequests({ q: ip || '', type: $('requests-type').value });
     });
-    if (!blockedIps.has(ip)) return b;
+    if (!blockedAs(ip)) return b;
     return el('span', {}, [b, el('span', { className: 'dv-chip dv-chip-bad', text: 'Blocked', attrs: { style: 'margin-left:0.4rem' } })]);
   }
 
   // ---------- Blocked IP addresses ----------
+  // A long (IPv6) address is blocked as the whole network it belongs to (its "/64"), because
+  // devices switch to a new long address inside that network every day or so. This gives the
+  // name a block is stored under, the same way the server does (lib/blocklist.js): the address
+  // itself for a short one, "xxxx:xxxx:xxxx:xxxx::/64" for a long one, '' if it is not an address.
+  function blockKeyOf(value) {
+    let raw = String(value || '').trim().toLowerCase();
+    if (raw.endsWith('/64')) raw = raw.slice(0, -3);
+    if (!raw.includes(':')) return /^[0-9.]{7,15}$/.test(raw) ? raw : '';
+    if (!/^[0-9a-f:.]{2,45}$/.test(raw)) return '';
+    let ip;
+    try { ip = new URL('http://[' + raw + ']/').hostname.slice(1, -1); } catch (e) { return ''; }
+    const halves = ip.split('::');
+    const left = halves[0] ? halves[0].split(':') : [];
+    const right = halves[1] ? halves[1].split(':') : [];
+    const groups = ip.includes('::') ? left.concat(Array(Math.max(0, 8 - left.length - right.length)).fill('0'), right) : left;
+    if (groups.length !== 8) return '';
+    if (groups.slice(0, 5).every((g) => g === '0') && groups[5] === 'ffff') {
+      const hi = parseInt(groups[6], 16);
+      const lo = parseInt(groups[7], 16);
+      return (hi >> 8) + '.' + (hi & 255) + '.' + (lo >> 8) + '.' + (lo & 255);
+    }
+    try { return new URL('http://[' + groups.slice(0, 4).join(':') + '::]/').hostname.slice(1, -1) + '/64'; } catch (e) { return ''; }
+  }
+
+  // The entry in the block list that covers this address, or '' if it is not blocked.
+  function blockedAs(ip) {
+    if (!ip) return '';
+    if (blockedIps.has(ip)) return ip;
+    const key = blockKeyOf(ip);
+    return key && blockedIps.has(key) ? key : '';
+  }
+
+  const isYou = (ip) => Boolean(ip && yourIp && (ip === yourIp || (blockKeyOf(ip) && blockKeyOf(ip) === blockKeyOf(yourIp))));
+
   // "Block" / "Unblock" button shown beside an address in the tables.
   function blockAction(ip) {
     if (!ip || ip === 'unknown') return '';
-    if (ip === yourIp) return el('span', { className: 'text-brand-muted', text: 'You' });
-    const blocked = blockedIps.has(ip);
-    const b = el('button', { className: 'dv-btn' + (blocked ? '' : ' dv-btn-danger'), text: blocked ? 'Unblock' : 'Block', attrs: { type: 'button' } });
-    b.addEventListener('click', () => (blocked ? unblockIp(ip, b) : startBlock(ip)));
+    if (isYou(ip)) return el('span', { className: 'text-brand-muted', text: 'You' });
+    const entry = blockedAs(ip);
+    const b = el('button', { className: 'dv-btn' + (entry ? '' : ' dv-btn-danger'), text: entry ? 'Unblock' : 'Block', attrs: { type: 'button' } });
+    b.addEventListener('click', () => (entry ? unblockIp(entry, b) : startBlock(ip)));
     return b;
   }
 
@@ -775,7 +1071,7 @@
 
   function renderBlocks(blocks) {
     const body = $('blocks-body');
-    $('block-you').textContent = yourIp ? `You are using ${yourIp} right now, so that address cannot be blocked.` : '';
+    $('block-you').textContent = yourIp ? `You are using ${yourIp} right now, so that address${yourIp.includes(':') ? ' (and the network it belongs to)' : ''} cannot be blocked.` : '';
     if (!blocks.length) { emptyRow(body, 6, 'No addresses are blocked.'); return; }
     body.textContent = '';
     blocks.forEach((x) => {
@@ -805,9 +1101,13 @@
     const reason = $('block-reason').value.trim();
     const days = Number($('block-days').value);
     if (!ip) { setStatus('bad', 'Enter the IP address to block.'); $('block-ip').focus(); return; }
-    if (ip === yourIp) { setStatus('bad', 'That is the address you are using right now, so it cannot be blocked.'); return; }
+    if (isYou(ip)) { setStatus('bad', 'That is the address you are using right now, so it cannot be blocked.'); return; }
     const length = days === 0 ? 'permanently' : `for ${plural(days, 'day', 'days')}`;
-    if (!confirm(`Block ${ip} ${length}?\n\nIt will still be able to open the website, but it won't be able to send enquiries or call requests, or sign in to the staff inbox.`)) return;
+    const key = blockKeyOf(ip);
+    const network = key.endsWith('/64')
+      ? `\n\nThis is a long address, so the whole network it belongs to (${key}) will be blocked. That is one home or one phone, and it keeps the block working when the device changes its address.`
+      : '';
+    if (!confirm(`Block ${ip} ${length}?${network}\n\nIt will still be able to open the website, but it won't be able to send enquiries or call requests, or sign in to the staff inbox.`)) return;
     const btn = $('block-submit');
     btn.disabled = true;
     setStatus('busy', 'Blocking…');
