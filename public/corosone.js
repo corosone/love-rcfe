@@ -354,7 +354,7 @@
   }
 
   // ---------- Tabs ----------
-  const TABS = ['overview', 'security', 'leads', 'requests', 'site', 'activity'];
+  const TABS = ['overview', 'security', 'leads', 'requests', 'tools', 'site', 'activity'];
   let currentTab = 'overview';
   const loadedTabs = new Set();
 
@@ -379,6 +379,7 @@
     if (!signedIn) return;
     if (name === 'leads') { loadedTabs.add(name); loadLeads(leadsQuery); }
     if (name === 'requests') { loadedTabs.add(name); loadRequests(requestsQuery); }
+    if (name === 'tools') { loadedTabs.add(name); loadFollowUp(); loadHoliday(); }
   }
 
   function onTabKey(e) {
@@ -421,8 +422,13 @@
     clear_requests: 'Tool: cleared request log',
     pause_requests: 'Tool: paused request logging',
     resume_requests: 'Tool: resumed request logging',
-    block_ip: 'Tool: blocked an IP address',
-    unblock_ip: 'Tool: unblocked an IP address'
+    block_ip: 'Tool: blocked an IP address or device',
+    unblock_ip: 'Tool: unblocked an IP address or device',
+    ip_lookup: 'Tool: checked an IP address',
+    mark_duplicate: 'Tool: marked an enquiry as a duplicate',
+    unmark_duplicate: 'Tool: unmarked a duplicate',
+    set_holiday: 'Tool: paused call bookings (holiday)',
+    clear_holiday: 'Tool: opened call bookings again'
   };
 
   const FAILURE_LABELS = [
@@ -631,11 +637,12 @@
 
   // Keeps the panel exactly as wide as the visible part of the table. On a phone the table is
   // wider than the screen and scrolls sideways inside its box; the panel should not.
+  // Also used for the Journey and licence Details panels.
   function fitActivityDetail() {
-    const holder = document.querySelector('#activity-detail-row .dv-detail');
-    if (!holder) return;
-    const scroller = holder.closest('.dev-scroll');
-    if (scroller && scroller.clientWidth > 40) holder.style.width = (scroller.clientWidth - 20) + 'px';
+    document.querySelectorAll('.dev-scroll td > .dv-detail').forEach((holder) => {
+      const scroller = holder.closest('.dev-scroll');
+      if (scroller && scroller.clientWidth > 40) holder.style.width = (scroller.clientWidth - 20) + 'px';
+    });
   }
   window.addEventListener('resize', fitActivityDetail);
 
@@ -847,9 +854,32 @@
       (Array.isArray(l.flags) ? l.flags : []).forEach((f) => flags.appendChild(el('span', { className: 'dv-chip', text: f })));
       if (!flags.childNodes.length) flags.appendChild(el('span', { className: 'text-brand-muted', text: 'None' }));
       // Clicking the IP address opens the Requests tab showing everything else it did.
+      const actions = (key, extra) => {
+        const a = blockAction(key);
+        const w = el('div', { className: 'dv-actions', attrs: { style: 'margin-top:0.35rem' } });
+        if (a) w.appendChild(typeof a === 'string' ? document.createTextNode(a) : a);
+        if (extra) w.appendChild(extra);
+        return w.childNodes.length ? w : null;
+      };
       const from = l.ip
-        ? el('div', {}, [ipButton(l.ip), el('div', { className: 'text-brand-muted', text: l.ipPlace || 'Unknown location' }), (() => { const a = blockAction(l.ip); if (!a) return null; const w = el('div', { attrs: { style: 'margin-top:0.35rem' } }); w.appendChild(typeof a === 'string' ? document.createTextNode(a) : a); return w; })()])
+        ? el('div', {}, [
+          ipButton(l.ip),
+          el('div', { className: 'text-brand-muted', text: l.ipPlace || 'Unknown location' }),
+          l.network && l.network.isp ? el('div', { className: 'text-brand-muted', text: l.network.isp }) : null,
+          networkChip(l.network),
+          actions(l.ip, checkIpLink(l.ip))
+        ])
         : el('span', { className: 'text-brand-muted', text: 'Not recorded', title: 'Sent before IP addresses were saved' });
+      // The device check code (see "Device checks stop spam." in the privacy policy)
+      if (l.device) {
+        from.appendChild(el('div', { className: 'dv-mono text-brand-muted', attrs: { style: 'margin-top:0.35rem' }, text: 'Device ' + l.device.slice(0, 8), title: 'Device check code: the same code means the same device' }));
+        const devActions = actions('device:' + l.device);
+        if (devActions) from.appendChild(devActions);
+      }
+      if (l.duplicateOf) nameCell.appendChild(el('span', { className: 'dv-chip dv-chip-note', text: `Duplicate of #${l.duplicateOf}` }));
+      const journeyBtn = el('button', { className: 'dv-link text-xs', text: 'Journey', attrs: { type: 'button', 'aria-expanded': 'false', title: 'What they looked at on the site before writing in' } });
+      journeyBtn.addEventListener('click', () => toggleJourney(l, tr, journeyBtn));
+      nameCell.appendChild(el('div', {}, [journeyBtn]));
       const tr = el('tr', {}, [td(box), td(formatIso(l.createdAt)), td(nameCell), td(contact), td(from), td(msg), td(flags)]);
       body.appendChild(tr);
     });
@@ -1029,6 +1059,7 @@
   // itself for a short one, "xxxx:xxxx:xxxx:xxxx::/64" for a long one, '' if it is not an address.
   function blockKeyOf(value) {
     let raw = String(value || '').trim().toLowerCase();
+    if (/^device:[0-9a-f]{64}$/.test(raw)) return raw;
     if (raw.endsWith('/64')) raw = raw.slice(0, -3);
     if (!raw.includes(':')) return /^[0-9.]{7,15}$/.test(raw) ? raw : '';
     if (!/^[0-9a-f:.]{2,45}$/.test(raw)) return '';
@@ -1084,8 +1115,9 @@
     blocks.forEach((x) => {
       const unblock = el('button', { className: 'dv-btn', text: 'Unblock', attrs: { type: 'button' } });
       unblock.addEventListener('click', () => unblockIp(x.ip, unblock));
+      const isDevice = /^device:/.test(x.ip);
       body.appendChild(el('tr', {}, [
-        td(el('span', { className: 'dv-mono', text: x.ip })),
+        td(el('span', { className: 'dv-mono', text: isDevice ? `Device ${x.ip.slice(7, 15)}…` : x.ip, title: isDevice ? 'A device, blocked by its device check code' : '' })),
         td(x.reason || '-'),
         td(formatTime(x.createdAt)),
         td(Number(x.expiresAt) === 0 ? 'Never' : formatTime(x.expiresAt)),
@@ -1111,10 +1143,18 @@
     if (isYou(ip)) { setStatus('bad', 'That is the address you are using right now, so it cannot be blocked.'); return; }
     const length = days === 0 ? 'permanently' : `for ${plural(days, 'day', 'days')}`;
     const key = blockKeyOf(ip);
+    if (/^device:/.test(key)) {
+      if (!confirm(`Block this device (${key.slice(7, 15)}…) ${length}?\n\nIt will still be able to open the website, but it won't be able to send enquiries or call requests, from any address.`)) return;
+      return finishBlock(ip, reason, days);
+    }
     const network = key.endsWith('/64')
       ? `\n\nThis is a long address, so the whole network it belongs to (${key}) will be blocked. That is one home or one phone, and it keeps the block working when the device changes its address.`
       : '';
     if (!confirm(`Block ${ip} ${length}?${network}\n\nIt will still be able to open the website, but it won't be able to send enquiries or call requests, or sign in to the staff inbox.`)) return;
+    return finishBlock(ip, reason, days);
+  }
+
+  async function finishBlock(ip, reason, days) {
     const btn = $('block-submit');
     btn.disabled = true;
     setStatus('busy', 'Blocking…');
@@ -1133,7 +1173,8 @@
   }
 
   async function unblockIp(ip, button) {
-    if (!confirm(`Unblock ${ip}? It will be able to send enquiries and sign in to the staff inbox again.`)) return;
+    const label = /^device:/.test(ip) ? `this device (${ip.slice(7, 15)}…)` : ip;
+    if (!confirm(`Unblock ${label}? It will be able to send enquiries${/^device:/.test(ip) ? '' : ' and sign in to the staff inbox'} again.`)) return;
     if (button) button.disabled = true;
     setStatus('busy', 'Unblocking…');
     try {
@@ -1194,7 +1235,11 @@
     if (!top.length) emptyRow(tb, 7, 'No page visits in the last 24 hours.');
     else {
       tb.textContent = '';
-      top.forEach((t) => tb.appendChild(el('tr', {}, [td(ipButton(t.ip)), td(t.count, 'dv-num'), td(t.errors, 'dv-num'), td(t.place || 'Unknown'), td(t.device || ''), td(formatTime(t.last)), td(blockAction(t.ip))])));
+      top.forEach((t) => tb.appendChild(el('tr', {}, [
+        td(el('div', {}, [ipButton(t.ip), t.network && t.network.isp ? el('div', { className: 'text-brand-muted', text: t.network.isp }) : null, t.network && t.network.hidden ? networkChip(t.network) : null])),
+        td(t.count, 'dv-num'), td(t.errors, 'dv-num'), td(t.place || 'Unknown'), td(t.device || ''), td(formatTime(t.last)),
+        td(el('div', { className: 'dv-actions' }, [(() => { const a = blockAction(t.ip); return a && typeof a !== 'string' ? a : (a ? document.createTextNode(a) : null); })(), checkIpLink(t.ip)]))
+      ])));
     }
 
     const body = $('requests-body');
@@ -1208,7 +1253,7 @@
           : el('span', { className: 'dv-chip dv-chip-view', text: 'Page visit' });
         body.appendChild(el('tr', {}, [
           td(formatTime(r.at)), td(type), td(el('span', { className: 'dv-mono', text: r.path || '' })),
-          td(statusChip(r)), td(ipButton(r.ip)), td(r.place || 'Unknown'), td(r.device || '')
+          td(statusChip(r)), td(el('div', {}, [ipButton(r.ip), r.network && r.network.hidden ? networkChip(r.network) : null])), td(r.place || 'Unknown'), td(r.device || '')
         ]));
       });
     }
@@ -1318,6 +1363,512 @@
     btn.disabled = false;
   }
 
+  // ---------- Tools tab ----------
+  // Follow-up alarm, duplicate finder, holiday switch, IP address check (with the VPN check),
+  // care-home licence lookup and translation checker. The server side is lib/devtools.js,
+  // lib/netinfo.js, lib/licence.js and lib/settings.js; this part only draws the results.
+  const toolGet = (params) => apiFetch('/api/dev/tools?' + new URLSearchParams(params));
+  const toolFailed = (err, el) => {
+    if (err.status === 401) { sessionEnded(); return; }
+    el.textContent = err.message;
+  };
+  const waitedText = (h) => (h < 48 ? `${h} hours` : `${Math.floor(h / 24)} days`);
+  const fmtYmd = (ymd) => {
+    const [y, m, d] = String(ymd || '').split('-').map(Number);
+    if (!y || !m || !d) return String(ymd || '');
+    return new Date(y, m - 1, d).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  };
+  const VIEW_NAMES = { home: 'Home', services: 'Services', tools: 'Care tools', approach: 'Approach', support: 'FAQs & support', contact: 'Contact', terms: 'Terms', privacy: 'Privacy' };
+  // "/es/#services" -> "Services (Spanish page)"
+  function pageName(path) {
+    const m = /^\/(?:([a-z]{2})\/)?(?:index\.html)?(?:#([a-z0-9-]+))?$/.exec(String(path || ''));
+    if (!m) return String(path || '');
+    const lang = m[1] ? LANGS.find(([c]) => c === m[1]) : null;
+    return (VIEW_NAMES[m[2] || 'home'] || m[2]) + (lang ? ` (${lang[1]} page)` : '');
+  }
+
+  // A small coloured label for a network check result ({ kind, label, isp }).
+  function networkChip(net) {
+    if (!net || !net.kind || net.kind === 'unknown') return null;
+    const cls = { tor: 'dv-chip-bad', vpn: 'dv-chip-bad', hosting: 'dv-chip-bad', relay: 'dv-chip-warn', mobile: 'dv-chip-note', home: 'dv-chip-view' }[net.kind] || 'dv-chip-note';
+    return el('span', { className: 'dv-chip ' + cls, text: net.label, title: [net.isp, net.about].filter(Boolean).join(' · ') });
+  }
+
+  // "Check" next to an address: opens the IP address check with it.
+  function checkIpLink(ip) {
+    if (!ip || ip === 'unknown') return null;
+    const b = el('button', { className: 'dv-link text-xs', text: 'Check', attrs: { type: 'button', title: 'Owner, VPN check and everything this address did' } });
+    b.addEventListener('click', () => {
+      setTab('tools');
+      $('iptool-ip').value = ip;
+      $('iptool-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      runIpCheck(ip);
+    });
+    return b;
+  }
+
+  // ----- Follow-up alarm -----
+  async function loadFollowUp() {
+    const summary = $('followup-summary');
+    const body = $('followup-body');
+    summary.textContent = 'Checking…';
+    try {
+      const d = await toolGet({ tool: 'followup' });
+      const s = d.last30Days || {};
+      const stats = s.received
+        ? ` Last 30 days: ${plural(s.received, 'enquiry', 'enquiries')} received, ${s.answered} answered${s.answered ? ` (${s.answeredWithinDay} within a day; typical first reply ${s.medianHours} hours, average ${s.averageHours} hours)` : ''}.`
+        : ' No enquiries arrived in the last 30 days.';
+      summary.textContent = (d.waitingCount
+        ? `${plural(d.waitingCount, 'enquiry has', 'enquiries have')} waited more than a day with no reply.`
+        : 'Nothing is waiting: every enquiry older than a day has been answered.') + stats;
+      const rows = Array.isArray(d.waiting) ? d.waiting : [];
+      if (!rows.length) { emptyRow(body, 4, 'Nothing to follow up.'); return; }
+      body.textContent = '';
+      rows.forEach((r) => {
+        body.appendChild(el('tr', {}, [
+          td(formatIso(r.createdAt)),
+          td(el('div', {}, [el('div', { className: 'font-semibold', text: r.name || '' }), el('div', { className: 'text-brand-muted', text: (r.kind === 'call_request' ? 'Call request' : 'Enquiry') + (r.inquiryType ? ' · ' + r.inquiryType : '') })])),
+          td(el('div', {}, [el('div', { className: 'dv-mono', text: r.email || '' }), el('div', { className: 'text-brand-muted', text: r.phone || '' })])),
+          td(el('span', { className: 'dv-chip ' + (r.hoursWaiting >= 48 ? 'dv-chip-bad' : 'dv-chip-warn'), text: waitedText(r.hoursWaiting) }), 'dv-num')
+        ]));
+      });
+    } catch (err) {
+      toolFailed(err, summary);
+    }
+  }
+
+  // ----- Duplicate finder -----
+  async function loadDuplicates() {
+    const summary = $('dupes-summary');
+    const list = $('dupes-list');
+    summary.textContent = 'Looking…';
+    try {
+      const d = await toolGet({ tool: 'duplicates' });
+      const groups = Array.isArray(d.groups) ? d.groups : [];
+      summary.textContent = groups.length
+        ? `${plural(groups.length, 'possible duplicate group', 'possible duplicate groups')} in the newest ${d.checked} enquiries${d.more ? ' (showing the newest 100 groups)' : ''}. Check each one before marking it.`
+        : `No duplicates found in the newest ${d.checked} enquiries.`;
+      list.textContent = '';
+      groups.forEach((g) => {
+        const box = el('div', { className: 'dv-group' });
+        const head = el('div', { className: 'mb-2' });
+        g.reasons.forEach((r) => head.appendChild(el('span', { className: 'dv-chip dv-chip-warn', text: r })));
+        box.appendChild(head);
+        const table = el('table', { className: 'dev-table text-brand-ink' });
+        const tbody = el('tbody');
+        g.members.forEach((m) => {
+          let action;
+          if (m.id === g.originalId) action = el('span', { className: 'dv-chip dv-chip-view', text: 'Original' });
+          else if (m.duplicateOf) {
+            action = el('span', {}, [el('span', { className: 'text-brand-muted', text: `Marked: duplicate of #${m.duplicateOf} ` })]);
+            const undo = el('button', { className: 'dv-link', text: 'Undo', attrs: { type: 'button' } });
+            undo.addEventListener('click', () => duplicateAction(undo, 'unmark_duplicate', { id: m.id }));
+            action.appendChild(undo);
+          } else {
+            action = el('button', { className: 'dv-btn', text: `Mark as duplicate of #${g.originalId}`, attrs: { type: 'button' } });
+            action.addEventListener('click', () => duplicateAction(action, 'mark_duplicate', { id: m.id, of: g.originalId }));
+          }
+          tbody.appendChild(el('tr', {}, [
+            td(`#${m.id}`, 'dv-mono'),
+            td(formatIso(m.createdAt)),
+            td(el('div', {}, [el('div', { className: 'font-semibold', text: m.name || '' }), el('div', { className: 'text-brand-muted', text: [m.kind === 'call_request' ? 'Call request' : 'Enquiry', m.city].filter(Boolean).join(' · ') })])),
+            td(el('div', {}, [el('div', { className: 'dv-mono', text: m.email || '' }), el('div', { className: 'text-brand-muted', text: m.phone || '' })])),
+            td(m.handled ? 'Handled' : 'Open'),
+            td(action)
+          ]));
+        });
+        table.appendChild(tbody);
+        box.appendChild(el('div', { className: 'dev-scroll' }, [table]));
+        list.appendChild(box);
+      });
+    } catch (err) {
+      toolFailed(err, summary);
+    }
+  }
+
+  async function duplicateAction(button, name, options) {
+    button.disabled = true;
+    setStatus('busy', 'Working…');
+    try {
+      const data = await callTool(name, options);
+      setStatus('ok', data.message || 'Done.');
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    }
+    await loadDuplicates();
+    loadFollowUp();
+    if (loadedTabs.has('leads')) loadLeads(leadsQuery);
+  }
+
+  // ----- Holiday switch -----
+  let holidayToday = '';
+  async function loadHoliday() {
+    const state = $('holiday-state');
+    try {
+      const d = await toolGet({ tool: 'holiday' });
+      holidayToday = d.today || '';
+      $('holiday-from').min = holidayToday;
+      $('holiday-to').min = holidayToday;
+      const h = d.holiday;
+      $('holiday-clear').classList.toggle('hidden', !h);
+      if (!h) {
+        state.textContent = 'Call bookings are open. No break is set.';
+        return;
+      }
+      $('holiday-from').value = h.from;
+      $('holiday-to').value = h.to;
+      state.textContent = h.from <= holidayToday
+        ? `Call bookings are paused now, until ${fmtYmd(h.to)} (last day away). The website shows the "we are away" note.`
+        : `A break is set from ${fmtYmd(h.from)} to ${fmtYmd(h.to)}. Until then, calls can be booked for any other day; the booking popup already mentions the break.`;
+    } catch (err) {
+      toolFailed(err, state);
+    }
+  }
+
+  async function saveHoliday(e) {
+    e.preventDefault();
+    const from = $('holiday-from').value;
+    const to = $('holiday-to').value;
+    if (!from || !to) { setStatus('bad', 'Choose the first and last day you are away.'); return; }
+    const btn = $('holiday-save');
+    btn.disabled = true;
+    setStatus('busy', 'Saving…');
+    try {
+      const data = await callTool('set_holiday', { from, to });
+      setStatus('ok', data.message);
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    } finally {
+      btn.disabled = false;
+    }
+    loadHoliday();
+  }
+
+  async function clearHolidayClicked() {
+    if (!confirm('Open call bookings again now?')) return;
+    const btn = $('holiday-clear');
+    btn.disabled = true;
+    try {
+      const data = await callTool('clear_holiday');
+      setStatus('ok', data.message);
+      $('holiday-from').value = '';
+      $('holiday-to').value = '';
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    } finally {
+      btn.disabled = false;
+    }
+    loadHoliday();
+  }
+
+  // ----- IP address check -----
+  let ipSeq = 0;
+  function kv(rows) {
+    const dl = el('dl', { className: 'dv-kv' });
+    rows.forEach(([label, value]) => {
+      if (value === '' || value === null || value === undefined) return;
+      dl.appendChild(el('dt', { text: label }));
+      const dd = el('dd');
+      if (value instanceof Node) dd.appendChild(value); else dd.textContent = String(value);
+      dl.appendChild(dd);
+    });
+    return dl;
+  }
+
+  async function runIpCheck(raw) {
+    const ip = String(raw || '').trim();
+    const out = $('iptool-result');
+    if (!ip) { out.textContent = 'Type an IP address first.'; return; }
+    const seq = ++ipSeq;
+    out.textContent = 'Checking… (asking the internet registry can take a few seconds)';
+    try {
+      const d = await toolGet({ tool: 'ip', ip });
+      if (seq !== ipSeq) return;
+      renderIpReport(out, d);
+    } catch (err) {
+      if (seq !== ipSeq) return;
+      toolFailed(err, out);
+    }
+  }
+
+  function renderIpReport(out, d) {
+    out.textContent = '';
+    const net = d.network || {};
+    const head = el('div', { className: 'dv-toolbar mb-2' }, [el('span', { className: 'dv-mono font-semibold', text: d.ip }), networkChip(net)]);
+    if (d.blocked) head.appendChild(el('span', { className: 'dv-chip dv-chip-bad', text: 'Blocked' }));
+    const action = blockAction(d.ip);
+    if (action && typeof action !== 'string') head.appendChild(action);
+    out.appendChild(head);
+    if (net.about) out.appendChild(el('p', { className: 'text-xs text-brand-ink mb-2', text: net.about + (net.reason ? ` (${net.reason})` : '') }));
+    if (net.torChecked === false) out.appendChild(el('p', { className: 'dv-help', text: 'The Tor list could not be checked right now, so Tor is not ruled out.' }));
+
+    const reg = d.registry || {};
+    let abuse = '';
+    if (reg.abuseEmail) {
+      abuse = el('span', {}, [el('span', { className: 'dv-mono', text: reg.abuseEmail + ' ' })]);
+      const copy = el('button', { className: 'dv-link', text: 'Copy', attrs: { type: 'button' } });
+      copy.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(reg.abuseEmail); copy.textContent = 'Copied'; } catch (e) { copy.textContent = 'Select and copy it'; }
+      });
+      abuse.appendChild(copy);
+    }
+    out.appendChild(el('h3', { className: 'text-xs font-bold text-brand-muted uppercase mt-3 mb-1', text: 'Who owns this address (public internet registry)' }));
+    out.appendChild(reg.ok
+      ? kv([
+        ['Network owner', reg.owner], ['Network name', reg.network], ['Address range', reg.range], ['Country', reg.country],
+        ['Registry', reg.registry], ['Report abuse to', abuse],
+        ['Provider seen by Cloudflare', [net.isp, net.asn ? `AS${net.asn}` : ''].filter(Boolean).join(' · ')]
+      ])
+      : el('p', { className: 'text-xs text-brand-muted', text: reg.error || 'Not available.' }));
+
+    out.appendChild(el('h3', { className: 'text-xs font-bold text-brand-muted uppercase mt-3 mb-1', text: 'What it did on this site' }));
+    if (d.blockKey && d.blockKey.endsWith('/64')) {
+      out.appendChild(el('p', { className: 'dv-help', text: `A long address: this includes its whole home or phone network (${d.blockKey}).` }));
+    }
+    const v = d.visits || {};
+    const leads = Array.isArray(d.leads) ? d.leads : [];
+    out.appendChild(kv([
+      ['Page visits', v.count ? `${v.count} (first ${formatTime(v.first)}, last ${formatTime(v.last)})` : 'None recorded (the log keeps up to 30 days)'],
+      ['Enquiries sent', leads.length ? leads.map((l) => `#${l.id} ${l.name} (${formatIso(l.createdAt)}${l.handled ? ', handled' : ''})`).join('; ') : 'None'],
+      ['Sign-in and tool activity', d.activity && d.activity.count ? `${d.activity.count} entries (see the Activity tab)` : 'None'],
+      ['Blocked', d.blocked ? `Yes${d.blocked.reason ? `: ${d.blocked.reason}` : ''} (${d.blocked.expiresAt ? 'until ' + formatTime(d.blocked.expiresAt) : 'permanently'}; tried again ${d.blocked.hits} times)` : 'No']
+    ]));
+    if (Array.isArray(v.recent) && v.recent.length) {
+      const tbody = el('tbody');
+      v.recent.forEach((r) => tbody.appendChild(el('tr', {}, [td(formatTime(r.at)), td(pageName(r.path)), td(statusChip(r)), td(r.place || 'Unknown'), td(r.browser || '')])));
+      const table = el('table', { className: 'dev-table text-brand-ink mt-2' }, [el('thead', {}, [el('tr', {}, ['When', 'Page', 'Result', 'Approximate location', 'Browser'].map((h) => el('th', { text: h })))]), tbody]);
+      out.appendChild(el('div', { className: 'dev-scroll' }, [table]));
+    }
+  }
+
+  // ----- Care-home licence lookup -----
+  let licenceSeq = 0;
+  async function searchLicences(e) {
+    if (e) e.preventDefault();
+    const q = $('licence-q').value.trim();
+    const info = $('licence-info');
+    const body = $('licence-body');
+    if (q.length < 2) { info.textContent = 'Type at least 2 letters or numbers.'; return; }
+    const seq = ++licenceSeq;
+    info.textContent = 'Searching the state\'s list…';
+    try {
+      const d = await toolGet({ tool: 'licence', q, closed: $('licence-closed').checked ? '1' : '0' });
+      if (seq !== licenceSeq) return;
+      const rows = Array.isArray(d.results) ? d.results : [];
+      info.textContent = rows.length
+        ? `${plural(rows.length, 'care home', 'care homes')} found${d.more ? ' (showing the first 25: add a city or more of the name)' : ''}.`
+        : 'No care homes match. Try fewer words, or include closed homes.';
+      if (!rows.length) { body.textContent = ''; return; }
+      body.textContent = '';
+      rows.forEach((r) => {
+        const statusCls = r.status === 'LICENSED' ? 'dv-chip-view' : r.status === 'ON PROBATION' ? 'dv-chip-bad' : 'dv-chip-note';
+        const details = el('button', { className: 'dv-btn', text: 'Details', attrs: { type: 'button', 'aria-expanded': 'false' } });
+        const link = el('a', { className: 'dv-link text-xs', text: 'State page', attrs: { href: r.page, target: '_blank', rel: 'noopener noreferrer' } });
+        const row = el('tr', {}, [
+          td(el('div', {}, [el('div', { className: 'font-semibold', text: r.name }), el('div', { className: 'text-brand-muted', text: [r.licensee, r.address].filter(Boolean).join(' · ') }), el('div', { className: 'text-brand-muted', text: r.phone || '' })])),
+          td([r.city, r.zip].filter(Boolean).join(' ')),
+          td(r.capacity || '', 'dv-num'),
+          td(el('span', { className: 'dv-chip ' + statusCls, text: r.status.toLowerCase() })),
+          td(r.number, 'dv-mono'),
+          td(el('div', { className: 'dv-actions' }, [details, link]))
+        ]);
+        details.addEventListener('click', () => toggleLicenceDetail(r, row, details));
+        body.appendChild(row);
+      });
+    } catch (err) {
+      if (seq !== licenceSeq) return;
+      toolFailed(err, info);
+      if (err.data && err.data.searchPage) {
+        info.appendChild(document.createTextNode(' '));
+        info.appendChild(el('a', { className: 'dv-link', text: 'Open the state\'s search', attrs: { href: err.data.searchPage, target: '_blank', rel: 'noopener noreferrer' } }));
+      }
+    }
+  }
+
+  async function toggleLicenceDetail(r, row, button) {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    const existing = row.nextElementSibling && row.nextElementSibling.classList.contains('licence-detail') ? row.nextElementSibling : null;
+    if (existing) existing.remove();
+    button.setAttribute('aria-expanded', open ? 'false' : 'true');
+    button.textContent = open ? 'Details' : 'Hide';
+    if (open) return;
+    const holder = el('div', { className: 'dv-detail', text: 'Loading the state\'s records…' });
+    const detailRow = el('tr', { className: 'licence-detail' }, [el('td', { attrs: { colspan: '6' } }, [holder])]);
+    row.after(detailRow);
+    fitActivityDetail();
+    try {
+      const d = await toolGet({ tool: 'licence-detail', number: r.number });
+      holder.textContent = '';
+      const c = d.complaints || {};
+      const visits = d.visits || {};
+      holder.appendChild(kv([
+        ['Status', d.status], ['Licensed beds', d.capacity], ['Licensee', d.licensee], ['Administrator', d.administrator], ['Phone', d.phone], ['Address', d.address],
+        ['Licensed since', d.licensedSince], ['Closed', d.closed],
+        ['Last state visit', d.lastVisit || 'None on record'],
+        ['State visits (last 5 years)', `${visits.all || 0} in all: ${visits.inspections || 0} inspections, ${visits.complaints || 0} complaint visits, ${visits.other || 0} other`],
+        ['Complaints', `${c.total || 0} complaint(s). Allegations: ${c.substantiated || 0} substantiated, ${c.inconclusive || 0} inconclusive, ${c.unsubstantiated || 0} unsubstantiated, ${c.unfounded || 0} unfounded`],
+        ['Citations', `${(d.citations || {}).typeA || 0} Type A (serious), ${(d.citations || {}).typeB || 0} Type B`],
+        ['Legal action', d.legalAction ? `${d.legalAction.type}${d.legalAction.closed ? ' (case closed)' : ''}` : 'None on record'],
+        ['Notes from the state', d.notes], ['Licensing office', d.districtOffice]
+      ]));
+      holder.appendChild(el('a', { className: 'dv-link text-xs', text: 'Open the full record and inspection reports on the state\'s website', attrs: { href: d.page || r.page, target: '_blank', rel: 'noopener noreferrer' } }));
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      holder.textContent = err.message + ' ';
+      holder.appendChild(el('a', { className: 'dv-link', text: 'State page', attrs: { href: r.page, target: '_blank', rel: 'noopener noreferrer' } }));
+    }
+  }
+
+  // ----- Translation checker (runs in this browser) -----
+  function loadLanguageFile(code) {
+    return new Promise((resolve) => {
+      if (window.LoveI18nData && window.LoveI18nData[code]) return resolve(true);
+      const s = document.createElement('script');
+      s.src = `/i18n/${code}.js`;
+      s.onload = () => resolve(Boolean(window.LoveI18nData && window.LoveI18nData[code]));
+      s.onerror = () => resolve(false);
+      document.head.appendChild(s);
+    });
+  }
+
+  // Every English text the website translates: page text and attributes, translated blocks,
+  // and the messages its scripts show (text passed to t(...) in app.js).
+  function englishTexts(html, appJs) {
+    const wanted = new Set();
+    const blocks = new Set();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = walker.nextNode())) {
+      const p = n.parentElement;
+      if (!p || /^(SCRIPT|STYLE|NOSCRIPT)$/.test(p.tagName) || p.closest('svg, .lang-option, [data-i18n-block], [data-i18n-skip], [translate="no"]')) continue;
+      const s = n.nodeValue.replace(/\s+/g, ' ').trim();
+      if (s && /[A-Za-z]{2}/.test(s)) wanted.add(s);
+    }
+    doc.querySelectorAll('[placeholder],[title],[aria-label],[alt]').forEach((e) => {
+      if (e.closest('.lang-option')) return;
+      ['placeholder', 'title', 'aria-label', 'alt'].forEach((a) => {
+        const v = (e.getAttribute(a) || '').replace(/\s+/g, ' ').trim();
+        if (v && /[A-Za-z]{2}/.test(v)) wanted.add(v);
+      });
+    });
+    doc.querySelectorAll('[data-i18n-block]').forEach((e) => blocks.add(e.getAttribute('data-i18n-block')));
+    const src = appJs.replace(/\r/g, '');
+    const lit = (q, body) => {
+      try { return JSON.parse('"' + (q === "'" ? body.replace(/\\'/g, "'").replace(/"/g, '\\"') : body) + '"'); } catch (e) { return ''; }
+    };
+    for (const m of src.matchAll(/\b(?:t|tx)\(\s*(['"])((?:\\.|(?!\1).)*)\1/g)) { const s = lit(m[1], m[2]); if (s) wanted.add(s); }
+    for (const m of src.matchAll(/\bt\([^()]*?\?\s*'([^']+)'\s*:\s*'([^']+)'\s*\)/g)) { wanted.add(m[1]); wanted.add(m[2]); }
+    // Texts passed through t() indirectly: the care recommendations, quiz answers, page titles and day names.
+    for (const re of [/getCareRecommendation[\s\S]*?return \{/, /ANSWER_LABELS = \{[\s\S]*?\};/, /VIEW_TITLES = \{[\s\S]*?\};/, /dayNames = \[[^\]]*\]/]) {
+      const part = (src.match(re) || [''])[0];
+      for (const m of part.matchAll(/(['"])((?:\\.|(?!\1).)*)\1/g)) {
+        const s = lit(m[1], m[2]);
+        if (s.length > 2 && /[A-Za-z]{3}/.test(s) && !/^[a-z-]+$/.test(s)) wanted.add(s);
+      }
+    }
+    return { wanted, blocks };
+  }
+
+  async function runTranslationCheck() {
+    const btn = $('i18ncheck-btn');
+    const summary = $('i18ncheck-summary');
+    const list = $('i18ncheck-list');
+    btn.disabled = true;
+    summary.textContent = 'Checking all 17 languages…';
+    list.textContent = '';
+    try {
+      const [html, appJs, loaded] = await Promise.all([
+        fetch('/', { cache: 'no-store', credentials: 'omit' }).then((r) => r.text()),
+        fetch('/app.js', { cache: 'no-store', credentials: 'omit' }).then((r) => r.text()),
+        Promise.all(LANGS.map(([code]) => loadLanguageFile(code)))
+      ]);
+      const failed = LANGS.filter((l, i) => !loaded[i]).map(([, name]) => name);
+      const { wanted, blocks } = englishTexts(html, appJs);
+      const data = window.LoveI18nData || {};
+      const okLangs = LANGS.filter((l, i) => loaded[i]);
+      const missingByLang = new Map(okLangs.map(([code]) => [code, []]));
+      const everywhere = [];
+      const has = (o, k) => o && Object.prototype.hasOwnProperty.call(o, k);
+      const check = (text, isBlock) => {
+        const missingIn = okLangs.filter(([code]) => !(isBlock ? has(data[code].blocks, text) : has(data[code].dict, text)));
+        if (!missingIn.length) return;
+        const label = isBlock ? `[block "${text}"]` : text;
+        if (missingIn.length === okLangs.length) everywhere.push(label);
+        else missingIn.forEach(([code]) => missingByLang.get(code).push(label));
+      };
+      wanted.forEach((s) => check(s, false));
+      blocks.forEach((b) => check(b, true));
+      const gaps = [...missingByLang.values()].reduce((a, b) => a + b.length, 0);
+      summary.textContent = (gaps
+        ? `${plural(gaps, 'missing translation', 'missing translations')} found across ${wanted.size + blocks.size} pieces of text.`
+        : `All ${wanted.size + blocks.size} pieces of text are translated in every language that loaded.`)
+        + (failed.length ? ` These language files could not be loaded: ${failed.join(', ')}.` : '');
+      missingByLang.forEach((items, code) => {
+        if (!items.length) return;
+        const name = (LANGS.find(([c]) => c === code) || [code, code])[1];
+        list.appendChild(el('div', { className: 'dv-group mt-2' }, [
+          el('p', { className: 'text-xs font-bold mb-1', text: `${name} (${code}): ${plural(items.length, 'text', 'texts')} missing. Add them to public/i18n/${code}.js.` }),
+          el('ul', { className: 'text-xs list-disc pl-5' }, items.slice(0, 50).map((s) => el('li', { text: s })))
+        ]));
+      });
+      if (everywhere.length) {
+        list.appendChild(el('div', { className: 'dv-group mt-2' }, [
+          el('p', { className: 'text-xs font-bold mb-1', text: `Not translated in any language (${everywhere.length}). These are usually names, prices or the email address, which stay the same everywhere:` }),
+          el('p', { className: 'text-xs text-brand-muted', text: everywhere.join(' · ') })
+        ]));
+      }
+    } catch (err) {
+      summary.textContent = 'The check could not finish: ' + err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // ----- Visitor journey (Enquiries tab) -----
+  // What an enquirer looked at before writing in. Covered by the privacy policy line
+  // "Visit history improves support."
+  async function toggleJourney(lead, row, button) {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    const existing = row.nextElementSibling && row.nextElementSibling.classList.contains('journey-row') ? row.nextElementSibling : null;
+    if (existing) existing.remove();
+    button.setAttribute('aria-expanded', open ? 'false' : 'true');
+    button.textContent = open ? 'Journey' : 'Hide journey';
+    if (open) return;
+    const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
+    row.after(el('tr', { className: 'journey-row' }, [el('td', { attrs: { colspan: '7' } }, [holder])]));
+    fitActivityDetail();
+    try {
+      const d = await toolGet({ tool: 'journey', id: lead.id });
+      holder.textContent = '';
+      const net = d.network || {};
+      holder.appendChild(el('div', { className: 'dv-toolbar mb-2' }, [
+        el('span', { className: 'font-semibold', text: `${d.lead.name}: what they looked at before writing in` }),
+        networkChip({ ...net, isp: d.lead.isp }),
+        d.lead.isp ? el('span', { className: 'text-brand-muted', text: d.lead.isp }) : null
+      ]));
+      const visits = Array.isArray(d.visits) ? d.visits : [];
+      if (!visits.length) {
+        holder.appendChild(el('p', { className: 'text-xs text-brand-muted', text: d.note || 'No page visits from this address were recorded in the 30 days before (the visit log keeps up to 30 days and 5,000 visits).' }));
+      } else {
+        const tbody = el('tbody');
+        visits.forEach((v) => tbody.appendChild(el('tr', {}, [td(formatTime(v.at)), td(pageName(v.path)), td(v.place || ''), td(v.browser || '')])));
+        holder.appendChild(el('div', { className: 'dev-scroll' }, [el('table', { className: 'dev-table text-brand-ink' }, [
+          el('thead', {}, [el('tr', {}, ['When', 'Page', 'Approximate location', 'Browser'].map((h) => el('th', { text: h })))]), tbody])]));
+      }
+      const others = Array.isArray(d.others) ? d.others : [];
+      const listOf = (by) => others.filter((o) => o.sameBy === by).map((o) => `#${o.id} ${o.name} (${formatIso(o.createdAt)})`).join(', ');
+      if (listOf('device')) holder.appendChild(el('p', { className: 'text-xs mt-2', text: 'Other enquiries from the same device: ' + listOf('device') }));
+      if (listOf('address')) holder.appendChild(el('p', { className: 'text-xs mt-2', text: 'Other enquiries from the same address: ' + listOf('address') }));
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      holder.textContent = err.message;
+    }
+  }
+
   // ---------- Database ----------
   async function checkDatabase() {
     const btn = $('db-btn');
@@ -1387,6 +1938,13 @@
     $('requests-more').addEventListener('click', () => loadRequests(requestsQuery, { append: true }));
     $('block-form').addEventListener('submit', submitBlock);
 
+    $('followup-btn').addEventListener('click', loadFollowUp);
+    $('dupes-btn').addEventListener('click', loadDuplicates);
+    $('holiday-form').addEventListener('submit', saveHoliday);
+    $('holiday-clear').addEventListener('click', clearHolidayClicked);
+    $('iptool-form').addEventListener('submit', (e) => { e.preventDefault(); runIpCheck($('iptool-ip').value); });
+    $('licence-form').addEventListener('submit', searchLicences);
+    $('i18ncheck-btn').addEventListener('click', runTranslationCheck);
     $('sitecheck-btn').addEventListener('click', runSiteCheck);
     $('db-btn').addEventListener('click', checkDatabase);
     $('backup-btn').addEventListener('click', downloadBackup);

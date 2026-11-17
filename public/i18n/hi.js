@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "कृपया अगले 3 महीनों के भीतर की कोई तारीख चुनें।",
     "Please choose a time from the list.": "कृपया सूची में से एक समय चुनें।",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "कृपया सुरक्षा जांच पूरी करें। यदि यह दिखाई नहीं देती है, तो (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "सुरक्षा सत्यापन अस्थायी रूप से अनुपलब्ध है। कृपया (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "सुरक्षा सत्यापन अस्थायी रूप से अनुपलब्ध है। कृपया (818) 217-5755 पर कॉल करें या loveRCFE@gmail.com पर ईमेल करें।",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "डिवाइस जाँच स्पैम रोकती है।",
+    "Visit history improves support.": "विज़िट इतिहास से बेहतर सहायता मिलती है।",
+    "Network details prevent abuse.": "नेटवर्क विवरण दुरुपयोग रोकते हैं।",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "हम {from} से {to} तक अवकाश पर हैं। {next} से कॉल बुक की जा सकती है।",
+    "We are away until {to}. Messages sent now are answered from {next}.": "हम {to} तक अवकाश पर हैं। अभी भेजे गए संदेशों का उत्तर {next} से दिया जाएगा।",
+    "We are away on that date. Please choose {next} or later.": "उस दिन हम अवकाश पर हैं। कृपया {next} या उसके बाद की तारीख चुनें।",
+    "We are away on that date. Please pick another date.": "उस दिन हम अवकाश पर हैं। कृपया कोई दूसरी तारीख चुनें।"
   },
   blocks: {
     "hero_title": "थोड़ी अधिक स्पष्टता।<br> <span class=\"italic text-brand-green font-normal\">कहीं अधिक देखभाल।</span>",

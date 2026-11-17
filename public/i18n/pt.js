@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Por favor, escolha uma data dentro dos próximos 3 meses.",
     "Please choose a time from the list.": "Por favor, escolha um horário da lista.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Por favor, conclua a verificação de segurança. Caso ela não apareça, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "A verificação de segurança está temporariamente indisponível. Por favor, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "A verificação de segurança está temporariamente indisponível. Por favor, ligue para (818) 217-5755 ou envie um e-mail para loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "A verificação do dispositivo bloqueia spam.",
+    "Visit history improves support.": "O histórico de visitas melhora o atendimento.",
+    "Network details prevent abuse.": "Dados de rede evitam abusos.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Estaremos ausentes de {from} a {to}. É possível agendar ligações a partir de {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Estaremos ausentes até {to}. As mensagens enviadas agora serão respondidas a partir de {next}.",
+    "We are away on that date. Please choose {next} or later.": "Estaremos ausentes nesse dia. Escolha {next} ou uma data posterior.",
+    "We are away on that date. Please pick another date.": "Estaremos ausentes nesse dia. Por favor, escolha outra data."
   },
   blocks: {
     "hero_title": "Um pouco mais de clareza.<br> <span class=\"italic text-brand-green font-normal\">Muito mais cuidado.</span>",

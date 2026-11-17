@@ -451,6 +451,27 @@
         .some(v => String(v || '').toLowerCase().includes(q));
     });
 
+    // "Possible duplicate": another loaded message has the same email or phone number.
+    // (The developer console's Duplicate Finder checks more, and can mark them.)
+    const keyCounts = new Map();
+    const leadKeys = (l) => {
+      const keys = [];
+      const email = String(l.email || '').trim().toLowerCase();
+      if (email) keys.push('e:' + email);
+      const digits = String(l.phone || '').replace(/\D/g, '');
+      if (digits.length >= 7) keys.push('p:' + digits.slice(-10));
+      return keys;
+    };
+    allLeads.forEach((l) => leadKeys(l).forEach((k) => keyCounts.set(k, (keyCounts.get(k) || 0) + 1)));
+    const looksDuplicate = (l) => !l.duplicateOf && leadKeys(l).some((k) => keyCounts.get(k) > 1);
+    // "Waiting 2 days": still new and nobody has acted on it for more than a day.
+    const waitingDays = (l) => {
+      if (l.handled || l.duplicateOf || (l.stage && l.stage !== 'new') || l.firstResponseAt) return 0;
+      const t = parseCreatedAt(l.createdAt).getTime();
+      const hours = Number.isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+      return hours > 24 ? Math.max(1, Math.floor(hours / 24)) : 0;
+    };
+
     const listEl = document.getElementById('leads-list');
     if (!filtered.length) {
       listEl.innerHTML = `
@@ -489,6 +510,8 @@
                 </span>
                 ${l.stage && l.stage !== 'new' ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-accentLight text-brand-accent">${escapeHtml(STAGE_LABELS[l.stage] || l.stage)}</span>` : ''}
                 ${l.handled ? '<span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-brand-sageLight text-brand-green">Handled</span>' : ''}
+                ${waitingDays(l) ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-red-800 dark:bg-red-950/60 dark:text-red-300" title="Nobody has replied yet. Move it to another stage once you have called or written.">Waiting ${waitingDays(l)} day${waitingDays(l) === 1 ? '' : 's'}</span>` : ''}
+                ${l.duplicateOf ? `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-brand-line text-brand-muted">Duplicate of #${Number(l.duplicateOf)}</span>` : (looksDuplicate(l) ? '<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300" title="Another message has the same email or phone number">Possible duplicate</span>' : '')}
               </div>
               <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-brand-muted mt-1.5">
                 <a href="${escapeHtml(telHref)}" class="hover:underline font-semibold text-brand-green flex items-center gap-1">

@@ -6,6 +6,7 @@
 import { jsonResponse } from '../../../lib/db.js';
 import { authorizeDev } from '../../../lib/dev.js';
 import { requestLogPaused, KEEP_ROWS, KEEP_DAYS } from '../../../lib/requestlog.js';
+import { rowNetwork } from '../../../lib/devtools.js';
 
 const PAGE_SIZE = 100;
 const TYPES = new Set(['view', 'errors']);
@@ -26,8 +27,8 @@ export async function onRequestGet({ request, env }) {
   if (type === 'errors') where.push("kind = 'view' AND status >= 400");
   if (q) {
     const like = `%${likeEscape(q)}%`;
-    where.push("(ip = ? OR ip LIKE ? ESCAPE '\\' OR path LIKE ? ESCAPE '\\' OR place LIKE ? ESCAPE '\\' OR device LIKE ? ESCAPE '\\')");
-    binds.push(q, like, like, like, like);
+    where.push("(ip = ? OR ip LIKE ? ESCAPE '\\' OR path LIKE ? ESCAPE '\\' OR place LIKE ? ESCAPE '\\' OR device LIKE ? ESCAPE '\\' OR isp LIKE ? ESCAPE '\\')");
+    binds.push(q, like, like, like, like, like);
   }
   if (before) {
     where.push('id < ?');
@@ -40,7 +41,7 @@ export async function onRequestGet({ request, env }) {
   try {
     const [rows, summary, top, paused] = await Promise.all([
       env.DB
-        .prepare(`SELECT id, at, kind, method, path, status, ip, place, device FROM request_log ${whereSql} ORDER BY id DESC LIMIT ?`)
+        .prepare(`SELECT id, at, kind, method, path, status, ip, place, device, asn, isp FROM request_log ${whereSql} ORDER BY id DESC LIMIT ?`)
         .bind(...binds, PAGE_SIZE + 1)
         .all(),
       env.DB.prepare(`
@@ -65,10 +66,10 @@ export async function onRequestGet({ request, env }) {
     if (topRows.length) {
       const ids = topRows.map((r) => Number(r.lastId));
       const places = await env.DB
-        .prepare(`SELECT id, place, device FROM request_log WHERE id IN (${ids.map(() => '?').join(', ')})`)
+        .prepare(`SELECT id, place, device, asn, isp FROM request_log WHERE id IN (${ids.map(() => '?').join(', ')})`)
         .bind(...ids)
         .all();
-      for (const r of places?.results || []) placeById.set(Number(r.id), { place: r.place, device: r.device });
+      for (const r of places?.results || []) placeById.set(Number(r.id), { place: r.place, device: r.device, asn: r.asn, isp: r.isp });
     }
 
     const list = rows?.results || [];
@@ -90,6 +91,7 @@ export async function onRequestGet({ request, env }) {
         last: Number(r.last || 0),
         place: placeById.get(Number(r.lastId))?.place || '',
         device: placeById.get(Number(r.lastId))?.device || '',
+        network: rowNetwork(placeById.get(Number(r.lastId))?.asn, placeById.get(Number(r.lastId))?.isp),
       })),
       requests: list.slice(0, PAGE_SIZE).map((r) => ({
         id: Number(r.id),
@@ -101,6 +103,7 @@ export async function onRequestGet({ request, env }) {
         ip: r.ip,
         place: r.place,
         device: r.device,
+        network: rowNetwork(r.asn, r.isp),
       })),
       hasMore,
     });

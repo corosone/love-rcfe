@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "ਕਿਰਪਾ ਕਰਕੇ ਅਗਲੇ 3 ਮਹੀਨਿਆਂ ਦੇ ਅੰਦਰ ਦੀ ਤਾਰੀਖ਼ ਚੁਣੋ।",
     "Please choose a time from the list.": "ਕਿਰਪਾ ਕਰਕੇ ਸੂਚੀ ਵਿੱਚੋਂ ਸਮਾਂ ਚੁਣੋ।",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "ਕਿਰਪਾ ਕਰਕੇ ਸੁਰੱਖਿਆ ਜਾਂਚ ਪੂਰੀ ਕਰੋ। ਜੇ ਇਹ ਦਿਖਾਈ ਨਹੀਂ ਦਿੰਦੀ, ਤਾਂ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "ਸੁਰੱਖਿਆ ਤਸਦੀਕ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "ਸੁਰੱਖਿਆ ਤਸਦੀਕ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ (818) 217-5755 'ਤੇ ਕਾਲ ਕਰੋ ਜਾਂ loveRCFE@gmail.com 'ਤੇ ਈਮੇਲ ਕਰੋ।",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "ਡਿਵਾਈਸ ਜਾਂਚ ਸਪੈਮ ਰੋਕਦੀ ਹੈ।",
+    "Visit history improves support.": "ਵਿਜ਼ਿਟ ਇਤਿਹਾਸ ਨਾਲ ਬਿਹਤਰ ਸਹਾਇਤਾ ਮਿਲਦੀ ਹੈ।",
+    "Network details prevent abuse.": "ਨੈੱਟਵਰਕ ਵੇਰਵੇ ਦੁਰਵਰਤੋਂ ਰੋਕਦੇ ਹਨ।",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "ਅਸੀਂ {from} ਤੋਂ {to} ਤੱਕ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। {next} ਤੋਂ ਕਾਲ ਬੁੱਕ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।",
+    "We are away until {to}. Messages sent now are answered from {next}.": "ਅਸੀਂ {to} ਤੱਕ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਹੁਣ ਭੇਜੇ ਸੁਨੇਹਿਆਂ ਦਾ ਜਵਾਬ {next} ਤੋਂ ਦਿੱਤਾ ਜਾਵੇਗਾ।",
+    "We are away on that date. Please choose {next} or later.": "ਉਸ ਦਿਨ ਅਸੀਂ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ {next} ਜਾਂ ਉਸ ਤੋਂ ਬਾਅਦ ਦੀ ਤਾਰੀਖ ਚੁਣੋ।",
+    "We are away on that date. Please pick another date.": "ਉਸ ਦਿਨ ਅਸੀਂ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਕੋਈ ਹੋਰ ਤਾਰੀਖ ਚੁਣੋ।"
   },
   blocks: {
     "hero_title": "ਥੋੜ੍ਹੀ ਹੋਰ ਸਪੱਸ਼ਟਤਾ।<br> <span class=\"italic text-brand-green font-normal\">ਬਹੁਤ ਜ਼ਿਆਦਾ ਦੇਖਭਾਲ।</span>",

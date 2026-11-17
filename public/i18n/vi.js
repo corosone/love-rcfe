@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Vui lòng chọn ngày trong vòng 3 tháng tới.",
     "Please choose a time from the list.": "Vui lòng chọn khung giờ từ danh sách.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Vui lòng hoàn tất bước kiểm tra bảo mật. Nếu không hiển thị, hãy gọi (818) 217-5755 hoặc email loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Xác minh bảo mật tạm thời không khả dụng. Vui lòng gọi (818) 217-5755 hoặc email loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Xác minh bảo mật tạm thời không khả dụng. Vui lòng gọi (818) 217-5755 hoặc email loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Kiểm tra thiết bị giúp chặn thư rác.",
+    "Visit history improves support.": "Lịch sử truy cập giúp hỗ trợ tốt hơn.",
+    "Network details prevent abuse.": "Thông tin mạng giúp ngăn lạm dụng.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Chúng tôi nghỉ từ {from} đến {to}. Bạn có thể đặt lịch gọi từ {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Chúng tôi nghỉ đến {to}. Tin nhắn gửi bây giờ sẽ được trả lời từ {next}.",
+    "We are away on that date. Please choose {next} or later.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn {next} hoặc muộn hơn.",
+    "We are away on that date. Please pick another date.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn ngày khác."
   },
   blocks: {
     "hero_title": "Thêm một chút rõ ràng.<br><span class=\"italic text-brand-green font-normal\">Thêm thật nhiều yêu thương.</span>",

@@ -3,12 +3,18 @@ import {
   verifySameOrigin, readJsonBody, tooManyRequests, tooManyRequestsD1,
 } from '../../lib/db.js';
 import { cfLocation } from '../../lib/reqinfo.js';
+import { cfNetwork } from '../../lib/netinfo.js';
+import { isBlockedKey, deviceBlockKey, recordBlockedHit, blockedResponse } from '../../lib/blocklist.js';
+import { getHoliday, holidayCovers } from '../../lib/settings.js';
 
 const LIMITS = { name: 120, email: 254, phone: 40, city: 100, message: 3000, inquiryType: 80, short: 80 };
 const MAX_DAYS_AHEAD = 100; // the booking form offers 90 days; small slack for time zones
 const TIME_RE = /^(morning|afternoon|late afternoon|evening)\b/i;
 const SSN_RE = /\b\d{3}-\d{2}-\d{4}\b/;
 const ALLOWED_SOURCES = new Set(['home', 'services', 'tools', 'approach', 'support', 'contact', 'terms', 'privacy']);
+// The device check code made by public/app.js (a one-way SHA-256 code, never the details themselves)
+const DEVICE_RE = /^[0-9a-f]{64}$/;
+const HOLIDAY_ERROR = 'We are away on that date. Please pick another date.';
 
 // "YYYY-MM-DD" -> Date (UTC midnight) if it is a real calendar date, else null
 function parseYmd(str) {
@@ -96,6 +102,8 @@ export async function onRequestPost(context) {
   }
   const kind = body.kind === 'call_request' ? 'call_request' : 'enquiry';
   const rawSource = clean(body.source, 40);
+  const net = cfNetwork(request);
+  const device = typeof body.device === 'string' && DEVICE_RE.test(body.device) ? body.device : '';
   const record = {
     kind,
     inquiryType: clean(body.inquiry_type, LIMITS.inquiryType) || 'General Inquiry',
@@ -110,7 +118,16 @@ export async function onRequestPost(context) {
     // Who sent it, from Cloudflare (never from the form): shown in the inbox, console and email.
     ip: ip.slice(0, 64),
     ipPlace: cfLocation(request).slice(0, 80),
+    isp: net.isp,
+    asn: net.asn,
+    device,
   };
+
+  // A device the owner blocked in the developer console (spam sent from changing addresses).
+  if (device && (await isBlockedKey(env, deviceBlockKey(device)))) {
+    if (context.waitUntil) context.waitUntil(recordBlockedHit(env, request, deviceBlockKey(device)));
+    return blockedResponse();
+  }
 
   const errors = {};
   if (record.name.length < 2) errors.name = 'Please enter your name.';
@@ -140,6 +157,10 @@ export async function onRequestPost(context) {
     }
     if (record.preferredTime && !TIME_RE.test(record.preferredTime)) {
       errors.preferred_time = 'Please choose a time from the list.';
+    }
+    // Days off set with the holiday switch in the developer console
+    if (!errors.preferred_date && holidayCovers(await getHoliday(env), record.preferredDate)) {
+      errors.preferred_date = HOLIDAY_ERROR;
     }
   }
 
@@ -182,8 +203,8 @@ export async function onRequestPost(context) {
       .prepare(`
         INSERT INTO leads (
           kind, inquiry_type, name, email, phone, city, message, preferred_date, preferred_time, source,
-          ip, ip_place
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          ip, ip_place, isp, asn, device
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `)
       .bind(
         record.kind,
@@ -197,7 +218,10 @@ export async function onRequestPost(context) {
         record.preferredTime,
         record.source,
         record.ip,
-        record.ipPlace
+        record.ipPlace,
+        record.isp,
+        record.asn,
+        record.device
       )
       .run();
 

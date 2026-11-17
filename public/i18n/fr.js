@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Veuillez choisir une date dans les 3 prochains mois.",
     "Please choose a time from the list.": "Veuillez choisir un horaire dans la liste.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Veuillez effectuer la vérification de sécurité. Si elle ne s'affiche pas, appelez le (818) 217-5755 ou écrivez à loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "La vérification de sécurité est temporairement indisponible. Veuillez appeler le (818) 217-5755 ou écrire à loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "La vérification de sécurité est temporairement indisponible. Veuillez appeler le (818) 217-5755 ou écrire à loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Les vérifications d'appareil bloquent le spam.",
+    "Visit history improves support.": "L'historique de visite améliore l'accompagnement.",
+    "Network details prevent abuse.": "Les données réseau préviennent les abus.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Nous sommes absents du {from} au {to}. Vous pouvez réserver un appel à partir du {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Nous sommes absents jusqu'au {to}. Nous répondrons aux messages envoyés maintenant à partir du {next}.",
+    "We are away on that date. Please choose {next} or later.": "Nous sommes absents ce jour-là. Veuillez choisir le {next} ou une date ultérieure.",
+    "We are away on that date. Please pick another date.": "Nous sommes absents ce jour-là. Veuillez choisir une autre date."
   },
   blocks: {
     "hero_title": "Un peu plus de clarté.<br> <span class=\"italic text-brand-green font-normal\">Beaucoup plus de bienveillance.</span>",

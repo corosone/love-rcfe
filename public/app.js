@@ -266,7 +266,8 @@
       }
 
       try {
-        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token });
+        const device = await Promise.race([deviceCheckCode(), new Promise(resolve => setTimeout(() => resolve(''), 800))]);
+        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token, device });
 
         if (res.status >= 400 && res.status < 500) {
           return {
@@ -283,6 +284,115 @@
       } catch (err) {
         return { ok: false, reason: 'network' };
       }
+    }
+
+    // ==================== DEVICE CHECK (spam and duplicate protection) ====================
+    // Only when an enquiry or call request is SENT (never on ordinary page views), the browser
+    // turns a few of its settings (screen, time zone, languages, graphics) into a one-way code.
+    // Only the code is sent, never the settings themselves. It lets the owner spot the same
+    // device sending spam under different names, or a family writing in twice, and is listed
+    // in the privacy policy ("Device checks stop spam.").
+    async function deviceCheckCode() {
+      try {
+        if (!window.crypto || !crypto.subtle || typeof TextEncoder === 'undefined') return '';
+        const parts = [];
+        const add = (read) => { try { const v = read(); parts.push(v === undefined || v === null ? '' : String(v)); } catch (e) { parts.push(''); } };
+        add(() => screen.width + 'x' + screen.height + 'x' + screen.colorDepth);
+        add(() => window.devicePixelRatio);
+        add(() => Intl.DateTimeFormat().resolvedOptions().timeZone);
+        add(() => (navigator.languages || [navigator.language]).join(','));
+        add(() => navigator.platform);
+        add(() => navigator.hardwareConcurrency);
+        add(() => navigator.deviceMemory);
+        add(() => navigator.maxTouchPoints);
+        add(() => {
+          const gl = document.createElement('canvas').getContext('webgl');
+          if (!gl) return '';
+          const ext = gl.getExtension('WEBGL_debug_renderer_info');
+          const out = ext ? gl.getParameter(ext.UNMASKED_VENDOR_WEBGL) + '|' + gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
+          const lose = gl.getExtension('WEBGL_lose_context');
+          if (lose) lose.loseContext();
+          return out;
+        });
+        add(() => {
+          const c = document.createElement('canvas');
+          c.width = 220; c.height = 30;
+          const x = c.getContext('2d');
+          x.textBaseline = 'top';
+          x.font = '14px Arial';
+          x.fillStyle = '#315d48';
+          x.fillRect(0, 0, 110, 30);
+          x.fillStyle = '#a96b46';
+          x.fillText('Love RCFE \u2764 1234', 4, 8);
+          return c.toDataURL();
+        });
+        const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('love-rcfe-device-v1|' + parts.join('|')));
+        return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+      } catch (e) {
+        return '';
+      }
+    }
+
+    // ==================== HOLIDAY SWITCH (set in the developer console) ====================
+    // While it is on, call bookings for those dates are paused: the booking popup says so and
+    // offers the first day after the break. Messages through the contact form keep working.
+    let siteSettingsPromise = null;
+    let holiday = null; // { from: 'YYYY-MM-DD', to: 'YYYY-MM-DD' } or null
+    function loadSiteSettings() {
+      if (!siteSettingsPromise) {
+        siteSettingsPromise = fetch('/api/settings', { headers: { Accept: 'application/json' } })
+          .then(res => (res.ok ? res.json() : {}))
+          .then(data => {
+            const h = data && data.holiday;
+            holiday = h && /^\d{4}-\d{2}-\d{2}$/.test(h.from) && /^\d{4}-\d{2}-\d{2}$/.test(h.to) && h.from <= h.to ? { from: h.from, to: h.to } : null;
+            showHolidayNotes();
+          })
+          .catch(() => { holiday = null; }); // the server still refuses bookings on days off
+      }
+      return siteSettingsPromise;
+    }
+
+    const ymdOf = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const dateOfYmd = ymd => { const [y, m, d] = ymd.split('-').map(Number); return new Date(y, m - 1, d); };
+    // Today in California (the business's calendar)
+    function pacificTodayYmd() {
+      try {
+        return new Intl.DateTimeFormat('en-CA', { timeZone: BUSINESS.tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+      } catch (e) {
+        return ymdOf(new Date());
+      }
+    }
+    const prettyDay = ymd => dateOfYmd(ymd).toLocaleDateString(currentLocale(), { month: 'long', day: 'numeric' });
+    const onHoliday = ymd => Boolean(holiday && ymd && ymd >= holiday.from && ymd <= holiday.to);
+    // The first day calls can be booked again: the day after the break, skipping Sunday.
+    function firstDayBack() {
+      const d = dateOfYmd(holiday.to);
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() === 0) d.setDate(d.getDate() + 1);
+      return ymdOf(d);
+    }
+
+    function showHolidayNotes() {
+      const today = pacificTodayYmd();
+      const upcoming = holiday && holiday.to >= today;
+      const booking = document.getElementById('booking-holiday');
+      if (booking) {
+        booking.textContent = upcoming
+          ? t('We are away from {from} to {to}. Calls can be booked from {next}.', { from: prettyDay(holiday.from), to: prettyDay(holiday.to), next: prettyDay(firstDayBack()) })
+          : '';
+        booking.classList.toggle('hidden', !upcoming);
+      }
+      const contact = document.getElementById('contact-holiday');
+      if (contact) {
+        const now = upcoming && holiday.from <= today;
+        contact.textContent = now
+          ? t('We are away until {to}. Messages sent now are answered from {next}.', { to: prettyDay(holiday.to), next: prettyDay(firstDayBack()) })
+          : '';
+        contact.classList.toggle('hidden', !now);
+      }
+      // A suggested booking date that falls on a day off moves to the first day back.
+      const dateInput = document.getElementById('book-date');
+      if (upcoming && dateInput && onHoliday(dateInput.value)) dateInput.value = firstDayBack();
     }
 
     function openMailDraft(record) {
@@ -398,6 +508,9 @@
 
       // Spam-check widget renders once its page is visible
       if (typeof initTurnstile === 'function') initTurnstile();
+
+      // The "we are away" note (holiday switch) is only fetched when a form is about to be used
+      if (chosen === 'contact') loadSiteSettings();
     }
 
     // ==================== DARK / LIGHT MODE CONTROLLER ====================
@@ -1349,6 +1462,7 @@
       initBookingDatePicker();
       openModal('booking-modal');
       initTurnstile();
+      loadSiteSettings().then(showHolidayNotes);
     }
 
     function closeBookingModal() {
@@ -1398,6 +1512,7 @@
       const [y, m, d] = date.split('-').map(Number);
       const chosen = new Date(y, m - 1, d);
       if (chosen.getDay() === 0) return fail(t('We make calls Monday through Saturday. Please pick another date.'));
+      if (onHoliday(date)) return fail(t('We are away on that date. Please choose {next} or later.', { next: prettyDay(firstDayBack()) }));
       const prettyDateEn = chosen.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
       const prettyDateLocal = chosen.toLocaleDateString(currentLocale(), { weekday: 'long', month: 'long', day: 'numeric' });
 
@@ -1675,6 +1790,7 @@
         if (callModal && !callModal.classList.contains('hidden')) {
           updateCallStatus();
         }
+        if (holiday) showHolidayNotes();
         const calcWidget = document.getElementById('neon-calculator-widget');
         const calcBtn = document.getElementById('toggle-neon-calc-btn');
         if (calcWidget && calcBtn) {

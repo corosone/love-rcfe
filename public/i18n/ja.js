@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "本日より3か月以内の日付をお選びください。",
     "Please choose a time from the list.": "リストからご希望の時間帯をお選びください。",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "セキュリティ確認を完了してください。表示されない場合は、(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "セキュリティ認証が一時的にご利用いただけません。(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。"
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "セキュリティ認証が一時的にご利用いただけません。(818) 217-5755 までお電話いただくか、loveRCFE@gmail.com までメールでご連絡ください。",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "端末の確認で迷惑メールを防ぎます。",
+    "Visit history improves support.": "閲覧履歴でより良いサポートを。",
+    "Network details prevent abuse.": "ネットワーク情報で不正利用を防ぎます。",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}から{to}まで休業いたします。お電話のご予約は{next}から承ります。",
+    "We are away until {to}. Messages sent now are answered from {next}.": "{to}まで休業中です。ただいまいただいたメッセージには{next}以降に返信いたします。",
+    "We are away on that date. Please choose {next} or later.": "その日は休業日です。{next}以降の日付をお選びください。",
+    "We are away on that date. Please pick another date.": "その日は休業日です。別の日付をお選びください。"
   },
   blocks: {
     "hero_title": "もう少しの明快さを。<br><span class=\"italic text-brand-green font-normal\">もっと深い思いやりを。</span>",

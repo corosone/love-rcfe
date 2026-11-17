@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Pumili ng petsa sa loob ng susunod na 3 buwan.",
     "Please choose a time from the list.": "Pumili ng oras mula sa listahan.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Pakikumpleto ang security check. Kung hindi ito lumalabas, tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Pansamantalang hindi magamit ang security verification. Tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Pansamantalang hindi magamit ang security verification. Tumawag sa (818) 217-5755 o mag-email sa loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Pinipigilan ng device check ang spam.",
+    "Visit history improves support.": "Pinapabuti ng kasaysayan ng pagbisita ang suporta.",
+    "Network details prevent abuse.": "Pinipigilan ng detalye ng network ang pang-aabuso.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Wala kami mula {from} hanggang {to}. Maaaring mag-book ng tawag simula {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Wala kami hanggang {to}. Ang mga mensaheng ipapadala ngayon ay sasagutin simula {next}.",
+    "We are away on that date. Please choose {next} or later.": "Wala kami sa petsang iyon. Pumili ng {next} o mas huli pa.",
+    "We are away on that date. Please pick another date.": "Wala kami sa petsang iyon. Mangyaring pumili ng ibang petsa."
   },
   blocks: {
     "hero_title": "Kaunting linaw pa.<br><span class=\"italic text-brand-green font-normal\">Mas maraming pag-aalaga.</span>",

@@ -30,7 +30,8 @@ export async function buildWeeklySummary(db, nowMs = Date.now()) {
   const sinceIso = new Date(sinceSec * 1000).toISOString();
   const nowSec = Math.floor(nowMs / 1000);
 
-  const [byKind, byStage, handledNew, openAll, visits, audit, blocksActive, blocksNew, blockHits, lockedNow] = await Promise.all([
+  const twoDaysAgoIso = new Date(nowMs - 2 * 24 * 60 * 60 * 1000).toISOString();
+  const [byKind, byStage, handledNew, openAll, visits, audit, blocksActive, blocksNew, blockHits, lockedNow, waitingLong] = await Promise.all([
     db.prepare('SELECT kind, COUNT(*) AS n FROM leads WHERE created_at >= ? GROUP BY kind').bind(sinceIso).all(),
     db.prepare('SELECT stage, COUNT(*) AS n FROM leads WHERE created_at >= ? GROUP BY stage').bind(sinceIso).all(),
     db.prepare('SELECT COUNT(*) AS n FROM leads WHERE created_at >= ? AND handled = 1').bind(sinceIso).first(),
@@ -41,6 +42,8 @@ export async function buildWeeklySummary(db, nowMs = Date.now()) {
     db.prepare('SELECT COUNT(*) AS n FROM blocked_ips WHERE created_at >= ?').bind(sinceSec).first(),
     db.prepare('SELECT COUNT(*) AS n FROM blocked_ips WHERE last_hit >= ?').bind(sinceSec).first(),
     db.prepare('SELECT COUNT(*) AS n FROM auth_attempts WHERE locked_until > ?').bind(nowSec).first(),
+    // Follow-up alarm: still "new", nobody has acted on it, and more than 2 days old
+    db.prepare("SELECT COUNT(*) AS n FROM leads WHERE handled = 0 AND first_response_at = '' AND stage = 'new' AND duplicate_of = 0 AND created_at < ?").bind(twoDaysAgoIso).first(),
   ]);
 
   const kinds = Object.fromEntries((byKind?.results || []).map((r) => [r.kind, n(r)]));
@@ -59,6 +62,7 @@ export async function buildWeeklySummary(db, nowMs = Date.now()) {
       handled: n(handledNew),
       notHandledAllTime: n(openAll),
       oldestNotHandled: openAll?.oldest || '',
+      waitingOverTwoDays: n(waitingLong),
     },
     visits: { views: n(visits), people: n(visits, 'people') },
     staff: {
@@ -96,6 +100,7 @@ export function unusualItems(s) {
   if (s.developer.exports) out.push(`Enquiries were exported or backed up ${s.developer.exports} time(s).`);
   if (s.blocks.triedAgain) out.push(`${s.blocks.triedAgain} blocked address(es) tried to reach the site again.`);
   if (s.lockedNow) out.push(`${s.lockedNow} sign-in lock(s) are active right now.`);
+  if (s.enquiries.waitingOverTwoDays) out.push(`${s.enquiries.waitingOverTwoDays} enquir${s.enquiries.waitingOverTwoDays === 1 ? 'y has' : 'ies have'} waited more than 2 days with no reply (see Tools > Follow-up alarm in the developer console).`);
   if (s.enquiries.notHandledAllTime >= 10) out.push(`${s.enquiries.notHandledAllTime} enquiries are waiting to be marked as handled.`);
   return out;
 }

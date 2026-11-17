@@ -6,6 +6,7 @@ import {
 } from '../../../lib/dev.js';
 import { setRequestLogPaused } from '../../../lib/requestlog.js';
 import { addBlock, removeBlock } from '../../../lib/blocklist.js';
+import { setHoliday, clearHoliday } from '../../../lib/settings.js';
 
 const MAX_DELETE_IDS = 50; // Cloudflare D1 allows at most 100 values per query; stay well under it
 
@@ -137,6 +138,60 @@ const ACTIONS = {
       .run();
     const n = Number(res?.meta?.changes || 0);
     return { message: n ? `Deleted ${n} enquir${n === 1 ? 'y' : 'ies'} older than ${days} days.` : `No enquiries are older than ${days} days.`, detail: `deleted ${n}` };
+  },
+
+  // Marks an enquiry as a repeat of an earlier one (options: id, of). It is marked handled, with
+  // a note "Duplicate of #<of>", so it leaves the open list. Nothing is deleted.
+  async mark_duplicate(request, env, session, options) {
+    const id = Number(options?.id);
+    const of = Number(options?.of);
+    if (!Number.isInteger(id) || id <= 0 || !Number.isInteger(of) || of <= 0 || id === of) {
+      return { ok: false, status: 400, message: 'Choose two different enquiries.' };
+    }
+    const [lead, original] = await Promise.all([
+      env.DB.prepare('SELECT id, notes, duplicate_of AS duplicateOf FROM leads WHERE id = ?').bind(id).first(),
+      env.DB.prepare('SELECT id, duplicate_of AS duplicateOf FROM leads WHERE id = ?').bind(of).first(),
+    ]);
+    if (!lead || !original) return { ok: false, status: 404, message: 'One of those enquiries no longer exists.' };
+    // Always point at the first enquiry, never at another duplicate (no chains).
+    const target = Number(original.duplicateOf) || of;
+    if (target === id) return { ok: false, status: 400, message: 'That enquiry is the original of this group.' };
+    const line = `Duplicate of #${target}`;
+    const notes = String(lead.notes || '');
+    const newNotes = notes.includes(line) ? notes : (notes ? `${notes}\n${line}` : line).slice(0, 2000);
+    await env.DB
+      .prepare(`
+        UPDATE leads SET duplicate_of = ?, handled = 1, notes = ?,
+          handled_at = CASE WHEN handled_at = '' THEN strftime('%Y-%m-%dT%H:%M:%fZ', 'now') ELSE handled_at END
+        WHERE id = ?
+      `)
+      .bind(target, newNotes, id)
+      .run();
+    return { message: `Enquiry #${id} is marked as a duplicate of #${target} and moved to Handled.`, detail: `#${id} of #${target}` };
+  },
+
+  async unmark_duplicate(request, env, session, options) {
+    const id = Number(options?.id);
+    if (!Number.isInteger(id) || id <= 0) return { ok: false, status: 400, message: 'Unknown enquiry.' };
+    const res = await env.DB.prepare('UPDATE leads SET duplicate_of = 0 WHERE id = ? AND duplicate_of != 0').bind(id).run();
+    return Number(res?.meta?.changes || 0)
+      ? { message: `Enquiry #${id} is no longer marked as a duplicate. It stays in Handled; reopen it in the staff inbox if it needs a reply.`, detail: `#${id}` }
+      : { ok: false, status: 404, message: 'That enquiry was not marked as a duplicate.' };
+  },
+
+  // ----- Holiday switch -----
+  // Pauses call bookings for a range of days (options: from, to as YYYY-MM-DD). See lib/settings.js.
+  async set_holiday(request, env, session, options) {
+    const r = await setHoliday(env, options);
+    if (!r.ok) return r;
+    return { message: `Call bookings are paused from ${r.holiday.from} to ${r.holiday.to}. The website shows the note within a minute. Messages through the contact form still arrive as usual.`, detail: `${r.holiday.from} to ${r.holiday.to}` };
+  },
+
+  async clear_holiday(request, env) {
+    const removed = await clearHoliday(env);
+    return removed
+      ? { message: 'Call bookings are open again. The website updates within a minute.' }
+      : { message: 'No break was set, so nothing changed.' };
   },
 
   // ----- Maintenance -----

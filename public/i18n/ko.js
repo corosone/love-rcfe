@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "향후 3개월 이내의 날짜를 선택해 주세요.",
     "Please choose a time from the list.": "목록에서 시간대를 선택해 주세요.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "보안 확인을 완료해 주세요. 화면에 나타나지 않으면 (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 연락해 주세요.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "보안 인증을 일시적으로 이용할 수 없습니다. (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 문의해 주세요."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "보안 인증을 일시적으로 이용할 수 없습니다. (818) 217-5755 로 전화하거나 loveRCFE@gmail.com 으로 문의해 주세요.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "기기 확인으로 스팸을 막습니다.",
+    "Visit history improves support.": "방문 기록으로 더 나은 지원을 드립니다.",
+    "Network details prevent abuse.": "네트워크 정보로 악용을 방지합니다.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}부터 {to}까지 휴무입니다. {next}부터 통화 예약이 가능합니다.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "{to}까지 휴무입니다. 지금 보내신 메시지는 {next}부터 답변드립니다.",
+    "We are away on that date. Please choose {next} or later.": "해당 날짜는 휴무입니다. {next} 이후 날짜를 선택해 주세요.",
+    "We are away on that date. Please pick another date.": "해당 날짜는 휴무입니다. 다른 날짜를 선택해 주세요."
   },
   blocks: {
     "hero_title": "조금 더 선명한 안내.<br><span class=\"italic text-brand-green font-normal\">훨씬 더 깊은 돌봄.</span>",

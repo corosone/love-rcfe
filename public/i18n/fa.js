@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "لطفاً تاریخی در ۳ ماه آینده انتخاب کنید.",
     "Please choose a time from the list.": "لطفاً یک زمان از فهرست انتخاب کنید.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "لطفاً بررسی امنیتی را تکمیل کنید. اگر نمایش داده نمی‌شود، با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "تأیید امنیتی موقتاً در دسترس نیست. لطفاً با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "تأیید امنیتی موقتاً در دسترس نیست. لطفاً با (818) 217-5755 تماس بگیرید یا به loveRCFE@gmail.com ایمیل بزنید.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "بررسی دستگاه از هرزنامه جلوگیری می‌کند.",
+    "Visit history improves support.": "سابقهٔ بازدید پشتیبانی را بهتر می‌کند.",
+    "Network details prevent abuse.": "اطلاعات شبکه از سوءاستفاده جلوگیری می‌کند.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "ما از {from} تا {to} در مرخصی هستیم. از {next} می‌توانید تماس رزرو کنید.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "ما تا {to} در مرخصی هستیم. به پیام‌هایی که اکنون ارسال شوند از {next} پاسخ می‌دهیم.",
+    "We are away on that date. Please choose {next} or later.": "ما در آن روز در مرخصی هستیم. لطفاً {next} یا تاریخی بعد از آن را انتخاب کنید.",
+    "We are away on that date. Please pick another date.": "ما در آن روز در مرخصی هستیم. لطفاً تاریخ دیگری انتخاب کنید."
   },
   blocks: {
     "hero_title": "کمی شفافیت بیشتر.<br> <span class=\"italic text-brand-green font-normal\">مراقبتی بسیار صمیمانه‌تر.</span>",

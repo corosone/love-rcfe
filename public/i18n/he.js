@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "אנא בחרו תאריך בתוך 3 החודשים הקרובים.",
     "Please choose a time from the list.": "אנא בחרו שעה מהרשימה.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "אנא השלימו את בדיקת האבטחה. אם אינה מופיעה, התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "אימות האבטחה אינו זמין זמנית. אנא התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "אימות האבטחה אינו זמין זמנית. אנא התקשרו אל (818) 217-5755 או שלחו אימייל אל loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "בדיקת מכשיר מונעת ספאם.",
+    "Visit history improves support.": "היסטוריית ביקורים משפרת את התמיכה.",
+    "Network details prevent abuse.": "פרטי רשת מונעים שימוש לרעה.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "אנחנו בחופשה מ-{from} עד {to}. אפשר לקבוע שיחה החל מ-{next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "אנחנו בחופשה עד {to}. על הודעות שיישלחו עכשיו נענה החל מ-{next}.",
+    "We are away on that date. Please choose {next} or later.": "אנחנו בחופשה בתאריך הזה. נא לבחור את {next} או תאריך מאוחר יותר.",
+    "We are away on that date. Please pick another date.": "אנחנו בחופשה בתאריך הזה. נא לבחור תאריך אחר."
   },
   blocks: {
     "hero_title": "קצת יותר בהירות.<br> <span class=\"italic text-brand-green font-normal\">הרבה יותר דאגה ומסירות.</span>",

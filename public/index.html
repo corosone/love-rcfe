@@ -2182,6 +2182,8 @@
                 <h2 class="display text-2xl font-medium text-brand-ink">Send an Enquiry</h2>
                 <p class="text-xs text-brand-muted mt-1">We respond to every message with personal attention. No spam, ever.</p>
               </div>
+              <!-- "We are away" note, shown by app.js while the holiday switch is on (set in the developer console) -->
+              <p id="contact-holiday" role="status" data-i18n-skip class="hidden p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-sm font-semibold"></p>
 
               <!-- Inquiry Type Selector -->
               <fieldset>
@@ -2318,6 +2320,11 @@
               <p class="text-brand-muted leading-relaxed">
                 When you submit an enquiry through our contact forms or assessment tools, we collect the details you voluntarily submit: your name, email address, phone number, geographic region, inquiry category, message details, and submission timestamp. We do not sell your personal contact information to third-party marketing brokers.
               </p>
+              <ul class="list-disc pl-5 mt-3 space-y-1 text-brand-muted leading-relaxed">
+                <li>Device checks stop spam.</li>
+                <li>Visit history improves support.</li>
+                <li>Network details prevent abuse.</li>
+              </ul>
             </div>
 
             <div>
@@ -2420,6 +2427,9 @@
           <p class="text-xs text-brand-muted">Complimentary, confidential phone consultation.</p>
         </div>
       </div>
+
+      <!-- Shown by app.js while call bookings are paused for a break (holiday switch) -->
+      <p id="booking-holiday" role="status" data-i18n-skip class="hidden mb-4 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs font-semibold"></p>
 
       <form id="booking-form" class="space-y-4">
         <div>

@@ -476,7 +476,15 @@
     "Please choose a date within the next 3 months.": "Будь ласка, оберіть дату в межах наступних 3 місяців.",
     "Please choose a time from the list.": "Будь ласка, оберіть час зі списку.",
     "Please complete the security check. If it does not appear, call (818) 217-5755 or email loveRCFE@gmail.com.": "Будь ласка, пройдіть перевірку безпеки. Якщо вона не відображається, зателефонуйте на (818) 217-5755 або напишіть на loveRCFE@gmail.com.",
-    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Перевірка безпеки тимчасово недоступна. Будь ласка, зателефонуйте на (818) 217-5755 або напишіть на loveRCFE@gmail.com."
+    "Security verification is temporarily unavailable. Please call (818) 217-5755 or email loveRCFE@gmail.com.": "Перевірка безпеки тимчасово недоступна. Будь ласка, зателефонуйте на (818) 217-5755 або напишіть на loveRCFE@gmail.com.",
+    // Privacy policy lines and the holiday switch notes (added Nov 2026)
+    "Device checks stop spam.": "Перевірка пристрою захищає від спаму.",
+    "Visit history improves support.": "Історія відвідувань покращує підтримку.",
+    "Network details prevent abuse.": "Мережеві дані запобігають зловживанням.",
+    "We are away from {from} to {to}. Calls can be booked from {next}.": "Ми не працюємо з {from} по {to}. Дзвінок можна замовити з {next}.",
+    "We are away until {to}. Messages sent now are answered from {next}.": "Ми не працюємо до {to}. На повідомлення, надіслані зараз, ми відповімо з {next}.",
+    "We are away on that date. Please choose {next} or later.": "Цього дня ми не працюємо. Оберіть {next} або пізнішу дату.",
+    "We are away on that date. Please pick another date.": "Цього дня ми не працюємо. Будь ласка, оберіть іншу дату."
   },
   blocks: {
     "hero_title": "Трохи більше ясності.<br> <span class=\"italic text-brand-green font-normal\">Набагато більше турботи.</span>",
