@@ -186,14 +186,46 @@
 
     // ==================== TURNSTILE (spam protection) ====================
     const TURNSTILE_SITE_KEY = '0x4AAAAAAF_J9TXjVKsqM-AR';
+    const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=initTurnstile';
     const tsWidgets = {};
+    let tsScriptLoading = false;
+    // Cloudflare's Turnstile script is downloaded the first time an enquiry form is on screen,
+    // not on every page view. When it has loaded, it calls window.initTurnstile (see the URL).
+    function loadTurnstileScript() {
+      if (window.turnstile || tsScriptLoading) return;
+      tsScriptLoading = true;
+      const showErrors = () => {
+        if (window.turnstile) return;
+        document.querySelectorAll('.cf-ts').forEach(el => {
+          if (tsWidgets[el.id] === undefined) tsShowError(el);
+        });
+      };
+      const script = document.createElement('script');
+      script.src = TURNSTILE_SCRIPT_URL;
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.referrerPolicy = 'no-referrer';
+      script.addEventListener('error', () => {
+        // Blocked or offline: say so now, and try again the next time a form is shown.
+        script.remove();
+        tsScriptLoading = false;
+        showErrors();
+      });
+      document.head.appendChild(script);
+      // Still not here after 10 seconds: show the message. If the script does arrive later,
+      // initTurnstile replaces the message with the real check.
+      setTimeout(showErrors, 10000);
+    }
     function initTurnstile() {
-      if (!window.turnstile) return;
+      // A widget renders when its page or popup is shown
+      const pending = Array.from(document.querySelectorAll('.cf-ts')).filter(el =>
+        tsWidgets[el.id] === undefined && !el.closest('[hidden], .hidden'));
+      if (!pending.length) return;
+      if (!window.turnstile) { loadTurnstileScript(); return; }
       const tsTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      document.querySelectorAll('.cf-ts').forEach(el => {
-        if (tsWidgets[el.id] !== undefined) return;
-        if (el.closest('[hidden], .hidden')) return; // renders when its page or popup is shown
+      pending.forEach(el => {
         try {
+          el.textContent = ''; // clears an earlier "could not load" message
           tsWidgets[el.id] = turnstile.render(el, { sitekey: TURNSTILE_SITE_KEY, theme: tsTheme });
         } catch (e) { tsShowError(el); }
       });
@@ -205,12 +237,7 @@
       p.textContent = t('The security check could not load. Please turn off ad blockers for this site, or call (818) 217-5755 or email loveRCFE@gmail.com.');
       el.appendChild(p);
     }
-    window.addEventListener('load', () => {
-      initTurnstile();
-      setTimeout(() => {
-        if (!window.turnstile) document.querySelectorAll('.cf-ts').forEach(tsShowError);
-      }, 4000);
-    });
+    window.addEventListener('load', initTurnstile);
     function tsToken(id) {
       try { return tsWidgets[id] !== undefined ? (turnstile.getResponse(tsWidgets[id]) || '') : ''; } catch (e) { return ''; }
     }
@@ -1548,11 +1575,18 @@
     }
 
     document.querySelectorAll('img[data-fallback-src]').forEach(img => {
-      img.addEventListener('error', function onImgErr() {
-        img.removeEventListener('error', onImgErr);
+      const useFallback = () => {
+        img.removeEventListener('error', useFallback);
         const fb = img.getAttribute('data-fallback-src');
-        if (fb) img.src = fb;
-      });
+        if (!fb) return;
+        // srcset would win over src, so the fallback would never be used
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+        img.src = fb;
+      };
+      img.addEventListener('error', useFallback);
+      // The picture may already have failed before this script ran
+      if (img.complete && img.naturalWidth === 0) useFallback();
     });
 
     document.addEventListener('change', e => {
