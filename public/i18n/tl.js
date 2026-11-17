@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "Lisensyadong May-ari ng RCFE, Sacramento CA",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"Ipinaliwanag nila ang kaibahan ng malalaking 100-residenteng assisted living at ng maliliit na residential board-and-care home. Nakatipid kami ng halos $2,400 bawat buwan at nabigyan si Tatay ng 1-sa-3 na personal na pag-aalaga.\"",
     "Family Caregivers, Irvine CA": "Mga Tagapag-alaga sa Pamilya, Irvine CA",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* Kinatawang karanasan ng mga kliyente. Ang tunay na talaan ng pamilya at pasilidad ay mahigpit na kumpidensyal.",
+    "* Representative composite client experiences.": "* Kinatawang karanasan ng mga kliyente.",
     "Our Core Practice": "Aming Pangunahing Serbisyo",
     "Expert Guidance for Families & Care Providers": "Dalubhasang Gabay para sa mga Pamilya at Care Provider",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "Ang mga desisyon sa pag-aalaga ay nakakaapekto sa kalusugan, dignidad, at ipon habambuhay. Nagbibigay kami ng malinaw at patas na payo sa paghahanap ng tahanan o pagsisimula ng negosyong care home.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "Mas gusto ba ng nakatakdang tawag sa telepono?",
     "Click here to pick a 15-minute slot on our calendar →": "I-click dito upang pumili ng 15-minutong oras sa aming kalendaryo →",
     "Send an Enquiry": "Magpadala ng Pagtatanong",
-    "We respond to every message with personal attention. No spam, ever.": "Personal naming sinasagot ang bawat mensahe. Walang spam, kailanman.",
+    "We respond to every message with personal attention.": "Personal naming sinasagot ang bawat mensahe.",
     "I am reaching out regarding *": "Sumusulat ako tungkol sa *",
     "Elder Care / Family Placement": "Pag-aalaga sa Matatanda / Paghahanap ng Pamilya",
     "RCFE Licensing & Consulting": "Lisensyang RCFE at Pagkonsulta",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "hal. Maria Santos",
     "you@domain.com": "ikaw@domain.com",
     "e.g. San Jose, Irvine, Roseville": "hal. San Jose, Irvine, Daly City",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "Ibahagi ang nais na petsa, lugar, at pinakamainam na oras upang makontak kayo, o ilarawan ang proyekto ng inyong care home (huwag maglagay ng medikal na rekord o SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "Ibahagi ang nais na petsa, lugar, at pinakamainam na oras upang makontak kayo, o ilarawan ang proyekto ng inyong care home...",
     "Close dialog": "Isara ang dialog",
     "Full name": "Buong pangalan",
     "Back to top": "Bumalik sa itaas",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Wala kami mula {from} hanggang {to}. Maaaring mag-book ng tawag simula {next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Wala kami hanggang {to}. Ang mga mensaheng ipapadala ngayon ay sasagutin simula {next}.",
     "We are away on that date. Please choose {next} or later.": "Wala kami sa petsang iyon. Pumili ng {next} o mas huli pa.",
-    "We are away on that date. Please pick another date.": "Wala kami sa petsang iyon. Mangyaring pumili ng ibang petsa."
+    "We are away on that date. Please pick another date.": "Wala kami sa petsang iyon. Mangyaring pumili ng ibang petsa.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. Pag-iingat sa Inyong Impormasyon",
+    "Messages are sent securely.": "Ligtas na ipinapadala ang mga mensahe.",
+    "Every enquiry stays confidential.": "Kumpidensyal ang bawat tanong.",
+    "Only used to respond.": "Ginagamit lamang para sumagot.",
+    "We never send spam.": "Hindi kami nagpapadala ng spam.",
+    "Family records stay confidential.": "Kumpidensyal ang talaan ng pamilya.",
+    "Keep bank details private.": "Huwag ibahagi ang detalye ng bangko."
   },
   blocks: {
     "hero_title": "Kaunting linaw pa.<br><span class=\"italic text-brand-green font-normal\">Mas maraming pag-aalaga.</span>",

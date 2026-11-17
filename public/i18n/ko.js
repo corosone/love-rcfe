@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "인가 RCFE 시설 대표 · 캘리포니아 새크라멘토",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"100인 규모 대형 시설과 소규모 주거형 보드앤케어의 차이를 명확히 설명해 주셨습니다. 덕분에 매달 약 2,400달러를 아끼면서 아버지께 1대3 밀착 돌봄을 해드릴 수 있었어요.\"",
     "Family Caregivers, Irvine CA": "가족 보호자 · 캘리포니아 어바인",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* 고객 사례를 바탕으로 구성한 대표 후기이며, 실제 가족 및 시설 기록은 엄격히 비밀이 유지됩니다.",
+    "* Representative composite client experiences.": "* 고객 사례를 바탕으로 구성한 대표 후기입니다.",
     "Our Core Practice": "핵심 전문 분야",
     "Expert Guidance for Families & Care Providers": "가족과 시설 운영자를 위한 전문 컨설팅",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "돌봄에 관한 결정은 건강과 존엄성, 그리고 평생 모은 자산에 직결됩니다. 어르신 입소 안내든 RCFE 창업 준비든 명쾌하고 객관적인 전문 지식을 제공합니다.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "원하시는 시간에 전화 상담을 받고 싶으신가요?",
     "Click here to pick a 15-minute slot on our calendar →": "여기를 클릭해 15분 상담 시간을 선택하세요 →",
     "Send an Enquiry": "온라인 상담 문의",
-    "We respond to every message with personal attention. No spam, ever.": "모든 문의에 담당자가 직접 정성껏 답변드리며, 스팸 연락은 절대 하지 않습니다.",
+    "We respond to every message with personal attention.": "모든 문의에 담당자가 직접 정성껏 답변드립니다.",
     "I am reaching out regarding *": "문의 분야 선택 *",
     "Elder Care / Family Placement": "어르신 돌봄 / 가족 입소 연계",
     "RCFE Licensing & Consulting": "RCFE 인허가 및 운영 컨설팅",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "예: 홍길동",
     "you@domain.com": "example@email.com",
     "e.g. San Jose, Irvine, Roseville": "예: San Jose, Irvine, Fullerton",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "희망 입소 시기, 지역, 연락 가능한 시간대를 알려주시거나 준비 중인 요양홈 개원 계획을 적어주세요(상세 의료 기록 및 SSN 제외)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "희망 입소 시기, 지역, 연락 가능한 시간대를 알려주시거나 준비 중인 요양홈 개원 계획을 적어주세요...",
     "Close dialog": "창 닫기",
     "Full name": "성함",
     "Back to top": "맨 위로",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}부터 {to}까지 휴무입니다. {next}부터 통화 예약이 가능합니다.",
     "We are away until {to}. Messages sent now are answered from {next}.": "{to}까지 휴무입니다. 지금 보내신 메시지는 {next}부터 답변드립니다.",
     "We are away on that date. Please choose {next} or later.": "해당 날짜는 휴무입니다. {next} 이후 날짜를 선택해 주세요.",
-    "We are away on that date. Please pick another date.": "해당 날짜는 휴무입니다. 다른 날짜를 선택해 주세요."
+    "We are away on that date. Please pick another date.": "해당 날짜는 휴무입니다. 다른 날짜를 선택해 주세요.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. 정보 보호",
+    "Messages are sent securely.": "메시지는 안전하게 전송됩니다.",
+    "Every enquiry stays confidential.": "모든 문의는 비밀이 유지됩니다.",
+    "Only used to respond.": "답변 목적으로만 사용됩니다.",
+    "We never send spam.": "스팸은 절대 보내지 않습니다.",
+    "Family records stay confidential.": "가족 기록은 비밀로 유지됩니다.",
+    "Keep bank details private.": "은행 정보는 보내지 마세요."
   },
   blocks: {
     "hero_title": "조금 더 선명한 안내.<br><span class=\"italic text-brand-green font-normal\">훨씬 더 깊은 돌봄.</span>",

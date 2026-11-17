@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "Ліцензований власник RCFE, Sacramento, Каліфорнія",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "«Вони пояснили різницю між комерційними комплексами на 100 мешканців і невеликими домашніми будинками догляду. Це заощадило нам майже $2,400 на місяць і забезпечило батькові персональну увагу у співвідношенні 1 доглядальник на 3 мешканців».",
     "Family Caregivers, Irvine CA": "Родина опікунів, Irvine, Каліфорнія",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* Типові узагальнені історії клієнтів. Реальні дані родин і закладів зберігаються в суворій конфіденційності.",
+    "* Representative composite client experiences.": "* Типові узагальнені історії клієнтів.",
     "Our Core Practice": "Наша основна спеціалізація",
     "Expert Guidance for Families & Care Providers": "Експертний супровід для родин і надавачів догляду",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "Рішення щодо догляду впливають на здоров’я, гідність і багаторічні заощадження. Ми надаємо чітку та об’єктивну експертну підтримку як при виборі закладу для близької людини, так і при відкритті бізнесу у сфері догляду.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "Бажаєте запланувати дзвінок на зручний час?",
     "Click here to pick a 15-minute slot on our calendar →": "Натисніть тут, щоб обрати 15-хвилинний слот у нашому календарі →",
     "Send an Enquiry": "Надіслати запит",
-    "We respond to every message with personal attention. No spam, ever.": "Ми особисто відповідаємо на кожне повідомлення. Жодного спаму.",
+    "We respond to every message with personal attention.": "Ми особисто відповідаємо на кожне повідомлення.",
     "I am reaching out regarding *": "Тема мого звернення *",
     "Elder Care / Family Placement": "Догляд за літньою людиною / підбір закладу для родини",
     "RCFE Licensing & Consulting": "Ліцензування RCFE та консалтинг",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "напр. Олена Коваленко",
     "you@domain.com": "vash.email@example.com",
     "e.g. San Jose, Irvine, Roseville": "напр. San Jose, Irvine, Roseville",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "Вкажіть бажані терміни, регіон і зручний час для зв’язку або опишіть ваш майбутній проєкт будинку догляду (будь ласка, без медичних виписок і SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "Вкажіть бажані терміни, регіон і зручний час для зв’язку або опишіть ваш майбутній проєкт будинку догляду...",
     "Close dialog": "Закрити вікно",
     "Full name": "Повне ім’я",
     "Back to top": "Догори",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Ми не працюємо з {from} по {to}. Дзвінок можна замовити з {next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Ми не працюємо до {to}. На повідомлення, надіслані зараз, ми відповімо з {next}.",
     "We are away on that date. Please choose {next} or later.": "Цього дня ми не працюємо. Оберіть {next} або пізнішу дату.",
-    "We are away on that date. Please pick another date.": "Цього дня ми не працюємо. Будь ласка, оберіть іншу дату."
+    "We are away on that date. Please pick another date.": "Цього дня ми не працюємо. Будь ласка, оберіть іншу дату.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. Захист вашої інформації",
+    "Messages are sent securely.": "Повідомлення передаються захищено.",
+    "Every enquiry stays confidential.": "Кожне звернення конфіденційне.",
+    "Only used to respond.": "Використовується лише для відповіді.",
+    "We never send spam.": "Жодного спаму.",
+    "Family records stay confidential.": "Дані родин конфіденційні.",
+    "Keep bank details private.": "Не надсилайте банківські дані."
   },
   blocks: {
     "hero_title": "Трохи більше ясності.<br> <span class=\"italic text-brand-green font-normal\">Набагато більше турботи.</span>",

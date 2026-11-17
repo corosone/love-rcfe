@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "ម្ចាស់ RCFE មានអាជ្ញាប័ណ្ណ, Sacramento CA",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"ពួកគេបានពន្យល់ពីភាពខុសគ្នារវាងមណ្ឌលរស់នៅដោយមានជំនួយខ្នាតធំ 100 នាក់ និងផ្ទះថែទាំស្នាក់នៅខ្នាតតូច។ ការណ៍នេះបានជួយសន្សំប្រាក់យើងជិត $2,400 ក្នុងមួយខែ ហើយផ្តល់ឱ្យឪពុកខ្ញុំនូវការយកចិត្តទុកដាក់ផ្ទាល់ខ្លួនក្នុងសមាមាត្រ 1 ទល់ 3។\"",
     "Family Caregivers, Irvine CA": "អ្នកមើលថែគ្រួសារ, Irvine CA",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* ឧទាហរណ៍បទពិសោធន៍តំណាងរបស់អតិថិជន។ កំណត់ត្រាពិតរបស់គ្រួសារ និងមណ្ឌលត្រូវបានរក្សាជាការសម្ងាត់យ៉ាងតឹងរ៉ឹង។",
+    "* Representative composite client experiences.": "* ឧទាហរណ៍បទពិសោធន៍តំណាងរបស់អតិថិជន។",
     "Our Core Practice": "ជំនាញស្នូលរបស់យើង",
     "Expert Guidance for Families & Care Providers": "ការណែនាំប្រកបដោយវិជ្ជាជីវៈសម្រាប់គ្រួសារ និងអ្នកផ្តល់សេវាថែទាំ",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "ការសម្រេចចិត្តផ្នែកថែទាំប៉ះពាល់ដល់សុខភាព សេចក្តីថ្លៃថ្នូរ និងប្រាក់សន្សំពេញមួយជីវិត។ យើងផ្តល់ជូននូវជំនាញច្បាស់លាស់ និងមិនលំអៀង មិនថាលោកអ្នកកំពុងស្វែងរកកន្លែងស្នាក់នៅសម្រាប់មនុស្សជាទីស្រឡាញ់ ឬកំពុងចាប់ផ្តើមអាជីវកម្មថែទាំមនុស្សចាស់នោះទេ។",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "ចូលចិត្តការហៅទូរស័ព្ទដែលបានកំណត់ពេលទុកជាមុនមែនទេ?",
     "Click here to pick a 15-minute slot on our calendar →": "ចុចទីនេះដើម្បីជ្រើសរើសម៉ោង 15 នាទីលើប្រតិទិនរបស់យើង →",
     "Send an Enquiry": "ផ្ញើការសាកសួរ",
-    "We respond to every message with personal attention. No spam, ever.": "យើងឆ្លើយតបគ្រប់សារដោយការយកចិត្តទុកដាក់ផ្ទាល់ខ្លួន។ គ្មានសារឥតបានការឡើយ។",
+    "We respond to every message with personal attention.": "យើងឆ្លើយតបគ្រប់សារដោយការយកចិត្តទុកដាក់ផ្ទាល់ខ្លួន។",
     "I am reaching out regarding *": "ខ្ញុំទាក់ទងមកពាក់ព័ន្ធនឹង *",
     "Elder Care / Family Placement": "ការថែទាំមនុស្សចាស់ / ការស្វែងរកកន្លែងស្នាក់នៅសម្រាប់គ្រួសារ",
     "RCFE Licensing & Consulting": "ការសុំអាជ្ញាប័ណ្ណ RCFE និងការប្រឹក្សា",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "ឧ. Eleanor Vance",
     "you@domain.com": "yourname@example.com",
     "e.g. San Jose, Irvine, Roseville": "ឧ. San Jose, Irvine, Roseville",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "ចែករំលែករយៈពេល តំបន់ និងពេលវេលាល្អបំផុតដើម្បីទាក់ទងលោកអ្នក ឬពិពណ៌នាគម្រោងផ្ទះថែទាំអនាគតរបស់លោកអ្នក (សូមកុំបញ្ចូលកំណត់ត្រាវេជ្ជសាស្ត្រ ឬ SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "ចែករំលែករយៈពេល តំបន់ និងពេលវេលាល្អបំផុតដើម្បីទាក់ទងលោកអ្នក ឬពិពណ៌នាគម្រោងផ្ទះថែទាំអនាគតរបស់លោកអ្នក...",
     "Close dialog": "បិទប្រអប់សន្ទនា",
     "Full name": "ឈ្មោះពេញ",
     "Back to top": "ត្រឡប់ទៅខាងលើ",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "យើងឈប់សម្រាកពី {from} ដល់ {to}។ អាចកក់ការហៅទូរសព្ទចាប់ពី {next}។",
     "We are away until {to}. Messages sent now are answered from {next}.": "យើងឈប់សម្រាករហូតដល់ {to}។ សារដែលផ្ញើឥឡូវនេះនឹងត្រូវឆ្លើយតបចាប់ពី {next}។",
     "We are away on that date. Please choose {next} or later.": "យើងឈប់សម្រាកនៅថ្ងៃនោះ។ សូមជ្រើសរើស {next} ឬថ្ងៃក្រោយ។",
-    "We are away on that date. Please pick another date.": "យើងឈប់សម្រាកនៅថ្ងៃនោះ។ សូមជ្រើសរើសកាលបរិច្ឆេទផ្សេង។"
+    "We are away on that date. Please pick another date.": "យើងឈប់សម្រាកនៅថ្ងៃនោះ។ សូមជ្រើសរើសកាលបរិច្ឆេទផ្សេង។",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. ការការពារព័ត៌មានរបស់លោកអ្នក",
+    "Messages are sent securely.": "សារត្រូវបានផ្ញើដោយសុវត្ថិភាព។",
+    "Every enquiry stays confidential.": "រាល់សំណួរត្រូវបានរក្សាជាការសម្ងាត់។",
+    "Only used to respond.": "ប្រើសម្រាប់តែការឆ្លើយតបប៉ុណ្ណោះ។",
+    "We never send spam.": "យើងមិនដែលផ្ញើសារឥតបានការឡើយ។",
+    "Family records stay confidential.": "កំណត់ត្រាគ្រួសារត្រូវបានរក្សាជាការសម្ងាត់។",
+    "Keep bank details private.": "សូមកុំផ្ញើព័ត៌មានធនាគារ។"
   },
   blocks: {
     "hero_title": "ភាពច្បាស់លាស់កាន់តែច្រើន។<br> <span class=\"italic text-brand-green font-normal\">ការយកចិត្តទុកដាក់កាន់តែខ្លាំង។</span>",

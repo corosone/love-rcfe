@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "مالكة دار RCFE مرخصة، ساكرامنتو، كاليفورنيا",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"شرحوا لنا الفرق بين المجمعات التجارية الكبيرة التي تضم 100 مقيم وبيوت الرعاية السكنية الصغيرة. وفر ذلك علينا قرابة $2,400 شهرياً ومنح والدي رعاية شخصية بنسبة 1 إلى 3.\"",
     "Family Caregivers, Irvine CA": "مقدمو رعاية عائليون، إرفاين، كاليفورنيا",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* تجارب تمثيلية مجمعة لعملائنا. تبقى السجلات الفعلية للعائلات والمرافق سرية تماماً.",
+    "* Representative composite client experiences.": "* تجارب تمثيلية مجمعة لعملائنا.",
     "Our Core Practice": "ممارستنا الأساسية",
     "Expert Guidance for Families & Care Providers": "إرشاد خبير للعائلات ومقدمي الرعاية",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "تؤثر قرارات الرعاية على الصحة والكرامة ومدخرات العمر. نقدم خبرة واضحة وموضوعية سواء كنت تبحث عن رعاية لقريب أو تطلق مشروع رعاية مسنين.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "هل تفضل مكالمة هاتفية مجدولة؟",
     "Click here to pick a 15-minute slot on our calendar →": "انقر هنا لاختيار موعد مدته 15 دقيقة في جدولنا →",
     "Send an Enquiry": "أرسل استفساراً",
-    "We respond to every message with personal attention. No spam, ever.": "نرد على كل رسالة باهتمام شخصي. لا رسائل مزعجة أبداً.",
+    "We respond to every message with personal attention.": "نرد على كل رسالة باهتمام شخصي.",
     "I am reaching out regarding *": "أتواصل بخصوص *",
     "Elder Care / Family Placement": "رعاية المسنين / التسكين العائلي",
     "RCFE Licensing & Consulting": "ترخيص RCFE والاستشارات",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "مثال: سعاد المنصور",
     "you@domain.com": "you@domain.com",
     "e.g. San Jose, Irvine, Roseville": "مثال: لوس أنجلوس، إرفاين، سان خوسيه",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "شاركنا الجدول الزمني المفضل والمنطقة وأفضل وقت للتواصل، أو صف مشروع دار الرعاية المرتقب (يرجى عدم ذكر السجلات الطبية أو أرقام SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "شاركنا الجدول الزمني المفضل والمنطقة وأفضل وقت للتواصل، أو صف مشروع دار الرعاية المرتقب...",
     "Close dialog": "إغلاق النافذة",
     "Full name": "الاسم الكامل",
     "Back to top": "العودة للأعلى",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "نحن في إجازة من {from} إلى {to}. يمكن حجز المكالمات ابتداءً من {next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "نحن في إجازة حتى {to}. سنرد على الرسائل المرسلة الآن ابتداءً من {next}.",
     "We are away on that date. Please choose {next} or later.": "نحن في إجازة في ذلك اليوم. يرجى اختيار {next} أو تاريخ لاحق.",
-    "We are away on that date. Please pick another date.": "نحن في إجازة في ذلك اليوم. يرجى اختيار تاريخ آخر."
+    "We are away on that date. Please pick another date.": "نحن في إجازة في ذلك اليوم. يرجى اختيار تاريخ آخر.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. حماية معلوماتك",
+    "Messages are sent securely.": "تُرسل الرسائل بشكل آمن.",
+    "Every enquiry stays confidential.": "كل استفسار يبقى سرياً.",
+    "Only used to respond.": "تُستخدم فقط للرد عليك.",
+    "We never send spam.": "لا نرسل رسائل مزعجة أبداً.",
+    "Family records stay confidential.": "سجلات العائلات تبقى سرية.",
+    "Keep bank details private.": "لا ترسل بيانات مصرفية."
   },
   blocks: {
     "hero_title": "وضوح أكثر قليلاً.<br><span class=\"italic text-brand-green font-normal\">ورعاية أكبر بكثير.</span>",

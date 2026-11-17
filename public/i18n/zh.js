@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "持牌 RCFE 机构业主 · 加州萨克拉门托",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "“他们清晰比较了百人大型商业养老社区与小型家庭式照护之家的差异。这不仅每月为我们节省了近 2,400 美元，也让父亲享受到 1 对 3 的贴心照护。”",
     "Family Caregivers, Irvine CA": "家庭照护者 · 加州尔湾",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* 以上为具有代表性的客户综合案例展示。真实家庭与机构档案均严格保密。",
+    "* Representative composite client experiences.": "* 以上为具有代表性的客户综合案例展示。",
     "Our Core Practice": "核心服务领域",
     "Expert Guidance for Families & Care Providers": "为家庭与照护机构提供专家级指导",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "照护决策关乎长者的健康、尊严与家庭毕生积蓄。无论您是为亲人寻找居所还是创立长者照护事业，我们都提供透明客观的专业支持。",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "更希望预约时段接听回电？",
     "Click here to pick a 15-minute slot on our calendar →": "点击此处挑选 15 分钟专属通话时段 →",
     "Send an Enquiry": "发送在线咨询",
-    "We respond to every message with personal attention. No spam, ever.": "每条留言均由人工贴心跟进回复，绝无垃圾邮件。",
+    "We respond to every message with personal attention.": "每条留言均由人工贴心跟进回复。",
     "I am reaching out regarding *": "我的咨询主题 *",
     "Elder Care / Family Placement": "长者照护 / 家庭安置寻找床位",
     "RCFE Licensing & Consulting": "RCFE 牌照申请与开办咨询",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "例如：李明慧",
     "you@domain.com": "yourname@example.com",
     "e.g. San Jose, Irvine, Roseville": "例如：San Jose, Irvine, Pasadena",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "请简述期望入住时间、所在城市与方便联系的时段，或介绍您的 RCFE 开办计划（请勿包含病历或社安号）...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "请简述期望入住时间、所在城市与方便联系的时段，或介绍您的 RCFE 开办计划...",
     "Close dialog": "关闭弹窗",
     "Full name": "姓名",
     "Back to top": "返回顶部",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "我们将于{from}至{to}休假。{next}起可预约通话。",
     "We are away until {to}. Messages sent now are answered from {next}.": "我们休假至{to}。现在发送的留言将从{next}起回复。",
     "We are away on that date. Please choose {next} or later.": "我们当天休假。请选择{next}或之后的日期。",
-    "We are away on that date. Please pick another date.": "我们当天休假。请选择其他日期。"
+    "We are away on that date. Please pick another date.": "我们当天休假。请选择其他日期。",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. 信息安全保障",
+    "Messages are sent securely.": "留言通过安全方式传输。",
+    "Every enquiry stays confidential.": "每条咨询均严格保密。",
+    "Only used to respond.": "仅用于回复您的咨询。",
+    "We never send spam.": "绝不发送垃圾信息。",
+    "Family records stay confidential.": "家庭档案严格保密。",
+    "Keep bank details private.": "请勿提供银行信息。"
   },
   blocks: {
     "hero_title": "多一份清晰指引。<br><span class=\"italic text-brand-green font-normal\">多十分用心照护。</span>",

@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "認可 RCFE オーナー・カリフォルニア州 Sacramento",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "「100人規模の商業的なアシステッド・リビングと、小規模な居住型 Board & Care ホームの違いをわかりやすく説明してくれました。おかげで毎月約 $2,400 を節約できたうえ、父は介護スタッフ1名につき入居者3名という手厚いケアを受けられています。」",
     "Family Caregivers, Irvine CA": "ご家族介護者・カリフォルニア州 Irvine",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "※ ご相談事例をもとに再構成した代表的な体験談です。実際のご家族および施設に関する記録は厳重に守秘管理しております。",
+    "* Representative composite client experiences.": "※ ご相談事例をもとに再構成した代表的な体験談です。",
     "Our Core Practice": "中核となる専門サービス",
     "Expert Guidance for Families & Care Providers": "ご家族と介護事業者の双方に寄り添う専門支援",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "ケアに関する決断は、健康・尊厳・大切な資産のすべてに関わる重要な選択です。ご家族の入居先探しにおいても、高齢者ケア事業の立ち上げにおいても、客観的で明快な専門知見をご提供いたします。",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "ご希望日時の電話予約をご希望ですか？",
     "Click here to pick a 15-minute slot on our calendar →": "こちらをクリックしてカレンダーから15分枠を選択 →",
     "Send an Enquiry": "お問い合わせを送信",
-    "We respond to every message with personal attention. No spam, ever.": "すべてのメッセージに担当者が心を込めて個別にご返信します。迷惑メールの送信は一切いたしません。",
+    "We respond to every message with personal attention.": "すべてのメッセージに担当者が心を込めて個別にご返信します。",
     "I am reaching out regarding *": "お問い合わせ内容 *",
     "Elder Care / Family Placement": "高齢者ケア・ご家族の施設探し",
     "RCFE Licensing & Consulting": "RCFE ライセンス取得・開業コンサルティング",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "例：佐藤 花子",
     "you@domain.com": "yourname@example.com",
     "e.g. San Jose, Irvine, Roseville": "例：San Jose, Irvine, Roseville",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "ご希望の時期、地域、ご連絡しやすい時間帯、または開業をご検討中のケアホーム計画についてお知らせください（医療記録や社会保障番号はご記入にならないでください）...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "ご希望の時期、地域、ご連絡しやすい時間帯、または開業をご検討中のケアホーム計画についてお知らせください...",
     "Close dialog": "ダイアログを閉じる",
     "Full name": "お名前（フルネーム）",
     "Back to top": "ページトップへ戻る",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}から{to}まで休業いたします。お電話のご予約は{next}から承ります。",
     "We are away until {to}. Messages sent now are answered from {next}.": "{to}まで休業中です。ただいまいただいたメッセージには{next}以降に返信いたします。",
     "We are away on that date. Please choose {next} or later.": "その日は休業日です。{next}以降の日付をお選びください。",
-    "We are away on that date. Please pick another date.": "その日は休業日です。別の日付をお選びください。"
+    "We are away on that date. Please pick another date.": "その日は休業日です。別の日付をお選びください。",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. 情報の安全管理",
+    "Messages are sent securely.": "メッセージは安全に送信されます。",
+    "Every enquiry stays confidential.": "ご相談内容は厳重に守秘します。",
+    "Only used to respond.": "ご返信の目的にのみ使用します。",
+    "We never send spam.": "迷惑メールは一切送りません。",
+    "Family records stay confidential.": "ご家族の記録は厳重に管理します。",
+    "Keep bank details private.": "銀行口座情報はご記入にならないでください。"
   },
   blocks: {
     "hero_title": "もう少しの明快さを。<br><span class=\"italic text-brand-green font-normal\">もっと深い思いやりを。</span>",

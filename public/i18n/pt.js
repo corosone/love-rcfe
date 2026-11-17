@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "Proprietária de RCFE Licenciado, Sacramento CA",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "\"Eles explicaram a diferença entre grandes empreendimentos comerciais para 100 residentes e pequenas casas residenciais de cuidados. Isso nos economizou quase $2,400 por mês e deu ao meu pai atenção pessoal na proporção de 1 para 3.\"",
     "Family Caregivers, Irvine CA": "Cuidadores Familiares, Irvine CA",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* Relatos compostos representativos de experiências reais. Registros reais de famílias e residenciais são mantidos sob sigilo absoluto.",
+    "* Representative composite client experiences.": "* Relatos compostos representativos de experiências reais.",
     "Our Core Practice": "Nossa Atuação Principal",
     "Expert Guidance for Families & Care Providers": "Orientação Especializada para Famílias e Operadores de Cuidados",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "Decisões sobre cuidados impactam a saúde, a dignidade e as economias de uma vida. Oferecemos consultoria clara e objetiva, seja para acolher um ente querido ou lançar um negócio de cuidados para idosos.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "Prefere uma ligação agendada?",
     "Click here to pick a 15-minute slot on our calendar →": "Clique aqui para escolher um horário de 15 minutos em nossa agenda →",
     "Send an Enquiry": "Enviar Mensagem",
-    "We respond to every message with personal attention. No spam, ever.": "Respondemos a cada mensagem com atenção pessoal. Nunca enviamos spam.",
+    "We respond to every message with personal attention.": "Respondemos a cada mensagem com atenção pessoal.",
     "I am reaching out regarding *": "Estou entrando em contato sobre *",
     "Elder Care / Family Placement": "Cuidados para Idosos / Acolhimento Familiar",
     "RCFE Licensing & Consulting": "Licenciamento RCFE e Consultoria",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "ex.: Helena Silva",
     "you@domain.com": "seunome@exemplo.com",
     "e.g. San Jose, Irvine, Roseville": "ex.: San Jose, Irvine, Roseville",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "Informe seu prazo desejado, região e melhor horário para contato, ou descreva seu projeto de casa de cuidados (evite incluir prontuários médicos ou SSNs)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "Informe seu prazo desejado, região e melhor horário para contato, ou descreva seu projeto de casa de cuidados...",
     "Close dialog": "Fechar janela",
     "Full name": "Nome completo",
     "Back to top": "Voltar ao topo",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Estaremos ausentes de {from} a {to}. É possível agendar ligações a partir de {next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Estaremos ausentes até {to}. As mensagens enviadas agora serão respondidas a partir de {next}.",
     "We are away on that date. Please choose {next} or later.": "Estaremos ausentes nesse dia. Escolha {next} ou uma data posterior.",
-    "We are away on that date. Please pick another date.": "Estaremos ausentes nesse dia. Por favor, escolha outra data."
+    "We are away on that date. Please pick another date.": "Estaremos ausentes nesse dia. Por favor, escolha outra data.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. Como Protegemos Suas Informações",
+    "Messages are sent securely.": "As mensagens são enviadas com segurança.",
+    "Every enquiry stays confidential.": "Cada solicitação é confidencial.",
+    "Only used to respond.": "Usado apenas para responder.",
+    "We never send spam.": "Nunca enviamos spam.",
+    "Family records stay confidential.": "Registros familiares são sigilosos.",
+    "Keep bank details private.": "Não envie dados bancários."
   },
   blocks: {
     "hero_title": "Um pouco mais de clareza.<br> <span class=\"italic text-brand-green font-normal\">Muito mais cuidado.</span>",

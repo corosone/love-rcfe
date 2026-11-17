@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "Лицензированный владелец RCFE, Сакраменто, Калифорния",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "«Нам подробно объяснили разницу между крупными коммерческими комплексами на 100 человек и небольшими семейными пансионатами. Это сэкономило почти $2,400 в месяц и дало отцу персональный уход в соотношении 1 к 3».",
     "Family Caregivers, Irvine CA": "Родственники, Ирвайн, Калифорния",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* Обобщенные примеры опыта клиентов. Реальные данные семей и учреждений хранятся в строгой конфиденциальности.",
+    "* Representative composite client experiences.": "* Обобщенные примеры опыта клиентов.",
     "Our Core Practice": "Наша основная практика",
     "Expert Guidance for Families & Care Providers": "Экспертная помощь семьям и владельцам пансионатов",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "Решения об уходе влияют на здоровье, достоинство и сбережения всей жизни. Мы даем ясную, объективную экспертизу как при размещении близкого человека, так и при открытии бизнеса.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "Предпочитаете запланированный звонок?",
     "Click here to pick a 15-minute slot on our calendar →": "Нажмите здесь, чтобы выбрать 15-минутный слот в календаре →",
     "Send an Enquiry": "Отправить запрос",
-    "We respond to every message with personal attention. No spam, ever.": "Мы лично отвечаем на каждое сообщение. Никакого спама.",
+    "We respond to every message with personal attention.": "Мы лично отвечаем на каждое сообщение.",
     "I am reaching out regarding *": "Тема обращения *",
     "Elder Care / Family Placement": "Уход за пожилыми / Подбор пансионата",
     "RCFE Licensing & Consulting": "Лицензирование RCFE и консалтинг",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "напр., Анна Соколова",
     "you@domain.com": "you@domain.com",
     "e.g. San Jose, Irvine, Roseville": "напр., Лос-Анджелес, Сан-Хосе, Сакраменто",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "Укажите желаемые сроки, район и удобное время для звонка, либо опишите проект вашего пансионата (пожалуйста, без медицинских выписок и SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "Укажите желаемые сроки, район и удобное время для звонка, либо опишите проект вашего пансионата...",
     "Close dialog": "Закрыть окно",
     "Full name": "Имя и фамилия",
     "Back to top": "Наверх",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Мы не работаем с {from} по {to}. Звонок можно заказать с {next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Мы не работаем до {to}. На сообщения, отправленные сейчас, мы ответим с {next}.",
     "We are away on that date. Please choose {next} or later.": "В этот день мы не работаем. Выберите {next} или более позднюю дату.",
-    "We are away on that date. Please pick another date.": "В этот день мы не работаем. Пожалуйста, выберите другую дату."
+    "We are away on that date. Please pick another date.": "В этот день мы не работаем. Пожалуйста, выберите другую дату.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. Защита вашей информации",
+    "Messages are sent securely.": "Сообщения передаются защищённо.",
+    "Every enquiry stays confidential.": "Каждое обращение конфиденциально.",
+    "Only used to respond.": "Используется только для ответа.",
+    "We never send spam.": "Никакого спама.",
+    "Family records stay confidential.": "Данные семей конфиденциальны.",
+    "Keep bank details private.": "Не отправляйте банковские данные."
   },
   blocks: {
     "hero_title": "Больше ясности.<br><span class=\"italic text-brand-green font-normal\">Больше заботы.</span>",

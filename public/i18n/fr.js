@@ -79,7 +79,7 @@
     "Licensed RCFE Owner, Sacramento CA": "Propriétaire agréée d'un RCFE, Sacramento CA",
     "\"They explained the difference between commercial 100-resident assisted living facilities and small residential board-and-care homes. That saved us nearly $2,400 a month and gave my father 1-on-3 personal attention.\"": "« Ils nous ont expliqué la différence entre les grands établissements commerciaux de 100 résidents et les petits foyers résidentiels de soins. Cela nous a fait économiser près de 2 400 $ par mois tout en offrant à mon père un accompagnement personnalisé à raison d'un soignant pour trois résidents. »",
     "Family Caregivers, Irvine CA": "Aidants familiaux, Irvine CA",
-    "* Representative composite client experiences. Real family and facility records are kept strictly confidential.": "* Expériences clients composites représentatives. Les dossiers réels des familles et des établissements restent strictement confidentiels.",
+    "* Representative composite client experiences.": "* Expériences clients composites représentatives.",
     "Our Core Practice": "Notre cœur de métier",
     "Expert Guidance for Families & Care Providers": "Une expertise claire pour les familles et les professionnels du soin",
     "Care decisions affect health, dignity, and life savings. We provide clear, objective expertise whether you are placing a loved one or launching an elder care business.": "Les décisions de placement touchent à la santé, à la dignité et à l'épargne d'une vie. Nous apportons une expertise objective et limpide, que vous placiez un proche ou lanciez votre activité d'accueil pour aînés.",
@@ -293,7 +293,7 @@
     "Prefer a scheduled phone call?": "Vous préférez un appel téléphonique planifié ?",
     "Click here to pick a 15-minute slot on our calendar →": "Cliquez ici pour choisir un créneau de 15 minutes dans notre calendrier →",
     "Send an Enquiry": "Envoyer une demande",
-    "We respond to every message with personal attention. No spam, ever.": "Nous répondons à chaque message avec une attention personnelle. Jamais de courrier indésirable.",
+    "We respond to every message with personal attention.": "Nous répondons à chaque message avec une attention personnelle.",
     "I am reaching out regarding *": "Je vous contacte au sujet de *",
     "Elder Care / Family Placement": "Soins aux aînés / Placement familial",
     "RCFE Licensing & Consulting": "Agrément RCFE et conseil aux exploitants",
@@ -394,7 +394,7 @@
     "e.g. Eleanor Vance": "p. ex. Eleanor Vance",
     "you@domain.com": "vous@domaine.com",
     "e.g. San Jose, Irvine, Roseville": "p. ex. San Jose, Irvine, Roseville",
-    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project (please omit medical records or SSNs)...": "Indiquez le délai souhaité, la région et le meilleur moment pour vous joindre, ou décrivez votre projet de maison de soins (merci d'omettre les dossiers médicaux ou numéros SSN)...",
+    "Share your preferred timeline, region, and best time to reach you, or describe your prospective care home project...": "Indiquez le délai souhaité, la région et le meilleur moment pour vous joindre, ou décrivez votre projet de maison de soins...",
     "Close dialog": "Fermer la fenêtre",
     "Full name": "Nom complet",
     "Back to top": "Haut de page",
@@ -484,7 +484,15 @@
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Nous sommes absents du {from} au {to}. Vous pouvez réserver un appel à partir du {next}.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Nous sommes absents jusqu'au {to}. Nous répondrons aux messages envoyés maintenant à partir du {next}.",
     "We are away on that date. Please choose {next} or later.": "Nous sommes absents ce jour-là. Veuillez choisir le {next} ou une date ultérieure.",
-    "We are away on that date. Please pick another date.": "Nous sommes absents ce jour-là. Veuillez choisir une autre date."
+    "We are away on that date. Please pick another date.": "Nous sommes absents ce jour-là. Veuillez choisir une autre date.",
+    // Privacy policy section 6 (moved here from the contact form, booking popup and testimonials)
+    "6. Keeping Your Information Safe": "6. Protection de vos informations",
+    "Messages are sent securely.": "Les messages sont envoyés de façon sécurisée.",
+    "Every enquiry stays confidential.": "Chaque demande reste confidentielle.",
+    "Only used to respond.": "Utilisé uniquement pour vous répondre.",
+    "We never send spam.": "Jamais de courrier indésirable.",
+    "Family records stay confidential.": "Les dossiers familiaux restent confidentiels.",
+    "Keep bank details private.": "Gardez vos coordonnées bancaires pour vous."
   },
   blocks: {
     "hero_title": "Un peu plus de clarté.<br> <span class=\"italic text-brand-green font-normal\">Beaucoup plus de bienveillance.</span>",
