@@ -1,4 +1,399 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://love-rcfe.pages.dev/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://love-rcfe.pages.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/tl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/vi/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ko/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/hy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/fa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/hi/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/pa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/uk/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/he/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/km/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
+  </url>
 </urlset>

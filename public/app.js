@@ -817,10 +817,10 @@
         if (btn) btn.setAttribute('aria-selected', active ? 'true' : 'false');
         if (active) {
           if (el) el.classList.remove('hidden');
-          if (btn) btn.className = 'px-5 py-2.5 rounded-full text-sm font-semibold transition bg-brand-green text-white shadow-sm';
+          if (btn) btn.className = 'px-3 sm:px-5 py-2.5 min-w-0 rounded-full text-xs min-[360px]:text-sm font-semibold transition bg-brand-green text-white shadow-sm';
         } else {
           if (el) el.classList.add('hidden');
-          if (btn) btn.className = 'px-5 py-2.5 rounded-full text-sm font-semibold transition text-brand-ink hover:text-brand-green';
+          if (btn) btn.className = 'px-3 sm:px-5 py-2.5 min-w-0 rounded-full text-xs min-[360px]:text-sm font-semibold transition text-brand-ink hover:text-brand-green';
         }
       });
       refreshIcons();
@@ -1651,6 +1651,8 @@
 
     if (window.LoveI18n && typeof window.LoveI18n.onChange === 'function') {
       window.LoveI18n.onChange(() => {
+        // Menu words have a different length in each language
+        if (typeof window.fitHeaderNav === 'function') window.fitHeaderNav();
         updateDocumentTitle(currentView);
         applyTheme(document.documentElement.classList.contains('dark'));
         calculateCosts();

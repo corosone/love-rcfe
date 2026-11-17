@@ -20,6 +20,26 @@
   <meta name="twitter:description" content="Free placement guidance for families and Title 22 licensing consulting for RCFE owners in California.">
   <meta name="twitter:image" content="https://love-rcfe.pages.dev/og-image.jpg">
   <link rel="canonical" href="https://love-rcfe.pages.dev/">
+  <!-- Each language has its own address (built at deploy time by scripts/build-pages.js) -->
+  <link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/">
+  <link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/">
+  <link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/">
+  <link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/">
+  <link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/">
+  <link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/">
+  <link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/">
+  <link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/">
+  <link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/">
+  <link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/">
+  <link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/">
+  <link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/">
+  <link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/">
+  <link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/">
+  <link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/">
+  <link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/">
+  <link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/">
+  <link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/">
+  <link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"ProfessionalService","name":"Love RCFE","url":"https://love-rcfe.pages.dev/","telephone":"+1-818-217-5755","email":"loveRCFE@gmail.com","description":"Free placement guidance for families seeking elder care, and Title 22 licensing consulting for residential care facility (RCFE) owners.","areaServed":{"@type":"State","name":"California"}}
@@ -71,7 +91,11 @@
       color: var(--ink);
       background-color: var(--cream);
       -webkit-font-smoothing: antialiased;
+      /* A word too long for a narrow phone screen breaks instead of pushing the page sideways */
+      overflow-wrap: break-word;
     }
+    /* Armenian has many very long words: let them break anywhere so cards and columns can narrow */
+    html[lang="hy"] body { overflow-wrap: anywhere; }
     .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.035em; }
     .eyebrow { letter-spacing: 0.18em; text-transform: uppercase; font-size: 11px; font-weight: 700; }
     
@@ -144,6 +168,14 @@
       border-radius: 8px;
     }
     .prose-copy p { margin: 0 0 1.25rem; line-height: 1.8; }
+
+    /* Top bar: when the full menu does not fit (tablets, long languages), nav-fit.js adds
+       .nav-compact and the phone layout with the menu button is used instead. */
+    header.nav-compact #desktop-nav { display: none; }
+    header.nav-compact #mobile-controls { display: flex; }
+    header.nav-compact #mobile-menu:not(.hidden) { display: block; }
+    header.nav-measure a[data-view-link="home"],
+    header.nav-measure #desktop-nav { flex: 0 0 auto; white-space: nowrap; }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -678,19 +710,19 @@
   <header class="sticky top-0 z-40 w-full border-b border-brand-line bg-brand-cream/95 backdrop-blur-md transition-all">
     <div class="mx-auto max-w-7xl px-6 lg:px-10 py-4 flex items-center justify-between gap-4">
       <!-- Brand Logo -->
-      <a href="#home" data-view-link="home" class="flex items-center gap-2.5 text-brand-ink no-underline group">
-        <div class="w-10 h-10 rounded-xl bg-brand-green text-white flex items-center justify-center font-bold shadow-sm group-hover:scale-105 transition-transform">
+      <a href="#home" data-view-link="home" class="flex items-center gap-2.5 min-w-0 text-brand-ink no-underline group">
+        <div class="w-10 h-10 shrink-0 rounded-xl bg-brand-green text-white flex items-center justify-center font-bold shadow-sm group-hover:scale-105 transition-transform">
           <i data-lucide="heart-handshake" class="w-5 h-5 text-emerald-200"></i>
         </div>
-        <div>
+        <div class="min-w-0">
           <span class="display text-2xl font-bold tracking-tight text-brand-ink block leading-none">Love RCFE<span class="text-brand-accent">.</span></span>
-          <span class="text-[11px] uppercase tracking-wider text-brand-muted font-medium block">Care & Consulting</span>
+          <span class="text-[11px] uppercase tracking-wider text-brand-muted font-medium block [overflow-wrap:anywhere]">Care & Consulting</span>
         </div>
         <span class="sr-only">Home</span>
       </a>
 
       <!-- Desktop Nav -->
-      <nav aria-label="Main navigation" class="hidden md:flex items-center gap-x-5 lg:gap-x-7">
+      <nav id="desktop-nav" aria-label="Main navigation" class="hidden md:flex items-center gap-x-5 lg:gap-x-7">
         <a data-view-link="home" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#home">Home</a>
         <a data-view-link="services" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#services">Services</a>
         <a data-view-link="tools" class="nav-link font-semibold text-brand-ink text-[15px] flex items-center gap-1.5 whitespace-nowrap" href="#tools">
@@ -708,7 +740,7 @@
           <div id="lang-menu-wrap" class="relative">
             <button id="lang-toggle-btn" data-lang-toggle="desktop" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-dropdown" title="Change language" class="lang-toggle-btn inline-flex items-center gap-1.5 px-2.5 py-2 rounded-full border border-brand-line text-brand-ink text-xs font-bold transition hover:scale-105 active:scale-95">
               <i data-lucide="globe" class="w-4 h-4"></i>
-              <span class="lang-current-code notranslate" translate="no">EN</span>
+              <span class="lang-current-code notranslate whitespace-nowrap" translate="no">EN</span>
               <span class="sr-only">Change language</span>
               <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
             </button>
@@ -798,11 +830,11 @@
       </nav>
 
       <!-- Mobile Right Controls (Language + Theme Toggle + Contact + Hamburger) -->
-      <div class="flex items-center gap-1.5 sm:gap-2 md:hidden">
+      <div id="mobile-controls" class="flex items-center gap-1.5 sm:gap-2 md:hidden">
         <div id="lang-menu-wrap-mobile" class="relative">
           <button id="lang-toggle-btn-mobile" data-lang-toggle="mobile" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="lang-dropdown-mobile" class="lang-toggle-btn inline-flex items-center gap-1 px-2 py-2 rounded-lg border border-brand-line text-brand-ink text-xs font-bold transition">
             <i data-lucide="globe" class="w-4 h-4"></i>
-            <span class="lang-current-code notranslate" translate="no">EN</span>
+            <span class="lang-current-code notranslate whitespace-nowrap" translate="no">EN</span>
             <span class="sr-only">Change language</span>
           </button>
           <div id="lang-dropdown-mobile" role="menu" aria-labelledby="lang-toggle-btn-mobile" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-52 max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
@@ -885,7 +917,7 @@
           <i data-lucide="moon" class="theme-moon-mobile w-4 h-4"></i>
           <i data-lucide="sun" class="theme-sun-mobile w-4 h-4 hidden"></i>
         </button>
-        <a data-view-link="contact" class="rounded-full bg-brand-green text-white px-3.5 py-1.5 text-xs font-semibold hover:bg-brand-greenDark transition whitespace-nowrap" href="#contact">
+        <a data-view-link="contact" class="hidden sm:inline rounded-full bg-brand-green text-white px-3.5 py-1.5 text-xs font-semibold hover:bg-brand-greenDark transition whitespace-nowrap" href="#contact">
           Contact
         </a>
         <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation menu" class="p-2 rounded-lg border border-brand-line text-brand-ink hover:bg-brand-sageLight transition">
@@ -927,6 +959,8 @@
       </div>
     </div>
   </header>
+  <!-- Switches the top bar to the menu button when the full menu does not fit (see /nav-fit.js) -->
+  <script src="/nav-fit.js"></script>
 
   <!-- Main Content Views Container -->
   <main id="main-content" class="flex-1">
@@ -946,7 +980,7 @@
               A little more clarity.<br>
               <span class="italic text-brand-green font-normal">A lot more care.</span>
             </h1>
-            <p class="text-brand-muted text-lg sm:text-xl leading-relaxed max-w-xl mb-8 font-normal">
+            <p id="hero-intro" class="text-brand-muted text-lg sm:text-xl leading-relaxed max-w-xl mb-8 font-normal">
               Whether you are looking for the right residential care home for a parent, or navigating California Title 22 licensing to open your own RCFE, we guide you every step of the way.
             </p>
             
@@ -1342,14 +1376,14 @@
 
           <!-- Tabs for Tools -->
           <div class="flex justify-center mb-10">
-            <div role="tablist" aria-label="Care planning tools" class="inline-flex rounded-full bg-white dark:bg-[#1a251f] p-1.5 border border-brand-line shadow-sm">
-              <button id="tab-btn-calculator" role="tab" aria-selected="true" aria-controls="tool-calculator" data-click="switchToolTab('calculator')" class="px-5 py-2.5 rounded-full text-sm font-semibold transition bg-brand-green text-white shadow-sm">
+            <div role="tablist" aria-label="Care planning tools" class="inline-flex max-w-full rounded-full bg-white dark:bg-[#1a251f] p-1.5 border border-brand-line shadow-sm">
+              <button id="tab-btn-calculator" role="tab" aria-selected="true" aria-controls="tool-calculator" data-click="switchToolTab('calculator')" class="px-3 sm:px-5 py-2.5 min-w-0 rounded-full text-xs min-[360px]:text-sm font-semibold transition bg-brand-green text-white shadow-sm">
                 Cost Estimator
               </button>
-              <button id="tab-btn-quiz" role="tab" aria-selected="false" aria-controls="tool-quiz" data-click="switchToolTab('quiz')" class="px-5 py-2.5 rounded-full text-sm font-semibold transition text-brand-ink hover:text-brand-green">
+              <button id="tab-btn-quiz" role="tab" aria-selected="false" aria-controls="tool-quiz" data-click="switchToolTab('quiz')" class="px-3 sm:px-5 py-2.5 min-w-0 rounded-full text-xs min-[360px]:text-sm font-semibold transition text-brand-ink hover:text-brand-green">
                 Care Level Assessment
               </button>
-              <button id="tab-btn-roadmap" role="tab" aria-selected="false" aria-controls="tool-roadmap" data-click="switchToolTab('roadmap')" class="px-5 py-2.5 rounded-full text-sm font-semibold transition text-brand-ink hover:text-brand-green">
+              <button id="tab-btn-roadmap" role="tab" aria-selected="false" aria-controls="tool-roadmap" data-click="switchToolTab('roadmap')" class="px-3 sm:px-5 py-2.5 min-w-0 rounded-full text-xs min-[360px]:text-sm font-semibold transition text-brand-ink hover:text-brand-green">
                 Operator Licensing Roadmap
               </button>
             </div>

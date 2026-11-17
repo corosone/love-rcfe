@@ -23,6 +23,11 @@
     var qLang = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
     // Same rule as i18n.js: an unknown ?lang= value falls back to the saved language.
     var sLang = LANG_RE.test(qLang || '') ? qLang : (localStorage.getItem('lovercfe_lang') || 'en');
+    // A language address such as /es/ decides the language (see i18n.js)
+    var pLang = (/^\/([a-z]{2})(?:\/|$)/.exec(window.location.pathname) || [])[1] || '';
+    if (LANG_RE.test(pLang) && pLang !== 'en') sLang = pLang;
+    // Already translated when it arrived: nothing to hide while the language file loads
+    var ready = document.documentElement.getAttribute('data-prerendered') === sLang;
     if (LANG_RE.test(sLang) && sLang !== 'en') {
       var root = document.documentElement;
       root.lang = sLang;
@@ -34,7 +39,7 @@
       style.id = 'i18n-pending-style';
       style.textContent = 'html.i18n-pending body{visibility:hidden}';
       document.head.appendChild(style);
-      root.classList.add('i18n-pending');
+      if (!ready) root.classList.add('i18n-pending');
       var data = document.createElement('script');
       data.id = 'i18n-data-' + sLang;
       data.src = '/i18n/' + sLang + '.js';

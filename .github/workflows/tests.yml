@@ -1,0 +1,28 @@
+# Runs the automated tests in /tests on every push, on GitHub's computers (free for public
+# repositories). A red cross on a commit or pull request means a test failed: do not merge.
+name: Tests
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the site (the same step Cloudflare runs)
+        run: npm install --no-audit --no-fund && npm run build
+      - name: Install the test tools
+        working-directory: tests
+        run: npm ci --no-audit --no-fund && npx playwright install --with-deps chromium
+      - name: Run the tests
+        working-directory: tests
+        run: npm test

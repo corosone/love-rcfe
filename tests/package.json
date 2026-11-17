@@ -1,0 +1,11 @@
+{
+  "name": "love-rcfe-tests",
+  "private": true,
+  "description": "Automated tests for the Love RCFE website. Run by GitHub on every push; see README.md in this folder.",
+  "scripts": {
+    "test": "node --test api.test.js site.test.js"
+  },
+  "dependencies": {
+    "playwright": "1.63.0"
+  }
+}
