@@ -146,7 +146,7 @@
 
   var currentLang = getSavedLang();
   syncDocumentLangAttrs(currentLang);
-  // Start downloading the visitor's language immediately (theme-init.js may already have started it).
+  // Start downloading the visitor's language immediately (the set-up script in index.html may already have started it).
   if (currentLang !== 'en' && !dataFor(currentLang)) {
     loadLang(currentLang, function () {});
   }

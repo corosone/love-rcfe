@@ -47,15 +47,16 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23315d48'/%3E%3Cpath d='M16 24s-7-4.6-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 23 14c0 5.4-7 10-7 10z' fill='%23dce7d9'/%3E%3C/svg%3E">
   
   <!-- Fonts: DM Sans and Fraunces, served from this site (/fonts/) instead of Google Fonts.
-       Only the styles this page uses are included: DM Sans upright (all weights) and italic 400,
-       Fraunces upright 500 and italic 400. Using another Fraunces weight, or a bold italic,
-       needs a matching font file added here first. The font files are cached for a year
+       Only the styles this page uses are included: DM Sans upright weights 400-900, DM Sans italic 400
+       fixed at its 14px design size (only used for text-sm testimonials), Fraunces upright 500 and
+       italic 400. A DM Sans weight under 400, italic DM Sans at another size, another Fraunces
+       weight, or a bold italic needs a matching font file added here first. The font files are cached for a year
        (see _headers), so a changed font file must be given a new file name. -->
   <style>
-    @font-face { font-family: 'DM Sans'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/dm-sans-v17-italic-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'DM Sans'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/dm-sans-v17-italic-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-    @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 100 1000; font-display: swap; src: url(/fonts/dm-sans-v17-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-    @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 100 1000; font-display: swap; src: url(/fonts/dm-sans-v17-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'DM Sans'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/dm-sans-v17-italic-14px-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'DM Sans'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/dm-sans-v17-italic-14px-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 900; font-display: swap; src: url(/fonts/dm-sans-v17-w400-900-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 900; font-display: swap; src: url(/fonts/dm-sans-v17-w400-900-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
     @font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/fraunces-v38-italic-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
     @font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/fraunces-v38-italic-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
     @font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 400; font-display: swap; src: url(/fonts/fraunces-v38-italic-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -66,13 +67,69 @@
 
   <!-- Cloudflare Turnstile (spam protection) is loaded by app.js only when an enquiry form is shown. -->
 
-  <!-- Lucide icons (self-hosted subset, see /icons.js) -->
-  <script src="/icons.js"></script>
   <script src="/visit.js" defer></script>
   
   <!-- Tailwind CSS: built at deploy time into /tailwind.css by "npm run build" -->
   <link id="tw-css" rel="stylesheet" href="/tailwind.css">
-  <script src="/theme-init.js"></script>
+  <!-- Theme and language set-up: runs before the first paint. It is written into the page rather
+       than loaded as a file, so the page does not wait for one more download. -->
+  <script>
+(function () {
+  'use strict';
+
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  try {
+    var s = localStorage.getItem('lovercfe_theme');
+    // First-time visitors always default to light mode first
+    var isDark = s === 'dark';
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', isDark ? '#121915' : '#315d48');
+  } catch (e) {}
+
+  try {
+    var LANG_RE = /^(en|es|zh|tl|vi|ko|hy|ru|ar|fa|hi|pa|ja|uk|he|km|fr|pt)$/;
+    var qLang = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
+    // Same rule as i18n.js: an unknown ?lang= value falls back to the saved language.
+    var sLang = LANG_RE.test(qLang || '') ? qLang : (localStorage.getItem('lovercfe_lang') || 'en');
+    // A language address such as /es/ decides the language (see i18n.js)
+    var pLang = (/^\/([a-z]{2})(?:\/|$)/.exec(window.location.pathname) || [])[1] || '';
+    if (LANG_RE.test(pLang) && pLang !== 'en') sLang = pLang;
+    // Already translated when it arrived: nothing to hide while the language file loads
+    var ready = document.documentElement.getAttribute('data-prerendered') === sLang;
+    if (LANG_RE.test(sLang) && sLang !== 'en') {
+      var root = document.documentElement;
+      root.lang = sLang;
+      root.setAttribute('translate', 'no');
+      root.classList.add('notranslate');
+      // Start downloading this language's translations now, while the page is still loading,
+      // and keep the page invisible until /i18n.js has applied them (at most 3 seconds).
+      var style = document.createElement('style');
+      style.id = 'i18n-pending-style';
+      style.textContent = 'html.i18n-pending body{visibility:hidden}';
+      document.head.appendChild(style);
+      if (!ready) root.classList.add('i18n-pending');
+      var data = document.createElement('script');
+      data.id = 'i18n-data-' + sLang;
+      data.src = '/i18n/' + sLang + '.js';
+      data.async = true;
+      data.onerror = function () {
+        data.setAttribute('data-failed', '1');
+        root.classList.remove('i18n-pending');
+      };
+      document.head.appendChild(data);
+      setTimeout(function () { root.classList.remove('i18n-pending'); }, 3000);
+    }
+  } catch (e) {}
+})();
+</script>
 
   <style>
     :root {
@@ -128,7 +185,9 @@
     }
     #main-content:focus { outline: none; }
     .view[hidden] { display: none !important; }
-    .view:not([hidden]) {
+    /* Fade only when moving between pages, not on first load: a fade on first load delays
+       the moment the opening text counts as shown (Largest Contentful Paint). */
+    html.view-anim .view:not([hidden]) {
       animation: viewFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes viewFadeIn {
@@ -169,7 +228,7 @@
     }
     .prose-copy p { margin: 0 0 1.25rem; line-height: 1.8; }
 
-    /* Top bar: when the full menu does not fit (tablets, long languages), nav-fit.js adds
+    /* Top bar: when the full menu does not fit (tablets, long languages), the top-bar script (after the <header>) adds
        .nav-compact and the phone layout with the menu button is used instead. */
     header.nav-compact #desktop-nav { display: none; }
     header.nav-compact #mobile-controls { display: flex; }
@@ -347,8 +406,10 @@
     html.dark .has-\[\:checked\]\:border-brand-green:has(:checked) {
       border-color: #4ade80 !important;
     }
+    /* Dark mode terracotta for buttons and badges with white text: 4.9:1 contrast (the lighter
+       #b97550 used before was only 3.7:1, too faint for small white text). */
     html.dark .bg-brand-accent {
-      background-color: #b97550 !important;
+      background-color: #9e623e !important;
     }
     html.dark ::selection {
       background-color: #4ade80 !important;
@@ -959,8 +1020,57 @@
       </div>
     </div>
   </header>
-  <!-- Switches the top bar to the menu button when the full menu does not fit (see /nav-fit.js) -->
-  <script src="/nav-fit.js"></script>
+  <!-- Switches the top bar to the menu button when the full menu does not fit. Written into the
+       page (not loaded as a file) so the page does not wait for one more download. -->
+  <script>
+// Top bar: decides whether the full menu fits next to the logo.
+// If it does not (tablets, or languages with long menu words), the header gets the class
+// "nav-compact" and shows the phone layout (menu button) instead of sliding the page sideways.
+// Loaded right after the header so it runs before the page is first drawn, and again
+// whenever the window size, the language or the fonts change.
+(function () {
+  'use strict';
+
+  var header = document.querySelector('header');
+  var nav = document.getElementById('desktop-nav');
+  if (!header || !nav || !window.matchMedia) return;
+
+  var row = nav.parentElement;
+  var logo = row.querySelector('a[data-view-link="home"]');
+  if (!logo) return;
+  var wide = window.matchMedia('(min-width: 768px)');
+
+  function fit() {
+    header.classList.remove('nav-compact');
+    if (!wide.matches) return; // phones: the stylesheet already shows the menu button
+    header.classList.add('nav-measure'); // logo and menu at their full width while measuring
+    var style = window.getComputedStyle(row);
+    var room = row.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    var needed = logo.getBoundingClientRect().width + nav.getBoundingClientRect().width + (parseFloat(style.columnGap) || 0);
+    var tooWide = needed > room - 1; // 1px spare, so nothing wraps because of rounding
+    header.classList.remove('nav-measure');
+    if (tooWide) header.classList.add('nav-compact');
+  }
+
+  var queued = false;
+  function fitSoon() {
+    if (queued) return;
+    queued = true;
+    window.requestAnimationFrame(function () {
+      queued = false;
+      fit();
+    });
+  }
+
+  fit();
+  window.addEventListener('resize', fitSoon);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+  // app.js calls this after the language changes
+  window.fitHeaderNav = fit;
+})();
+</script>
 
   <!-- Main Content Views Container -->
   <main id="main-content" class="flex-1">
@@ -1393,7 +1503,7 @@
           <div id="tool-calculator" role="tabpanel" aria-labelledby="tab-btn-calculator" class="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 border border-brand-line shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-brand-line pb-4 mb-6">
               <div>
-                <h3 class="display text-2xl font-medium text-brand-ink">California Elder Care Monthly Cost Calculator</h3>
+                <h2 class="display text-2xl font-medium text-brand-ink">California Elder Care Monthly Cost Calculator</h2>
                 <p class="text-xs text-brand-muted mt-1">Based on prevailing 2025–2026 California regional market rates for RCFEs &amp; Assisted Living.</p>
               </div>
               <div class="flex items-center gap-2.5">
@@ -1563,7 +1673,7 @@
           <div id="tool-quiz" role="tabpanel" aria-labelledby="tab-btn-quiz" class="hidden max-w-3xl mx-auto bg-white rounded-3xl p-6 sm:p-10 border border-brand-line shadow-sm">
             <div class="text-center max-w-lg mx-auto mb-8">
               <span class="text-xs font-bold uppercase tracking-wider text-brand-green">Self-Assessment Tool</span>
-              <h3 class="display text-2xl sm:text-3xl font-medium text-brand-ink mt-1">Find the Right Care Setting</h3>
+              <h2 class="display text-2xl sm:text-3xl font-medium text-brand-ink mt-1">Find the Right Care Setting</h2>
               <p class="text-xs sm:text-sm text-brand-muted mt-2">Answer 4 quick questions to receive tailored recommendations on care type, staff ratio, and touring advice.</p>
             </div>
 
@@ -1675,7 +1785,7 @@
                   <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-green text-white text-xs font-bold uppercase tracking-wider mb-3">
                     <i data-lucide="check" class="w-3.5 h-3.5"></i> Custom Recommendation
                   </div>
-                  <h4 id="result-title" class="display text-2xl font-bold text-brand-ink mb-2">Residential 6-Bed Care Home (RCFE / Board &amp; Care)</h4>
+                  <h3 id="result-title" class="display text-2xl font-bold text-brand-ink mb-2">Residential 6-Bed Care Home (RCFE / Board &amp; Care)</h3>
                   <p id="result-description" class="text-brand-muted text-sm leading-relaxed mb-4">
                     Based on your answers, an intimate residential care home provides the ideal 1-to-3 caregiver ratio, continuous eyes-on supervision, and lower sensory stimulation compared to large institutional facilities.
                   </p>
@@ -1722,7 +1832,7 @@
           <div id="tool-roadmap" role="tabpanel" aria-labelledby="tab-btn-roadmap" class="hidden max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 border border-brand-line shadow-sm">
             <div class="border-b border-brand-line pb-4 mb-8">
               <span class="text-xs font-bold uppercase tracking-wider text-brand-accent">California Title 22 Licensing Guide</span>
-              <h3 class="display text-2xl font-medium text-brand-ink mt-1">4-Stage RCFE Licensure Roadmap</h3>
+              <h2 class="display text-2xl font-medium text-brand-ink mt-1">4-Stage RCFE Licensure Roadmap</h2>
               <p class="text-xs sm:text-sm text-brand-muted mt-1">A step-by-step timeline from business inception to accepting your first resident.</p>
             </div>
 
@@ -1733,7 +1843,7 @@
                   <div class="w-8 h-8 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
                   <div class="flex-1">
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                      <h4 class="font-bold text-base text-brand-ink">Stage 1: Administrator Certification &amp; Prerequisites</h4>
+                      <h3 class="font-bold text-base text-brand-ink">Stage 1: Administrator Certification &amp; Prerequisites</h3>
                       <span class="text-xs font-semibold text-brand-muted bg-white px-2.5 py-0.5 rounded-full border border-brand-line">Weeks 1–6</span>
                     </div>
                     <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
@@ -1749,7 +1859,7 @@
                   <div class="w-8 h-8 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
                   <div class="flex-1">
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                      <h4 class="font-bold text-base text-brand-ink">Stage 2: Real Estate &amp; STD 850 Fire Clearance</h4>
+                      <h3 class="font-bold text-base text-brand-ink">Stage 2: Real Estate &amp; STD 850 Fire Clearance</h3>
                       <span class="text-xs font-semibold text-brand-muted bg-white px-2.5 py-0.5 rounded-full border border-brand-line">Weeks 6–14</span>
                     </div>
                     <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
@@ -1765,7 +1875,7 @@
                   <div class="w-8 h-8 rounded-full bg-brand-accent text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
                   <div class="flex-1">
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                      <h4 class="font-bold text-base text-brand-ink">Stage 3: Application Submission (LIC 200 &amp; Policies)</h4>
+                      <h3 class="font-bold text-base text-brand-ink">Stage 3: Application Submission (LIC 200 &amp; Policies)</h3>
                       <span class="text-xs font-semibold text-brand-muted bg-white px-2.5 py-0.5 rounded-full border border-brand-line">Weeks 14–22</span>
                     </div>
                     <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
@@ -1781,7 +1891,7 @@
                   <div class="w-8 h-8 rounded-full bg-brand-green text-white flex items-center justify-center font-bold text-sm shrink-0">4</div>
                   <div class="flex-1">
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                      <h4 class="font-bold text-base text-brand-ink">Stage 4: Component III &amp; Pre-Licensing Inspection</h4>
+                      <h3 class="font-bold text-base text-brand-ink">Stage 4: Component III &amp; Pre-Licensing Inspection</h3>
                       <span class="text-xs font-semibold text-brand-muted bg-white px-2.5 py-0.5 rounded-full border border-brand-line">Weeks 22–28</span>
                     </div>
                     <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
@@ -2069,7 +2179,7 @@
           <div class="lg:col-span-7">
             <form id="enquiry-form" class="bg-white rounded-3xl p-7 sm:p-10 border border-brand-line shadow-lg space-y-5 relative">
               <div class="border-b border-brand-line pb-4 mb-2">
-                <h3 class="display text-2xl font-medium text-brand-ink">Send an Enquiry</h3>
+                <h2 class="display text-2xl font-medium text-brand-ink">Send an Enquiry</h2>
                 <p class="text-xs text-brand-muted mt-1">We respond to every message with personal attention. No spam, ever.</p>
               </div>
 
@@ -2460,6 +2570,9 @@
   </button>
 
   <!-- ==================== JAVASCRIPT ==================== -->
+  <!-- Lucide icons (self-hosted subset, see /icons.js). Loaded here rather than in <head>, so it
+       does not hold up the first paint; i18n.js and app.js below draw the icons. -->
+  <script src="/icons.js"></script>
   <script src="/i18n.js"></script>
   <script src="/app.js"></script>
 </body>

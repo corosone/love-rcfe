@@ -1223,7 +1223,7 @@
       { label: 'Server functions are running', url: '/api/leads', expect: 405 },
       { label: 'Styles (tailwind.css)', url: '/tailwind.css', expect: 200, minBytes: 1000 }
     ];
-    ['app.js', 'i18n.js', 'icons.js', 'theme-init.js', 'turnstile-gate.js', 'visit.js', 'staff.js', 'corosone.js', '404.js'].forEach((f) => {
+    ['app.js', 'i18n.js', 'icons.js', 'turnstile-gate.js', 'visit.js', 'staff.js', 'corosone.js', '404.js'].forEach((f) => {
       checks.push({ label: 'Script ' + f, url: '/' + f, expect: 200, minBytes: 200 });
     });
     checks.push({ label: 'Main photo (hero.jpg)', url: '/hero.jpg', expect: 200, minBytes: 1000 });
