@@ -244,6 +244,9 @@
     staff_wrong_password: 'Staff: wrong password',
     staff_locked_out: 'Staff: blocked after too many wrong passwords',
     export_leads: 'Downloaded enquiries spreadsheet',
+    backup_download: 'Downloaded full backup',
+    restore_leads: 'Tool: restored enquiries from a backup',
+    staff_marked_spam: 'Inbox: message marked as spam (sent from)',
     signout_staff: 'Tool: signed out all staff',
     clear_lockouts: 'Tool: cleared sign-in lockouts',
     test_lead_email: 'Tool: sent test enquiry email',
@@ -398,7 +401,16 @@
     body.textContent = '';
     list.forEach((item) => {
       const label = has(EVENT_LABELS, item.event) ? EVENT_LABELS[item.event] : String(item.event || '');
-      body.appendChild(el('tr', {}, [td(formatTime(item.at)), td(label), td(item.ip || ''), td(item.detail || '')]));
+      let detail = item.detail || '';
+      if (item.event === 'staff_marked_spam') {
+        // The detail starts with the address the spam was sent from: offer to block it.
+        const sender = String(detail).split(' · ')[0];
+        if (/^[0-9a-f:.]{3,45}$/i.test(sender) && /[.:]/.test(sender)) {
+          const action = blockAction(sender);
+          detail = el('span', {}, [el('span', { text: detail + ' ' }), typeof action === 'string' ? el('span', { className: 'text-brand-muted', text: action }) : action]);
+        }
+      }
+      body.appendChild(el('tr', {}, [td(formatTime(item.at)), td(label), td(item.ip || ''), td(detail)]));
     });
   }
 
@@ -644,6 +656,84 @@
     }
   }
 
+  // ---------- Backups ----------
+  async function downloadBackup() {
+    const btn = $('backup-btn');
+    btn.disabled = true;
+    setStatus('busy', 'Preparing the backup…');
+    try {
+      const res = await fetch('/api/dev/backup', { credentials: 'same-origin' });
+      if (res.status === 401) { sessionEnded(); return; }
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'The backup failed.');
+      }
+      const blob = await res.blob();
+      const match = /filename="([^"]+)"/.exec(res.headers.get('content-disposition') || '');
+      const url = URL.createObjectURL(blob);
+      const a = el('a', { attrs: { href: url, download: match ? match[1] : 'love-rcfe-backup.json' } });
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      setStatus('ok', 'Backup downloaded. It contains personal information, so keep it somewhere safe (not in a shared or public folder).');
+      loadOverview();
+    } catch (err) {
+      setStatus('bad', err.message);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  const RESTORE_BATCH = 25; // the server accepts up to 25 enquiries per request
+  let restoring = false;
+
+  async function restoreFromFile(file) {
+    if (!file || restoring) return;
+    const progress = $('restore-progress');
+    progress.textContent = '';
+    let backup;
+    try {
+      if (file.size > 60 * 1024 * 1024) throw new Error('too big');
+      backup = JSON.parse(await file.text());
+    } catch (e) {
+      setStatus('bad', 'That file could not be read. Choose a backup file downloaded from this page (its name starts with "love-rcfe-backup").');
+      return;
+    }
+    const leads = backup && backup.format === 'love-rcfe-backup' && backup.tables && Array.isArray(backup.tables.leads) ? backup.tables.leads : null;
+    if (!leads) {
+      setStatus('bad', 'That is not a Love RCFE backup file. Choose a file downloaded with "Download full backup".');
+      return;
+    }
+    if (!leads.length) { setStatus('bad', 'That backup file has no enquiries in it.'); return; }
+    const made = backup.createdAt && !isNaN(new Date(backup.createdAt)) ? formatIso(backup.createdAt) : 'an unknown date';
+    if (!confirm(`This backup was made on ${made} and has ${plural(leads.length, 'enquiry', 'enquiries')}.\n\nAdd back any that are missing from the site now? Nothing is changed or deleted.`)) return;
+
+    restoring = true;
+    $('restore-btn').disabled = true;
+    let added = 0, skipped = 0, invalid = 0;
+    setStatus('busy', 'Restoring…');
+    try {
+      for (let i = 0; i < leads.length; i += RESTORE_BATCH) {
+        const data = await apiFetch('/api/dev/backup', { method: 'POST', body: JSON.stringify({ leads: leads.slice(i, i + RESTORE_BATCH) }) });
+        added += Number(data.added || 0);
+        skipped += Number(data.skipped || 0);
+        invalid += Number(data.invalid || 0);
+        progress.textContent = `Checked ${Math.min(i + RESTORE_BATCH, leads.length)} of ${leads.length}…`;
+      }
+      setStatus('ok', `Restore finished: ${plural(added, 'enquiry was', 'enquiries were')} added back, ${skipped} ${skipped === 1 ? 'was' : 'were'} already there${invalid ? `, and ${invalid} could not be read from the file` : ''}.`);
+      progress.textContent = '';
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', `Restore stopped: ${err.message} ${added} added so far. It is safe to choose the file again to continue.`);
+    } finally {
+      restoring = false;
+      $('restore-btn').disabled = false;
+    }
+    await loadOverview();
+    if (loadedTabs.has('leads')) loadLeads(leadsQuery);
+  }
+
   // ---------- Requests ----------
   // The log holds page visits only (requests to the site's server are not recorded).
   let requestsQuery = { q: '', type: 'view' };
@@ -840,6 +930,8 @@
     checks.push({ label: 'Phone icon (apple-touch-icon.png)', url: '/apple-touch-icon.png', expect: 200 });
     checks.push({ label: 'robots.txt', url: '/robots.txt', expect: 200 });
     checks.push({ label: 'sitemap.xml', url: '/sitemap.xml', expect: 200 });
+    // Optional: Cloudflare adds this script to the pages when Web Analytics is turned on.
+    checks.push({ label: 'Visitor statistics (Cloudflare Web Analytics)', url: '/', expect: 200, optionalContains: 'static.cloudflareinsights.com/beacon.min.js' });
     LANGS.forEach(([code, name]) => checks.push({ label: `Language: ${name} (${code})`, url: `/i18n/${code}.js`, expect: 200, contains: 'LoveI18nData' }));
     return checks;
   }
@@ -870,6 +962,10 @@
       if (c.minBytes && buf.byteLength < c.minBytes) problems.push('file is empty or too small');
       if (c.contains && !new TextDecoder().decode(buf).includes(c.contains)) problems.push('file does not contain the translations');
       if (c.headers) headerProblems(res, c.headers).forEach((p) => problems.push(p));
+      if (c.optionalContains && !problems.length) {
+        const on = new TextDecoder().decode(buf).includes(c.optionalContains);
+        return { c, level: on ? 'ok' : 'note', text: on ? 'Turned on' : 'Not turned on (optional)', ms, bytes: buf.byteLength };
+      }
       const level = problems.length ? 'bad' : ms > SLOW_MS ? 'warn' : 'ok';
       return { c, level, text: problems.length ? problems.join('; ') : ms > SLOW_MS ? 'Works, but slow' : 'OK', ms, bytes: buf.byteLength };
     } catch (err) {
@@ -894,10 +990,10 @@
     }
     await Promise.all([worker(), worker(), worker(), worker()]);
     body.textContent = '';
-    const order = { bad: 0, warn: 1, ok: 2 };
+    const order = { bad: 0, warn: 1, note: 1, ok: 2 };
     results.slice().sort((a, b) => order[a.level] - order[b.level]).forEach((r) => {
-      const dot = el('span', { className: 'status-dot status-' + r.level, attrs: { 'aria-hidden': 'true' } });
-      const result = el('span', { className: 'flex items-baseline' }, [dot, el('span', { text: (r.level === 'bad' ? 'Problem: ' : r.level === 'warn' ? 'Note: ' : '') + r.text })]);
+      const dot = el('span', { className: 'status-dot status-' + (r.level === 'note' ? 'warn' : r.level), attrs: { 'aria-hidden': 'true' } });
+      const result = el('span', { className: 'flex items-baseline' }, [dot, el('span', { text: (r.level === 'bad' ? 'Problem: ' : r.level === 'warn' || r.level === 'note' ? 'Note: ' : '') + r.text })]);
       body.appendChild(el('tr', {}, [
         td(el('span', {}, [el('span', { text: r.c.label }), el('div', { className: 'dv-mono text-brand-muted', text: r.c.url })])),
         td(result), td(`${r.ms} ms`, 'dv-num'), td(r.bytes ? `${(r.bytes / 1024).toFixed(1)} KB` : '-', 'dv-num')
@@ -905,9 +1001,13 @@
     });
     const bad = results.filter((r) => r.level === 'bad').length;
     const slow = results.filter((r) => r.level === 'warn').length;
-    $('sitecheck-summary').textContent = bad
-      ? `${plural(bad, 'problem', 'problems')} found out of ${results.length} checks${slow ? `, and ${slow} slow` : ''}. Problems are listed first.`
-      : `All ${results.length} checks passed${slow ? `, but ${plural(slow, 'item was', 'items were')} slow` : ''}.`;
+    // Optional items that are simply switched off are mentioned, but are not counted as checks.
+    const notes = results.filter((r) => r.level === 'note');
+    const counted = results.length - notes.length;
+    $('sitecheck-summary').textContent = (bad
+      ? `${plural(bad, 'problem', 'problems')} found out of ${counted} checks${slow ? `, and ${slow} slow` : ''}. Problems are listed first.`
+      : `All ${counted} checks passed${slow ? `, but ${plural(slow, 'item was', 'items were')} slow` : ''}.`)
+      + (notes.length ? ' Visitor statistics are not turned on (optional).' : '');
     btn.disabled = false;
   }
 
@@ -982,6 +1082,13 @@
 
     $('sitecheck-btn').addEventListener('click', runSiteCheck);
     $('db-btn').addEventListener('click', checkDatabase);
+    $('backup-btn').addEventListener('click', downloadBackup);
+    $('restore-btn').addEventListener('click', () => { if (!restoring) $('restore-file').click(); });
+    $('restore-file').addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      e.target.value = ''; // so the same file can be chosen again later
+      restoreFromFile(file);
+    });
 
     document.addEventListener('click', (e) => {
       const toolBtn = e.target.closest && e.target.closest('[data-tool]');

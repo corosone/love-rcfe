@@ -12,6 +12,7 @@
   let totalLeads = 0;
   let hasMoreLeads = false;
   let isSignedIn = false;
+  let isDeveloper = false; // a signed-in developer also gets the offer to block a spammer's address
   let currentFilter = 'open';
   let searchQuery = '';
 
@@ -141,6 +142,7 @@
       // A signed-in developer gets a link back to the developer console.
       const devLink = document.getElementById('dev-link');
       if (devLink) devLink.classList.toggle('hidden', !data.developer);
+      isDeveloper = Boolean(data.developer);
       showDashboard();
       if (statusEl) {
         statusEl.textContent = hasMoreLeads
@@ -276,11 +278,122 @@
     }
   }
 
+  // "Mark as spam": deletes the message and tells the site owner which address sent it
+  // (it appears in the developer console's activity log, where the owner can block it).
+  async function markSpam(id) {
+    const lead = findLead(id);
+    if (!lead) return;
+    const ip = String(lead.ip || '');
+    if (!confirm('Mark this message as spam?\n\nIt will be permanently deleted.' + (ip ? ' The address it was sent from is reported to the site owner.' : ''))) return;
+    try {
+      await apiFetch(`/api/admin/leads?id=${encodeURIComponent(id)}&spam=1`, { method: 'DELETE' });
+      allLeads = allLeads.filter(l => Number(l.id) !== Number(id));
+      if (totalLeads > 0) totalLeads -= 1;
+      renderLeads();
+    } catch (err) {
+      if (!handleAuthFailure(err)) alert(err.message);
+      return;
+    }
+    // Only the developer can block addresses; the server refuses this for staff sessions.
+    if (!isDeveloper || !ip || ip === 'unknown') return;
+    if (!confirm(`Also block ${ip} for 30 days?\n\nIt will no longer be able to send enquiries or sign in to the staff inbox. You can unblock it in the developer console.`)) return;
+    try {
+      const res = await apiFetch('/api/dev/action', {
+        method: 'POST',
+        body: JSON.stringify({ action: 'block_ip', options: { ip, reason: 'Marked as spam', days: 30 } })
+      });
+      alert(res.message || 'Blocked.');
+    } catch (err) {
+      alert('The message was deleted, but the address was not blocked: ' + err.message);
+    }
+  }
+
+  // ---------- Quick replies ----------
+  // Choosing one opens your email app with the message already written, addressed to the
+  // person. Nothing is sent until you press Send there, so you can edit it first.
+  const BUSINESS_PHONE = '(818) 217-5755';
+  const SIGN_OFF = '\n\nWarm regards,\nLove RCFE\n' + BUSINESS_PHONE;
+  const REPLY_TEMPLATES = {
+    thanks: {
+      label: 'Thank you, we will call you',
+      subject: 'Thank you for contacting Love RCFE',
+      body: (l) => `Thank you for reaching out to Love RCFE. We received your message, and a member of our team will call you${l.phone ? ' at ' + l.phone : ''} within 1 business day.\n\nIf a different number or time works better for you, just reply to this email.`
+    },
+    missed: {
+      label: 'We tried to call you',
+      subject: 'We tried to reach you - Love RCFE',
+      body: (l) => `We tried calling you${l.phone ? ' at ' + l.phone : ''} about your enquiry but were not able to reach you.\n\nWhen would be a good time to call back? You can reply to this email or call us at ${BUSINESS_PHONE}.`
+    },
+    details: {
+      label: 'Ask for more details',
+      subject: 'A quick question about your enquiry - Love RCFE',
+      body: () => 'Thank you for your message. So that we can point you in the right direction, could you tell us a little more about what you need help with, and the best time to reach you by phone?'
+    },
+    confirm: {
+      label: 'Confirm the scheduled call',
+      subject: 'Your call with Love RCFE',
+      body: (l) => `This is to confirm your call with Love RCFE on ${l.preferredDate}${l.preferredTime ? ' (' + l.preferredTime + ')' : ''}. We will call you${l.phone ? ' at ' + l.phone : ''}.\n\nIf you need to change the time, just reply to this email or call us at ${BUSINESS_PHONE}.`
+    }
+  };
+
+  function replyOptions(l) {
+    return Object.entries(REPLY_TEMPLATES)
+      .filter(([key]) => key !== 'confirm' || (l.kind === 'call_request' && l.preferredDate))
+      .map(([key, t]) => `<option value="${escapeHtml(key)}">${escapeHtml(t.label)}</option>`).join('');
+  }
+
+  function firstName(name) {
+    const first = String(name || '').trim().split(/\s+/)[0] || '';
+    // Letters (any language), apostrophes and hyphens only; anything odd falls back to a plain greeting.
+    return /^[\p{L}\p{M}'’-]{1,30}$/u.test(first) ? first : '';
+  }
+
+  function quickReplyHref(l, key) {
+    const t = Object.prototype.hasOwnProperty.call(REPLY_TEMPLATES, key) ? REPLY_TEMPLATES[key] : null;
+    const email = String(l.email || '').trim();
+    if (!t || !email) return '';
+    const name = firstName(l.name);
+    const body = (name ? `Hello ${name},` : 'Hello,') + '\n\n' + t.body(l) + SIGN_OFF;
+    return 'mailto:' + encodeURIComponent(email)
+      + '?subject=' + encodeURIComponent(t.subject)
+      + '&body=' + encodeURIComponent(body.replace(/\n/g, '\r\n'));
+  }
+
+  function openQuickReply(id, key) {
+    const lead = findLead(id);
+    const href = lead ? quickReplyHref(lead, key) : '';
+    if (!href) return;
+    const a = document.createElement('a');
+    a.href = href;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // The number in the browser tab, e.g. "(3) Staff Inbox": messages not yet marked handled.
+  function setTitleCount(openCount) {
+    document.title = (openCount > 0 ? '(' + openCount + ') ' : '') + 'Staff Inbox | Love RCFE';
+  }
+
+  // While the inbox tab is in the background, only the tab's number is refreshed (a small
+  // request), so you can see new messages arrive without the page redrawing under you.
+  async function refreshTitleCount() {
+    try {
+      const data = await apiFetch('/api/admin/leads?summary=1');
+      if (isSignedIn) setTitleCount(Number(data.open || 0));
+    } catch (err) {
+      if (err.status === 401) {
+        allLeads = [];
+        showLogin('Your session has ended. Please sign in again.');
+      }
+    }
+  }
+
   function renderLeads() {
     const openCount = allLeads.filter(l => !l.handled).length;
     const handledCount = allLeads.filter(l => l.handled).length;
     const callsCount = allLeads.filter(l => l.kind === 'call_request' && !l.handled).length;
-    document.title = (openCount > 0 ? '(' + openCount + ') ' : '') + 'Staff Inbox | Love RCFE';
+    setTitleCount(openCount);
 
     document.getElementById('stat-open').textContent = openCount;
     document.getElementById('stat-calls').textContent = callsCount;
@@ -373,7 +486,13 @@
             </label>
           </div>
 
-          <div class="flex items-center justify-end gap-3 pt-1">
+          <div class="flex flex-wrap items-center justify-end gap-3 pt-1">
+            ${l.email ? `<select class="lead-field lead-reply mr-auto" data-action="reply" data-lead-id="${leadId}" aria-label="Reply by email to ${escapeHtml(l.name)}" title="Opens your email app with the message written. Nothing is sent until you press Send there.">
+                <option value="">Reply by email…</option>${replyOptions(l)}
+              </select>` : ''}
+            <button type="button" data-action="spam" data-lead-id="${leadId}" class="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline" title="Deletes this message and reports the sender's address to the site owner">
+              Mark as spam
+            </button>
             <button type="button" data-action="delete" data-lead-id="${leadId}" class="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline">
               Delete
             </button>
@@ -490,6 +609,8 @@
 
       if (actionBtn.dataset.action === 'delete') {
         deleteLead(id);
+      } else if (actionBtn.dataset.action === 'spam') {
+        markSpam(id);
       } else if (actionBtn.dataset.action === 'toggle-handled') {
         setHandled(id, actionBtn.dataset.nextHandled === 'true');
       }
@@ -502,6 +623,11 @@
         if (el && el.dataset && el.dataset.action === 'stage') {
           const id = Number(el.dataset.leadId);
           if (Number.isInteger(id) && id > 0) setStage(id, el.value);
+        } else if (el && el.dataset && el.dataset.action === 'reply') {
+          const id = Number(el.dataset.leadId);
+          const key = el.value;
+          el.value = ''; // back to "Reply by email…" so the same reply can be picked again
+          if (key && Number.isInteger(id) && id > 0) openQuickReply(id, key);
         }
       });
       listEl.addEventListener('input', (e) => {
@@ -543,13 +669,31 @@
     refreshIcons();
     loadLeads({ silentAuth: true });
 
-    // Auto-refresh every 60s while signed in and the tab is visible
-    setInterval(() => {
+    // Auto-refresh every 60s while signed in and the tab is visible. In a background tab,
+    // only the number in the tab title is refreshed, every 3 minutes.
+    const canRedraw = () => {
       const typing = document.activeElement && document.activeElement.matches('input, textarea, select');
-      if (!document.hidden && isSignedIn && !typing && !hasUnsavedNotes()) {
-        loadLeads({ silentAuth: true });
+      return isSignedIn && !typing && !hasUnsavedNotes();
+    };
+    let hiddenTicks = 0;
+    setInterval(() => {
+      if (!isSignedIn) return;
+      if (document.hidden) {
+        hiddenTicks += 1;
+        if (hiddenTicks % 3 === 0) refreshTitleCount();
+        return;
       }
+      hiddenTicks = 0;
+      if (canRedraw()) loadLeads({ silentAuth: true });
     }, 60000);
+    // Coming back to the tab shows the latest messages straight away.
+    let lastVisibleLoad = Date.now();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible' || Date.now() - lastVisibleLoad < 15000) return;
+      lastVisibleLoad = Date.now();
+      hiddenTicks = 0;
+      if (canRedraw()) loadLeads({ silentAuth: true });
+    });
   }
 
   if (document.readyState === 'loading') {
