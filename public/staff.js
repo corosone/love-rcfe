@@ -16,6 +16,7 @@
   let leadCounts = null;
   let isSignedIn = false;
   let isDeveloper = false; // a signed-in developer also gets the offer to block a spammer's address
+  let me = null; // who is signed in: { name, kind } ('account', 'shared' or 'developer')
   let currentFilter = 'open';
   let searchQuery = '';
 
@@ -73,6 +74,12 @@
     return new Date(iso);
   }
 
+  // "Nov 18, 3:10 PM" for an ISO time, in the viewer's own time zone.
+  function formatWhen(raw) {
+    const d = parseCreatedAt(raw);
+    return Number.isNaN(d.getTime()) ? String(raw || '') : d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  }
+
   // Newest first. The server sends messages not yet handled first (so none can be left out
   // of the first batch), but the inbox lists everything by date.
   function byNewest(a, b) {
@@ -118,7 +125,23 @@
     document.getElementById('signout-btn').classList.add('hidden');
     const devLink = document.getElementById('dev-link');
     if (devLink) devLink.classList.add('hidden');
+    me = null;
+    showWhoAmI();
+    document.getElementById('change-pw-view').classList.add('hidden');
     document.getElementById('login-error').textContent = errorMsg;
+  }
+
+  // "Signed in as Maria" in the header, and the Change Password button for people with their own account.
+  function showWhoAmI() {
+    const who = document.getElementById('whoami');
+    const btn = document.getElementById('change-pw-btn');
+    const label = !me ? '' : me.kind === 'account' ? `Signed in as ${me.name}` : me.kind === 'developer' ? 'Signed in as the developer' : 'Signed in with the shared password';
+    if (who) {
+      // Shown on wider screens only (the element is "hidden sm:inline"); empty when signed out.
+      who.textContent = label;
+      who.title = label;
+    }
+    if (btn) btn.classList.toggle('hidden', !me || me.kind !== 'account');
   }
 
   function showDashboard() {
@@ -175,6 +198,8 @@
       const devLink = document.getElementById('dev-link');
       if (devLink) devLink.classList.toggle('hidden', !data.developer);
       isDeveloper = Boolean(data.developer);
+      me = data.me && typeof data.me === 'object' ? { name: String(data.me.name || ''), kind: String(data.me.kind || '') } : null;
+      showWhoAmI();
       showDashboard();
       if (statusEl) {
         statusEl.textContent = hasMoreLeads
@@ -203,15 +228,24 @@
     if (btn) btn.disabled = false;
   }
 
+  // Copies "who changed it last, and when" from the server's reply.
+  function noteChange(target, data) {
+    if (target && data && data.lead) {
+      target.updatedBy = data.lead.updatedBy || '';
+      target.updatedAt = data.lead.updatedAt || '';
+    }
+  }
+
   async function setHandled(id, handled) {
     try {
-      await apiFetch('/api/admin/leads', {
+      const data = await apiFetch('/api/admin/leads', {
         method: 'PATCH',
         body: JSON.stringify({ id, handled })
       });
       const target = findLead(id);
       countChange(target, { handled });
       if (target) target.handled = handled;
+      noteChange(target, data);
       renderLeads();
     } catch (err) {
       if (!handleAuthFailure(err)) alert(err.message);
@@ -220,9 +254,10 @@
 
   async function setStage(id, stage) {
     try {
-      await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, stage }) });
+      const data = await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, stage }) });
       const target = findLead(id);
       if (target) target.stage = stage;
+      noteChange(target, data);
       renderLeads();
     } catch (err) {
       if (!handleAuthFailure(err)) alert(err.message);
@@ -261,9 +296,11 @@
     const statusEl = () => document.getElementById('note-status-' + id);
     if (statusEl()) statusEl().textContent = 'Saving…';
     try {
-      await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, notes: sent }) });
+      const data = await apiFetch('/api/admin/leads', { method: 'PATCH', body: JSON.stringify({ id, notes: sent }) });
       // Mark only the text that was actually sent as saved (typing may have continued meanwhile).
       target._savedNotes = sent;
+      // Not redrawn now (that would interrupt typing); shown the next time the list is drawn.
+      noteChange(target, data);
       const el = statusEl();
       if (el && target.notes === sent) {
         el.textContent = 'Saved';
@@ -300,7 +337,7 @@
   }
 
   async function deleteLead(id) {
-    if (!confirm('Permanently delete this lead from the database?')) return;
+    if (!confirm('Delete this message?\n\nIt leaves the inbox. The site owner can still bring it back for 30 days.')) return;
     try {
       await apiFetch(`/api/admin/leads?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
       countChange(findLead(id), { removed: true });
@@ -318,7 +355,7 @@
     const lead = findLead(id);
     if (!lead) return;
     const ip = String(lead.ip || '');
-    if (!confirm('Mark this message as spam?\n\nIt will be permanently deleted.' + (ip ? ' The address it was sent from is reported to the site owner.' : ''))) return;
+    if (!confirm('Mark this message as spam?\n\nIt leaves the inbox (the site owner can still bring it back for 30 days).' + (ip ? ' The address it was sent from is reported to the site owner.' : ''))) return;
     try {
       await apiFetch(`/api/admin/leads?id=${encodeURIComponent(id)}&spam=1`, { method: 'DELETE' });
       countChange(lead, { removed: true });
@@ -529,6 +566,7 @@
             </div>
             <div class="text-right">
               <span class="text-[11px] text-brand-muted">${escapeHtml(created)}</span>
+              ${l.updatedBy ? `<p class="text-[11px] text-brand-muted mt-0.5" title="Who last changed the stage, notes or handled mark, and when">Last changed by <span class="font-semibold text-brand-ink">${escapeHtml(l.updatedBy)}</span>${l.updatedAt ? ` · ${escapeHtml(formatWhen(l.updatedAt))}` : ''}</p>` : ''}
               ${l.source ? `<p class="text-[11px] text-brand-muted mt-0.5">From: ${escapeHtml(sourceLabel(l.source))}</p>` : ''}
               ${l.ip ? `<p class="text-[11px] text-brand-muted mt-0.5" title="The internet address this message was sent from. The location is approximate.">IP: <span class="font-semibold text-brand-ink">${escapeHtml(l.ip)}</span>${l.ipPlace ? ` · ${escapeHtml(l.ipPlace)}` : ''}</p>` : ''}
             </div>
@@ -607,6 +645,45 @@
     const signoutBtn = document.getElementById('signout-btn');
     if (signoutBtn) signoutBtn.addEventListener('click', signOut);
 
+    // Change your own password (only shown to people with their own staff account)
+    const pwView = document.getElementById('change-pw-view');
+    const pwForm = document.getElementById('change-pw-form');
+    const pwStatus = document.getElementById('change-pw-status');
+    const closePw = () => {
+      pwView.classList.add('hidden');
+      pwForm.reset();
+      pwStatus.textContent = '';
+    };
+    const changePwBtn = document.getElementById('change-pw-btn');
+    if (changePwBtn) changePwBtn.addEventListener('click', () => {
+      pwView.classList.remove('hidden');
+      document.getElementById('change-pw-user').value = me ? me.name : '';
+      document.getElementById('change-pw-current').focus();
+    });
+    document.getElementById('change-pw-cancel').addEventListener('click', closePw);
+    pwForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const current = document.getElementById('change-pw-current').value;
+      const next = document.getElementById('change-pw-new').value;
+      const again = document.getElementById('change-pw-again').value;
+      pwStatus.className = 'text-xs font-semibold min-h-4 text-red-600 dark:text-red-400';
+      if (next !== again) { pwStatus.textContent = 'The two new passwords are not the same.'; return; }
+      if (next.length < 12) { pwStatus.textContent = 'Use at least 12 characters.'; return; }
+      const save = document.getElementById('change-pw-save');
+      save.disabled = true;
+      try {
+        const data = await apiFetch('/api/admin/session', { method: 'PATCH', body: JSON.stringify({ current, password: next }) });
+        pwForm.reset();
+        pwStatus.className = 'text-xs font-semibold min-h-4 text-brand-green';
+        pwStatus.textContent = 'Your password is changed.' + (data.signedOut ? ` ${data.signedOut} other device(s) were signed out.` : '');
+        setTimeout(() => { if (/changed/.test(pwStatus.textContent)) closePw(); }, 3000);
+      } catch (err) {
+        if (!handleAuthFailure(err)) pwStatus.textContent = err.message;
+      } finally {
+        save.disabled = false;
+      }
+    });
+
     const refreshBtn = document.getElementById('refresh-btn');
     if (refreshBtn) refreshBtn.addEventListener('click', () => loadLeads());
 
@@ -621,6 +698,7 @@
       loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const pw = document.getElementById('inbox-password').value;
+        const name = document.getElementById('inbox-name').value.trim();
         const btn = document.getElementById('login-submit');
         const errorEl = document.getElementById('login-error');
         btn.disabled = true;
@@ -640,7 +718,7 @@
           sent = true;
           await apiFetch('/api/admin/session', {
             method: 'POST',
-            body: JSON.stringify({ password: pw, turnstile_token: token })
+            body: JSON.stringify({ name, password: pw, turnstile_token: token })
           });
           document.getElementById('inbox-password').value = '';
           await loadLeads();

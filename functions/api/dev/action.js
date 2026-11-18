@@ -7,23 +7,64 @@ import {
 import { setRequestLogPaused } from '../../../lib/requestlog.js';
 import { addBlock, removeBlock } from '../../../lib/blocklist.js';
 import { setHoliday, clearHoliday } from '../../../lib/settings.js';
+import { forgetTrustedDevices } from '../../../lib/trust.js';
+import {
+  moveLeadsToBin, restoreDeletedLeads, deleteForever, emptyBin, purgeDeletedLeads, cleanIds, RESTORE_BATCH, KEEP_DELETED_DAYS,
+} from '../../../lib/deletedleads.js';
+import {
+  createStaffAccount, resetStaffPassword, removeStaffAccount, setSharedPassword,
+} from '../../../lib/staff.js';
 
 const MAX_DELETE_IDS = 50; // Cloudflare D1 allows at most 100 values per query; stay well under it
 
-async function signOutOtherDevelopers(env, session) {
+// Also forgets every other trusted developer device (lib/trust.js); this one stays trusted.
+async function signOutOtherDevelopers(env, session, request) {
   const mine = await sessionRowId(session);
   const res = await env.DB.prepare('DELETE FROM dev_sessions WHERE jti != ?').bind(mine).run();
+  await forgetTrustedDevices(env, 'dev', request);
   return Number(res?.meta?.changes || 0);
 }
 
 const ACTIONS = {
   // ----- Security -----
 
-  // Signs every staff device out of the inbox (they sign in again with the staff password).
+  // Signs every staff device out of the inbox (they sign in again with their password), and
+  // forgets every trusted staff device (lib/trust.js).
   async signout_staff(request, env) {
     const res = await env.DB.prepare('DELETE FROM admin_sessions').run();
+    await forgetTrustedDevices(env, 'staff');
     const n = Number(res?.meta?.changes || 0);
     return { message: `Signed out ${n} staff session(s).`, detail: `${n} session(s)` };
+  },
+
+  // ----- Staff accounts (lib/staff.js) -----
+  // The made-up password is in the reply once, to hand to the person. It is never stored.
+  async add_staff_account(request, env, session, options) {
+    const r = await createStaffAccount(env.DB, options?.name);
+    if (!r.ok) return r;
+    return { message: `Account created for ${r.name}.`, detail: r.name, extra: { account: { id: r.id, name: r.name }, password: r.password } };
+  },
+
+  async reset_staff_password(request, env, session, options) {
+    const r = await resetStaffPassword(env.DB, options?.id);
+    if (!r.ok) return r;
+    return { message: `${r.name} has a new password and was signed out everywhere.`, detail: r.name, extra: { account: { id: r.id, name: r.name }, password: r.password } };
+  },
+
+  async remove_staff_account(request, env, session, options) {
+    const r = await removeStaffAccount(env.DB, options?.id);
+    if (!r.ok) return r;
+    return { message: `${r.name}'s account was removed and they were signed out everywhere.`, detail: r.name };
+  },
+
+  // options.allowed: true lets the shared staff password (INBOX_PASSWORD) sign in; false turns it off.
+  async shared_staff_password(request, env, session, options) {
+    const allowed = options?.allowed === true;
+    const r = await setSharedPassword(env, allowed);
+    if (!r.ok) return r;
+    return allowed
+      ? { message: 'The shared staff password works again.', detail: 'allowed' }
+      : { message: `The shared staff password is turned off. Staff now sign in with their own name and password.${r.signedOut ? ` ${r.signedOut} session(s) that used it were signed out.` : ''}`, detail: 'turned off' };
   },
 
   // Removes "too many wrong passwords" lockouts and sign-in rate limits, e.g. after staff lock themselves out.
@@ -38,14 +79,14 @@ const ACTIONS = {
 
   // Ends every developer session except the one making this request.
   async signout_other_devs(request, env, session) {
-    const n = await signOutOtherDevelopers(env, session);
+    const n = await signOutOtherDevelopers(env, session, request);
     return { message: n ? `Signed out ${n} other developer session(s). This device stays signed in.` : 'No other developer sessions were signed in.', detail: `${n} session(s)` };
   },
 
   // Emergency switch: blocks new developer sign-ins and signs out other developer sessions.
   async lock_dev(request, env, session) {
     if (!(await setDevLock(env, true))) return { ok: false, status: 500, message: 'Could not lock the developer sign-in.' };
-    const n = await signOutOtherDevelopers(env, session);
+    const n = await signOutOtherDevelopers(env, session, request);
     return {
       message: `Developer sign-in is now locked${n ? ` and ${n} other developer session(s) were signed out` : ''}. This device stays signed in so you can unlock it. Changing DEV_PASSWORD in Cloudflare also unlocks it.`,
       detail: `${n} other session(s) ended`,
@@ -111,19 +152,36 @@ const ACTIONS = {
 
   // ----- Enquiries -----
 
-  // Permanently deletes the chosen enquiries (up to 50 at a time; the console sends bigger selections in batches).
+  // Deletes the chosen enquiries (up to 50 at a time; the console sends bigger selections in
+  // batches). They go to Recently Deleted for 30 days first (lib/deletedleads.js).
   async delete_leads(request, env, session, options) {
-    const raw = Array.isArray(options?.ids) ? options.ids : [];
-    const ids = [...new Set(raw.map(Number))].filter((n) => Number.isInteger(n) && n > 0);
-    if (!ids.length || ids.length !== raw.length || ids.length > MAX_DELETE_IDS) {
+    const ids = Array.isArray(options?.ids) ? cleanIds(options.ids) : null;
+    if (!ids || ids.length > MAX_DELETE_IDS) {
       return { ok: false, status: 400, message: `Choose between 1 and ${MAX_DELETE_IDS} enquiries to delete.` };
     }
-    const res = await env.DB
-      .prepare(`DELETE FROM leads WHERE id IN (${ids.map(() => '?').join(', ')})`)
-      .bind(...ids)
-      .run();
-    const n = Number(res?.meta?.changes || 0);
-    return { message: `Deleted ${n} enquir${n === 1 ? 'y' : 'ies'}.`, detail: `deleted ${n}` };
+    const n = (await moveLeadsToBin(env.DB, ids, { by: 'Developer' })).length;
+    return { message: `Deleted ${n} enquir${n === 1 ? 'y' : 'ies'}. ${n === 1 ? 'It stays' : 'They stay'} in Recently Deleted for ${KEEP_DELETED_DAYS} days in case you need ${n === 1 ? 'it' : 'them'} back.`, detail: `deleted ${n}` };
+  },
+
+  // ----- Recently Deleted (lib/deletedleads.js) -----
+  async restore_deleted(request, env, session, options) {
+    const ids = Array.isArray(options?.ids) ? cleanIds(options.ids) : null;
+    if (!ids || ids.length > RESTORE_BATCH) return { ok: false, status: 400, message: `Choose between 1 and ${RESTORE_BATCH} enquiries to put back.` };
+    const r = await restoreDeletedLeads(env.DB, ids);
+    if (!r.restored) return { ok: false, status: 404, message: 'Nothing was put back: those enquiries are no longer in Recently Deleted.' };
+    return { message: `Put back ${r.restored} enquir${r.restored === 1 ? 'y' : 'ies'}.${r.missing ? ` ${r.missing} could not be put back.` : ''}`, detail: `restored ${r.restored}` };
+  },
+
+  async delete_forever(request, env, session, options) {
+    const ids = Array.isArray(options?.ids) ? cleanIds(options.ids) : null;
+    if (!ids) return { ok: false, status: 400, message: 'Choose between 1 and 50 enquiries.' };
+    const n = await deleteForever(env.DB, ids);
+    return { message: `Deleted ${n} enquir${n === 1 ? 'y' : 'ies'} for good.`, detail: `${n}` };
+  },
+
+  async empty_bin(request, env) {
+    const n = await emptyBin(env.DB);
+    return { message: n ? `Emptied Recently Deleted (${n} enquir${n === 1 ? 'y' : 'ies'} deleted for good).` : 'Recently Deleted was already empty.', detail: `${n}` };
   },
 
   // Runs the LEAD_RETENTION_DAYS clean-up now instead of waiting for it to happen on its own.
@@ -219,11 +277,13 @@ const ACTIONS = {
       env.DB.prepare('DELETE FROM dev_challenges WHERE expires_at <= ?').bind(now).run(),
       env.DB.prepare('DELETE FROM blocked_ips WHERE expires_at != 0 AND expires_at <= ?').bind(now).run(),
       env.DB.prepare("DELETE FROM request_log WHERE kind = 'api'").run(),
+      env.DB.prepare('DELETE FROM trusted_devices WHERE expires_at <= ?').bind(now).run(),
     ]);
-    const [limits, attempts, staff, devs, codes, blocks, oldServer] = runs.map((r) => Number(r?.meta?.changes || 0));
-    const total = limits + attempts + staff + devs + codes + blocks + oldServer;
+    const [limits, attempts, staff, devs, codes, blocks, oldServer, trusted] = runs.map((r) => Number(r?.meta?.changes || 0));
+    const binned = await purgeDeletedLeads(env.DB);
+    const total = limits + attempts + staff + devs + codes + blocks + oldServer + trusted + binned;
     return {
-      message: `Removed ${total} old record(s): ${limits} rate-limit counter(s), ${attempts} finished lockout(s), ${staff + devs} expired session(s), ${codes} expired code(s), ${blocks} ended block(s), ${oldServer} old server-request record(s).`,
+      message: `Removed ${total} old record(s): ${limits} rate-limit counter(s), ${attempts} finished lockout(s), ${staff + devs} expired session(s), ${codes} expired code(s), ${blocks} ended block(s), ${oldServer} old server-request record(s), ${trusted} expired trusted device(s), ${binned} enquir${binned === 1 ? 'y' : 'ies'} deleted over ${KEEP_DELETED_DAYS} days ago.`,
       detail: `${total} record(s)`,
     };
   },
@@ -263,7 +323,7 @@ export async function onRequestPost({ request, env }) {
     const result = await ACTIONS[name](request, env, session, options);
     const ok = result.ok !== false;
     await devAudit(env, request, name, result.detail || (ok ? 'ok' : 'failed'));
-    return jsonResponse({ ok, message: result.message }, ok ? 200 : (result.status || 502));
+    return jsonResponse({ ok, message: result.message, ...(ok && result.extra ? result.extra : {}) }, ok ? 200 : (result.status || 502));
   } catch (err) {
     console.error(`Developer action ${name} failed:`, err);
     return jsonResponse({ error: 'That action failed. Please try again.' }, 500);

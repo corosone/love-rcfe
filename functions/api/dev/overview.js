@@ -6,6 +6,7 @@ import { placeFromDetail } from '../../../lib/reqinfo.js';
 import { requestLogPaused } from '../../../lib/requestlog.js';
 import { listBlocks, normalizeIp } from '../../../lib/blocklist.js';
 import { infoFromJson, deviceAddresses, deviceSections } from '../../../lib/deviceinfo.js';
+import { listStaffAccounts, sharedPasswordAllowed } from '../../../lib/staff.js';
 
 // Events that count as failed or blocked sign-ins in the security summary.
 const FAIL_EVENTS = ['wrong_password', 'wrong_code', 'blocked_locked', 'code_limit', 'staff_wrong_password', 'staff_locked_out'];
@@ -46,7 +47,7 @@ export async function onRequestGet({ request, env }) {
   const weekAgo = now - 7 * 86400;
   const keepDays = retentionDays(env);
   try {
-    const [leads, staffSessions, devSessions, lockouts, audit, failCounts, failSources, lock, oldLeads, paused, blocks] = await Promise.all([
+    const [leads, staffSessions, devSessions, lockouts, audit, failCounts, failSources, lock, oldLeads, paused, blocks, staffAccounts, sharedAllowed, trusted, deleted] = await Promise.all([
       env.DB.prepare(`
         SELECT
           COUNT(*) AS total,
@@ -74,7 +75,12 @@ export async function onRequestGet({ request, env }) {
         : Promise.resolve(null),
       requestLogPaused(env, { fresh: true }),
       listBlocks(env.DB),
+      listStaffAccounts(env.DB),
+      sharedPasswordAllowed(env),
+      env.DB.prepare('SELECT kind, COUNT(*) AS n FROM trusted_devices WHERE expires_at > ? GROUP BY kind').bind(now).all(),
+      env.DB.prepare('SELECT COUNT(*) AS n FROM deleted_leads').first(),
     ]);
+    const trustedCount = (kind) => Number((trusted?.results || []).find((r) => r.kind === kind)?.n || 0);
 
     // The place for each top source comes from its most recent failed event.
     const sources = failSources?.results || [];
@@ -104,12 +110,18 @@ export async function onRequestGet({ request, env }) {
         newest: leads?.newest || null,
         retentionDays: keepDays,
         olderThanRetention: oldLeads ? Number(oldLeads.n || 0) : 0,
+        recentlyDeleted: Number(deleted?.n || 0),
       },
+      // Individual staff accounts (lib/staff.js) and whether the shared staff password still works.
+      staff: { accounts: staffAccounts, sharedPasswordAllowed: Boolean(sharedAllowed) },
       security: {
         staffSessions: Number(staffSessions?.n || 0),
         developerSessions: Number(devSessions?.n || 0),
         activeLockouts: Number(lockouts?.n || 0),
         devLocked: Boolean(lock?.locked),
+        // Browsers that signed in before and so skip the site-wide lockout (lib/trust.js)
+        trustedStaffDevices: trustedCount('staff'),
+        trustedDeveloperDevices: trustedCount('dev'),
         devLockedSince: lock?.since || null,
         failures: counts,
         failureSources: sources.map((s) => ({

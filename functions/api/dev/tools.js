@@ -7,12 +7,14 @@
 //   licence&q=<text>[&closed=1]  search California's licensed care homes
 //   licence-detail&number=<n>    inspection and complaint history for one home
 //   holiday                      the holiday switch's current setting
+//   deleted                      Recently Deleted: enquiries deleted in the last 30 days
 // Changes (mark duplicate, holiday switch, blocking) go through POST /api/dev/action.
 import { jsonResponse } from '../../../lib/db.js';
 import { authorizeDev, devAudit } from '../../../lib/dev.js';
 import { followUp, findDuplicates, journey, ipReport, leadDevice } from '../../../lib/devtools.js';
 import { searchFacilities, facilityDetail, STATE_SEARCH_PAGE } from '../../../lib/licence.js';
 import { getHoliday, pacificToday } from '../../../lib/settings.js';
+import { listDeletedLeads } from '../../../lib/deletedleads.js';
 
 export async function onRequestGet({ request, env }) {
   const { denied } = await authorizeDev(request, env);
@@ -46,6 +48,8 @@ export async function onRequestGet({ request, env }) {
         return reply({ ...(await searchFacilities(params.get('q') || '', { includeClosed: params.get('closed') === '1' })), searchPage: STATE_SEARCH_PAGE });
       case 'licence-detail':
         return reply(await facilityDetail(params.get('number') || ''));
+      case 'deleted':
+        return jsonResponse({ ok: true, ...(await listDeletedLeads(env.DB)) });
       case 'holiday':
         return jsonResponse({ ok: true, holiday: await getHoliday(env, { fresh: true }), today: pacificToday() });
       default:

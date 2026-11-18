@@ -14,8 +14,13 @@
 //   - the reply to the caller says only whether an email was sent.
 // The worst a stranger can do is make one week's email arrive early.
 //
+// Refusing a call never writes to the database (the free plan allows 100,000 writes a day for
+// the whole site, and enquiries stop saving if that runs out): calls are first limited in each
+// Cloudflare server's memory, then "was one sent in the last 5 days?" is only read. The
+// database-wide limits below are counted only for calls that could actually send an email.
+//
 // 5 days (not 7) so that an email sent by hand mid-week does not block the next Monday's.
-import { ensureSchema, jsonResponse, clientIp, tooManyRequestsD1 } from '../../../lib/db.js';
+import { ensureSchema, jsonResponse, senderKey, tooManyRequests, tooManyRequestsD1 } from '../../../lib/db.js';
 import { sendDevEmail } from '../../../lib/dev.js';
 
 const DAYS = 7;
@@ -140,6 +145,12 @@ export function summaryEmail(s, origin) {
   return { subject, text: lines.join('\n') };
 }
 
+// True when a summary went out less than 5 days ago (a read; writes nothing).
+async function sentRecently(db, nowSec) {
+  const row = await db.prepare('SELECT value FROM app_secrets WHERE name = ?').bind(LAST_SENT_NAME).first();
+  return Number(row?.value) > nowSec - MIN_GAP_SEC;
+}
+
 // Marks "an email is being sent now", but only if the last one was at least 5 days ago.
 // One database statement, so two calls at the same moment cannot both get through.
 // Returns the earlier time (so it can be put back if sending fails), or null when it is too soon.
@@ -172,19 +183,31 @@ export async function onRequestPost(context) {
     return jsonResponse({ error: 'Database is not bound yet.' }, 503);
   }
 
+  // In memory only (no database work): 6 an hour from one sender, 30 an hour in all.
+  const sender = senderKey(request);
+  if (tooManyRequests(`cron:${sender}`, 6, 60 * 60 * 1000) || tooManyRequests('cron:__all__', 30, 60 * 60 * 1000)) {
+    return jsonResponse({ error: 'Too many requests.' }, 429);
+  }
+
   try {
     await ensureSchema(env.DB);
 
-    // Calls are cheap to refuse, but keep them few: 6 an hour from one address, 20 an hour in all.
+    // Read only: most calls stop here.
+    const nowSec = Math.floor(Date.now() / 1000);
+    if (await sentRecently(env.DB, nowSec)) {
+      return jsonResponse({ ok: true, sent: false, reason: 'A summary was already sent in the last 5 days.' });
+    }
+
+    // Across all of Cloudflare's servers: 6 an hour from one sender, 20 an hour in all.
     const [ipLimited, allLimited] = await Promise.all([
-      tooManyRequestsD1(env.DB, `cron:${clientIp(request)}`, 6, 60 * 60),
+      tooManyRequestsD1(env.DB, `cron:${sender}`, 6, 60 * 60),
       tooManyRequestsD1(env.DB, 'cron:__global__', 20, 60 * 60),
     ]);
     if (ipLimited || allLimited) {
       return jsonResponse({ error: 'Too many requests.' }, 429);
     }
 
-    const claim = await claimSend(env.DB, Math.floor(Date.now() / 1000));
+    const claim = await claimSend(env.DB, nowSec);
     if (!claim) {
       return jsonResponse({ ok: true, sent: false, reason: 'A summary was already sent in the last 5 days.' });
     }
