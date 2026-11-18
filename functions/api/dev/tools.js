@@ -2,6 +2,7 @@
 //   followup                     enquiries waiting more than a day, and reply times
 //   duplicates                   enquiries that look like the same person writing twice
 //   journey&id=<enquiry>         what an enquirer looked at before writing in
+//   lead-device&id=<enquiry>     the full device report for one enquiry (as in the sign-in email)
 //   ip&ip=<address>              everything about one address, its owner and a VPN check
 //   licence&q=<text>[&closed=1]  search California's licensed care homes
 //   licence-detail&number=<n>    inspection and complaint history for one home
@@ -9,7 +10,7 @@
 // Changes (mark duplicate, holiday switch, blocking) go through POST /api/dev/action.
 import { jsonResponse } from '../../../lib/db.js';
 import { authorizeDev, devAudit } from '../../../lib/dev.js';
-import { followUp, findDuplicates, journey, ipReport } from '../../../lib/devtools.js';
+import { followUp, findDuplicates, journey, ipReport, leadDevice } from '../../../lib/devtools.js';
 import { searchFacilities, facilityDetail, STATE_SEARCH_PAGE } from '../../../lib/licence.js';
 import { getHoliday, pacificToday } from '../../../lib/settings.js';
 
@@ -30,6 +31,11 @@ export async function onRequestGet({ request, env }) {
         const id = Number(params.get('id'));
         if (!Number.isInteger(id) || id <= 0) return jsonResponse({ error: 'Unknown enquiry.' }, 400);
         return reply(await journey(env.DB, id));
+      }
+      case 'lead-device': {
+        const id = Number(params.get('id'));
+        if (!Number.isInteger(id) || id <= 0) return jsonResponse({ error: 'Unknown enquiry.' }, 400);
+        return reply(await leadDevice(env.DB, id));
       }
       case 'ip': {
         const r = await ipReport(env.DB, params.get('ip') || '');

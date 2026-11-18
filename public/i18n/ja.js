@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "公開ウェブフォームからは、社会保障番号（SSN）の全桁、詳細な既往歴、または保護対象医療情報（PHI）を送信しないでください。カリフォルニア州様式 LIC 602A などの機微な医療評価書類は、正式な入居審査の段階で HIPAA 準拠の安全な通信経路を通じてのみ共有いたします。",
     "4. Data Access & Removal Requests": "4. データの開示および削除請求",
     "5. Services We Use": "5. 利用している外部サービス",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "当サイトの運営にあたり、Cloudflare（ウェブサイトホスティング、データベース保管、スパム対策、プライバシーに配慮したアクセス統計）および Formspree（送信されたメッセージのメール転送）といった外部サービスを利用しています。フォームから送信された情報は、当社が受信してご返信するためにこれらのサービスを経由する場合があります。",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "当サイトの運営にあたり、Cloudflare（ウェブサイトホスティング、データベース保管、スパム対策、プライバシーに配慮したアクセス統計）、Formspree（送信されたメッセージのメール転送）および ipify / icanhazip（フォームのご利用時に端末のもう一つのインターネットアドレスを確認するため）といった外部サービスを利用しています。フォームから送信された情報は、当社が受信してご返信するためにこれらのサービスを経由する場合があります。",
     "Contact our Privacy Officer": "個人情報保護担当へ問い合わせる",
     "Call Love RCFE": "Love RCFE にお電話する",
     "Talk with an advisor. Free and confidential.": "アドバイザーに無料・秘密厳守でご相談いただけます。",
@@ -492,7 +492,8 @@
     "Only used to respond.": "ご返信の目的にのみ使用します。",
     "We never send spam.": "迷惑メールは一切送りません。",
     "Family records stay confidential.": "ご家族の記録は厳重に管理します。",
-    "Keep bank details private.": "銀行口座情報はご記入にならないでください。"
+    "Keep bank details private.": "銀行口座情報はご記入にならないでください。",
+    "Device details improve security.": "端末情報で安全性を高めます。"
   },
   blocks: {
     "hero_title": "もう少しの明快さを。<br><span class=\"italic text-brand-green font-normal\">もっと深い思いやりを。</span>",

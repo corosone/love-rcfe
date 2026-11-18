@@ -4,6 +4,7 @@ import {
 } from '../../lib/db.js';
 import { cfLocation } from '../../lib/reqinfo.js';
 import { cfNetwork } from '../../lib/netinfo.js';
+import { buildDeviceInfo, infoToJson, deviceType } from '../../lib/deviceinfo.js';
 import { isBlockedKey, deviceBlockKey, recordBlockedHit, blockedResponse } from '../../lib/blocklist.js';
 import { getHoliday, holidayCovers } from '../../lib/settings.js';
 
@@ -80,7 +81,8 @@ export async function onRequestPost(context) {
   const originErr = verifySameOrigin(request);
   if (originErr) return originErr;
 
-  const parsed = await readJsonBody(request, 16384);
+  // Room for a 3,000-character message in any script plus the device report
+  const parsed = await readJsonBody(request, 32768);
   if (!parsed.ok) return parsed.response;
   const body = parsed.data;
 
@@ -104,6 +106,17 @@ export async function onRequestPost(context) {
   const rawSource = clean(body.source, 40);
   const net = cfNetwork(request);
   const device = typeof body.device === 'string' && DEVICE_RE.test(body.device) ? body.device : '';
+  // The device report (public/device-report.js), checked field by field in lib/deviceinfo.js.
+  const client = body.client && typeof body.client === 'object' && !Array.isArray(body.client) ? body.client : null;
+  let deviceInfo = '';
+  let reported = null;
+  try {
+    const info = buildDeviceInfo(request, client);
+    reported = info.reported || null;
+    deviceInfo = infoToJson(info);
+  } catch (err) {
+    console.warn('Could not build the device report:', err?.message);
+  }
   const record = {
     kind,
     inquiryType: clean(body.inquiry_type, LIMITS.inquiryType) || 'General Inquiry',
@@ -121,6 +134,8 @@ export async function onRequestPost(context) {
     isp: net.isp,
     asn: net.asn,
     device,
+    deviceInfo,
+    deviceType: deviceType(request, reported),
   };
 
   // A device the owner blocked in the developer console (spam sent from changing addresses).
@@ -203,8 +218,8 @@ export async function onRequestPost(context) {
       .prepare(`
         INSERT INTO leads (
           kind, inquiry_type, name, email, phone, city, message, preferred_date, preferred_time, source,
-          ip, ip_place, isp, asn, device
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          ip, ip_place, isp, asn, device, device_info, device_type
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `)
       .bind(
         record.kind,
@@ -221,7 +236,9 @@ export async function onRequestPost(context) {
         record.ipPlace,
         record.isp,
         record.asn,
-        record.device
+        record.device,
+        record.deviceInfo,
+        record.deviceType
       )
       .run();
 

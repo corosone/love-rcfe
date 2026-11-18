@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "공개 웹 양식을 통해 사회보장번호 전체, 상세 병력 또는 보호 대상 건강 정보(PHI)를 전송하지 마세요. LIC 602A 같은 민감한 의료 평가 서류는 정식 입소 심사 중 HIPAA 보안 채널을 통해서만 전달됩니다.",
     "4. Data Access & Removal Requests": "4. 정보 열람 및 삭제 요청",
     "5. Services We Use": "5. 이용 중인 외부 기술 서비스",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "본 웹사이트 운영을 위해 Cloudflare(웹 호스팅, 데이터베이스 저장, 스팸 차단, 개인정보 친화적 방문 통계) 및 Formspree(접수된 문의를 이메일로 전달) 서비스를 이용합니다. 양식으로 제출하신 정보는 상담 접수 및 답변 처리를 위해 해당 서비스를 거칠 수 있습니다.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "본 웹사이트 운영을 위해 Cloudflare(웹 호스팅, 데이터베이스 저장, 스팸 차단, 개인정보 친화적 방문 통계), Formspree(접수된 문의를 이메일로 전달) 및 ipify / icanhazip(양식 이용 시 기기의 두 번째 인터넷 주소 확인) 서비스를 이용합니다. 양식으로 제출하신 정보는 상담 접수 및 답변 처리를 위해 해당 서비스를 거칠 수 있습니다.",
     "Contact our Privacy Officer": "개인정보 보호 담당자 문의",
     "Call Love RCFE": "Love RCFE 전화 연결",
     "Talk with an advisor. Free and confidential.": "전문 상담사와 통화하세요. 무료이며 비밀이 보장됩니다.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "답변 목적으로만 사용됩니다.",
     "We never send spam.": "스팸은 절대 보내지 않습니다.",
     "Family records stay confidential.": "가족 기록은 비밀로 유지됩니다.",
-    "Keep bank details private.": "은행 정보는 보내지 마세요."
+    "Keep bank details private.": "은행 정보는 보내지 마세요.",
+    "Device details improve security.": "기기 정보로 보안을 강화합니다."
   },
   blocks: {
     "hero_title": "조금 더 선명한 안내.<br><span class=\"italic text-brand-green font-normal\">훨씬 더 깊은 돌봄.</span>",

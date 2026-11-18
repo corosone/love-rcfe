@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Пожалуйста, не отправляйте номера SSN, подробные истории болезни и медицинскую тайну (PHI) через открытые веб-формы. Чувствительные документы (например, форму LIC 602A) передаются только по защищенным каналам, соответствующим HIPAA.",
     "4. Data Access & Removal Requests": "4. Доступ к данным и запрос на удаление",
     "5. Services We Use": "5. Используемые сервисы",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Для работы сайта мы используем несколько сторонних сервисов: Cloudflare (хостинг, база данных, защита от спама и приватная аналитика) и Formspree (пересылка ваших сообщений на почту). Переданные через формы данные могут обрабатываться ими для доставки вашего обращения.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Для работы сайта мы используем несколько сторонних сервисов: Cloudflare (хостинг, база данных, защита от спама и приватная аналитика), Formspree (пересылка ваших сообщений на почту) и ipify / icanhazip (для определения второго интернет-адреса вашего устройства при использовании наших форм). Переданные через формы данные могут обрабатываться ими для доставки вашего обращения.",
     "Contact our Privacy Officer": "Связаться по вопросам приватности",
     "Call Love RCFE": "Позвонить в Love RCFE",
     "Talk with an advisor. Free and confidential.": "Поговорите с консультантом. Бесплатно и конфиденциально.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "Используется только для ответа.",
     "We never send spam.": "Никакого спама.",
     "Family records stay confidential.": "Данные семей конфиденциальны.",
-    "Keep bank details private.": "Не отправляйте банковские данные."
+    "Keep bank details private.": "Не отправляйте банковские данные.",
+    "Device details improve security.": "Данные устройства повышают безопасность."
   },
   blocks: {
     "hero_title": "Больше ясности.<br><span class=\"italic text-brand-green font-normal\">Больше заботы.</span>",

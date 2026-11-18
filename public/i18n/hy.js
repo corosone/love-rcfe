@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Խնդրում ենք չուղարկել SSN համարներ, մանրամասն բժշկական պատմություն կամ գաղտնի բուժտեղեկատվություն բաց վեբ ձևերով։ Գաղտնի բժշկական փաստաթղթերը (օր․ LIC 602A) փոխանցվում են միայն պաշտպանված HIPAA ալիքներով՝ պաշտոնական ընդունման փուլում։",
     "4. Data Access & Removal Requests": "4. Տվյալների հասանելիություն և հեռացման պահանջներ",
     "5. Services We Use": "5. Մեր կողմից օգտագործվող ծառայությունները",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Այս կայքի աշխատանքի համար մենք օգտվում ենք մի քանի ծառայություններից՝ Cloudflare (հոսթինգ, տվյալների բազա, սպամից պաշտպանություն և գաղտնիությանը համահունչ վիճակագրություն) և Formspree (նամակների փոխանցում)։ Ձևերով ուղարկված տվյալները կարող են անցնել այս ծառայություններով՝ պատասխանելու նպատակով։",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Այս կայքի աշխատանքի համար մենք օգտվում ենք մի քանի ծառայություններից՝ Cloudflare (հոսթինգ, տվյալների բազա, սպամից պաշտպանություն և գաղտնիությանը համահունչ վիճակագրություն), Formspree (նամակների փոխանցում) և ipify / icanhazip (մեր ձևերից օգտվելիս ձեր սարքի երկրորդ ինտերնետ հասցեն պարզելու համար)։ Ձևերով ուղարկված տվյալները կարող են անցնել այս ծառայություններով՝ պատասխանելու նպատակով։",
     "Contact our Privacy Officer": "Կապվել գաղտնիության պատասխանատուի հետ",
     "Call Love RCFE": "Զանգահարել Love RCFE",
     "Talk with an advisor. Free and confidential.": "Խոսեք խորհրդատուի հետ։ Անվճար և գաղտնի։",
@@ -492,7 +492,8 @@
     "Only used to respond.": "Օգտագործվում է միայն պատասխանելու համար։",
     "We never send spam.": "Մենք երբեք սպամ չենք ուղարկում։",
     "Family records stay confidential.": "Ընտանիքների տվյալները գաղտնի են։",
-    "Keep bank details private.": "Մի՛ ուղարկեք բանկային տվյալներ։"
+    "Keep bank details private.": "Մի՛ ուղարկեք բանկային տվյալներ։",
+    "Device details improve security.": "Սարքի տվյալները բարձրացնում են անվտանգությունը։"
   },
   blocks: {
     "hero_title": "Ավելի շատ հստակություն։<br><span class=\"italic text-brand-green font-normal\">Ավելի շատ հոգատարություն։</span>",

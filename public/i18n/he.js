@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "אנא אל תשלחו מספרי Social Security מלאים, היסטוריה רפואית מפורטת או מידע רפואי מוגן (PHI) דרך טופסי אינטרנט פתוחים. הערכות רפואיות רגישות (כגון טופס קליפורניה LIC 602A) מועברות רק בערוצים מאובטחים התואמים לתקן HIPAA במהלך בדיקות קליטה רשמיות.",
     "4. Data Access & Removal Requests": "4. גישה לנתונים ובקשות מחיקה",
     "5. Services We Use": "5. שירותים שאנו עושים בהם שימוש",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "לתפעול אתר זה אנו מסתמכים על מספר שירותי צד שלישי: Cloudflare (אחסון אתר, מסד נתונים, הגנה מספאם וסטטיסטיקת תנועה שומרת פרטיות) ו-Formspree (להעברת ההודעות שתשלחו אלינו באימייל). מידע שתשלחו בטפסים עשוי לעבור דרך שירותים אלה כדי שנוכל לקבלו ולהשיב לכם.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "לתפעול אתר זה אנו מסתמכים על מספר שירותי צד שלישי: Cloudflare (אחסון אתר, מסד נתונים, הגנה מספאם וסטטיסטיקת תנועה שומרת פרטיות), Formspree (להעברת ההודעות שתשלחו אלינו באימייל) ו-ipify / icanhazip (לאיתור כתובת האינטרנט השנייה של המכשיר שלכם בעת שימוש בטפסים). מידע שתשלחו בטפסים עשוי לעבור דרך שירותים אלה כדי שנוכל לקבלו ולהשיב לכם.",
     "Contact our Privacy Officer": "פנו לממונה על הפרטיות",
     "Call Love RCFE": "חייגו ל-Love RCFE",
     "Talk with an advisor. Free and confidential.": "שוחחו עם יועץ. חינם ובסודיות מלאה.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "משמש רק כדי להשיב לכם.",
     "We never send spam.": "לעולם לא נשלח ספאם.",
     "Family records stay confidential.": "רשומות המשפחה נשמרות בסודיות.",
-    "Keep bank details private.": "אל תשלחו פרטי בנק."
+    "Keep bank details private.": "אל תשלחו פרטי בנק.",
+    "Device details improve security.": "פרטי המכשיר משפרים את האבטחה."
   },
   blocks: {
     "hero_title": "קצת יותר בהירות.<br> <span class=\"italic text-brand-green font-normal\">הרבה יותר דאגה ומסירות.</span>",

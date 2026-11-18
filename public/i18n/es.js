@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Por favor no envíe números completos de Seguro Social, historiales clínicos detallados ni información médica protegida (PHI) en formularios web abiertos. Las evaluaciones sensibles (como el Formulario LIC 602A) solo se comparten por canales seguros compatibles con HIPAA.",
     "4. Data Access & Removal Requests": "4. Acceso y eliminación de datos",
     "5. Services We Use": "5. Servicios que utilizamos",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Para operar este sitio utilizamos algunos servicios esenciales: Cloudflare (alojamiento, base de datos, protección contra spam y estadísticas respetuosas de la privacidad) y Formspree (para enviarnos por correo sus consultas). La información enviada en los formularios pasa por estos servicios para poder recibirla y responderle.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Para operar este sitio utilizamos algunos servicios esenciales: Cloudflare (alojamiento, base de datos, protección contra spam y estadísticas respetuosas de la privacidad), Formspree (para enviarnos por correo sus consultas) y ipify / icanhazip (para identificar la segunda dirección de internet de su dispositivo cuando usa nuestros formularios). La información enviada en los formularios pasa por estos servicios para poder recibirla y responderle.",
     "Contact our Privacy Officer": "Contactar al Oficial de Privacidad",
     "Call Love RCFE": "Llamar a Love RCFE",
     "Talk with an advisor. Free and confidential.": "Hable con un asesor. Gratis y confidencial.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "Solo se usa para responderle.",
     "We never send spam.": "Nunca enviamos spam.",
     "Family records stay confidential.": "Los registros familiares son confidenciales.",
-    "Keep bank details private.": "No comparta datos bancarios."
+    "Keep bank details private.": "No comparta datos bancarios.",
+    "Device details improve security.": "Los datos del dispositivo mejoran la seguridad."
   },
   blocks: {
     "hero_title": "Un poco más de claridad.<br><span class=\"italic text-brand-green font-normal\">Mucho más cuidado.</span>",

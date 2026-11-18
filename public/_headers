@@ -3,7 +3,7 @@
   X-Frame-Options: DENY
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-iBjwwaiHFz799V/i6eIA8Fg5BpVak4o6E6ub1C/LcDY=' 'sha256-Rs29O02YBgzInZGn1b00pY2Yx4N7GkiV0LbObXpCN5Y=' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://images.pexels.com; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-iBjwwaiHFz799V/i6eIA8Fg5BpVak4o6E6ub1C/LcDY=' 'sha256-Rs29O02YBgzInZGn1b00pY2Yx4N7GkiV0LbObXpCN5Y=' https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://images.pexels.com; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://ipv4.icanhazip.com https://ipv6.icanhazip.com https://api.ipify.org https://api6.ipify.org; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
@@ -11,6 +11,10 @@
 # The two 'sha256-...' entries in script-src above allow the two small scripts written into the home
 # page (theme set-up, top-bar check) and nothing else. Changing either script changes its
 # fingerprint; scripts/build-pages.js then stops the deploy and prints the new one to put here.
+
+# The four address-lookup hosts in connect-src (ipify, icanhazip) are used by /device-report.js
+# once someone starts filling in a form, to find the device's second internet address. They are
+# listed in the privacy policy's "Services We Use".
 
 # Font files never change (a new version gets a new file name), so browsers may keep them
 # for a year instead of re-checking on every visit.

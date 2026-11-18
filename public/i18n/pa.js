@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "ਕਿਰਪਾ ਕਰਕੇ ਖੁੱਲ੍ਹੇ ਜਨਤਕ ਵੈੱਬ ਫਾਰਮਾਂ ਰਾਹੀਂ ਪੂਰੇ ਸੋਸ਼ਲ ਸਿਕਿਉਰਿਟੀ ਨੰਬਰ, ਵਿਸਤ੍ਰਿਤ ਡਾਕਟਰੀ ਇਤਿਹਾਸ ਜਾਂ ਸੁਰੱਖਿਅਤ ਸਿਹਤ ਜਾਣਕਾਰੀ (PHI) ਨਾ ਭੇਜੋ। ਸੰਵੇਦਨਸ਼ੀਲ ਡਾਕਟਰੀ ਮੁਲਾਂਕਣ (ਜਿਵੇਂ ਕਿ California Form LIC 602A) ਰਸਮੀ ਦਾਖ਼ਲਾ ਸਮੀਖਿਆ ਦੌਰਾਨ ਸਿਰਫ਼ ਸੁਰੱਖਿਅਤ, HIPAA-ਅਨੁਕੂਲ ਮਾਧਿਅਮਾਂ ਰਾਹੀਂ ਹੀ ਸਾਂਝੇ ਕੀਤੇ ਜਾਂਦੇ ਹਨ।",
     "4. Data Access & Removal Requests": "4. ਡੇਟਾ ਪਹੁੰਚ ਅਤੇ ਹਟਾਉਣ ਦੀਆਂ ਬੇਨਤੀਆਂ",
     "5. Services We Use": "5. ਸੇਵਾਵਾਂ ਜੋ ਅਸੀਂ ਵਰਤਦੇ ਹਾਂ",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ਇਸ ਸਾਈਟ ਨੂੰ ਚਲਾਉਣ ਲਈ ਅਸੀਂ ਕੁਝ ਤੀਜੀ-ਧਿਰ ਦੀਆਂ ਸੇਵਾਵਾਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦੇ ਹਾਂ: Cloudflare (ਵੈੱਬਸਾਈਟ ਹੋਸਟਿੰਗ, ਡੇਟਾਬੇਸ ਸਟੋਰੇਜ, ਸਪੈਮ ਸੁਰੱਖਿਆ ਅਤੇ ਗੋਪਨੀਯਤਾ-ਪੱਖੀ ਟ੍ਰੈਫਿਕ ਅੰਕੜੇ) ਅਤੇ Formspree (ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੇ ਸੁਨੇਹੇ ਸਾਨੂੰ ਈਮੇਲ ਕਰਨ ਲਈ)। ਸਾਡੇ ਫਾਰਮਾਂ ਰਾਹੀਂ ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੀ ਜਾਣਕਾਰੀ ਇਨ੍ਹਾਂ ਸੇਵਾਵਾਂ ਵਿੱਚੋਂ ਲੰਘ ਸਕਦੀ ਹੈ ਤਾਂ ਜੋ ਅਸੀਂ ਇਸ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਕੇ ਜਵਾਬ ਦੇ ਸਕੀਏ।",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ਇਸ ਸਾਈਟ ਨੂੰ ਚਲਾਉਣ ਲਈ ਅਸੀਂ ਕੁਝ ਤੀਜੀ-ਧਿਰ ਦੀਆਂ ਸੇਵਾਵਾਂ 'ਤੇ ਨਿਰਭਰ ਕਰਦੇ ਹਾਂ: Cloudflare (ਵੈੱਬਸਾਈਟ ਹੋਸਟਿੰਗ, ਡੇਟਾਬੇਸ ਸਟੋਰੇਜ, ਸਪੈਮ ਸੁਰੱਖਿਆ ਅਤੇ ਗੋਪਨੀਯਤਾ-ਪੱਖੀ ਟ੍ਰੈਫਿਕ ਅੰਕੜੇ), Formspree (ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੇ ਸੁਨੇਹੇ ਸਾਨੂੰ ਈਮੇਲ ਕਰਨ ਲਈ) ਅਤੇ ipify / icanhazip (ਸਾਡੇ ਫਾਰਮ ਵਰਤਣ ਸਮੇਂ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਦਾ ਦੂਜਾ ਇੰਟਰਨੈੱਟ ਪਤਾ ਜਾਣਨ ਲਈ)। ਸਾਡੇ ਫਾਰਮਾਂ ਰਾਹੀਂ ਤੁਹਾਡੇ ਵੱਲੋਂ ਭੇਜੀ ਜਾਣਕਾਰੀ ਇਨ੍ਹਾਂ ਸੇਵਾਵਾਂ ਵਿੱਚੋਂ ਲੰਘ ਸਕਦੀ ਹੈ ਤਾਂ ਜੋ ਅਸੀਂ ਇਸ ਨੂੰ ਪ੍ਰਾਪਤ ਕਰਕੇ ਜਵਾਬ ਦੇ ਸਕੀਏ।",
     "Contact our Privacy Officer": "ਸਾਡੇ ਗੋਪਨੀਯਤਾ ਅਧਿਕਾਰੀ ਨਾਲ ਸੰਪਰਕ ਕਰੋ",
     "Call Love RCFE": "Love RCFE ਨੂੰ ਕਾਲ ਕਰੋ",
     "Talk with an advisor. Free and confidential.": "ਸਲਾਹਕਾਰ ਨਾਲ ਗੱਲ ਕਰੋ। ਮੁਫ਼ਤ ਅਤੇ ਗੁਪਤ।",
@@ -492,7 +492,8 @@
     "Only used to respond.": "ਸਿਰਫ਼ ਜਵਾਬ ਦੇਣ ਲਈ ਵਰਤੀ ਜਾਂਦੀ ਹੈ।",
     "We never send spam.": "ਅਸੀਂ ਕਦੇ ਸਪੈਮ ਨਹੀਂ ਭੇਜਦੇ।",
     "Family records stay confidential.": "ਪਰਿਵਾਰਾਂ ਦੇ ਰਿਕਾਰਡ ਗੁਪਤ ਰਹਿੰਦੇ ਹਨ।",
-    "Keep bank details private.": "ਬੈਂਕ ਵੇਰਵੇ ਸਾਂਝੇ ਨਾ ਕਰੋ।"
+    "Keep bank details private.": "ਬੈਂਕ ਵੇਰਵੇ ਸਾਂਝੇ ਨਾ ਕਰੋ।",
+    "Device details improve security.": "ਡਿਵਾਈਸ ਵੇਰਵੇ ਸੁਰੱਖਿਆ ਵਧਾਉਂਦੇ ਹਨ।"
   },
   blocks: {
     "hero_title": "ਥੋੜ੍ਹੀ ਹੋਰ ਸਪੱਸ਼ਟਤਾ।<br> <span class=\"italic text-brand-green font-normal\">ਬਹੁਤ ਜ਼ਿਆਦਾ ਦੇਖਭਾਲ।</span>",

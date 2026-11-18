@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "សូមកុំផ្ញើលេខសន្តិសុខសង្គមពេញលេញ ប្រវត្តិវេជ្ជសាស្ត្រលម្អិត ឬព័ត៌មានសុខភាពដែលត្រូវបានការពារ (PHI) តាមរយៈទម្រង់គេហទំព័រសាធារណៈឡើយ។ ការវាយតម្លៃវេជ្ជសាស្ត្ររសើប (ដូចជាទម្រង់ California LIC 602A) ត្រូវបានចែករំលែកតែតាមរយៈបណ្តាញសុវត្ថិភាពដែលអនុលោមតាម HIPAA ក្នុងអំឡុងពេលពិនិត្យចូលស្នាក់នៅផ្លូវការប៉ុណ្ណោះ។",
     "4. Data Access & Removal Requests": "4. សំណើចូលប្រើ និងលុបទិន្នន័យ",
     "5. Services We Use": "5. សេវាកម្មដែលយើងប្រើប្រាស់",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ដើម្បីដំណើរការគេហទំព័រនេះ យើងពឹងផ្អែកលើសេវាកម្មភាគីទីបីមួយចំនួន៖ Cloudflare (ការបង្ហោះគេហទំព័រ ការផ្ទុកទិន្នន័យ ការការពារសារឥតបានការ និងស្ថិតិចរាចរណ៍ដែលគោរពឯកជនភាព) និង Formspree (ដើម្បីផ្ញើសារដែលលោកអ្នកដាក់ស្នើមកកាន់អ៊ីមែលរបស់យើង)។ ព័ត៌មានដែលលោកអ្នកផ្ញើតាមទម្រង់របស់យើងអាចឆ្លងកាត់សេវាកម្មទាំងនេះ ដើម្បីឱ្យយើងអាចទទួល និងឆ្លើយតបបាន។",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "ដើម្បីដំណើរការគេហទំព័រនេះ យើងពឹងផ្អែកលើសេវាកម្មភាគីទីបីមួយចំនួន៖ Cloudflare (ការបង្ហោះគេហទំព័រ ការផ្ទុកទិន្នន័យ ការការពារសារឥតបានការ និងស្ថិតិចរាចរណ៍ដែលគោរពឯកជនភាព), Formspree (ដើម្បីផ្ញើសារដែលលោកអ្នកដាក់ស្នើមកកាន់អ៊ីមែលរបស់យើង) និង ipify / icanhazip (ដើម្បីស្វែងរកអាសយដ្ឋានអ៊ីនធឺណិតទីពីររបស់ឧបករណ៍លោកអ្នក នៅពេលប្រើទម្រង់របស់យើង)។ ព័ត៌មានដែលលោកអ្នកផ្ញើតាមទម្រង់របស់យើងអាចឆ្លងកាត់សេវាកម្មទាំងនេះ ដើម្បីឱ្យយើងអាចទទួល និងឆ្លើយតបបាន។",
     "Contact our Privacy Officer": "ទាក់ទងមន្ត្រីឯកជនភាពរបស់យើង",
     "Call Love RCFE": "ទូរស័ព្ទទៅ Love RCFE",
     "Talk with an advisor. Free and confidential.": "ពិភាក្សាជាមួយទីប្រឹក្សា។ ឥតគិតថ្លៃ និងរក្សាការសម្ងាត់។",
@@ -492,7 +492,8 @@
     "Only used to respond.": "ប្រើសម្រាប់តែការឆ្លើយតបប៉ុណ្ណោះ។",
     "We never send spam.": "យើងមិនដែលផ្ញើសារឥតបានការឡើយ។",
     "Family records stay confidential.": "កំណត់ត្រាគ្រួសារត្រូវបានរក្សាជាការសម្ងាត់។",
-    "Keep bank details private.": "សូមកុំផ្ញើព័ត៌មានធនាគារ។"
+    "Keep bank details private.": "សូមកុំផ្ញើព័ត៌មានធនាគារ។",
+    "Device details improve security.": "ព័ត៌មានឧបករណ៍ជួយបង្កើនសុវត្ថិភាព។"
   },
   blocks: {
     "hero_title": "ភាពច្បាស់លាស់កាន់តែច្រើន។<br> <span class=\"italic text-brand-green font-normal\">ការយកចិត្តទុកដាក់កាន់តែខ្លាំង។</span>",

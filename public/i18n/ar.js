@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "يرجى عدم إرسال أرقام الضمان الاجتماعي أو السجلات الطبية المفصلة عبر نماذج الويب المفتوحة. تُشارك التقارير الطبية الحساسة (مثل نموذج LIC 602A) فقط عبر قنوات مشفرة متوافقة مع HIPAA أثناء إجراءات القبول.",
     "4. Data Access & Removal Requests": "4. الوصول للبيانات وطلبات الحذف",
     "5. Services We Use": "5. الخدمات التي نستخدمها",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "لتشغيل هذا الموقع نعتمد على خدمات خارجية: Cloudflare (الاستضافة وقاعدة البيانات والحماية من الرسائل العشوائية) وFormspree (لإرسال الرسائل إلى بريدنا). قد تمر البيانات المرسلة عبر هذه الخدمات لنتمكن من استلامها والرد عليك.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "لتشغيل هذا الموقع نعتمد على خدمات خارجية: Cloudflare (الاستضافة وقاعدة البيانات والحماية من الرسائل العشوائية)، Formspree (لإرسال الرسائل إلى بريدنا) وipify / icanhazip (لمعرفة عنوان الإنترنت الثاني لجهازك عند استخدام نماذجنا). قد تمر البيانات المرسلة عبر هذه الخدمات لنتمكن من استلامها والرد عليك.",
     "Contact our Privacy Officer": "تواصل مع مسؤول الخصوصية",
     "Call Love RCFE": "اتصل بـ Love RCFE",
     "Talk with an advisor. Free and confidential.": "تحدث مع مستشار. خدمة مجانية وسرية.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "تُستخدم فقط للرد عليك.",
     "We never send spam.": "لا نرسل رسائل مزعجة أبداً.",
     "Family records stay confidential.": "سجلات العائلات تبقى سرية.",
-    "Keep bank details private.": "لا ترسل بيانات مصرفية."
+    "Keep bank details private.": "لا ترسل بيانات مصرفية.",
+    "Device details improve security.": "بيانات الجهاز تعزز الأمان."
   },
   blocks: {
     "hero_title": "وضوح أكثر قليلاً.<br><span class=\"italic text-brand-green font-normal\">ورعاية أكبر بكثير.</span>",
