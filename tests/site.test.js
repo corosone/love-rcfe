@@ -16,6 +16,23 @@ const BACKUP_PICTURE = require('node:fs').readFileSync(require('node:path').join
 
 let site;
 let browser;
+
+// Starts the test browser. On GitHub the browser that matches this Playwright version is
+// downloaded first (see .github/workflows/tests.yml). Claude's cloud computers come with one
+// browser already installed and cannot download another, so when the matching one is missing,
+// the installed one is used instead (it only needs to be a recent Chrome).
+const INSTALLED_CHROMIUM = '/opt/pw-browsers/chromium';
+async function launchBrowser() {
+  try {
+    return await chromium.launch();
+  } catch (err) {
+    if (/Executable doesn't exist/.test(String(err?.message)) && require('node:fs').existsSync(INSTALLED_CHROMIUM)) {
+      console.log(`The matching test browser is not installed here; using ${INSTALLED_CHROMIUM} instead.`);
+      return chromium.launch({ executablePath: INSTALLED_CHROMIUM });
+    }
+    throw err;
+  }
+}
 const STAFF_PASSWORD = 'staff password for site tests';
 const DEV_PASSWORD = 'developer password for site tests';
 
@@ -30,7 +47,7 @@ before(async () => {
     DEV_PASSWORD: DEV_PASSWORD,
     RESEND_API_KEY: 're_test_key',
   });
-  browser = await chromium.launch();
+  browser = await launchBrowser();
 });
 
 after(async () => {

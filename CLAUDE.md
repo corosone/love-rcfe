@@ -85,6 +85,8 @@ cd tests && npm ci && npm test
 
 GitHub runs the same tests on every push (`.github/workflows/tests.yml`); the "test" check
 must be green before merging. For anything visible, also look at the branch's preview.
+In a Claude cloud session the browser tests use the Chrome already installed there when the one
+matching the Playwright version is missing (it cannot be downloaded); nothing to set up.
 
 ## Automatic jobs on GitHub
 
