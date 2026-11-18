@@ -748,12 +748,12 @@
     Skip to main content
   </a>
 
-  <!-- Top Announcement Bar -->
-  <div class="bg-brand-green text-brand-creamLight text-xs sm:text-sm font-medium py-2 px-4 border-b border-brand-greenDark/30">
+  <!-- Top Announcement Bar (its own labelled section, so screen readers can find or skip it) -->
+  <aside aria-labelledby="top-offer" class="bg-brand-green text-brand-creamLight text-xs sm:text-sm font-medium py-2 px-4 border-b border-brand-greenDark/30">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center gap-2">
         <span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>Free 15-Minute Advisory Consultations Available this Week</span>
+        <span id="top-offer">Free 15-Minute Advisory Consultations Available this Week</span>
       </div>
       <div class="flex items-center gap-4 text-xs">
         <a href="tel:+18182175755" data-call class="hover:underline flex items-center gap-1 opacity-90 hover:opacity-100">
@@ -765,7 +765,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </aside>
 
   <!-- Header -->
   <header class="sticky top-0 z-40 w-full border-b border-brand-line bg-brand-cream/95 backdrop-blur-md transition-all">
@@ -2574,18 +2574,19 @@
         </div>
       </div>
     </div>
+
+    <!-- Floating buttons: inside the footer section for screen readers, but fixed on screen as before -->
+    <!-- Floating Call Button (phones only) -->
+    <a href="tel:+18182175755" data-call class="fixed bottom-6 left-4 z-40 md:hidden inline-flex items-center gap-2 rounded-full bg-brand-green text-white pl-4 pr-5 py-3 text-sm font-semibold shadow-xl border border-white/20 active:scale-95 transition">
+      <i data-lucide="phone" class="w-4 h-4"></i>
+      <span>Call Us</span>
+    </a>
+
+    <!-- Floating Back to Top Button -->
+    <button id="back-to-top" data-click="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed bottom-6 right-6 z-40 p-3.5 rounded-full bg-brand-green text-white shadow-xl hover:bg-brand-greenDark transition-all border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95" aria-label="Back to top">
+      <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
   </footer>
-
-  <!-- Floating Call Button (phones only) -->
-  <a href="tel:+18182175755" data-call class="fixed bottom-6 left-4 z-40 md:hidden inline-flex items-center gap-2 rounded-full bg-brand-green text-white pl-4 pr-5 py-3 text-sm font-semibold shadow-xl border border-white/20 active:scale-95 transition">
-    <i data-lucide="phone" class="w-4 h-4"></i>
-    <span>Call Us</span>
-  </a>
-
-  <!-- Floating Back to Top Button -->
-  <button id="back-to-top" data-click="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed bottom-6 right-6 z-40 p-3.5 rounded-full bg-brand-green text-white shadow-xl hover:bg-brand-greenDark transition-all border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95" aria-label="Back to top">
-    <i data-lucide="arrow-up" class="w-5 h-5"></i>
-  </button>
 
   <!-- ==================== JAVASCRIPT ==================== -->
   <!-- Lucide icons (self-hosted subset, see /icons.js). Loaded here rather than in <head>, so it
