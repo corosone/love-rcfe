@@ -734,11 +734,11 @@
       if (l.otherIp && l.otherIp.ip && l.ip) {
         from.insertBefore(el('div', { className: 'dv-mono text-brand-muted', text: `${l.otherIp.kind === 'long' ? 'long' : 'short'}: ${l.otherIp.ip}`, title: 'The device\'s other address, as reported by its browser' }), from.childNodes[1] || null);
       }
-      const journeyBtn = el('button', { className: 'dv-link text-xs', text: 'Journey', attrs: { type: 'button', 'aria-expanded': 'false', title: 'What they looked at on the site before writing in' } });
+      const journeyBtn = el('button', { className: 'dv-link text-xs', text: 'Show journey', attrs: { type: 'button', 'aria-expanded': 'false', title: 'What they looked at on the site before writing in' } });
       journeyBtn.addEventListener('click', () => toggleJourney(l, tr, journeyBtn));
       const links = el('div', { className: 'dv-actions' }, [journeyBtn]);
       if (l.hasInfo) {
-        const detailBtn = el('button', { className: 'dv-link text-xs', text: 'Device', attrs: { type: 'button', 'aria-expanded': 'false', title: 'Everything known about the device that sent it (the same as your sign-in email)' } });
+        const detailBtn = el('button', { className: 'dv-link text-xs', text: 'Show device', attrs: { type: 'button', 'aria-expanded': 'false', title: 'Everything known about the device that sent it (the same as your sign-in email)' } });
         detailBtn.addEventListener('click', () => toggleLeadDevice(l, tr, detailBtn));
         links.appendChild(detailBtn);
       }
@@ -1702,7 +1702,7 @@
     const existing = row.parentNode ? [...row.parentNode.querySelectorAll('tr.lead-device-row')].find((r) => r.dataset.lead === String(lead.id)) : null;
     if (existing) existing.remove();
     button.setAttribute('aria-expanded', open ? 'false' : 'true');
-    button.textContent = open ? 'Device' : 'Hide device';
+    button.textContent = open ? 'Show device' : 'Hide device';
     if (open) return;
     const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
     const detailRow = el('tr', { className: 'lead-device-row', attrs: { 'data-lead': String(lead.id) } }, [el('td', { attrs: { colspan: '7' } }, [holder])]);
@@ -1729,7 +1729,7 @@
     const existing = row.nextElementSibling && row.nextElementSibling.classList.contains('journey-row') ? row.nextElementSibling : null;
     if (existing) existing.remove();
     button.setAttribute('aria-expanded', open ? 'false' : 'true');
-    button.textContent = open ? 'Journey' : 'Hide journey';
+    button.textContent = open ? 'Show journey' : 'Hide journey';
     if (open) return;
     const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
     row.after(el('tr', { className: 'journey-row' }, [el('td', { attrs: { colspan: '7' } }, [holder])]));

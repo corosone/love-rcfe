@@ -741,11 +741,18 @@ test('device details: the staff inbox only shows phone or computer; the console 
     await page.click('#tab-leads');
     await page.fill('#leads-q', 'phone-sender@example.com');
     await page.click('#leads-search button[type="submit"]');
-    await page.waitForFunction(() => /Phone Sender/.test(document.getElementById('leads-body').textContent));
+    await page.waitForFunction(() => /^1 match for/.test(document.getElementById('leads-info').textContent) && /Phone Sender/.test(document.getElementById('leads-body').textContent));
     assert.match(await page.textContent('#leads-body'), /Phone/);
-    await page.click('#leads-body .dv-link:text-is("Device")');
+    assert.equal(await page.locator('#leads-body .dv-link', { hasText: 'Show journey' }).count(), 1, 'the Journey button says what it does');
+    await page.click('#leads-body .dv-link:text-is("Show device")');
+    assert.equal(await page.locator('#leads-body .dv-link:text-is("Hide device")').count(), 1, 'and changes to Hide when open');
     await page.waitForFunction(() => /Short address/.test((document.querySelector('.lead-device-row') || {}).textContent || ''));
     const report = await page.textContent('.lead-device-row');
+    await page.click('#leads-body .dv-link:text-is("Show journey")');
+    await page.waitForSelector('#leads-body .dv-link:text-is("Hide journey")');
+    await page.click('#leads-body .dv-link:text-is("Hide journey")');
+    await page.waitForSelector('#leads-body .dv-link:text-is("Show journey")');
+    assert.equal(await page.locator('.journey-row').count(), 0, 'hiding closes the panel');
     for (const want of ['Long address (IPv6)', '2603:8001:9a00:1cc6::42', 'Reported by the browser', 'Screen size', 'Device (reported by the browser', 'Browser (from what the browser sent']) {
       assert.ok(report.includes(want), `the report shows ${want}`);
     }
