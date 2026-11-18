@@ -14,12 +14,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # Each outside action is pinned to an exact version (its commit fingerprint), so a change
+      # to it cannot slip into this repository unnoticed. The version is in the comment.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
+          package-manager-cache: false
+      # npm ci installs exactly the versions in package-lock.json (as Cloudflare does).
       - name: Build the site (the same step Cloudflare runs)
-        run: npm install --no-audit --no-fund && npm run build
+        run: npm ci --no-audit --no-fund && npm run build
       - name: Install the test tools
         working-directory: tests
         run: npm ci --no-audit --no-fund && npx playwright install --with-deps chromium

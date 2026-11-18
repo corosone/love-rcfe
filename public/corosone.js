@@ -260,6 +260,15 @@
     backup_download: 'Downloaded full backup',
     restore_leads: 'Tool: restored enquiries from a backup',
     staff_marked_spam: 'Inbox: message marked as spam (sent from)',
+    staff_deleted: 'Inbox: message deleted (in Recently Deleted)',
+    staff_changed_password: 'Staff: changed their own password',
+    add_staff_account: 'Tool: created a staff account',
+    reset_staff_password: 'Tool: gave a staff account a new password',
+    remove_staff_account: 'Tool: removed a staff account',
+    shared_staff_password: 'Tool: changed the shared staff password setting',
+    restore_deleted: 'Tool: put back deleted enquiries',
+    delete_forever: 'Tool: deleted enquiries for good',
+    empty_bin: 'Tool: emptied Recently Deleted',
     signout_staff: 'Tool: signed out all staff',
     clear_lockouts: 'Tool: cleared sign-in lockouts',
     test_lead_email: 'Tool: sent test enquiry email',
@@ -297,6 +306,9 @@
     rows.push(config.staffPasswordSet
       ? ['ok', 'Staff password is set']
       : ['bad', 'Staff password (INBOX_PASSWORD) is missing: the staff inbox cannot be opened']);
+    if (config.staffPasswordShort) {
+      rows.push(['warn', 'The shared staff password (INBOX_PASSWORD) is shorter than 12 characters, which makes it much easier to guess. Make it longer in Cloudflare, or give staff their own accounts (Security tab) and turn the shared password off']);
+    }
     rows.push(config.turnstileSecretSet
       ? ['ok', 'Security check secret is set']
       : ['bad', 'Security check secret (TURNSTILE_SECRET) is missing']);
@@ -384,6 +396,12 @@
     const others = Math.max(0, Number(sec.developerSessions || 0) - 1);
     $('sessions-state').textContent = `${plural(Number(sec.staffSessions || 0), 'staff session', 'staff sessions')} active. `
       + (others ? `${plural(others, 'other developer device is', 'other developer devices are')} signed in besides this one.` : 'No other developer devices are signed in.');
+    $('trusted-state').textContent = `Trusted devices: ${plural(Number(sec.trustedDeveloperDevices || 0), 'developer browser', 'developer browsers')} and ${plural(Number(sec.trustedStaffDevices || 0), 'staff browser', 'staff browsers')}. `
+      + 'A browser becomes trusted after signing in successfully. If strangers type many wrong passwords and the sign-in is locked for everyone, trusted browsers can still sign in (with the right password, and for you the emailed code too).';
+
+    renderStaffAccounts(data.staff || {});
+    const binCount = Number(data.leads.recentlyDeleted || 0);
+    if (!deletedShown) $('deleted-info').textContent = binCount ? `${plural(binCount, 'enquiry is', 'enquiries are')} in Recently Deleted. Press Show to see ${binCount === 1 ? 'it' : 'them'}.` : 'Nothing has been deleted in the last 30 days.';
 
     // Old enquiries (LEAD_RETENTION_DAYS)
     const oldEl = $('old-leads');
@@ -730,6 +748,7 @@
       }
       if (l.duplicateOf) nameCell.appendChild(el('span', { className: 'dv-chip dv-chip-note', text: `Duplicate of #${l.duplicateOf}` }));
       if (DEVICE_TYPE_LABELS[l.deviceType]) nameCell.appendChild(el('span', { className: 'dv-chip dv-chip-note', text: DEVICE_TYPE_LABELS[l.deviceType] }));
+      if (l.updatedBy) nameCell.appendChild(el('div', { className: 'text-brand-muted', text: `Last changed by ${l.updatedBy}${l.updatedAt ? ' · ' + formatIso(l.updatedAt) : ''}` }));
       // The device's other address (the one the site did not see), as its browser reported it
       if (l.otherIp && l.otherIp.ip && l.ip) {
         from.insertBefore(el('div', { className: 'dv-mono text-brand-muted', text: `${l.otherIp.kind === 'long' ? 'long' : 'short'}: ${l.otherIp.ip}`, title: 'The device\'s other address, as reported by its browser' }), from.childNodes[1] || null);
@@ -769,7 +788,7 @@
   async function deleteSelectedLeads() {
     const ids = [...selectedLeads];
     if (!ids.length) return;
-    if (!confirm(`Permanently delete ${plural(ids.length, 'enquiry', 'enquiries')}? This cannot be undone.`)) return;
+    if (!confirm(`Delete ${plural(ids.length, 'enquiry', 'enquiries')}?\n\n${ids.length === 1 ? 'It stays' : 'They stay'} in Recently Deleted (below) for 30 days, in case you need ${ids.length === 1 ? 'it' : 'them'} back.`)) return;
     const btn = $('leads-delete');
     btn.disabled = true;
     setStatus('busy', 'Deleting…');
@@ -781,12 +800,188 @@
         const m = /Deleted (\d+)/.exec(data.message || '');
         deleted += m ? Number(m[1]) : 0;
       }
-      setStatus('ok', `Deleted ${plural(deleted, 'enquiry', 'enquiries')}.`);
+      setStatus('ok', `Deleted ${plural(deleted, 'enquiry', 'enquiries')}. You can put ${deleted === 1 ? 'it' : 'them'} back from Recently Deleted for 30 days.`);
     } catch (err) {
       if (err.status === 401) { sessionEnded(); return; }
       setStatus('bad', (deleted ? `Deleted ${deleted}, then: ` : '') + err.message);
     }
     await loadLeads(leadsQuery);
+    if (deletedShown) loadDeleted();
+    loadOverview();
+  }
+
+  // ---------- Recently Deleted ----------
+  let deletedShown = false;
+
+  async function loadDeleted() {
+    deletedShown = true;
+    const info = $('deleted-info');
+    info.textContent = 'Loading…';
+    try {
+      renderDeleted(await toolGet({ tool: 'deleted' }));
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      info.textContent = err.message;
+    }
+  }
+
+  function renderDeleted(data) {
+    const body = $('deleted-body');
+    const items = Array.isArray(data.items) ? data.items : [];
+    $('deleted-info').textContent = items.length
+      ? `${plural(Number(data.total || items.length), 'enquiry', 'enquiries')} deleted in the last ${data.keepDays || 30} days${Number(data.total) > items.length ? ` (showing the newest ${items.length})` : ''}.`
+      : 'Nothing has been deleted in the last 30 days.';
+    if (!items.length) { emptyRow(body, 6, 'Recently Deleted is empty.'); return; }
+    body.textContent = '';
+    items.forEach((d) => {
+      const restore = el('button', { className: 'dv-btn', text: 'Put Back', attrs: { type: 'button' } });
+      restore.addEventListener('click', () => deletedAction(restore, 'restore_deleted', d, `Put back the enquiry from ${d.name || 'unknown'}? It returns to the staff inbox with the same number, stage and notes.`));
+      const forever = el('button', { className: 'dv-btn dv-btn-danger', text: 'Delete for Good', attrs: { type: 'button' } });
+      forever.addEventListener('click', () => deletedAction(forever, 'delete_forever', d, `Delete the enquiry from ${d.name || 'unknown'} for good? This cannot be undone.`));
+      const nameCell = el('div', {}, [
+        el('div', { className: 'font-semibold', text: d.name || '' }),
+        el('div', { className: 'text-brand-muted', text: `#${d.id} · ${d.kind === 'call_request' ? 'Call request' : 'Enquiry'} · received ${formatIso(d.createdAt)}` })
+      ]);
+      if (d.reason === 'spam') nameCell.appendChild(el('span', { className: 'dv-chip', text: 'Marked as spam' }));
+      const contact = el('div', {}, [el('div', { className: 'dv-mono', text: d.email || '' }), el('div', { className: 'text-brand-muted', text: d.phone || '' })]);
+      body.appendChild(el('tr', {}, [
+        td(formatTime(d.deletedAt)),
+        td(d.deletedBy || 'Unknown'),
+        td(nameCell),
+        td(contact),
+        td(el('div', { className: 'dv-msg', text: d.message || '' })),
+        td(el('div', { className: 'dv-actions' }, [restore, forever]))
+      ]));
+    });
+  }
+
+  async function deletedAction(button, name, d, question) {
+    if (!confirm(question)) return;
+    button.disabled = true;
+    setStatus('busy', 'Working…');
+    try {
+      const data = await callTool(name, { ids: [d.id] });
+      setStatus('ok', data.message || 'Done.');
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    }
+    await loadDeleted();
+    if (loadedTabs.has('leads')) loadLeads(leadsQuery);
+    loadOverview();
+  }
+
+  async function emptyDeleted() {
+    if (!confirm('Delete everything in Recently Deleted for good? This cannot be undone.')) return;
+    setStatus('busy', 'Working…');
+    try {
+      const data = await callTool('empty_bin');
+      setStatus('ok', data.message || 'Done.');
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    }
+    await loadDeleted();
+    loadOverview();
+  }
+
+  // ---------- Staff accounts ----------
+  function renderStaffAccounts(staff) {
+    const body = $('staff-body');
+    const accounts = Array.isArray(staff.accounts) ? staff.accounts : [];
+    const shared = staff.sharedPasswordAllowed !== false;
+    $('shared-state').textContent = shared
+      ? 'On: anyone with the shared staff password can sign in (with the name box left blank).'
+      : 'Off: only people with their own account can sign in.';
+    $('shared-off-btn').classList.toggle('hidden', !shared);
+    $('shared-on-btn').classList.toggle('hidden', shared);
+    if (!accounts.length) { emptyRow(body, 6, 'No staff accounts yet. Everyone uses the shared staff password.'); return; }
+    body.textContent = '';
+    accounts.forEach((a) => {
+      const reset = el('button', { className: 'dv-btn', text: 'New Password', attrs: { type: 'button' } });
+      reset.addEventListener('click', () => staffAction(reset, 'reset_staff_password', a, `Give ${a.name} a new password?\n\nTheir old password stops working and they are signed out everywhere. The new one is shown here once, for you to hand to them.`));
+      const remove = el('button', { className: 'dv-btn dv-btn-danger', text: 'Remove', attrs: { type: 'button' } });
+      remove.addEventListener('click', () => staffAction(remove, 'remove_staff_account', a, `Remove ${a.name}'s account?\n\nThey are signed out everywhere straight away and can no longer sign in. Enquiries they changed keep their name.`));
+      body.appendChild(el('tr', {}, [
+        td(el('span', { className: 'font-semibold', text: a.name })),
+        td(a.createdAt ? formatTime(a.createdAt) : ''),
+        td(a.lastSignIn ? formatTime(a.lastSignIn) : 'Never'),
+        td(a.passwordSetAt ? formatTime(a.passwordSetAt) : ''),
+        td(plural(Number(a.sessions || 0), 'device', 'devices'), 'dv-num'),
+        td(el('div', { className: 'dv-actions' }, [reset, remove]))
+      ]));
+    });
+  }
+
+  // Shows a made-up password once, with a Copy button. It is never shown again.
+  function showNewPassword(name, password) {
+    const box = $('staff-new-password');
+    box.textContent = '';
+    const copy = el('button', { className: 'dv-btn', text: 'Copy', attrs: { type: 'button' } });
+    copy.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(password); copy.textContent = 'Copied'; } catch (e) { copy.textContent = 'Select and Copy It'; }
+    });
+    const hide = el('button', { className: 'dv-btn', text: 'Done, Hide It', attrs: { type: 'button' } });
+    hide.addEventListener('click', () => { box.textContent = ''; box.classList.add('hidden'); });
+    box.appendChild(el('p', { text: `Password for ${name} (shown only now; give it to them privately, for example in person or by phone):` }));
+    box.appendChild(el('p', { className: 'dv-mono font-bold text-base my-2', text: password, attrs: { style: 'user-select:all' } }));
+    box.appendChild(el('p', { className: 'text-brand-muted', text: `They sign in at /staff with the name "${name}" and this password, and can change it from the inbox.` }));
+    box.appendChild(el('div', { className: 'dv-actions mt-2' }, [copy, hide]));
+    box.classList.remove('hidden');
+  }
+
+  async function staffAction(button, name, a, question) {
+    if (!confirm(question)) return;
+    button.disabled = true;
+    setStatus('busy', 'Working…');
+    try {
+      const data = await callTool(name, { id: a.id });
+      setStatus('ok', data.message || 'Done.');
+      if (data.password) showNewPassword(a.name, data.password);
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    } finally {
+      button.disabled = false;
+    }
+    loadOverview();
+  }
+
+  async function addStaff(e) {
+    e.preventDefault();
+    const input = $('staff-add-name');
+    const name = input.value.trim();
+    if (!name) { setStatus('bad', 'Type the person\'s name first.'); input.focus(); return; }
+    const btn = $('staff-add-btn');
+    btn.disabled = true;
+    setStatus('busy', 'Creating the account…');
+    try {
+      const data = await callTool('add_staff_account', { name });
+      setStatus('ok', data.message || 'Account created.');
+      input.value = '';
+      if (data.password) showNewPassword(data.account ? data.account.name : name, data.password);
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    } finally {
+      btn.disabled = false;
+    }
+    loadOverview();
+  }
+
+  async function setSharedPassword(allowed) {
+    const question = allowed
+      ? 'Allow the shared staff password again? Anyone who knows it can then sign in to the inbox.'
+      : 'Turn off the shared staff password?\n\nOnly people with their own account will be able to sign in, and anyone signed in with the shared password is signed out now. Make sure everyone has an account first.';
+    if (!confirm(question)) return;
+    setStatus('busy', 'Working…');
+    try {
+      const data = await callTool('shared_staff_password', { allowed });
+      setStatus('ok', data.message || 'Done.');
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      setStatus('bad', err.message);
+    }
     loadOverview();
   }
 
@@ -1825,6 +2020,11 @@
     $('leads-check-all').addEventListener('change', (e) => toggleAllLeads(e.target.checked));
     $('leads-delete').addEventListener('click', deleteSelectedLeads);
     $('export-btn').addEventListener('click', exportLeads);
+    $('deleted-load').addEventListener('click', loadDeleted);
+    $('deleted-empty').addEventListener('click', emptyDeleted);
+    $('staff-add-form').addEventListener('submit', addStaff);
+    $('shared-off-btn').addEventListener('click', () => setSharedPassword(false));
+    $('shared-on-btn').addEventListener('click', () => setSharedPassword(true));
 
     $('requests-search').addEventListener('submit', (e) => { e.preventDefault(); loadRequests({ q: $('requests-q').value.trim(), type: $('requests-type').value }); });
     $('requests-reset').addEventListener('click', () => { $('requests-q').value = ''; $('requests-type').value = 'view'; loadRequests({ q: '', type: 'view' }); });

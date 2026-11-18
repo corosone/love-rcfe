@@ -1,5 +1,6 @@
-import { jsonResponse, clean, readJsonBody, authorizeAdmin, readDevSession } from '../../../lib/db.js';
+import { jsonResponse, clean, readJsonBody, authorizeStaff } from '../../../lib/db.js';
 import { devAudit } from '../../../lib/dev.js';
+import { moveLeadsToBin } from '../../../lib/deletedleads.js';
 
 const STAGES = ['new', 'called', 'tour', 'waiting'];
 const DEFAULT_LIMIT = 500;
@@ -25,6 +26,8 @@ const LEAD_COLUMNS = `
   first_response_at AS firstResponseAt,
   duplicate_of AS duplicateOf,
   device_type AS deviceType,
+  updated_by AS updatedBy,
+  updated_at AS updatedAt,
   created_at AS createdAt
 `;
 
@@ -51,12 +54,15 @@ function mapLead(row) {
     duplicateOf: Number(row.duplicateOf || 0),
     // Only "phone", "tablet" or "computer": staff never see the full device report.
     deviceType: ['phone', 'tablet', 'computer'].includes(row.deviceType) ? row.deviceType : '',
+    // Who last changed it here, and when ('' = nobody yet)
+    updatedBy: row.updatedBy || '',
+    updatedAt: row.updatedAt || '',
     createdAt: row.createdAt,
   };
 }
 
 export async function onRequestGet({ request, env }) {
-  const denied = await authorizeAdmin(request, env);
+  const { denied, who } = await authorizeStaff(request, env);
   if (denied) return denied;
 
   const params = new URL(request.url).searchParams;
@@ -102,12 +108,14 @@ export async function onRequestGet({ request, env }) {
     const total = Number(countRow?.total ?? rows.length);
     const open = Number(countRow?.open || 0);
     // Lets the inbox show a link back to the developer console for a signed-in developer.
-    const developer = Boolean(await readDevSession(request, env).catch(() => null));
+    const developer = who.kind === 'developer';
     return jsonResponse({
       leads: rows.map(mapLead),
       total,
       counts: { open, handled: Math.max(0, total - open), openCalls: Number(countRow?.openCalls || 0) },
       hasMore: offset + rows.length < total,
+      // Who is signed in, for the inbox's header ("Signed in as Maria")
+      me: { name: who.name, kind: who.kind },
       ...(developer ? { developer: true } : {}),
     });
   } catch (err) {
@@ -117,7 +125,7 @@ export async function onRequestGet({ request, env }) {
 }
 
 export async function onRequestPatch({ request, env }) {
-  const denied = await authorizeAdmin(request, env);
+  const { denied, who } = await authorizeStaff(request, env);
   if (denied) return denied;
 
   const parsed = await readJsonBody(request, 8192);
@@ -163,6 +171,9 @@ export async function onRequestPatch({ request, env }) {
       ? `handled_at = CASE WHEN handled_at = '' THEN ${NOW_SQL} ELSE handled_at END`
       : "handled_at = ''");
   }
+  // Who changed it last, and when
+  sets.push('updated_by = ?', `updated_at = ${NOW_SQL}`);
+  values.push(String(who.name).slice(0, 60));
 
   try {
     await env.DB
@@ -187,7 +198,7 @@ export async function onRequestPatch({ request, env }) {
 }
 
 export async function onRequestDelete({ request, env }) {
-  const denied = await authorizeAdmin(request, env);
+  const { denied, who } = await authorizeStaff(request, env);
   if (denied) return denied;
 
   const parsed = await readJsonBody(request, 2048, { allowEmpty: true });
@@ -206,10 +217,8 @@ export async function onRequestDelete({ request, env }) {
   }
 
   try {
-    const removed = await env.DB
-      .prepare('DELETE FROM leads WHERE id = ? RETURNING ip, ip_place')
-      .bind(id)
-      .first();
+    // Kept in Recently Deleted for 30 days, so the owner can undo it (lib/deletedleads.js).
+    const [removed] = await moveLeadsToBin(env.DB, [id], { by: who.name, reason: spam ? 'spam' : 'deleted' });
 
     if (!removed) {
       return jsonResponse({ error: 'Lead not found.' }, 404);
@@ -218,7 +227,10 @@ export async function onRequestDelete({ request, env }) {
     if (spam) {
       const sender = String(removed.ip || '').trim();
       const place = String(removed.ip_place || '').trim();
-      await devAudit(env, request, 'staff_marked_spam', sender ? `${sender}${place ? ` · ${place}` : ''}` : 'sender address not recorded');
+      // The address comes first: the console offers to block it from there.
+      await devAudit(env, request, 'staff_marked_spam', `${sender ? `${sender}${place ? ` · ${place}` : ''}` : 'sender address not recorded'} · #${id} by ${who.name}`);
+    } else {
+      await devAudit(env, request, 'staff_deleted', `#${id} by ${who.name}`);
     }
     return jsonResponse({ ok: true, id });
   } catch (err) {

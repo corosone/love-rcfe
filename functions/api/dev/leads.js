@@ -34,7 +34,7 @@ export async function onRequestGet({ request, env }) {
       env.DB
         .prepare(`
           SELECT id, kind, inquiry_type AS inquiryType, name, email, phone, city, message,
-                 handled, stage, ip, ip_place AS ipPlace, isp, asn, device, duplicate_of AS duplicateOf, device_type AS deviceType, device_info AS deviceInfo, created_at AS createdAt
+                 handled, stage, ip, ip_place AS ipPlace, isp, asn, device, duplicate_of AS duplicateOf, device_type AS deviceType, device_info AS deviceInfo, updated_by AS updatedBy, updated_at AS updatedAt, created_at AS createdAt
           FROM leads ${whereSql} ORDER BY created_at DESC, id DESC LIMIT ?
         `)
         .bind(...binds, spamOnly ? SPAM_SCAN : MAX_RESULTS + 1)
@@ -68,6 +68,8 @@ export async function onRequestGet({ request, env }) {
       device: r.device || '',
       duplicateOf: Number(r.duplicateOf || 0),
       deviceType: r.deviceType || '',
+      updatedBy: r.updatedBy || '',
+      updatedAt: r.updatedAt || '',
       hasInfo: Boolean(info),
       otherIp,
       flags: spamReasons({ ...r, webdriver: info?.reported?.webdriver === true }, repeats),

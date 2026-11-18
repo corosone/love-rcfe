@@ -15,7 +15,7 @@ export async function onRequestGet({ request, env }) {
       .prepare(`
         SELECT id, created_at, kind, inquiry_type, name, email, phone, city, message,
                preferred_date, preferred_time, stage, handled, notes, source, ip, ip_place,
-               isp, first_response_at, handled_at, duplicate_of, device, device_type
+               isp, first_response_at, handled_at, duplicate_of, device, device_type, updated_by, updated_at
         FROM leads ORDER BY created_at DESC, id DESC LIMIT ?
       `)
       .bind(MAX_ROWS)

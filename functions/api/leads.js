@@ -1,16 +1,30 @@
 import {
-  ensureSchema, jsonResponse, clean, clientIp, enforceTurnstile,
+  ensureSchema, jsonResponse, clean, clientIp, senderKey, enforceTurnstile,
   verifySameOrigin, readJsonBody, tooManyRequests, tooManyRequestsD1,
 } from '../../lib/db.js';
 import { cfLocation } from '../../lib/reqinfo.js';
-import { cfNetwork } from '../../lib/netinfo.js';
+import { cfNetwork, classifyNetwork } from '../../lib/netinfo.js';
 import { buildDeviceInfo, infoToJson, deviceType } from '../../lib/deviceinfo.js';
 import { isBlockedKey, deviceBlockKey, recordBlockedHit, blockedResponse } from '../../lib/blocklist.js';
 import { getHoliday, holidayCovers } from '../../lib/settings.js';
 
 const LIMITS = { name: 120, email: 254, phone: 40, city: 100, message: 3000, inquiryType: 80, short: 80 };
+
+// How many messages the form takes in 10 minutes:
+//   - from one sender (an address, or one IPv6 home network): 8
+//   - from all senders that look automated (a VPN, data centre or Tor network, or a browser run
+//     by automation software) together: 15
+//   - from everyone together: 120
+// Spam sent through VPNs and data centres therefore only uses up its own small allowance and
+// cannot crowd out families writing from home or from their phones.
+const PER_SENDER = 8;
+const SUSPICIOUS_TOTAL = 15;
+const EVERYONE_TOTAL = 120;
+const WINDOW_SEC = 10 * 60;
+const SUSPICIOUS_NETWORKS = new Set(['vpn', 'hosting', 'tor']);
 const MAX_DAYS_AHEAD = 100; // the booking form offers 90 days; small slack for time zones
-const TIME_RE = /^(morning|afternoon|late afternoon|evening)\b/i;
+// One of the booking form's times, e.g. "Morning (9am - 12pm)": nothing else is accepted.
+const TIME_RE = /^(morning|afternoon|late afternoon|evening)( \([0-9apm :.–-]{1,30}\))?$/i;
 const SSN_RE = /\b\d{3}-\d{2}-\d{4}\b/;
 const ALLOWED_SOURCES = new Set(['home', 'services', 'tools', 'approach', 'support', 'contact', 'terms', 'privacy']);
 // The device check code made by public/app.js (a one-way SHA-256 code, never the details themselves)
@@ -92,7 +106,9 @@ export async function onRequestPost(context) {
   }
 
   const ip = clientIp(request);
-  if (tooManyRequests(`lead:${ip}`, 8, 10 * 60 * 1000)) {
+  // Limits count a whole home or phone network as one sender (see lib/ipnet.js).
+  const sender = senderKey(request);
+  if (tooManyRequests(`lead:${sender}`, PER_SENDER, WINDOW_SEC * 1000)) {
     return jsonResponse(
       { error: 'Too many submissions. Please call (818) 217-5755 or email loveRCFE@gmail.com.' },
       429
@@ -137,6 +153,7 @@ export async function onRequestPost(context) {
     deviceInfo,
     deviceType: deviceType(request, reported),
   };
+  const suspicious = SUSPICIOUS_NETWORKS.has(classifyNetwork(net).kind) || reported?.webdriver === true;
 
   // A device the owner blocked in the developer console (spam sent from changing addresses).
   if (device && (await isBlockedKey(env, deviceBlockKey(device)))) {
@@ -202,12 +219,13 @@ export async function onRequestPost(context) {
   try {
     await ensureSchema(env.DB);
 
-    // Cross-isolate D1 rate limits (per-IP and global flood cap)
-    const [ipLimited, globalLimited] = await Promise.all([
-      tooManyRequestsD1(env.DB, `lead:${ip}`, 8, 10 * 60),
-      tooManyRequestsD1(env.DB, 'lead:__global__', 40, 10 * 60),
+    // Cross-isolate D1 rate limits (per sender, senders that look automated, and everyone)
+    const [ipLimited, suspiciousLimited, globalLimited] = await Promise.all([
+      tooManyRequestsD1(env.DB, `lead:${sender}`, PER_SENDER, WINDOW_SEC),
+      suspicious ? tooManyRequestsD1(env.DB, 'lead:__suspicious__', SUSPICIOUS_TOTAL, WINDOW_SEC) : false,
+      tooManyRequestsD1(env.DB, 'lead:__global__', EVERYONE_TOTAL, WINDOW_SEC),
     ]);
-    if (ipLimited || globalLimited) {
+    if (ipLimited || suspiciousLimited || globalLimited) {
       return jsonResponse(
         { error: 'Too many submissions. Please call (818) 217-5755 or email loveRCFE@gmail.com.' },
         429

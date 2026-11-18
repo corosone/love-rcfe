@@ -647,7 +647,12 @@ test('signing out of the developer console also ends the staff inbox session on 
 
   await page.click('#signout-btn');
   await page.waitForSelector('#login-view:not(.hidden)');
-  assert.deepEqual((await context.cookies()).map((c) => c.name), [], 'no sign-in cookies are left in the browser');
+  const left = await context.cookies();
+  assert.deepEqual(left.map((c) => c.name).filter((n) => !/_trust$/.test(n)), [], 'no sign-in cookies are left in the browser');
+  // Only the "trusted device" cookies stay: they never sign anyone in, they only let this
+  // browser past the site-wide lockout next time (with the right password).
+  assert.deepEqual(left.map((c) => c.name).sort(), ['lovercfe_dev_trust', 'lovercfe_staff_trust']);
+  assert.ok(left.every((c) => c.httpOnly && c.sameSite === 'Strict'), 'trusted-device cookies cannot be read by scripts or sent from other sites');
   // Even a copy of the old cookies no longer works
   assert.equal((await site.api('/api/admin/leads', { headers: { cookie: `lovercfe_admin=${staffCookie}` } })).status, 401, 'staff session ended');
   assert.equal((await site.api('/api/dev/overview', { headers: { cookie: `lovercfe_dev=${devCookie}` } })).status, 401, 'developer session ended');
@@ -968,4 +973,72 @@ test('staff inbox: with more than 500 messages, the counts and the "Open" list s
   await page.waitForFunction((n) => document.getElementById('stat-open').textContent === String(n), real.open - 2);
   assert.deepEqual(await stats(), [real.open - 2, real.calls - 1, real.handled + 1, real.total - 1]);
   await context.close();
+});
+
+test('staff accounts and Recently Deleted, end to end: console creates an account, the person signs in, changes their password, and a deleted message is put back', async () => {
+  await ensureTables();
+  site.db._run("INSERT INTO leads (kind, inquiry_type, name, email, phone, message, created_at, handled) VALUES ('enquiry', 'x', 'Bin Family', 'bin@example.com', '8185550177', 'Please call about my aunt.', ?, 0)", new Date().toISOString());
+
+  // The developer creates an account; the made-up password is shown once
+  const dev = await open('/corosone', { wait: 'load' });
+  dev.page.on('dialog', (d) => d.accept());
+  await devSignIn(dev.page);
+  await dev.page.click('#tab-security');
+  await dev.page.fill('#staff-add-name', 'Rosa Diaz');
+  await dev.page.click('#staff-add-btn');
+  await dev.page.waitForSelector('#staff-new-password:not(.hidden)');
+  const shown = await dev.page.textContent('#staff-new-password');
+  const password = /([a-z2-9]{4}-[a-z2-9]{4}-[a-z2-9]{4}-[a-z2-9]{4})/.exec(shown)[1];
+  await dev.page.waitForSelector('#staff-body span:text-is("Rosa Diaz")');
+  assert.match(await dev.page.textContent('#shared-state'), /^On:/);
+  assert.match(await dev.page.textContent('#trusted-state'), /^Trusted devices: [1-9]\d* developer browsers?/);
+
+  // Rosa signs in with her name, sees who she is, and changes her password
+  const staff = await open('/staff', { wait: 'load' });
+  staff.page.on('dialog', (d) => d.accept());
+  await staff.page.fill('#inbox-name', 'Rosa Diaz');
+  await staff.page.fill('#inbox-password', password);
+  await staff.page.click('#login-submit');
+  await staff.page.waitForSelector('#dashboard-view:not(.hidden)');
+  assert.equal(await staff.page.textContent('#whoami'), 'Signed in as Rosa Diaz');
+  assert.ok(await staff.page.isVisible('#change-pw-btn'));
+  await staff.page.click('#change-pw-btn');
+  await staff.page.fill('#change-pw-current', password);
+  await staff.page.fill('#change-pw-new', 'quiet-harbor-lantern-42');
+  await staff.page.fill('#change-pw-again', 'quiet-harbor-lantern-42');
+  await staff.page.click('#change-pw-save');
+  await staff.page.waitForFunction(() => /changed/.test(document.getElementById('change-pw-status').textContent));
+
+  // She moves an enquiry on: the inbox says she did it
+  await staff.page.selectOption('#leads-list article:has(h3:text-is("Bin Family")) select[data-action="stage"]', 'called');
+  await staff.page.waitForSelector('#leads-list article:has(h3:text-is("Bin Family")) :text("Last changed by")');
+  assert.match(await staff.page.textContent('#leads-list article:has(h3:text-is("Bin Family"))'), /Last changed by\s+Rosa Diaz/);
+
+  // ...then deletes it
+  await staff.page.click('#leads-list article:has(h3:text-is("Bin Family")) [data-action="delete"]');
+  await staff.page.waitForFunction(() => ![...document.querySelectorAll('#leads-list article h3')].some((h) => h.textContent === 'Bin Family'));
+
+  // The developer sees it in Recently Deleted and puts it back
+  await dev.page.click('#tab-leads');
+  await dev.page.click('#deleted-load');
+  await dev.page.waitForSelector('#deleted-body td:text-is("Rosa Diaz")');
+  const row = dev.page.locator('#deleted-body tr', { hasText: 'Bin Family' });
+  await row.locator('button', { hasText: 'Put Back' }).click();
+  await dev.page.waitForFunction(() => /Put back 1 enquiry/.test(document.getElementById('tool-status').textContent));
+  assert.equal(site.db._rows("SELECT stage, updated_by FROM leads WHERE name = 'Bin Family'")[0].updated_by, 'Rosa Diaz');
+  assert.equal(site.db._rows("SELECT stage FROM leads WHERE name = 'Bin Family'")[0].stage, 'called', 'it comes back as it was');
+
+  // The shared password sign-in screen still works with the name left blank
+  site.db._run('DELETE FROM rate_limits');
+  const shared = await open('/staff', { wait: 'load' });
+  await staffSignIn(shared.page);
+  assert.equal(await shared.page.textContent('#whoami'), 'Signed in with the shared password');
+  assert.ok(!(await shared.page.isVisible('#change-pw-btn')), 'no Change Password button for the shared password');
+
+  for (const s of [dev, staff, shared]) {
+    // (A 401 reply is expected: each page first asks whether it is already signed in.)
+    const errors = s.seen.errors.filter((e) => !/status of 401/.test(e));
+    assert.deepEqual(errors, [], 'no errors in the browser: ' + JSON.stringify(errors));
+    await s.context.close();
+  }
 });
