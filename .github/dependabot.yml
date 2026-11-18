@@ -1,0 +1,64 @@
+# Automatic updates (Dependabot, free on GitHub).
+#
+# Once a week GitHub checks whether newer versions exist of the tools this site is built and
+# tested with, and opens a pull request for them. The tests run on it like on any other change;
+# merge it once they pass (the "test" check must be green). Nothing is ever merged automatically.
+#
+#   /         the build tools Cloudflare uses (Tailwind for the styles, jsdom for the language pages)
+#   /tests    the test tools (Playwright)
+#   actions   the GitHub Actions in .github/workflows (pinned to exact versions)
+#
+# Safety:
+#   - A new version is only suggested once it has been out for 7 days ("cooldown"), so a bad or
+#     tampered release is usually caught and pulled by then.
+#   - Small updates are grouped into one pull request per area, so there is little to review.
+#   - Tailwind 4 is a rewrite that needs the site's styles to be moved over by hand, so it is not
+#     suggested; Tailwind 3 updates still are.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: '10:17'
+      timezone: America/Los_Angeles
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 3
+    groups:
+      build-tools:
+        patterns: ['*']
+        update-types: [minor, patch]
+    ignore:
+      - dependency-name: tailwindcss
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: npm
+    directory: /tests
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: '10:17'
+      timezone: America/Los_Angeles
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 3
+    groups:
+      test-tools:
+        patterns: ['*']
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: '10:17'
+      timezone: America/Los_Angeles
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 3
+    groups:
+      github-actions:
+        patterns: ['*']

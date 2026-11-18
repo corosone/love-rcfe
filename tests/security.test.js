@@ -569,6 +569,9 @@ test('backups include Recently Deleted and staff names, never password fingerpri
   assert.ok(!text.includes(hash), 'no password fingerprints');
   assert.ok(!/pass_salt|trusted_devices/.test(text));
   assert.match(backup.notIncluded, /staff passwords/);
+  // The download time is kept for the Monday email's backup reminder
+  const noted = Number(site.db._rows("SELECT value FROM app_secrets WHERE name = 'last_backup_download'")[0]?.value);
+  assert.ok(Math.abs(noted - Date.now() / 1000) < 120, 'the backup time is recorded');
   // "Last changed by" survives a backup and restore
   const { cleanBackupLead } = await import('../lib/backup.js');
   const cleaned = cleanBackupLead({ created_at: '2026-01-02T03:04:05.000Z', name: 'A B', email: 'a@b.co', message: 'hello', updated_by: 'Maria López', updated_at: '2026-01-03T00:00:00.000Z' });

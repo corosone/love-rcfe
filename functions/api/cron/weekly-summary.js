@@ -22,10 +22,13 @@
 // 5 days (not 7) so that an email sent by hand mid-week does not block the next Monday's.
 import { ensureSchema, jsonResponse, senderKey, tooManyRequests, tooManyRequestsD1 } from '../../../lib/db.js';
 import { sendDevEmail } from '../../../lib/dev.js';
+import { lastBackupAt } from '../../../lib/backup.js';
 
 const DAYS = 7;
 const MIN_GAP_SEC = 5 * 24 * 60 * 60;
 const LAST_SENT_NAME = 'weekly_summary_last_sent';
+// The email reminds the owner to download a full backup when the last one is older than this.
+export const BACKUP_REMINDER_DAYS = 30;
 
 const n = (row, key = 'n') => Number(row?.[key]) || 0;
 
@@ -36,7 +39,7 @@ export async function buildWeeklySummary(db, nowMs = Date.now()) {
   const nowSec = Math.floor(nowMs / 1000);
 
   const twoDaysAgoIso = new Date(nowMs - 2 * 24 * 60 * 60 * 1000).toISOString();
-  const [byKind, byStage, handledNew, openAll, visits, audit, blocksActive, blocksNew, blockHits, lockedNow, waitingLong] = await Promise.all([
+  const [byKind, byStage, handledNew, openAll, visits, audit, blocksActive, blocksNew, blockHits, lockedNow, waitingLong, backupAt] = await Promise.all([
     db.prepare('SELECT kind, COUNT(*) AS n FROM leads WHERE created_at >= ? GROUP BY kind').bind(sinceIso).all(),
     db.prepare('SELECT stage, COUNT(*) AS n FROM leads WHERE created_at >= ? GROUP BY stage').bind(sinceIso).all(),
     db.prepare('SELECT COUNT(*) AS n FROM leads WHERE created_at >= ? AND handled = 1').bind(sinceIso).first(),
@@ -49,6 +52,7 @@ export async function buildWeeklySummary(db, nowMs = Date.now()) {
     db.prepare('SELECT COUNT(*) AS n FROM auth_attempts WHERE locked_until > ?').bind(nowSec).first(),
     // Follow-up alarm: still "new", nobody has acted on it, and more than 2 days old
     db.prepare("SELECT COUNT(*) AS n FROM leads WHERE handled = 0 AND first_response_at = '' AND stage = 'new' AND duplicate_of = 0 AND created_at < ?").bind(twoDaysAgoIso).first(),
+    lastBackupAt(db),
   ]);
 
   const kinds = Object.fromEntries((byKind?.results || []).map((r) => [r.kind, n(r)]));
@@ -88,8 +92,14 @@ export async function buildWeeklySummary(db, nowMs = Date.now()) {
     },
     blocks: { active: n(blocksActive), added: n(blocksNew), triedAgain: n(blockHits) },
     lockedNow: n(lockedNow),
+    // When the last full backup was downloaded (0 = never), and how many whole days ago
+    backup: backupAt
+      ? { lastAt: new Date(backupAt * 1000).toISOString(), daysAgo: Math.max(0, Math.floor((nowSec - backupAt) / 86400)) }
+      : { lastAt: '', daysAgo: null },
   };
 }
+
+const BACKUP_WHERE = 'in the developer console (Site & Database > Backups > Download Full Backup) and keep it somewhere safe, like your computer.';
 
 // Things worth a second look, in plain words. An empty list means a quiet week.
 export function unusualItems(s) {
@@ -107,10 +117,13 @@ export function unusualItems(s) {
   if (s.lockedNow) out.push(`${s.lockedNow} sign-in lock(s) are active right now.`);
   if (s.enquiries.waitingOverTwoDays) out.push(`${s.enquiries.waitingOverTwoDays} enquir${s.enquiries.waitingOverTwoDays === 1 ? 'y has' : 'ies have'} waited more than 2 days with no reply (see Tools > Follow-up alarm in the developer console).`);
   if (s.enquiries.notHandledAllTime >= 10) out.push(`${s.enquiries.notHandledAllTime} enquiries are waiting to be marked as handled.`);
+  if (!s.backup?.lastAt) out.push(`No full backup has been downloaded yet. Download one ${BACKUP_WHERE}`);
+  else if (s.backup.daysAgo > BACKUP_REMINDER_DAYS) out.push(`The last full backup was downloaded ${s.backup.daysAgo} days ago. Download a new one ${BACKUP_WHERE}`);
   return out;
 }
 
 const day = (iso) => String(iso || '').slice(0, 10);
+const daysAgoText = (d) => (d === 0 ? 'today' : d === 1 ? '1 day ago' : `${d} days ago`);
 
 export function summaryEmail(s, origin) {
   const e = s.enquiries;
@@ -133,6 +146,11 @@ export function summaryEmail(s, origin) {
     '',
     'BLOCKED ADDRESSES',
     `Active blocks: ${s.blocks.active} (${s.blocks.added} added this week)`,
+    '',
+    'BACKUPS',
+    s.backup?.lastAt
+      ? `Last full backup downloaded: ${day(s.backup.lastAt)} (${daysAgoText(s.backup.daysAgo)})`
+      : 'No full backup has been downloaded yet.',
     '',
     'ANYTHING UNUSUAL',
     ...(unusual.length ? unusual.map((u) => `- ${u}`) : ['Nothing unusual this week.']),

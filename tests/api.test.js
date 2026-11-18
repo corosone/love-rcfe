@@ -264,6 +264,9 @@ test('the weekly summary emails numbers only, and tells the caller nothing else'
   assert.match(sent.text, /sign-in lock\(s\) are active right now/);
   assert.match(sent.text, /Active blocks: 1 \(1 added this week\)/);
   assert.match(sent.text, /Page views: \d+/);
+  // No backup has been downloaded in these tests yet, so the email says so and reminds the owner
+  assert.match(sent.text, /BACKUPS\nNo full backup has been downloaded yet\.\n/);
+  assert.match(sent.text, /- No full backup has been downloaded yet\. Download one in the developer console \(Site & Database > Backups > Download Full Backup\)/);
 
   // No personal details of families
   for (const secret of ['Test Person', 'test@example.com', '555-0100', 'Looking for a care home', '203.0.113.']) {
@@ -340,6 +343,81 @@ test('the weekly summary only counts the last 7 days', async () => {
   const future = await buildWeeklySummary(site.db, Date.now() + 30 * 24 * 60 * 60 * 1000);
   assert.equal(future.enquiries.total, 0);
   assert.equal(future.visits.views, 0);
+});
+
+test('the weekly summary shows the last backup and reminds the owner after 30 days', async () => {
+  const { buildWeeklySummary, summaryEmail, unusualItems, BACKUP_REMINDER_DAYS } = await import('../functions/api/cron/weekly-summary.js');
+  assert.equal(BACKUP_REMINDER_DAYS, 30);
+  const DAY = 24 * 60 * 60;
+  const now = Math.floor(Date.now() / 1000);
+  const setBackup = (sec) => site.db._run("INSERT INTO app_secrets (name, value) VALUES ('last_backup_download', ?) ON CONFLICT(name) DO UPDATE SET value = excluded.value", String(sec));
+  const reminders = (s) => unusualItems(s).filter((u) => /backup was downloaded|No full backup/.test(u));
+  try {
+    // 3 days ago: shown, no reminder
+    setBackup(now - 3 * DAY - 60);
+    let s = await buildWeeklySummary(site.db);
+    assert.equal(s.backup.daysAgo, 3);
+    assert.match(summaryEmail(s, site.origin).text, new RegExp(`BACKUPS\\nLast full backup downloaded: ${new Date((now - 3 * DAY - 60) * 1000).toISOString().slice(0, 10)} \\(3 days ago\\)\\n`));
+    assert.deepEqual(reminders(s), []);
+
+    // Exactly 30 days: still fine. 31 days: reminder
+    setBackup(now - 30 * DAY - 60);
+    assert.deepEqual(reminders(await buildWeeklySummary(site.db)), []);
+    setBackup(now - 31 * DAY - 60);
+    s = await buildWeeklySummary(site.db);
+    assert.deepEqual(reminders(s), ['The last full backup was downloaded 31 days ago. Download a new one in the developer console (Site & Database > Backups > Download Full Backup) and keep it somewhere safe, like your computer.']);
+    assert.match(summaryEmail(s, site.origin).subject, /things? to check/);
+
+    // Today
+    setBackup(now - 60);
+    assert.match(summaryEmail(await buildWeeklySummary(site.db), site.origin).text, /\(today\)\n/);
+
+    // Backups from before this was recorded separately are found in the activity log
+    site.db._run("DELETE FROM app_secrets WHERE name = 'last_backup_download'");
+    site.db._run("INSERT INTO dev_audit (at, event, detail) VALUES (?, 'backup_download', 'test')", now - 10 * DAY - 60);
+    assert.equal((await buildWeeklySummary(site.db)).backup.daysAgo, 10);
+  } finally {
+    site.db._run("DELETE FROM app_secrets WHERE name = 'last_backup_download'");
+    site.db._run("DELETE FROM dev_audit WHERE event = 'backup_download' AND detail = 'test'");
+  }
+  // Never: reminder
+  assert.equal((await buildWeeklySummary(site.db)).backup.lastAt, '');
+});
+
+// ---------- Health check (used by the daily site check on GitHub) ----------
+
+test('the health check says ok when the server and database work, and nothing else', async () => {
+  const before = site.db._rows('SELECT COUNT(*) AS n FROM rate_limits')[0].n;
+  const res = await site.api('/api/health', { ip: '203.0.113.150' });
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true, database: 'ok' });
+  assert.equal(res.headers.get('cache-control'), 'no-store');
+  assert.match(res.headers.get('x-robots-tag'), /noindex/);
+  assert.equal(site.db._rows('SELECT COUNT(*) AS n FROM rate_limits')[0].n, before, 'it writes nothing to the database');
+
+  const post = await site.api('/api/health', { method: 'POST', ip: '203.0.113.150' });
+  assert.equal(post.status, 405);
+});
+
+test('the health check reports a missing or broken database', async () => {
+  const { onRequestGet } = await import('../functions/api/health.js');
+  const request = () => new Request(site.origin + '/api/health', { headers: { 'x-forwarded-for': '203.0.113.151' } });
+  const none = await onRequestGet({ request: request(), env: {} });
+  assert.equal(none.status, 503);
+  assert.deepEqual(await none.json(), { ok: false, database: 'not connected' });
+
+  const broken = { prepare() { throw new Error('D1 is down'); } };
+  const res = await onRequestGet({ request: request(), env: { DB: broken } });
+  assert.equal(res.status, 503);
+  const body = await res.json();
+  assert.deepEqual(body, { ok: false, database: 'error' });
+  assert.ok(!JSON.stringify(body).includes('D1 is down'), 'error details stay in the server log');
+});
+
+test('the health check cannot be hammered', async () => {
+  let res;
+  for (let i = 0; i < 32; i++) res = await site.api('/api/health', { ip: '203.0.113.152' });
+  assert.equal(res.status, 429);
 });
 
 // ---------- Developer console sign-in (email + password, then a 6-digit code by email) ----------

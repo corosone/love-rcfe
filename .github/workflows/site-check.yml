@@ -1,0 +1,82 @@
+# Daily site check, on GitHub's computers (free for public repositories).
+#
+# Once a day this opens the live website and checks that the main pages, the translated pages,
+# the styles, the staff inbox and the server and its database all work. If something does not,
+# this run fails and GitHub emails the owner ("Run failed: Daily site check"), so a problem is
+# noticed before a family finds it. Each failing check is tried again twice, a minute apart, so a
+# passing hiccup does not cause a false alarm. The run's summary page lists every check.
+#
+# It also keeps the scheduled jobs switched on: GitHub turns off scheduled jobs (this check and
+# the Monday summary email) in a public repository that has had no new changes for 60 days.
+# Switching them on again each day resets that count, so they never go quiet by themselves.
+#
+# Nothing here needs a password or secret, and it only reads the website (no database writes).
+name: Daily site check
+
+on:
+  schedule:
+    - cron: '47 13 * * *' # every day 13:47 UTC (5:47 am Pacific in winter, 6:47 am in summer)
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check the website
+        env:
+          SITE: https://love-rcfe.pages.dev
+        run: |
+          failed=0
+          summary() { echo "$1" >> "$GITHUB_STEP_SUMMARY"; }
+          # check NAME PATH STATUS TEXT: the address must answer with STATUS and contain TEXT.
+          check() {
+            local name="$1" path="$2" want_status="$3" want_text="$4" status=""
+            for attempt in 1 2 3; do
+              status=$(curl -sS -o body.txt -w '%{http_code}' --max-time 30 "$SITE$path") || status="no answer"
+              if [ "$status" = "$want_status" ] && grep -qF -- "$want_text" body.txt; then
+                echo "OK       $name"
+                summary "| $name | OK |"
+                return 0
+              fi
+              if [ "$attempt" -lt 3 ]; then sleep 60; fi
+            done
+            echo "::error::$name ($path) is not working: expected $want_status, got $status"
+            summary "| $name | **Not working** (expected $want_status, got $status) |"
+            failed=1
+          }
+          summary "### Love RCFE daily site check"
+          summary ""
+          summary "| Check | Result |"
+          summary "|---|---|"
+          check "Home page and contact form" "/" 200 'id="enquiry-form"'
+          check "Spanish page" "/es/" 200 'data-prerendered="es"'
+          check "Chinese page" "/zh/" 200 'data-prerendered="zh"'
+          check "Arabic page" "/ar/" 200 'data-prerendered="ar"'
+          check "Styles" "/tailwind.css" 200 'tailwindcss v'
+          check "Staff inbox page" "/staff" 200 'id="login-form"'
+          check "Server and database" "/api/health" 200 '"database":"ok"'
+          check "Staff sign-in protection" "/api/admin/session" 401 'Authentication required'
+          if [ "$failed" = 1 ]; then
+            echo "Something on the website is not working. The list above shows what."
+            exit 1
+          fi
+          echo "Everything is working."
+
+  keep-schedules-on:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write # only to switch this repository's own scheduled jobs on
+    steps:
+      - name: Keep the scheduled jobs switched on
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          for wf in site-check.yml weekly-summary.yml; do
+            gh api --method PUT "repos/$REPO/actions/workflows/$wf/enable" --silent
+            echo "Switched on: $wf"
+          done

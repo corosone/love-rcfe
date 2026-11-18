@@ -4,7 +4,7 @@
 //                        Only adds enquiries that are missing; never changes or deletes any.
 import { jsonResponse, readJsonBody } from '../../../lib/db.js';
 import { authorizeDev, devAudit } from '../../../lib/dev.js';
-import { buildBackup, restoreLeads, RESTORE_BATCH } from '../../../lib/backup.js';
+import { buildBackup, restoreLeads, noteBackupDownloaded, RESTORE_BATCH } from '../../../lib/backup.js';
 
 export async function onRequestGet({ request, env }) {
   const { denied } = await authorizeDev(request, env);
@@ -13,6 +13,8 @@ export async function onRequestGet({ request, env }) {
   try {
     const backup = await buildBackup(env.DB, new URL(request.url).origin);
     await devAudit(env, request, 'backup_download', `${backup.counts.leads} enquiries`);
+    // For the Monday summary's backup reminder. Never stops the download if it fails.
+    await noteBackupDownloaded(env.DB).catch((err) => console.warn('Could not note the backup time:', err?.message));
     const date = new Intl.DateTimeFormat('en-CA', {
       timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit',
     }).format(new Date());
