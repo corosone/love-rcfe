@@ -392,7 +392,7 @@
     const old = Number(data.leads.olderThanRetention || 0);
     if (keep) {
       oldEl.appendChild(el('span', { text: old ? `${plural(old, 'enquiry is', 'enquiries are')} older than ${keep} days and will be deleted automatically over time.` : `No enquiries are older than ${keep} days.` }));
-      if (old) oldEl.appendChild(el('button', { className: 'dv-btn dv-btn-danger', text: 'Delete them now', attrs: { type: 'button', 'data-tool': 'purge_old_leads' } }));
+      if (old) oldEl.appendChild(el('button', { className: 'dv-btn dv-btn-danger', text: 'Delete Them Now', attrs: { type: 'button', 'data-tool': 'purge_old_leads' } }));
       oldEl.classList.remove('hidden');
     } else {
       oldEl.classList.add('hidden');
@@ -402,7 +402,7 @@
     const paused = Boolean(data.requestLog && data.requestLog.paused);
     $('requests-paused').classList.toggle('hidden', !paused);
     const pauseBtn = $('pause-btn');
-    pauseBtn.textContent = paused ? 'Resume logging' : 'Pause logging';
+    pauseBtn.textContent = paused ? 'Resume Logging' : 'Pause Logging';
     pauseBtn.setAttribute('data-tool', paused ? 'resume_requests' : 'pause_requests');
 
     renderActivity();
@@ -734,11 +734,11 @@
       if (l.otherIp && l.otherIp.ip && l.ip) {
         from.insertBefore(el('div', { className: 'dv-mono text-brand-muted', text: `${l.otherIp.kind === 'long' ? 'long' : 'short'}: ${l.otherIp.ip}`, title: 'The device\'s other address, as reported by its browser' }), from.childNodes[1] || null);
       }
-      const journeyBtn = el('button', { className: 'dv-link text-xs', text: 'Journey', attrs: { type: 'button', 'aria-expanded': 'false', title: 'What they looked at on the site before writing in' } });
+      const journeyBtn = el('button', { className: 'dv-link text-xs', text: 'Show Journey', attrs: { type: 'button', 'aria-expanded': 'false', title: 'What they looked at on the site before writing in' } });
       journeyBtn.addEventListener('click', () => toggleJourney(l, tr, journeyBtn));
       const links = el('div', { className: 'dv-actions' }, [journeyBtn]);
       if (l.hasInfo) {
-        const detailBtn = el('button', { className: 'dv-link text-xs', text: 'Device', attrs: { type: 'button', 'aria-expanded': 'false', title: 'Everything known about the device that sent it (the same as your sign-in email)' } });
+        const detailBtn = el('button', { className: 'dv-link text-xs', text: 'Show Device', attrs: { type: 'button', 'aria-expanded': 'false', title: 'Everything known about the device that sent it (the same as your sign-in email)' } });
         detailBtn.addEventListener('click', () => toggleLeadDevice(l, tr, detailBtn));
         links.appendChild(detailBtn);
       }
@@ -752,7 +752,7 @@
     const n = selectedLeads.size;
     const btn = $('leads-delete');
     btn.disabled = n === 0;
-    btn.textContent = n ? `Delete selected (${n})` : 'Delete selected';
+    btn.textContent = n ? `Delete Selected (${n})` : 'Delete Selected';
   }
 
   function toggleAllLeads(checked) {
@@ -1328,7 +1328,7 @@
             undo.addEventListener('click', () => duplicateAction(undo, 'unmark_duplicate', { id: m.id }));
             action.appendChild(undo);
           } else {
-            action = el('button', { className: 'dv-btn', text: `Mark as duplicate of #${g.originalId}`, attrs: { type: 'button' } });
+            action = el('button', { className: 'dv-btn', text: `Mark as Duplicate of #${g.originalId}`, attrs: { type: 'button' } });
             action.addEventListener('click', () => duplicateAction(action, 'mark_duplicate', { id: m.id, of: g.originalId }));
           }
           tbody.appendChild(el('tr', {}, [
@@ -1474,7 +1474,7 @@
       abuse = el('span', {}, [el('span', { className: 'dv-mono', text: reg.abuseEmail + ' ' })]);
       const copy = el('button', { className: 'dv-link', text: 'Copy', attrs: { type: 'button' } });
       copy.addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(reg.abuseEmail); copy.textContent = 'Copied'; } catch (e) { copy.textContent = 'Select and copy it'; }
+        try { await navigator.clipboard.writeText(reg.abuseEmail); copy.textContent = 'Copied'; } catch (e) { copy.textContent = 'Select and Copy It'; }
       });
       abuse.appendChild(copy);
     }
@@ -1529,7 +1529,7 @@
       rows.forEach((r) => {
         const statusCls = r.status === 'LICENSED' ? 'dv-chip-view' : r.status === 'ON PROBATION' ? 'dv-chip-bad' : 'dv-chip-note';
         const details = el('button', { className: 'dv-btn', text: 'Details', attrs: { type: 'button', 'aria-expanded': 'false' } });
-        const link = el('a', { className: 'dv-link text-xs', text: 'State page', attrs: { href: r.page, target: '_blank', rel: 'noopener noreferrer' } });
+        const link = el('a', { className: 'dv-link text-xs', text: 'State Page', attrs: { href: r.page, target: '_blank', rel: 'noopener noreferrer' } });
         const row = el('tr', {}, [
           td(el('div', {}, [el('div', { className: 'font-semibold', text: r.name }), el('div', { className: 'text-brand-muted', text: [r.licensee, r.address].filter(Boolean).join(' · ') }), el('div', { className: 'text-brand-muted', text: r.phone || '' })])),
           td([r.city, r.zip].filter(Boolean).join(' ')),
@@ -1546,7 +1546,7 @@
       toolFailed(err, info);
       if (err.data && err.data.searchPage) {
         info.appendChild(document.createTextNode(' '));
-        info.appendChild(el('a', { className: 'dv-link', text: 'Open the state\'s search', attrs: { href: err.data.searchPage, target: '_blank', rel: 'noopener noreferrer' } }));
+        info.appendChild(el('a', { className: 'dv-link', text: 'Open the State\'s Search', attrs: { href: err.data.searchPage, target: '_blank', rel: 'noopener noreferrer' } }));
       }
     }
   }
@@ -1577,11 +1577,11 @@
         ['Legal action', d.legalAction ? `${d.legalAction.type}${d.legalAction.closed ? ' (case closed)' : ''}` : 'None on record'],
         ['Notes from the state', d.notes], ['Licensing office', d.districtOffice]
       ]));
-      holder.appendChild(el('a', { className: 'dv-link text-xs', text: 'Open the full record and inspection reports on the state\'s website', attrs: { href: d.page || r.page, target: '_blank', rel: 'noopener noreferrer' } }));
+      holder.appendChild(el('a', { className: 'dv-link text-xs', text: 'Open the Full Record and Inspection Reports on the State\'s Website', attrs: { href: d.page || r.page, target: '_blank', rel: 'noopener noreferrer' } }));
     } catch (err) {
       if (err.status === 401) { sessionEnded(); return; }
       holder.textContent = err.message + ' ';
-      holder.appendChild(el('a', { className: 'dv-link', text: 'State page', attrs: { href: r.page, target: '_blank', rel: 'noopener noreferrer' } }));
+      holder.appendChild(el('a', { className: 'dv-link', text: 'State Page', attrs: { href: r.page, target: '_blank', rel: 'noopener noreferrer' } }));
     }
   }
 
@@ -1702,7 +1702,7 @@
     const existing = row.parentNode ? [...row.parentNode.querySelectorAll('tr.lead-device-row')].find((r) => r.dataset.lead === String(lead.id)) : null;
     if (existing) existing.remove();
     button.setAttribute('aria-expanded', open ? 'false' : 'true');
-    button.textContent = open ? 'Device' : 'Hide device';
+    button.textContent = open ? 'Show Device' : 'Hide Device';
     if (open) return;
     const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
     const detailRow = el('tr', { className: 'lead-device-row', attrs: { 'data-lead': String(lead.id) } }, [el('td', { attrs: { colspan: '7' } }, [holder])]);
@@ -1729,7 +1729,7 @@
     const existing = row.nextElementSibling && row.nextElementSibling.classList.contains('journey-row') ? row.nextElementSibling : null;
     if (existing) existing.remove();
     button.setAttribute('aria-expanded', open ? 'false' : 'true');
-    button.textContent = open ? 'Journey' : 'Hide journey';
+    button.textContent = open ? 'Show Journey' : 'Hide Journey';
     if (open) return;
     const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
     row.after(el('tr', { className: 'journey-row' }, [el('td', { attrs: { colspan: '7' } }, [holder])]));

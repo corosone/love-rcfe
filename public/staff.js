@@ -548,10 +548,10 @@
 
           <div class="flex flex-wrap items-center justify-end gap-3 pt-1">
             ${l.email ? `<select class="lead-field lead-reply mr-auto" data-action="reply" data-lead-id="${leadId}" aria-label="Reply by email to ${escapeHtml(l.name)}" title="Opens your email app with the message written. Nothing is sent until you press Send there.">
-                <option value="">Reply by email…</option>${replyOptions(l)}
+                <option value="">Reply by Email…</option>${replyOptions(l)}
               </select>` : ''}
             <button type="button" data-action="spam" data-lead-id="${leadId}" class="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline" title="Deletes this message and reports the sender's address to the site owner">
-              Mark as spam
+              Mark as Spam
             </button>
             <button type="button" data-action="delete" data-lead-id="${leadId}" class="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline">
               Delete

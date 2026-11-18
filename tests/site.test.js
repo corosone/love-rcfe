@@ -294,7 +294,7 @@ test('each page view is reported once to the request log', async () => {
 
 test('names for voice control and screen readers match the visible text (English and Spanish)', async () => {
   for (const [lang, want] of [
-    ['en', { logo: 'Love RCFE. Care & Consulting Home', lang: 'EN Change language', call: 'Call us' }],
+    ['en', { logo: 'Love RCFE. Care & Consulting Home', lang: 'EN Change language', call: 'Call Us' }],
     ['es', { logo: 'Love RCFE. Cuidado y Consultoría Inicio', lang: 'ES Cambiar idioma', call: 'Llámenos' }],
   ]) {
     const { page, context } = await open(lang === 'en' ? '/' : `/?lang=${lang}`);
@@ -741,11 +741,18 @@ test('device details: the staff inbox only shows phone or computer; the console 
     await page.click('#tab-leads');
     await page.fill('#leads-q', 'phone-sender@example.com');
     await page.click('#leads-search button[type="submit"]');
-    await page.waitForFunction(() => /Phone Sender/.test(document.getElementById('leads-body').textContent));
+    await page.waitForFunction(() => /^1 match for/.test(document.getElementById('leads-info').textContent) && /Phone Sender/.test(document.getElementById('leads-body').textContent));
     assert.match(await page.textContent('#leads-body'), /Phone/);
-    await page.click('#leads-body .dv-link:text-is("Device")');
+    assert.equal(await page.locator('#leads-body .dv-link', { hasText: 'Show Journey' }).count(), 1, 'the Journey button says what it does');
+    await page.click('#leads-body .dv-link:text-is("Show Device")');
+    assert.equal(await page.locator('#leads-body .dv-link:text-is("Hide Device")').count(), 1, 'and changes to Hide when open');
     await page.waitForFunction(() => /Short address/.test((document.querySelector('.lead-device-row') || {}).textContent || ''));
     const report = await page.textContent('.lead-device-row');
+    await page.click('#leads-body .dv-link:text-is("Show Journey")');
+    await page.waitForSelector('#leads-body .dv-link:text-is("Hide Journey")');
+    await page.click('#leads-body .dv-link:text-is("Hide Journey")');
+    await page.waitForSelector('#leads-body .dv-link:text-is("Show Journey")');
+    assert.equal(await page.locator('.journey-row').count(), 0, 'hiding closes the panel');
     for (const want of ['Long address (IPv6)', '2603:8001:9a00:1cc6::42', 'Reported by the browser', 'Screen size', 'Device (reported by the browser', 'Browser (from what the browser sent']) {
       assert.ok(report.includes(want), `the report shows ${want}`);
     }
@@ -875,7 +882,7 @@ test('developer console Tools tab: follow-up, duplicates, holiday switch, IP che
     await page.click('#dupes-btn');
     await page.waitForFunction(() => document.querySelectorAll('#dupes-list .dv-group').length > 0);
     const twinGroup = page.locator('#dupes-list .dv-group', { hasText: 'Tools Twin' });
-    await twinGroup.locator('button', { hasText: 'Mark as duplicate of' }).click();
+    await twinGroup.locator('button', { hasText: 'Mark as Duplicate of' }).click();
     await page.waitForFunction(() => /marked as a duplicate/.test(document.getElementById('tool-status').textContent));
     assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM leads WHERE email = 'TOOLS-TWIN@example.com' AND duplicate_of > 0 AND handled = 1")[0].n, 1);
 
