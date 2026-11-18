@@ -153,7 +153,7 @@
       }
       if (label) {
         label.textContent = copied ? t('Copied') : t('Press Ctrl+C to copy');
-        setTimeout(() => { label.textContent = t('Copy number'); }, 2200);
+        setTimeout(() => { label.textContent = t('Copy Number'); }, 2200);
       }
     }
 
