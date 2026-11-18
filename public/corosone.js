@@ -126,161 +126,13 @@
   }
 
   // ---------- Device details for the sign-in email and the activity log ----------
-  // The developer sign-in is the most sensitive door on the site, so every attempt records
-  // as much as possible about the device that made it. The server already sees one address,
-  // the location Cloudflare estimates for it, and what the browser sends with every request.
-  // This part adds what only the browser itself can tell: the device's OTHER address, its
-  // screen, processor, graphics card and so on. It is sent with the sign-in, checked field by
-  // field on the server (lib/deviceinfo.js), and shown only in the code email and this console.
-  //
-  // A device usually has a long (IPv6) and a short (IPv4) address, and the site only sees the
-  // one the browser connected with. These services answer over one kind only, which is how the
-  // page finds the other. If none answers, sign-in works exactly the same, just without it.
-  const ADDRESS_SOURCES = {
-    ipv4: ['https://ipv4.icanhazip.com/', 'https://api.ipify.org/'],
-    ipv6: ['https://ipv6.icanhazip.com/', 'https://api6.ipify.org/']
-  };
-  const IPV4_TEXT_RE = /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
-  const CLIENT_FRESH_MS = 5 * 60 * 1000;
-  let clientInfo = null;   // filled in piece by piece as the answers arrive
-  let clientReady = null;  // settles when every piece has arrived (or given up)
-  let clientAt = 0;
-
-  function looksLikeIp(kind, value) {
-    if (kind === 'ipv4') return IPV4_TEXT_RE.test(value);
-    if (!/^[0-9a-fA-F:]{3,45}$/.test(value) || !value.includes(':')) return false;
-    try { return new URL('http://[' + value + ']/').hostname.length > 2; } catch (e) { return false; }
-  }
-
-  function askAddress(kind, url) {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 4000);
-    return fetch(url, { cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer', signal: ctrl.signal })
-      .then((res) => (res.ok ? res.text() : ''))
-      .then((body) => {
-        const ip = String(body).slice(0, 60).trim();
-        return looksLikeIp(kind, ip) ? ip : '';
-      })
-      .catch(() => '')
-      .finally(() => clearTimeout(timer));
-  }
-
-  async function findAddress(kind) {
-    for (const url of ADDRESS_SOURCES[kind]) {
-      const ip = await askAddress(kind, url);
-      if (ip) return ip;
-    }
-    return '';
-  }
-
-  // Everything the browser will say about itself without asking the person for permission.
-  function readDeviceNow() {
-    const d = {};
-    const set = (key, read) => { try { const v = read(); if (v !== undefined && v !== null && v !== '') d[key] = v; } catch (e) {} };
-    const media = (q) => window.matchMedia(q).matches;
-    set('screenW', () => screen.width);
-    set('screenH', () => screen.height);
-    set('availW', () => screen.availWidth);
-    set('availH', () => screen.availHeight);
-    set('windowW', () => window.innerWidth);
-    set('windowH', () => window.innerHeight);
-    set('pixelRatio', () => Math.round(window.devicePixelRatio * 100) / 100);
-    set('colorDepth', () => screen.colorDepth);
-    set('orientation', () => screen.orientation.type);
-    set('timezone', () => Intl.DateTimeFormat().resolvedOptions().timeZone);
-    set('utcOffset', () => new Date().getTimezoneOffset());
-    set('languages', () => Array.from(navigator.languages || [navigator.language]).slice(0, 8));
-    set('platform', () => navigator.platform);
-    set('vendor', () => navigator.vendor);
-    set('cores', () => navigator.hardwareConcurrency);
-    set('memory', () => navigator.deviceMemory);
-    set('touchPoints', () => navigator.maxTouchPoints);
-    set('cookies', () => navigator.cookieEnabled);
-    set('dnt', () => (navigator.doNotTrack === '1' ? true : navigator.doNotTrack === '0' ? false : undefined));
-    set('gpc', () => (typeof navigator.globalPrivacyControl === 'boolean' ? navigator.globalPrivacyControl : undefined));
-    set('dark', () => media('(prefers-color-scheme: dark)'));
-    set('reducedMotion', () => media('(prefers-reduced-motion: reduce)'));
-    set('pdf', () => (typeof navigator.pdfViewerEnabled === 'boolean' ? navigator.pdfViewerEnabled : undefined));
-    set('webdriver', () => (typeof navigator.webdriver === 'boolean' ? navigator.webdriver : undefined));
-    set('online', () => navigator.onLine);
-    set('pointer', () => (media('(pointer: fine)') ? 'fine' : media('(pointer: coarse)') ? 'coarse' : 'none'));
-    set('hover', () => media('(hover: hover)'));
-    set('referrer', () => document.referrer.slice(0, 200));
-    set('netType', () => navigator.connection.effectiveType);
-    set('netKind', () => navigator.connection.type);
-    set('downlink', () => navigator.connection.downlink);
-    set('rtt', () => navigator.connection.rtt);
-    set('saveData', () => navigator.connection.saveData);
-    // Graphics card name, as the browser's 3D drawing system reports it.
-    try {
-      const gl = document.createElement('canvas').getContext('webgl');
-      if (gl) {
-        const ext = gl.getExtension('WEBGL_debug_renderer_info');
-        set('gpuVendor', () => String(gl.getParameter(ext ? ext.UNMASKED_VENDOR_WEBGL : gl.VENDOR)).slice(0, 80));
-        set('gpu', () => String(gl.getParameter(ext ? ext.UNMASKED_RENDERER_WEBGL : gl.RENDERER)).slice(0, 160));
-        const lose = gl.getExtension('WEBGL_lose_context');
-        if (lose) lose.loseContext();
-      }
-    } catch (e) {}
-    return d;
-  }
-
-  // The parts that take a moment: exact operating system and browser versions, and battery.
-  async function readDeviceSlow(into) {
-    const jobs = [];
-    try {
-      const uad = navigator.userAgentData;
-      if (uad && typeof uad.getHighEntropyValues === 'function') {
-        if (typeof uad.mobile === 'boolean') into.mobile = uad.mobile;
-        if (uad.platform) into.os = String(uad.platform);
-        jobs.push(uad.getHighEntropyValues(['architecture', 'bitness', 'model', 'platformVersion', 'fullVersionList', 'formFactors', 'wow64']).then((h) => {
-          if (h.platform) into.os = String(h.platform);
-          if (h.platformVersion) into.osVersion = String(h.platformVersion);
-          if (h.architecture) into.arch = String(h.architecture);
-          if (h.bitness) into.bitness = String(h.bitness);
-          if (h.model) into.model = String(h.model);
-          if (typeof h.wow64 === 'boolean') into.wow64 = h.wow64;
-          if (Array.isArray(h.formFactors)) into.formFactors = h.formFactors.map(String).slice(0, 4);
-          if (Array.isArray(h.fullVersionList)) into.brands = h.fullVersionList.slice(0, 6).map((b) => ({ brand: String(b.brand), version: String(b.version) }));
-        }).catch(() => {}));
-      }
-    } catch (e) {}
-    try {
-      if (typeof navigator.getBattery === 'function') {
-        jobs.push(navigator.getBattery().then((b) => {
-          if (typeof b.level === 'number') into.batteryLevel = Math.round(b.level * 100);
-          if (typeof b.charging === 'boolean') into.charging = b.charging;
-        }).catch(() => {}));
-      }
-    } catch (e) {}
-    await Promise.all(jobs);
-  }
-
-  // Starts collecting (or reuses a recent collection). Never throws.
-  function gatherClient() {
-    if (clientReady && Date.now() - clientAt < CLIENT_FRESH_MS) return clientReady;
-    clientAt = Date.now();
-    let info;
-    try { info = readDeviceNow(); } catch (e) { info = {}; }
-    clientInfo = info;
-    clientReady = Promise.all([
-      findAddress('ipv4').then((ip) => { if (ip) info.ipv4 = ip; }),
-      findAddress('ipv6').then((ip) => { if (ip) info.ipv6 = ip; }),
-      readDeviceSlow(info)
-    ]).catch(() => {});
-    return clientReady;
-  }
-
-  // What has been collected so far, waiting at most `ms` for the slower answers. Sign-in is
-  // never held up for longer than that: whatever has not arrived is simply left out.
-  async function clientSnapshot(ms) {
-    try {
-      await Promise.race([gatherClient(), new Promise((resolve) => setTimeout(resolve, ms))]);
-      return JSON.parse(JSON.stringify(clientInfo || {}));
-    } catch (e) {
-      return {};
-    }
-  }
+  // The developer sign-in is the most sensitive door on the site, so every attempt records as
+  // much as possible about the device that made it: both of its addresses, screen, processor,
+  // graphics card and so on. The gathering itself is in /device-report.js (shared with the
+  // enquiry forms on the main site).
+  const deviceReport = window.LoveDeviceReport || { start: () => Promise.resolve(), snapshot: () => Promise.resolve({}) };
+  const gatherClient = () => deviceReport.start();
+  const clientSnapshot = (ms) => deviceReport.snapshot(ms);
 
   // ---------- Step 1: email + password ----------
   async function submitLogin(e) {
@@ -877,9 +729,20 @@
         if (devActions) from.appendChild(devActions);
       }
       if (l.duplicateOf) nameCell.appendChild(el('span', { className: 'dv-chip dv-chip-note', text: `Duplicate of #${l.duplicateOf}` }));
+      if (DEVICE_TYPE_LABELS[l.deviceType]) nameCell.appendChild(el('span', { className: 'dv-chip dv-chip-note', text: DEVICE_TYPE_LABELS[l.deviceType] }));
+      // The device's other address (the one the site did not see), as its browser reported it
+      if (l.otherIp && l.otherIp.ip && l.ip) {
+        from.insertBefore(el('div', { className: 'dv-mono text-brand-muted', text: `${l.otherIp.kind === 'long' ? 'long' : 'short'}: ${l.otherIp.ip}`, title: 'The device\'s other address, as reported by its browser' }), from.childNodes[1] || null);
+      }
       const journeyBtn = el('button', { className: 'dv-link text-xs', text: 'Journey', attrs: { type: 'button', 'aria-expanded': 'false', title: 'What they looked at on the site before writing in' } });
       journeyBtn.addEventListener('click', () => toggleJourney(l, tr, journeyBtn));
-      nameCell.appendChild(el('div', {}, [journeyBtn]));
+      const links = el('div', { className: 'dv-actions' }, [journeyBtn]);
+      if (l.hasInfo) {
+        const detailBtn = el('button', { className: 'dv-link text-xs', text: 'Device', attrs: { type: 'button', 'aria-expanded': 'false', title: 'Everything known about the device that sent it (the same as your sign-in email)' } });
+        detailBtn.addEventListener('click', () => toggleLeadDevice(l, tr, detailBtn));
+        links.appendChild(detailBtn);
+      }
+      nameCell.appendChild(links);
       const tr = el('tr', {}, [td(box), td(formatIso(l.createdAt)), td(nameCell), td(contact), td(from), td(msg), td(flags)]);
       body.appendChild(tr);
     });
@@ -1825,6 +1688,36 @@
       summary.textContent = 'The check could not finish: ' + err.message;
     } finally {
       btn.disabled = false;
+    }
+  }
+
+  const DEVICE_TYPE_LABELS = { phone: 'Phone', tablet: 'Tablet', computer: 'Computer' };
+
+  // ----- Device report for one enquiry (Enquiries tab) -----
+  // The same report as the developer's sign-in email: both addresses (with Block buttons) and
+  // everything known about the device. Covered by "Device details improve security." in the
+  // privacy policy. Never shown to staff.
+  async function toggleLeadDevice(lead, row, button) {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    const existing = row.parentNode ? [...row.parentNode.querySelectorAll('tr.lead-device-row')].find((r) => r.dataset.lead === String(lead.id)) : null;
+    if (existing) existing.remove();
+    button.setAttribute('aria-expanded', open ? 'false' : 'true');
+    button.textContent = open ? 'Device' : 'Hide device';
+    if (open) return;
+    const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
+    const detailRow = el('tr', { className: 'lead-device-row', attrs: { 'data-lead': String(lead.id) } }, [el('td', { attrs: { colspan: '7' } }, [holder])]);
+    row.after(detailRow);
+    fitActivityDetail();
+    try {
+      const d = await toolGet({ tool: 'lead-device', id: lead.id });
+      holder.textContent = '';
+      holder.appendChild(el('p', { className: 'font-semibold mb-2', text: `Device that sent ${d.name ? d.name + '\'s' : 'this'} message${DEVICE_TYPE_LABELS[d.deviceType] ? ` (${DEVICE_TYPE_LABELS[d.deviceType].toLowerCase()})` : ''}` }));
+      const inner = el('div');
+      holder.appendChild(inner);
+      renderActivityDetail(inner, d);
+    } catch (err) {
+      if (err.status === 401) { sessionEnded(); return; }
+      holder.textContent = err.message;
     }
   }
 

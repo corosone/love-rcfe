@@ -53,6 +53,8 @@
   }
 
   const STAGE_LABELS = { new: 'New', called: 'Called', tour: 'Tour scheduled', waiting: 'Waiting on family' };
+  // The only device detail staff see: what kind of device a message came from.
+  const DEVICE_TYPES = { phone: 'Sent from a phone', tablet: 'Sent from a tablet', computer: 'Sent from a computer' };
   const SOURCE_LABELS = {
     home: 'Home page', services: 'Services page', tools: 'Tools page',
     approach: 'Approach page', support: 'FAQs & Support', contact: 'Contact page',
@@ -510,6 +512,7 @@
                 </span>
                 ${l.stage && l.stage !== 'new' ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brand-accentLight text-brand-accent">${escapeHtml(STAGE_LABELS[l.stage] || l.stage)}</span>` : ''}
                 ${l.handled ? '<span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-brand-sageLight text-brand-green">Handled</span>' : ''}
+                ${DEVICE_TYPES[l.deviceType] ? `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-brand-line text-brand-muted" title="The kind of device this message was sent from">${DEVICE_TYPES[l.deviceType]}</span>` : ''}
                 ${waitingDays(l) ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-red-800 dark:bg-red-950/60 dark:text-red-300" title="Nobody has replied yet. Move it to another stage once you have called or written.">Waiting ${waitingDays(l)} day${waitingDays(l) === 1 ? '' : 's'}</span>` : ''}
                 ${l.duplicateOf ? `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-brand-line text-brand-muted">Duplicate of #${Number(l.duplicateOf)}</span>` : (looksDuplicate(l) ? '<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300" title="Another message has the same email or phone number">Possible duplicate</span>' : '')}
               </div>

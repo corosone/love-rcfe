@@ -24,6 +24,7 @@ const LEAD_COLUMNS = `
   ip_place AS ipPlace,
   first_response_at AS firstResponseAt,
   duplicate_of AS duplicateOf,
+  device_type AS deviceType,
   created_at AS createdAt
 `;
 
@@ -48,6 +49,8 @@ function mapLead(row) {
     ipPlace: row.ipPlace || '',
     firstResponseAt: row.firstResponseAt || '',
     duplicateOf: Number(row.duplicateOf || 0),
+    // Only "phone", "tablet" or "computer": staff never see the full device report.
+    deviceType: ['phone', 'tablet', 'computer'].includes(row.deviceType) ? row.deviceType : '',
     createdAt: row.createdAt,
   };
 }

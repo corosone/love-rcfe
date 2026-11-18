@@ -439,7 +439,7 @@ test('backups and the spreadsheet keep the new details, and a restore puts them 
   assert.equal(saved.device, 'e5'.repeat(32));
   assert.equal(saved.isp, 'Comcast');
   const csv = await (await site.api('/api/dev/leads-export', { headers: { cookie: dev }, ip: '203.0.113.250' })).text();
-  assert.match(csv.split('\r\n')[0], /"Network","First reply \(UTC\)","Marked handled \(UTC\)","Duplicate of","Device check code"/);
+  assert.match(csv.split("\r\n")[0], /"Network","Sent from","First reply \(UTC\)","Marked handled \(UTC\)","Duplicate of","Device check code"/);
   site.db._run('DELETE FROM leads WHERE id = ?', id);
   const restore = await site.api('/api/dev/backup', { method: 'POST', body: { leads: [saved] }, headers: { cookie: dev }, ip: '203.0.113.250' });
   assert.equal((await restore.json()).added, 1);
@@ -455,4 +455,110 @@ test('every tool needs the developer sign-in', async () => {
   const res = await site.api('/api/dev/action', { method: 'POST', body: { action: 'set_holiday', options: { from: '2030-01-01', to: '2030-01-02' } }, headers: { cookie: staff }, ip: '203.0.113.252' });
   assert.equal(res.status, 401);
   assert.equal((await tool({ tool: 'nonsense' })).status, 400);
+});
+
+// ---------- Full device report with each enquiry (developer console only) ----------
+
+async function postWithHeaders(body, headers, ip) {
+  const { onRequestPost } = await import('../functions/api/leads.js');
+  const request = new Request(site.origin + '/api/leads', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', origin: site.origin, 'x-forwarded-for': ip, ...headers },
+    body: JSON.stringify(body),
+  });
+  const res = await onRequestPost({ request, env: site.env, waitUntil: () => {} });
+  return res;
+}
+const UA = {
+  iphone: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1',
+  ipad: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15',
+  androidTablet: 'Mozilla/5.0 (Linux; Android 14; SM-X710) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36',
+  androidPhone: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Mobile Safari/537.36',
+  windows: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36',
+  curl: 'curl/8.5.0',
+};
+
+test('device report: checked field by field, saved with the enquiry, with phone / tablet / computer', async () => {
+  const client = {
+    screenW: 1179, screenH: 2556, pixelRatio: 3, timezone: 'America/Los_Angeles', languages: ['en-US', 'es-US'],
+    touchPoints: 5, gpu: 'Apple GPU', cores: 6, ipv6: '2603:8001:9a00:1cc6::77', ipv4: '8.8.8.8',
+    // things that must be dropped
+    evil: '<script>alert(1)</script>', screenW2: 'x'.repeat(9999), memory: 'lots', orientation: 'sideways',
+    brands: [{ brand: 'Brave', version: '126.0.0.0' }, { brand: 'Not/A)Brand', version: '8' }],
+  };
+  const res = await postWithHeaders(enquiry({ email: 'report@example.com', client }), { 'user-agent': UA.iphone }, '203.0.113.130');
+  assert.equal(res.status, 201);
+  const row = site.db._rows("SELECT device_info, device_type FROM leads WHERE email = 'report@example.com'")[0];
+  assert.equal(row.device_type, 'phone');
+  const info = JSON.parse(row.device_info);
+  assert.equal(info.seen.ip, '203.0.113.130');
+  assert.equal(info.reported.screenW, 1179);
+  assert.equal(info.reported.ipv6, '2603:8001:9a00:1cc6::77', 'the long address is kept: the site saw the short one');
+  assert.equal(info.reported.ipv4, undefined, 'a reported short address is ignored: the site saw that one itself');
+  assert.deepEqual(info.reported.brands, [{ brand: 'Brave', version: '126.0.0.0' }]);
+  for (const k of ['evil', 'screenW2', 'memory', 'orientation']) assert.equal(info.reported[k], undefined, `${k} is dropped`);
+
+  // Phone, tablet or computer
+  const cases = [
+    [UA.ipad, { touchPoints: 5 }, 'tablet'], [UA.ipad, { touchPoints: 0 }, 'computer'], [UA.androidTablet, {}, 'tablet'],
+    [UA.androidPhone, {}, 'phone'], [UA.windows, {}, 'computer'], [UA.curl, {}, ''],
+  ];
+  for (const [ua, c, want] of cases) {
+    const email = `type-${want || 'none'}-${Math.random().toString(36).slice(2, 7)}@example.com`;
+    assert.equal((await postWithHeaders(enquiry({ email, client: c }), { 'user-agent': ua }, '203.0.113.131')).status, 201);
+    assert.equal(site.db._rows('SELECT device_type FROM leads WHERE email = ?', email)[0].device_type, want, ua.slice(0, 40));
+  }
+  // Without any report (browser script blocked), the type still comes from the browser's name
+  const bare = 'bare@example.com';
+  await postWithHeaders(enquiry({ email: bare }), { 'user-agent': UA.androidPhone }, '203.0.113.132');
+  assert.equal(site.db._rows('SELECT device_type FROM leads WHERE email = ?', bare)[0].device_type, 'phone');
+});
+
+test('device report: staff only get phone / tablet / computer; the console gets everything', async () => {
+  const listed = await (await site.api('/api/admin/leads', { headers: { cookie: staff }, ip: '203.0.113.251' })).json();
+  const mine = listed.leads.find((l) => l.email === 'report@example.com');
+  assert.equal(mine.deviceType, 'phone');
+  for (const k of ['deviceInfo', 'device_info', 'device', 'client']) assert.equal(mine[k], undefined, `staff never get ${k}`);
+  assert.doesNotMatch(JSON.stringify(listed), /screenW|Apple GPU|2603:8001:9a00:1cc6::77/);
+
+  const id = site.db._rows("SELECT id FROM leads WHERE email = 'report@example.com'")[0].id;
+  const { status, data } = await tool({ tool: 'lead-device', id });
+  assert.equal(status, 200);
+  assert.equal(data.deviceType, 'phone');
+  assert.deepEqual(data.addresses.map((a) => [a.kind, a.ip, a.source]), [['long', '2603:8001:9a00:1cc6::77', 'reported'], ['short', '203.0.113.130', 'seen']]);
+  const titles = data.sections.map((s) => s.title);
+  assert.ok(titles.includes('Addresses'));
+  assert.ok(titles.some((t) => /^Device \(reported by the browser/.test(t)));
+  const devRows = Object.fromEntries(data.sections.find((s) => /^Device/.test(s.title)).rows);
+  assert.equal(devRows['Screen size'], '1179 x 2556');
+  assert.equal(devRows['Exact browser version'], 'Brave 126.0.0.0');
+
+  const search = await (await site.api('/api/dev/leads?q=report%40example.com', { headers: { cookie: dev }, ip: '203.0.113.250' })).json();
+  const row = search.leads.find((l) => l.id === id);
+  assert.deepEqual([row.deviceType, row.hasInfo, row.otherIp], ['phone', true, { kind: 'long', ip: '2603:8001:9a00:1cc6::77' }]);
+  assert.equal((await tool({ tool: 'lead-device', id: 999999 })).status, 404);
+  const staffTry = await site.api(`/api/dev/tools?tool=lead-device&id=${id}`, { headers: { cookie: staff }, ip: '203.0.113.252' });
+  assert.equal(staffTry.status, 401, 'staff cannot open the report');
+});
+
+test('device report: a message sent by automation software is flagged as likely spam', async () => {
+  await postWithHeaders(enquiry({ email: 'robot@example.com', message: 'Automated hello there friend', client: { webdriver: true } }), { 'user-agent': UA.windows }, '203.0.113.133');
+  const res = await (await site.api('/api/dev/leads?q=robot%40example.com', { headers: { cookie: dev }, ip: '203.0.113.250' })).json();
+  assert.ok(res.leads[0].flags.includes('Sent by automation software'));
+});
+
+test('device report: backups keep it, and a restore checks it again before putting it back', async () => {
+  const backup = await (await site.api('/api/dev/backup', { headers: { cookie: dev }, ip: '203.0.113.250' })).json();
+  const saved = backup.tables.leads.find((x) => x.email === 'report@example.com');
+  assert.equal(saved.device_type, 'phone');
+  assert.match(saved.device_info, /"screenW":1179/);
+  site.db._run("DELETE FROM leads WHERE email = 'report@example.com'");
+  const tampered = { ...saved, device_info: '{"seen":"not an object"}', device_type: 'spaceship' };
+  const restored = await (await site.api('/api/dev/backup', { method: 'POST', body: { leads: [tampered] }, headers: { cookie: dev }, ip: '203.0.113.250' })).json();
+  assert.equal(restored.added, 1);
+  const back = site.db._rows("SELECT device_info, device_type FROM leads WHERE email = 'report@example.com'")[0];
+  assert.deepEqual([back.device_info, back.device_type], ['', ''], 'a report that is not in the expected shape is not restored');
+  site.db._run("DELETE FROM leads WHERE email = 'report@example.com'");
+  await site.api('/api/dev/backup', { method: 'POST', body: { leads: [saved] }, headers: { cookie: dev }, ip: '203.0.113.250' });
+  assert.match(site.db._rows("SELECT device_info FROM leads WHERE email = 'report@example.com'")[0].device_info, /"screenW":1179/);
 });

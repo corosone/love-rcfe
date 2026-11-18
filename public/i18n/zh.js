@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "请勿通过公开网页表单提交完整的社会安全号码（SSN）、详细病历或受保护健康信息（PHI）。诸如加州 LIC 602A 等敏感医疗评估文件仅在正式入院审查期间通过符合 HIPAA 安全标准的加密渠道传输。",
     "4. Data Access & Removal Requests": "4. 数据查阅与删除请求",
     "5. Services We Use": "5. 本站依赖的第三方技术服务",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "为保障本网站稳定运行，我们依赖以下第三方技术服务：Cloudflare（网站托管、数据库存储、垃圾信息防护及隐私友好的访问统计）以及 Formspree（用于将您提交的留言转发至我们的顾问邮箱）。您通过表单提交的内容可能会经过上述服务以便我们接收与回复。",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "为保障本网站稳定运行，我们依赖以下第三方技术服务：Cloudflare（网站托管、数据库存储、垃圾信息防护及隐私友好的访问统计）、Formspree（用于将您提交的留言转发至我们的顾问邮箱）以及 ipify / icanhazip（在您使用表单时识别设备的第二个网络地址）。您通过表单提交的内容可能会经过上述服务以便我们接收与回复。",
     "Contact our Privacy Officer": "联系隐私保护专员",
     "Call Love RCFE": "致电 Love RCFE",
     "Talk with an advisor. Free and confidential.": "与顾问通话 · 免费且严格保密。",
@@ -492,7 +492,8 @@
     "Only used to respond.": "仅用于回复您的咨询。",
     "We never send spam.": "绝不发送垃圾信息。",
     "Family records stay confidential.": "家庭档案严格保密。",
-    "Keep bank details private.": "请勿提供银行信息。"
+    "Keep bank details private.": "请勿提供银行信息。",
+    "Device details improve security.": "设备信息用于加强安全。"
   },
   blocks: {
     "hero_title": "多一份清晰指引。<br><span class=\"italic text-brand-green font-normal\">多十分用心照护。</span>",

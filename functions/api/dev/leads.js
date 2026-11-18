@@ -6,6 +6,7 @@ import { jsonResponse } from '../../../lib/db.js';
 import { authorizeDev } from '../../../lib/dev.js';
 import { spamReasons, repeatSets } from '../../../lib/leadtools.js';
 import { rowNetwork } from '../../../lib/devtools.js';
+import { infoFromJson, deviceAddresses } from '../../../lib/deviceinfo.js';
 
 const MAX_RESULTS = 200;
 const SPAM_SCAN = 2000;
@@ -33,7 +34,7 @@ export async function onRequestGet({ request, env }) {
       env.DB
         .prepare(`
           SELECT id, kind, inquiry_type AS inquiryType, name, email, phone, city, message,
-                 handled, stage, ip, ip_place AS ipPlace, isp, asn, device, duplicate_of AS duplicateOf, created_at AS createdAt
+                 handled, stage, ip, ip_place AS ipPlace, isp, asn, device, duplicate_of AS duplicateOf, device_type AS deviceType, device_info AS deviceInfo, created_at AS createdAt
           FROM leads ${whereSql} ORDER BY created_at DESC, id DESC LIMIT ?
         `)
         .bind(...binds, spamOnly ? SPAM_SCAN : MAX_RESULTS + 1)
@@ -42,7 +43,13 @@ export async function onRequestGet({ request, env }) {
       env.DB.prepare('SELECT COUNT(*) AS n FROM leads').first(),
     ]);
 
-    let list = (rows?.results || []).map((r) => ({
+    let list = (rows?.results || []).map((r) => {
+      const info = infoFromJson(r.deviceInfo);
+      const addr = info ? deviceAddresses(info) : { long: null, short: null };
+      // The device's other address (the one the site did not see), when the browser reported it
+      const otherIp = addr.long && addr.long.source === 'reported' ? { kind: 'long', ip: addr.long.ip }
+        : addr.short && addr.short.source === 'reported' ? { kind: 'short', ip: addr.short.ip } : null;
+      return {
       id: Number(r.id),
       kind: r.kind,
       inquiryType: r.inquiryType,
@@ -60,8 +67,12 @@ export async function onRequestGet({ request, env }) {
       network: rowNetwork(r.asn, r.isp),
       device: r.device || '',
       duplicateOf: Number(r.duplicateOf || 0),
-      flags: spamReasons(r, repeats),
-    }));
+      deviceType: r.deviceType || '',
+      hasInfo: Boolean(info),
+      otherIp,
+      flags: spamReasons({ ...r, webdriver: info?.reported?.webdriver === true }, repeats),
+    };
+    });
     if (spamOnly) list = list.filter((l) => l.flags.length);
     const more = list.length > MAX_RESULTS;
 

@@ -56,6 +56,9 @@ async function open(pathAndQuery, { width = 1280, height = 900, scale = 1, turns
       return route.abort();
     }
     if (url.startsWith('https://images.pexels.com/')) return route.fulfill({ contentType: 'image/png', body: BACKUP_PICTURE });
+    // The address-lookup services used by /device-report.js once someone uses a form
+    if (/^https:\/\/(ipv4\.icanhazip\.com|api\.ipify\.org)\//.test(url)) return route.fulfill({ contentType: 'text/plain', body: '73.15.20.1' });
+    if (/^https:\/\/(ipv6\.icanhazip\.com|api6\.ipify\.org)\//.test(url)) return route.fulfill({ contentType: 'text/plain', body: '2603:8001:9a00:1cc6::42' });
     return route.abort();
   });
   if (setup) await setup(page, context);
@@ -653,42 +656,117 @@ test('signing out of the developer console also ends the staff inbox session on 
 
 // ---------- Device check, holiday switch, privacy lines ----------
 
-test('the device check code is sent only with enquiries and call requests, never with page visits', async () => {
+// Stand-ins for the two address-lookup services (ipify / icanhazip)
+const LOOKUPS = { 'https://ipv4.icanhazip.com/': '73.15.20.1', 'https://api.ipify.org/': '73.15.20.1', 'https://ipv6.icanhazip.com/': '2603:8001:9a00:1cc6::42', 'https://api6.ipify.org/': '2603:8001:9a00:1cc6::42' };
+const answerLookups = (p, seen) => p.route(/icanhazip\.com|ipify\.org/, (route) => {
+  if (seen) seen.push(route.request().url());
+  route.fulfill({ contentType: 'text/plain', body: LOOKUPS[route.request().url()] || '' });
+});
+
+test('device details: gathered only once someone uses a form, sent with the message, never with page visits', async () => {
   const bodies = { leads: [], visit: [] };
-  const { page, context } = await open('/#contact', {
+  const lookups = [];
+  const { page, context, seen } = await open('/#contact', {
     wait: 'load',
-    setup: (p) => p.on('request', (r) => {
-      if (r.url().endsWith('/api/leads')) bodies.leads.push(JSON.parse(r.postData()));
-      if (r.url().endsWith('/api/visit')) bodies.visit.push(JSON.parse(r.postData()));
-    }),
+    setup: async (p, c) => {
+      await c.setExtraHTTPHeaders({ 'x-forwarded-for': '73.15.20.1' }); // a visitor the site sees by their short address
+      await answerLookups(p, lookups);
+      p.on('request', (r) => {
+        if (r.url().endsWith('/api/leads')) bodies.leads.push(JSON.parse(r.postData()));
+        if (r.url().endsWith('/api/visit')) bodies.visit.push(JSON.parse(r.postData()));
+      });
+    },
   });
+  await page.waitForTimeout(500);
+  assert.equal(lookups.length, 0, 'just opening the contact page asks nobody for the address');
+  assert.ok(!seen.requests.some((u) => u.endsWith('/device-report.js')), 'and does not even load the device report');
   await page.fill('#name', 'Device Check');
   await page.fill('#phone', '(818) 555-0177');
   await page.fill('#email', 'device-check@example.com');
-  await page.fill('#message', 'Checking the device code is attached.');
+  await page.fill('#message', 'Checking the device report is attached.');
   await page.click('#submit-button');
   await page.waitForFunction(() => /Thank you/.test(document.getElementById('form-status').textContent));
   assert.equal(bodies.leads.length, 1);
-  assert.match(bodies.leads[0].device, /^[0-9a-f]{64}$/, 'a one-way code, not the device details');
-  assert.ok(!JSON.stringify(bodies.leads[0]).includes('x' + (await page.evaluate(() => screen.width))), 'no raw screen size is sent');
+  const sent = bodies.leads[0];
+  assert.match(sent.device, /^[0-9a-f]{64}$/, 'the one-way device check code');
+  assert.equal(typeof sent.client, 'object', 'the device report');
+  assert.equal(sent.client.screenW, await page.evaluate(() => screen.width));
+  assert.equal(sent.client.ipv6, '2603:8001:9a00:1cc6::42', 'the other address, from the lookup services');
+  assert.ok(lookups.length >= 2, 'both kinds of address were looked up');
   assert.ok(bodies.visit.length >= 1);
-  assert.ok(bodies.visit.every((b) => !('device' in b)), 'page visits carry no device code');
-  const saved = site.db._rows("SELECT device FROM leads WHERE email = 'device-check@example.com'")[0];
-  assert.equal(saved.device, bodies.leads[0].device);
+  assert.ok(bodies.visit.every((b) => !('device' in b) && !('client' in b)), 'page visits carry no device details');
+  const saved = site.db._rows("SELECT device, device_info, device_type FROM leads WHERE email = 'device-check@example.com'")[0];
+  assert.equal(saved.device, sent.device);
+  assert.equal(saved.device_type, 'computer');
+  const info = JSON.parse(saved.device_info);
+  assert.equal(info.reported.screenW, sent.client.screenW);
+  assert.equal(info.reported.ipv6, '2603:8001:9a00:1cc6::42', 'the site saw the short address, so the long one is kept');
+  assert.deepEqual(seen.errors.filter((e) => /Refused to/.test(e)), [], 'the security policy allows the lookups');
   await context.close();
+});
+
+test('device details: the staff inbox only shows phone or computer; the console shows the full report', async () => {
+  await ensureTables();
+  // A message sent from an iPhone
+  const phone = await browser.newContext({ ...require('playwright').devices['iPhone 13'], extraHTTPHeaders: { 'x-forwarded-for': '73.15.20.2' } });
+  const pp = await phone.newPage();
+  await pp.route('https://challenges.cloudflare.com/**', (r) => r.fulfill({ contentType: 'application/javascript', body: TURNSTILE_STUB }));
+  await answerLookups(pp);
+  await pp.goto(site.origin + '/#contact', { waitUntil: 'load' });
+  await pp.fill('#name', 'Phone Sender');
+  await pp.fill('#phone', '(818) 555-0199');
+  await pp.fill('#email', 'phone-sender@example.com');
+  await pp.fill('#message', 'Sent from my phone.');
+  await pp.click('#submit-button');
+  await pp.waitForFunction(() => /Thank you/.test(document.getElementById('form-status').textContent));
+  await phone.close();
+  assert.equal(site.db._rows("SELECT device_type FROM leads WHERE email = 'phone-sender@example.com'")[0].device_type, 'phone');
+
+  // Staff: "Sent from a phone", and nothing else about the device reaches the page
+  const staffSide = await open('/staff', { wait: 'load' });
+  const leadsJson = [];
+  staffSide.page.on('response', async (r) => { if (r.url().includes('/api/admin/leads?')) leadsJson.push(await r.text()); });
+  await staffSignIn(staffSide.page);
+  const card = staffSide.page.locator('#leads-list article', { has: staffSide.page.locator('h3', { hasText: 'Phone Sender' }) });
+  assert.match(await card.textContent(), /Sent from a phone/);
+  await staffSide.page.click('#refresh-btn');
+  await staffSide.page.waitForTimeout(500);
+  assert.ok(leadsJson.length && leadsJson.every((t) => !/device_?info|deviceInfo|screenW|ipv6|"device"/.test(t)), 'staff never receive the device report');
+  await staffSide.context.close();
+
+  // Console: the Device button shows the same report as the sign-in email
+  const { page, context, seen } = await open('/corosone', { wait: 'load' });
+  try {
+    await devSignIn(page);
+    await page.click('#tab-leads');
+    await page.fill('#leads-q', 'phone-sender@example.com');
+    await page.click('#leads-search button[type="submit"]');
+    await page.waitForFunction(() => /Phone Sender/.test(document.getElementById('leads-body').textContent));
+    assert.match(await page.textContent('#leads-body'), /Phone/);
+    await page.click('#leads-body .dv-link:text-is("Device")');
+    await page.waitForFunction(() => /Short address/.test((document.querySelector('.lead-device-row') || {}).textContent || ''));
+    const report = await page.textContent('.lead-device-row');
+    for (const want of ['Long address (IPv6)', '2603:8001:9a00:1cc6::42', 'Reported by the browser', 'Screen size', 'Device (reported by the browser', 'Browser (from what the browser sent']) {
+      assert.ok(report.includes(want), `the report shows ${want}`);
+    }
+    assert.deepEqual(seen.errors.filter((e) => /Refused to|page error/.test(e)), []);
+  } finally {
+    await context.close();
+  }
 });
 
 test('privacy policy: all privacy lines are on the privacy page, short (4 words or fewer), and nowhere else', async () => {
   const { page, context } = await open('/#privacy', { wait: 'load' });
   const lines = await page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
   assert.deepEqual(lines, [
-    'Device checks stop spam.', 'Visit history improves support.', 'Network details prevent abuse.',
+    'Device checks stop spam.', 'Device details improve security.', 'Visit history improves support.', 'Network details prevent abuse.',
     'Messages are sent securely.', 'Every enquiry stays confidential.', 'Only used to respond.',
     'We never send spam.', 'Family records stay confidential.', 'Keep bank details private.',
   ]);
   for (const l of lines) assert.ok(l.split(/\s+/).length <= 4, l);
   assert.match(await page.textContent('#privacy'), /6\. Keeping Your Information Safe/);
   assert.doesNotMatch(await page.textContent('#privacy'), /Google Fonts/, 'fonts come from this site now');
+  assert.match(await page.textContent('#privacy'), /ipify \/ icanhazip \(to look up your device's second internet address when you use our forms\)/);
   // No privacy notes anywhere else: other pages, the booking popup, or the message box hint
   const elsewhere = await page.evaluate(() => {
     const out = [];
@@ -705,7 +783,8 @@ test('privacy policy: all privacy lines are on the privacy page, short (4 words 
   await context.close();
   const es = await open('/es/#privacy', { wait: 'load' });
   const esLines = await es.page.$$eval('#privacy li', (xs) => xs.map((x) => x.textContent.trim()));
-  assert.equal(esLines.length, 9);
+  assert.equal(esLines.length, 10);
+  assert.match(await es.page.textContent('#privacy'), /ipify \/ icanhazip/, 'the address-lookup services are listed');
   assert.ok(esLines.every((l, i) => l && l !== lines[i]), 'translated on the Spanish page: ' + esLines.join(' | '));
   await es.context.close();
 });
@@ -763,7 +842,11 @@ async function devSignIn(page) {
   await page.click('#login-submit');
   await page.waitForSelector('#code-view:not(.hidden)');
   const mail = site.outside.filter((c) => c.url === 'https://api.resend.com/emails').at(-1);
-  await page.fill('#dev-code', /code is: (\d{6})/.exec(JSON.parse(mail.body).text)[1]);
+  const text = JSON.parse(mail.body).text;
+  // The sign-in email still carries the full device report (gathered by /device-report.js)
+  assert.match(text, /EVERYTHING KNOWN ABOUT THE DEVICE/);
+  assert.match(text, /Screen size: \d+ x \d+/);
+  await page.fill('#dev-code', /code is: (\d{6})/.exec(text)[1]);
   await page.click('#code-submit');
   await page.waitForSelector('#console-view:not(.hidden)');
 }

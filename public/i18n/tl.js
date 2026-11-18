@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Huwag magsumite ng Social Security number, detalyadong kasaysayang medikal, o protektadong impormasyong pangkalusugan (PHI) sa bukas na web form. Ang mga sensitibong ulat tulad ng LIC 602A ay ibinabahagi lamang sa ligtas at HIPAA-compliant na paraan.",
     "4. Data Access & Removal Requests": "4. Pag-access at Pagtanggal ng Datos",
     "5. Services We Use": "5. Mga Serbisyong Ginagamit Namin",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Upang patakbuhin ang site na ito, gumagamit kami ng Cloudflare (hosting, database, proteksyon sa spam, at pribadong estadistika) at Formspree (upang maipadala sa aming email ang inyong mensahe).",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Upang patakbuhin ang site na ito, gumagamit kami ng Cloudflare (hosting, database, proteksyon sa spam, at pribadong estadistika), Formspree (upang maipadala sa aming email ang inyong mensahe) at ipify / icanhazip (upang malaman ang ikalawang internet address ng inyong device kapag ginamit ninyo ang aming mga form).",
     "Contact our Privacy Officer": "Makipag-ugnayan sa Privacy Officer",
     "Call Love RCFE": "Tumawag sa Love RCFE",
     "Talk with an advisor. Free and confidential.": "Makipag-usap sa tagapayo. Libre at kumpidensyal.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "Ginagamit lamang para sumagot.",
     "We never send spam.": "Hindi kami nagpapadala ng spam.",
     "Family records stay confidential.": "Kumpidensyal ang talaan ng pamilya.",
-    "Keep bank details private.": "Huwag ibahagi ang detalye ng bangko."
+    "Keep bank details private.": "Huwag ibahagi ang detalye ng bangko.",
+    "Device details improve security.": "Pinapalakas ng detalye ng device ang seguridad."
   },
   blocks: {
     "hero_title": "Kaunting linaw pa.<br><span class=\"italic text-brand-green font-normal\">Mas maraming pag-aalaga.</span>",

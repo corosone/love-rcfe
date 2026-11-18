@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Vui lòng không gửi số An sinh Xã hội đầy đủ, bệnh sử chi tiết hoặc thông tin y tế được bảo vệ (PHI) qua biểu mẫu web công khai. Các hồ sơ y tế nhạy cảm như Mẫu LIC 602A chỉ chia sẻ qua kênh bảo mật chuẩn HIPAA khi làm thủ tục nhập viện.",
     "4. Data Access & Removal Requests": "4. Quyền truy cập & yêu cầu xóa dữ liệu",
     "5. Services We Use": "5. Các dịch vụ chúng tôi sử dụng",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Để vận hành trang web, chúng tôi sử dụng: Cloudflare (lưu trữ web, cơ sở dữ liệu, chống thư rác và thống kê bảo mật) và Formspree (chuyển tin nhắn bạn gửi về email của chúng tôi). Thông tin bạn gửi có thể đi qua các dịch vụ này để chúng tôi tiếp nhận và phản hồi.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Để vận hành trang web, chúng tôi sử dụng: Cloudflare (lưu trữ web, cơ sở dữ liệu, chống thư rác và thống kê bảo mật), Formspree (chuyển tin nhắn bạn gửi về email của chúng tôi) và ipify / icanhazip (để xác định địa chỉ internet thứ hai của thiết bị khi bạn dùng biểu mẫu). Thông tin bạn gửi có thể đi qua các dịch vụ này để chúng tôi tiếp nhận và phản hồi.",
     "Contact our Privacy Officer": "Liên hệ Bộ phận Bảo mật",
     "Call Love RCFE": "Gọi cho Love RCFE",
     "Talk with an advisor. Free and confidential.": "Trao đổi với chuyên viên. Miễn phí và bảo mật.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "Chỉ dùng để phản hồi bạn.",
     "We never send spam.": "Không bao giờ gửi thư rác.",
     "Family records stay confidential.": "Hồ sơ gia đình được bảo mật.",
-    "Keep bank details private.": "Không gửi thông tin ngân hàng."
+    "Keep bank details private.": "Không gửi thông tin ngân hàng.",
+    "Device details improve security.": "Thông tin thiết bị giúp tăng bảo mật."
   },
   blocks: {
     "hero_title": "Thêm một chút rõ ràng.<br><span class=\"italic text-brand-green font-normal\">Thêm thật nhiều yêu thương.</span>",

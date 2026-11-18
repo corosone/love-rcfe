@@ -266,8 +266,11 @@
       }
 
       try {
-        const device = await Promise.race([deviceCheckCode(), new Promise(resolve => setTimeout(() => resolve(''), 800))]);
-        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token, device });
+        const [device, client] = await Promise.all([
+          Promise.race([deviceCheckCode(), new Promise(resolve => setTimeout(() => resolve(''), 800))]),
+          deviceReportSnapshot(1500)
+        ]);
+        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token, device, ...(client ? { client } : {}) });
 
         if (res.status >= 400 && res.status < 500) {
           return {
@@ -330,6 +333,46 @@
         return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
       } catch (e) {
         return '';
+      }
+    }
+
+    // ==================== DEVICE REPORT (for the developer console only) ====================
+    // When someone starts filling in the contact form or the booking popup, the browser gathers
+    // what it can say about the device without asking for any permission (screen, browser,
+    // graphics, both internet addresses and so on; see /device-report.js). It is sent with the
+    // message and shown only in the developer console, never to staff, and is listed in the
+    // privacy policy ("Device details improve security."). Ordinary page views gather nothing.
+    let deviceReportPromise = null;
+    function loadDeviceReport() {
+      if (window.LoveDeviceReport) return Promise.resolve(window.LoveDeviceReport);
+      if (!deviceReportPromise) {
+        deviceReportPromise = new Promise(resolve => {
+          const script = document.createElement('script');
+          script.src = '/device-report.js';
+          script.async = true;
+          script.onload = () => resolve(window.LoveDeviceReport || null);
+          script.onerror = () => { deviceReportPromise = null; resolve(null); };
+          document.head.appendChild(script);
+        });
+      }
+      return deviceReportPromise;
+    }
+    function startDeviceReport() {
+      loadDeviceReport().then(report => { if (report) report.start(); }).catch(() => {});
+    }
+    ['enquiry-form', 'booking-form'].forEach(id => {
+      const formEl = document.getElementById(id);
+      if (formEl) formEl.addEventListener('focusin', startDeviceReport, { once: true });
+    });
+    // What has been gathered so far, waiting at most `ms`. Sending is never held up for longer.
+    async function deviceReportSnapshot(ms) {
+      try {
+        const report = await Promise.race([loadDeviceReport(), new Promise(resolve => setTimeout(() => resolve(null), ms))]);
+        if (!report) return null;
+        const data = await report.snapshot(ms);
+        return data && typeof data === 'object' && Object.keys(data).length ? data : null;
+      } catch (e) {
+        return null;
       }
     }
 

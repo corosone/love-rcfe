@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "Veuillez ne pas transmettre de numéros de sécurité sociale complets, d'antécédents médicaux détaillés ni d'informations de santé protégées (PHI) via des formulaires web publics. Les évaluations médicales sensibles (telles que le formulaire californien LIC 602A) sont partagées uniquement par des canaux sécurisés conformes à HIPAA lors de l'examen formel d'admission.",
     "4. Data Access & Removal Requests": "4. Accès aux données et demandes de suppression",
     "5. Services We Use": "5. Services tiers utilisés",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Pour faire fonctionner ce site, nous utilisons quelques services tiers : Cloudflare (hébergement web, stockage de base de données, protection anti-spam et statistiques de fréquentation respectueuses de la vie privée) et Formspree (pour nous transmettre par e-mail les messages que vous envoyez). Les informations que vous envoyez via nos formulaires peuvent transiter par ces services afin que nous puissions les recevoir et y répondre.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "Pour faire fonctionner ce site, nous utilisons quelques services tiers : Cloudflare (hébergement web, stockage de base de données, protection anti-spam et statistiques de fréquentation respectueuses de la vie privée), Formspree (pour nous transmettre par e-mail les messages que vous envoyez) et ipify / icanhazip (pour identifier la seconde adresse internet de votre appareil lorsque vous utilisez nos formulaires). Les informations que vous envoyez via nos formulaires peuvent transiter par ces services afin que nous puissions les recevoir et y répondre.",
     "Contact our Privacy Officer": "Contacter notre responsable de la confidentialité",
     "Call Love RCFE": "Appeler Love RCFE",
     "Talk with an advisor. Free and confidential.": "Parlez à un conseiller. Gratuit et confidentiel.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "Utilisé uniquement pour vous répondre.",
     "We never send spam.": "Jamais de courrier indésirable.",
     "Family records stay confidential.": "Les dossiers familiaux restent confidentiels.",
-    "Keep bank details private.": "Gardez vos coordonnées bancaires pour vous."
+    "Keep bank details private.": "Gardez vos coordonnées bancaires pour vous.",
+    "Device details improve security.": "Les données de l'appareil renforcent la sécurité."
   },
   blocks: {
     "hero_title": "Un peu plus de clarté.<br> <span class=\"italic text-brand-green font-normal\">Beaucoup plus de bienveillance.</span>",

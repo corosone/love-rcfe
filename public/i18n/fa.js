@@ -327,7 +327,7 @@
     "Please do not submit full Social Security numbers, detailed medical histories, or protected health information (PHI) via open public web forms. Sensitive medical appraisals (such as California Form LIC 602A) are shared only through secure, HIPAA-compliant channels during formal admission reviews.": "لطفاً شماره کامل تأمین اجتماعی (SSN)، سوابق دقیق پزشکی یا اطلاعات سلامت محافظت‌شده (PHI) را از طریق فرم‌های عمومی وب ارسال نکنید. ارزیابی‌های پزشکی حساس (مانند فرم LIC 602A کالیفرنیا) تنها در جریان بررسی‌های رسمی پذیرش و از طریق کانال‌های امن منطبق با HIPAA به اشتراک گذاشته می‌شوند.",
     "4. Data Access & Removal Requests": "۴. دسترسی به داده‌ها و درخواست حذف",
     "5. Services We Use": "۵. خدماتی که استفاده می‌کنیم",
-    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics) and Formspree (to email us the messages you submit). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "برای اجرای این وب‌سایت به چند سرویس شخص ثالث متکی هستیم: Cloudflare (میزبانی وب‌سایت، ذخیره‌سازی پایگاه داده، محافظت در برابر هرزنامه و آمار ترافیک دوستدار حریم خصوصی) و Formspree (برای ارسال پیام‌های ثبت‌شده شما به ایمیل ما). اطلاعاتی که از طریق فرم‌های ما ارسال می‌کنید ممکن است از این سرویس‌ها عبور کند تا بتوانیم آن را دریافت و پاسخ دهیم.",
+    "To run this site we rely on a few third-party services: Cloudflare (website hosting, database storage, spam protection, and privacy-friendly traffic statistics), Formspree (to email us the messages you submit), and ipify / icanhazip (to look up your device's second internet address when you use our forms). Information you submit through our forms may pass through these services so that we can receive and respond to it.": "برای اجرای این وب‌سایت به چند سرویس شخص ثالث متکی هستیم: Cloudflare (میزبانی وب‌سایت، ذخیره‌سازی پایگاه داده، محافظت در برابر هرزنامه و آمار ترافیک دوستدار حریم خصوصی)، Formspree (برای ارسال پیام‌های ثبت‌شده شما به ایمیل ما) و ipify / icanhazip (برای یافتن نشانی اینترنتی دوم دستگاه شما هنگام استفاده از فرم‌ها). اطلاعاتی که از طریق فرم‌های ما ارسال می‌کنید ممکن است از این سرویس‌ها عبور کند تا بتوانیم آن را دریافت و پاسخ دهیم.",
     "Contact our Privacy Officer": "تماس با مسئول حریم خصوصی ما",
     "Call Love RCFE": "تماس با Love RCFE",
     "Talk with an advisor. Free and confidential.": "با یک مشاور گفتگو کنید. رایگان و محرمانه.",
@@ -492,7 +492,8 @@
     "Only used to respond.": "فقط برای پاسخ‌دادن استفاده می‌شود.",
     "We never send spam.": "هرگز هرزنامه ارسال نمی‌کنیم.",
     "Family records stay confidential.": "سوابق خانواده‌ها محرمانه است.",
-    "Keep bank details private.": "اطلاعات بانکی ارسال نکنید."
+    "Keep bank details private.": "اطلاعات بانکی ارسال نکنید.",
+    "Device details improve security.": "اطلاعات دستگاه امنیت را بالا می‌برد."
   },
   blocks: {
     "hero_title": "کمی شفافیت بیشتر.<br> <span class=\"italic text-brand-green font-normal\">مراقبتی بسیار صمیمانه‌تر.</span>",
