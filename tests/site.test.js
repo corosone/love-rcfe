@@ -1399,13 +1399,27 @@ test('holiday switch: before a break starts the popup says other days can be boo
   await (await import('../lib/db.js')).ensureSchema(site.env.DB); // the tables, also when this test runs on its own
   const { setHoliday, clearHoliday, pacificToday, addDays } = await import('../lib/settings.js');
   const today = pacificToday();
-  // Opens the booking popup and waits until the page has read the holiday dates
+  // Opens the booking popup and waits until the page has read the holiday dates and acted on
+  // them. A fixed wait would sometimes be too short, and a far-off break changes nothing one
+  // could wait for. So the page's own reading of /api/settings is watched: window.__holidayRead
+  // is set in a new task right after the answer is handed to the page, by which time everything
+  // the page does with it at once (showing its notes) has been done.
+  const watchHolidayRead = (p) => p.addInitScript(() => {
+    const realFetch = window.fetch;
+    window.fetch = function (input) {
+      const answer = realFetch.apply(this, arguments);
+      if (!String(input).endsWith('/api/settings')) return answer;
+      return answer.then((res) => {
+        const readJson = res.json.bind(res);
+        res.json = () => readJson().then((data) => { setTimeout(() => { window.__holidayRead = true; }, 0); return data; });
+        return res;
+      });
+    };
+  });
   const popup = async (path) => {
-    const { page, context } = await open(path, { wait: 'load', setup: (p) => p.on('response', (r) => { if (r.url().endsWith('/api/settings')) p.__settings = true; }) });
+    const { page, context } = await open(path, { wait: 'load', setup: watchHolidayRead });
     await page.$$eval('[data-click="openBookingModal()"]', (xs) => xs[0].click());
-    for (let i = 0; i < 100 && !page.__settings; i++) await page.waitForTimeout(50);
-    assert.ok(page.__settings, 'the page read the holiday dates');
-    await page.waitForTimeout(150);
+    await page.waitForFunction(() => window.__holidayRead === true);
     const state = await page.evaluate(() => {
       const note = document.getElementById('booking-holiday');
       const date = document.getElementById('book-date');
@@ -1476,8 +1490,9 @@ test('a language page keeps its translated tab title, quiz counter and theme lab
       wait: 'domcontentloaded',
       setup: (p) => p.route('**/i18n/es.js', async (route) => { if (mode === 'cannot load') return route.abort(); await held; route.continue(); }),
     });
-    // The page's own start-up has run (it sets the quiz bar) while the Spanish words are not here
-    await page.waitForFunction(() => document.getElementById('quiz-progress-bar').style.width === '25%');
+    // The page's own start-up has finished (its last step fills in the booking form's earliest
+    // date, which is not in the page as it arrives) while the Spanish words are not here
+    await page.waitForFunction(() => window.LoveI18n && document.getElementById('book-date').min !== '');
     const during = await read(page);
     assert.equal(during.ready, false, 'the language file has not arrived');
     spanish(during, `${mode}, at first`);
