@@ -87,6 +87,32 @@ async function open(pathAndQuery, { width = 1280, height = 900, scale = 1, turns
 const turnstileRequests = (seen) => seen.requests.filter((u) => u.includes('challenges.cloudflare.com'));
 const go = async (page, view) => { await page.evaluate((v) => { location.hash = v; }, view); await page.waitForTimeout(250); };
 
+// Changes the window size, then waits until the page has finished reacting to it. The browser
+// tells the page about a new size at its next screen refresh, and the top bar adjusts to it in
+// that same refresh, before anything is drawn (so visitors never see the in-between moment).
+// Measuring before that refresh catches the page mid-change: the full menu still squeezed into a
+// tablet-sized window, which looks like the page sliding sideways. A fixed short wait usually
+// covers that refresh, but not when the computer is busy, which once made a test fail for no
+// real reason. So this waits for the refreshes themselves: two at the new size. It gives up
+// after 2 seconds, so a page that stops refreshing cannot hang the tests (the checks that follow
+// then show what is wrong).
+async function resizeWindow(page, width, height = 800) {
+  await page.setViewportSize({ width, height });
+  await page.evaluate((w) => new Promise((done) => {
+    let frames = 0;
+    let finished = false;
+    const finish = () => { finished = true; done(); };
+    const next = () => requestAnimationFrame(() => {
+      if (finished) return;
+      frames++;
+      if (innerWidth === w && frames >= 2) finish();
+      else next();
+    });
+    next();
+    setTimeout(finish, 2000);
+  }), width);
+}
+
 // ---------- Loading ----------
 
 test('home page: fonts come from this site, and nothing is loaded that is not needed', async () => {
@@ -522,8 +548,7 @@ test('family guide: never slides sideways, and reads right to left in Arabic, Pe
   for (const lang of LANGS) {
     const { page, context } = await open(guideAddress(lang), { width: 320, height: 800 });
     for (const width of [320, 390, 768, 1280]) {
-      await page.setViewportSize({ width, height: 800 });
-      await page.waitForTimeout(60);
+      await resizeWindow(page, width);
       const r = await page.evaluate(() => ({
         over: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         dir: document.documentElement.dir,
@@ -636,8 +661,7 @@ test('the other family guides: work in the browser, never slide sideways, and re
     for (const lang of LANGS) {
       const { page, context } = await open((lang === 'en' ? '' : `/${lang}`) + `/guides/${guide.name}/`, { width: 320, height: 800 });
       for (const width of [320, 768]) {
-        await page.setViewportSize({ width, height: 800 });
-        await page.waitForTimeout(60);
+        await resizeWindow(page, width);
         const r = await page.evaluate(() => ({
           over: document.documentElement.scrollWidth - document.documentElement.clientWidth,
           h1: getComputedStyle(document.querySelector('main h1')).direction,
@@ -777,7 +801,7 @@ test('the page never slides sideways: every language on phones, tablets and lapt
     const { page, context } = await open(lang === 'en' ? '/' : `/${lang}/`, { width: 320, height: 800 });
     await page.waitForTimeout(200);
     for (const width of [320, 390, 768, 1024]) {
-      await page.setViewportSize({ width, height: 800 });
+      await resizeWindow(page, width);
       for (const view of ['home', 'tools', 'contact']) {
         await page.evaluate((v) => { location.hash = v; }, view);
         await page.waitForTimeout(80);
@@ -960,8 +984,7 @@ test('top bar: shows the full menu when it fits and the menu button when it does
   await page.click('#mobile-menu a[data-view-link="services"]');
   await page.waitForTimeout(300);
   assert.equal(await page.evaluate(() => location.hash), '#services');
-  await page.setViewportSize({ width: 1300, height: 800 });
-  await page.waitForTimeout(300);
+  await resizeWindow(page, 1300);
   assert.ok(await page.evaluate(() => getComputedStyle(document.getElementById('desktop-nav')).display !== 'none'), 'the full menu returns on a wide window');
   await context.close();
 });
