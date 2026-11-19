@@ -178,6 +178,22 @@
   function homeAddressFor(code) {
     return code === 'en' ? '/' : '/' + code + '/';
   }
+  // The guides also have their own address in every language: /guides/<name>/ in English and
+  // /<code>/guides/<name>/ for the others (built by scripts/build-pages.js).
+  var GUIDE_PATH = /^(?:\/([a-z]{2}))?(\/guides\/[a-z0-9-]+\/)(?:index\.html)?$/;
+  function onGuideAddress() {
+    try {
+      var m = GUIDE_PATH.exec(window.location.pathname);
+      return !!m && (!m[1] || (m[1] !== 'en' && own(LANGUAGES, m[1])));
+    } catch (e) {
+      return false;
+    }
+  }
+  // This page's own address in another language (the home page, or the same guide)
+  function addressFor(code) {
+    var m = onGuideAddress() && GUIDE_PATH.exec(window.location.pathname);
+    return m ? (code === 'en' ? '' : '/' + code) + m[2] : homeAddressFor(code);
+  }
   // True when this page arrived already translated into the current language
   function isPrerendered() {
     var html = document.documentElement;
@@ -407,13 +423,14 @@
   // the page stays in its current language.
   function setLang(code) {
     var next = own(LANGUAGES, code) ? code : 'en';
-    // On the home page, changing language means going to that language's own address.
-    if (onHomeAddress()) {
+    // On the home page and the guides, changing language means going to that language's own address.
+    if (onHomeAddress() || onGuideAddress()) {
       var here = window.location.pathname.replace(/index\.html$/, '');
-      if (here !== homeAddressFor(next) && here + '/' !== homeAddressFor(next)) {
+      var there = addressFor(next);
+      if (here !== there && here + '/' !== there) {
         saveLang(next);
         closeMenus();
-        window.location.assign(homeAddressFor(next) + window.location.hash);
+        window.location.assign(there + window.location.hash);
         return;
       }
       if (isPrerendered() && next === currentLang) {

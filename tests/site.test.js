@@ -8,6 +8,7 @@ const { chromium } = require('playwright');
 const { startServer } = require('./helpers/server.js');
 
 const LANGS = ['en', 'es', 'zh', 'tl', 'vi', 'ko', 'hy', 'ru', 'ar', 'fa', 'hi', 'pa', 'ja', 'uk', 'he', 'km', 'fr', 'pt'];
+const RTL = ['ar', 'fa', 'he']; // written from right to left
 
 // Stand-in for Cloudflare's Turnstile script
 const TURNSTILE_STUB = `window.turnstile={_n:0,render:function(el,o){var d=document.createElement('div');d.className='stub-ts';d.textContent='check';el.appendChild(d);return 'w'+(this._n++);},getResponse:function(id){return 'tok-'+id;},reset:function(){window.__resets=(window.__resets||0)+1;}};window.initTurnstile&&window.initTurnstile();`;
@@ -419,8 +420,102 @@ test('every language has its own ready-translated page that search engines can r
     assert.ok(description.length > 40 && !description.startsWith('Personalized placement guidance'), `${lang}: translated description`);
   }
   const sitemap = await (await fetch(site.origin + '/sitemap.xml')).text();
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 18);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 36, '18 home pages and 18 copies of the family guide');
   for (const lang of LANGS.filter((l) => l !== 'en')) assert.ok(sitemap.includes(`<loc>https://love-rcfe.pages.dev/${lang}/</loc>`));
+});
+
+// ---------- Family guide (src/guides/choosing-a-care-home.html, built by scripts/build-pages.js) ----------
+
+const GUIDE = '/guides/choosing-a-care-home/';
+const GUIDE_TITLE = 'How to Choose the Right Care Home for Your Parent | Love RCFE';
+const guideAddress = (lang) => (lang === 'en' ? '' : `/${lang}`) + GUIDE;
+
+test('family guide: its own ready-translated page in every language, listed for search engines', async () => {
+  for (const lang of LANGS) {
+    const res = await fetch(site.origin + guideAddress(lang));
+    assert.equal(res.status, 200, `${lang}: the guide exists`);
+    const html = await res.text(); // as a search engine receives it, before any script runs
+    const title = html.match(/<title>([^<]*)<\/title>/)[1];
+    if (lang === 'en') assert.equal(title, GUIDE_TITLE);
+    else {
+      assert.match(html, new RegExp(`<html lang="${lang}"[^>]* dir="${RTL.includes(lang) ? 'rtl' : 'ltr'}"[^>]* data-prerendered="${lang}"`), `${lang}: language and direction`);
+      assert.ok(title !== GUIDE_TITLE && title.endsWith('| Love RCFE'), `${lang}: translated title`);
+      assert.ok(!html.includes('How to Choose the Right Care Home for Your Parent<'), `${lang}: the heading is not English`);
+    }
+    assert.ok(html.includes(`<link rel="canonical" href="https://love-rcfe.pages.dev${guideAddress(lang)}">`), `${lang}: its own address`);
+    const others = html.match(/<link rel="alternate" hreflang="[^"]+" href="([^"]+)">/g) || [];
+    assert.equal(others.length, 19, `${lang}: lists the guide in every language`);
+    assert.ok(others.every((l) => l.includes(GUIDE)), `${lang}: those addresses are the guide's, not the home page's`);
+    assert.match(html, /"@type":"Article"/, `${lang}: described to search engines as an article`);
+    assert.ok(html.includes('<main id="main-content" class="flex-1" data-guide="choosing-a-care-home">'), `${lang}: marked as a guide page`);
+    assert.ok(!/<meta name="robots" content="[^"]*noindex/.test(html), `${lang}: may be listed`);
+    // Facts that must survive every translation
+    for (const fact of ['1-800-231-4024', 'Care Facility Search', 'https://www.ccld.dss.ca.gov/carefacilitysearch/', 'Medi-Cal']) {
+      assert.ok(html.includes(fact), `${lang}: keeps "${fact}"`);
+    }
+    assert.ok(lang === 'fa' ? html.includes('۹۰') : /\b90\b/.test(html), `${lang}: keeps the 90-day notice`);
+  }
+  const sitemap = await (await fetch(site.origin + '/sitemap.xml')).text();
+  for (const lang of LANGS) assert.ok(sitemap.includes(`<loc>https://love-rcfe.pages.dev${guideAddress(lang)}</loc>`), `${lang}: in the sitemap`);
+  // The home page links to the guide in the same language
+  assert.match(await (await fetch(site.origin + '/')).text(), /<a data-guide-link href="\/guides\/choosing-a-care-home\/"/);
+  assert.match(await (await fetch(site.origin + '/es/')).text(), /<a data-guide-link="" href="\/es\/guides\/choosing-a-care-home\/"/);
+});
+
+test('family guide: menus and links lead back to the site in the same language, and the language menu keeps you on the guide', async () => {
+  let { page, context, seen } = await open(GUIDE, { width: 1280, height: 900 });
+  assert.deepEqual(seen.errors, [], 'no errors in the browser console');
+  assert.equal(await page.title(), GUIDE_TITLE, 'the tab shows the guide, not the home page');
+  // "Schedule a Call" in the article opens the booking pop-up
+  await page.click('main [data-click="openBookingModal()"]');
+  assert.equal(await page.isVisible('#booking-modal'), true);
+  await page.keyboard.press('Escape');
+  // The ombudsman's CRISISline number dials directly (the site's own call card must not take over)
+  const dialled = await page.evaluate(() => new Promise((resolve) => {
+    const link = document.querySelector('main a[href="tel:+18002314024"]');
+    window.addEventListener('click', (e) => { resolve(!e.defaultPrevented); e.preventDefault(); }, { once: true });
+    link.click();
+  }));
+  assert.equal(dialled, true, 'the CRISISline link is left to the phone');
+  assert.equal(await page.isVisible('#call-modal'), false);
+  // A menu link opens that section on the home page
+  await Promise.all([page.waitForURL(site.origin + '/#services'), page.click('#desktop-nav [data-view-link="services"]')]);
+  assert.equal(await page.isVisible('#services'), true);
+  await context.close();
+
+  // In Spanish: the article's links go to the Spanish home page
+  ({ page, context, seen } = await open('/es' + GUIDE, { width: 1280, height: 900 }));
+  assert.notEqual(await page.title(), GUIDE_TITLE, 'the tab shows the Spanish title');
+  await Promise.all([page.waitForURL(site.origin + '/es/#tools'), page.click('main a[data-view-link="tools"] >> nth=0')]);
+  assert.equal(await page.isVisible('#tools'), true);
+  // The language menu goes to the same guide in the other language
+  await page.goto(site.origin + '/es' + GUIDE);
+  await page.click('#lang-toggle-btn');
+  await Promise.all([page.waitForURL(site.origin + '/fr' + GUIDE), page.click('#lang-dropdown [data-lang="fr"]')]);
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'fr');
+  assert.deepEqual(seen.errors, [], 'no errors in the browser console');
+  await context.close();
+});
+
+test('family guide: never slides sideways, and reads right to left in Arabic, Persian and Hebrew', async () => {
+  const problems = [];
+  for (const lang of LANGS) {
+    const { page, context } = await open(guideAddress(lang), { width: 320, height: 800 });
+    for (const width of [320, 390, 768, 1280]) {
+      await page.setViewportSize({ width, height: 800 });
+      await page.waitForTimeout(60);
+      const r = await page.evaluate(() => ({
+        over: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        dir: document.documentElement.dir,
+        h1: getComputedStyle(document.querySelector('main h1')).direction,
+      }));
+      if (r.over > 0) problems.push(`${lang} ${width}px: ${r.over}px too wide`);
+      const want = RTL.includes(lang) ? 'rtl' : 'ltr';
+      if (r.dir !== want || r.h1 !== want) problems.push(`${lang}: reads ${r.h1}, expected ${want}`);
+    }
+    await context.close();
+  }
+  assert.deepEqual(problems, []);
 });
 
 test('a language page shows its language from the first moment and its tools are translated too', async () => {
@@ -515,8 +610,6 @@ test('the page never slides sideways: every language on phones, tablets and lapt
   }
   assert.deepEqual(problems, []);
 });
-
-const RTL = ['ar', 'fa', 'he'];
 
 test('Arabic, Persian and Hebrew pages read right to left; every other language left to right', async () => {
   for (const lang of LANGS) {

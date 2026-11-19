@@ -1,0 +1,133 @@
+<!--
+  Family guide: How to Choose the Right Care Home for Your Parent.
+
+  scripts/build-pages.js puts this article into a copy of the home page (same header, footer and
+  pop-ups) at /guides/choosing-a-care-home/, and a translated copy for every language at
+  /<code>/guides/choosing-a-care-home/. Translations are in public/i18n/<code>.js like the rest of
+  the site: plain text by its English wording, and paragraphs with links or bold words as blocks
+  ("guide_choosing_..." keys). Change the English here and update every language file too.
+
+  The title and description below are used for the browser tab, search results and link previews.
+  Facts checked in November 2026 against the California Department of Social Services, the
+  California Department of Aging and the Department of Health Care Services; see the pull request.
+-->
+<section id="guide-choosing-care-home" data-guide-title="How to Choose the Right Care Home for Your Parent | Love RCFE" data-guide-description="A step-by-step guide for California families: what care your parent needs, the types of care homes, costs, checking a home's license and inspections, what to ask on a visit and what to check before you sign.">
+  <div class="bg-brand-cream py-12 md:py-20 border-b border-brand-line">
+    <div class="mx-auto max-w-3xl px-6">
+      <nav aria-label="Breadcrumb" class="text-sm text-brand-muted mb-6">
+        <a data-view-link="home" href="#home" class="font-semibold text-brand-green hover:underline">Home</a>
+        <span aria-hidden="true" class="mx-2">/</span>
+        <span>Family Guide</span>
+      </nav>
+      <p class="eyebrow text-brand-accent mb-4">Family Guide</p>
+      <h1 id="guide-title" class="display text-4xl sm:text-5xl font-medium text-brand-ink mb-6">How to Choose the Right Care Home for Your Parent</h1>
+      <p class="text-lg text-brand-muted leading-relaxed mb-3">Choosing a care home is one of the biggest decisions a family makes, and it often has to happen quickly. This guide walks you through it step by step: what to look for, what to ask, and how to check a home before you decide.</p>
+      <p class="text-sm text-brand-muted mb-10">Last updated November 2026</p>
+
+      <div class="prose-copy text-brand-muted bg-white p-8 sm:p-10 rounded-3xl border border-brand-line shadow-sm space-y-10">
+        <div>
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">1. Start with the care your parent needs</h2>
+          <p class="text-brand-muted leading-relaxed">Before you look at homes, write down the help your parent needs every day. This decides which homes can care for them safely.</p>
+          <ul class="list-disc ps-5 mt-3 space-y-2 text-brand-muted leading-relaxed mb-4">
+            <li>Daily help: bathing, dressing, eating, using the toilet, walking or moving from bed to chair</li>
+            <li>Medicines: how many, how often, and whether someone needs to give them</li>
+            <li>Memory: forgetfulness, confusion, wandering or changes in behavior</li>
+            <li>Medical care: wounds, injections, oxygen or other nursing care</li>
+            <li>Daily life: language, food, faith, routines and the people they want nearby</li>
+          </ul>
+          <p data-i18n-block="guide_choosing_assessment" class="text-brand-muted leading-relaxed mt-4">Not sure where to start? Our free <a data-view-link="tools" href="#tools" class="text-brand-green underline font-semibold">Care Assessment</a> takes two minutes and gives you a starting point.</p>
+        </div>
+
+        <div>
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">2. Know the main types of care homes</h2>
+          <p class="text-brand-muted leading-relaxed">In California, most care homes for older adults are licensed by the California Department of Social Services as Residential Care Facilities for the Elderly (RCFEs). They come in different sizes:</p>
+          <ul class="list-disc ps-5 mt-3 space-y-2 text-brand-muted leading-relaxed mb-4">
+            <li data-i18n-block="guide_choosing_type_small"><strong class="text-brand-ink">Small board and care homes:</strong> usually six residents or fewer, in a house in a neighborhood. Care is personal, and staff get to know each resident well.</li>
+            <li data-i18n-block="guide_choosing_type_large"><strong class="text-brand-ink">Assisted living communities:</strong> larger buildings with more residents, activities and amenities.</li>
+            <li data-i18n-block="guide_choosing_type_memory"><strong class="text-brand-ink">Memory care:</strong> homes or units for people living with dementia, with extra safety features and specially trained staff.</li>
+          </ul>
+          <p class="text-brand-muted leading-relaxed mt-4">If your parent needs nursing or medical care around the clock, a skilled nursing facility may be the better fit. Those are licensed by the California Department of Public Health.</p>
+        </div>
+
+        <div>
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">3. Set a budget and look at ways to pay</h2>
+          <p class="text-brand-muted leading-relaxed">Costs depend on the area, the size of the home, the room (private or shared) and how much care your parent needs. Ask every home exactly what the monthly price includes and what costs extra.</p>
+          <p class="text-brand-muted leading-relaxed mt-3">Most families pay privately. Other help can include:</p>
+          <ul class="list-disc ps-5 mt-3 space-y-2 text-brand-muted leading-relaxed mb-4">
+            <li>Long-term care insurance, if your parent has a policy</li>
+            <li>VA Aid and Attendance, for eligible veterans and surviving spouses</li>
+            <li>Medi-Cal's Assisted Living Waiver, which helps pay for care (not room and board) in some counties and often has a waiting list</li>
+          </ul>
+          <p data-i18n-block="guide_choosing_calculator" class="text-brand-muted leading-relaxed mt-4">Our <a data-view-link="tools" href="#tools" class="text-brand-green underline font-semibold">Cost Calculator</a> shows a typical monthly range for your area.</p>
+        </div>
+
+        <div>
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">4. Check the home's license and inspection history</h2>
+          <p class="text-brand-muted leading-relaxed">Every care home for older adults in California must be licensed by the state. Before you visit, look the home up on the state's free Care Facility Search website. You can see:</p>
+          <ul class="list-disc ps-5 mt-3 space-y-2 text-brand-muted leading-relaxed mb-4">
+            <li>Whether the license is active, and how many residents the home may care for</li>
+            <li>Reports from state inspections and complaint visits</li>
+            <li>Any citations, which is what the state calls a rule the home broke</li>
+          </ul>
+          <p class="text-brand-muted leading-relaxed mt-4">One small citation is not unusual. A pattern of serious ones, especially about care, safety or staffing, is a warning sign. Ask the home what happened and what has changed since.</p>
+          <p data-i18n-block="guide_choosing_search_link" class="text-brand-muted leading-relaxed mt-4"><a href="https://www.ccld.dss.ca.gov/carefacilitysearch/" rel="noopener" class="text-brand-green underline font-semibold">Look up a care home on the state's Care Facility Search website</a></p>
+        </div>
+
+        <div>
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">5. Visit, and visit again</h2>
+          <p class="text-brand-muted leading-relaxed">A visit tells you things a website cannot. If you can, go more than once, at different times of day, and try to see a meal.</p>
+          <h3 class="font-semibold text-brand-ink mt-5 mb-2">What to look for</h3>
+          <ul class="list-disc ps-5 space-y-2 text-brand-muted leading-relaxed">
+            <li>Residents who are clean, dressed and engaged, not left alone for long periods</li>
+            <li>Staff who are kind and patient and know residents by name</li>
+            <li>A clean home without strong smells, with safe floors, grab bars and good lighting</li>
+            <li>Food that looks good, with choices for special diets</li>
+          </ul>
+          <h3 class="font-semibold text-brand-ink mt-5 mb-2">What to ask</h3>
+          <ul class="list-disc ps-5 space-y-2 text-brand-muted leading-relaxed">
+            <li>How many caregivers are on duty during the day and at night?</li>
+            <li>What training do your caregivers have, especially for dementia?</li>
+            <li>Who gives medicines, and how do you prevent mistakes?</li>
+            <li>What happens if my parent falls, gets sick or needs to go to the hospital?</li>
+            <li>If my parent's needs grow, can they stay here? Can they receive hospice care here?</li>
+            <li>How do you keep families informed?</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">6. Read the admission agreement before you sign</h2>
+          <p class="text-brand-muted leading-relaxed">Before your parent moves in, the home will ask you to sign an admission agreement. Take it home and read it first. Check:</p>
+          <ul class="list-disc ps-5 mt-3 space-y-2 text-brand-muted leading-relaxed mb-4">
+            <li>The monthly rate, and exactly what it includes</li>
+            <li>Extra charges for more care, and how the level of care is decided</li>
+            <li>The refund policy if your parent moves out or passes away</li>
+            <li>When the home can ask your parent to move out, and how much notice it must give</li>
+          </ul>
+          <p class="text-brand-muted leading-relaxed mt-4">Under California law, most care homes must give residents written notice at least 90 days before raising their rates, with the reason for the increase.</p>
+        </div>
+
+        <div>
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">7. Know who to call if something goes wrong</h2>
+          <p data-i18n-block="guide_choosing_ombudsman" class="text-brand-muted leading-relaxed">California's Long-Term Care Ombudsman program helps people who live in care homes, free of charge. If you are worried about your parent's care or safety, call the 24-hour CRISISline at <a href="tel:+18002314024" data-native-tel class="text-brand-green underline font-semibold whitespace-nowrap">1-800-231-4024</a>. Every licensed home must post the contact details of its local ombudsman.</p>
+        </div>
+
+        <div class="rounded-2xl bg-brand-sageLight p-6 sm:p-8">
+          <h2 class="display text-2xl font-semibold text-brand-ink mb-3">How Love RCFE can help</h2>
+          <p class="text-brand-ink leading-relaxed">Our advisors help California families find and compare licensed care homes, free of charge for families. We can shortlist homes that fit your parent's needs and budget, check their state records and come with you on tours.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button type="button" data-click="openBookingModal()" class="inline-flex items-center gap-2 rounded-full bg-brand-green text-white px-6 py-3 font-semibold hover:bg-brand-greenDark transition shadow-sm">
+              <i data-lucide="calendar" class="w-4 h-4"></i>
+              <span>Schedule a Call</span>
+            </button>
+            <a data-view-link="contact" href="#contact" class="inline-flex items-center gap-2 rounded-full border-2 border-brand-green text-brand-green px-6 py-3 font-semibold hover:bg-white/60 transition">
+              <span>Talk with an Advisor</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs text-brand-muted leading-relaxed">This guide is general information, not legal or medical advice. Rules can change, so check with the state or a professional about your own situation.</p>
+      </div>
+    </div>
+  </div>
+</section>
