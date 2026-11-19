@@ -281,6 +281,29 @@ test('holiday switch: after a long break that ends beyond the usual 3 months, th
   assert.equal((await call(notSunday(addDays(today, 101)), '203.0.113.78')).status, 422, 'without a break, the usual limit applies');
 });
 
+test('holiday switch: a break set far ahead does not let calls be booked beyond the usual 3 months', async () => {
+  const { pacificToday, addDays } = await import('../lib/settings.js');
+  const today = pacificToday();
+  const notSunday = (d) => (new Date(d + 'T00:00:00Z').getUTCDay() === 0 ? addDays(d, 1) : d);
+  const call = (date, ip) => site.api('/api/leads', { method: 'POST', body: enquiry({ kind: 'call_request', preferred_date: date, preferred_time: 'Morning (9am - 12pm)', email: `far${ip.split('.').pop()}@example.com` }), ip });
+  // One week off, 200 days from now
+  assert.equal((await action('set_holiday', { from: addDays(today, 200), to: addDays(today, 206) })).status, 200);
+  try {
+    const far = await call(notSunday(addDays(today, 150)), '203.0.113.81');
+    assert.equal(far.status, 422, 'a call 150 days ahead is still refused');
+    assert.match((await far.json()).error, /within the next 3 months/);
+    assert.equal((await call(notSunday(addDays(today, 30)), '203.0.113.82')).status, 201, 'the usual dates work as always');
+    // A break that starts within the usual dates and runs past them: the limit moves to just after it
+    const to = addDays(today, 110);
+    assert.equal((await action('set_holiday', { from: addDays(today, 95), to })).status, 200);
+    assert.equal((await call(notSunday(addDays(to, 1)), '203.0.113.83')).status, 201, 'the first day back can be booked');
+    assert.equal((await call(notSunday(addDays(today, 90)), '203.0.113.84')).status, 201, 'so can a day before the break');
+    assert.equal((await call(notSunday(addDays(to, 10)), '203.0.113.85')).status, 422, 'but not weeks after it');
+  } finally {
+    assert.equal((await action('clear_holiday')).status, 200);
+  }
+});
+
 // ---------- VPN check ----------
 
 test('network check: tells VPNs, data centres, relays, mobile and home connections apart', async () => {

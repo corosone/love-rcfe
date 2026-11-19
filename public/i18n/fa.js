@@ -627,6 +627,7 @@
     "Visit history improves support.": "سابقهٔ بازدید پشتیبانی را بهتر می‌کند.",
     "Network details prevent abuse.": "اطلاعات شبکه از سوءاستفاده جلوگیری می‌کند.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "ما از {from} تا {to} در مرخصی هستیم. از {next} می‌توانید تماس رزرو کنید.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "ما از {from} تا {to} در مرخصی هستیم. برای هر روز دیگری می‌توانید تماس رزرو کنید.",
     "We are away until {to}. Messages sent now are answered from {next}.": "ما تا {to} در مرخصی هستیم. به پیام‌هایی که اکنون ارسال شوند از {next} پاسخ می‌دهیم.",
     "We are away on that date. Please choose {next} or later.": "ما در آن روز در مرخصی هستیم. لطفاً {next} یا تاریخی بعد از آن را انتخاب کنید.",
     "We are away on that date. Please pick another date.": "ما در آن روز در مرخصی هستیم. لطفاً تاریخ دیگری انتخاب کنید.",

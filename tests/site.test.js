@@ -1395,6 +1395,175 @@ test('holiday switch: the booking popup and contact page say when we are away, i
   await context.close();
 });
 
+test('holiday switch: before a break starts the popup says other days can be booked; a break far ahead changes nothing', async () => {
+  await (await import('../lib/db.js')).ensureSchema(site.env.DB); // the tables, also when this test runs on its own
+  const { setHoliday, clearHoliday, pacificToday, addDays } = await import('../lib/settings.js');
+  const today = pacificToday();
+  // Opens the booking popup and waits until the page has read the holiday dates
+  const popup = async (path) => {
+    const { page, context } = await open(path, { wait: 'load', setup: (p) => p.on('response', (r) => { if (r.url().endsWith('/api/settings')) p.__settings = true; }) });
+    await page.$$eval('[data-click="openBookingModal()"]', (xs) => xs[0].click());
+    for (let i = 0; i < 100 && !page.__settings; i++) await page.waitForTimeout(50);
+    assert.ok(page.__settings, 'the page read the holiday dates');
+    await page.waitForTimeout(150);
+    const state = await page.evaluate(() => {
+      const note = document.getElementById('booking-holiday');
+      const date = document.getElementById('book-date');
+      return { note: note.classList.contains('hidden') ? '' : note.textContent, contact: !document.getElementById('contact-holiday').classList.contains('hidden'), min: date.min, max: date.max, value: date.value, valid: date.checkValidity() };
+    });
+    await context.close();
+    return state;
+  };
+  try {
+    // 1. A week off, two weeks from now
+    const from = addDays(today, 14);
+    assert.equal((await setHoliday(site.env, { from, to: addDays(today, 20) })).ok, true);
+    let s = await popup('/');
+    assert.match(s.note, /^We are away from .+ to .+\. Calls can be booked for any other day\.$/);
+    assert.equal(s.contact, false, 'the contact page says nothing until the break starts');
+    assert.ok(s.value < from && s.valid, `the suggested day (${s.value}) is before the break and can be chosen`);
+    assert.ok(s.max <= addDays(today, 91), `the latest day offered (${s.max}) is the usual one`);
+    assert.match((await popup('/es/')).note, /^Estaremos fuera del .+ al .+\. Puede reservar llamadas para cualquier otro día\.$/);
+
+    // 2. A week off, 200 days from now: nothing to say yet, and no extra dates on offer
+    assert.equal((await setHoliday(site.env, { from: addDays(today, 200), to: addDays(today, 206) })).ok, true);
+    s = await popup('/');
+    assert.equal(s.note, '');
+    assert.ok(s.max <= addDays(today, 91), `the latest day offered (${s.max}) is still about 3 months ahead`);
+
+    // 3. A long break from tomorrow that ends after the usual 3 months: the days right after it are offered
+    const to = addDays(today, 95);
+    assert.equal((await setHoliday(site.env, { from: addDays(today, 1), to })).ok, true);
+    s = await popup('/');
+    assert.notEqual(s.note, '');
+    assert.equal(s.max, addDays(to, 3), 'up to 3 days after the break, as far as the server accepts');
+    assert.ok(s.value > to && s.value <= s.max && s.valid, `the suggested first day back (${s.value}) can be chosen`);
+  } finally {
+    await clearHoliday(site.env);
+  }
+
+  // Every language has the new sentence, with its dates in place
+  const fs = require('node:fs');
+  const key = 'We are away from {from} to {to}. Calls can be booked for any other day.';
+  for (const lang of LANGS.filter((l) => l !== 'en')) {
+    const text = fs.readFileSync(require('node:path').join(__dirname, '..', 'public', 'i18n', `${lang}.js`), 'utf8');
+    const found = new RegExp(`"${key.replace(/[.{}]/g, '\\$&')}": "([^"]+)"`).exec(text);
+    assert.ok(found, `${lang}: has the sentence`);
+    assert.ok(found[1] !== key && found[1].includes('{from}') && found[1].includes('{to}') && !found[1].includes('{next}'), `${lang}: ${found[1]}`);
+  }
+});
+
+test('a language page keeps its translated tab title, quiz counter and theme labels while its language file loads, and if it cannot load', async () => {
+  const read = (page) => page.evaluate(() => ({
+    title: document.title,
+    quiz: document.getElementById('quiz-progress-text').textContent.trim(),
+    percent: document.getElementById('quiz-progress-percent').textContent.trim(),
+    theme: document.getElementById('theme-toggle-btn').getAttribute('aria-label'),
+    mobileTheme: (document.querySelector('.theme-label-mobile') || {}).textContent,
+    ready: window.LoveI18n.isReady(),
+  }));
+  const spanish = (state, when) => {
+    assert.match(state.title, /Asesoría/, `${when}: the tab title is Spanish`);
+    assert.equal(state.quiz, 'Pregunta 1 de 4', `${when}: the quiz counter`);
+    assert.equal(state.percent, '25% Completado', `${when}: the quiz progress`);
+    assert.match(state.theme, /modo oscuro/, `${when}: the theme button's label`);
+    assert.doesNotMatch(String(state.mobileTheme), /Dark Mode/, `${when}: the theme label in the phone menu`);
+  };
+  for (const mode of ['held back', 'cannot load']) {
+    let release;
+    const held = new Promise((resolve) => { release = resolve; });
+    const { page, context } = await open('/es/', {
+      wait: 'domcontentloaded',
+      setup: (p) => p.route('**/i18n/es.js', async (route) => { if (mode === 'cannot load') return route.abort(); await held; route.continue(); }),
+    });
+    // The page's own start-up has run (it sets the quiz bar) while the Spanish words are not here
+    await page.waitForFunction(() => document.getElementById('quiz-progress-bar').style.width === '25%');
+    const during = await read(page);
+    assert.equal(during.ready, false, 'the language file has not arrived');
+    spanish(during, `${mode}, at first`);
+    // Moving to another section does not bring English in either
+    await page.evaluate(() => { location.hash = 'tools'; });
+    await page.waitForTimeout(200);
+    assert.match(await page.title(), /Asesoría/, `${mode}: still Spanish after opening another section`);
+    if (mode === 'held back') {
+      release();
+      await page.waitForFunction(() => window.LoveI18n.isReady() && /Herramientas/.test(document.title));
+      const after = await read(page);
+      assert.equal(after.quiz, 'Pregunta 1 de 4');
+      assert.equal(after.theme, 'Cambiar a modo oscuro', 'once the words are here, the labels are set as usual');
+    }
+    await context.close();
+  }
+  // In English nothing waits: the words are always there
+  const en = await open('/#tools', { wait: 'load' });
+  assert.equal(await en.page.evaluate(() => window.LoveI18n.isReady()), true);
+  assert.match(await en.page.title(), /Care Tools|Tools/);
+  await en.context.close();
+});
+
+test('a missing page under a language address keeps that language: its tab title and its links back to the site', async () => {
+  const state = (page) => page.evaluate(() => ({
+    title: document.title,
+    lang: document.documentElement.lang,
+    english: document.querySelectorAll('a[href^="/#"]').length,
+    links: [...document.querySelectorAll('a[href]')].map((a) => a.getAttribute('href')).filter((h) => /^\/[^/]*\/?#/.test(h) || h.startsWith('/#')),
+  }));
+  let { page, context } = await open('/es/no-existe');
+  await page.waitForFunction(() => document.title !== 'Page Not Found | Love RCFE');
+  let s = await state(page);
+  assert.equal(s.title, 'Página No Encontrada | Love RCFE');
+  assert.equal(s.lang, 'es');
+  assert.equal(s.english, 0, 'no link goes to the English home page');
+  assert.equal(s.links.length, 10);
+  assert.ok(s.links.every((h) => /^\/es\/#[a-z]+$/.test(h)), s.links.join(' '));
+  await Promise.all([page.waitForURL(site.origin + '/es/#contact'), page.click('main a[href="/es/#contact"]')]);
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'es', 'the contact page opens in Spanish');
+  await context.close();
+
+  // The Spanish words can arrive before or after the page starts up; the tab title is right either way.
+  // "after": the language file is held back until the page has started.
+  // window.__started is set when the page starts up (its scripts run their set-up then).
+  const holdBack = (address, hold) => async (p) => {
+    await p.addInitScript(() => document.addEventListener('DOMContentLoaded', () => { window.__started = true; }));
+    await p.route(address, async (route) => { await hold; route.continue(); });
+  };
+  let release;
+  let held = new Promise((resolve) => { release = resolve; });
+  ({ page, context } = await open('/es/no-existe', { wait: 'commit', setup: holdBack('**/i18n/es.js', held) }));
+  await page.waitForFunction(() => window.__started === true);
+  assert.equal(await page.title(), 'Page Not Found | Love RCFE', 'not translated yet: the words are not here');
+  release();
+  await page.waitForFunction(() => document.title === 'Página No Encontrada | Love RCFE');
+  await context.close();
+  // "before": the page's start-up is held back (it waits for visit.js) until the words are here.
+  held = new Promise((resolve) => { release = resolve; });
+  ({ page, context } = await open('/es/no-existe', { wait: 'commit', setup: holdBack('**/visit.js', held) }));
+  await page.waitForFunction(() => window.LoveI18nData && window.LoveI18nData.es);
+  assert.notEqual(await page.evaluate(() => window.__started), true, 'the page has not started up yet');
+  release();
+  await page.waitForFunction(() => window.__started === true);
+  assert.equal(await page.title(), 'Página No Encontrada | Love RCFE');
+  assert.equal(await page.evaluate(() => document.querySelectorAll('a[href^="/es/#"]').length), 10);
+  await context.close();
+
+  // A language written with a script name
+  ({ page, context } = await open('/zh-hant/missing/page'));
+  await page.waitForFunction(() => document.title !== 'Page Not Found | Love RCFE');
+  s = await state(page);
+  assert.ok(s.links.length === 10 && s.links.every((h) => h.startsWith('/zh-hant/#')), s.links.join(' '));
+  await context.close();
+
+  // English, and a two-letter folder that is not one of the site's languages: nothing changes
+  for (const path of ['/no-such-page', '/xx/no-such-page']) {
+    ({ page, context } = await open(path));
+    s = await state(page);
+    assert.equal(s.title, 'Page Not Found | Love RCFE', path);
+    assert.equal(s.english, 10, path);
+    assert.ok(s.links.every((h) => h.startsWith('/#')), `${path}: ${s.links.join(' ')}`);
+    await context.close();
+  }
+});
+
 // Makes sure the database tables exist (they are created on first use), so a test can add rows directly.
 async function ensureTables() {
   await site.api('/api/visit', { method: 'POST', body: { path: '/' }, ip: '203.0.113.200' });

@@ -627,6 +627,7 @@
     "Visit history improves support.": "Այցելությունների պատմությունը բարելավում է աջակցությունը։",
     "Network details prevent abuse.": "Ցանցային տվյալները կանխում են չարաշահումները։",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Մենք բացակայում ենք {from} – {to}։ Զանգ կարող եք ամրագրել սկսած {next}։",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "Մենք բացակայում ենք {from} – {to}։ Զանգ կարող եք ամրագրել ցանկացած այլ օրվա համար։",
     "We are away until {to}. Messages sent now are answered from {next}.": "Մենք բացակայում ենք մինչև {to}։ Այժմ ուղարկված հաղորդագրություններին կպատասխանենք սկսած {next}։",
     "We are away on that date. Please choose {next} or later.": "Այդ օրը մենք բացակայում ենք։ Խնդրում ենք ընտրել {next} կամ ավելի ուշ։",
     "We are away on that date. Please pick another date.": "Այդ օրը մենք բացակայում ենք։ Խնդրում ենք ընտրել այլ ամսաթիվ։",

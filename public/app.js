@@ -21,6 +21,11 @@
       ? window.LoveI18n.t(text, vars)
       : String(text || '').replace(/\{(\w+)\}/g, (_, k) => (vars && vars[k] !== undefined ? vars[k] : `{${k}}`)));
     const currentLocale = () => (window.LoveI18n ? window.LoveI18n.getIntlLocale() : 'en-US');
+    // False while the language file of a translated page is still downloading (or could not be
+    // loaded). The page arrived with its tab title, quiz counter and theme labels already in the
+    // right language; until the words are here, those are left as they arrived rather than
+    // replaced by English. They are set again as soon as the file is in (LoveI18n.onChange below).
+    const wordsReady = () => !window.LoveI18n || typeof window.LoveI18n.isReady !== 'function' || window.LoveI18n.isReady();
 
     let currentView = 'home';
     let quizCurrentStep = 1;
@@ -418,26 +423,35 @@
     function showHolidayNotes() {
       const today = pacificTodayYmd();
       const upcoming = holiday && holiday.to >= today;
+      const started = upcoming && holiday.from <= today;
+      const dateInput = document.getElementById('book-date');
+      // The booking pop-up only mentions a break that touches the dates it offers (about 3 months
+      // ahead). A break set further ahead changes nothing yet.
+      const inReach = upcoming && (!dateInput || !dateInput.max || holiday.from <= dateInput.max);
       const booking = document.getElementById('booking-holiday');
       if (booking) {
-        booking.textContent = upcoming
-          ? t('We are away from {from} to {to}. Calls can be booked from {next}.', { from: prettyDay(holiday.from), to: prettyDay(holiday.to), next: prettyDay(firstDayBack()) })
-          : '';
-        booking.classList.toggle('hidden', !upcoming);
+        // Before the break starts, every other day can still be booked, earlier ones too
+        booking.textContent = !inReach ? ''
+          : started ? t('We are away from {from} to {to}. Calls can be booked from {next}.', { from: prettyDay(holiday.from), to: prettyDay(holiday.to), next: prettyDay(firstDayBack()) })
+          : t('We are away from {from} to {to}. Calls can be booked for any other day.', { from: prettyDay(holiday.from), to: prettyDay(holiday.to) });
+        booking.classList.toggle('hidden', !inReach);
       }
       const contact = document.getElementById('contact-holiday');
       if (contact) {
-        const now = upcoming && holiday.from <= today;
-        contact.textContent = now
+        contact.textContent = started
           ? t('We are away until {to}. Messages sent now are answered from {next}.', { to: prettyDay(holiday.to), next: prettyDay(firstDayBack()) })
           : '';
-        contact.classList.toggle('hidden', !now);
+        contact.classList.toggle('hidden', !started);
       }
       // A suggested booking date that falls on a day off moves to the first day back. A long
-      // break can end after the usual 90 days, so the latest date offered then reaches that day.
-      const dateInput = document.getElementById('book-date');
-      if (upcoming && dateInput && dateInput.max && firstDayBack() > dateInput.max) dateInput.max = firstDayBack();
-      if (upcoming && dateInput && onHoliday(dateInput.value)) dateInput.value = firstDayBack();
+      // break can end after the usual 90 days; the latest date offered then reaches 3 days past
+      // the break, as far as the server accepts (functions/api/leads.js), so there are days to choose from.
+      if (inReach && dateInput && dateInput.max) {
+        const last = dateOfYmd(holiday.to);
+        last.setDate(last.getDate() + 3);
+        if (ymdOf(last) > dateInput.max) dateInput.max = ymdOf(last);
+      }
+      if (inReach && dateInput && onHoliday(dateInput.value)) dateInput.value = firstDayBack();
     }
 
     function openMailDraft(record) {
@@ -504,6 +518,7 @@
     function updateDocumentTitle(viewName) {
       // A guide page keeps its own title (data-guide-title is the English one; t() translates it)
       const guide = onGuidePage && document.querySelector('main [data-guide-title]');
+      if (!wordsReady()) return; // keep the translated title the page arrived with
       document.title = t(guide ? guide.getAttribute('data-guide-title') : (VIEW_TITLES[viewName] || 'Love RCFE'));
     }
 
@@ -626,21 +641,30 @@
         if (isDark) el.classList.remove('hidden');
         else el.classList.add('hidden');
       });
-      document.querySelectorAll('.theme-label-mobile').forEach(el => {
-        el.textContent = t(isDark ? 'Light Mode' : 'Dark Mode');
-      });
+      // The page arrives with the light-mode labels already translated. While the words are not
+      // here yet, those stay; only dark mode (whose labels differ) falls back to English.
+      const keepLabels = !wordsReady() && !isDark;
+      if (!keepLabels) {
+        document.querySelectorAll('.theme-label-mobile').forEach(el => {
+          el.textContent = t(isDark ? 'Light Mode' : 'Dark Mode');
+        });
+      }
 
       // Update accessibility labels & aria-pressed state
       const themeLabel = t(isDark ? 'Switch to light mode' : 'Switch to dark mode');
       const themeBtn = document.getElementById('theme-toggle-btn');
       if (themeBtn) {
-        themeBtn.setAttribute('aria-label', themeLabel);
-        themeBtn.setAttribute('title', themeLabel);
+        if (!keepLabels) {
+          themeBtn.setAttribute('aria-label', themeLabel);
+          themeBtn.setAttribute('title', themeLabel);
+        }
         themeBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
       }
-      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-        btn.setAttribute('aria-label', themeLabel);
-      });
+      if (!keepLabels) {
+        document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+          btn.setAttribute('aria-label', themeLabel);
+        });
+      }
 
       // Sync mobile browser chrome / status bar theme color
       const meta = document.querySelector('meta[name="theme-color"]');
@@ -1136,8 +1160,10 @@
       if (wrapperEl) wrapperEl.classList.remove('hidden');
 
       const pct = Math.round((step / 4) * 100);
-      if (textEl) textEl.textContent = t('Question {step} of 4', { step });
-      if (percentEl) percentEl.textContent = t('{pct}% Complete', { pct });
+      // The page arrives showing question 1 in its own language; that stays until the words are here
+      const keepText = !wordsReady() && step === 1;
+      if (textEl && !keepText) textEl.textContent = t('Question {step} of 4', { step });
+      if (percentEl && !keepText) percentEl.textContent = t('{pct}% Complete', { pct });
       if (barEl) barEl.style.width = `${pct}%`;
     }
 

@@ -627,6 +627,7 @@
     "Visit history improves support.": "ਵਿਜ਼ਿਟ ਇਤਿਹਾਸ ਨਾਲ ਬਿਹਤਰ ਸਹਾਇਤਾ ਮਿਲਦੀ ਹੈ।",
     "Network details prevent abuse.": "ਨੈੱਟਵਰਕ ਵੇਰਵੇ ਦੁਰਵਰਤੋਂ ਰੋਕਦੇ ਹਨ।",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "ਅਸੀਂ {from} ਤੋਂ {to} ਤੱਕ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। {next} ਤੋਂ ਕਾਲ ਬੁੱਕ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "ਅਸੀਂ {from} ਤੋਂ {to} ਤੱਕ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਕਿਸੇ ਵੀ ਹੋਰ ਦਿਨ ਲਈ ਕਾਲ ਬੁੱਕ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।",
     "We are away until {to}. Messages sent now are answered from {next}.": "ਅਸੀਂ {to} ਤੱਕ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਹੁਣ ਭੇਜੇ ਸੁਨੇਹਿਆਂ ਦਾ ਜਵਾਬ {next} ਤੋਂ ਦਿੱਤਾ ਜਾਵੇਗਾ।",
     "We are away on that date. Please choose {next} or later.": "ਉਸ ਦਿਨ ਅਸੀਂ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ {next} ਜਾਂ ਉਸ ਤੋਂ ਬਾਅਦ ਦੀ ਤਾਰੀਖ ਚੁਣੋ।",
     "We are away on that date. Please pick another date.": "ਉਸ ਦਿਨ ਅਸੀਂ ਛੁੱਟੀ 'ਤੇ ਹਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਕੋਈ ਹੋਰ ਤਾਰੀਖ ਚੁਣੋ।",

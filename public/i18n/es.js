@@ -627,6 +627,7 @@
     "Visit history improves support.": "El historial de visitas mejora la atención.",
     "Network details prevent abuse.": "Los datos de red previenen abusos.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Estaremos fuera del {from} al {to}. Puede reservar llamadas a partir del {next}.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "Estaremos fuera del {from} al {to}. Puede reservar llamadas para cualquier otro día.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Estaremos fuera hasta el {to}. Los mensajes enviados ahora se responderán a partir del {next}.",
     "We are away on that date. Please choose {next} or later.": "Estaremos fuera ese día. Elija el {next} o una fecha posterior.",
     "We are away on that date. Please pick another date.": "Estaremos fuera ese día. Por favor, elija otra fecha.",

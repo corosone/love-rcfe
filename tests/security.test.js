@@ -764,7 +764,7 @@ test('staff accounts: wrong current passwords are counted for the account and lo
   const relogin = await staffLogin({ name: 'Kim Changes', password: kim.password }, { ip: '203.0.113.173' });
   assert.equal(relogin.status, 200, 'signing in is not affected');
 
-  clearLockouts();
+  clearLockouts(); clearLimits(); // the same as waiting the 15 minutes
   const ok = await change({ current: kim.password, password: 'a brand new password' }, '198.51.100.187');
   assert.equal(ok.status, 200, JSON.stringify(ok.data));
   const { isTrusted } = await import('../lib/trust.js');
@@ -952,3 +952,287 @@ test('the Database tab counts every table the site keeps', async () => {
   assert.deepEqual(r.data.tables.map((t) => t.table).sort(), all.sort());
   assert.ok(['staff_accounts', 'deleted_leads', 'trusted_devices'].every((t) => all.includes(t)));
 });
+
+// ---------- 11. Fixes from the fourth review ----------
+
+test('developer sign-in: someone who has learned the password cannot cancel the owner\'s code or use up the owner\'s codes', async () => {
+  clearLimits(); clearLockouts();
+  const step1 = (ip, cookie = '') => site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, ip, headers: cookie ? { cookie } : {} });
+  const verify = (challenge, code, ip) => site.api('/api/dev/verify', { method: 'POST', body: { code }, headers: { cookie: `lovercfe_dev_step=${challenge}` }, ip });
+  const lastCode = () => /code is: (\d{6})/.exec(JSON.parse(codeMails().at(-1).body).text)[1];
+  const aMinuteLater = () => site.db._run("DELETE FROM rate_limits WHERE key LIKE 'devlogin:%'"); // only the per-minute limits
+  const OWNER_IP = '203.0.113.251';
+  let trust = `lovercfe_dev_trust=${(await devSignIn(OWNER_IP)).trust}`; // the owner's own browser
+
+  // The owner starts a sign-in; then a stranger with the right password starts one, twice
+  clearLimits();
+  const owner = await step1(OWNER_IP, trust);
+  assert.equal(owner.status, 200);
+  const ownerChallenge = cookiesOf(owner).lovercfe_dev_step;
+  const ownerCode = lastCode();
+  const first = await step1('198.51.100.61');
+  assert.equal(first.status, 200);
+  const firstChallenge = cookiesOf(first).lovercfe_dev_step;
+  const firstCode = lastCode();
+  aMinuteLater();
+  assert.equal((await step1('198.51.100.62')).status, 200);
+  assert.equal((await verify(firstChallenge, firstCode, '198.51.100.61')).status, 401, 'the stranger\'s own earlier code is cancelled, as before');
+  const signedIn = await verify(ownerChallenge, ownerCode, OWNER_IP);
+  assert.equal(signedIn.status, 200, 'the owner\'s code still works');
+  trust = `lovercfe_dev_trust=${cookiesOf(signedIn).lovercfe_dev_trust}`; // each sign-in renews it
+
+  // The stranger uses up the hour's codes (5); the owner's browser has its own 5
+  const got = [];
+  for (let i = 0; i < 5; i++) { aMinuteLater(); got.push((await step1(`198.51.100.${63 + i}`)).status); }
+  assert.deepEqual(got, [200, 200, 200, 429, 429], 'strangers: 5 codes an hour in all');
+  aMinuteLater();
+  assert.equal((await step1(OWNER_IP, trust)).status, 200, 'the owner can still get a code');
+  const mine = [];
+  for (let i = 0; i < 5; i++) { aMinuteLater(); mine.push((await step1(OWNER_IP, trust)).status); }
+  assert.deepEqual(mine, [200, 200, 200, 429, 429], 'the owner\'s browsers: also 5 an hour (1 was used before signing in, 1 just now)');
+  // A made-up "trusted" cookie gets nothing extra
+  aMinuteLater();
+  assert.equal((await step1('198.51.100.70', `lovercfe_dev_trust=${'A'.repeat(43)}`)).status, 429);
+  site.db._run('DELETE FROM dev_challenges');
+  clearLimits(); clearLockouts();
+});
+
+test('developer sign-in: an older database gets the new column by itself and keeps a sign-in that was in progress', async () => {
+  const { createD1 } = require('./helpers/d1.js');
+  const old = createD1();
+  // The table as it was before trusted browsers had their own pending code, with a code waiting
+  await old.exec('CREATE TABLE dev_challenges (id TEXT PRIMARY KEY, code_hash TEXT NOT NULL, attempts INTEGER NOT NULL DEFAULT 0, created_at INTEGER NOT NULL, expires_at INTEGER NOT NULL)');
+  old._run("INSERT INTO dev_challenges (id, code_hash, attempts, created_at, expires_at) VALUES ('waiting', 'hash', 2, ?, ?)", nowSec(), nowSec() + 600);
+  // Its own copy of the database code, so the tables are set up from scratch as on a new Cloudflare server
+  await (await import('../lib/db.js?an-older-database')).ensureSchema(old);
+  const columns = () => old._rows('PRAGMA table_info(dev_challenges)').map((c) => c.name);
+  assert.ok(columns().includes('trusted'), columns().join(', '));
+  assert.deepEqual(old._rows('SELECT id, attempts, trusted FROM dev_challenges').map((r) => ({ ...r })), [{ id: 'waiting', attempts: 2, trusted: 0 }]);
+  // Every Cloudflare server does this when it starts: a second time changes nothing
+  await (await import('../lib/db.js?an-older-database-again')).ensureSchema(old);
+  assert.equal(columns().filter((c) => c === 'trusted').length, 1);
+  // The statements the sign-in uses work on the upgraded table
+  old._run('DELETE FROM dev_challenges WHERE trusted = ? OR expires_at <= ?', 1, nowSec());
+  old._run("INSERT INTO dev_challenges (id, code_hash, attempts, created_at, expires_at, trusted) VALUES ('mine', 'hash', 0, ?, ?, 1)", nowSec(), nowSec() + 600);
+  assert.deepEqual(old._rows('SELECT id FROM dev_challenges ORDER BY id').map((r) => r.id), ['mine', 'waiting']);
+  old._close();
+});
+
+test('developer sign-in: tries turned away by the daily code limit do not use up the next hour', async () => {
+  clearLimits(); clearLockouts();
+  const step1 = (ip) => site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, ip });
+  const aMinuteLater = () => site.db._run("DELETE FROM rate_limits WHERE key LIKE 'devlogin:%'");
+  assert.equal((await step1('198.51.100.71')).status, 200); // creates the hour and day counts
+  const keys = site.db._rows("SELECT key FROM rate_limits WHERE key LIKE 'devsend:%'").map((r) => r.key);
+  const hourKey = keys.find((k) => k.endsWith(':hour'));
+  const dayKey = keys.find((k) => k.endsWith(':day'));
+  assert.ok(hourKey && dayKey && keys.length === 2);
+  // The day's 15 codes are used up and the day ends in 10 minutes; a new hour has just started
+  site.db._run('UPDATE rate_limits SET hits = 15, window_start = ? WHERE key = ?', nowSec() - 86400 + 600, dayKey);
+  site.db._run('DELETE FROM rate_limits WHERE key = ?', hourKey);
+  const mails = codeMails().length;
+  for (let i = 0; i < 6; i++) { aMinuteLater(); assert.equal((await step1('198.51.100.71')).status, 429); }
+  assert.equal(codeMails().length, mails, 'no code was emailed');
+  assert.equal(hitsOf(hourKey), 0, 'the hour\'s count was given back each time');
+  // The day ends: the very next try gets a code
+  site.db._run('UPDATE rate_limits SET window_start = ? WHERE key = ?', nowSec() - 86400 - 5, dayKey);
+  aMinuteLater();
+  assert.equal((await step1('198.51.100.71')).status, 200);
+  site.db._run('DELETE FROM dev_challenges');
+  clearLimits(); clearLockouts();
+});
+
+test('staff accounts: password-change tries sent at the same moment cannot test more than 5 wrong passwords', async () => {
+  clearLimits(); clearLockouts();
+  const pat = (await action('add_staff_account', { name: 'Pat Burst' })).data;
+  const session = cookiesOf(await staffLogin({ name: 'Pat Burst', password: pat.password }, { ip: '203.0.113.181' })).lovercfe_admin;
+  const change = (body, ip) => site.api('/api/admin/session', { method: 'PATCH', body, ip, headers: { cookie: `lovercfe_admin=${session}` } });
+  const wrongLogged = () => site.db._rows("SELECT COUNT(*) AS n FROM dev_audit WHERE event = 'staff_wrong_password' AND detail LIKE '%Pat Burst%changing their password%'")[0].n;
+  // 15 wrong guesses and the right password, all at once, each from a different address
+  const answers = await Promise.all([
+    ...Array.from({ length: 15 }, (_, i) => change({ current: 'wrong guess ' + i, password: 'a brand new password' }, `198.51.100.${200 + i}`)),
+    change({ current: pat.password, password: 'a brand new password' }, '198.51.100.220'),
+  ]);
+  const count = (status) => answers.filter((a) => a.status === status).length;
+  assert.ok(count(401) <= 5, `${count(401)} wrong passwords were checked; at most 5 may be`);
+  assert.equal(wrongLogged(), count(401));
+  assert.equal(count(401) + count(429) + count(200), 16, answers.map((a) => a.status).join(','));
+  if (count(401) === 5) {
+    assert.equal(count(200), 0, 'after 5 wrong ones, the right password waits too');
+    assert.equal((await staffLogin({ name: 'Pat Burst', password: pat.password }, { ip: '203.0.113.182' })).status, 200, 'the password was not changed');
+  }
+
+  // The lock is checked again after the (slow) password check, right before saving
+  const { changeOwnStaffPassword } = await import('../lib/staff.js');
+  const id = pat.account.id;
+  const before = site.db._rows('SELECT pass_hash FROM staff_accounts WHERE id = ?', id)[0].pass_hash;
+  let asked = 0;
+  const late = await changeOwnStaffPassword(site.env.DB, id, pat.password, 'another brand new password', '', { stillAllowed: async () => { asked++; return false; } });
+  assert.deepEqual([late.ok, late.status, asked], [false, 429, 1]);
+  assert.equal(site.db._rows('SELECT pass_hash FROM staff_accounts WHERE id = ?', id)[0].pass_hash, before, 'nothing was saved');
+  const wrong = await changeOwnStaffPassword(site.env.DB, id, 'not it', 'another brand new password', '', { stillAllowed: async () => { asked++; return true; } });
+  assert.deepEqual([wrong.status, asked], [401, 1], 'a wrong password is refused before that');
+  assert.equal((await action('remove_staff_account', { id })).status, 200);
+  clearLimits(); clearLockouts();
+});
+
+test('staff accounts: a new password that is not allowed is not counted as a try at the current one', async () => {
+  clearLimits(); clearLockouts();
+  const lee = (await action('add_staff_account', { name: 'Lee Chooses' })).data;
+  const session = cookiesOf(await staffLogin({ name: 'Lee Chooses', password: lee.password }, { ip: '203.0.113.183' })).lovercfe_admin;
+  const change = async (body) => json(await site.api('/api/admin/session', { method: 'PATCH', body, ip: '203.0.113.183', headers: { cookie: `lovercfe_admin=${session}` } }));
+  // Eight new passwords that are not allowed, from the same address (more than the 5 tries it gets)
+  const refused = [
+    { password: 'short' }, { password: 'lee likes long passwords' }, { password: 'aaaaaaaaaaaaaaaa' }, { password: lee.password },
+    { password: 'x'.repeat(129) }, { password: 'LEE-in-capitals-too' }, { password: '' }, {},
+  ];
+  for (const body of refused) {
+    const r = await change({ current: lee.password, ...body });
+    assert.equal(r.status, 400, JSON.stringify(body) + ' ' + JSON.stringify(r.data));
+    assert.ok(r.data.error && !r.data.field);
+  }
+  // Also with a wrong current password: nothing is checked, so nothing is counted or logged
+  assert.equal((await change({ current: 'not the current one', password: 'short' })).status, 400);
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM auth_attempts WHERE key LIKE 'staffpw|%'")[0].n, 0);
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM dev_audit WHERE event = 'staff_wrong_password' AND detail LIKE '%Lee Chooses%'")[0].n, 0);
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM rate_limits WHERE key LIKE 'staffpw:%'")[0].n, 0, 'no database writes for them');
+  // Then a good one goes through at once
+  const ok = await change({ current: lee.password, password: 'garden-lamp-river-78' });
+  assert.equal(ok.status, 200, JSON.stringify(ok.data));
+  assert.equal((await staffLogin({ name: 'Lee Chooses', password: 'garden-lamp-river-78' }, { ip: '203.0.113.184' })).status, 200);
+  // Real tries from one address are still limited (5 in 10 minutes)
+  const more = [];
+  for (let i = 0; i < 6; i++) more.push((await change({ current: 'a wrong guess ' + i, password: 'a different long password' })).status);
+  assert.deepEqual(more, [401, 401, 401, 401, 429, 429]);
+  assert.equal((await action('remove_staff_account', { id: lee.account.id })).status, 200);
+  clearLimits(); clearLockouts();
+});
+
+test('weekly summary: a sender over its own limit is not counted against everyone\'s', async () => {
+  clearLimits();
+  site.db._run("DELETE FROM app_secrets WHERE name LIKE 'weekly%' OR name LIKE '%summary%'");
+  setHits('cron:198.51.100.230', 6); // as counted by other Cloudflare servers
+  assert.equal((await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '198.51.100.230' })).status, 429);
+  assert.equal(hitsOf('cron:__global__'), 0, 'the shared limit is untouched');
+  // Everyone's limit still works: 20 an hour in all
+  setHits('cron:__global__', 20);
+  assert.equal((await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '198.51.100.231' })).status, 429);
+  clearLimits();
+});
+
+test('blocked addresses: reading the public "we are away" dates is not refused or counted; everything else still is', async () => {
+  clearLimits();
+  const ip = '198.51.100.232';
+  const { _resetBlockCache } = await import('../lib/blocklist.js');
+  assert.equal((await action('block_ip', { ip, days: 7, reason: 'review test' })).status, 200);
+  _resetBlockCache();
+  const hits = async () => { await site.settle(); return Number(site.db._rows('SELECT hits FROM blocked_ips WHERE ip = ?', ip)[0].hits); };
+  try {
+    const settings = await site.api('/api/settings', { ip });
+    assert.equal(settings.status, 200);
+    assert.deepEqual(Object.keys(await settings.json()), ['holiday']);
+    assert.equal((await site.api('/api/visit', { method: 'POST', body: { path: '/' }, ip })).status, 204);
+    assert.equal(await hits(), 0, 'opening the Contact page is not "tried again"');
+    // What a block is for is still refused, and counted
+    const enquiry = { kind: 'enquiry', name: 'Blocked Person', email: 'blocked-review@example.com', phone: '8185550101', inquiry_type: 'Family Placement', message: 'Trying to write from a blocked address.', turnstile_token: 't' };
+    assert.equal((await site.api('/api/leads', { method: 'POST', body: enquiry, ip })).status, 403);
+    assert.equal(await hits(), 1, 'a refused enquiry is counted (the count is written at most once a minute)');
+    assert.equal((await staffLogin({ password: INBOX_PASSWORD }, { ip })).status, 403);
+    assert.equal((await site.api('/api/admin/leads', { ip })).status, 403);
+    assert.equal((await site.api('/api/health', { ip })).status, 403);
+    assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM leads WHERE email = 'blocked-review@example.com'")[0].n, 0);
+  } finally {
+    assert.equal((await action('unblock_ip', { ip })).status, 200);
+    _resetBlockCache();
+    clearLimits();
+  }
+});
+
+test('backups: a device report with the wrong shape is cleaned when restored and never breaks Show Device', async () => {
+  const { cleanStoredInfo, buildDeviceInfo, infoToJson, infoFromJson, deviceSections, deviceSummary } = await import('../lib/deviceinfo.js');
+  // A real report (as the site stores it) comes back exactly as it was
+  const request = new Request('https://love-rcfe.pages.dev/api/leads', { headers: {
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+    'accept-language': 'en-US,en;q=0.9', 'sec-ch-ua': '"Chromium";v="131"', 'sec-ch-ua-platform': '"Windows"', 'sec-ch-ua-mobile': '?0',
+    'cf-connecting-ip': '8.8.4.4', dnt: '1', referer: 'https://www.google.com/',
+  } });
+  Object.defineProperty(request, 'cf', { value: { city: 'Burbank', region: 'California', regionCode: 'CA', postalCode: '91501', country: 'US', continent: 'NA', latitude: '34.18', longitude: '-118.30', timezone: 'America/Los_Angeles', metroCode: '803', asOrganization: 'Charter Communications', asn: 20001, colo: 'LAX', httpProtocol: 'HTTP/3', tlsVersion: 'TLSv1.3', tlsCipher: 'AEAD-AES128-GCM-SHA256', clientTcpRtt: 12, isEUCountry: '1' } });
+  const real = infoToJson(buildDeviceInfo(request, { screenW: 1920, screenH: 1080, ipv6: '2603:8001:9a00:1cc6::42', brands: [{ brand: 'Chromium', version: '131.0.0.0' }], languages: ['en-US'], orientation: 'landscape-primary', timezone: 'Europe/Paris', os: 'Windows', osVersion: '15.0.0', touchPoints: 0, memory: 8 }));
+  assert.ok(real.length > 600);
+  assert.equal(cleanStoredInfo(real), real);
+
+  // Reports changed by hand (or damaged) in a backup file
+  const odd = [
+    '{"v":1,"seen":{"ip":"198.51.100.1"},"reported":{"brands":[null]}}',
+    '{"v":1,"seen":{"ip":{"a":1},"browser":42,"city":["x"],"asn":"12; DROP TABLE leads"},"reported":{"orientation":7,"os":{},"brands":"x"}}',
+    '{"v":1,"seen":{"city":"Burbank","browser":7,"continent":"__proto__"},"reported":[1,2]}',
+    '{"v":1,"seen":{"ip":"198.51.100.1","userAgent":"' + 'A'.repeat(5000) + '"},"reported":{"os":"Windows","osVersion":"15.0.0","orientation":{"x":1}}}',
+    '{"v":1,"seen":[1,2,3]}', '{"v":1,"seen":"text"}', '[]', 'not json', '', null,
+  ];
+  for (const text of odd) {
+    const cleaned = cleanStoredInfo(text);
+    assert.equal(typeof cleaned, 'string');
+    const info = infoFromJson(cleaned);
+    if (cleaned) {
+      for (const value of Object.values(info.seen)) assert.ok(['string', 'number', 'boolean'].includes(typeof value), `only plain values are kept: ${cleaned.slice(0, 80)}`);
+      assert.ok(cleaned.length <= 6000);
+    }
+    // Shown without failing, cleaned or not (a report already in the database is never trusted either)
+    for (const shown of [info, infoFromJson(text)]) {
+      assert.ok(Array.isArray(deviceSections(shown)));
+      assert.equal(typeof deviceSummary(shown), 'string');
+    }
+  }
+  assert.equal(cleanStoredInfo(odd[0]), '{"v":1,"seen":{"ip":"198.51.100.1"}}');
+  assert.equal(cleanStoredInfo(odd[1]), '', 'nothing usable left');
+
+  // Through the console: restore a backup with such a report, then press Show Device
+  const lead = { kind: 'enquiry', name: 'Restored Person', email: 'restored-review-a@example.com', phone: '8185550101', message: 'Restored from a backup file.', created_at: new Date().toISOString(), ip: '198.51.100.1', device_info: odd[0] };
+  const restored = await json(await site.api('/api/dev/backup', { method: 'POST', body: { leads: [lead, { ...lead, email: 'restored-review-b@example.com', device_info: real }] }, headers: { cookie: `lovercfe_dev=${DEV}` }, ip: DEV_IP }));
+  assert.equal(restored.status, 200, JSON.stringify(restored.data));
+  assert.equal(restored.data.added, 2);
+  const rows = site.db._rows("SELECT id, email, device_info FROM leads WHERE email LIKE 'restored-review%' ORDER BY email");
+  assert.equal(rows[0].device_info, '{"v":1,"seen":{"ip":"198.51.100.1"}}');
+  assert.equal(rows[1].device_info, real, 'a real report is restored unchanged');
+  for (const row of rows) {
+    const shown = await tool({ tool: 'lead-device', id: row.id });
+    assert.equal(shown.status, 200, JSON.stringify(shown.data));
+  }
+  // A report in the wrong shape that is already stored does not break it either
+  site.db._run('UPDATE leads SET device_info = ? WHERE id = ?', odd[3], rows[0].id);
+  assert.equal((await tool({ tool: 'lead-device', id: rows[0].id })).status, 200);
+  site.db._run("DELETE FROM leads WHERE email LIKE 'restored-review%'");
+});
+
+test('developer console: wrong staff passwords never push the developer\'s own activity off the list', async () => {
+  const devEvents = () => site.db._rows(`SELECT COUNT(*) AS n FROM dev_audit WHERE event NOT LIKE 'staff\\_%' ESCAPE '\\'`)[0].n;
+  assert.ok(devEvents() >= 3, 'the developer has signed in during these tests');
+  const mark = `flood ${Date.now()}`;
+  for (let i = 0; i < 150; i++) site.db._run("INSERT INTO dev_audit (at, event, ip, detail, info) VALUES (?, 'staff_wrong_password', '198.51.100.9', ?, '')", nowSec(), mark);
+  try {
+    const data = await overview();
+    const isStaff = (a) => String(a.event).startsWith('staff_');
+    const shownDev = data.activity.filter((a) => !isStaff(a));
+    const shownStaff = data.activity.filter(isStaff);
+    assert.equal(shownDev.length, Math.min(devEvents(), 100), 'the newest developer events are all there');
+    assert.equal(shownStaff.length, 100, 'and the newest 100 staff sign-in events');
+    assert.ok(shownDev.some((a) => a.event === 'signed_in'));
+    const ids = data.activity.map((a) => a.id);
+    assert.deepEqual(ids, [...ids].sort((a, b) => b - a), 'newest first, both kinds together');
+    assert.equal(new Set(ids).size, ids.length);
+  } finally {
+    site.db._run('DELETE FROM dev_audit WHERE detail = ?', mark);
+  }
+});
+
+test('developer console: the Recently Deleted count leaves out what is older than 30 days', async () => {
+  const before = (await overview()).leads.recentlyDeleted;
+  site.db._run("INSERT INTO deleted_leads (id, deleted_at, deleted_by, reason, lead) VALUES (987601, ?, 'Test', 'deleted', '{}')", nowSec() - 31 * 86400);
+  site.db._run("INSERT INTO deleted_leads (id, deleted_at, deleted_by, reason, lead) VALUES (987602, ?, 'Test', 'deleted', '{}')", nowSec() - 29 * 86400);
+  try {
+    assert.equal((await overview()).leads.recentlyDeleted, before + 1, 'only the one deleted 29 days ago is counted');
+  } finally {
+    site.db._run('DELETE FROM deleted_leads WHERE id IN (987601, 987602)');
+  }
+});
+

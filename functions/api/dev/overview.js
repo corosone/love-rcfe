@@ -1,7 +1,8 @@
 // GET /api/dev/overview — everything the developer console shows (developer session required)
 // GET /api/dev/overview?detail=<activity id> — every device detail stored with one activity row
 import { jsonResponse, clientIp } from '../../../lib/db.js';
-import { authorizeDev, devConfigSummary, devLockState, retentionDays } from '../../../lib/dev.js';
+import { authorizeDev, devConfigSummary, devLockState, retentionDays, STAFF_EVENT_SQL } from '../../../lib/dev.js';
+import { KEEP_DELETED_DAYS } from '../../../lib/deletedleads.js';
 import { placeFromDetail } from '../../../lib/reqinfo.js';
 import { requestLogPaused } from '../../../lib/requestlog.js';
 import { listBlocks, normalizeIp } from '../../../lib/blocklist.js';
@@ -11,6 +12,12 @@ import { listStaffAccounts, sharedPasswordAllowed } from '../../../lib/staff.js'
 // Events that count as failed or blocked sign-ins in the security summary.
 const FAIL_EVENTS = ['wrong_password', 'wrong_code', 'blocked_locked', 'code_limit', 'staff_wrong_password', 'staff_locked_out'];
 const FAIL_IN = FAIL_EVENTS.map(() => '?').join(', ');
+// The Activity list shows the newest events of each kind: developer events and staff sign-in
+// events are read separately, so a flood of wrong staff passwords (which anyone can cause) can
+// never push the developer's own sign-ins off the list. The log itself keeps them apart the
+// same way (lib/dev.js).
+const ACTIVITY_PER_GROUP = 100;
+const ACTIVITY_COLUMNS = 'id, at, event, ip, detail, info';
 
 export async function onRequestGet({ request, env }) {
   const { denied, session } = await authorizeDev(request, env);
@@ -47,7 +54,7 @@ export async function onRequestGet({ request, env }) {
   const weekAgo = now - 7 * 86400;
   const keepDays = retentionDays(env);
   try {
-    const [leads, staffSessions, devSessions, lockouts, audit, failCounts, failSources, lock, oldLeads, paused, blocks, staffAccounts, sharedAllowed, trusted, deleted] = await Promise.all([
+    const [leads, staffSessions, devSessions, lockouts, devActivity, staffActivity, failCounts, failSources, lock, oldLeads, paused, blocks, staffAccounts, sharedAllowed, trusted, deleted] = await Promise.all([
       env.DB.prepare(`
         SELECT
           COUNT(*) AS total,
@@ -60,7 +67,8 @@ export async function onRequestGet({ request, env }) {
       env.DB.prepare('SELECT COUNT(*) AS n FROM admin_sessions WHERE expires_at > ?').bind(now).first(),
       env.DB.prepare('SELECT COUNT(*) AS n FROM dev_sessions WHERE expires_at > ?').bind(now).first(),
       env.DB.prepare('SELECT COUNT(*) AS n FROM auth_attempts WHERE locked_until > ?').bind(now).first(),
-      env.DB.prepare('SELECT id, at, event, ip, detail, info FROM dev_audit ORDER BY id DESC LIMIT 100').all(),
+      env.DB.prepare(`SELECT ${ACTIVITY_COLUMNS} FROM dev_audit WHERE NOT (${STAFF_EVENT_SQL}) ORDER BY id DESC LIMIT ${ACTIVITY_PER_GROUP}`).all(),
+      env.DB.prepare(`SELECT ${ACTIVITY_COLUMNS} FROM dev_audit WHERE ${STAFF_EVENT_SQL} ORDER BY id DESC LIMIT ${ACTIVITY_PER_GROUP}`).all(),
       env.DB.prepare(`
         SELECT event, COALESCE(SUM(CASE WHEN at >= ? THEN 1 ELSE 0 END), 0) AS day, COUNT(*) AS week
         FROM dev_audit WHERE at >= ? AND event IN (${FAIL_IN}) GROUP BY event
@@ -78,8 +86,11 @@ export async function onRequestGet({ request, env }) {
       listStaffAccounts(env.DB),
       sharedPasswordAllowed(env),
       env.DB.prepare('SELECT kind, COUNT(*) AS n FROM trusted_devices WHERE expires_at > ? GROUP BY kind').bind(now).all(),
-      env.DB.prepare('SELECT COUNT(*) AS n FROM deleted_leads').first(),
+      // Only what Recently Deleted still shows (older ones are removed when it is next opened)
+      env.DB.prepare('SELECT COUNT(*) AS n FROM deleted_leads WHERE deleted_at >= ?').bind(now - KEEP_DELETED_DAYS * 86400).first(),
     ]);
+    // Newest first, both kinds together
+    const audit = [...(devActivity?.results || []), ...(staffActivity?.results || [])].sort((a, b) => Number(b.id) - Number(a.id));
     const trustedCount = (kind) => Number((trusted?.results || []).find((r) => r.kind === kind)?.n || 0);
 
     // The place for each top source comes from its most recent failed event.
@@ -136,7 +147,7 @@ export async function onRequestGet({ request, env }) {
       // Lets the console warn before you block the address you are using yourself.
       yourIp: normalizeIp(clientIp(request)) || clientIp(request),
       config: devConfigSummary(env),
-      activity: (audit?.results || []).map((r) => {
+      activity: audit.map((r) => {
         const item = { id: Number(r.id), at: r.at, event: r.event, ip: r.ip, detail: r.detail, hasInfo: false };
         const info = infoFromJson(r.info);
         if (info) {

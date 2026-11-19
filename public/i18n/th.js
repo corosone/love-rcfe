@@ -627,6 +627,7 @@
     "Visit history improves support.": "ประวัติการเข้าชมช่วยปรับปรุงบริการ",
     "Network details prevent abuse.": "ข้อมูลเครือข่ายช่วยป้องกันการละเมิด",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "เราไม่อยู่ตั้งแต่ {from} ถึง {to} นัดโทรได้ตั้งแต่ {next}",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "เราไม่อยู่ตั้งแต่ {from} ถึง {to} นัดโทรได้ในวันอื่น ๆ ทุกวัน",
     "We are away until {to}. Messages sent now are answered from {next}.": "เราไม่อยู่จนถึง {to} ข้อความที่ส่งตอนนี้จะได้รับการตอบตั้งแต่ {next}",
     "We are away on that date. Please choose {next} or later.": "เราไม่อยู่ในวันนั้น กรุณาเลือก {next} หรือหลังจากนั้น",
     "We are away on that date. Please pick another date.": "เราไม่อยู่ในวันนั้น กรุณาเลือกวันอื่น",

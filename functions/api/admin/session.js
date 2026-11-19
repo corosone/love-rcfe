@@ -1,5 +1,5 @@
 import {
-  jsonResponse, verifySameOrigin, readJsonBody, senderKey, tooManyRequests,
+  jsonResponse, verifySameOrigin, readJsonBody, senderKey, tooManyRequests, tooManyRequestsD1,
   checkAdminConfig, checkAdminPrereqs, checkPasswordWithLockout, enforceTurnstile,
   getSessionSigningMaterial, createSessionToken, sessionCookieHeader, SESSION_TTL_SEC,
   authorizeStaff, getAdminAttempts, lockWaitSeconds, recordAdminFail, clearAdminAttempts,
@@ -7,7 +7,8 @@ import {
 import { signOutEverywhere, devAudit } from '../../../lib/dev.js';
 import { isTrusted, trustThisDevice, forgetAccountDevices } from '../../../lib/trust.js';
 import {
-  checkStaffAccount, cleanStaffName, sharedPasswordAllowed, noteStaffSignIn, changeOwnStaffPassword, staffAccountId,
+  checkStaffAccount, cleanStaffName, sharedPasswordAllowed, noteStaffSignIn, changeOwnStaffPassword, ownPasswordProblem,
+  staffAccountId,
 } from '../../../lib/staff.js';
 
 // Staff sign-in. Order matters: cheap checks first, then the Turnstile spam check,
@@ -103,6 +104,10 @@ export async function onRequestGet({ request, env }) {
 const PW_CHANGE_MAX_FAILS = 5;
 const PW_CHANGE_WINDOW = 15 * 60;
 const PW_CHANGE_LOCK_SECONDS = 15 * 60;
+// Tries for one account in one minute, counted in the database before the password is checked.
+// Checking a password takes a moment, so without this, many tries sent at the same instant (from
+// several addresses) would all be checked before the first wrong one was counted.
+const PW_CHANGE_PER_MINUTE = 5;
 
 // Change your own password (staff accounts only): { current, password }.
 // Signs your other devices out (and forgets them as trusted browsers); this one stays signed in.
@@ -112,24 +117,35 @@ export async function onRequestPatch({ request, env }) {
   if (who.kind !== 'account') {
     return jsonResponse({ error: 'Only people with their own staff account can change a password here.' }, 400);
   }
+  const parsed = await readJsonBody(request, 4096);
+  if (!parsed.ok) return parsed.response;
+  // A new password that is not allowed (too short, holds your name, the same as the old one) is
+  // turned away first. It is not a guess at the current password, so it is not counted as a try:
+  // someone still choosing a new password is never told to wait.
+  const problem = ownPasswordProblem(parsed.data.current, parsed.data.password, who.name);
+  if (problem) return jsonResponse({ error: problem }, 400);
   if (tooManyRequests(`staffpw:${senderKey(request)}`, 5, 10 * 60 * 1000)) {
     return jsonResponse({ error: 'Too many tries. Please wait a few minutes and try again.' }, 429);
   }
-  const parsed = await readJsonBody(request, 4096);
-  if (!parsed.ok) return parsed.response;
   try {
     // Read only: refused while locked, without writing anything.
     const lockKey = `staffpw|${who.accountId}`;
-    const wait = lockWaitSeconds(await getAdminAttempts(env.DB, lockKey));
-    if (wait > 0) {
-      return jsonResponse(
-        { error: `Too many wrong passwords. Please try again in ${Math.ceil(wait / 60)} minute(s).` },
-        429,
-        { 'Retry-After': String(wait) }
-      );
+    const lockWait = async () => lockWaitSeconds(await getAdminAttempts(env.DB, lockKey));
+    const tooManyWrong = (wait) => jsonResponse(
+      { error: `Too many wrong passwords. Please try again in ${Math.ceil(wait / 60)} minute(s).` },
+      429,
+      { 'Retry-After': String(wait) }
+    );
+    const wait = await lockWait();
+    if (wait > 0) return tooManyWrong(wait);
+    if (await tooManyRequestsD1(env.DB, `staffpw:${who.accountId}`, PW_CHANGE_PER_MINUTE, 60, { failClosed: true })) {
+      return jsonResponse({ error: 'Too many tries. Please wait a minute and try again.' }, 429, { 'Retry-After': '60' });
     }
-    const r = await changeOwnStaffPassword(env.DB, who.accountId, parsed.data.current, parsed.data.password, who.jti);
+    const r = await changeOwnStaffPassword(env.DB, who.accountId, parsed.data.current, parsed.data.password, who.jti, {
+      stillAllowed: async () => (await lockWait()) === 0,
+    });
     if (!r.ok) {
+      if (r.status === 429) return tooManyWrong(Math.max(await lockWait(), 60));
       if (r.status === 401) {
         // A wrong current password: counted for this account, and shown in the activity log.
         await recordAdminFail(env.DB, lockKey, PW_CHANGE_WINDOW, PW_CHANGE_MAX_FAILS, PW_CHANGE_LOCK_SECONDS)

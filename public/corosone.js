@@ -1578,7 +1578,7 @@
       $('holiday-to').value = h.to;
       state.textContent = h.from <= holidayToday
         ? `Call bookings are paused now, until ${fmtYmd(h.to)} (last day away). The website shows the "we are away" note.`
-        : `A break is set from ${fmtYmd(h.from)} to ${fmtYmd(h.to)}. Until then, calls can be booked for any other day; the booking popup already mentions the break.`;
+        : `A break is set from ${fmtYmd(h.from)} to ${fmtYmd(h.to)}. Until then, calls can be booked for any other day; the booking popup mentions the break once it is within the dates on offer (about 3 months ahead).`;
     } catch (err) {
       toolFailed(err, state);
     }

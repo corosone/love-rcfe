@@ -568,6 +568,10 @@
     setLang: setLang,
     getLang: function () { return currentLang; },
     getIntlLocale: function () { var m = pick(LANGUAGES, currentLang); return (m && m.intl) || 'en-US'; },
+    // True once the words of the current language are here (always true for English). On a page
+    // that arrived already translated, the language file is still downloading at first; until
+    // it is here, t() can only answer in English.
+    isReady: function () { return currentLang === 'en' || !!dataFor(currentLang); },
     t: t,
     getBlock: getBlock,
     applyDom: applyDom,
