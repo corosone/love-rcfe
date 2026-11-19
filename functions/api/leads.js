@@ -23,6 +23,7 @@ const EVERYONE_TOTAL = 120;
 const WINDOW_SEC = 10 * 60;
 const SUSPICIOUS_NETWORKS = new Set(['vpn', 'hosting', 'tor']);
 const MAX_DAYS_AHEAD = 100; // the booking form offers 90 days; small slack for time zones
+// A break can end later than that: the first days after it can still be booked.
 // One of the booking form's times, e.g. "Morning (9am - 12pm)": nothing else is accepted.
 const TIME_RE = /^(morning|afternoon|late afternoon|evening)( \([0-9apm :.–-]{1,30}\))?$/i;
 const SSN_RE = /\b\d{3}-\d{2}-\d{4}\b/;
@@ -174,15 +175,18 @@ export async function onRequestPost(context) {
   }
   if (kind === 'call_request') {
     const dateOk = parseYmd(record.preferredDate);
+    // Days off set with the holiday switch in the developer console
+    const holiday = await getHoliday(env);
     if (!record.preferredDate) {
       errors.preferred_date = 'Please choose a preferred date.';
     } else if (!dateOk) {
       errors.preferred_date = 'Please choose a valid date.';
     } else {
       const today = pacificToday();
+      const latest = [addDays(today, MAX_DAYS_AHEAD), holiday ? addDays(holiday.to, 3) : ''].sort().pop();
       if (record.preferredDate < today) {
         errors.preferred_date = 'Please choose a future date.';
-      } else if (record.preferredDate > addDays(today, MAX_DAYS_AHEAD)) {
+      } else if (record.preferredDate > latest) {
         errors.preferred_date = 'Please choose a date within the next 3 months.';
       } else if (dateOk.getUTCDay() === 0) {
         errors.preferred_date = 'We make calls Monday through Saturday. Please pick another date.';
@@ -191,8 +195,7 @@ export async function onRequestPost(context) {
     if (record.preferredTime && !TIME_RE.test(record.preferredTime)) {
       errors.preferred_time = 'Please choose a time from the list.';
     }
-    // Days off set with the holiday switch in the developer console
-    if (!errors.preferred_date && holidayCovers(await getHoliday(env), record.preferredDate)) {
+    if (!errors.preferred_date && holidayCovers(holiday, record.preferredDate)) {
       errors.preferred_date = HOLIDAY_ERROR;
     }
   }
@@ -220,13 +223,13 @@ export async function onRequestPost(context) {
   try {
     await ensureSchema(env.DB);
 
-    // Cross-isolate D1 rate limits (per sender, senders that look automated, and everyone)
-    const [ipLimited, suspiciousLimited, globalLimited] = await Promise.all([
-      tooManyRequestsD1(env.DB, `lead:${sender}`, PER_SENDER, WINDOW_SEC),
-      suspicious ? tooManyRequestsD1(env.DB, 'lead:__suspicious__', SUSPICIOUS_TOTAL, WINDOW_SEC) : false,
-      tooManyRequestsD1(env.DB, 'lead:__global__', EVERYONE_TOTAL, WINDOW_SEC),
-    ]);
-    if (ipLimited || suspiciousLimited || globalLimited) {
+    // Limits across all of Cloudflare's servers: this sender, then senders that look automated,
+    // then everyone. One at a time, so a message already turned away by its own limit is not
+    // also counted against the shared ones (that would let one sender use up everyone's).
+    const limited = (await tooManyRequestsD1(env.DB, `lead:${sender}`, PER_SENDER, WINDOW_SEC))
+      || (suspicious && (await tooManyRequestsD1(env.DB, 'lead:__suspicious__', SUSPICIOUS_TOTAL, WINDOW_SEC)))
+      || (await tooManyRequestsD1(env.DB, 'lead:__global__', EVERYONE_TOTAL, WINDOW_SEC));
+    if (limited) {
       return jsonResponse(
         { error: 'Too many submissions. Please call (818) 217-5755 or email loveRCFE@gmail.com.' },
         429

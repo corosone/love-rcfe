@@ -5,8 +5,8 @@
 // booking time check, individual staff accounts (sign-in, own password, new password, removal,
 // turning the shared password off, "last changed by"), Recently Deleted (put back, delete for
 // good, empty, removed after 30 days), backups, the spreadsheet formula guard and the console's
-// warning about a short staff password. Section 9 covers the fixes from the second security
-// review. Everything runs against an in-memory database.
+// warning about a short staff password. Sections 9 and 10 cover the fixes from the second and
+// third security reviews. Everything runs against an in-memory database.
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const { startServer } = require('./helpers/server.js');
@@ -817,4 +817,138 @@ test('IP address check: records of a long address\'s network are found, however 
   }
   assert.ok(checked > 19000);
   assert.deepEqual(networkLikePatterns('198.51.100.7'), [], 'short addresses are looked up exactly');
+});
+
+// ---------- 10. Fixes from the third security review ----------
+
+const nowSec = () => Math.floor(Date.now() / 1000);
+const setHits = (key, hits) => site.db._run('INSERT INTO rate_limits (key, hits, window_start) VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET hits = excluded.hits, window_start = excluded.window_start', key, hits, nowSec());
+const hitsOf = (key) => Number(site.db._rows('SELECT hits FROM rate_limits WHERE key = ?', key)[0]?.hits || 0);
+
+test('limits: a try already turned away by its own limit is not counted against the shared ones', async () => {
+  clearLimits(); clearLockouts();
+  // Contact form: this sender is already at its limit (as counted by other Cloudflare servers)
+  setHits('lead:198.51.100.240', 8);
+  assert.equal((await postEnquiry({ email: 'over1@example.com' }, { ip: '198.51.100.240' })).status, 429);
+  assert.equal(hitsOf('lead:__global__'), 0, 'not counted against everyone\'s allowance');
+  // A VPN sender when the allowance for senders that look automated is full
+  setHits('lead:__suspicious__', 15);
+  assert.equal((await postEnquiry({ email: 'over2@example.com' }, { ip: '198.51.100.241', asn: 39351, org: 'Some VPN' })).status, 429);
+  assert.equal(hitsOf('lead:__global__'), 0, 'not counted against everyone\'s allowance either');
+  // A family on a home network still gets through, and only that one counts
+  assert.equal((await postEnquiry({ email: 'family-ok@example.com' }, { ip: '198.51.100.239' })).status, 201);
+  assert.equal(hitsOf('lead:__global__'), 1);
+
+  // Staff sign-in: this address is already at its per-minute limit
+  setHits('login:198.51.100.242', 8);
+  assert.equal((await staffLogin({ password: 'wrong' }, { ip: '198.51.100.242' })).status, 429);
+  assert.equal(hitsOf('login:__global__'), 0, 'the site-wide sign-in limit is not touched');
+  // Developer sign-in, the same
+  setHits('devlogin:198.51.100.243', 5);
+  assert.equal((await site.api('/api/dev/login', { method: 'POST', body: { ...DEV_LOGIN, password: 'wrong' }, ip: '198.51.100.243' })).status, 429);
+  assert.equal(hitsOf('devlogin:__global__'), 0);
+  clearLimits(); clearLockouts();
+});
+
+test('staff: a trusted browser only skips the site-wide lockout for its own account; turning the shared password off forgets its browsers', async () => {
+  clearLimits(); clearLockouts();
+  assert.equal((await action('shared_staff_password', { allowed: true })).status, 200);
+  const add = async (name) => (await action('add_staff_account', { name })).data;
+  const sam = await add('Sam Bound');
+  const lee = await add('Lee Bound');
+  const samTrust = cookiesOf(await staffLogin({ name: 'Sam Bound', password: sam.password }, { ip: '198.51.100.150' })).lovercfe_staff_trust;
+  const sharedTrust = cookiesOf(await staffLogin({ password: INBOX_PASSWORD }, { ip: '198.51.100.151' })).lovercfe_staff_trust;
+  assert.ok(samTrust && sharedTrust);
+
+  // Strangers have set off the site-wide lockout
+  site.db._run("INSERT INTO auth_attempts (key, fails, first_fail, locked_until) VALUES ('admin|__global__', 20, ?, ?) ON CONFLICT(key) DO UPDATE SET locked_until = excluded.locked_until", nowSec(), nowSec() + 300);
+  const tryWith = (body, trust, ip) => staffLogin(body, { ip, cookie: `lovercfe_staff_trust=${trust}` });
+  assert.equal((await tryWith({ name: 'Lee Bound', password: lee.password }, samTrust, '198.51.100.152')).status, 423, 'Sam\'s browser does not get Lee past the lockout');
+  assert.equal((await tryWith({ name: 'Sam Bound', password: sam.password }, sharedTrust, '198.51.100.153')).status, 423, 'nor does a shared-password browser get into an account');
+  assert.equal((await tryWith({ name: 'No Such Person', password: 'whatever it is' }, samTrust, '198.51.100.154')).status, 423);
+  assert.equal((await tryWith({ name: 'Sam Bound', password: sam.password }, samTrust, '198.51.100.155')).status, 200, 'Sam still gets in on his own browser');
+  const shared = await tryWith({ password: INBOX_PASSWORD }, sharedTrust, '198.51.100.156');
+  assert.equal(shared.status, 200, 'and the shared password on its own browser');
+  const sharedTrust2 = cookiesOf(shared).lovercfe_staff_trust;
+  clearLockouts();
+
+  // Turning the shared password off forgets the browsers it made trusted
+  const { isTrusted } = await import('../lib/trust.js');
+  const trusted = (token) => isTrusted(new Request(site.origin + '/api/admin/session', { headers: { cookie: `lovercfe_staff_trust=${token}` } }), site.env, 'staff');
+  assert.equal(await trusted(sharedTrust2), true);
+  assert.equal((await action('shared_staff_password', { allowed: false })).status, 200);
+  assert.equal(await trusted(sharedTrust2), false);
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM trusted_devices WHERE kind = 'staff' AND account_id = 0")[0].n, 0);
+  assert.equal((await action('shared_staff_password', { allowed: true })).status, 200);
+  for (const who of [sam, lee]) assert.equal((await action('remove_staff_account', { id: who.account.id })).status, 200);
+
+  // If the setting cannot be read, the shared password counts as turned off
+  const { sharedPasswordAllowed } = await import('../lib/staff.js');
+  assert.equal(await sharedPasswordAllowed({ DB: { prepare() { throw new Error('database unavailable'); } } }), false);
+  clearLimits(); clearLockouts();
+});
+
+test('developer: the hourly code-email limit is checked first, a code that could not be emailed does not count, and Clear Sign-In Lockouts resets them', async () => {
+  clearLimits(); clearLockouts();
+  const ip = '198.51.100.244';
+  const step1 = () => site.api('/api/dev/login', { method: 'POST', body: DEV_LOGIN, ip });
+  const row = (span) => site.db._rows(`SELECT key, hits FROM rate_limits WHERE key LIKE 'devsend:%:${span}'`)[0];
+  assert.equal((await step1()).status, 200);
+  assert.equal(row('day').hits, 1);
+  site.db._run('UPDATE rate_limits SET hits = 5 WHERE key = ?', row('hour').key);
+  assert.equal((await step1()).status, 429);
+  assert.equal(row('day').hits, 1, 'turned away by the hourly limit: the day\'s codes are not used up');
+
+  site.db._run('UPDATE rate_limits SET hits = 1 WHERE key = ?', row('hour').key);
+  site.setOutsideAnswer((url) => (url === 'https://api.resend.com/emails' ? new Response('down', { status: 500 }) : undefined));
+  try {
+    assert.equal((await step1()).status, 502);
+  } finally {
+    site.setOutsideAnswer(null);
+  }
+  assert.deepEqual([row('hour').hits, row('day').hits], [1, 1], 'a code that could not be emailed does not count');
+
+  assert.equal((await action('clear_lockouts')).status, 200);
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM rate_limits WHERE key LIKE 'devsend:%'")[0].n, 0, 'Clear Sign-In Lockouts resets the code-email limits');
+  clearLimits(); clearLockouts();
+});
+
+test('Recently Deleted: an enquiry whose number is already taken stays in the bin', async () => {
+  const { moveLeadsToBin, restoreDeletedLeads } = await import('../lib/deletedleads.js');
+  const id = addLead({ name: 'Number Taken', email: 'taken@example.com' });
+  await moveLeadsToBin(site.env.DB, [id], { by: 'Test' });
+  addLead({ id, name: 'Someone Else', email: 'else@example.com' }); // a different enquiry now has that number
+  assert.deepEqual(await restoreDeletedLeads(site.env.DB, [id]), { restored: 0, missing: 1 });
+  assert.equal(site.db._rows('SELECT COUNT(*) AS n FROM deleted_leads WHERE id = ?', id)[0].n, 1, 'still in the bin');
+  assert.equal(site.db._rows('SELECT name FROM leads WHERE id = ?', id)[0].name, 'Someone Else', 'the other enquiry is untouched');
+
+  const other = addLead({ name: 'Goes Back', email: 'back@example.com' });
+  await moveLeadsToBin(site.env.DB, [other], { by: 'Test' });
+  assert.deepEqual(await restoreDeletedLeads(site.env.DB, [other, id]), { restored: 1, missing: 1 }, 'a normal one still goes back, alongside');
+  assert.equal(site.db._rows('SELECT COUNT(*) AS n FROM deleted_leads WHERE id = ?', other)[0].n, 0);
+  assert.equal(site.db._rows('SELECT name FROM leads WHERE id = ?', other)[0].name, 'Goes Back');
+  site.db._run('DELETE FROM leads WHERE id IN (?, ?)', id, other);
+  site.db._run('DELETE FROM deleted_leads WHERE id = ?', id);
+});
+
+test('IP address check: a block that has ended is not shown as blocked', async () => {
+  const ip = '198.51.100.250';
+  site.db._run("INSERT INTO blocked_ips (ip, reason, created_at, expires_at) VALUES (?, 'old spam', ?, ?)", ip, nowSec() - 7200, nowSec() - 3600);
+  site.setOutsideAnswer(() => new Response('', { status: 503 }));
+  try {
+    assert.equal((await tool({ tool: 'ip', ip })).data.blocked, null, 'ended an hour ago');
+    site.db._run('UPDATE blocked_ips SET expires_at = ? WHERE ip = ?', nowSec() + 3600, ip);
+    assert.equal((await tool({ tool: 'ip', ip })).data.blocked.reason, 'old spam', 'a block still in force is shown');
+  } finally {
+    site.setOutsideAnswer(null);
+    site.db._run('DELETE FROM blocked_ips WHERE ip = ?', ip);
+  }
+});
+
+test('the Database tab counts every table the site keeps', async () => {
+  const r = await json(await site.api('/api/dev/database', { headers: { cookie: `lovercfe_dev=${DEV}` }, ip: DEV_IP }));
+  assert.equal(r.status, 200);
+  const all = site.db._rows("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%'").map((t) => t.name);
+  assert.deepEqual(r.data.tables.map((t) => t.table).sort(), all.sort());
+  assert.ok(['staff_accounts', 'deleted_leads', 'trusted_devices'].every((t) => all.includes(t)));
 });

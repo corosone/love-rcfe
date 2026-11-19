@@ -433,8 +433,10 @@
           : '';
         contact.classList.toggle('hidden', !now);
       }
-      // A suggested booking date that falls on a day off moves to the first day back.
+      // A suggested booking date that falls on a day off moves to the first day back. A long
+      // break can end after the usual 90 days, so the latest date offered then reaches that day.
       const dateInput = document.getElementById('book-date');
+      if (upcoming && dateInput && dateInput.max && firstDayBack() > dateInput.max) dateInput.max = firstDayBack();
       if (upcoming && dateInput && onHoliday(dateInput.value)) dateInput.value = firstDayBack();
     }
 
