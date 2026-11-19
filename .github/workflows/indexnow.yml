@@ -1,0 +1,58 @@
+# Tells search engines about new and changed pages (IndexNow), on GitHub's computers (free for
+# public repositories).
+#
+# After each change to what the site's pages say, this works out which addresses changed, waits
+# until Cloudflare has published them (at most 10 minutes), and sends the list to IndexNow.
+# IndexNow passes it on to Bing, Yahoo (which uses Bing), Naver, Yandex, Seznam and other search
+# engines, so they visit the new pages sooner. Google does not use IndexNow; it reads the sitemap
+# (Google Search Console). How it works and what each answer means: scripts/indexnow.js.
+#
+# If it fails, GitHub emails the owner ("Run failed: Tell search engines about changes"). That only
+# happens for a problem on our side: the new version never went live, or IndexNow refused the key
+# or the list. A passing problem on IndexNow's side (busy, not answering) only puts a yellow
+# warning on the run, because search engines still find the changes through the sitemap.
+#
+# To send every address by hand: Actions tab > Tell search engines about changes > Run workflow.
+# Please do that rarely: IndexNow asks for changed pages only, not the same list again and again.
+#
+# Nothing here needs a password or secret. It only reads the repository and the live website.
+name: Tell search engines about changes
+
+on:
+  push:
+    branches: [main]
+    # Only files that can change what a page says. Keep this list the same as WATCHED_PATHS in
+    # scripts/indexnow.js (a test checks).
+    paths:
+      - 'public/index.html'
+      - 'public/i18n.js'
+      - 'public/sitemap.xml'
+      - 'scripts/build-pages.js'
+      - 'public/i18n/**'
+      - 'src/guides/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    # Only for the live site's branch: started by hand on any other branch, it does nothing.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      # Each outside action is pinned to an exact version (its commit fingerprint), so a change
+      # to it cannot slip into this repository unnoticed. The version is in the comment.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # the whole history, to see which files this change touched
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - name: Tell search engines about the changed pages
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: node scripts/indexnow.js
