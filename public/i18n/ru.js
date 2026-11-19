@@ -627,6 +627,7 @@
     "Visit history improves support.": "История посещений улучшает поддержку.",
     "Network details prevent abuse.": "Сетевые данные предотвращают злоупотребления.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Мы не работаем с {from} по {to}. Звонок можно заказать с {next}.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "Мы не работаем с {from} по {to}. Звонок можно заказать на любой другой день.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Мы не работаем до {to}. На сообщения, отправленные сейчас, мы ответим с {next}.",
     "We are away on that date. Please choose {next} or later.": "В этот день мы не работаем. Выберите {next} или более позднюю дату.",
     "We are away on that date. Please pick another date.": "В этот день мы не работаем. Пожалуйста, выберите другую дату.",

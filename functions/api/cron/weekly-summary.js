@@ -230,12 +230,12 @@ export async function onRequestPost(context) {
       return jsonResponse({ ok: true, sent: false, reason: 'A summary was already sent in the last 5 days.' });
     }
 
-    // Across all of Cloudflare's servers: 6 an hour from one sender, 20 an hour in all.
-    const [ipLimited, allLimited] = await Promise.all([
-      tooManyRequestsD1(env.DB, `cron:${sender}`, 6, 60 * 60),
-      tooManyRequestsD1(env.DB, 'cron:__global__', 20, 60 * 60),
-    ]);
-    if (ipLimited || allLimited) {
+    // Across all of Cloudflare's servers: 6 an hour from one sender, 20 an hour in all. The
+    // sender's own limit first: a call it turns away is not counted against everyone's, so one
+    // sender cannot use up the shared limit and block the scheduled Monday call.
+    const limited = (await tooManyRequestsD1(env.DB, `cron:${sender}`, 6, 60 * 60))
+      || (await tooManyRequestsD1(env.DB, 'cron:__global__', 20, 60 * 60));
+    if (limited) {
       return jsonResponse({ error: 'Too many requests.' }, 429);
     }
 

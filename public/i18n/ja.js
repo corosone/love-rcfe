@@ -627,6 +627,7 @@
     "Visit history improves support.": "閲覧履歴でより良いサポートを。",
     "Network details prevent abuse.": "ネットワーク情報で不正利用を防ぎます。",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}から{to}まで休業いたします。お電話のご予約は{next}から承ります。",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "{from}から{to}まで休業いたします。それ以外の日はお電話のご予約を承ります。",
     "We are away until {to}. Messages sent now are answered from {next}.": "{to}まで休業中です。ただいまいただいたメッセージには{next}以降に返信いたします。",
     "We are away on that date. Please choose {next} or later.": "その日は休業日です。{next}以降の日付をお選びください。",
     "We are away on that date. Please pick another date.": "その日は休業日です。別の日付をお選びください。",

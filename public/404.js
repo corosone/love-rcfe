@@ -36,6 +36,26 @@
     syncThemeBtn(dark);
   }
 
+  // The tab title in the page's language (the text on the page is translated by i18n.js).
+  function translateTitle() {
+    if (window.LoveI18n && typeof window.LoveI18n.t === 'function') {
+      document.title = window.LoveI18n.t('Page Not Found | Love RCFE');
+    }
+  }
+
+  // A missing page under a language address (/es/..., /zh-hant/...) is shown in that language,
+  // so its links to the home page go to that language's home page (/es/#contact), not the
+  // English one. Done once: only links that still start with "/#" are changed.
+  function keepLanguageInLinks() {
+    if (!window.LoveI18n || typeof window.LoveI18n.getLang !== 'function') return;
+    var lang = window.LoveI18n.getLang();
+    var m = /^\/([a-z]{2}(?:-[a-z]{4})?)\//.exec(window.location.pathname);
+    if (!m || m[1] !== lang || lang === 'en') return;
+    document.querySelectorAll('a[href^="/#"]').forEach(function (a) {
+      a.setAttribute('href', '/' + lang + '/' + a.getAttribute('href').slice(1));
+    });
+  }
+
   function init404() {
     var btn = document.getElementById('theme-btn');
     if (btn) btn.addEventListener('click', toggleTheme);
@@ -45,7 +65,10 @@
       window.LoveI18n.init();
       window.LoveI18n.onChange(function () {
         syncThemeBtn(document.documentElement.classList.contains('dark'));
+        translateTitle();
       });
+      keepLanguageInLinks();
+      translateTitle();
     }
     syncThemeBtn(document.documentElement.classList.contains('dark'));
   }

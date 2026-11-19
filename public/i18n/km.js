@@ -627,6 +627,7 @@
     "Visit history improves support.": "ប្រវត្តិនៃការចូលមើលជួយកែលម្អការគាំទ្រ។",
     "Network details prevent abuse.": "ព័ត៌មានបណ្ដាញជួយការពារការរំលោភបំពាន។",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "យើងឈប់សម្រាកពី {from} ដល់ {to}។ អាចកក់ការហៅទូរសព្ទចាប់ពី {next}។",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "យើងឈប់សម្រាកពី {from} ដល់ {to}។ អាចកក់ការហៅទូរសព្ទសម្រាប់ថ្ងៃផ្សេងទៀតណាមួយ។",
     "We are away until {to}. Messages sent now are answered from {next}.": "យើងឈប់សម្រាករហូតដល់ {to}។ សារដែលផ្ញើឥឡូវនេះនឹងត្រូវឆ្លើយតបចាប់ពី {next}។",
     "We are away on that date. Please choose {next} or later.": "យើងឈប់សម្រាកនៅថ្ងៃនោះ។ សូមជ្រើសរើស {next} ឬថ្ងៃក្រោយ។",
     "We are away on that date. Please pick another date.": "យើងឈប់សម្រាកនៅថ្ងៃនោះ។ សូមជ្រើសរើសកាលបរិច្ឆេទផ្សេង។",

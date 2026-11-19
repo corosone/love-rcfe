@@ -627,6 +627,7 @@
     "Visit history improves support.": "Lịch sử truy cập giúp hỗ trợ tốt hơn.",
     "Network details prevent abuse.": "Thông tin mạng giúp ngăn lạm dụng.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Chúng tôi nghỉ từ {from} đến {to}. Bạn có thể đặt lịch gọi từ {next}.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "Chúng tôi nghỉ từ {from} đến {to}. Bạn có thể đặt lịch gọi vào bất kỳ ngày nào khác.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Chúng tôi nghỉ đến {to}. Tin nhắn gửi bây giờ sẽ được trả lời từ {next}.",
     "We are away on that date. Please choose {next} or later.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn {next} hoặc muộn hơn.",
     "We are away on that date. Please pick another date.": "Chúng tôi nghỉ vào ngày đó. Vui lòng chọn ngày khác.",

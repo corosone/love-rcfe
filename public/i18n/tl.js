@@ -627,6 +627,7 @@
     "Visit history improves support.": "Pinapabuti ng kasaysayan ng pagbisita ang suporta.",
     "Network details prevent abuse.": "Pinipigilan ng detalye ng network ang pang-aabuso.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "Wala kami mula {from} hanggang {to}. Maaaring mag-book ng tawag simula {next}.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "Wala kami mula {from} hanggang {to}. Maaaring mag-book ng tawag sa alinmang ibang araw.",
     "We are away until {to}. Messages sent now are answered from {next}.": "Wala kami hanggang {to}. Ang mga mensaheng ipapadala ngayon ay sasagutin simula {next}.",
     "We are away on that date. Please choose {next} or later.": "Wala kami sa petsang iyon. Pumili ng {next} o mas huli pa.",
     "We are away on that date. Please pick another date.": "Wala kami sa petsang iyon. Mangyaring pumili ng ibang petsa.",

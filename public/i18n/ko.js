@@ -627,6 +627,7 @@
     "Visit history improves support.": "방문 기록으로 더 나은 지원을 드립니다.",
     "Network details prevent abuse.": "네트워크 정보로 악용을 방지합니다.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "{from}부터 {to}까지 휴무입니다. {next}부터 통화 예약이 가능합니다.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "{from}부터 {to}까지 휴무입니다. 그 외의 날짜에는 통화 예약이 가능합니다.",
     "We are away until {to}. Messages sent now are answered from {next}.": "{to}까지 휴무입니다. 지금 보내신 메시지는 {next}부터 답변드립니다.",
     "We are away on that date. Please choose {next} or later.": "해당 날짜는 휴무입니다. {next} 이후 날짜를 선택해 주세요.",
     "We are away on that date. Please pick another date.": "해당 날짜는 휴무입니다. 다른 날짜를 선택해 주세요.",

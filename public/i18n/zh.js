@@ -627,6 +627,7 @@
     "Visit history improves support.": "访问记录帮助改进服务。",
     "Network details prevent abuse.": "网络信息用于防止滥用。",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "我们将于{from}至{to}休假。{next}起可预约通话。",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "我们将于{from}至{to}休假。其他日期均可预约通话。",
     "We are away until {to}. Messages sent now are answered from {next}.": "我们休假至{to}。现在发送的留言将从{next}起回复。",
     "We are away on that date. Please choose {next} or later.": "我们当天休假。请选择{next}或之后的日期。",
     "We are away on that date. Please pick another date.": "我们当天休假。请选择其他日期。",

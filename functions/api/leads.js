@@ -183,7 +183,11 @@ export async function onRequestPost(context) {
       errors.preferred_date = 'Please choose a valid date.';
     } else {
       const today = pacificToday();
-      const latest = [addDays(today, MAX_DAYS_AHEAD), holiday ? addDays(holiday.to, 3) : ''].sort().pop();
+      // A break that runs past the usual limit moves the limit to 3 days after it, so there is
+      // always a day to book. A break that only starts after the limit changes nothing: without
+      // this check, a short break set far ahead would let calls be booked all the way up to it.
+      const usualLatest = addDays(today, MAX_DAYS_AHEAD);
+      const latest = holiday && holiday.from <= usualLatest ? [usualLatest, addDays(holiday.to, 3)].sort().pop() : usualLatest;
       if (record.preferredDate < today) {
         errors.preferred_date = 'Please choose a future date.';
       } else if (record.preferredDate > latest) {

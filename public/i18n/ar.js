@@ -627,6 +627,7 @@
     "Visit history improves support.": "سجل الزيارات يحسّن الدعم.",
     "Network details prevent abuse.": "بيانات الشبكة تمنع إساءة الاستخدام.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "نحن في إجازة من {from} إلى {to}. يمكن حجز المكالمات ابتداءً من {next}.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "نحن في إجازة من {from} إلى {to}. يمكن حجز المكالمات في أي يوم آخر.",
     "We are away until {to}. Messages sent now are answered from {next}.": "نحن في إجازة حتى {to}. سنرد على الرسائل المرسلة الآن ابتداءً من {next}.",
     "We are away on that date. Please choose {next} or later.": "نحن في إجازة في ذلك اليوم. يرجى اختيار {next} أو تاريخ لاحق.",
     "We are away on that date. Please pick another date.": "نحن في إجازة في ذلك اليوم. يرجى اختيار تاريخ آخر.",

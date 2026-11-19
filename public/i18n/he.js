@@ -627,6 +627,7 @@
     "Visit history improves support.": "היסטוריית ביקורים משפרת את התמיכה.",
     "Network details prevent abuse.": "פרטי רשת מונעים שימוש לרעה.",
     "We are away from {from} to {to}. Calls can be booked from {next}.": "אנחנו בחופשה מ-{from} עד {to}. אפשר לקבוע שיחה החל מ-{next}.",
+    "We are away from {from} to {to}. Calls can be booked for any other day.": "אנחנו בחופשה מ-{from} עד {to}. אפשר לקבוע שיחה לכל יום אחר.",
     "We are away until {to}. Messages sent now are answered from {next}.": "אנחנו בחופשה עד {to}. על הודעות שיישלחו עכשיו נענה החל מ-{next}.",
     "We are away on that date. Please choose {next} or later.": "אנחנו בחופשה בתאריך הזה. נא לבחור את {next} או תאריך מאוחר יותר.",
     "We are away on that date. Please pick another date.": "אנחנו בחופשה בתאריך הזה. נא לבחור תאריך אחר.",
