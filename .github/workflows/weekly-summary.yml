@@ -1,16 +1,16 @@
 # Asks the site to email the weekly summary to the owner, every Monday morning (Pacific).
 #
 # Cloudflare Pages cannot run on a timer, so GitHub does the timing. Nothing needs to be
-# set up: the site itself makes sure that at most one summary goes out every 5 days and
-# that it only ever goes to the owner (see functions/api/cron/weekly-summary.js).
+# set up: the site itself makes sure that it only sends on Mondays (California time), at most
+# one summary every 5 days, and only ever to the owner (see functions/api/cron/weekly-summary.js).
 #
 # The email itself is never shown here. This log is public, so it only shows whether the
 # site answered "sent".
 #
-# To send one right now: Actions tab > Weekly summary email > Run workflow.
-# (If one was already sent in the last 5 days, the site answers "not sent" and that is fine.)
-# Note: GitHub pauses scheduled workflows after 60 days without any change to the
-# repository; it emails you first, and one click re-enables it.
+# To send one by hand on a Monday: Actions tab > Weekly summary email > Run workflow.
+# (On other days, or if one was already sent in the last 5 days, the site answers "not sent"
+# and that is fine.) GitHub pauses scheduled workflows after 60 days without changes; the daily
+# site check (site-check.yml) switches this one back on every day so that never happens.
 name: Weekly summary email
 
 on:
@@ -31,6 +31,6 @@ jobs:
             https://love-rcfe.pages.dev/api/cron/weekly-summary)
           echo "The site answered with status $status: $(cat reply.json)"
           if [ "$status" != "200" ]; then
-            echo "200 = fine (sent, or already sent in the last 5 days). 502 = the email service refused. 429 = asked too often."
+            echo "200 = fine (sent, already sent in the last 5 days, or not a Monday in California). 502 = the email service refused. 429 = asked too often."
             exit 1
           fi

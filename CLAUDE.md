@@ -36,6 +36,7 @@ keys, email addresses or any other private details here.
 | Styles | `src/input.css`, `tailwind.config.js` | Tailwind 3, built into `public/tailwind.css` (not stored in the repository) |
 | Language pages | `scripts/build-pages.js` | builds ready-translated copies (`public/es/`, `public/zh/`, ...) at deploy time (not stored) |
 | Translations | `public/i18n/<code>.js` | 17 languages. The key is the **English text exactly as on the page**; change the English and every language file must get the same new key |
+| Guides | `src/guides/<name>.html` | articles at their own address (`/guides/<name>/`, `/<code>/guides/<name>/`), built by `scripts/build-pages.js` from the home page's header and footer. The build stops if any piece is untranslated. Add each new address to `public/sitemap.xml` |
 | Tests | `tests/` | see `tests/README.md` |
 
 Things that are easy to get wrong:

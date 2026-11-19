@@ -396,4 +396,400 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/"/>
   </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
+  <url>
+    <loc>https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hy" href="https://love-rcfe.pages.dev/hy/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://love-rcfe.pages.dev/ru/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://love-rcfe.pages.dev/ar/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://love-rcfe.pages.dev/fa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://love-rcfe.pages.dev/hi/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pa" href="https://love-rcfe.pages.dev/pa/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://love-rcfe.pages.dev/ja/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/guides/choosing-a-care-home/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/guides/choosing-a-care-home/"/>
+  </url>
 </urlset>

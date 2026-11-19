@@ -1,6 +1,6 @@
 // Same settings the pages used inline with the Tailwind CDN.
 module.exports = {
-  content: ['./public/**/*.{html,js}'],
+  content: ['./public/**/*.{html,js}', './src/**/*.html'],
   darkMode: 'class',
   theme: {
     extend: {

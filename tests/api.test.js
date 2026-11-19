@@ -21,6 +21,8 @@ before(async () => {
     RESEND_API_KEY: 're_test_key',
     FORMSPREE_ENDPOINT: 'https://formspree.io/f/testform',
   });
+  // The weekly summary is only sent on Mondays; these tests run on any day.
+  (await import('../functions/api/cron/weekly-summary.js')).sendDay.allowed = () => true;
 });
 
 after(async () => {

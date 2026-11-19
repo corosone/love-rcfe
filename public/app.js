@@ -270,7 +270,7 @@
           Promise.race([deviceCheckCode(), new Promise(resolve => setTimeout(() => resolve(''), 800))]),
           deviceReportSnapshot(1500)
         ]);
-        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token, device, ...(client ? { client } : {}) });
+        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: onGuidePage ? 'guide' : (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token, device, ...(client ? { client } : {}) });
 
         if (res.status >= 400 && res.status < 500) {
           return {
@@ -473,6 +473,14 @@
     // Available Views
     const viewNames = new Set(['home', 'services', 'tools', 'approach', 'contact', 'support', 'terms', 'privacy']);
 
+    // Guide pages (/guides/..., built by scripts/build-pages.js) hold one article in place of the
+    // home page's sections. There, a link to a section opens the home page in the same language.
+    const onGuidePage = !!document.querySelector('main[data-guide]');
+    function homeAddress() {
+      const m = /^\/([a-z]{2})\//.exec(location.pathname);
+      return m ? '/' + m[1] + '/' : '/';
+    }
+
     // Safe Lucide icon refresh
     function refreshIcons() {
       if (window.lucide && typeof lucide.createIcons === 'function') {
@@ -492,12 +500,22 @@
     };
 
     function updateDocumentTitle(viewName) {
-      document.title = t(VIEW_TITLES[viewName] || 'Love RCFE');
+      // A guide page keeps its own title (data-guide-title is the English one; t() translates it)
+      const guide = onGuidePage && document.querySelector('main [data-guide-title]');
+      document.title = t(guide ? guide.getAttribute('data-guide-title') : (VIEW_TITLES[viewName] || 'Love RCFE'));
     }
 
     // View Routing
     function openView(name, updateHistory = true) {
       if (name === 'main-content') return;
+      if (onGuidePage) {
+        // A click on a section link opens it on the home page. So does a section named in the
+        // address (#tools); that one replaces this page in the history, so Back still works.
+        if (!viewNames.has(name)) return;
+        if (updateHistory) location.assign(homeAddress() + (name === 'home' ? '' : '#' + name));
+        else if (location.hash === '#' + name) location.replace(homeAddress() + '#' + name);
+        return;
+      }
       const chosen = viewNames.has(name) ? name : 'home';
       currentView = chosen;
       

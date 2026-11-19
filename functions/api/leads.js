@@ -26,7 +26,8 @@ const MAX_DAYS_AHEAD = 100; // the booking form offers 90 days; small slack for 
 // One of the booking form's times, e.g. "Morning (9am - 12pm)": nothing else is accepted.
 const TIME_RE = /^(morning|afternoon|late afternoon|evening)( \([0-9apm :.–-]{1,30}\))?$/i;
 const SSN_RE = /\b\d{3}-\d{2}-\d{4}\b/;
-const ALLOWED_SOURCES = new Set(['home', 'services', 'tools', 'approach', 'support', 'contact', 'terms', 'privacy']);
+// Where on the site an enquiry was sent from: a home page section, or 'guide' (a family guide page)
+const ALLOWED_SOURCES = new Set(['home', 'services', 'tools', 'approach', 'support', 'contact', 'terms', 'privacy', 'guide']);
 // The device check code made by public/app.js (a one-way SHA-256 code, never the details themselves)
 const DEVICE_RE = /^[0-9a-f]{64}$/;
 const HOLIDAY_ERROR = 'We are away on that date. Please pick another date.';

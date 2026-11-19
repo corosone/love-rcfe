@@ -59,7 +59,7 @@
   const SOURCE_LABELS = {
     home: 'Home page', services: 'Services page', tools: 'Tools page',
     approach: 'Approach page', support: 'FAQs & Support', contact: 'Contact page',
-    terms: 'Terms page', privacy: 'Privacy page', other: 'Other page',
+    terms: 'Terms page', privacy: 'Privacy page', guide: 'Family guide', other: 'Other page',
   };
   const sourceLabel = (v) => SOURCE_LABELS[v] || v;
   const stageOptions = (cur) => Object.entries(STAGE_LABELS)
@@ -112,7 +112,7 @@
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-      throw Object.assign(new Error(data.error || 'Request failed'), { status: res.status });
+      throw Object.assign(new Error(data.error || 'Request failed'), { status: res.status, field: data.field || '' });
     }
     return data;
   }
@@ -678,7 +678,8 @@
         pwStatus.textContent = 'Your password is changed.' + (data.signedOut ? ` ${data.signedOut} other device(s) were signed out.` : '');
         setTimeout(() => { if (/changed/.test(pwStatus.textContent)) closePw(); }, 3000);
       } catch (err) {
-        if (!handleAuthFailure(err)) pwStatus.textContent = err.message;
+        // A wrong current password is not being signed out: say so here, in the form.
+        if (err.field === 'current' || !handleAuthFailure(err)) pwStatus.textContent = err.message;
       } finally {
         save.disabled = false;
       }
