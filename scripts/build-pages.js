@@ -11,6 +11,9 @@
 // the result is exactly what a visitor's browser would produce. Nothing is translated here;
 // to change wording, edit the language file as before.
 //
+// It also writes public/version.txt on Cloudflare (which commit is being published), for the job
+// that tells search engines about changed pages (scripts/indexnow.js).
+//
 // Runs on Cloudflare at deploy time. It is started twice on purpose (see package.json):
 // by "postinstall", which Cloudflare always runs when it installs the packages, and by
 // "npm run build". That way the pages are built whatever build command is saved in the
@@ -240,4 +243,12 @@ for (const name of guideNames) {
 }
 if (guideNames.length) {
   console.log(`build-pages: wrote ${guidePages} guide pages (${guideNames.join(', ')}; public/guides/ and public/<code>/guides/)`);
+}
+
+// ---------- Live version ----------
+// The commit Cloudflare is publishing goes in /version.txt, so the search-engine job
+// (scripts/indexnow.js) can tell when this version is live. Only on Cloudflare: builds elsewhere
+// do not know the commit and write nothing.
+if (require('./indexnow.js').writeVersionFile(PUBLIC)) {
+  console.log(`build-pages: wrote public/version.txt (${process.env.CF_PAGES_COMMIT_SHA.slice(0, 7)})`);
 }

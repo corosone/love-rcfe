@@ -10,3 +10,5 @@ public/tailwind.css
 /public/[a-z][a-z]-[a-z][a-z][a-z][a-z]/
 # The guide pages (public/guides/...), built from src/guides/ by scripts/build-pages.js
 /public/guides/
+# Which commit is live, written by scripts/build-pages.js on Cloudflare only
+/public/version.txt
