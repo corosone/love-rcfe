@@ -270,7 +270,7 @@
           Promise.race([deviceCheckCode(), new Promise(resolve => setTimeout(() => resolve(''), 800))]),
           deviceReportSnapshot(1500)
         ]);
-        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token, device, ...(client ? { client } : {}) });
+        const { res, data } = await postJson(FORM_ENDPOINT, { ...record, source: onGuidePage ? 'guide' : (location.hash || '#home').replace('#', '').slice(0, 40), turnstile_token: token, device, ...(client ? { client } : {}) });
 
         if (res.status >= 400 && res.status < 500) {
           return {

@@ -59,7 +59,7 @@
   const SOURCE_LABELS = {
     home: 'Home page', services: 'Services page', tools: 'Tools page',
     approach: 'Approach page', support: 'FAQs & Support', contact: 'Contact page',
-    terms: 'Terms page', privacy: 'Privacy page', other: 'Other page',
+    terms: 'Terms page', privacy: 'Privacy page', guide: 'Family guide', other: 'Other page',
   };
   const sourceLabel = (v) => SOURCE_LABELS[v] || v;
   const stageOptions = (cur) => Object.entries(STAGE_LABELS)

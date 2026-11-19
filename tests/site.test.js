@@ -497,6 +497,26 @@ test('family guide: menus and links lead back to the site in the same language, 
   await context.close();
 });
 
+test('family guide: a call booked from the guide reaches the inbox, marked as coming from the guide', async () => {
+  const { page, context, seen } = await open('/es' + GUIDE, { width: 1280, height: 900 });
+  await page.click('main [data-click="openBookingModal()"]');
+  await page.waitForSelector('#ts-booking .stub-ts');
+  await page.fill('#book-name', 'Guía Prueba');
+  await page.fill('#book-phone', '8185550142');
+  await page.fill('#book-email', 'guia@example.com');
+  const date = await page.evaluate(() => document.getElementById('book-date').min);
+  await page.fill('#book-date', date);
+  await page.selectOption('#book-time', { index: 1 });
+  for (const box of await page.locator('#booking-form input[type="checkbox"][required]').all()) await box.check();
+  await page.locator('#booking-form [type="submit"]').click();
+  for (let i = 0; i < 50 && !site.db._rows("SELECT COUNT(*) AS n FROM leads WHERE email = 'guia@example.com'")[0].n; i++) await page.waitForTimeout(100);
+  await site.settle();
+  const rows = site.db._rows("SELECT kind, source FROM leads WHERE email = 'guia@example.com'");
+  assert.deepEqual(rows, [{ kind: 'call_request', source: 'guide' }]);
+  assert.deepEqual(seen.errors.filter((e) => /page error/.test(e)), [], 'no script errors');
+  await context.close();
+});
+
 test('family guide: never slides sideways, and reads right to left in Arabic, Persian and Hebrew', async () => {
   const problems = [];
   for (const lang of LANGS) {
