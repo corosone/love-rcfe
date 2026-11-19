@@ -831,7 +831,7 @@ test('top bar: shows the full menu when it fits and the menu button when it does
     return { page, context, result };
   };
 
-  for (const [path, width, fullMenu] of [['/', 390, false], ['/', 900, false], ['/', 1280, true], ['/', 1920, true], ['/zh/', 1024, true], ['/hy/', 1440, false]]) {
+  for (const [path, width, fullMenu] of [['/', 390, false], ['/', 900, false], ['/', 1024, true], ['/', 1280, true], ['/', 1920, true], ['/zh/', 1024, true], ['/hy/', 1280, true], ['/hy/', 1024, false]]) {
     const { context, result } = await state(path, width);
     assert.deepEqual(result, { menu: fullMenu, button: !fullMenu, over: 0 }, `${path} at ${width}px`);
     await context.close();
@@ -848,6 +848,40 @@ test('top bar: shows the full menu when it fits and the menu button when it does
   await page.waitForTimeout(300);
   assert.ok(await page.evaluate(() => getComputedStyle(document.getElementById('desktop-nav')).display !== 'none'), 'the full menu returns on a wide window');
   await context.close();
+});
+
+test('top bar: every language keeps the full menu on a computer, without overlaps or words split in the middle', async () => {
+  const problems = [];
+  const { page, context } = await open('/', { width: 1280, height: 800 });
+  for (const lang of LANGS) {
+    await page.goto(site.origin + (lang === 'en' ? '/' : `/${lang}/`), { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(150);
+    const r = await page.evaluate(() => {
+      const shown = (id) => getComputedStyle(document.getElementById(id)).display !== 'none';
+      const rtl = getComputedStyle(document.documentElement).direction === 'rtl';
+      const box = (el) => el.getBoundingClientRect();
+      const logo = box(document.querySelector('header a[data-view-link="home"]'));
+      const items = [...document.querySelectorAll('#desktop-nav > *')].map(box);
+      // In reading order, each item starts after the one before it ends (and the menu after the logo)
+      const edges = [logo, ...items];
+      let overlap = false;
+      for (let i = 1; i < edges.length; i++) {
+        if (rtl ? edges[i].right > edges[i - 1].left + 1 : edges[i].left < edges[i - 1].right - 1) overlap = true;
+      }
+      // A one-word item never takes two lines (that would mean the word was split)
+      const split = [...document.querySelectorAll('#desktop-nav a[data-view-link]')].filter((a) => {
+        const words = a.textContent.trim().split(/\s+/).filter(Boolean);
+        const lineHeight = parseFloat(getComputedStyle(a).lineHeight) || 20;
+        const text = [...a.querySelectorAll('span')].find((s) => s.textContent.trim() === a.textContent.trim().split(/\s{2,}/)[0]) || a;
+        return words.length === 1 && box(text).height > lineHeight * 1.5;
+      }).map((a) => a.textContent.trim());
+      return { menu: shown('desktop-nav'), button: shown('mobile-controls'), overlap, split, over: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+    });
+    if (!r.menu || r.button || r.overlap || r.split.length || r.over > 0) problems.push(`${lang}: ${JSON.stringify(r)}`);
+  }
+  await context.close();
+  assert.deepEqual(problems, []);
 });
 
 test('the small footnote under the testimonials is readable in light and dark mode', async () => {
