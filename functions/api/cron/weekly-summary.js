@@ -12,14 +12,16 @@
 //     6-digit sign-in codes;
 //   - the email holds numbers only: no names, messages, phone numbers or IP addresses;
 //   - the reply to the caller says only whether an email was sent.
-// The worst a stranger can do is make one week's email arrive early.
+//   - it only sends on Mondays (California time), the day the schedule calls it, so a stranger
+//     cannot move the summaries to other days of the week.
+// The worst a stranger can do is make a Monday's email arrive a few hours early.
 //
 // Refusing a call never writes to the database (the free plan allows 100,000 writes a day for
 // the whole site, and enquiries stop saving if that runs out): calls are first limited in each
 // Cloudflare server's memory, then "was one sent in the last 5 days?" is only read. The
 // database-wide limits below are counted only for calls that could actually send an email.
 //
-// 5 days (not 7) so that an email sent by hand mid-week does not block the next Monday's.
+// 5 days (not 7) so that one Monday's email arriving late never blocks the next Monday's.
 import { ensureSchema, jsonResponse, senderKey, tooManyRequests, tooManyRequestsD1 } from '../../../lib/db.js';
 import { sendDevEmail } from '../../../lib/dev.js';
 import { lastBackupAt } from '../../../lib/backup.js';
@@ -31,6 +33,13 @@ const LAST_SENT_NAME = 'weekly_summary_last_sent';
 export const BACKUP_REMINDER_DAYS = 30;
 
 const n = (row, key = 'n') => Number(row?.[key]) || 0;
+
+// True on Mondays in California (where the owner is), whatever the time of year.
+export function isMondayInCalifornia(ms = Date.now()) {
+  return new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', weekday: 'short' }).format(new Date(ms)) === 'Mon';
+}
+// The rule the address follows (tests replace it to run on any day).
+export const sendDay = { allowed: isMondayInCalifornia };
 
 // All the numbers for the email, for the 7 days before "nowMs".
 export async function buildWeeklySummary(db, nowMs = Date.now()) {
@@ -205,6 +214,11 @@ export async function onRequestPost(context) {
   const sender = senderKey(request);
   if (tooManyRequests(`cron:${sender}`, 6, 60 * 60 * 1000) || tooManyRequests('cron:__all__', 30, 60 * 60 * 1000)) {
     return jsonResponse({ error: 'Too many requests.' }, 429);
+  }
+
+  // Only on Mondays: refused on any other day before the database is touched.
+  if (!sendDay.allowed(Date.now())) {
+    return jsonResponse({ ok: true, sent: false, reason: 'The summary is only sent on Mondays (California time).' });
   }
 
   try {

@@ -892,6 +892,9 @@ async function staffSignIn(page) {
 
 test('developer console: a code pasted with a space in it is kept whole', async () => {
   const { page, context } = await open('/corosone', { wait: 'load' });
+  // Let the page's own "signed in?" check finish first: when it answers "no", the page shows
+  // the sign-in step and empties the code box, which could otherwise wipe what is typed below.
+  await page.waitForLoadState('networkidle');
   await page.evaluate(() => document.getElementById('code-view').classList.remove('hidden'));
   for (const pasted of [' 123456', '123 456', '123456 ']) {
     await page.fill('#dev-code', '');
@@ -1277,6 +1280,13 @@ test('staff accounts and Recently Deleted, end to end: console creates an accoun
   assert.equal(await staff.page.textContent('#whoami'), 'Signed in as Rosa Diaz');
   assert.ok(await staff.page.isVisible('#change-pw-btn'));
   await staff.page.click('#change-pw-btn');
+  // A wrong current password is shown in the form; she stays in the inbox
+  await staff.page.fill('#change-pw-current', 'not my password');
+  await staff.page.fill('#change-pw-new', 'quiet-harbor-lantern-42');
+  await staff.page.fill('#change-pw-again', 'quiet-harbor-lantern-42');
+  await staff.page.click('#change-pw-save');
+  await staff.page.waitForFunction(() => /not right/.test(document.getElementById('change-pw-status').textContent));
+  assert.ok(await staff.page.isVisible('#dashboard-view'), 'still in the inbox, not sent back to the sign-in page');
   await staff.page.fill('#change-pw-current', password);
   await staff.page.fill('#change-pw-new', 'quiet-harbor-lantern-42');
   await staff.page.fill('#change-pw-again', 'quiet-harbor-lantern-42');

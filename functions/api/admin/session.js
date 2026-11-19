@@ -2,10 +2,10 @@ import {
   jsonResponse, verifySameOrigin, readJsonBody, senderKey, tooManyRequests,
   checkAdminConfig, checkAdminPrereqs, checkPasswordWithLockout, enforceTurnstile,
   getSessionSigningMaterial, createSessionToken, sessionCookieHeader, SESSION_TTL_SEC,
-  authorizeStaff,
+  authorizeStaff, getAdminAttempts, lockWaitSeconds, recordAdminFail, clearAdminAttempts,
 } from '../../../lib/db.js';
 import { signOutEverywhere, devAudit } from '../../../lib/dev.js';
-import { isTrusted, trustThisDevice } from '../../../lib/trust.js';
+import { isTrusted, trustThisDevice, forgetAccountDevices } from '../../../lib/trust.js';
 import {
   checkStaffAccount, cleanStaffName, sharedPasswordAllowed, noteStaffSignIn, changeOwnStaffPassword,
 } from '../../../lib/staff.js';
@@ -79,7 +79,7 @@ export async function onRequestPost({ request, env }) {
     if (accountId) await noteStaffSignIn(env.DB, accountId);
     await devAudit(env, request, 'staff_signed_in', accountId ? `as "${account.name}"` : 'with the shared staff password', { withContext: true });
     const cookies = [sessionCookieHeader(request, token, SESSION_TTL_SEC)];
-    const trust = await trustThisDevice(request, env, 'staff');
+    const trust = await trustThisDevice(request, env, 'staff', { accountId });
     if (trust) cookies.push(trust);
     return jsonResponse({ ok: true, name: accountId ? account.name : '' }, 200, { 'Set-Cookie': cookies });
   } catch (err) {
@@ -95,8 +95,16 @@ export async function onRequestGet({ request, env }) {
   return jsonResponse({ ok: true, name: who.name, kind: who.kind });
 }
 
+// Wrong current passwords when changing your own: at most 5 in 15 minutes for each account (from
+// anywhere), then password changes for that account wait 15 minutes. Signing in is not affected.
+// These replies carry field: 'current' or status 429, so the inbox shows them in the form instead
+// of treating them as being signed out.
+const PW_CHANGE_MAX_FAILS = 5;
+const PW_CHANGE_WINDOW = 15 * 60;
+const PW_CHANGE_LOCK_SECONDS = 15 * 60;
+
 // Change your own password (staff accounts only): { current, password }.
-// Signs your other devices out; this one stays signed in.
+// Signs your other devices out (and forgets them as trusted browsers); this one stays signed in.
 export async function onRequestPatch({ request, env }) {
   const { denied, who } = await authorizeStaff(request, env);
   if (denied) return denied;
@@ -109,8 +117,29 @@ export async function onRequestPatch({ request, env }) {
   const parsed = await readJsonBody(request, 4096);
   if (!parsed.ok) return parsed.response;
   try {
+    // Read only: refused while locked, without writing anything.
+    const lockKey = `staffpw|${who.accountId}`;
+    const wait = lockWaitSeconds(await getAdminAttempts(env.DB, lockKey));
+    if (wait > 0) {
+      return jsonResponse(
+        { error: `Too many wrong passwords. Please try again in ${Math.ceil(wait / 60)} minute(s).` },
+        429,
+        { 'Retry-After': String(wait) }
+      );
+    }
     const r = await changeOwnStaffPassword(env.DB, who.accountId, parsed.data.current, parsed.data.password, who.jti);
-    if (!r.ok) return jsonResponse({ error: r.message }, r.status || 400);
+    if (!r.ok) {
+      if (r.status === 401) {
+        // A wrong current password: counted for this account, and shown in the activity log.
+        await recordAdminFail(env.DB, lockKey, PW_CHANGE_WINDOW, PW_CHANGE_MAX_FAILS, PW_CHANGE_LOCK_SECONDS)
+          .catch((err) => console.error('Could not record wrong current password:', err));
+        await devAudit(env, request, 'staff_wrong_password', `"${who.name}", changing their password`, { withContext: true });
+        return jsonResponse({ error: r.message, field: 'current' }, 401);
+      }
+      return jsonResponse({ error: r.message }, r.status || 400);
+    }
+    await clearAdminAttempts(env.DB, lockKey);
+    await forgetAccountDevices(env, who.accountId, request);
     await devAudit(env, request, 'staff_changed_password', `"${who.name}"`, { withContext: true });
     return jsonResponse({ ok: true, signedOut: r.signedOut });
   } catch (err) {

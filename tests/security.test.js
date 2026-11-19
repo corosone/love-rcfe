@@ -5,7 +5,8 @@
 // booking time check, individual staff accounts (sign-in, own password, new password, removal,
 // turning the shared password off, "last changed by"), Recently Deleted (put back, delete for
 // good, empty, removed after 30 days), backups, the spreadsheet formula guard and the console's
-// warning about a short staff password. Everything runs against an in-memory database.
+// warning about a short staff password. Section 9 covers the fixes from the second security
+// review. Everything runs against an in-memory database.
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const { startServer } = require('./helpers/server.js');
@@ -27,6 +28,8 @@ before(async () => {
   // Create the tables now (the site creates them on first use), so tests can reset limits.
   const { ensureSchema } = await import('../lib/db.js');
   await ensureSchema(site.env.DB);
+  // The weekly summary is only sent on Mondays; these tests run on any day.
+  (await import('../functions/api/cron/weekly-summary.js')).sendDay.allowed = () => true;
 });
 
 after(async () => {
@@ -596,4 +599,222 @@ test('the console warns when the shared staff password is short, without ever sh
   const o = await overview();
   assert.equal(o.config.staffPasswordShort, false);
   assert.ok(!JSON.stringify(o).includes(INBOX_PASSWORD));
+});
+
+// ---------- 9. Fixes from the second security review ----------
+
+test('lockouts: once a lock ends, the count starts again, so one more wrong password does not lock again', async () => {
+  const { recordAdminFail, getAdminAttempts, lockWaitSeconds } = await import('../lib/db.js');
+  const db = site.env.DB;
+  const key = 'test|relock';
+  // 3 wrong within 5 minutes locks for 1 minute (like the site-wide staff lock: short lock, longer window)
+  for (let i = 0; i < 3; i++) await recordAdminFail(db, key, 300, 3, 60);
+  assert.ok(lockWaitSeconds(await getAdminAttempts(db, key)) > 0, '3 wrong ones lock');
+  await recordAdminFail(db, key, 300, 3, 60);
+  assert.equal(Number((await getAdminAttempts(db, key)).fails), 4, 'tries during a lock still count');
+  // The lock ends while those failures are still inside their 5-minute window
+  const now = Math.floor(Date.now() / 1000);
+  site.db._run('UPDATE auth_attempts SET first_fail = ?, locked_until = ? WHERE key = ?', now - 70, now - 10, key);
+  await recordAdminFail(db, key, 300, 3, 60);
+  let row = await getAdminAttempts(db, key);
+  assert.equal(lockWaitSeconds(row), 0, 'one wrong password after the lock ended does not lock again');
+  assert.equal(Number(row.fails), 1, 'the count started again');
+  await recordAdminFail(db, key, 300, 3, 60);
+  await recordAdminFail(db, key, 300, 3, 60);
+  row = await getAdminAttempts(db, key);
+  assert.ok(lockWaitSeconds(row) > 0, '3 new wrong ones lock again');
+  site.db._run('DELETE FROM auth_attempts WHERE key = ?', key);
+});
+
+test('weekly summary: only sent on Mondays in California, all year round; other days send and write nothing', async () => {
+  const { isMondayInCalifornia, sendDay } = await import('../functions/api/cron/weekly-summary.js');
+  const monday = (iso) => isMondayInCalifornia(Date.parse(iso));
+  assert.equal(monday('2026-11-23T16:23:00Z'), true, 'the time GitHub calls it (Monday morning)');
+  assert.equal(monday('2026-11-23T08:00:00Z'), true, 'just after midnight on Monday (winter time)');
+  assert.equal(monday('2026-11-23T07:59:00Z'), false, 'still Sunday night in California');
+  assert.equal(monday('2026-11-24T07:59:00Z'), true, 'just before midnight on Monday');
+  assert.equal(monday('2026-11-24T08:00:00Z'), false, 'Tuesday');
+  assert.equal(monday('2026-07-06T07:00:00Z'), true, 'just after midnight on Monday (summer time)');
+  assert.equal(monday('2026-07-06T06:59:00Z'), false, 'still Sunday night in summer');
+
+  site.db._run("INSERT INTO app_secrets (name, value) VALUES ('weekly_summary_last_sent', '1') ON CONFLICT(name) DO UPDATE SET value = excluded.value");
+  clearLimits();
+  site.outside.length = 0;
+  sendDay.allowed = () => false;
+  try {
+    const r = await json(await site.api('/api/cron/weekly-summary', { method: 'POST', ip: '198.51.100.201' }));
+    assert.equal(r.status, 200);
+    assert.equal(r.data.sent, false);
+    assert.equal(site.outside.filter((c) => c.url === 'https://api.resend.com/emails').length, 0, 'no email');
+    assert.equal(site.db._rows("SELECT value FROM app_secrets WHERE name = 'weekly_summary_last_sent'")[0].value, '1', 'nothing recorded as sent');
+    assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM rate_limits WHERE key LIKE 'cron:%'")[0].n, 0, 'nothing written');
+  } finally {
+    sendDay.allowed = () => true;
+  }
+});
+
+test('page visits: the whole site records at most 4,000 a day; after that nothing more is written', async () => {
+  const { SITE_DAY_LIMIT, _resetRequestLogLimits } = await import('../lib/requestlog.js');
+  assert.equal(SITE_DAY_LIMIT, 4000);
+  _resetRequestLogLimits();
+  const today = Math.floor(Date.now() / 86400000) * 86400;
+  const setDay = (hits, start) => site.db._run("INSERT INTO rate_limits (key, hits, window_start) VALUES ('visitlog:__day__', ?, ?) ON CONFLICT(key) DO UPDATE SET hits = excluded.hits, window_start = excluded.window_start", hits, start);
+  const dayRow = () => site.db._rows("SELECT hits, window_start FROM rate_limits WHERE key = 'visitlog:__day__'")[0];
+  const logged = (ip) => site.db._rows('SELECT COUNT(*) AS n FROM request_log WHERE ip = ?', ip)[0].n;
+  const visit = async (ip) => { assert.equal((await site.api('/api/visit', { method: 'POST', body: { path: '/' }, ip })).status, 204); await site.settle(); };
+
+  setDay(SITE_DAY_LIMIT - 1, today);
+  await visit('198.51.100.230');
+  assert.equal(logged('198.51.100.230'), 1, 'the day\'s last allowed visit is recorded');
+  assert.equal(dayRow().hits, SITE_DAY_LIMIT);
+  await visit('198.51.100.231');
+  assert.equal(logged('198.51.100.231'), 0, 'the next one is not');
+  assert.equal(dayRow().hits, SITE_DAY_LIMIT, 'and not even counted: no database write at all');
+  _resetRequestLogLimits(); // as on another of Cloudflare's servers: it reads the count and stops too
+  await visit('198.51.100.232');
+  assert.equal(logged('198.51.100.232'), 0);
+  assert.equal(dayRow().hits, SITE_DAY_LIMIT);
+
+  // The next day starts a fresh count
+  setDay(SITE_DAY_LIMIT, today - 86400);
+  _resetRequestLogLimits();
+  await visit('198.51.100.233');
+  assert.equal(logged('198.51.100.233'), 1);
+  assert.deepEqual(dayRow(), { hits: 1, window_start: today });
+  site.db._run("DELETE FROM rate_limits WHERE key = 'visitlog:__day__'");
+  _resetRequestLogLimits();
+});
+
+test('staff sessions: one account signing in again and again only replaces its own oldest sessions', async () => {
+  const { createSessionToken, STAFF_SESSIONS_PER_ACCOUNT, STAFF_SESSIONS_SHARED } = await import('../lib/db.js');
+  const db = site.env.DB;
+  const sessions = (id) => site.db._rows('SELECT COUNT(*) AS n FROM admin_sessions WHERE account_id = ?', id)[0].n;
+  const sharedBefore = sessions(0);
+  await createSessionToken('test material', 3600, db, 'staff', { accountId: 9002 });
+  for (let i = 0; i < STAFF_SESSIONS_PER_ACCOUNT + 10; i++) await createSessionToken('test material', 3600, db, 'staff', { accountId: 9001 });
+  assert.equal(sessions(9001), STAFF_SESSIONS_PER_ACCOUNT, `at most ${STAFF_SESSIONS_PER_ACCOUNT} for one account`);
+  assert.equal(sessions(9002), 1, 'another person\'s session is untouched');
+  assert.equal(sessions(0), sharedBefore, 'shared-password sessions are untouched');
+  assert.equal(STAFF_SESSIONS_SHARED, 100, 'the shared password keeps its old allowance');
+  site.db._run('DELETE FROM admin_sessions WHERE account_id IN (9001, 9002)');
+});
+
+test('trusted browsers: one account signing in again and again only replaces its own oldest ones', async () => {
+  const { trustThisDevice, isTrusted } = await import('../lib/trust.js');
+  const req = (cookie = '') => new Request(site.origin + '/api/admin/session', { headers: cookie ? { cookie } : {} });
+  const devices = (id) => site.db._rows("SELECT COUNT(*) AS n FROM trusted_devices WHERE kind = 'staff' AND account_id = ?", id)[0].n;
+  const sharedBefore = devices(0);
+  const other = (await trustThisDevice(req(), site.env, 'staff', { accountId: 9002 })).split(';')[0];
+  for (let i = 0; i < 30; i++) await trustThisDevice(req(), site.env, 'staff', { accountId: 9001 });
+  assert.equal(devices(9001), 20, 'at most 20 for one account');
+  assert.equal(devices(9002), 1);
+  assert.equal(await isTrusted(req(other), site.env, 'staff'), true, 'another person\'s browser stays trusted');
+  assert.equal(devices(0), sharedBefore, 'shared-password browsers are untouched');
+  site.db._run('DELETE FROM trusted_devices WHERE account_id IN (9001, 9002)');
+});
+
+test('staff accounts: removing someone or giving them a new password also forgets their trusted browsers', async () => {
+  clearLimits(); clearLockouts();
+  const added = async (name) => (await action('add_staff_account', { name })).data;
+  const sam = await added('Sam Trusted');
+  const lee = await added('Lee Trusted');
+  const signIn = async (who, ip) => {
+    const res = await staffLogin({ name: who.account.name, password: who.password }, { ip });
+    assert.equal(res.status, 200);
+    return cookiesOf(res).lovercfe_staff_trust;
+  };
+  const samTrust = await signIn(sam, '203.0.113.161');
+  const leeTrust = await signIn(lee, '203.0.113.162');
+  const { isTrusted } = await import('../lib/trust.js');
+  const trusted = (token) => isTrusted(new Request(site.origin + '/api/admin/session', { headers: { cookie: `lovercfe_staff_trust=${token}` } }), site.env, 'staff');
+  assert.equal(site.db._rows("SELECT COUNT(*) AS n FROM trusted_devices WHERE kind = 'staff' AND account_id = ?", sam.account.id)[0].n, 1, 'the browser is linked to the account that signed in');
+  assert.equal(await trusted(samTrust), true);
+
+  assert.equal((await action('reset_staff_password', { id: sam.account.id })).status, 200);
+  assert.equal(await trusted(samTrust), false, 'a new password: the old browser is no longer trusted');
+  assert.equal(await trusted(leeTrust), true, 'other people are not affected');
+
+  assert.equal((await action('remove_staff_account', { id: lee.account.id })).status, 200);
+  assert.equal(await trusted(leeTrust), false, 'removed: their browser is no longer trusted');
+  assert.equal((await action('remove_staff_account', { id: sam.account.id })).status, 200);
+  clearLimits();
+});
+
+test('staff accounts: wrong current passwords are counted for the account and logged; changing it forgets other trusted browsers', async () => {
+  clearLimits(); clearLockouts();
+  const kim = (await action('add_staff_account', { name: 'Kim Changes' })).data;
+  const signIn = async (ip) => cookiesOf(await staffLogin({ name: 'Kim Changes', password: kim.password }, { ip }));
+  const here = await signIn('203.0.113.171');
+  const elsewhere = await signIn('203.0.113.172');
+  const change = async (body, ip) => json(await site.api('/api/admin/session', {
+    method: 'PATCH', body, ip,
+    headers: { cookie: `lovercfe_admin=${here.lovercfe_admin}; lovercfe_staff_trust=${here.lovercfe_staff_trust}` },
+  }));
+  const logged = () => site.db._rows("SELECT COUNT(*) AS n FROM dev_audit WHERE event = 'staff_wrong_password' AND detail LIKE '%Kim Changes%changing their password%'")[0].n;
+  // From a different address each time, so only the account's own count can stop them
+  for (let i = 1; i <= 5; i++) {
+    const r = await change({ current: 'not it ' + i, password: 'a brand new password' }, `198.51.100.${180 + i}`);
+    assert.equal(r.status, 401);
+    assert.equal(r.data.field, 'current', 'the inbox shows this in the form instead of signing out');
+  }
+  assert.equal(logged(), 5, 'each wrong one is in the activity log');
+  const locked = await change({ current: kim.password, password: 'a brand new password' }, '198.51.100.186');
+  assert.equal(locked.status, 429, 'after 5 wrong ones, even the right password waits');
+  assert.match(locked.data.error, /Too many wrong passwords/);
+  const relogin = await staffLogin({ name: 'Kim Changes', password: kim.password }, { ip: '203.0.113.173' });
+  assert.equal(relogin.status, 200, 'signing in is not affected');
+
+  clearLockouts();
+  const ok = await change({ current: kim.password, password: 'a brand new password' }, '198.51.100.187');
+  assert.equal(ok.status, 200, JSON.stringify(ok.data));
+  const { isTrusted } = await import('../lib/trust.js');
+  const trusted = (token) => isTrusted(new Request(site.origin + '/api/admin/session', { headers: { cookie: `lovercfe_staff_trust=${token}` } }), site.env, 'staff');
+  assert.equal(await trusted(here.lovercfe_staff_trust), true, 'this browser stays trusted');
+  assert.equal(await trusted(elsewhere.lovercfe_staff_trust), false, 'the other browser is forgotten');
+  assert.equal((await action('remove_staff_account', { id: kim.account.id })).status, 200);
+  clearLimits(); clearLockouts();
+});
+
+test('IP address check: records of a long address\'s network are found, however busy its provider is', async () => {
+  const now = Math.floor(Date.now() / 1000);
+  const addVisit = (ip, at = now) => site.db._run("INSERT INTO request_log (at, kind, method, path, status, ip) VALUES (?, 'view', 'GET', '/', 200, ?)", at, ip);
+  // The network asked about: two phones, visited first
+  addVisit('2603:8001:4d2:1::1', now - 100);
+  addVisit('2603:8001:4d2:1:abcd::2', now - 90);
+  // A network whose short form hides zero groups ("::")
+  addVisit('2603:8001::5:6:7:8', now - 80);
+  addVisit('2603:8001:0:0:1::', now - 70);
+  // Then 2,100 newer visits from other homes at the same provider
+  site.db._run(`
+    WITH RECURSIVE n(i) AS (SELECT 1 UNION ALL SELECT i + 1 FROM n WHERE i < 2100)
+    INSERT INTO request_log (at, kind, method, path, status, ip)
+    SELECT ?, 'view', 'GET', '/', 200, printf('2603:8001:4d2:%x::1', i + 1) FROM n
+  `, now);
+  site.setOutsideAnswer(() => new Response('', { status: 503 }));
+  try {
+    const a = await tool({ tool: 'ip', ip: '2603:8001:4d2:1::99' });
+    assert.equal(a.status, 200);
+    assert.equal(a.data.blockKey, '2603:8001:4d2:1::/64');
+    assert.equal(a.data.visits.count, 2, 'both phones\' visits are found');
+    const b = await tool({ tool: 'ip', ip: '2603:8001::1' });
+    assert.equal(b.data.blockKey, '2603:8001::/64');
+    assert.equal(b.data.visits.count, 2, 'both ways of writing that network are found');
+  } finally {
+    site.setOutsideAnswer(null);
+    site.db._run("DELETE FROM request_log WHERE ip LIKE '2603:8001:%'");
+  }
+
+  // The search patterns cover every way an address can be written, checked on many made-up ones
+  const { networkLikePatterns, networkKey, normalizeIp } = await import('../lib/ipnet.js');
+  let checked = 0;
+  for (let i = 0; i < 20000; i++) {
+    const groups = Array.from({ length: 8 }, () => (Math.random() < 0.45 ? '0' : Math.floor(Math.random() * 65536).toString(16)));
+    groups[0] = '2603';
+    const ip = normalizeIp(groups.join(':'));
+    if (!networkKey(ip).endsWith('/64')) continue;
+    checked++;
+    assert.ok(networkLikePatterns(ip).some((p) => ip.startsWith(p.slice(0, -1))), `${ip} is found by its own network's search`);
+  }
+  assert.ok(checked > 19000);
+  assert.deepEqual(networkLikePatterns('198.51.100.7'), [], 'short addresses are looked up exactly');
 });
