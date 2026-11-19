@@ -1007,6 +1007,24 @@
       refreshIcons();
     }
 
+    // Dollar amounts in the cost calculator, written the way each language writes them in its own
+    // text on this page (public/i18n/<code>.js): "$5,200" in most languages, "5 200 $" in French,
+    // and Persian digits with the word for dollar in Persian. Always US dollars: these are
+    // California prices. Non-breaking spaces keep each amount on one line.
+    const PERSIAN_DIGITS = '\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9';
+    function formatDollars(amount, perMonth = false) {
+      const lang = window.LoveI18n ? window.LoveI18n.getLang() : 'en';
+      const plain = Math.round(amount).toLocaleString('en-US'); // 5,200
+      if (lang === 'fr') {
+        return plain.replace(/,/g, '\u00a0') + '\u00a0$' + (perMonth ? t('/mo') : '');
+      }
+      if (lang === 'fa') {
+        const persian = plain.replace(/,/g, '\u066c').replace(/[0-9]/g, (d) => PERSIAN_DIGITS[d]);
+        return persian + '\u00a0دلار' + (perMonth ? ' در ماه' : ''); // "dollar", "per month"
+      }
+      return '$' + plain + (perMonth ? t('/mo') : '');
+    }
+
     // Cost Calculator
     function calculateCosts() {
       const regionEl = document.getElementById('calc-region');
@@ -1063,11 +1081,14 @@
       const facEl = document.getElementById('calc-facility-price');
       const homeEl = document.getElementById('calc-homecare-price');
 
-      const perMo = t('/mo');
-      if (rangeEl) rangeEl.textContent = `${formatter.format(lowRange)} – ${formatter.format(highRange)}`;
-      if (rcfeEl) rcfeEl.textContent = `${formatter.format(totalRCFE)}${perMo}`;
-      if (facEl) facEl.textContent = `${formatter.format(facilityPrice)}${perMo}`;
-      if (homeEl) homeEl.textContent = `${formatter.format(homeCarePrice)}${perMo}`;
+      if (rangeEl) {
+        rangeEl.textContent = `${formatDollars(lowRange)} – ${formatDollars(highRange)}`;
+        // The contact form message gets the plain "$5,510 – $6,670", which staff can always read
+        rangeEl.dataset.usd = `${formatter.format(lowRange)} – ${formatter.format(highRange)}`;
+      }
+      if (rcfeEl) rcfeEl.textContent = formatDollars(totalRCFE, true);
+      if (facEl) facEl.textContent = formatDollars(facilityPrice, true);
+      if (homeEl) homeEl.textContent = formatDollars(homeCarePrice, true);
     }
 
     // Pre-fill contact form from calculator estimate
@@ -1075,7 +1096,8 @@
       const regionEl = document.getElementById('calc-region');
       const careLevelEl = document.getElementById('calc-care-level');
       const roomType = document.querySelector('input[name="calc-room"]:checked')?.value || 'private';
-      const range = document.getElementById('calc-result-range')?.textContent || '$5,200 – $6,400';
+      const rangeEl = document.getElementById('calc-result-range');
+      const range = rangeEl?.dataset.usd || rangeEl?.textContent || '$5,200 – $6,400';
 
       const regionText = regionEl ? regionEl.options[regionEl.selectedIndex].text : 'California';
       const careText = careLevelEl ? careLevelEl.options[careLevelEl.selectedIndex].text : 'Moderate Care';

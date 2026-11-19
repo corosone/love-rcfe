@@ -701,6 +701,33 @@ test('a language page shows its language from the first moment and its tools are
   await context.close();
 });
 
+test('cost calculator: amounts are written the way the language writes dollars on its own page; staff get plain dollars', async () => {
+  const NBSP = ' '; // keeps each amount on one line
+  const want = {
+    en: { range: '$5,510 – $6,670', rcfe: '$5,800/mo', home: '$27,360/mo' },
+    es: { range: '$5,510 – $6,670', rcfe: '$5,800/mes', home: '$27,360/mes' },
+    ar: { range: '$5,510 – $6,670', rcfe: '$5,800/شهر', home: '$27,360/شهر' },
+    'zh-hant': { range: '$5,510 – $6,670', rcfe: '$5,800/月', home: '$27,360/月' },
+    // French and Persian write money their own way in their text, so the calculator does too
+    fr: { range: `5${NBSP}510${NBSP}$ – 6${NBSP}670${NBSP}$`, rcfe: `5${NBSP}800${NBSP}$/mois`, home: `27${NBSP}360${NBSP}$/mois`, sameAs: '2 424 $/mois' },
+    fa: { range: `۵٬۵۱۰${NBSP}دلار – ۶٬۶۷۰${NBSP}دلار`, rcfe: `۵٬۸۰۰${NBSP}دلار در ماه`, home: `۲۷٬۳۶۰${NBSP}دلار در ماه`, sameAs: '۲٬۴۲۴ دلار در ماه' },
+  };
+  for (const [lang, w] of Object.entries(want)) {
+    const { page, context, seen } = await open((lang === 'en' ? '/' : `/${lang}/`) + '#tools', { width: 390, height: 844 });
+    assert.equal(await page.textContent('#calc-result-range'), w.range, `${lang}: the estimate`);
+    assert.equal(await page.textContent('#calc-rcfe-price'), w.rcfe, `${lang}: board and care`);
+    assert.equal(await page.textContent('#calc-homecare-price'), w.home, `${lang}: home care`);
+    // The same style as the VA amounts in this language's own text on the page
+    if (w.sameAs) assert.ok((await page.textContent('#tools')).includes(w.sameAs), `${lang}: the page writes "${w.sameAs}" elsewhere`);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), 0, `${lang}: nothing too wide`);
+    // "Inquire About This Budget" copies the estimate into the contact form in plain dollars, which staff can always read
+    await page.click('[data-click="prefillContactFromEstimate()"]');
+    assert.match(await page.inputValue('#message'), /\$5,510 – \$6,670/, `${lang}: the message keeps plain dollars`);
+    assert.deepEqual(seen.errors, [], `${lang}: no errors`);
+    await context.close();
+  }
+});
+
 test('the address decides the language, and the old ways of choosing one still work', async () => {
   // A visitor whose saved language is French opens the Spanish address: Spanish wins
   const a = await open('/es/', { setup: (p) => p.addInitScript(() => { try { localStorage.setItem('lovercfe_lang', 'fr'); } catch (e) {} }) });
