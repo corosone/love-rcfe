@@ -360,6 +360,8 @@
     "Navigation": "Նավիգացիա",
     "Cost Calculator & Assessment": "Արժեքի հաշվիչ և գնահատում",
     "Direct Assistance": "Ուղիղ աջակցություն",
+    "Review Us on Google": "Թողեք կարծիք Google-ում",
+    "Find Us on Google Maps": "Գտեք մեզ Google Քարտեզներում",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "Երկ–Շաբ 8:00 – 19:00 PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE։ Բոլոր իրավունքները պաշտպանված են։ Գաղտնի, սրտացավ ուղեկցում։",
     "Support": "Աջակցություն",

@@ -360,6 +360,8 @@
     "Navigation": "网站导航",
     "Cost Calculator & Assessment": "费用计算器与自评",
     "Direct Assistance": "直接联系支持",
+    "Review Us on Google": "在 Google 上评价我们",
+    "Find Us on Google Maps": "在 Google 地图上查看我们",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "周一至周六 8:00 AM – 7:00 PM PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE 保留所有权利。私密、用心的长者照护指导。",
     "Support": "支持中心",

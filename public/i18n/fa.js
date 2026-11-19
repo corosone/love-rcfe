@@ -360,6 +360,8 @@
     "Navigation": "ناوبری",
     "Cost Calculator & Assessment": "ماشین‌حساب هزینه و ارزیابی",
     "Direct Assistance": "راهنمایی مستقیم",
+    "Review Us on Google": "در Google به ما امتیاز دهید",
+    "Find Us on Google Maps": "ما را در نقشه Google پیدا کنید",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "دوشنبه–شنبه ۸:۰۰ صبح – ۷:۰۰ عصر PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE. تمامی حقوق محفوظ است. راهنمایی خصوصی و دلسوزانه برای مراقبت از سالمندان.",
     "Support": "پشتیبانی",

@@ -360,6 +360,8 @@
     "Navigation": "ਨੈਵੀਗੇਸ਼ਨ",
     "Cost Calculator & Assessment": "ਖਰਚ ਕੈਲਕੂਲੇਟਰ ਅਤੇ ਮੁਲਾਂਕਣ",
     "Direct Assistance": "ਸਿੱਧੀ ਸਹਾਇਤਾ",
+    "Review Us on Google": "Google 'ਤੇ ਸਾਨੂੰ ਰਿਵਿਊ ਦਿਓ",
+    "Find Us on Google Maps": "Google Maps 'ਤੇ ਸਾਨੂੰ ਦੇਖੋ",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "ਸੋਮ–ਸ਼ਨੀ ਸਵੇਰੇ 8:00 – ਸ਼ਾਮ 7:00 ਵਜੇ PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE. ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ। ਨਿੱਜੀ, ਸੁਚੱਜਾ ਬਜ਼ੁਰਗ ਦੇਖਭਾਲ ਮਾਰਗਦਰਸ਼ਨ।",
     "Support": "ਸਹਾਇਤਾ",

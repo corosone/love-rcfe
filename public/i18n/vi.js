@@ -360,6 +360,8 @@
     "Navigation": "Điều Hướng",
     "Cost Calculator & Assessment": "Bảng Tính & Đánh Giá",
     "Direct Assistance": "Hỗ Trợ Trực Tiếp",
+    "Review Us on Google": "Đánh Giá Chúng Tôi trên Google",
+    "Find Us on Google Maps": "Tìm Chúng Tôi trên Google Maps",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "Thứ 2–Thứ 7: 8:00 AM – 7:00 PM PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE. Bảo lưu mọi quyền. Tư vấn chăm sóc người cao tuổi riêng tư và tận tâm.",
     "Support": "Hỗ trợ",

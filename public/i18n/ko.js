@@ -360,6 +360,8 @@
     "Navigation": "바로가기",
     "Cost Calculator & Assessment": "비용 계산기 및 자가진단",
     "Direct Assistance": "직통 상담 안내",
+    "Review Us on Google": "Google 리뷰 남기기",
+    "Find Us on Google Maps": "Google 지도에서 보기",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "월–토 오전 8:00 – 오후 7:00 PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE. All rights reserved. 프라이버시를 존중하는 사려 깊은 어르신 돌봄 안내.",
     "Support": "고객지원",

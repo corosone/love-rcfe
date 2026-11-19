@@ -360,6 +360,8 @@
     "Navigation": "ナビゲーション",
     "Cost Calculator & Assessment": "費用試算・ケア診断",
     "Direct Assistance": "直接のお問い合わせ",
+    "Review Us on Google": "Google でクチコミを書く",
+    "Find Us on Google Maps": "Google マップで見る",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "月〜土 午前8:00〜午後7:00（太平洋時間）",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE. All rights reserved. プライバシーを尊重した丁寧な高齢者ケア相談。",
     "Support": "サポート",
