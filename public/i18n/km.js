@@ -360,6 +360,8 @@
     "Navigation": "ការរុករក",
     "Cost Calculator & Assessment": "ម៉ាស៊ីនគណនាថ្លៃចំណាយ និងការវាយតម្លៃ",
     "Direct Assistance": "ជំនួយផ្ទាល់",
+    "Review Us on Google": "វាយតម្លៃយើងនៅលើ Google",
+    "Find Us on Google Maps": "ស្វែងរកយើងនៅលើ Google Maps",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "ចន្ទ–សៅរ៍ 8:00 ព្រឹក – 7:00 ល្ងាច PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE។ រក្សាសិទ្ធិគ្រប់យ៉ាង។ ការណែនាំអំពីការថែទាំមនុស្សចាស់ប្រកបដោយភាពឯកជន និងការយកចិត្តទុកដាក់។",
     "Support": "ជំនួយ",

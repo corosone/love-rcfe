@@ -360,6 +360,8 @@
     "Navigation": "Навигация",
     "Cost Calculator & Assessment": "Калькулятор и оценка ухода",
     "Direct Assistance": "Прямая связь",
+    "Review Us on Google": "Оставить отзыв в Google",
+    "Find Us on Google Maps": "Мы на Google Картах",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "Пн–Сб 8:00 – 19:00 PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE. Все права защищены. Деликатная помощь по уходу за пожилыми.",
     "Support": "Поддержка",

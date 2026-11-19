@@ -360,6 +360,8 @@
     "Navigation": "Nabigasyon",
     "Cost Calculator & Assessment": "Kalkulador ng Gastos at Pagsusuri",
     "Direct Assistance": "Direktang Tulong",
+    "Review Us on Google": "Mag-iwan ng Review sa Google",
+    "Find Us on Google Maps": "Hanapin Kami sa Google Maps",
     "Mon–Sat 8:00 AM – 7:00 PM PT": "Lun–Sab 8:00 AM – 7:00 PM PT",
     "Love RCFE. All rights reserved. Private, thoughtful elder care guidance.": "Love RCFE. Nakalaan ang lahat ng karapatan. Pribado at maingat na gabay sa pag-aalaga.",
     "Support": "Suporta",
