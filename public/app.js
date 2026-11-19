@@ -1300,19 +1300,19 @@
 
             <p class="text-sm font-bold text-brand-ink mb-3">${tx('Who are you exploring care for?')}</p>
             <div class="grid sm:grid-cols-2 gap-3 mb-4">
-              <button data-click="setModalQuizAnswer(1, 'elder-parent')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(1, 'elder-parent')" class="quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Elder Parent or Relative')}</span>
                 <span class="block text-xs text-brand-muted mt-1">${tx('Caring for Mom, Dad, or elder relative')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(1, 'spouse')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(1, 'spouse')" class="quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Spouse or Partner')}</span>
                 <span class="block text-xs text-brand-muted mt-1">${tx("Seeking support for partner's health progression")}</span>
               </button>
-              <button data-click="setModalQuizAnswer(1, 'self')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(1, 'self')" class="quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Myself')}</span>
                 <span class="block text-xs text-brand-muted mt-1">${tx('Planning forward for my own future residence')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(1, 'client')" class="quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(1, 'client')" class="quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Social Worker / Discharge Planner')}</span>
                 <span class="block text-xs text-brand-muted mt-1">${tx('Hospital / rehab safe discharge placement')}</span>
               </button>
@@ -1338,15 +1338,15 @@
 
             <p class="text-sm font-bold text-brand-ink mb-3">${tx('What is their primary cognitive and memory status?')}</p>
             <div class="space-y-3 mb-4">
-              <button data-click="setModalQuizAnswer(2, 'sharp')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(2, 'sharp')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Sharp & Clear Cognitively')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Alert, manages conversations, no wandering or severe memory confusion')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(2, 'mild')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(2, 'mild')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Mild Forgetfulness / Age-Related Memory Lapses')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Occasionally forgets medications or dates, but oriented to surroundings')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(2, 'dementia')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(2, 'dementia')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx("Diagnosed Alzheimer's or Moderate/Severe Dementia")}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Confusion, disorientation, risk of exit-seeking/wandering, requires secured care')}</span>
               </button>
@@ -1372,15 +1372,15 @@
 
             <p class="text-sm font-bold text-brand-ink mb-3">${tx('What assistance is required with physical activities of daily living (ADLs)?')}</p>
             <div class="space-y-3 mb-4">
-              <button data-click="setModalQuizAnswer(3, 'independent')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(3, 'independent')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Independent / Minimal assistance')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Walks easily; just needs meal service, companionship, and medication reminders')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(3, 'assist')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(3, 'assist')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Moderate Assistance (Bathing, Dressing, Transfers)')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Uses walker or wheelchair; needs 1 caregiver for showers or getting out of bed')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(3, 'total')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(3, 'total')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('High Acuity / Bedridden / Total Dependence')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Non-ambulatory, frequent turning, hoyer lift or 2-person assist, hospice waiver')}</span>
               </button>
@@ -1406,15 +1406,15 @@
 
             <p class="text-sm font-bold text-brand-ink mb-3">${tx('How soon is care needed?')}</p>
             <div class="space-y-3 mb-4">
-              <button data-click="setModalQuizAnswer(4, 'immediate')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(4, 'immediate')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Immediate / Hospital Discharge (Within 1–7 Days)')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Urgent transition needing expedited bed placement and physician review')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(4, 'soon')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(4, 'soon')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Next 30–60 Days')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Proactively planning a comfortable, unhurried transition')}</span>
               </button>
-              <button data-click="setModalQuizAnswer(4, 'research')" class="w-full quiz-option-btn text-left p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+              <button data-click="setModalQuizAnswer(4, 'research')" class="w-full quiz-option-btn text-start p-4 rounded-2xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                 <span class="block font-bold text-sm text-brand-ink">${tx('Future Research & Budget Planning')}</span>
                 <span class="block text-xs text-brand-muted mt-0.5">${tx('Gathering pricing, options, and understanding California licensing levels')}</span>
               </button>
@@ -1452,7 +1452,7 @@
 
               <div class="border-t border-brand-line pt-3 text-xs">
                 <p class="font-bold text-brand-ink mb-1.5">${tx('Key Questions to Ask on Your First Tour:')}</p>
-                <ul class="list-disc pl-5 space-y-1 text-brand-muted">
+                <ul class="list-disc ps-5 space-y-1 text-brand-muted">
                   ${rec.questions.map(q => `<li>${escapeHtml(q)}</li>`).join('')}
                 </ul>
               </div>

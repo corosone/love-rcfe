@@ -202,7 +202,7 @@
     .nav-link::after {
       content: '';
       position: absolute;
-      left: 0;
+      inset-inline-start: 0;
       bottom: -6px;
       width: 0%;
       height: 2px;
@@ -223,7 +223,7 @@
       color: var(--green) !important;
       font-weight: 700 !important;
       background-color: var(--sage);
-      padding-left: 12px;
+      padding-inline-start: 12px;
       border-radius: 8px;
     }
     .prose-copy p { margin: 0 0 1.25rem; line-height: 1.8; }
@@ -679,19 +679,21 @@
     html:not(.dark) .text-brand-accent { color: #8a4f2c; }
     html:not(.dark) .bg-brand-accent { background-color: #8a4f2c; }
     html:not(.dark) .border-brand-accent { border-color: #8a4f2c; }
-    html:is([lang="ar"], [lang="fa"], [lang="he"]) body {
-      text-align: left;
-    }
-    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(h1, h2, h3, h4, p:not(.flex):not(.inline-flex), li:not(.flex), blockquote) {
+    /* Arabic, Persian and Hebrew: i18n.js sets dir="rtl" on the page, so the whole layout reads
+       from right to left. What visitors type follows the language they type in; phone numbers,
+       email addresses, the calculator and the language list stay left to right. Arrows point the
+       way of reading. */
+    html[dir="rtl"] :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
       unicode-bidi: plaintext;
+      text-align: start;
     }
-    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(input:not([type="tel"]):not([type="email"]), textarea, select) {
-      unicode-bidi: plaintext;
-      text-align: left;
-    }
-    html:is([lang="ar"], [lang="fa"], [lang="he"]) :is(a[href^="tel:"], input[type="tel"], input[type="email"], #neon-calculator-widget, .lang-dropdown) {
+    /* (The floating "Call Us" button shows words, not the number, so it follows the page.) */
+    html[dir="rtl"] :is(a[href^="tel:"]:not(.fixed), a[href^="mailto:"], input[type="tel"], input[type="email"], #neon-calculator-widget, .lang-dropdown) {
       direction: ltr;
       unicode-bidi: isolate;
+    }
+    html[dir="rtl"] :is(.lucide-arrow-right, .lucide-arrow-left, .lucide-chevron-right, .lucide-chevron-left, .lucide-arrow-up-right, .lucide-send) {
+      scale: -1 1;
     }
     .lang-dropdown {
       scrollbar-width: thin;
@@ -744,7 +746,7 @@
 <body class="bg-brand-cream text-brand-ink min-h-screen flex flex-col selection:bg-brand-sage selection:text-brand-ink">
 
   <!-- Accessible Skip Link -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-brand-green text-white rounded-lg shadow-lg font-semibold">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 z-50 px-4 py-2 bg-brand-green text-white rounded-lg shadow-lg font-semibold">
     Skip to main content
   </a>
 
@@ -776,7 +778,7 @@
           <i data-lucide="heart-handshake" class="w-5 h-5 text-emerald-200"></i>
         </div>
         <div class="min-w-0">
-          <span class="display text-2xl font-bold tracking-tight text-brand-ink block leading-none">Love RCFE<span class="text-brand-accent">.</span></span>
+          <span class="display text-2xl font-bold tracking-tight text-brand-ink block leading-none"><span dir="ltr">Love RCFE<span class="text-brand-accent">.</span></span></span>
           <span class="text-[11px] uppercase tracking-wider text-brand-muted font-medium block [overflow-wrap:anywhere]">Care & Consulting</span>
         </div>
         <span class="sr-only">Home</span>
@@ -805,7 +807,7 @@
               <span class="sr-only">Change language</span>
               <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
             </button>
-            <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-56 max-h-80 overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
+            <div id="lang-dropdown" role="menu" aria-labelledby="lang-toggle-btn" translate="no" class="lang-dropdown notranslate hidden absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-56 max-h-80 overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
               <div class="sticky top-0 z-10 bg-inherit px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
               <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
                 <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
@@ -898,7 +900,7 @@
             <span class="lang-current-code notranslate whitespace-nowrap" translate="no">EN</span>
             <span class="sr-only">Change language</span>
           </button>
-          <div id="lang-dropdown-mobile" role="menu" aria-labelledby="lang-toggle-btn-mobile" translate="no" class="lang-dropdown notranslate hidden absolute right-0 mt-2 w-52 max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
+          <div id="lang-dropdown-mobile" role="menu" aria-labelledby="lang-toggle-btn-mobile" translate="no" class="lang-dropdown notranslate hidden absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-52 max-h-[70vh] overflow-y-auto overscroll-contain rounded-2xl border shadow-xl pb-1.5 z-50">
             <div class="sticky top-0 z-10 bg-inherit px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-muted border-b border-brand-line/60 mb-1">Language / Idioma</div>
             <button type="button" role="menuitemradio" aria-checked="true" data-lang="en" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
               <span><span>English</span> <span class="text-xs text-brand-muted ml-1">EN</span></span>
@@ -1139,7 +1141,7 @@
               </div>
               
               <!-- Floating Caption Card (Repositioned gracefully so it never covers the subjects' faces or core picture) -->
-              <div id="hero-floating-card" class="hero-floating-card mt-4 sm:absolute sm:-bottom-5 sm:-left-4 z-10 rounded-2xl bg-white/95 dark:bg-[#121915] backdrop-blur-md p-4 shadow-xl max-w-xs border border-brand-line dark:border-brand-line transition-transform duration-200 hover:-translate-y-0.5">
+              <div id="hero-floating-card" class="hero-floating-card mt-4 sm:absolute sm:-bottom-5 sm:-start-4 z-10 rounded-2xl bg-white/95 dark:bg-[#121915] backdrop-blur-md p-4 shadow-xl max-w-xs border border-brand-line dark:border-brand-line transition-transform duration-200 hover:-translate-y-0.5">
                 <div class="flex items-center gap-2 text-brand-green dark:text-emerald-400 mb-1.5">
                   <span class="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center text-brand-green dark:text-emerald-400 shrink-0">
                     <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
@@ -1259,7 +1261,7 @@
                   EK
                 </div>
                 <div>
-                  <p class="font-bold text-sm text-brand-ink">Elena K.</p>
+                  <p class="font-bold text-sm text-brand-ink"><span dir="ltr">Elena K.</span></p>
                   <p class="text-xs text-brand-muted">Daughter &amp; Family Caregiver, San Jose CA</p>
                 </div>
               </div>
@@ -1307,7 +1309,7 @@
                   DL
                 </div>
                 <div>
-                  <p class="font-bold text-sm text-brand-ink">David &amp; Sarah L.</p>
+                  <p class="font-bold text-sm text-brand-ink"><span dir="ltr">David &amp; Sarah L.</span></p>
                   <p class="text-xs text-brand-muted">Family Caregivers, Irvine CA</p>
                 </div>
               </div>
@@ -1694,19 +1696,19 @@
               <div id="quiz-step-1" class="quiz-step">
                 <p class="text-sm font-bold text-brand-ink mb-4">Question 1 of 4: Who are you exploring care for?</p>
                 <div class="grid sm:grid-cols-2 gap-3 mb-6">
-                  <button data-click="setQuizAnswer(1, 'elder-parent')" class="quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(1, 'elder-parent')" class="quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Elder Parent or Relative</span>
                     <span class="block text-xs text-brand-muted mt-1">Looking after Mom, Dad, or elderly family member.</span>
                   </button>
-                  <button data-click="setQuizAnswer(1, 'spouse')" class="quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(1, 'spouse')" class="quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Spouse or Partner</span>
                     <span class="block text-xs text-brand-muted mt-1">Seeking support for partner's health progression.</span>
                   </button>
-                  <button data-click="setQuizAnswer(1, 'self')" class="quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(1, 'self')" class="quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Myself</span>
                     <span class="block text-xs text-brand-muted mt-1">Planning forward for my own future community.</span>
                   </button>
-                  <button data-click="setQuizAnswer(1, 'client')" class="quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(1, 'client')" class="quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Social Worker / Discharge Planner</span>
                     <span class="block text-xs text-brand-muted mt-1">Helping a patient transition safely from hospital.</span>
                   </button>
@@ -1720,15 +1722,15 @@
                 </button>
                 <p class="text-sm font-bold text-brand-ink mb-4">Question 2 of 4: What is their primary cognitive and memory status?</p>
                 <div class="space-y-3 mb-6">
-                  <button data-click="setQuizAnswer(2, 'sharp')" class="w-full quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(2, 'sharp')" class="w-full quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Sharp &amp; Clear Cognitively</span>
                     <span class="block text-xs text-brand-muted mt-0.5">Alert, manages conversations, no wandering or severe memory lapses.</span>
                   </button>
-                  <button data-click="setQuizAnswer(2, 'mild')" class="w-full quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(2, 'mild')" class="w-full quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Mild Forgetfulness / Age-Related Memory Loss</span>
                     <span class="block text-xs text-brand-muted mt-0.5">Occasionally forgets medications or dates, but remains oriented to surroundings.</span>
                   </button>
-                  <button data-click="setQuizAnswer(2, 'dementia')" class="w-full quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(2, 'dementia')" class="w-full quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Diagnosed Alzheimer's or Moderate Dementia</span>
                     <span class="block text-xs text-brand-muted mt-0.5">Confusion, disorientation, risk of exit-seeking or getting lost, requires delayed egress.</span>
                   </button>
@@ -1742,15 +1744,15 @@
                 </button>
                 <p class="text-sm font-bold text-brand-ink mb-4">Question 3 of 4: What assistance is required with physical activities of daily living (ADLs)?</p>
                 <div class="space-y-3 mb-6">
-                  <button data-click="setQuizAnswer(3, 'independent')" class="w-full quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(3, 'independent')" class="w-full quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Independent / Minimal assistance</span>
                     <span class="block text-xs text-brand-muted mt-0.5">Walks without difficulty; just needs meal service, social outings, and medication distribution.</span>
                   </button>
-                  <button data-click="setQuizAnswer(3, 'assist')" class="w-full quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(3, 'assist')" class="w-full quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Assistance with Bathing, Dressing, or Transfers</span>
                     <span class="block text-xs text-brand-muted mt-0.5">Uses walker or wheelchair, needs 1-person physical help getting in/out of bed or shower.</span>
                   </button>
-                  <button data-click="setQuizAnswer(3, 'total')" class="w-full quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(3, 'total')" class="w-full quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Bedridden / Total Dependence / Incontinence</span>
                     <span class="block text-xs text-brand-muted mt-0.5">Non-ambulatory, frequent turning, hoyer lift or 2-person transfer, or hospice waiver care.</span>
                   </button>
@@ -1764,15 +1766,15 @@
                 </button>
                 <p class="text-sm font-bold text-brand-ink mb-4">Question 4 of 4: How soon is care needed?</p>
                 <div class="grid sm:grid-cols-3 gap-3 mb-6">
-                  <button data-click="setQuizAnswer(4, 'immediate')" class="quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(4, 'immediate')" class="quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Immediate / Hospital Discharge</span>
                     <span class="block text-xs text-brand-muted mt-1">Within 1–7 days.</span>
                   </button>
-                  <button data-click="setQuizAnswer(4, 'soon')" class="quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(4, 'soon')" class="quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Next 30–60 Days</span>
                     <span class="block text-xs text-brand-muted mt-1">Planning a smooth transition.</span>
                   </button>
-                  <button data-click="setQuizAnswer(4, 'research')" class="quiz-btn text-left p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
+                  <button data-click="setQuizAnswer(4, 'research')" class="quiz-btn text-start p-4 rounded-xl border border-brand-line hover:border-brand-green hover:bg-brand-sageLight/40 transition">
                     <span class="block font-semibold text-sm text-brand-ink">Future Research</span>
                     <span class="block text-xs text-brand-muted mt-1">Just learning options.</span>
                   </button>
@@ -1803,7 +1805,7 @@
 
                   <div class="border-t border-brand-line pt-4 space-y-2 text-xs">
                     <p class="font-bold text-brand-ink">Key Questions to Ask on Your First Tour:</p>
-                    <ul id="result-checklist" class="list-disc pl-5 space-y-1 text-brand-muted">
+                    <ul id="result-checklist" class="list-disc ps-5 space-y-1 text-brand-muted">
                       <li>Does the home have a currently active CDSS Hospice Waiver and Bedridden Clearance?</li>
                       <li>Is there an awake caregiver on shift throughout the entire night?</li>
                       <li>Are medications stored in double-locked cabinets and administered strictly per doctor orders?</li>
@@ -1939,7 +1941,7 @@
                 <span class="w-8 h-8 rounded-full bg-brand-green text-white text-xs font-bold flex items-center justify-center">01</span>
                 <h2 class="font-bold text-brand-ink text-xl">Tell us your story</h2>
               </div>
-              <p class="text-brand-muted text-sm leading-relaxed pl-11">
+              <p class="text-brand-muted text-sm leading-relaxed ps-11">
                 We begin with a confidential discovery discussion. We listen to medical histories, family dynamics, geographic boundaries, or your entrepreneurial goals for an RCFE business.
               </p>
             </div>
@@ -1949,7 +1951,7 @@
                 <span class="w-8 h-8 rounded-full bg-brand-green text-white text-xs font-bold flex items-center justify-center">02</span>
                 <h2 class="font-bold text-brand-ink text-xl">Unpack options &amp; verify compliance</h2>
               </div>
-              <p class="text-brand-muted text-sm leading-relaxed pl-11">
+              <p class="text-brand-muted text-sm leading-relaxed ps-11">
                 We cut through the jargon. We explain the legal differences between RCFE, Hospice Waivers, and Nursing Facilities, verify state licenses, and outline financial costs and schedules.
               </p>
             </div>
@@ -1959,12 +1961,12 @@
                 <span class="w-8 h-8 rounded-full bg-brand-green text-white text-xs font-bold flex items-center justify-center">03</span>
                 <h2 class="font-bold text-brand-ink text-xl">Move forward with total confidence</h2>
               </div>
-              <p class="text-brand-muted text-sm leading-relaxed pl-11">
+              <p class="text-brand-muted text-sm leading-relaxed ps-11">
                 Whether signing an admission agreement or walking into your CDSS licensing inspection, you have tailored documentation and an advocate standing right beside you.
               </p>
             </div>
 
-            <div class="pt-4 pl-2">
+            <div class="pt-4 ps-2">
               <a data-view-link="contact" href="#contact" class="inline-flex items-center gap-2 rounded-full bg-brand-green px-8 py-4 text-white font-semibold hover:bg-brand-greenDark shadow-md transition">
                 <span>Start a Conversation</span>
                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -2025,7 +2027,7 @@
             <div class="space-y-4" id="faq-accordion">
               <!-- FAQ 1 -->
               <div class="border border-brand-line rounded-xl overflow-hidden transition-colors">
-                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-1" class="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
+                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-1" class="w-full text-start p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
                   <span>What is the difference between an RCFE and a Skilled Nursing Facility (SNF)?</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
@@ -2037,7 +2039,7 @@
 
               <!-- FAQ 2 -->
               <div class="border border-brand-line rounded-xl overflow-hidden transition-colors">
-                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-2" class="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
+                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-2" class="w-full text-start p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
                   <span>Does Medicare or Medi-Cal pay for RCFE residential care?</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
@@ -2049,7 +2051,7 @@
 
               <!-- FAQ 3 -->
               <div class="border border-brand-line rounded-xl overflow-hidden transition-colors">
-                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-3" class="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
+                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-3" class="w-full text-start p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
                   <span>How long does it take to obtain an RCFE license in California?</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
@@ -2060,7 +2062,7 @@
 
               <!-- FAQ 4 -->
               <div class="border border-brand-line rounded-xl overflow-hidden transition-colors">
-                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-4" class="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
+                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-4" class="w-full text-start p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
                   <span>Why do many families prefer a 6-bed care home over a 150-room facility?</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
@@ -2071,7 +2073,7 @@
 
               <!-- FAQ 5 -->
               <div class="border border-brand-line rounded-xl overflow-hidden transition-colors">
-                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-5" class="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
+                <button data-click="toggleFaq(this)" aria-expanded="false" aria-controls="faq-content-5" class="w-full text-start p-5 flex items-center justify-between gap-4 font-bold text-base text-brand-ink hover:bg-brand-cream/60 transition">
                   <span>How does Love RCFE make money? (Our Transparent Revenue Model)</span>
                   <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-brand-muted transition-transform duration-200"></i>
                 </button>
@@ -2316,7 +2318,7 @@
               <p class="text-brand-muted leading-relaxed">
                 When you submit an enquiry through our contact forms or assessment tools, we collect the details you voluntarily submit: your name, email address, phone number, geographic region, inquiry category, message details, and submission timestamp. We do not sell your personal contact information to third-party marketing brokers.
               </p>
-              <ul class="list-disc pl-5 mt-3 space-y-1 text-brand-muted leading-relaxed">
+              <ul class="list-disc ps-5 mt-3 space-y-1 text-brand-muted leading-relaxed">
                 <li>Device checks stop spam.</li>
                 <li>Device details improve security.</li>
                 <li>Visit history improves support.</li>
@@ -2354,7 +2356,7 @@
 
             <div>
               <h2 class="display text-2xl font-semibold text-brand-ink mb-3">6. Keeping Your Information Safe</h2>
-              <ul class="list-disc pl-5 space-y-1 text-brand-muted leading-relaxed">
+              <ul class="list-disc ps-5 space-y-1 text-brand-muted leading-relaxed">
                 <li>Messages are sent securely.</li>
                 <li>Every enquiry stays confidential.</li>
                 <li>Only used to respond.</li>
@@ -2379,11 +2381,11 @@
   <!-- ==================== CALL MODAL ==================== -->
   <div id="call-modal" data-backdrop-close="call-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="call-modal-title">
     <div class="modal-card bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-brand-line relative max-h-[90vh] overflow-y-auto">
-      <button data-click="closeCallModal()" class="absolute top-5 right-5 p-2 rounded-full text-brand-muted hover:text-brand-ink hover:bg-brand-sageLight transition" aria-label="Close dialog">
+      <button data-click="closeCallModal()" class="absolute top-5 end-5 p-2 rounded-full text-brand-muted hover:text-brand-ink hover:bg-brand-sageLight transition" aria-label="Close dialog">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <div class="flex items-center gap-3 mb-5 pr-10">
+      <div class="flex items-center gap-3 mb-5 pe-10">
         <div class="w-10 h-10 rounded-xl bg-brand-sageLight text-brand-green flex items-center justify-center shrink-0">
           <i data-lucide="phone-call" class="w-5 h-5"></i>
         </div>
@@ -2423,11 +2425,11 @@
   <!-- ==================== BOOKING MODAL ==================== -->
   <div id="booking-modal" data-backdrop-close="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
     <div class="modal-card bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-brand-line relative max-h-[90vh] overflow-y-auto">
-      <button data-click="closeBookingModal()" class="absolute top-5 right-5 p-2 rounded-full text-brand-muted hover:text-brand-ink hover:bg-brand-sageLight transition" aria-label="Close dialog">
+      <button data-click="closeBookingModal()" class="absolute top-5 end-5 p-2 rounded-full text-brand-muted hover:text-brand-ink hover:bg-brand-sageLight transition" aria-label="Close dialog">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <div class="flex items-center gap-3 mb-4">
+      <div class="flex items-center gap-3 mb-4 pe-10">
         <div class="w-10 h-10 rounded-xl bg-brand-sageLight text-brand-green flex items-center justify-center font-bold">
           <i data-lucide="calendar" class="w-5 h-5"></i>
         </div>
@@ -2491,11 +2493,11 @@
   <!-- ==================== CARE QUIZ MODAL ==================== -->
   <div id="quiz-modal" data-backdrop-close="quiz-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="quiz-modal-title">
     <div class="modal-card bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-brand-line relative max-h-[92vh] overflow-y-auto">
-      <button data-click="closeCareQuizModal()" class="absolute top-5 right-5 p-2 rounded-full text-brand-muted hover:text-brand-ink hover:bg-brand-sageLight transition" aria-label="Close dialog">
+      <button data-click="closeCareQuizModal()" class="absolute top-5 end-5 p-2 rounded-full text-brand-muted hover:text-brand-ink hover:bg-brand-sageLight transition" aria-label="Close dialog">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <div class="mb-4">
+      <div class="mb-4 pe-10">
         <span class="text-xs font-bold uppercase tracking-wider text-brand-green">Fast Placement Assessment</span>
         <h3 id="quiz-modal-title" class="display text-2xl font-bold text-brand-ink mt-0.5">Care Assessment Wizard</h3>
         <p class="text-xs text-brand-muted mt-1">Get an instant recommendation tailored to your loved one's specific needs.</p>
@@ -2518,7 +2520,7 @@
             <div class="w-9 h-9 rounded-xl bg-brand-green text-white flex items-center justify-center font-bold">
               <i data-lucide="heart-handshake" class="w-5 h-5 text-emerald-300"></i>
             </div>
-            <span class="display text-2xl font-bold tracking-tight text-white">Love RCFE<span class="text-brand-accent">.</span></span>
+            <span class="display text-2xl font-bold tracking-tight text-white"><span dir="ltr">Love RCFE<span class="text-brand-accent">.</span></span></span>
           </div>
           <p class="text-[#dce7d9] text-sm leading-relaxed max-w-sm">
             Thoughtful, objective guidance rooted in deep care. Dedicated to connecting families with compassionate elder care and empowering operators to build licensed, compliant California care facilities.
@@ -2585,13 +2587,13 @@
 
     <!-- Floating buttons: inside the footer section for screen readers, but fixed on screen as before -->
     <!-- Floating Call Button (phones only) -->
-    <a href="tel:+18182175755" data-call class="fixed bottom-6 left-4 z-40 md:hidden inline-flex items-center gap-2 rounded-full bg-brand-green text-white pl-4 pr-5 py-3 text-sm font-semibold shadow-xl border border-white/20 active:scale-95 transition">
+    <a href="tel:+18182175755" data-call class="fixed bottom-6 start-4 z-40 md:hidden inline-flex items-center gap-2 rounded-full bg-brand-green text-white ps-4 pe-5 py-3 text-sm font-semibold shadow-xl border border-white/20 active:scale-95 transition">
       <i data-lucide="phone" class="w-4 h-4"></i>
       <span>Call Us</span>
     </a>
 
     <!-- Floating Back to Top Button -->
-    <button id="back-to-top" data-click="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed bottom-6 right-6 z-40 p-3.5 rounded-full bg-brand-green text-white shadow-xl hover:bg-brand-greenDark transition-all border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95" aria-label="Back to top">
+    <button id="back-to-top" data-click="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed bottom-6 end-6 z-40 p-3.5 rounded-full bg-brand-green text-white shadow-xl hover:bg-brand-greenDark transition-all border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95" aria-label="Back to top">
       <i data-lucide="arrow-up" class="w-5 h-5"></i>
     </button>
   </footer>
