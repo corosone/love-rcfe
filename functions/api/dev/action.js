@@ -71,10 +71,10 @@ const ACTIONS = {
   async clear_lockouts(request, env) {
     const locks = await env.DB.prepare('DELETE FROM auth_attempts').run();
     await env.DB
-      .prepare("DELETE FROM rate_limits WHERE key LIKE 'login:%' OR key LIKE 'admin:%' OR key LIKE 'devlogin:%'")
+      .prepare("DELETE FROM rate_limits WHERE key LIKE 'login:%' OR key LIKE 'admin:%' OR key LIKE 'devlogin:%' OR key LIKE 'devsend:%'")
       .run();
     const n = Number(locks?.meta?.changes || 0);
-    return { message: `Cleared ${n} lockout record(s) and the sign-in rate limits. Anyone who tried many times in the last minute may need to wait one more minute.`, detail: `${n} record(s)` };
+    return { message: `Cleared ${n} lockout record(s), the sign-in rate limits and the limit on sign-in code emails. Anyone who tried many times in the last minute may need to wait one more minute.`, detail: `${n} record(s)` };
   },
 
   // Ends every developer session except the one making this request.

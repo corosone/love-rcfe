@@ -7,7 +7,7 @@ import {
 import { signOutEverywhere, devAudit } from '../../../lib/dev.js';
 import { isTrusted, trustThisDevice, forgetAccountDevices } from '../../../lib/trust.js';
 import {
-  checkStaffAccount, cleanStaffName, sharedPasswordAllowed, noteStaffSignIn, changeOwnStaffPassword,
+  checkStaffAccount, cleanStaffName, sharedPasswordAllowed, noteStaffSignIn, changeOwnStaffPassword, staffAccountId,
 } from '../../../lib/staff.js';
 
 // Staff sign-in. Order matters: cheap checks first, then the Turnstile spam check,
@@ -51,8 +51,9 @@ export async function onRequestPost({ request, env }) {
     return jsonResponse({ error: 'Please enter your name and your own password. The shared staff password has been turned off.', field: 'name' }, 400);
   }
 
-  // A browser that has signed in here before is not held up by the site-wide lockout (lib/trust.js).
-  const trusted = await isTrusted(request, env, 'staff');
+  // A browser that has signed in here before, to this same account (or with the shared password),
+  // is not held up by the site-wide lockout (lib/trust.js).
+  const trusted = await isTrusted(request, env, 'staff', { accountId: rawName ? () => staffAccountId(env.DB, rawName) : 0 });
   let account = null;
   const denied = await checkPasswordWithLockout(request, env, body.password, rawName
     ? {

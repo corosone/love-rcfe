@@ -1202,7 +1202,7 @@
     const length = days === 0 ? 'permanently' : `for ${plural(days, 'day', 'days')}`;
     const key = blockKeyOf(ip);
     if (/^device:/.test(key)) {
-      if (!confirm(`Block this device (${key.slice(7, 15)}…) ${length}?\n\nIt will still be able to open the website, but it won't be able to send enquiries or call requests, from any address.`)) return;
+      if (!confirm(`Block this device (${key.slice(7, 15)}…) ${length}?\n\nIt will still be able to open the website, but that browser won't be able to send enquiries or call requests, whatever address it uses.\n\nSomeone determined can get around a device block, so if the messages keep coming, block their address too.`)) return;
       return finishBlock(ip, reason, days);
     }
     const network = key.endsWith('/64')
@@ -1921,13 +1921,14 @@
   // "Visit history improves support."
   async function toggleJourney(lead, row, button) {
     const open = button.getAttribute('aria-expanded') === 'true';
-    const existing = row.nextElementSibling && row.nextElementSibling.classList.contains('journey-row') ? row.nextElementSibling : null;
+    // Found by its enquiry number, not position: the device row may sit between them.
+    const existing = row.parentNode ? [...row.parentNode.querySelectorAll('tr.journey-row')].find((r) => r.dataset.lead === String(lead.id)) : null;
     if (existing) existing.remove();
     button.setAttribute('aria-expanded', open ? 'false' : 'true');
     button.textContent = open ? 'Show Journey' : 'Hide Journey';
     if (open) return;
     const holder = el('div', { className: 'dv-detail', text: 'Loading…' });
-    row.after(el('tr', { className: 'journey-row' }, [el('td', { attrs: { colspan: '7' } }, [holder])]));
+    row.after(el('tr', { className: 'journey-row', attrs: { 'data-lead': String(lead.id) } }, [el('td', { attrs: { colspan: '7' } }, [holder])]));
     fitActivityDetail();
     try {
       const d = await toolGet({ tool: 'journey', id: lead.id });

@@ -205,7 +205,9 @@
     if (fromPath) return fromPath;
     try {
       var q = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
-      if (q && own(LANGUAGES, q)) return q;
+      // A language chosen with ?lang= is remembered like one chosen from the menu, so it stays
+      // when the visitor moves on to another page (which has no ?lang=).
+      if (q && own(LANGUAGES, q)) { saveLang(q); return q; }
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved && own(LANGUAGES, saved)) return saved;
     } catch (e) {}

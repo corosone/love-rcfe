@@ -110,6 +110,7 @@ test('a blocked device cannot send enquiries from any address; other devices can
   const blocked = await action('block_ip', { ip: `device:${DEVICE_B}`, reason: 'spam', days: 7 });
   assert.equal(blocked.status, 200, blocked.data.message);
   assert.match(blocked.data.message, /device b2b2b2b2/);
+  assert.match(blocked.data.message, /Someone determined can get around a device block/, 'the message is honest about its limits');
   const { _resetBlockCache } = await import('../lib/blocklist.js');
   _resetBlockCache();
   const before = site.db._rows('SELECT COUNT(*) AS n FROM leads')[0].n;
@@ -259,6 +260,25 @@ test('holiday switch: refuses bad dates, pauses call bookings on those days only
   assert.equal((await action('clear_holiday')).status, 200);
   assert.deepEqual(await (await site.api('/api/settings')).json(), { holiday: null });
   assert.equal((await call(inBreak, '203.0.113.73')).status, 201, 'bookings work again');
+});
+
+test('holiday switch: after a long break that ends beyond the usual 3 months, the first days back can still be booked', async () => {
+  const { pacificToday, addDays } = await import('../lib/settings.js');
+  const today = pacificToday();
+  const to = addDays(today, 110);
+  assert.equal((await action('set_holiday', { from: addDays(today, 1), to })).status, 200);
+  const notSunday = (d) => (new Date(d + 'T00:00:00Z').getUTCDay() === 0 ? addDays(d, 1) : d);
+  const call = (date, ip) => site.api('/api/leads', { method: 'POST', body: enquiry({ kind: 'call_request', preferred_date: date, preferred_time: 'Morning (9am - 12pm)', email: `long${ip.split('.').pop()}@example.com` }), ip });
+  try {
+    const back = notSunday(addDays(to, 1));
+    assert.equal((await call(back, '203.0.113.76')).status, 201, `the first day back (${back}) can be booked`);
+    const later = await call(notSunday(addDays(to, 10)), '203.0.113.77');
+    assert.equal(later.status, 422, 'but not weeks after it');
+    assert.match((await later.json()).error, /within the next 3 months/);
+  } finally {
+    assert.equal((await action('clear_holiday')).status, 200);
+  }
+  assert.equal((await call(notSunday(addDays(today, 101)), '203.0.113.78')).status, 422, 'without a break, the usual limit applies');
 });
 
 // ---------- VPN check ----------

@@ -15,6 +15,9 @@ const TABLES = [
   ['dev_challenges', 'Pending sign-in codes'],
   ['blocked_ips', 'Blocked IP addresses'],
   ['app_secrets', 'Site settings and secrets'],
+  ['staff_accounts', 'Staff accounts'],
+  ['deleted_leads', 'Recently Deleted enquiries'],
+  ['trusted_devices', 'Trusted browsers'],
 ];
 const FREE_DB_SIZE_BYTES = 500 * 1024 * 1024; // 500 MB per database on the free plan
 

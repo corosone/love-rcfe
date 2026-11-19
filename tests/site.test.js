@@ -577,8 +577,10 @@ test('the address decides the language, and the old ways of choosing one still w
   assert.notEqual((await b.page.locator('#hero-title').textContent()).replace(/\s+/g, ' ').trim(), 'A little more clarity. A lot more care.');
   await b.context.close();
 
-  // Old links with ?lang= still work
+  // Old links with ?lang= still work, and the choice is remembered on the next page
   const c = await open('/?lang=ko');
+  await c.page.waitForFunction(() => document.documentElement.lang === 'ko');
+  await c.page.goto(site.origin + '/guides/choosing-a-care-home/', { waitUntil: 'load' });
   await c.page.waitForFunction(() => document.documentElement.lang === 'ko');
   await c.context.close();
 });
@@ -1035,6 +1037,18 @@ test('device details: the staff inbox only shows phone or computer; the console 
     await page.click('#leads-body .dv-link:text-is("Hide Journey")');
     await page.waitForSelector('#leads-body .dv-link:text-is("Show Journey")');
     assert.equal(await page.locator('.journey-row').count(), 0, 'hiding closes the panel');
+    // Journey first, then Device: the device row then sits between them, and Hide Journey still works
+    await page.click('#leads-body .dv-link:text-is("Hide Device")');
+    await page.click('#leads-body .dv-link:text-is("Show Journey")');
+    await page.waitForSelector('#leads-body .dv-link:text-is("Hide Journey")');
+    await page.click('#leads-body .dv-link:text-is("Show Device")');
+    await page.waitForSelector('.lead-device-row');
+    await page.click('#leads-body .dv-link:text-is("Hide Journey")');
+    await page.waitForSelector('#leads-body .dv-link:text-is("Show Journey")');
+    assert.equal(await page.locator('.journey-row').count(), 0, 'the journey closes with the device row in between');
+    await page.click('#leads-body .dv-link:text-is("Show Journey")');
+    await page.waitForSelector('#leads-body .dv-link:text-is("Hide Journey")');
+    assert.equal(await page.locator('.journey-row').count(), 1, 'opening it again shows one journey, not two');
     for (const want of ['Long address (IPv6)', '2603:8001:9a00:1cc6::42', 'Reported by the browser', 'Screen size', 'Device (reported by the browser', 'Browser (from what the browser sent']) {
       assert.ok(report.includes(want), `the report shows ${want}`);
     }
@@ -1076,6 +1090,24 @@ test('privacy policy: all privacy lines are on the privacy page, short (4 words 
   assert.match(await es.page.textContent('#privacy'), /ipify \/ icanhazip/, 'the address-lookup services are listed');
   assert.ok(esLines.every((l, i) => l && l !== lines[i]), 'translated on the Spanish page: ' + esLines.join(' | '));
   await es.context.close();
+});
+
+test('holiday switch: a break that ends after the usual 3 months still offers a day families can book', async () => {
+  await (await import('../lib/db.js')).ensureSchema(site.env.DB); // the tables, also when this test runs on its own
+  const { setHoliday, clearHoliday, pacificToday, addDays } = await import('../lib/settings.js');
+  const today = pacificToday();
+  assert.equal((await setHoliday(site.env, { from: today, to: addDays(today, 100) })).ok, true);
+  try {
+    const { page, context } = await open('/', { wait: 'load' });
+    await page.$$eval('[data-click="openBookingModal()"]', (xs) => xs[0].click());
+    await page.waitForFunction(() => !document.getElementById('booking-holiday').classList.contains('hidden'));
+    await page.waitForFunction((t) => document.getElementById('book-date').value > t, addDays(today, 100));
+    const d = await page.$eval('#book-date', (el) => ({ value: el.value, max: el.max, valid: el.checkValidity() }));
+    assert.ok(d.value <= d.max && d.valid, `the suggested first day back (${d.value}) can be chosen (latest ${d.max})`);
+    await context.close();
+  } finally {
+    await clearHoliday(site.env);
+  }
 });
 
 test('holiday switch: the booking popup and contact page say when we are away, in the visitor\'s language', async () => {
