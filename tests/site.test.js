@@ -420,7 +420,7 @@ test('every language has its own ready-translated page that search engines can r
     assert.ok(description.length > 40 && !description.startsWith('Personalized placement guidance'), `${lang}: translated description`);
   }
   const sitemap = await (await fetch(site.origin + '/sitemap.xml')).text();
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 2 * LANGS.length, 'a home page and a copy of the family guide in every language');
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 4 * LANGS.length, 'a home page and the three family guides in every language');
   for (const lang of LANGS.filter((l) => l !== 'en')) assert.ok(sitemap.includes(`<loc>https://love-rcfe.pages.dev/${lang}/</loc>`));
 });
 
@@ -534,6 +534,119 @@ test('family guide: never slides sideways, and reads right to left in Arabic, Pe
       if (r.dir !== want || r.h1 !== want) problems.push(`${lang}: reads ${r.h1}, expected ${want}`);
     }
     await context.close();
+  }
+  assert.deepEqual(problems, []);
+});
+
+// ---------- The other family guides (src/guides/paying-for-a-care-home.html and memory-care-signs.html) ----------
+
+const MORE_GUIDES = [
+  {
+    name: 'paying-for-a-care-home',
+    title: 'How to Pay for a Care Home in California | Love RCFE',
+    heading: 'How to Pay for a Care Home in California<',
+    // Facts that must survive every translation: phone numbers, official links, programme names and numbers
+    facts: ['1-800-434-0222', 'tel:+18004340222', 'https://www.dhcs.ca.gov/', 'https://www.va.gov/pension/aid-attendance-housebound/',
+      'Assisted Living Waiver', 'Aid and Attendance', 'VA Form 21-2680', 'Medicare', 'Medi-Cal', 'SSI', 'HICAP'],
+    numbers: ['15', '2026', '65'],
+  },
+  {
+    name: 'memory-care-signs',
+    title: 'Signs It May Be Time for Memory Care | Love RCFE',
+    heading: 'Signs It May Be Time for Memory Care<',
+    facts: ['1-800-272-3900', 'tel:+18002723900', '1-800-231-4024', "Alzheimer's Association", 'CRISISline'],
+    numbers: ['12', '8'],
+  },
+];
+const PERSIAN_DIGITS = (n) => n.replace(/[0-9]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+test('the other family guides: their own ready-translated pages in every language, listed and linked', async () => {
+  const sitemap = await (await fetch(site.origin + '/sitemap.xml')).text();
+  for (const guide of MORE_GUIDES) {
+    const path = `/guides/${guide.name}/`;
+    for (const lang of LANGS) {
+      const address = (lang === 'en' ? '' : `/${lang}`) + path;
+      const res = await fetch(site.origin + address);
+      assert.equal(res.status, 200, `${guide.name} ${lang}: the guide exists`);
+      const html = await res.text(); // as a search engine receives it, before any script runs
+      const title = html.match(/<title>([^<]*)<\/title>/)[1];
+      if (lang === 'en') assert.equal(title, guide.title);
+      else {
+        assert.match(html, new RegExp(`<html lang="${lang}"[^>]* dir="${RTL.includes(lang) ? 'rtl' : 'ltr'}"[^>]* data-prerendered="${lang}"`), `${guide.name} ${lang}: language and direction`);
+        assert.ok(title !== guide.title && title.endsWith('| Love RCFE'), `${guide.name} ${lang}: translated title`);
+        assert.ok(!html.includes(guide.heading), `${guide.name} ${lang}: the heading is not English`);
+      }
+      assert.ok(html.includes(`<link rel="canonical" href="https://love-rcfe.pages.dev${address}">`), `${guide.name} ${lang}: its own address`);
+      const others = html.match(/<link rel="alternate" hreflang="[^"]+" href="([^"]+)">/g) || [];
+      assert.equal(others.length, LANGS.length + 1, `${guide.name} ${lang}: lists the guide in every language`);
+      assert.ok(others.every((l) => l.includes(path)), `${guide.name} ${lang}: those addresses are this guide's`);
+      assert.match(html, /"@type":"Article"/, `${guide.name} ${lang}: described to search engines as an article`);
+      assert.ok(html.includes(`<main id="main-content" class="flex-1" data-guide="${guide.name}">`), `${guide.name} ${lang}: marked as a guide page`);
+      for (const fact of guide.facts) assert.ok(html.includes(fact), `${guide.name} ${lang}: keeps "${fact}"`);
+      const article = html.split('<main')[1].split('</main>')[0].replace(/<[^>]+>/g, ' '); // the words a reader sees
+      for (const n of guide.numbers) {
+        const shown = lang === 'fa' ? PERSIAN_DIGITS(n) : n;
+        assert.ok(new RegExp(`(^|[^0-9۰-۹])${shown}($|[^0-9۰-۹])`).test(article), `${guide.name} ${lang}: keeps the number ${n}`);
+      }
+      // "More family guides" leads to the other guides in the same language
+      const prefix = lang === 'en' ? '' : `/${lang}`;
+      for (const other of ['choosing-a-care-home', 'paying-for-a-care-home', 'memory-care-signs'].filter((g) => g !== guide.name)) {
+        assert.ok(html.includes(`href="${prefix}/guides/${other}/"`), `${guide.name} ${lang}: links to the ${other} guide in the same language`);
+      }
+      assert.ok(sitemap.includes(`<loc>https://love-rcfe.pages.dev${address}</loc>`), `${guide.name} ${lang}: in the sitemap`);
+    }
+  }
+  // The first guide links to the two new ones, and the home page has a card for each guide, in the same language
+  const first = await (await fetch(site.origin + '/ko/guides/choosing-a-care-home/')).text();
+  for (const g of ['paying-for-a-care-home', 'memory-care-signs']) assert.ok(first.includes(`href="/ko/guides/${g}/"`), `the first guide links to ${g}`);
+  for (const [lang, prefix] of [['en', ''], ['es', '/es'], ['zh-hant', '/zh-hant']]) {
+    const home = await (await fetch(site.origin + (prefix || '') + '/')).text();
+    for (const g of ['choosing-a-care-home', 'paying-for-a-care-home', 'memory-care-signs']) {
+      assert.match(home, new RegExp(`<a data-guide-link(="")? href="${prefix}/guides/${g}/"`), `${lang} home page: a card for ${g}`);
+    }
+  }
+});
+
+test('the other family guides: work in the browser, never slide sideways, and read right to left in Arabic, Persian and Hebrew', async () => {
+  // In English: no errors, the helpline dials directly, and the booking pop-up opens
+  let { page, context, seen } = await open('/guides/memory-care-signs/', { width: 1280, height: 900 });
+  assert.equal(await page.title(), MORE_GUIDES[1].title);
+  const dialled = await page.evaluate(() => new Promise((resolve) => {
+    const link = document.querySelector('main a[href="tel:+18002723900"]');
+    window.addEventListener('click', (e) => { resolve(!e.defaultPrevented); e.preventDefault(); }, { once: true });
+    link.click();
+  }));
+  assert.equal(dialled, true, 'the Helpline link is left to the phone');
+  await page.click('main [data-click="openBookingModal()"]');
+  assert.equal(await page.isVisible('#booking-modal'), true);
+  assert.deepEqual(seen.errors, [], 'no errors in the browser console');
+  await context.close();
+
+  // In Persian: the page is translated in the browser too, and its links stay in Persian
+  ({ page, context, seen } = await open('/fa/guides/paying-for-a-care-home/', { width: 1280, height: 900 }));
+  assert.notEqual(await page.title(), MORE_GUIDES[0].title);
+  assert.ok(!(await page.locator('main').textContent()).includes('Know what the monthly price covers'), 'no English left in the article');
+  await Promise.all([page.waitForURL(site.origin + '/fa/guides/memory-care-signs/'), page.click('main a[href="/fa/guides/memory-care-signs/"]')]);
+  assert.equal(await page.evaluate(() => document.documentElement.dir), 'rtl');
+  assert.deepEqual(seen.errors, [], 'no errors in the browser console');
+  await context.close();
+
+  const problems = [];
+  for (const guide of MORE_GUIDES) {
+    for (const lang of LANGS) {
+      const { page, context } = await open((lang === 'en' ? '' : `/${lang}`) + `/guides/${guide.name}/`, { width: 320, height: 800 });
+      for (const width of [320, 768]) {
+        await page.setViewportSize({ width, height: 800 });
+        await page.waitForTimeout(60);
+        const r = await page.evaluate(() => ({
+          over: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          h1: getComputedStyle(document.querySelector('main h1')).direction,
+        }));
+        if (r.over > 0) problems.push(`${guide.name} ${lang} ${width}px: ${r.over}px too wide`);
+        if (r.h1 !== (RTL.includes(lang) ? 'rtl' : 'ltr')) problems.push(`${guide.name} ${lang}: reads ${r.h1}`);
+      }
+      await context.close();
+    }
   }
   assert.deepEqual(problems, []);
 });
