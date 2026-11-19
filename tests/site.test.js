@@ -7,7 +7,7 @@ const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
 const { startServer } = require('./helpers/server.js');
 
-const LANGS = ['en', 'es', 'zh', 'tl', 'vi', 'ko', 'hy', 'ru', 'ar', 'fa', 'hi', 'pa', 'ja', 'uk', 'he', 'km', 'fr', 'pt'];
+const LANGS = ['en', 'es', 'zh', 'zh-hant', 'tl', 'vi', 'ko', 'hy', 'ru', 'ar', 'fa', 'hi', 'pa', 'ja', 'uk', 'he', 'km', 'th', 'fr', 'pt'];
 const RTL = ['ar', 'fa', 'he']; // written from right to left
 
 // Stand-in for Cloudflare's Turnstile script
@@ -403,7 +403,7 @@ test('switching language from the menu goes to that language\'s own address and 
 test('every language has its own ready-translated page that search engines can read', async () => {
   const englishHtml = await (await fetch(site.origin + '/')).text();
   const englishTitle = englishHtml.match(/<title>([^<]*)<\/title>/)[1];
-  assert.equal((englishHtml.match(/<link rel="alternate" hreflang=/g) || []).length, 19);
+  assert.equal((englishHtml.match(/<link rel="alternate" hreflang=/g) || []).length, LANGS.length + 1, 'every language, plus the default');
   for (const lang of LANGS.filter((l) => l !== 'en')) {
     const res = await fetch(`${site.origin}/${lang}/`);
     assert.equal(res.status, 200, `/${lang}/ exists`);
@@ -413,14 +413,14 @@ test('every language has its own ready-translated page that search engines can r
     assert.ok(title.startsWith('Love RCFE | ') && title !== englishTitle, `${lang}: translated title`);
     assert.ok(html.includes(`<link rel="canonical" href="https://love-rcfe.pages.dev/${lang}/">`), `${lang}: canonical address`);
     assert.ok(html.includes(`<meta property="og:url" content="https://love-rcfe.pages.dev/${lang}/">`));
-    assert.equal((html.match(/<link rel="alternate" hreflang=/g) || []).length, 19, `${lang}: lists all language addresses`);
+    assert.equal((html.match(/<link rel="alternate" hreflang=/g) || []).length, LANGS.length + 1, `${lang}: lists all language addresses`);
     assert.ok(!html.includes('A little more clarity.'), `${lang}: the main heading is not English`);
     assert.ok(!/<meta name="robots" content="[^"]*noindex/.test(html), `${lang}: may be listed`);
     const description = html.match(/<meta name="description" content="([^"]*)"/)[1];
     assert.ok(description.length > 40 && !description.startsWith('Personalized placement guidance'), `${lang}: translated description`);
   }
   const sitemap = await (await fetch(site.origin + '/sitemap.xml')).text();
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 36, '18 home pages and 18 copies of the family guide');
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 2 * LANGS.length, 'a home page and a copy of the family guide in every language');
   for (const lang of LANGS.filter((l) => l !== 'en')) assert.ok(sitemap.includes(`<loc>https://love-rcfe.pages.dev/${lang}/</loc>`));
 });
 
@@ -444,7 +444,7 @@ test('family guide: its own ready-translated page in every language, listed for 
     }
     assert.ok(html.includes(`<link rel="canonical" href="https://love-rcfe.pages.dev${guideAddress(lang)}">`), `${lang}: its own address`);
     const others = html.match(/<link rel="alternate" hreflang="[^"]+" href="([^"]+)">/g) || [];
-    assert.equal(others.length, 19, `${lang}: lists the guide in every language`);
+    assert.equal(others.length, LANGS.length + 1, `${lang}: lists the guide in every language`);
     assert.ok(others.every((l) => l.includes(GUIDE)), `${lang}: those addresses are the guide's, not the home page's`);
     assert.match(html, /"@type":"Article"/, `${lang}: described to search engines as an article`);
     assert.ok(html.includes('<main id="main-content" class="flex-1" data-guide="choosing-a-care-home">'), `${lang}: marked as a guide page`);
@@ -610,6 +610,50 @@ test('every language file loads and translates the main heading', async () => {
     assert.deepEqual(seen.errors, [], `${lang}: no errors`);
     await context.close();
   }
+});
+
+test('every language file has every piece of text; Traditional Chinese uses traditional characters and Thai is written in Thai', async () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const box = { window: {} };
+  for (const lang of LANGS.filter((l) => l !== 'en')) {
+    new Function('window', fs.readFileSync(path.join(__dirname, '..', 'public', 'i18n', `${lang}.js`), 'utf8'))(box.window);
+  }
+  const data = box.window.LoveI18nData;
+  const ref = data.es;
+  for (const lang of LANGS.filter((l) => l !== 'en')) {
+    assert.deepEqual(Object.keys(data[lang].dict).sort(), Object.keys(ref.dict).sort(), `${lang}: the same texts as every other language`);
+    assert.deepEqual(Object.keys(data[lang].blocks).sort(), Object.keys(ref.blocks).sort(), `${lang}: the same paragraphs as every other language`);
+  }
+  // Characters only used in simplified Chinese (each has a different traditional form)
+  const SIMPLIFIED = /[们这为来时说对会发过还现学实点问长门开关见东车钱让给经结题间业务员电话码语书写读听买卖级际难预约护疗医药机构费双岁亲爱乐欢设计规则场乡络视频软讯择应该报据号单园区县网标选两状检录证记忆认识验总统转换环变运动负担损坏帮协调节组织类龄伤险补贴账银从众与专个产权处办归带领导觉简讲谈论诉诊断续饮饭馆汤热风灵况态势头须虑围劳线终丰义厅厨厕卫阳龙凤鸟马驾驶锁钥键谁请谢议词译训练红绿紧纸细继营编缓响项额顾领频鸡黄齐龟么师历无仅价适]/;
+  const values = (lang) => [...Object.values(data[lang].dict), ...Object.values(data[lang].blocks)].map((v) => v.replace(/<[^>]*>/g, ''));
+  assert.ok(values('zh').some((v) => SIMPLIFIED.test(v)), 'the check itself works: it finds the simplified characters in the other Chinese file');
+  const simplified = values('zh-hant').filter((v) => SIMPLIFIED.test(v));
+  assert.deepEqual(simplified, [], 'no simplified characters in Traditional Chinese');
+  const notThai = Object.entries(data.th.dict).filter(([en, v]) => !/[\u0E00-\u0E7F]/.test(v) && v !== en);
+  assert.deepEqual(notThai, [], 'every Thai text is written in Thai (or kept as it is, like the phone number)');
+});
+
+test('the language menu offers both Chinese scripts and Thai, each at its own address', async () => {
+  const { page, context, seen } = await open('/zh/', { width: 1280, height: 900 });
+  await page.click('#lang-toggle-btn');
+  const options = await page.$$eval('#lang-dropdown .lang-option', (els) => els.map((e) => e.textContent.replace(/\s+/g, ' ').trim()));
+  assert.ok(options.includes('简体中文 Chinese (Simplified)') && options.includes('繁體中文 Chinese (Traditional)') && options.includes('ไทย Thai'), options.join(' | '));
+  await Promise.all([page.waitForURL(site.origin + '/zh-hant/'), page.click('#lang-dropdown [data-lang="zh-hant"]')]);
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'zh-hant');
+  assert.equal((await page.textContent('#lang-toggle-btn .lang-current-code')).trim(), '繁中');
+  assert.match(await page.textContent('#hero-title'), /多一份清晰指引/);
+  await page.click('#lang-toggle-btn');
+  await Promise.all([page.waitForURL(site.origin + '/th/'), page.click('#lang-dropdown [data-lang="th"]')]);
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'th');
+  assert.equal((await page.textContent('#lang-toggle-btn .lang-current-code')).trim(), 'TH');
+  // The guide in Traditional Chinese, from the home page link
+  await page.goto(site.origin + '/zh-hant/', { waitUntil: 'load' });
+  await Promise.all([page.waitForURL(site.origin + '/zh-hant' + GUIDE), page.click('footer a[data-guide-link]')]);
+  assert.match(await page.title(), /^如何為父母選擇合適的照護之家/);
+  assert.deepEqual(seen.errors, [], 'no errors in the browser console');
+  await context.close();
 });
 
 // ---------- Layout ----------

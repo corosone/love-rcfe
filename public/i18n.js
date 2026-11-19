@@ -12,7 +12,8 @@
   var LANGUAGES = {
     en: { code: 'EN', name: 'English', intl: 'en-US' },
     es: { code: 'ES', name: 'Español', intl: 'es-US' },
-    zh: { code: 'ZH', name: '中文', intl: 'zh-CN' },
+    zh: { code: 'ZH', name: '简体中文', intl: 'zh-CN' },
+    'zh-hant': { code: '繁中', name: '繁體中文', intl: 'zh-TW' },
     tl: { code: 'TL', name: 'Tagalog', intl: 'fil-PH' },
     vi: { code: 'VI', name: 'Tiếng Việt', intl: 'vi-VN' },
     ko: { code: 'KO', name: '한국어', intl: 'ko-KR' },
@@ -26,9 +27,13 @@
     uk: { code: 'UK', name: 'Українська', intl: 'uk-UA' },
     he: { code: 'HE', name: 'עברית', intl: 'he-IL' },
     km: { code: 'KM', name: 'ខ្មែរ', intl: 'km-KH' },
+    th: { code: 'TH', name: 'ไทย', intl: 'th-TH' },
     fr: { code: 'FR', name: 'Français', intl: 'fr-FR' },
     pt: { code: 'PT', name: 'Português', intl: 'pt-BR' }
   };
+  // A language's own address starts with its code: two letters, or two letters and a writing
+  // system (/zh-hant/ is Chinese in traditional characters).
+  var LANG_PATH = /^\/([a-z]{2}(?:-[a-z]{4})?)(?:\/|$)/;
 
   // English versions of HTML blocks that scripts insert themselves (not present in the page).
   var EN_BLOCKS = {
@@ -157,10 +162,10 @@
 
   // Each language also has its own address, /es/, /zh/ and so on: a copy of the home page
   // that is already translated (built by scripts/build-pages.js, so search engines can read
-  // it). On those addresses the address decides the language.
+  // it). On those addresses the address decides the language (see LANG_PATH above).
   function pathLang() {
     try {
-      var m = /^\/([a-z]{2})(?:\/|$)/.exec(window.location.pathname);
+      var m = LANG_PATH.exec(window.location.pathname);
       return m && m[1] !== 'en' && own(LANGUAGES, m[1]) ? m[1] : '';
     } catch (e) {
       return '';
@@ -170,7 +175,7 @@
   function onHomeAddress() {
     try {
       var p = window.location.pathname;
-      return p === '/' || p === '/index.html' || (!!pathLang() && /^\/[a-z]{2}\/?(?:index\.html)?$/.test(p));
+      return p === '/' || p === '/index.html' || (!!pathLang() && /^\/[a-z]{2}(?:-[a-z]{4})?\/?(?:index\.html)?$/.test(p));
     } catch (e) {
       return false;
     }
@@ -180,7 +185,7 @@
   }
   // The guides also have their own address in every language: /guides/<name>/ in English and
   // /<code>/guides/<name>/ for the others (built by scripts/build-pages.js).
-  var GUIDE_PATH = /^(?:\/([a-z]{2}))?(\/guides\/[a-z0-9-]+\/)(?:index\.html)?$/;
+  var GUIDE_PATH = /^(?:\/([a-z]{2}(?:-[a-z]{4})?))?(\/guides\/[a-z0-9-]+\/)(?:index\.html)?$/;
   function onGuideAddress() {
     try {
       var m = GUIDE_PATH.exec(window.location.pathname);

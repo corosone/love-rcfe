@@ -30,12 +30,12 @@ keys, email addresses or any other private details here.
 
 | Part | Where | What it is |
 |---|---|---|
-| Public pages | `public/` | `index.html` (home page, 18 languages), `staff.html` (staff inbox), `corosone.html` (developer console), plus their scripts |
+| Public pages | `public/` | `index.html` (home page, 20 languages), `staff.html` (staff inbox), `corosone.html` (developer console), plus their scripts |
 | Server | `functions/api/` | Cloudflare Pages Functions: the forms, staff inbox, developer console, health check, weekly summary |
 | Shared server code | `lib/` | database set-up and limits (`db.js`), developer sign-in (`dev.js`), staff accounts, backups, trusted devices, ... |
 | Styles | `src/input.css`, `tailwind.config.js` | Tailwind 3, built into `public/tailwind.css` (not stored in the repository) |
 | Language pages | `scripts/build-pages.js` | builds ready-translated copies (`public/es/`, `public/zh/`, ...) at deploy time (not stored) |
-| Translations | `public/i18n/<code>.js` | 17 languages. The key is the **English text exactly as on the page**; change the English and every language file must get the same new key |
+| Translations | `public/i18n/<code>.js` | 19 languages (`zh` is Chinese in simplified characters, `zh-hant` in traditional ones). The key is the **English text exactly as on the page**; change the English and every language file must get the same new key (a test checks they all have the same texts) |
 | Guides | `src/guides/<name>.html` | articles at their own address (`/guides/<name>/`, `/<code>/guides/<name>/`), built by `scripts/build-pages.js` from the home page's header and footer. The build stops if any piece is untranslated. Add each new address to `public/sitemap.xml` |
 | Tests | `tests/` | see `tests/README.md` |
 
@@ -43,7 +43,11 @@ Things that are easy to get wrong:
 
 - `public/index.html` and `public/app.js` use Windows line endings (CRLF). Keep them that way.
 - Button labels use Title Case ("Download Full Backup").
-- Any text change on the public site needs all 17 translations updated too.
+- Any text change on the public site needs all 19 translations updated too.
+- A language code is two letters, or two letters plus a writing system (`zh-hant`). Adding a language means: its file in
+  `public/i18n/`, `LANGUAGES` in `public/i18n.js`, both language menus and the hreflang links in `index.html`, the menu
+  in `404.html`, the list in the small script written into `index.html` (then its fingerprint in `_headers`),
+  `LANGS` in `scripts/build-pages.js`, `public/corosone.js` and `tests/site.test.js`, and `public/sitemap.xml`.
 - Arabic, Persian and Hebrew pages are right to left (`dir="rtl"`, set by `public/i18n.js`), so the
   whole layout mirrors. On the public site use start/end styles, never left/right: `ms-`/`me-`,
   `ps-`/`pe-`, `start-`/`end-`, `text-start`/`text-end`, `border-s`/`border-e`, and

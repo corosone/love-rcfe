@@ -5,7 +5,8 @@ node_modules/
 
 # Built by Cloudflare at deploy time (npm run build); never edit or upload these
 public/tailwind.css
-# The ready-translated language pages (public/es/, public/zh/, ...), built by scripts/build-pages.js
+# The ready-translated language pages (public/es/, public/zh/, public/zh-hant/, ...), built by scripts/build-pages.js
 /public/[a-z][a-z]/
+/public/[a-z][a-z]-[a-z][a-z][a-z][a-z]/
 # The guide pages (public/guides/...), built from src/guides/ by scripts/build-pages.js
 /public/guides/

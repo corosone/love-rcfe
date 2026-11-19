@@ -1321,7 +1321,7 @@
   }
 
   // ---------- Site check (runs in this browser) ----------
-  const LANGS = [['es', 'Spanish'], ['zh', 'Chinese'], ['tl', 'Tagalog'], ['vi', 'Vietnamese'], ['ko', 'Korean'], ['hy', 'Armenian'], ['ru', 'Russian'], ['ar', 'Arabic'], ['fa', 'Persian'], ['hi', 'Hindi'], ['pa', 'Punjabi'], ['ja', 'Japanese'], ['uk', 'Ukrainian'], ['he', 'Hebrew'], ['km', 'Khmer'], ['fr', 'French'], ['pt', 'Portuguese']];
+  const LANGS = [['es', 'Spanish'], ['zh', 'Chinese (Simplified)'], ['zh-hant', 'Chinese (Traditional)'], ['tl', 'Tagalog'], ['vi', 'Vietnamese'], ['ko', 'Korean'], ['hy', 'Armenian'], ['ru', 'Russian'], ['ar', 'Arabic'], ['fa', 'Persian'], ['hi', 'Hindi'], ['pa', 'Punjabi'], ['ja', 'Japanese'], ['uk', 'Ukrainian'], ['he', 'Hebrew'], ['km', 'Khmer'], ['th', 'Thai'], ['fr', 'French'], ['pt', 'Portuguese']];
   const SLOW_MS = 2000;
 
   function siteChecks() {
@@ -1439,7 +1439,7 @@
   const VIEW_NAMES = { home: 'Home', services: 'Services', tools: 'Care tools', approach: 'Approach', support: 'FAQs & support', contact: 'Contact', terms: 'Terms', privacy: 'Privacy' };
   // "/es/#services" -> "Services (Spanish page)"
   function pageName(path) {
-    const m = /^\/(?:([a-z]{2})\/)?(?:index\.html)?(?:#([a-z0-9-]+))?$/.exec(String(path || ''));
+    const m = /^\/(?:([a-z]{2}(?:-[a-z]{4})?)\/)?(?:index\.html)?(?:#([a-z0-9-]+))?$/.exec(String(path || ''));
     if (!m) return String(path || '');
     const lang = m[1] ? LANGS.find(([c]) => c === m[1]) : null;
     return (VIEW_NAMES[m[2] || 'home'] || m[2]) + (lang ? ` (${lang[1]} page)` : '');
@@ -1836,7 +1836,7 @@
     const summary = $('i18ncheck-summary');
     const list = $('i18ncheck-list');
     btn.disabled = true;
-    summary.textContent = 'Checking all 17 languages…';
+    summary.textContent = `Checking all ${LANGS.length} languages…`;
     list.textContent = '';
     try {
       const [html, appJs, loaded] = await Promise.all([

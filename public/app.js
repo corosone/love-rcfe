@@ -479,7 +479,7 @@
     // home page's sections. There, a link to a section opens the home page in the same language.
     const onGuidePage = !!document.querySelector('main[data-guide]');
     function homeAddress() {
-      const m = /^\/([a-z]{2})\//.exec(location.pathname);
+      const m = /^\/([a-z]{2}(?:-[a-z]{4})?)\//.exec(location.pathname);
       return m ? '/' + m[1] + '/' : '/';
     }
 
