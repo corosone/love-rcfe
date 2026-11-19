@@ -514,6 +514,10 @@ test('developer sign-in: the right email and password email a code; the right co
   assert.ok(signedIn.lovercfe_dev, 'a developer session cookie was set');
   assert.equal(signedIn.lovercfe_dev_step, '', 'the code cookie is removed');
   assert.match(ok.headers.getSetCookie().find((c) => c.startsWith('lovercfe_dev=')), /HttpOnly.*SameSite=Strict|SameSite=Strict.*HttpOnly/i);
+  // The console signs you out after 5 hours: the cookie and the session saved on the server both end then
+  assert.match(ok.headers.getSetCookie().find((c) => c.startsWith('lovercfe_dev=')), /Max-Age=18000\b/);
+  const saved = site.db._rows('SELECT created_at, expires_at FROM dev_sessions ORDER BY created_at DESC LIMIT 1')[0];
+  assert.equal(saved.expires_at - saved.created_at, 5 * 60 * 60);
 
   const overview = await site.api('/api/dev/overview', { headers: { cookie: cookieHeaderFor(signedIn) }, ip });
   assert.equal(overview.status, 200, 'the console opens');
