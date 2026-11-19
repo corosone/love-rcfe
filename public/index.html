@@ -237,6 +237,23 @@
     header.nav-compact #mobile-menu:not(.hidden) { display: block; }
     header.nav-measure a[data-view-link="home"],
     header.nav-measure #desktop-nav { flex: 0 0 auto; white-space: nowrap; }
+    /* Before switching to the menu button, the script tries tighter layouts in turn, so languages with
+       long menu words keep the full menu on computers. Step 1: less space between the items, the
+       line under the logo wraps beneath the name, a slimmer button. Step 2: slightly smaller menu
+       words, without the "New" badge. Step 3 (computers only): menu items of two or more words may
+       take two lines. Words are only split between words, never inside one (some languages let
+       long words break anywhere elsewhere on the page). */
+    header.nav-tight #desktop-nav { column-gap: 1rem; }
+    header.nav-tight #brand-tagline { max-width: 8rem; min-width: min-content; white-space: normal; overflow-wrap: normal; }
+    header.nav-tight #desktop-nav .nav-cta { padding-inline: 0.875rem; }
+    header.nav-small #desktop-nav .nav-link { font-size: 14px; }
+    header.nav-small #desktop-nav .nav-cta { font-size: 13px; }
+    header.nav-small #desktop-nav .nav-new { display: none; }
+    header.nav-wrap #desktop-nav .nav-link,
+    header.nav-wrap #desktop-nav .nav-cta > span {
+      white-space: normal; overflow-wrap: normal; max-width: 7.5rem; min-width: min-content; line-height: 1.2;
+      text-align: center; text-wrap: balance;
+    }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -781,7 +798,7 @@
         </div>
         <div class="min-w-0">
           <span class="display text-2xl font-bold tracking-tight text-brand-ink block leading-none"><span dir="ltr">Love RCFE<span class="text-brand-accent">.</span></span></span>
-          <span class="text-[11px] uppercase tracking-wider text-brand-muted font-medium block [overflow-wrap:anywhere]">Care & Consulting</span>
+          <span id="brand-tagline" class="text-[11px] uppercase tracking-wider text-brand-muted font-medium block [overflow-wrap:anywhere]">Care & Consulting</span>
         </div>
         <span class="sr-only">Home</span>
       </a>
@@ -792,11 +809,11 @@
         <a data-view-link="services" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#services">Services</a>
         <a data-view-link="tools" class="nav-link font-semibold text-brand-ink text-[15px] flex items-center gap-1.5 whitespace-nowrap" href="#tools">
           <span>Care Tools</span>
-          <span class="text-[10px] bg-brand-accent/15 text-brand-accent font-bold px-1.5 py-0.5 rounded-full">New</span>
+          <span class="nav-new text-[10px] bg-brand-accent/15 text-brand-accent font-bold px-1.5 py-0.5 rounded-full">New</span>
         </a>
         <a data-view-link="approach" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#approach">Our Approach</a>
         <a data-view-link="support" class="nav-link font-semibold text-brand-ink text-[15px] whitespace-nowrap" href="#support">FAQs & Support</a>
-        <a data-view-link="contact" class="inline-flex items-center gap-1.5 rounded-full bg-brand-green text-white px-5 py-2.5 text-sm font-semibold hover:bg-brand-greenDark shadow-sm transition whitespace-nowrap" href="#contact">
+        <a data-view-link="contact" class="nav-cta inline-flex items-center gap-1.5 rounded-full bg-brand-green text-white px-5 py-2.5 text-sm font-semibold hover:bg-brand-greenDark shadow-sm transition whitespace-nowrap" href="#contact">
           <span>Get in Touch</span>
           <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
         </a>
@@ -1044,8 +1061,10 @@
        page (not loaded as a file) so the page does not wait for one more download. -->
   <script>
 // Top bar: decides whether the full menu fits next to the logo.
-// If it does not (tablets, or languages with long menu words), the header gets the class
-// "nav-compact" and shows the phone layout (menu button) instead of sliding the page sideways.
+// If it does not, it first tries tighter layouts (the classes in STEPS, styled in the page's
+// stylesheet), so languages with long menu words keep the full menu on computers. Only if none
+// fits (tablets) does the header get the class "nav-compact" and show the phone layout (menu
+// button) instead of sliding the page sideways.
 // Loaded right after the header so it runs before the page is first drawn, and again
 // whenever the window size, the language or the fonts change.
 (function () {
@@ -1059,17 +1078,31 @@
   var logo = row.querySelector('a[data-view-link="home"]');
   if (!logo) return;
   var wide = window.matchMedia('(min-width: 768px)');
+  var computer = window.matchMedia('(min-width: 1024px)');
+  var STEPS = ['nav-tight', 'nav-small', 'nav-wrap']; // each step keeps the ones before it
 
-  function fit() {
-    header.classList.remove('nav-compact');
-    if (!wide.matches) return; // phones: the stylesheet already shows the menu button
+  function fits() {
     header.classList.add('nav-measure'); // logo and menu at their full width while measuring
     var style = window.getComputedStyle(row);
     var room = row.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
     var needed = logo.getBoundingClientRect().width + nav.getBoundingClientRect().width + (parseFloat(style.columnGap) || 0);
-    var tooWide = needed > room - 1; // 1px spare, so nothing wraps because of rounding
     header.classList.remove('nav-measure');
-    if (tooWide) header.classList.add('nav-compact');
+    return needed <= room - 1; // 1px spare, so nothing wraps because of rounding
+  }
+
+  function fit() {
+    header.classList.remove('nav-compact');
+    STEPS.forEach(function (step) { header.classList.remove(step); });
+    if (!wide.matches) return; // phones: the stylesheet already shows the menu button
+    if (fits()) return;
+    // Two-line menu items only on computers; tablets use the menu button instead
+    var steps = computer.matches ? STEPS : STEPS.slice(0, 2);
+    for (var i = 0; i < steps.length; i++) {
+      header.classList.add(steps[i]);
+      if (fits()) return;
+    }
+    STEPS.forEach(function (step) { header.classList.remove(step); });
+    header.classList.add('nav-compact');
   }
 
   var queued = false;
