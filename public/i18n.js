@@ -45,11 +45,15 @@
   var initialized = false;
   var switchToken = 0;
 
+  // Languages written from right to left: the whole page is laid out right to left for them.
+  var RTL_LANGS = { ar: true, fa: true, he: true };
+
   function syncDocumentLangAttrs(code) {
     try {
       var html = document.documentElement;
       if (!html) return;
       html.lang = code;
+      html.setAttribute('dir', own(RTL_LANGS, code) ? 'rtl' : 'ltr');
       if (code && code !== 'en') {
         html.setAttribute('translate', 'no');
         html.classList.add('notranslate');

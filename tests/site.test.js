@@ -516,6 +516,150 @@ test('the page never slides sideways: every language on phones, tablets and lapt
   assert.deepEqual(problems, []);
 });
 
+const RTL = ['ar', 'fa', 'he'];
+
+test('Arabic, Persian and Hebrew pages read right to left; every other language left to right', async () => {
+  for (const lang of LANGS) {
+    const path = lang === 'en' ? '/' : `/${lang}/`;
+    const want = RTL.includes(lang) ? 'rtl' : 'ltr';
+    // In the ready-made page itself (so the very first picture on screen is the right way round)
+    if (lang !== 'en') {
+      const html = await (await fetch(site.origin + path)).text();
+      assert.match(html, new RegExp(`<html[^>]* dir="${want}"`), `${lang}: ready-made page`);
+    }
+    // And once the page has loaded
+    const { page, context } = await open(path, { width: 390, height: 800 });
+    assert.equal(await page.evaluate(() => document.documentElement.dir), want, `${lang}: after loading`);
+    await context.close();
+  }
+});
+
+test('right-to-left pages are a mirror image: menu, text, arrows, logo, phone numbers, floating buttons, language menu, pop-ups', async () => {
+  for (const lang of RTL) {
+    // Computer: logo and the first menu item on the right, text starting on the right, arrows flipped
+    let { page, context } = await open(`/${lang}/`, { width: 1280, height: 900 });
+    const desk = await page.evaluate(() => {
+      const W = innerWidth;
+      const box = (el) => el.getBoundingClientRect();
+      const logo = document.querySelector('header a[href="#home"], header [data-view-link="home"]') ;
+      const links = [...document.querySelectorAll('#desktop-nav a[data-view-link]')];
+      const h1 = document.querySelector('#home h1');
+      const arrows = [...document.querySelectorAll('#home svg.lucide-arrow-right')];
+      const name = document.querySelector('header span[dir="ltr"]');
+      const dot = name && name.querySelector('span');
+      return {
+        logoRight: box(logo).left > W / 2,
+        firstLinkRightOfLast: box(links[0]).left > box(links[links.length - 1]).left,
+        h1Direction: getComputedStyle(h1).direction,
+        h1Align: getComputedStyle(h1).textAlign,
+        arrowsFlipped: arrows.length > 0 && arrows.every((a) => getComputedStyle(a).scale === '-1 1'),
+        nameText: name && name.textContent,
+        dotAtEnd: !!dot && box(dot).left > box(name).left + box(name).width / 2,
+        phoneReadsLeftToRight: [...document.querySelectorAll('a[href^="tel:"]:not(.fixed)')].every((a) => getComputedStyle(a).direction === 'ltr'),
+      };
+    });
+    assert.deepEqual(desk, {
+      logoRight: true, firstLinkRightOfLast: true, h1Direction: 'rtl', h1Align: 'start', arrowsFlipped: true,
+      nameText: 'Love RCFE.', dotAtEnd: true, phoneReadsLeftToRight: true,
+    }, `${lang} on a computer`);
+    // Pop-ups: the close button is in the top left corner
+    for (const fn of ['openCallModal', 'openBookingModal', 'openCareQuizModal']) {
+      await page.evaluate((f) => window[f](), fn);
+      await page.waitForTimeout(150);
+      const leftCorner = await page.evaluate(() => {
+        const m = [...document.querySelectorAll('[role="dialog"]')].find((d) => !d.classList.contains('hidden'));
+        const card = m.firstElementChild.getBoundingClientRect();
+        const x = m.querySelector('button[data-click^="close"]').getBoundingClientRect();
+        return x.left - card.left < card.right - x.right;
+      });
+      assert.ok(leftCorner, `${lang} ${fn}: close button in the left corner`);
+      await page.keyboard.press('Escape');
+    }
+    await context.close();
+
+    // Phone: "Call Us" on the right, "Back to top" on the left, not overlapping; language menu on screen
+    ({ page, context } = await open(`/${lang}/`, { width: 320, height: 640 }));
+    await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(400);
+    const phone = await page.evaluate(() => {
+      const W = innerWidth;
+      const c = document.querySelector('a[data-call].fixed').getBoundingClientRect();
+      const t = document.getElementById('back-to-top').getBoundingClientRect();
+      return { callOnRight: W - c.right < c.left, topOnLeft: t.left < W - t.right, overlap: c.left < t.right && t.left < c.right && c.top < t.bottom && t.top < c.bottom };
+    });
+    assert.deepEqual(phone, { callOnRight: true, topOnLeft: true, overlap: false }, `${lang} floating buttons`);
+    await page.evaluate(() => scrollTo(0, 0));
+    await page.click('#lang-toggle-btn-mobile');
+    await page.waitForTimeout(200);
+    const menu = await page.evaluate(() => { const r = document.getElementById('lang-dropdown-mobile').getBoundingClientRect(); return { left: r.left, right: r.right, W: innerWidth }; });
+    assert.ok(menu.left >= 0 && menu.right <= menu.W, `${lang}: language menu stays on screen (${Math.round(menu.left)}..${Math.round(menu.right)} of ${menu.W})`);
+    await context.close();
+  }
+
+  // English is unchanged: left to right, arrows not flipped
+  const { page, context } = await open('/', { width: 1280, height: 900 });
+  assert.deepEqual(await page.evaluate(() => ({
+    dir: document.documentElement.dir,
+    arrows: [...document.querySelectorAll('#home svg.lucide-arrow-right')].map((a) => getComputedStyle(a).scale),
+  })), { dir: 'ltr', arrows: ['none'] });
+  await context.close();
+});
+
+test('right-to-left pages: English-only names and labels keep their punctuation where it belongs ("Elena K.", not ".Elena K")', async () => {
+  const atRisk = [];
+  for (const lang of RTL) {
+    const { page, context } = await open(`/${lang}/`, { width: 1280, height: 900 });
+    for (const view of ['home', 'services', 'tools', 'approach', 'support', 'contact', 'terms', 'privacy']) {
+      await go(page, view);
+      const found = await page.evaluate(() => {
+        // Text with no Arabic/Hebrew letters, standing alone in its box, with punctuation at an edge,
+        // is shown in the wrong order on a right-to-left page unless it is marked left to right.
+        const RTL_CHARS = /[֐-ࣿיִ-﷿ﹰ-﻿]/;
+        const EDGE = /^[.,:;!?()\[\]"'“”‘’\/\-–—+%#&*]|[.,:;!?()\[\]"'“”‘’\/\-–—+%#&*]$/;
+        const out = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+          const el = n.parentElement;
+          const t = n.textContent.trim();
+          if (!el || !t || RTL_CHARS.test(t) || !/[A-Za-z]/.test(t)) continue;
+          const box = el.closest('p, h1, h2, h3, h4, li, label, button, a, span, div, td') || el;
+          if (RTL_CHARS.test(box.textContent) || !EDGE.test(box.textContent.trim())) continue;
+          if (el.closest('[dir="ltr"], .lang-dropdown, #neon-calculator-widget, script, style, svg, .sr-only, [hidden]')) continue;
+          if (getComputedStyle(el).direction === 'ltr' || !el.getBoundingClientRect().width) continue;
+          out.push(`"${t.slice(0, 40)}"`);
+        }
+        return out;
+      });
+      for (const f of found) atRisk.push(`${lang} #${view}: ${f}`);
+    }
+    await context.close();
+  }
+  assert.deepEqual(atRisk, []);
+});
+
+test('pop-ups: the close button never covers the title, in every language on a small phone', async () => {
+  const covered = [];
+  for (const lang of LANGS) {
+    const { page, context } = await open(lang === 'en' ? '/' : `/${lang}/`, { width: 320, height: 700 });
+    for (const fn of ['openCallModal', 'openBookingModal', 'openCareQuizModal']) {
+      await page.evaluate((f) => window[f](), fn);
+      await page.waitForTimeout(100);
+      const hit = await page.evaluate(() => {
+        const m = [...document.querySelectorAll('[role="dialog"]')].find((d) => !d.classList.contains('hidden'));
+        const x = m.querySelector('button[data-click^="close"]').getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(m.querySelector('h2, h3'));
+        return [...range.getClientRects()].some((r) => r.width > 0 && r.left < x.right && x.left < r.right && r.top < x.bottom && x.top < r.bottom);
+      });
+      if (hit) covered.push(`${lang} ${fn}`);
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(50);
+    }
+    await context.close();
+  }
+  assert.deepEqual(covered, []);
+});
+
 test('top bar: shows the full menu when it fits and the menu button when it does not', async () => {
   const state = async (path, width) => {
     const { page, context } = await open(path, { width, height: 800 });

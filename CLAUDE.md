@@ -43,6 +43,10 @@ Things that are easy to get wrong:
 - `public/index.html` and `public/app.js` use Windows line endings (CRLF). Keep them that way.
 - Button labels use Title Case ("Download Full Backup").
 - Any text change on the public site needs all 17 translations updated too.
+- Arabic, Persian and Hebrew pages are right to left (`dir="rtl"`, set by `public/i18n.js`), so the
+  whole layout mirrors. On the public site use start/end styles, never left/right: `ms-`/`me-`,
+  `ps-`/`pe-`, `start-`/`end-`, `text-start`/`text-end`, `border-s`/`border-e`, and
+  `inset-inline-start` / `padding-inline-start` in CSS. Arrow icons flip by themselves.
 - The two small scripts written into `index.html` are allowed by their sha256 fingerprints in
   `public/_headers` (Content-Security-Policy). Changing one means updating its fingerprint; the
   build stops with a message if they do not match.
