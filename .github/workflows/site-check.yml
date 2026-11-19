@@ -54,6 +54,7 @@ jobs:
           check "Home page and contact form" "/" 200 'id="enquiry-form"'
           check "Spanish page" "/es/" 200 'data-prerendered="es"'
           check "Chinese page" "/zh/" 200 'data-prerendered="zh"'
+          check "Chinese (traditional) page" "/zh-hant/" 200 'data-prerendered="zh-hant"'
           check "Arabic page" "/ar/" 200 'data-prerendered="ar"'
           check "Styles" "/tailwind.css" 200 'tailwindcss v'
           check "Staff inbox page" "/staff" 200 'id="login-form"'

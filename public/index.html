@@ -24,6 +24,7 @@
   <link rel="alternate" hreflang="en" href="https://love-rcfe.pages.dev/">
   <link rel="alternate" hreflang="es" href="https://love-rcfe.pages.dev/es/">
   <link rel="alternate" hreflang="zh" href="https://love-rcfe.pages.dev/zh/">
+  <link rel="alternate" hreflang="zh-Hant" href="https://love-rcfe.pages.dev/zh-hant/">
   <link rel="alternate" hreflang="tl" href="https://love-rcfe.pages.dev/tl/">
   <link rel="alternate" hreflang="vi" href="https://love-rcfe.pages.dev/vi/">
   <link rel="alternate" hreflang="ko" href="https://love-rcfe.pages.dev/ko/">
@@ -37,6 +38,7 @@
   <link rel="alternate" hreflang="uk" href="https://love-rcfe.pages.dev/uk/">
   <link rel="alternate" hreflang="he" href="https://love-rcfe.pages.dev/he/">
   <link rel="alternate" hreflang="km" href="https://love-rcfe.pages.dev/km/">
+  <link rel="alternate" hreflang="th" href="https://love-rcfe.pages.dev/th/">
   <link rel="alternate" hreflang="fr" href="https://love-rcfe.pages.dev/fr/">
   <link rel="alternate" hreflang="pt" href="https://love-rcfe.pages.dev/pt/">
   <link rel="alternate" hreflang="x-default" href="https://love-rcfe.pages.dev/">
@@ -95,12 +97,12 @@
   } catch (e) {}
 
   try {
-    var LANG_RE = /^(en|es|zh|tl|vi|ko|hy|ru|ar|fa|hi|pa|ja|uk|he|km|fr|pt)$/;
+    var LANG_RE = /^(en|es|zh|zh-hant|tl|vi|ko|hy|ru|ar|fa|hi|pa|ja|uk|he|km|th|fr|pt)$/;
     var qLang = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : '';
     // Same rule as i18n.js: an unknown ?lang= value falls back to the saved language.
     var sLang = LANG_RE.test(qLang || '') ? qLang : (localStorage.getItem('lovercfe_lang') || 'en');
     // A language address such as /es/ decides the language (see i18n.js)
-    var pLang = (/^\/([a-z]{2})(?:\/|$)/.exec(window.location.pathname) || [])[1] || '';
+    var pLang = (/^\/([a-z]{2}(?:-[a-z]{4})?)(?:\/|$)/.exec(window.location.pathname) || [])[1] || '';
     if (LANG_RE.test(pLang) && pLang !== 'en') sLang = pLang;
     // Already translated when it arrived: nothing to hide while the language file loads
     var ready = document.documentElement.getAttribute('data-prerendered') === sLang;
@@ -818,7 +820,11 @@
                 <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
               </button>
               <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
-                <span><span>中文</span> <span class="text-xs text-brand-muted ml-1">Chinese</span></span>
+                <span><span>简体中文</span> <span class="text-xs text-brand-muted ml-1">Chinese (Simplified)</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh-hant" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>繁體中文</span> <span class="text-xs text-brand-muted ml-1">Chinese (Traditional)</span></span>
                 <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
               </button>
               <button type="button" role="menuitemradio" aria-checked="false" data-lang="tl" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
@@ -873,6 +879,10 @@
                 <span><span>ខ្មែរ</span> <span class="text-xs text-brand-muted ml-1">Khmer</span></span>
                 <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
               </button>
+              <button type="button" role="menuitemradio" aria-checked="false" data-lang="th" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+                <span><span>ไทย</span> <span class="text-xs text-brand-muted ml-1">Thai</span></span>
+                <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+              </button>
               <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
                 <span><span>Français</span> <span class="text-xs text-brand-muted ml-1">French</span></span>
                 <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
@@ -911,7 +921,11 @@
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
             </button>
             <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
-              <span><span>中文</span> <span class="text-xs text-brand-muted ml-1">Chinese</span></span>
+              <span><span>简体中文</span> <span class="text-xs text-brand-muted ml-1">Chinese (Simplified)</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="zh-hant" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>繁體中文</span> <span class="text-xs text-brand-muted ml-1">Chinese (Traditional)</span></span>
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
             </button>
             <button type="button" role="menuitemradio" aria-checked="false" data-lang="tl" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
@@ -964,6 +978,10 @@
             </button>
             <button type="button" role="menuitemradio" aria-checked="false" data-lang="km" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
               <span><span>ខ្មែរ</span> <span class="text-xs text-brand-muted ml-1">Khmer</span></span>
+              <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" data-lang="th" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">
+              <span><span>ไทย</span> <span class="text-xs text-brand-muted ml-1">Thai</span></span>
               <i data-lucide="check" class="lang-check w-4 h-4 text-brand-green hidden"></i>
             </button>
             <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr" class="lang-option w-full text-left px-3.5 py-2 text-sm flex items-center justify-between gap-2 transition">

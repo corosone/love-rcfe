@@ -1,5 +1,5 @@
 // Builds one ready-translated copy of the home page per language:
-//   public/es/index.html, public/zh/index.html, ... (17 languages)
+//   public/es/index.html, public/zh/index.html, public/zh-hant/index.html, ... (19 languages)
 //
 // Why: the translations are normally swapped in by the visitor's browser, so search engines
 // only ever saw the English page. These copies arrive already translated, each at its own
@@ -25,7 +25,8 @@ const { JSDOM } = require('jsdom');
 
 const SITE = 'https://love-rcfe.pages.dev';
 const PUBLIC = path.join(__dirname, '..', 'public');
-const LANGS = ['es', 'zh', 'tl', 'vi', 'ko', 'hy', 'ru', 'ar', 'fa', 'hi', 'pa', 'ja', 'uk', 'he', 'km', 'fr', 'pt'];
+// Each code is also the folder and address (/zh-hant/ is Chinese in traditional characters).
+const LANGS = ['es', 'zh', 'zh-hant', 'tl', 'vi', 'ko', 'hy', 'ru', 'ar', 'fa', 'hi', 'pa', 'ja', 'uk', 'he', 'km', 'th', 'fr', 'pt'];
 
 const sourceHtml = fs.readFileSync(path.join(PUBLIC, 'index.html'), 'utf8');
 const i18nSource = fs.readFileSync(path.join(PUBLIC, 'i18n.js'), 'utf8');
@@ -44,7 +45,7 @@ function setContent(document, selector, value) {
 // The English page must list every language address, so search engines can pair them up.
 const alternates = (sourceHtml.match(/<link rel="alternate" hreflang="[^"]+" href="[^"]+">/g) || []).length;
 if (alternates !== LANGS.length + 2) {
-  fail(`index.html should have ${LANGS.length + 2} hreflang links (17 languages, English, x-default) but has ${alternates}`);
+  fail(`index.html should have ${LANGS.length + 2} hreflang links (${LANGS.length} languages, English, x-default) but has ${alternates}`);
 }
 
 // The home page has two small scripts written into the page itself (theme set-up, and the top-bar
