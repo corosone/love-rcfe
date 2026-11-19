@@ -240,15 +240,16 @@
     /* Before switching to the menu button, the script tries tighter layouts in turn, so languages with
        long menu words keep the full menu on computers. Step 1: less space between the items, the
        line under the logo wraps beneath the name, a slimmer button. Step 2: slightly smaller menu
-       words, without the "New" badge. Step 3 (computers only): menu items of two or more words may
-       take two lines. Words are only split between words, never inside one (some languages let
-       long words break anywhere elsewhere on the page). */
+       words and a slimmer "New" badge (it always stays). Step 3 (computers only): menu items of
+       two or more words may take two lines. Lines only break between words, never inside one
+       (some languages let long words break anywhere elsewhere on the page). */
     header.nav-tight #desktop-nav { column-gap: 1rem; }
     header.nav-tight #brand-tagline { max-width: 8rem; min-width: min-content; white-space: normal; overflow-wrap: normal; }
     header.nav-tight #desktop-nav .nav-cta { padding-inline: 0.875rem; }
     header.nav-small #desktop-nav .nav-link { font-size: 14px; }
     header.nav-small #desktop-nav .nav-cta { font-size: 13px; }
-    header.nav-small #desktop-nav .nav-new { display: none; }
+    header.nav-small #desktop-nav .nav-new { padding-inline: 0.25rem; }
+    header.nav-small #desktop-nav [data-view-link="tools"] { column-gap: 0.25rem; }
     header.nav-wrap #desktop-nav .nav-link,
     header.nav-wrap #desktop-nav .nav-cta > span {
       white-space: normal; overflow-wrap: normal; max-width: 7.5rem; min-width: min-content; line-height: 1.2;

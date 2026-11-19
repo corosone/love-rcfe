@@ -832,8 +832,11 @@ test('top bar: shows the full menu when it fits and the menu button when it does
   };
 
   for (const [path, width, fullMenu] of [['/', 390, false], ['/', 900, false], ['/', 1024, true], ['/', 1280, true], ['/', 1920, true], ['/zh/', 1024, true], ['/hy/', 1280, true], ['/hy/', 1024, false]]) {
-    const { context, result } = await state(path, width);
+    const { page, context, result } = await state(path, width);
     assert.deepEqual(result, { menu: fullMenu, button: !fullMenu, over: 0 }, `${path} at ${width}px`);
+    if (fullMenu) {
+      assert.ok(await page.evaluate(() => getComputedStyle(document.querySelector('#desktop-nav .nav-new')).display !== 'none'), `${path} at ${width}px: the "New" badge shows next to Care Tools`);
+    }
     await context.close();
   }
 
@@ -850,7 +853,7 @@ test('top bar: shows the full menu when it fits and the menu button when it does
   await context.close();
 });
 
-test('top bar: every language keeps the full menu on a computer, without overlaps or words split in the middle', async () => {
+test('top bar: every language keeps the full menu on a computer, with its "New" badge, without overlaps or words split in the middle', async () => {
   const problems = [];
   const { page, context } = await open('/', { width: 1280, height: 800 });
   for (const lang of LANGS) {
@@ -876,9 +879,11 @@ test('top bar: every language keeps the full menu on a computer, without overlap
         const text = [...a.querySelectorAll('span')].find((s) => s.textContent.trim() === a.textContent.trim().split(/\s{2,}/)[0]) || a;
         return words.length === 1 && box(text).height > lineHeight * 1.5;
       }).map((a) => a.textContent.trim());
-      return { menu: shown('desktop-nav'), button: shown('mobile-controls'), overlap, split, over: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+      const badge = document.querySelector('#desktop-nav .nav-new');
+      const badgeShown = getComputedStyle(badge).display !== 'none' && box(badge).width > 0;
+      return { menu: shown('desktop-nav'), button: shown('mobile-controls'), badge: badgeShown, overlap, split, over: document.documentElement.scrollWidth - document.documentElement.clientWidth };
     });
-    if (!r.menu || r.button || r.overlap || r.split.length || r.over > 0) problems.push(`${lang}: ${JSON.stringify(r)}`);
+    if (!r.menu || r.button || !r.badge || r.overlap || r.split.length || r.over > 0) problems.push(`${lang}: ${JSON.stringify(r)}`);
   }
   await context.close();
   assert.deepEqual(problems, []);
